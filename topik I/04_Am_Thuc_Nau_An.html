@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Ẩm thực & Đồ ăn</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdf6f0;
+    --card: #ffffff;
+    --accent: #c0560a;
+    --text: #2c1500;
+    --sub: #8a6040;
+    --border: #e8d5c0;
+    --tag-hv: #fdeede;
+    --tag-pure: #eef6e8;
+    --highlight: #fff5ec;
+    --row-alt: #fdf9f5;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #fdf6f0;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '음식';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #b08060; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #fdf6f0; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 130px; }
+  th:nth-child(3), td:nth-child(3) { width: 160px; }
+  th:nth-child(4), td:nth-child(4) { width: 185px; }
+  th:nth-child(5), td:nth-child(5) { width: 150px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
+  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #7a3000; font-weight: 500; }
+  .hv-tag.pure { background: var(--tag-pure); color: #2a6030; }
+  .hv-hanja { font-weight: 600; font-size: 13px; }
+  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
+  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
+  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
+  .explain { font-size: 13px; color: #4a2800; line-height: 1.6; }
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>음식 & 요리 — Ẩm thực & Đồ ăn</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Ẩm thực · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+  <button class="filter-btn" data-filter="pure">Thuần Hàn / Vay mượn</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Ẩm thực & Đồ ăn</div>
+
+<script>
+const vocab = [
+  { kr:"간식", en:"snack", vi:"đồ ăn vặt", hv:"間食", hvR:"gian thực", pure:false,
+    explain:"Đồ ăn nhẹ giữa các bữa chính. 간식을 먹다 = ăn vặt.",
+    ex:"간식으로 뭐 먹을까요?", exVi:"Ăn vặt cái gì nhỉ?" },
+  { kr:"간장", en:"soy sauce", vi:"nước tương", hv:"艮醬", hvR:"can tương", pure:false,
+    explain:"Nước tương — gia vị không thể thiếu trong bếp Hàn. Dùng để chấm, ướp, nêm.",
+    ex:"간장을 조금 넣어요.", exVi:"Cho thêm chút nước tương vào." },
+  { kr:"갈비", en:"Galbi, spareribs", vi:"sườn nướng Hàn Quốc", hv:"갈비 (thuần Hàn)", hvR:"thuần Hàn", pure:true,
+    explain:"Món sườn bò hoặc sườn heo nướng đặc trưng của Hàn Quốc. 소갈비 = sườn bò, 돼지갈비 = sườn heo.",
+    ex:"갈비가 정말 맛있어요.", exVi:"Sườn nướng ngon tuyệt." },
+  { kr:"갈비탕", en:"Galbitang, spareribs soup", vi:"canh sườn", hv:"湯", hvR:"갈비 + 탕(thang)", pure:false,
+    explain:"Canh sườn hầm lâu, nước trong và đậm vị. Món ăn sang trọng trong bữa tiệc truyền thống.",
+    ex:"갈비탕 한 그릇 주세요.", exVi:"Cho tôi một tô canh sườn." },
+  { kr:"감", en:"persimmon", vi:"quả hồng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Quả hồng — trái cây mùa thu đặc trưng ở Hàn Quốc. Có loại ăn tươi và loại phơi khô (곶감).",
+    ex:"가을에 감이 맛있어요.", exVi:"Mùa thu quả hồng rất ngon." },
+  { kr:"감자", en:"potato", vi:"khoai tây", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Khoai tây — nguyên liệu phổ biến trong bếp Hàn. Dùng trong canh, xào, chiên,...",
+    ex:"감자를 삶았어요.", exVi:"Tôi đã luộc khoai tây." },
+  { kr:"감자탕", en:"Gamjatang, pork bone soup", vi:"canh xương khoai tây", hv:"湯", hvR:"감자 + 탕(thang)", pure:false,
+    explain:"Canh xương heo hầm cùng khoai tây, rất đậm đà. 감자탕의 '감자'는 사실 뼈 주변 고기를 뜻해요.",
+    ex:"감자탕은 얼큰해서 좋아요.", exVi:"Tôi thích canh xương vì cay nồng." },
+  { kr:"건배", en:"cheers, toast", vi:"cụng ly, nâng ly", hv:"乾杯", hvR:"càn bôi", pure:false,
+    explain:"Cụng ly khi uống rượu, bia. 건배! = Cụng ly nào! 건(乾, cạn) + 배(杯, chén).",
+    ex:"건배합시다!", exVi:"Cụng ly nào!" },
+  { kr:"계란", en:"egg", vi:"trứng (gà)", hv:"鷄卵", hvR:"kê noãn", pure:false,
+    explain:"Trứng gà — cách gọi Hán Việt. Tương đương với 달걀 (thuần Hàn). Cả hai đều phổ biến.",
+    ex:"계란을 두 개 넣어요.", exVi:"Cho hai quả trứng vào." },
+  { kr:"고기", en:"meat", vi:"thịt", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Thịt nói chung. Kết hợp: 소고기(bò), 돼지고기(heo), 닭고기(gà), 양고기(cừu).",
+    ex:"고기를 구워 먹어요.", exVi:"Chúng tôi ăn thịt nướng." },
+  { kr:"고추", en:"red pepper, chili", vi:"ớt đỏ", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Ớt — nguyên liệu quan trọng bậc nhất của ẩm thực Hàn. Dùng tươi, khô, hoặc làm tương.",
+    ex:"고추가 너무 매워요.", exVi:"Ớt cay quá." },
+  { kr:"고추장", en:"Gochujang, red pepper paste", vi:"tương ớt Gochujang", hv:"醬", hvR:"고추 + 장(tương)", pure:true,
+    explain:"Tương ớt lên men đặc trưng của Hàn Quốc. Dùng để nêm, chấm, trộn. Vị cay ngọt đậm đà.",
+    ex:"고추장을 넣으면 더 맛있어요.", exVi:"Cho tương ớt vào thì ngon hơn." },
+  { kr:"과일", en:"fruit", vi:"trái cây", hv:"果實", hvR:"quả thực", pure:false,
+    explain:"Trái cây nói chung. 과일을 먹다 = ăn trái cây. 과일 가게 = cửa hàng trái cây.",
+    ex:"과일을 매일 먹어요.", exVi:"Tôi ăn trái cây mỗi ngày." },
+  { kr:"과자", en:"snack, cookie, cracker", vi:"bánh kẹo, đồ ăn vặt", hv:"菓子", hvR:"quả tử", pure:false,
+    explain:"Bánh quy, bánh snack, đồ ăn vặt đóng gói. Phổ biến với trẻ em và người trẻ Hàn.",
+    ex:"과자를 너무 많이 먹었어요.", exVi:"Tôi đã ăn quá nhiều bánh snack." },
+  { kr:"국", en:"soup", vi:"canh, súp", hv:"국 (thuần Hàn)", hvR:"thuần Hàn", pure:true,
+    explain:"Canh trong bữa ăn Hàn — bắt buộc phải có cùng cơm. Loãng hơn 찌개.",
+    ex:"국이 뜨거우니 조심하세요.", exVi:"Canh nóng, cẩn thận nhé." },
+  { kr:"국수", en:"noodle", vi:"mì, bún", hv:"麵", hvR:"국수 (thuần Hàn)", pure:true,
+    explain:"Mì, bún hoặc các loại sợi bột. 국수를 먹다 = ăn mì. Ở Hàn, ăn 국수 còn có nghĩa là... đám cưới!",
+    ex:"언제 국수 먹여 줄 거예요?", exVi:"Bao giờ mời ăn mì cưới đây?" },
+  { kr:"굽다", en:"to bake, grill", vi:"nướng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Động từ nướng trực tiếp trên lửa hoặc trong lò. 고기를 굽다 = nướng thịt.",
+    ex:"삼겹살을 구워 먹어요.", exVi:"Chúng tôi nướng ba chỉ ăn." },
+  { kr:"귤", en:"mandarin orange, tangerine", vi:"quýt", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Quýt — trái cây mùa đông rất phổ biến ở Hàn Quốc, đặc biệt loại từ đảo Jeju.",
+    ex:"귤이 달고 맛있어요.", exVi:"Quýt ngọt và ngon lắm." },
+  { kr:"그릇", en:"bowl, dish, container", vi:"bát, tô, đồ đựng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bát, đĩa, tô — đồ dùng để đựng thức ăn. 그릇을 씻다 = rửa bát.",
+    ex:"그릇을 씻어 주세요.", exVi:"Làm ơn rửa bát giúp tôi." },
+  { kr:"기름", en:"oil, gasoline", vi:"dầu ăn; xăng dầu", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Dầu ăn hoặc dầu nhiên liệu. 참기름 = dầu mè (dầu vừng), 식용유 = dầu ăn thông thường.",
+    ex:"팬에 기름을 둘러요.", exVi:"Cho dầu vào chảo." },
+  { kr:"김", en:"dried seaweed", vi:"rong biển, lá kim (rong biển phơi khô)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Lá rong biển phơi khô — ăn kèm cơm, cuộn kimbap. Khác với 미역(rong biển tươi dùng nấu canh).",
+    ex:"김을 밥에 싸서 먹어요.", exVi:"Tôi cuộn cơm bằng lá kim ăn." },
+  { kr:"김밥", en:"Kimbap, seaweed rice roll", vi:"Kimbap (cơm cuộn rong biển)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cơm cuộn rong biển nhân nhiều loại — món ăn đường phố cực kỳ phổ biến của Hàn Quốc.",
+    ex:"김밥 한 줄 주세요.", exVi:"Cho tôi một cuộn kimbap." },
+  { kr:"김치", en:"Kimchi", vi:"Kim chi", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Kim chi — linh hồn ẩm thực Hàn Quốc. Cải thảo muối lên men với ớt, tỏi, hành. Có hàng trăm loại.",
+    ex:"김치 없이는 못 살아요.", exVi:"Không có kim chi là không sống được." },
+  { kr:"김치찌개", en:"Kimchi stew", vi:"canh Kim chi", hv:"찌개 (thuần Hàn)", hvR:"thuần Hàn", pure:true,
+    explain:"Canh kim chi hầm đặc, cay và đậm đà. Một trong những món được yêu thích nhất ở Hàn Quốc.",
+    ex:"김치찌개가 제일 좋아요.", exVi:"Tôi thích canh kim chi nhất." },
+  { kr:"껌", en:"chewing gum", vi:"kẹo cao su", hv:null, hvR:"từ tiếng Anh 'gum'", pure:true,
+    explain:"Kẹo cao su. Vay mượn từ tiếng Anh 'gum'. 껌을 씹다 = nhai kẹo cao su.",
+    ex:"껌 있어요?", exVi:"Bạn có kẹo cao su không?" },
+  { kr:"끓이다", en:"to boil, to simmer", vi:"đun sôi, nấu", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nấu bằng cách đun sôi. 물을 끓이다 = đun sôi nước. 라면을 끓이다 = nấu mì ramen.",
+    ex:"라면을 끓여 먹었어요.", exVi:"Tôi đã nấu và ăn mì ramen." },
+  { kr:"냄비", en:"pot, saucepan", vi:"cái nồi", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cái nồi dùng để nấu. 냄비에 물을 끓이다 = đun sôi nước trong nồi.",
+    ex:"냄비가 뜨거워요.", exVi:"Cái nồi nóng lắm." },
+  { kr:"냄새", en:"smell, scent", vi:"mùi, hương", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Mùi nói chung — có thể tốt hoặc xấu. 좋은 냄새 = mùi thơm, 나쁜 냄새 = mùi hôi.",
+    ex:"맛있는 냄새가 나요.", exVi:"Có mùi thơm ngon quá." },
+  { kr:"냉면", en:"cold noodle", vi:"mì lạnh Naengmyeon", hv:"冷麵", hvR:"lãnh diện", pure:false,
+    explain:"Mì lạnh — có nguồn gốc từ miền Bắc Triều Tiên. Ăn với nước dùng lạnh hoặc kiểu trộn (비빔냉면).",
+    ex:"여름에 냉면이 최고예요.", exVi:"Mùa hè ăn mì lạnh là số một." },
+  { kr:"녹차", en:"green tea", vi:"trà xanh", hv:"綠茶", hvR:"lục trà", pure:false,
+    explain:"Trà xanh — đồ uống truyền thống. Hàn Quốc nổi tiếng với trà xanh Boseong (보성 녹차).",
+    ex:"녹차 한 잔 마실래요?", exVi:"Bạn có muốn uống một tách trà xanh không?" },
+  { kr:"달걀", en:"egg", vi:"trứng gà", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Trứng gà — cách gọi thuần Hàn. Tương đương 계란 (Hán Việt). Cả hai đều phổ biến như nhau.",
+    ex:"달걀 프라이를 만들었어요.", exVi:"Tôi đã làm trứng ốp la." },
+  { kr:"닭", en:"chicken, hen", vi:"con gà", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Con gà — chỉ con vật. Thịt gà gọi là 닭고기. 닭갈비 = sườn gà xào cay.",
+    ex:"닭이 울어요.", exVi:"Con gà gáy." },
+  { kr:"닭고기", en:"chicken (meat)", vi:"thịt gà", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Thịt gà. 닭(gà) + 고기(thịt). Nguyên liệu trong 삼계탕, 닭갈비, 치킨,...",
+    ex:"닭고기를 좋아해요.", exVi:"Tôi thích thịt gà." },
+  { kr:"담그다", en:"to pickle, marinate, dip", vi:"ngâm, muối dưa", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Ngâm chua hoặc muối dưa. 김치를 담그다 = muối kim chi. Cũng có nghĩa là nhúng vào nước.",
+    ex:"김치를 담갔어요.", exVi:"Tôi đã muối kim chi." },
+  { kr:"당근", en:"carrot", vi:"cà rốt", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cà rốt — rau củ phổ biến trong bếp Hàn. Dùng trong 비빔밥, 김밥, canh,...",
+    ex:"당근을 갈아서 넣어요.", exVi:"Tôi bào cà rốt cho vào." },
+  { kr:"더운물", en:"hot water", vi:"nước nóng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nước nóng. 더운(nóng) + 물(nước). Đối lập với 찬물 (nước lạnh).",
+    ex:"더운물 한 잔 주세요.", exVi:"Cho tôi một ly nước nóng." },
+  { kr:"돼지고기", en:"pork", vi:"thịt lợn, thịt heo", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Thịt heo. 삼겹살(ba chỉ), 목살(cổ heo) là các phần phổ biến nhất trong quán nướng Hàn.",
+    ex:"돼지고기를 구워 먹어요.", exVi:"Chúng tôi nướng thịt heo ăn." },
+  { kr:"된장", en:"fermented soybean paste", vi:"tương đậu nành lên men", hv:"醬", hvR:"된장 (thuần Hàn + 장)", pure:true,
+    explain:"Tương đậu lên men — gia vị truyền thống lâu đời của Hàn Quốc. Dùng nấu canh, chấm rau.",
+    ex:"된장은 발효 식품이에요.", exVi:"Tương đậu là thực phẩm lên men." },
+  { kr:"된장국", en:"soybean paste soup", vi:"canh tương đậu", hv:"國", hvR:"된장 + 국(canh)", pure:true,
+    explain:"Canh tương đậu loãng. Nhẹ hơn 된장찌개. Thường ăn kèm cơm hàng ngày.",
+    ex:"된장국이 구수해요.", exVi:"Canh tương đậu thơm ngon thật." },
+  { kr:"된장찌개", en:"soybean paste stew", vi:"canh tương đậu đặc", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Canh tương đậu đặc, sánh hơn 된장국, nấu với đậu phụ, rau, nấm,... Món quốc dân của Hàn.",
+    ex:"된장찌개 끓여 줄게요.", exVi:"Để tôi nấu canh tương đậu cho." },
+  { kr:"두부", en:"tofu", vi:"đậu phụ", hv:"豆腐", hvR:"đậu phụ", pure:false,
+    explain:"Đậu phụ — dùng trong canh, xào, chiên. Nguyên liệu phổ biến trong bếp Hàn và châu Á.",
+    ex:"두부찌개를 좋아해요.", exVi:"Tôi thích canh đậu phụ." },
+  { kr:"두부찌개", en:"tofu stew", vi:"canh đậu phụ", hv:"豆腐", hvR:"두부 + 찌개", pure:false,
+    explain:"Canh đậu phụ hầm. Có thể nấu với kim chi hoặc tương đậu, thêm rau củ và thịt.",
+    ex:"두부찌개는 담백해요.", exVi:"Canh đậu phụ thanh nhẹ lắm." },
+  { kr:"딸기", en:"strawberry", vi:"dâu tây", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Dâu tây — trái cây mùa xuân rất được yêu thích. Hàn Quốc xuất khẩu dâu tây chất lượng cao.",
+    ex:"딸기가 달고 맛있어요.", exVi:"Dâu tây ngọt và ngon." },
+  { kr:"떡", en:"rice cake", vi:"bánh gạo", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bánh gạo — thực phẩm truyền thống Hàn Quốc. Có nhiều loại: 가래떡, 인절미, 송편,...",
+    ex:"설날에 떡국을 먹어요.", exVi:"Tết Nguyên Đán ăn canh bánh gạo." },
+  { kr:"떡국", en:"rice cake soup", vi:"canh bánh gạo", hv:"국(thuần Hàn)", hvR:"떡 + 국(canh)", pure:true,
+    explain:"Canh bánh gạo — ăn vào ngày Tết (설날). Ăn một bát 떡국 có nghĩa là thêm một tuổi.",
+    ex:"떡국을 먹으면 나이를 먹어요.", exVi:"Ăn canh bánh gạo là thêm một tuổi." },
+  { kr:"떡볶이", en:"Tteokbokki", vi:"Tteokbokki (bánh gạo cay)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bánh gạo xào tương ớt cay — món đường phố số một của Hàn Quốc. Bán ở khắp mọi nơi.",
+    ex:"떡볶이가 너무 매워요.", exVi:"Tteokbokki cay quá." },
+  { kr:"라면", en:"ramen, instant noodle", vi:"mì ramen, mì tôm", hv:null, hvR:"từ tiếng Nhật 'ramen'", pure:true,
+    explain:"Mì ăn liền — từ vay mượn tiếng Nhật. Rất phổ biến ở Hàn. Hàn có hàng trăm loại mì gói.",
+    ex:"라면 끓여 먹을까요?", exVi:"Nấu mì ramen ăn nhé?" },
+  { kr:"마늘", en:"garlic", vi:"tỏi", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Tỏi — gia vị quan trọng trong ẩm thực Hàn. Dùng trong hầu hết các món: kim chi, xào, nướng,...",
+    ex:"마늘을 다져요.", exVi:"Tôi băm nhỏ tỏi." },
+  { kr:"만두", en:"dumpling", vi:"bánh bao, há cảo", hv:"饅頭", hvR:"mạn đầu", pure:false,
+    explain:"Bánh bao nhân thịt/rau hoặc há cảo. 군만두 = há cảo chiên, 물만두 = há cảo luộc.",
+    ex:"만두를 빚었어요.", exVi:"Tôi đã nặn há cảo." },
+  { kr:"맛", en:"flavor, taste", vi:"mùi vị, hương vị", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Vị, mùi vị thức ăn. 맛있다 = ngon, 맛없다 = không ngon. Từ cực kỳ hay dùng.",
+    ex:"이 음식 맛이 어때요?", exVi:"Món này vị thế nào?" },
+  { kr:"맥주", en:"beer", vi:"bia", hv:"麥酒", hvR:"mạch tửu", pure:false,
+    explain:"Bia. 맥(麥, lúa mạch) + 주(酒, rượu). 치맥 = gà rán + bia — tổ hợp quốc dân của Hàn.",
+    ex:"치킨이랑 맥주를 마셔요.", exVi:"Tôi uống bia cùng gà rán." },
+  { kr:"메뉴", en:"menu", vi:"thực đơn, menu", hv:null, hvR:"từ tiếng Pháp 'menu'", pure:true,
+    explain:"Thực đơn trong nhà hàng hoặc quán ăn. Từ vay mượn tiếng Pháp/Anh.",
+    ex:"메뉴 좀 보여 주세요.", exVi:"Cho tôi xem thực đơn với." },
+  { kr:"무", en:"radish", vi:"củ cải trắng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Củ cải trắng — rau củ rất phổ biến trong bếp Hàn. Dùng làm kim chi, nấu canh, muối chua.",
+    ex:"무를 깍두기로 만들어요.", exVi:"Làm kkakdugi từ củ cải." },
+  { kr:"물", en:"water", vi:"nước", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nước — nghĩa rộng nhất. 물을 마시다 = uống nước. 물이 끓다 = nước sôi.",
+    ex:"물 한 잔 주세요.", exVi:"Cho tôi một ly nước." },
+  { kr:"밀가루", en:"flour", vi:"bột mì", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bột mì. 밀(lúa mì) + 가루(bột). Nguyên liệu làm bánh, mì, bánh xèo (전),...",
+    ex:"밀가루로 빵을 만들어요.", exVi:"Làm bánh mì từ bột mì." },
+  { kr:"바나나", en:"banana", vi:"chuối", hv:null, hvR:"từ tiếng Anh 'banana'", pure:true,
+    explain:"Chuối. Từ vay mượn tiếng Anh. Trái cây nhập khẩu phổ biến ở Hàn Quốc.",
+    ex:"바나나를 매일 먹어요.", exVi:"Tôi ăn chuối mỗi ngày." },
+  { kr:"반찬", en:"side dish", vi:"món ăn kèm (đồ kèm cơm)", hv:"飯饌", hvR:"phạn soạn", pure:false,
+    explain:"Các món ăn kèm cơm trong bữa ăn Hàn. Bữa ăn truyền thống có nhiều 반찬 bày xung quanh cơm.",
+    ex:"반찬이 다양해요.", exVi:"Các món kèm rất đa dạng." },
+  { kr:"밥", en:"rice, meal", vi:"cơm, bữa ăn", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cơm hoặc bữa ăn nói chung. 밥 먹었어요? = Bạn ăn cơm chưa? — câu hỏi thăm phổ biến.",
+    ex:"밥 먹었어요?", exVi:"Bạn ăn cơm chưa?" },
+  { kr:"복숭아", en:"peach", vi:"quả đào", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Quả đào — trái cây mùa hè ngọt thơm. Hàn Quốc có nhiều vùng trồng đào nổi tiếng.",
+    ex:"복숭아가 달콤해요.", exVi:"Quả đào rất ngọt." },
+  { kr:"볶다", en:"to stir-fry", vi:"xào (chảo)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Xào trong chảo với dầu và lửa to. 볶음밥(cơm chiên), 김치볶음(kim chi xào).",
+    ex:"야채를 볶아요.", exVi:"Tôi xào rau củ." },
+  { kr:"볶음밥", en:"fried rice", vi:"cơm chiên", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cơm chiên — cơm xào với rau củ, trứng, kim chi,... Món đơn giản và phổ biến.",
+    ex:"김치볶음밥을 만들었어요.", exVi:"Tôi đã làm cơm chiên kim chi." },
+  { kr:"불고기", en:"Bulgogi, grilled beef", vi:"Bulgogi (thịt nướng Hàn)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Thịt bò ướp nước tương, tỏi, mè rồi nướng hoặc xào. Một trong những món Hàn nổi tiếng nhất.",
+    ex:"불고기가 제일 유명해요.", exVi:"Bulgogi là món nổi tiếng nhất." },
+  { kr:"비빔밥", en:"Bibimbap, mixed rice", vi:"Bibimbap (cơm trộn)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cơm trộn với rau củ, thịt, trứng và tương ớt. Đại diện tiêu biểu của ẩm thực Hàn Quốc.",
+    ex:"비빔밥에 고추장을 넣어요.", exVi:"Cho tương ớt vào cơm trộn." },
+  { kr:"빵", en:"bread", vi:"bánh mì", hv:null, hvR:"từ tiếng Bồ Đào Nha 'pão'", pure:true,
+    explain:"Bánh mì nói chung. Vay mượn từ tiếng Bồ Đào Nha qua tiếng Nhật. 빵집 = tiệm bánh.",
+    ex:"아침에 빵을 먹어요.", exVi:"Buổi sáng tôi ăn bánh mì." },
+  { kr:"사과", en:"apple", vi:"táo (trái cây)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Táo — trái cây rất phổ biến ở Hàn. Lưu ý: 사과하다 = xin lỗi (đồng âm khác nghĩa).",
+    ex:"사과를 깎아서 먹어요.", exVi:"Tôi gọt táo ăn." },
+  { kr:"사이다", en:"sparkling water, soda (Sprite-like)", vi:"nước có ga (Sprite)", hv:null, hvR:"từ tiếng Anh 'cider'", pure:true,
+    explain:"Nước ngọt có ga không màu, như Sprite. Ở Hàn, 사이다 không phải là cider (rượu táo) như phương Tây.",
+    ex:"사이다 하나 주세요.", exVi:"Cho tôi một chai soda." },
+  { kr:"사탕", en:"candy", vi:"kẹo", hv:"砂糖", hvR:"sa đường", pure:false,
+    explain:"Kẹo ngọt. 사탕을 먹다 = ăn kẹo. 할머니가 사탕을 주셨어요 = Bà đã cho kẹo.",
+    ex:"사탕을 너무 먹으면 이가 썩어요.", exVi:"Ăn kẹo nhiều quá thì sâu răng đấy." },
+  { kr:"삼계탕", en:"Samgyetang, ginseng chicken soup", vi:"Samgyetang (gà hầm sâm)", hv:"蔘鷄湯", hvR:"sâm kê thang", pure:false,
+    explain:"Gà non hầm sâm, táo tàu, gạo nếp. Món bổ dưỡng ăn vào mùa hè nóng nhất để tăng sức đề kháng.",
+    ex:"삼계탕은 몸에 좋아요.", exVi:"Gà hầm sâm rất tốt cho sức khỏe." },
+  { kr:"새우", en:"shrimp, prawn", vi:"tôm", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Tôm nói chung. 새우튀김 = tôm chiên, 새우젓 = mắm tôm lên men (dùng làm kim chi).",
+    ex:"새우가 신선해요.", exVi:"Tôm tươi lắm." },
+  { kr:"샌드위치", en:"sandwich", vi:"bánh sandwich", hv:null, hvR:"từ tiếng Anh 'sandwich'", pure:true,
+    explain:"Bánh sandwich. Từ vay mượn tiếng Anh. Phổ biến như bữa sáng hoặc bữa trưa nhanh.",
+    ex:"샌드위치를 만들었어요.", exVi:"Tôi đã làm bánh sandwich." },
+  { kr:"생선", en:"fish (food)", vi:"cá (thức ăn)", hv:"生鮮", hvR:"sinh tiên", pure:false,
+    explain:"Cá dùng làm thức ăn. Khác với 물고기 (cá sống trong nước). 생선구이 = cá nướng.",
+    ex:"생선구이가 맛있어요.", exVi:"Cá nướng ngon lắm." },
+  { kr:"설렁탕", en:"Seolleongtang, ox bone soup", vi:"Seolleongtang (canh bò hầm)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Canh bò hầm xương lâu giờ cho nước trắng đục, thanh ngọt. Ăn với cơm, muối, hành.",
+    ex:"설렁탕은 구수하고 맛있어요.", exVi:"Canh bò hầm thơm và ngon." },
+  { kr:"설탕", en:"sugar", vi:"đường trắng", hv:"雪糖", hvR:"tuyết đường", pure:false,
+    explain:"Đường trắng. 설탕을 넣다 = cho đường vào. 설탕을 빼다 = bớt đường.",
+    ex:"커피에 설탕 넣어요?", exVi:"Bạn có cho đường vào cà phê không?" },
+  { kr:"소고기", en:"beef", vi:"thịt bò", hv:null, hvR:"thuần Hàn (소=bò + 고기=thịt)", pure:true,
+    explain:"Thịt bò. 소(con bò) + 고기(thịt). Rất được coi trọng trong ẩm thực Hàn — đặc biệt bò Hanwoo.",
+    ex:"소고기가 비싸요.", exVi:"Thịt bò đắt tiền lắm." },
+  { kr:"소금", en:"salt", vi:"muối", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Muối — gia vị cơ bản nhất. 소금을 넣다 = cho muối vào. 짜다 = mặn.",
+    ex:"소금을 조금만 넣어요.", exVi:"Cho muối vào một chút thôi." },
+  { kr:"수돗물", en:"tap water", vi:"nước máy, nước vòi", hv:"水道", hvR:"수도 + 물", pure:false,
+    explain:"Nước máy từ đường ống. 수도(水道, đường nước) + 물(nước). Nước máy Hàn Quốc uống được.",
+    ex:"수돗물을 마셔도 돼요?", exVi:"Có thể uống nước máy không?" },
+  { kr:"수박", en:"watermelon", vi:"dưa hấu", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Dưa hấu — trái cây mùa hè số một của Hàn Quốc. Thường ăn khi xem thể thao, picnic.",
+    ex:"여름에 수박이 최고예요.", exVi:"Mùa hè dưa hấu là số một." },
+  { kr:"수저", en:"spoon and chopsticks set", vi:"bộ đũa và thìa", hv:"匙箸", hvR:"thị trợ", pure:false,
+    explain:"Bộ đũa và thìa — bộ dụng cụ ăn truyền thống của Hàn Quốc. 숟가락(thìa) + 젓가락(đũa).",
+    ex:"수저를 가져다 주세요.", exVi:"Lấy cho tôi bộ đũa thìa với." },
+  { kr:"숟가락", en:"spoon", vi:"cái thìa, muỗng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cái thìa. Người Hàn ăn cơm và canh bằng thìa, khác với Nhật Bản và Trung Quốc.",
+    ex:"숟가락으로 국을 떠먹어요.", exVi:"Tôi múc canh bằng thìa ăn." },
+  { kr:"술", en:"alcohol, liquor", vi:"rượu, đồ uống có cồn", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Rượu, đồ uống có cồn nói chung. 소주, 막걸리, 맥주 đều là 술. Văn hóa uống rượu rất mạnh ở Hàn.",
+    ex:"술을 너무 많이 마셨어요.", exVi:"Tôi đã uống rượu quá nhiều." },
+  { kr:"식사", en:"meal", vi:"bữa ăn", hv:"食事", hvR:"thực sự", pure:false,
+    explain:"Bữa ăn nói chung (trang trọng hơn 밥). 식사하다 = dùng bữa. 식사 맛있게 하세요 = Ăn ngon miệng!",
+    ex:"식사 맛있게 하세요!", exVi:"Ăn ngon miệng nhé!" },
+  { kr:"쌀", en:"rice (uncooked)", vi:"gạo", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Gạo sống chưa nấu. Phân biệt với 밥 (cơm đã nấu). 쌀을 씻다 = vo gạo.",
+    ex:"쌀을 씻어서 밥을 지어요.", exVi:"Vo gạo rồi nấu cơm." },
+  { kr:"쌀밥", en:"steamed rice", vi:"cơm gạo", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cơm nấu từ gạo. Nhấn mạnh chất liệu gạo, phân biệt với các loại cơm khác như 보리밥 (cơm lúa mạch).",
+    ex:"흰 쌀밥이 먹고 싶어요.", exVi:"Tôi muốn ăn cơm trắng." },
+  { kr:"썰다", en:"to slice, chop", vi:"thái, chặt (đồ ăn)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Thái, cắt lát đồ ăn. 채소를 썰다 = thái rau củ. 고기를 썰다 = thái thịt.",
+    ex:"당근을 잘게 썰었어요.", exVi:"Tôi đã thái nhỏ cà rốt." },
+  { kr:"아이스크림", en:"ice cream", vi:"kem (kem que/cốc)", hv:null, hvR:"từ tiếng Anh 'ice cream'", pure:true,
+    explain:"Kem. Hàn Quốc có rất nhiều loại kem que độc đáo, nổi tiếng như 빠삐코, 메로나,...",
+    ex:"더우니까 아이스크림 먹어요.", exVi:"Trời nóng nên ăn kem thôi." },
+  { kr:"아침밥", en:"breakfast (rice)", vi:"bữa sáng (cơm sáng)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bữa ăn sáng — cụ thể là cơm sáng. 아침(sáng) + 밥(cơm). Trang trọng hơn là 아침식사.",
+    ex:"아침밥을 꼭 먹어요.", exVi:"Nhất định phải ăn sáng nhé." },
+  { kr:"아침식사", en:"breakfast", vi:"bữa ăn sáng", hv:"食事", hvR:"아침 + 식사(thực sự)", pure:false,
+    explain:"Bữa ăn sáng (cách nói trang trọng). 아침(sáng) + 식사(bữa ăn).",
+    ex:"아침식사를 했어요?", exVi:"Bạn đã ăn sáng chưa?" },
+  { kr:"야채", en:"vegetable", vi:"rau củ", hv:"野菜", hvR:"dã thái", pure:false,
+    explain:"Rau củ — cách nói thông thường. Tương tự 채소 nhưng 야채 mang âm Nhật (野菜). Cả hai đều dùng.",
+    ex:"야채를 많이 먹어요.", exVi:"Tôi ăn nhiều rau củ." },
+  { kr:"양파", en:"onion", vi:"hành tây", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Hành tây. 양(洋, nước ngoài/phương Tây) + 파(hành lá) → hành từ phương Tây.",
+    ex:"양파를 볶으면 달아요.", exVi:"Xào hành tây lên thì ngọt." },
+  { kr:"얼음", en:"ice", vi:"đá, nước đá", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Đá, nước đá. 얼음을 넣다 = cho đá vào. 얼음물 = nước đá.",
+    ex:"얼음 많이 넣어 주세요.", exVi:"Cho thêm nhiều đá vào." },
+  { kr:"오렌지", en:"orange", vi:"quả cam", hv:null, hvR:"từ tiếng Anh 'orange'", pure:true,
+    explain:"Quả cam. Từ vay mượn tiếng Anh. 오렌지 주스 = nước cam.",
+    ex:"오렌지 주스 한 잔 주세요.", exVi:"Cho tôi một ly nước cam." },
+  { kr:"오이", en:"cucumber", vi:"dưa leo, dưa chuột", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Dưa leo. Dùng trong salad, kim chi oì (오이소박이), ăn sống chấm tương.",
+    ex:"오이를 썰어서 먹어요.", exVi:"Thái dưa leo ra ăn." },
+  { kr:"오징어", en:"squid", vi:"mực (hải sản)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Mực — hải sản phổ biến ở Hàn. 오징어볶음 = mực xào cay, 오징어순대 = dồi mực.",
+    ex:"오징어볶음이 매워요.", exVi:"Mực xào cay lắm." },
+  { kr:"요리", en:"cooking, cuisine, dish", vi:"nấu ăn, món ăn", hv:"料理", hvR:"liệu lý", pure:false,
+    explain:"Nấu ăn hoặc món ăn. 요리하다 = nấu ăn. 요리사 = đầu bếp. 한국요리 = ẩm thực Hàn.",
+    ex:"요리를 잘 해요?", exVi:"Bạn nấu ăn có giỏi không?" },
+  { kr:"우유", en:"milk", vi:"sữa (bò)", hv:"牛乳", hvR:"ngưu nhũ", pure:false,
+    explain:"Sữa bò. 우(牛, bò) + 유(乳, sữa). 우유를 마시다 = uống sữa.",
+    ex:"아침에 우유를 마셔요.", exVi:"Buổi sáng tôi uống sữa." },
+  { kr:"음료수", en:"drink, beverage", vi:"nước uống, đồ uống", hv:"飮料水", hvR:"ẩm liệu thủy", pure:false,
+    explain:"Đồ uống nói chung (nước ngọt, nước ép,...). 음료수를 사다 = mua đồ uống.",
+    ex:"음료수 뭐 마실 거예요?", exVi:"Bạn sẽ uống đồ uống gì?" },
+  { kr:"음식", en:"food", vi:"thức ăn, đồ ăn", hv:"飮食", hvR:"ẩm thực", pure:false,
+    explain:"Thức ăn, đồ ăn nói chung. 음식을 만들다 = làm đồ ăn. 한국 음식 = ẩm thực Hàn Quốc.",
+    ex:"한국 음식을 좋아해요?", exVi:"Bạn có thích ẩm thực Hàn không?" },
+  { kr:"인삼", en:"ginseng", vi:"nhân sâm", hv:"人蔘", hvR:"nhân sâm", pure:false,
+    explain:"Nhân sâm — thảo dược quý giá của Hàn Quốc. Dùng trong 삼계탕, trà sâm, đồ bổ dưỡng.",
+    ex:"한국 인삼이 유명해요.", exVi:"Nhân sâm Hàn Quốc rất nổi tiếng." },
+  { kr:"일본요리", en:"Japanese cuisine", vi:"ẩm thực Nhật Bản", hv:"日本料理", hvR:"nhật bản liệu lý", pure:false,
+    explain:"Ẩm thực Nhật Bản nói chung. Thường gọi tắt là 일식 trong hội thoại.",
+    ex:"일본요리도 좋아해요.", exVi:"Tôi cũng thích ẩm thực Nhật." },
+  { kr:"일식", en:"Japanese cuisine (short form)", vi:"ẩm thực Nhật", hv:"日食", hvR:"nhật thực", pure:false,
+    explain:"Cách nói tắt của 일본요리. 일식집 = nhà hàng Nhật.",
+    ex:"일식집에 자주 가요.", exVi:"Tôi hay đến nhà hàng Nhật." },
+  { kr:"자장면", en:"Jajangmyeon, black bean noodle", vi:"Jajangmyeon (mì đen)", hv:"炸醬麵", hvR:"chá tương miến", pure:false,
+    explain:"Mì sốt đậu đen — món ăn gốc Hoa du nhập vào Hàn Quốc, nay trở thành đặc sản riêng. Ăn vào ngày 짜장데이 (14/4).",
+    ex:"자장면이 먹고 싶어요.", exVi:"Tôi muốn ăn mì đen." },
+  { kr:"저녁식사", en:"dinner", vi:"bữa ăn tối", hv:"食事", hvR:"저녁 + 식사(thực sự)", pure:false,
+    explain:"Bữa ăn tối (cách nói trang trọng). 저녁(tối) + 식사(bữa ăn).",
+    ex:"저녁식사 같이 해요.", exVi:"Cùng ăn tối nhé." },
+  { kr:"점심식사", en:"lunch", vi:"bữa ăn trưa", hv:"食事", hvR:"점심 + 식사(thực sự)", pure:false,
+    explain:"Bữa ăn trưa (cách nói trang trọng). 점심(trưa) + 식사(bữa ăn).",
+    ex:"점심식사 하셨어요?", exVi:"Bạn đã ăn trưa chưa?" },
+  { kr:"젓가락", en:"chopsticks", vi:"đũa (ăn)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Đũa ăn. Đũa Hàn làm bằng kim loại — khác Việt Nam (tre/nhựa). Dùng cùng với 숟가락 (thìa).",
+    ex:"젓가락 사용이 어려워요.", exVi:"Dùng đũa khó quá." },
+  { kr:"주스", en:"juice", vi:"nước ép hoa quả", hv:null, hvR:"từ tiếng Anh 'juice'", pure:true,
+    explain:"Nước ép trái cây. Từ vay mượn tiếng Anh. 오렌지 주스, 사과 주스,...",
+    ex:"주스 한 잔 마실게요.", exVi:"Tôi sẽ uống một ly nước ép." },
+  { kr:"죽", en:"porridge, congee", vi:"cháo (thức ăn)", hv:"粥", hvR:"chúc", pure:false,
+    explain:"Cháo — ăn khi bệnh hoặc khi muốn ăn nhẹ. 전복죽(cháo bào ngư), 야채죽(cháo rau),...",
+    ex:"아플 때 죽을 먹어요.", exVi:"Khi bệnh thì ăn cháo." },
+  { kr:"중식", en:"Chinese cuisine", vi:"ẩm thực Trung Quốc", hv:"中食", hvR:"trung thực", pure:false,
+    explain:"Ẩm thực Trung Quốc. Cách nói tắt của 중국요리. 중식당 = nhà hàng Trung Quốc.",
+    ex:"중식당에 가요.", exVi:"Đến nhà hàng Trung Quốc đi." },
+  { kr:"찌개", en:"stew, thick soup", vi:"canh hầm đặc", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Canh đặc, đậm đà hơn 국. 김치찌개, 된장찌개, 부대찌개 là các loại phổ biến nhất.",
+    ex:"찌개가 팔팔 끓어요.", exVi:"Canh đang sôi sùng sục." },
+  { kr:"채소", en:"vegetable", vi:"rau xanh", hv:"菜蔬", hvR:"thái sơ", pure:false,
+    explain:"Rau củ — cách nói văn chương, trang trọng hơn 야채 (vay mượn từ tiếng Nhật).",
+    ex:"채소를 골고루 먹어야 해요.", exVi:"Phải ăn đủ loại rau củ." },
+  { kr:"초콜릿", en:"chocolate", vi:"sô cô la", hv:null, hvR:"từ tiếng Anh 'chocolate'", pure:true,
+    explain:"Sô cô la. Dịp Valentine (14/2) phụ nữ Hàn tặng sô cô la cho nam giới, ngược với nhiều nước.",
+    ex:"발렌타인데이에 초콜릿을 줘요.", exVi:"Ngày Valentine tặng sô cô la." },
+  { kr:"카레", en:"curry", vi:"cà ri", hv:null, hvR:"từ tiếng Nhật 'カレー'", pure:true,
+    explain:"Cà ri — du nhập từ tiếng Nhật. 카레라이스 = cơm cà ri. Món phổ biến trong bữa ăn gia đình Hàn.",
+    ex:"카레라이스를 만들었어요.", exVi:"Tôi đã làm cơm cà ri." },
+  { kr:"칼", en:"knife", vi:"dao (nhà bếp)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Dao. 칼을 갈다 = mài dao. 칼로 썰다 = thái bằng dao. 과도 = dao nhỏ, 식칼 = dao bếp.",
+    ex:"칼이 날카로워요.", exVi:"Con dao sắc lắm." },
+  { kr:"커피", en:"coffee", vi:"cà phê", hv:null, hvR:"từ tiếng Anh 'coffee'", pure:true,
+    explain:"Cà phê. Hàn Quốc có văn hóa cà phê rất phát triển — số lượng quán cà phê thuộc hàng cao nhất thế giới.",
+    ex:"커피 한 잔 할까요?", exVi:"Uống một ly cà phê nhé?" },
+  { kr:"컵", en:"cup, glass", vi:"cái cốc, ly uống", hv:null, hvR:"từ tiếng Anh 'cup'", pure:true,
+    explain:"Cái cốc, ly uống nước. 컵에 따르다 = rót vào cốc.",
+    ex:"컵에 물을 따랐어요.", exVi:"Tôi đã rót nước vào cốc." },
+  { kr:"케이크", en:"cake", vi:"bánh kem, bánh ngọt", hv:null, hvR:"từ tiếng Anh 'cake'", pure:true,
+    explain:"Bánh kem. Không thể thiếu trong tiệc sinh nhật ở Hàn Quốc. 케이크를 자르다 = cắt bánh.",
+    ex:"생일 케이크를 잘랐어요.", exVi:"Tôi đã cắt bánh sinh nhật." },
+  { kr:"콜라", en:"cola, Coke", vi:"Coca-Cola, nước ngọt", hv:null, hvR:"từ tiếng Anh 'cola'", pure:true,
+    explain:"Coca-Cola hoặc nước ngọt có ga nói chung. 콜라 한 캔 = một lon cola.",
+    ex:"피자에 콜라가 잘 어울려요.", exVi:"Pizza rất hợp với cola." },
+  { kr:"콩", en:"bean, soybean", vi:"đậu, đỗ", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Đậu, đỗ nói chung. 콩으로 두부를 만들어요 = làm đậu phụ từ đậu nành.",
+    ex:"콩밥을 먹어요.", exVi:"Tôi ăn cơm đậu." },
+  { kr:"토마토", en:"tomato", vi:"cà chua", hv:null, hvR:"từ tiếng Anh 'tomato'", pure:true,
+    explain:"Cà chua. Từ vay mượn tiếng Anh. Ăn tươi như trái cây ở Hàn, không chỉ dùng nấu ăn.",
+    ex:"토마토를 샐러드에 넣어요.", exVi:"Cho cà chua vào salad." },
+  { kr:"파", en:"green onion, scallion", vi:"hành lá", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Hành lá — gia vị phổ biến trong bếp Hàn. Dùng để trang trí và nêm hầu hết các món.",
+    ex:"파를 잘게 썰어요.", exVi:"Thái nhỏ hành lá." },
+  { kr:"포도", en:"grape", vi:"nho", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nho. Hàn Quốc có nhiều giống nho ngon như Shine Muscat (샤인머스캣) rất nổi tiếng.",
+    ex:"포도가 달아요.", exVi:"Nho ngọt lắm." },
+  { kr:"피자", en:"pizza", vi:"pizza", hv:null, hvR:"từ tiếng Ý 'pizza'", pure:true,
+    explain:"Pizza. Từ vay mượn tiếng Ý. Rất phổ biến ở Hàn với nhiều kiểu topping đặc biệt.",
+    ex:"피자 시켜 먹어요.", exVi:"Gọi pizza về ăn đi." },
+  { kr:"한국요리", en:"Korean cuisine", vi:"ẩm thực Hàn Quốc", hv:"韓國料理", hvR:"hàn quốc liệu lý", pure:false,
+    explain:"Ẩm thực Hàn Quốc nói chung. Thường gọi tắt là 한식. Đang được yêu thích trên toàn thế giới.",
+    ex:"한국요리를 배우고 싶어요.", exVi:"Tôi muốn học nấu ẩm thực Hàn." },
+  { kr:"한식", en:"Korean cuisine (short form)", vi:"ẩm thực Hàn, cơm Hàn", hv:"韓食", hvR:"hàn thực", pure:false,
+    explain:"Cách nói tắt của 한국요리. 한식집 = nhà hàng cơm Hàn. Phổ biến và thân thuộc trong giao tiếp.",
+    ex:"한식이 맛있어요.", exVi:"Cơm Hàn ngon lắm." },
+  { kr:"햄버거", en:"hamburger", vi:"bánh hamburger", hv:null, hvR:"từ tiếng Anh 'hamburger'", pure:true,
+    explain:"Bánh hamburger. Từ vay mượn tiếng Anh. Rất phổ biến ở Hàn — nhiều chuỗi fast food nội địa.",
+    ex:"햄버거를 먹으러 가요.", exVi:"Đi ăn hamburger nào." },
+  { kr:"홍차", en:"black tea", vi:"trà đen", hv:"紅茶", hvR:"hồng trà", pure:false,
+    explain:"Trà đen. 홍(紅, đỏ) + 차(茶, trà). Gọi là 'hồng trà' vì màu nước pha ra có màu đỏ/nâu đỏ.",
+    ex:"홍차에 우유를 넣어 마셔요.", exVi:"Tôi uống trà đen với sữa." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    const hvCell = item.pure
+      ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
+      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${hvCell}</td>
+      <td><span class="explain">${item.explain}</span></td>
+      <td>
+        <span class="example-kr">${item.ex}</span>
+        <span class="example-vi">${item.exVi}</span>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all'
+      || (currentFilter === 'hv' && !item.pure)
+      || (currentFilter === 'pure' && item.pure);
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || (item.hv && item.hv.includes(q))
+      || item.hvR.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
