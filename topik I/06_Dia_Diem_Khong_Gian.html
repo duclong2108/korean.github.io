@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Địa điểm & Không gian</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2fa;
+    --card: #ffffff;
+    --accent: #5c1a8a;
+    --text: #1e0a30;
+    --sub: #7a5a9a;
+    --border: #ddd0ee;
+    --tag-hv: #ede0fa;
+    --tag-pure: #e8f4e8;
+    --highlight: #f5eeff;
+    --row-alt: #faf8fd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f5f2fa;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '장소';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #9a80ba; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f5f2fa; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 130px; }
+  th:nth-child(3), td:nth-child(3) { width: 160px; }
+  th:nth-child(4), td:nth-child(4) { width: 185px; }
+  th:nth-child(5), td:nth-child(5) { width: 155px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
+  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #4a1070; font-weight: 500; }
+  .hv-tag.pure { background: var(--tag-pure); color: #2a6030; }
+  .hv-hanja { font-weight: 600; font-size: 13px; }
+  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
+  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
+  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
+  .explain { font-size: 13px; color: #3a1050; line-height: 1.6; }
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>장소 & 공간 — Địa điểm & Không gian</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Địa điểm · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+  <button class="filter-btn" data-filter="pure">Thuần Hàn / Vay mượn</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Địa điểm & Không gian</div>
+
+<script>
+const vocab = [
+  { kr:"가게", en:"store, shop", vi:"cửa hàng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cửa hàng nhỏ. Dùng rộng rãi hơn 상점. 꽃가게(cửa hoa), 옷가게(cửa quần áo),...",
+    ex:"가게에서 물건을 샀어요.", exVi:"Tôi đã mua đồ ở cửa hàng." },
+  { kr:"가구", en:"furniture", vi:"đồ nội thất", hv:"家具", hvR:"gia cụ", pure:false,
+    explain:"Đồ nội thất trong nhà. 가구를 사다 = mua đồ nội thất. 가구점 = cửa hàng nội thất.",
+    ex:"새 가구를 샀어요.", exVi:"Tôi đã mua đồ nội thất mới." },
+  { kr:"가위", en:"scissors", vi:"cái kéo", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cái kéo. 가위로 자르다 = cắt bằng kéo. Cũng là động tác 'kéo' trong trò oẳn tù xì.",
+    ex:"가위로 종이를 잘랐어요.", exVi:"Tôi đã cắt giấy bằng kéo." },
+  { kr:"거리", en:"street, distance", vi:"con đường, phố", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Con phố, đường phố. Cũng có nghĩa là khoảng cách (距離). 명동 거리 = phố Myeongdong.",
+    ex:"거리에 사람이 많아요.", exVi:"Ngoài phố có nhiều người." },
+  { kr:"거실", en:"living room", vi:"phòng khách", hv:"居室", hvR:"cư thất", pure:false,
+    explain:"Phòng khách trong nhà. 거실에서 TV를 봐요 = xem TV ở phòng khách.",
+    ex:"거실에서 쉬고 있어요.", exVi:"Tôi đang nghỉ ngơi ở phòng khách." },
+  { kr:"거울", en:"mirror", vi:"gương", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cái gương. 거울을 보다 = nhìn vào gương. 거울 앞에 서다 = đứng trước gương.",
+    ex:"거울을 보며 화장해요.", exVi:"Tôi trang điểm trước gương." },
+  { kr:"건너편", en:"opposite side, across", vi:"phía bên kia", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía bên kia đường hoặc bên đối diện. 건너(sang bên kia) + 편(phía).",
+    ex:"은행은 건너편에 있어요.", exVi:"Ngân hàng ở phía bên kia đường." },
+  { kr:"건물", en:"building", vi:"tòa nhà", hv:"建物", hvR:"kiến vật", pure:false,
+    explain:"Tòa nhà, công trình xây dựng. 건물 안 = bên trong tòa nhà. 몇 층 건물 = tòa nhà mấy tầng.",
+    ex:"저 건물이 우리 회사예요.", exVi:"Tòa nhà đó là công ty tôi." },
+  { kr:"경찰서", en:"police station", vi:"đồn cảnh sát", hv:"警察署", hvR:"cảnh sát thự", pure:false,
+    explain:"Đồn cảnh sát. 경찰서에 신고하다 = trình báo cảnh sát. 경찰관 = cảnh sát viên.",
+    ex:"경찰서가 어디 있어요?", exVi:"Đồn cảnh sát ở đâu vậy?" },
+  { kr:"계단", en:"stairs, steps", vi:"cầu thang", hv:"階段", hvR:"giai đoạn", pure:false,
+    explain:"Cầu thang bộ. 계단을 오르다/내려가다 = leo/xuống cầu thang. Đối lập với 엘리베이터.",
+    ex:"계단으로 올라가요.", exVi:"Tôi đi bộ lên cầu thang." },
+  { kr:"골목", en:"alley, lane", vi:"ngõ hẻm", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Ngõ hẻm nhỏ giữa các tòa nhà. 골목길 = con ngõ. 골목 안 = trong ngõ hẻm.",
+    ex:"골목이 좁고 어두워요.", exVi:"Ngõ hẻm hẹp và tối." },
+  { kr:"곳", en:"place, spot", vi:"nơi, địa điểm", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nơi chốn, địa điểm nói chung. Mang tính trừu tượng hơn 장소. 어떤 곳 = một nơi nào đó.",
+    ex:"조용한 곳에서 공부해요.", exVi:"Tôi học ở nơi yên tĩnh." },
+  { kr:"공간", en:"space", vi:"không gian", hv:"空間", hvR:"không gian", pure:false,
+    explain:"Không gian, khoảng trống. 공간이 넓다 = không gian rộng. 공간 활용 = tận dụng không gian.",
+    ex:"공간이 너무 좁아요.", exVi:"Không gian quá chật hẹp." },
+  { kr:"공원", en:"park", vi:"công viên", hv:"公園", hvR:"công viên", pure:false,
+    explain:"Công viên. 공원에서 산책하다 = đi dạo ở công viên. Rất phổ biến và quan trọng ở đô thị Hàn.",
+    ex:"공원에서 산책해요.", exVi:"Tôi đi dạo ở công viên." },
+  { kr:"교회", en:"church", vi:"nhà thờ (Thiên Chúa giáo)", hv:"敎會", hvR:"giáo hội", pure:false,
+    explain:"Nhà thờ Thiên Chúa giáo (Tin Lành). Hàn Quốc có tỷ lệ Thiên Chúa giáo cao. 교회에 다니다 = đi nhà thờ.",
+    ex:"일요일에 교회에 가요.", exVi:"Chủ nhật tôi đi nhà thờ." },
+  { kr:"극장", en:"theater, cinema", vi:"rạp chiếu phim, nhà hát", hv:"劇場", hvR:"kịch trường", pure:false,
+    explain:"Rạp chiếu phim hoặc nhà hát. 영화관 cụ thể hơn (chỉ rạp phim), 극장 rộng hơn.",
+    ex:"극장에서 뮤지컬을 봤어요.", exVi:"Tôi đã xem nhạc kịch ở nhà hát." },
+  { kr:"근처", en:"nearby, vicinity", vi:"gần đây, khu vực gần", hv:"近處", hvR:"cận xứ", pure:false,
+    explain:"Khu vực lân cận, gần đó. 근처에 있다 = ở gần đây. 근처 맛집 = quán ngon gần đây.",
+    ex:"근처에 편의점이 있어요?", exVi:"Gần đây có cửa hàng tiện lợi không?" },
+  { kr:"기숙사", en:"dormitory", vi:"ký túc xá", hv:"寄宿舍", hvR:"ký túc xá", pure:false,
+    explain:"Ký túc xá trường học hoặc công ty. 기숙사에 살다 = sống ở ký túc xá.",
+    ex:"기숙사에 살고 있어요.", exVi:"Tôi đang sống ở ký túc xá." },
+  { kr:"꽃집", en:"florist, flower shop", vi:"cửa hàng hoa", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cửa hàng bán hoa. 꽃(hoa) + 집(nhà/tiệm). 꽃집에서 꽃을 사다 = mua hoa ở tiệm hoa.",
+    ex:"꽃집에서 장미를 샀어요.", exVi:"Tôi đã mua hoa hồng ở tiệm hoa." },
+  { kr:"냉장고", en:"refrigerator", vi:"tủ lạnh", hv:"冷藏庫", hvR:"lãnh tàng khố", pure:false,
+    explain:"Tủ lạnh. 냉장고에 넣다 = cho vào tủ lạnh. 냉장고를 열다 = mở tủ lạnh.",
+    ex:"냉장고에 음식이 많아요.", exVi:"Tủ lạnh có nhiều đồ ăn." },
+  { kr:"댁", en:"house (honorific)", vi:"nhà (kính ngữ)", hv:"宅", hvR:"trạch", pure:false,
+    explain:"Cách nói kính trọng của 집. 댁에 계세요? = Ông/bà có ở nhà không? Dùng với người lớn tuổi.",
+    ex:"어머님 댁에 갔어요.", exVi:"Tôi đã đến nhà mẹ (kính ngữ)." },
+  { kr:"도서관", en:"library", vi:"thư viện", hv:"圖書館", hvR:"đồ thư quán", pure:false,
+    explain:"Thư viện. 도서관에서 공부하다 = học ở thư viện. Rất phổ biến và đông đúc ở Hàn.",
+    ex:"도서관에서 책을 빌렸어요.", exVi:"Tôi đã mượn sách ở thư viện." },
+  { kr:"도시", en:"city", vi:"thành phố", hv:"都市", hvR:"đô thị", pure:false,
+    explain:"Thành phố, đô thị. 대도시 = đô thị lớn. 도시 생활 = cuộc sống thành thị.",
+    ex:"도시가 너무 복잡해요.", exVi:"Thành phố quá phức tạp." },
+  { kr:"동네", en:"neighborhood, village", vi:"khu phố, hàng xóm", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Khu phố, xóm làng. 동네 사람들 = người trong xóm. 우리 동네 = xóm/khu tôi ở.",
+    ex:"우리 동네가 조용해요.", exVi:"Khu tôi ở rất yên tĩnh." },
+  { kr:"뒤", en:"back, rear", vi:"phía sau, sau lưng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía sau, mặt sau. 뒤에 있다 = ở phía sau. 뒤를 돌아보다 = ngoái nhìn lại phía sau.",
+    ex:"뒤에 누가 있어요.", exVi:"Có ai đó ở phía sau." },
+  { kr:"뒤쪽", en:"the back side, behind", vi:"phía sau", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía sau — nhấn mạnh hướng hơn 뒤. 뒤쪽(hướng phía sau) vs 뒤(vị trí phía sau).",
+    ex:"뒤쪽으로 가세요.", exVi:"Đi về phía sau đi." },
+  { kr:"맞은편", en:"opposite side, across from", vi:"phía đối diện", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía trực tiếp đối diện. Tương tự 건너편 nhưng nhấn mạnh vào sự đối mặt trực tiếp hơn.",
+    ex:"맞은편에 카페가 있어요.", exVi:"Có quán cà phê ở phía đối diện." },
+  { kr:"문", en:"door, gate", vi:"cái cửa", hv:"門", hvR:"môn", pure:false,
+    explain:"Cửa ra vào. 문을 열다/닫다 = mở/đóng cửa. 앞문 = cửa trước, 뒷문 = cửa sau.",
+    ex:"문을 열어 주세요.", exVi:"Làm ơn mở cửa giúp tôi." },
+  { kr:"문구점", en:"stationery store", vi:"cửa hàng văn phòng phẩm", hv:"文具店", hvR:"văn cụ điếm", pure:false,
+    explain:"Cửa hàng bán văn phòng phẩm (bút, vở, kéo,...). 문구(文具, dụng cụ viết) + 점(店, cửa hàng).",
+    ex:"문구점에서 노트를 샀어요.", exVi:"Tôi đã mua vở ở cửa hàng văn phòng phẩm." },
+  { kr:"미술관", en:"art gallery, art museum", vi:"bảo tàng mỹ thuật", hv:"美術館", hvR:"mỹ thuật quán", pure:false,
+    explain:"Bảo tàng hoặc phòng trưng bày nghệ thuật. Khác với 박물관 (bảo tàng lịch sử/tổng hợp).",
+    ex:"미술관에서 전시를 봤어요.", exVi:"Tôi đã xem triển lãm ở bảo tàng mỹ thuật." },
+  { kr:"미용실", en:"beauty salon, hair salon", vi:"tiệm làm tóc, salon tóc", hv:"美容室", hvR:"mỹ dung thất", pure:false,
+    explain:"Tiệm làm tóc, làm đẹp. 미용실에 가다 = đi làm tóc. 미용사 = thợ làm tóc.",
+    ex:"미용실에서 머리를 잘랐어요.", exVi:"Tôi đã cắt tóc ở tiệm làm tóc." },
+  { kr:"밑", en:"bottom, below", vi:"phía dưới, bên dưới", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía bên dưới, đáy. Tương tự 아래 nhưng 밑 thường chỉ vị trí sát bên dưới hơn.",
+    ex:"책상 밑에 있어요.", exVi:"Ở phía dưới bàn học." },
+  { kr:"박물관", en:"museum", vi:"bảo tàng", hv:"博物館", hvR:"bác vật quán", pure:false,
+    explain:"Bảo tàng tổng hợp về lịch sử, văn hóa. 국립박물관 = bảo tàng quốc gia.",
+    ex:"박물관에서 역사를 배워요.", exVi:"Tôi học lịch sử ở bảo tàng." },
+  { kr:"밖", en:"outside, exterior", vi:"bên ngoài, ngoài", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bên ngoài, phía ngoài. 밖에 나가다 = ra ngoài. Đối lập với 안(bên trong).",
+    ex:"밖이 추워요.", exVi:"Bên ngoài lạnh lắm." },
+  { kr:"방", en:"room", vi:"phòng (trong nhà)", hv:"房", hvR:"phòng", pure:false,
+    explain:"Phòng trong nhà. 침실(phòng ngủ), 거실(phòng khách), 화장실(nhà vệ sinh) đều là 방.",
+    ex:"방이 좁아요.", exVi:"Phòng chật quá." },
+  { kr:"백화점", en:"department store", vi:"trung tâm thương mại", hv:"百貨店", hvR:"bách hoá điếm", pure:false,
+    explain:"Trung tâm thương mại cao cấp. 백(百, trăm) + 화(貨, hàng hóa) + 점(店, cửa hàng) → bán trăm thứ.",
+    ex:"백화점에서 옷을 샀어요.", exVi:"Tôi đã mua quần áo ở trung tâm thương mại." },
+  { kr:"벽", en:"wall", vi:"bức tường", hv:"壁", hvR:"bích", pure:false,
+    explain:"Bức tường. 벽에 걸다 = treo lên tường. 벽지 = giấy dán tường.",
+    ex:"벽에 그림을 걸었어요.", exVi:"Tôi đã treo tranh lên tường." },
+  { kr:"봉지", en:"bag, plastic bag", vi:"túi nylon, túi nhựa", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Túi nylon/túi nhựa đựng đồ. 비닐봉지 = túi nylon. 봉지에 넣다 = cho vào túi.",
+    ex:"봉지에 넣어 주세요.", exVi:"Cho vào túi giúp tôi với." },
+  { kr:"부엌", en:"kitchen", vi:"nhà bếp, phòng bếp", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nhà bếp. 부엌에서 요리하다 = nấu ăn ở bếp. Tương tự 주방 nhưng 부엌 mang sắc thái truyền thống hơn.",
+    ex:"부엌에서 요리해요.", exVi:"Tôi nấu ăn ở bếp." },
+  { kr:"빌딩", en:"building (tall)", vi:"tòa nhà, building", hv:null, hvR:"từ tiếng Anh 'building'", pure:true,
+    explain:"Tòa nhà cao tầng, văn phòng. Từ vay mượn tiếng Anh. Thường chỉ tòa nhà hiện đại, cao hơn 건물.",
+    ex:"저 빌딩이 정말 높아요.", exVi:"Tòa nhà đó cao thật." },
+  { kr:"빵집", en:"bakery", vi:"tiệm bánh mì", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Tiệm bánh mì. 빵(bánh mì) + 집(tiệm). 빵집에서 크루아상을 샀어요 = mua croissant ở tiệm bánh.",
+    ex:"빵집에서 케이크를 샀어요.", exVi:"Tôi đã mua bánh kem ở tiệm bánh." },
+  { kr:"사물", en:"object, thing", vi:"vật thể, đồ vật", hv:"事物", hvR:"sự vật", pure:false,
+    explain:"Sự vật, đồ vật nói chung. 사물함 = tủ đồ cá nhân (locker). Dùng nhiều trong văn viết.",
+    ex:"주변 사물을 잘 관찰해요.", exVi:"Quan sát kỹ các sự vật xung quanh." },
+  { kr:"상자", en:"box, carton", vi:"hộp, thùng", hv:"箱子", hvR:"tương tử", pure:false,
+    explain:"Hộp, thùng đựng đồ. 택배 상자 = thùng hàng chuyển phát. 상자에 넣다 = cho vào hộp.",
+    ex:"상자에 물건을 넣었어요.", exVi:"Tôi đã cho đồ vào thùng." },
+  { kr:"서점", en:"bookstore", vi:"hiệu sách, nhà sách", hv:"書店", hvR:"thư điếm", pure:false,
+    explain:"Hiệu sách. 서점에서 책을 사다 = mua sách ở hiệu sách. Trang trọng hơn 책방.",
+    ex:"서점에서 소설을 샀어요.", exVi:"Tôi đã mua tiểu thuyết ở hiệu sách." },
+  { kr:"선풍기", en:"electric fan", vi:"quạt điện", hv:"扇風機", hvR:"phiến phong cơ", pure:false,
+    explain:"Quạt điện đứng hoặc để bàn. 선풍기를 틀다 = bật quạt. Đối lập với 에어컨 (điều hòa).",
+    ex:"더워서 선풍기를 틀었어요.", exVi:"Nóng quá nên tôi bật quạt lên." },
+  { kr:"설거지", en:"washing dishes", vi:"rửa bát đĩa", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Việc rửa bát đĩa sau khi ăn. 설거지를 하다 = rửa bát. Việc nhà quen thuộc.",
+    ex:"밥을 먹고 설거지해요.", exVi:"Sau khi ăn cơm thì rửa bát." },
+  { kr:"세탁기", en:"washing machine", vi:"máy giặt", hv:"洗濯機", hvR:"tẩy trạc cơ", pure:false,
+    explain:"Máy giặt. 세탁기를 돌리다 = chạy máy giặt. 세탁(洗濯, giặt giũ) + 기(機, máy).",
+    ex:"세탁기에 빨래를 넣었어요.", exVi:"Tôi đã cho quần áo vào máy giặt." },
+  { kr:"세탁소", en:"dry cleaners, laundry", vi:"tiệm giặt ủi", hv:"洗濯所", hvR:"tẩy trạc sở", pure:false,
+    explain:"Tiệm giặt ủi. 세탁소에 맡기다 = gửi đồ giặt. 세탁(giặt) + 소(所, nơi chốn).",
+    ex:"코트를 세탁소에 맡겼어요.", exVi:"Tôi đã gửi áo khoác ở tiệm giặt." },
+  { kr:"센터", en:"center", vi:"trung tâm", hv:null, hvR:"từ tiếng Anh 'center'", pure:true,
+    explain:"Trung tâm. Từ vay mượn tiếng Anh. 문화센터(trung tâm văn hóa), 쇼핑센터(trung tâm mua sắm).",
+    ex:"문화센터에서 수업을 들어요.", exVi:"Tôi học lớp ở trung tâm văn hóa." },
+  { kr:"소파", en:"sofa", vi:"ghế sofa", hv:null, hvR:"từ tiếng Anh 'sofa'", pure:true,
+    explain:"Ghế sofa trong phòng khách. Từ vay mượn tiếng Anh. 소파에 앉다 = ngồi lên sofa.",
+    ex:"소파에서 TV를 봐요.", exVi:"Tôi xem TV trên sofa." },
+  { kr:"속", en:"inside, interior", vi:"bên trong, nội tâm", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bên trong, nội dung bên trong. 가방 속 = trong túi. 마음속 = trong lòng, nội tâm.",
+    ex:"가방 속에 지갑이 있어요.", exVi:"Trong túi có ví tiền." },
+  { kr:"슈퍼마켓", en:"supermarket", vi:"siêu thị", hv:null, hvR:"từ tiếng Anh 'supermarket'", pure:true,
+    explain:"Siêu thị. Từ vay mượn tiếng Anh. Thường gọi tắt là 슈퍼. Nhỏ hơn 대형마트.",
+    ex:"슈퍼마켓에서 장을 봤어요.", exVi:"Tôi đã đi mua sắm ở siêu thị." },
+  { kr:"시내", en:"downtown, city center", vi:"trung tâm thành phố; suối nhỏ", hv:null, hvR:"thuần Hàn (2 nghĩa)", pure:true,
+    explain:"(1) Trung tâm thành phố, khu đô thị sầm uất. (2) Suối nhỏ (ít dùng). Thường dùng nghĩa (1).",
+    ex:"시내에서 쇼핑했어요.", exVi:"Tôi đã mua sắm ở trung tâm thành phố." },
+  { kr:"시설", en:"facility, infrastructure", vi:"cơ sở hạ tầng, tiện nghi", hv:"施設", hvR:"thi thiết", pure:false,
+    explain:"Cơ sở vật chất, tiện nghi. 시설이 좋다 = tiện nghi tốt. 편의시설 = tiện ích.",
+    ex:"이 건물은 시설이 좋아요.", exVi:"Tòa nhà này có tiện nghi tốt." },
+  { kr:"시장", en:"market", vi:"chợ, thị trường", hv:"市場", hvR:"thị trường", pure:false,
+    explain:"Chợ hoặc thị trường. 재래시장 = chợ truyền thống. 시장에 가다 = đi chợ.",
+    ex:"시장에서 야채를 샀어요.", exVi:"Tôi đã mua rau ở chợ." },
+  { kr:"시청", en:"city hall", vi:"tòa thị chính", hv:"市廳", hvR:"thị sảnh", pure:false,
+    explain:"Tòa thị chính, UBND thành phố. 서울시청 = Tòa thị chính Seoul — địa điểm nổi tiếng.",
+    ex:"시청 앞에서 만나요.", exVi:"Gặp nhau trước tòa thị chính nhé." },
+  { kr:"식당", en:"restaurant, cafeteria", vi:"nhà hàng, căng tin", hv:"食堂", hvR:"thực đường", pure:false,
+    explain:"Nhà hàng, quán ăn. Rộng nghĩa hơn 레스토랑. 학교 식당 = căng tin trường học.",
+    ex:"식당에서 밥을 먹어요.", exVi:"Tôi ăn cơm ở nhà hàng." },
+  { kr:"식탁", en:"dining table", vi:"bàn ăn", hv:"食卓", hvR:"thực trác", pure:false,
+    explain:"Bàn ăn trong bếp hoặc phòng ăn. 식탁에 앉다 = ngồi vào bàn ăn. 식탁을 차리다 = dọn bàn ăn.",
+    ex:"식탁에서 밥을 먹어요.", exVi:"Tôi ăn cơm ở bàn ăn." },
+  { kr:"쓰레기", en:"garbage, trash", vi:"rác, rác thải", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Rác thải. 쓰레기를 버리다 = đổ rác. 쓰레기통 = thùng rác. Hàn Quốc phân loại rác rất nghiêm.",
+    ex:"쓰레기를 버리지 마세요.", exVi:"Đừng xả rác." },
+  { kr:"아래", en:"below, under", vi:"phía dưới, bên dưới", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía bên dưới. 아래에 있다 = ở bên dưới. 아래층 = tầng dưới. Đối lập với 위 (phía trên).",
+    ex:"아래를 봐요.", exVi:"Nhìn xuống phía dưới." },
+  { kr:"아파트", en:"apartment", vi:"căn hộ chung cư", hv:null, hvR:"từ tiếng Anh 'apartment'", pure:true,
+    explain:"Căn hộ chung cư. Từ vay mượn tiếng Anh. Hình thức nhà ở phổ biến nhất ở Hàn Quốc.",
+    ex:"아파트에 살아요.", exVi:"Tôi sống ở căn hộ chung cư." },
+  { kr:"안", en:"inside, within", vi:"bên trong; không (phủ định)", hv:null, hvR:"thuần Hàn (2 nghĩa)", pure:true,
+    explain:"(1) Bên trong (집 안 = trong nhà). (2) Phủ định trước động từ (안 먹다 = không ăn). Ngữ cảnh quyết định.",
+    ex:"집 안에 있어요.", exVi:"Tôi đang ở trong nhà." },
+  { kr:"앞", en:"front, ahead", vi:"phía trước", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía trước. 앞에 가다 = đi ra phía trước. 앞문 = cửa trước. Đối lập với 뒤 (phía sau).",
+    ex:"앞을 똑바로 보세요.", exVi:"Nhìn thẳng phía trước đi." },
+  { kr:"에어컨", en:"air conditioner", vi:"điều hòa không khí, máy lạnh", hv:null, hvR:"từ tiếng Anh 'air con(ditioner)'", pure:true,
+    explain:"Điều hòa không khí. Rút gọn từ 'air conditioner'. 에어컨을 켜다/끄다 = bật/tắt điều hòa.",
+    ex:"에어컨을 틀어 주세요.", exVi:"Bật điều hòa lên giúp tôi với." },
+  { kr:"엘리베이터", en:"elevator", vi:"thang máy", hv:null, hvR:"từ tiếng Anh 'elevator'", pure:true,
+    explain:"Thang máy. Từ vay mượn tiếng Anh. 엘리베이터를 타다 = đi thang máy.",
+    ex:"엘리베이터로 올라가요.", exVi:"Tôi đi thang máy lên." },
+  { kr:"열쇠", en:"key", vi:"chìa khóa", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Chìa khóa. 열쇠를 잃어버리다 = làm mất chìa khóa. 열쇠로 문을 열다 = mở cửa bằng chìa.",
+    ex:"열쇠를 어디 뒀어요?", exVi:"Bạn để chìa khóa ở đâu vậy?" },
+  { kr:"영화관", en:"movie theater", vi:"rạp chiếu phim", hv:"映畫館", hvR:"ánh hoạ quán", pure:false,
+    explain:"Rạp chiếu phim. 영화관에 가다 = đi xem phim. CGV, 롯데시네마, 메가박스 là các chuỗi lớn ở Hàn.",
+    ex:"영화관에서 영화를 봤어요.", exVi:"Tôi đã xem phim ở rạp." },
+  { kr:"옆", en:"side, next to", vi:"bên cạnh", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bên cạnh, kế bên. 옆에 있다 = ở bên cạnh. 옆집 = nhà hàng xóm kế bên.",
+    ex:"옆에 앉아요.", exVi:"Ngồi bên cạnh tôi đi." },
+  { kr:"오른쪽", en:"right side", vi:"phía phải, bên phải", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bên phải. 오른쪽으로 가다 = đi về bên phải. Đối lập với 왼쪽 (bên trái).",
+    ex:"오른쪽으로 돌아요.", exVi:"Rẽ sang phải." },
+  { kr:"옷가게", en:"clothing store", vi:"cửa hàng quần áo", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Cửa hàng quần áo. 옷(quần áo) + 가게(cửa hàng). 옷가게에서 쇼핑하다 = mua sắm quần áo.",
+    ex:"옷가게에서 코트를 샀어요.", exVi:"Tôi đã mua áo khoác ở cửa hàng quần áo." },
+  { kr:"옷장", en:"wardrobe, closet", vi:"tủ quần áo", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Tủ đựng quần áo. 옷(quần áo) + 장(欌, tủ). 옷장을 정리하다 = dọn tủ quần áo.",
+    ex:"옷장이 가득 찼어요.", exVi:"Tủ quần áo đầy rồi." },
+  { kr:"왼쪽", en:"left side", vi:"phía trái, bên trái", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bên trái. 왼쪽으로 가다 = đi về bên trái. Đối lập với 오른쪽 (bên phải).",
+    ex:"왼쪽으로 돌아요.", exVi:"Rẽ sang trái." },
+  { kr:"우체국", en:"post office", vi:"bưu điện", hv:"郵遞局", hvR:"bưu đệ cục", pure:false,
+    explain:"Bưu điện. 우체국에서 편지를 보내다 = gửi thư ở bưu điện. 우체통 = hộp thư.",
+    ex:"우체국에서 택배를 보냈어요.", exVi:"Tôi đã gửi bưu kiện ở bưu điện." },
+  { kr:"위", en:"top, above", vi:"phía trên, bên trên", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Phía trên, bên trên. 위에 있다 = ở bên trên. 위층 = tầng trên. Đối lập với 아래 (bên dưới).",
+    ex:"위를 올려다봐요.", exVi:"Nhìn lên phía trên." },
+  { kr:"위치", en:"location, position", vi:"vị trí", hv:"位置", hvR:"vị trí", pure:false,
+    explain:"Vị trí, tọa độ. 위치를 알려주다 = cho biết vị trí. 위치가 좋다 = vị trí tốt.",
+    ex:"위치가 어디예요?", exVi:"Vị trí ở đâu vậy?" },
+  { kr:"유리", en:"glass", vi:"thủy tinh, kính", hv:"琉璃", hvR:"lưu ly", pure:false,
+    explain:"Kính thủy tinh. 유리창 = cửa kính. 유리컵 = cốc thủy tinh. 유리가 깨지다 = kính vỡ.",
+    ex:"유리창을 닦아요.", exVi:"Tôi lau cửa kính." },
+  { kr:"의자", en:"chair", vi:"cái ghế", hv:"椅子", hvR:"y tử", pure:false,
+    explain:"Cái ghế. 의자에 앉다 = ngồi xuống ghế. 의자를 당기다 = kéo ghế lại.",
+    ex:"의자에 앉으세요.", exVi:"Mời ngồi xuống ghế." },
+  { kr:"이사", en:"moving (house)", vi:"chuyển nhà, dọn nhà", hv:"移徙", hvR:"di tả", pure:false,
+    explain:"Chuyển nhà. 이사하다 = dọn nhà đi nơi khác. 이사짐 = đồ dọn nhà.",
+    ex:"다음 달에 이사해요.", exVi:"Tháng sau tôi chuyển nhà." },
+  { kr:"입구", en:"entrance", vi:"lối vào, cửa vào", hv:"入口", hvR:"nhập khẩu", pure:false,
+    explain:"Lối vào, cửa vào. 입구에서 기다리다 = chờ ở cửa vào. Đối lập với 출구 (lối ra).",
+    ex:"입구에서 기다릴게요.", exVi:"Tôi sẽ chờ ở lối vào." },
+  { kr:"자리", en:"seat, spot", vi:"chỗ ngồi; vị trí", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Chỗ ngồi hoặc vị trí. 자리가 있다 = còn chỗ. 자리를 잡다 = chiếm chỗ.",
+    ex:"자리가 있어요?", exVi:"Còn chỗ không?" },
+  { kr:"장소", en:"place, venue", vi:"địa điểm, nơi chốn", hv:"場所", hvR:"trường sở", pure:false,
+    explain:"Địa điểm cụ thể. Trang trọng hơn 곳. 약속 장소 = địa điểm hẹn gặp.",
+    ex:"장소가 어디예요?", exVi:"Địa điểm ở đâu vậy?" },
+  { kr:"정문", en:"main gate, front entrance", vi:"cổng chính, cửa chính", hv:"正門", hvR:"chính môn", pure:false,
+    explain:"Cổng/cửa chính của tòa nhà, trường học. 정문 앞에서 만나요 = gặp nhau trước cổng chính.",
+    ex:"학교 정문 앞에서 기다려요.", exVi:"Chờ trước cổng chính trường nhé." },
+  { kr:"종이", en:"paper", vi:"giấy", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Tờ giấy. 종이에 쓰다 = viết lên giấy. 종이를 접다 = gấp giấy (origami).",
+    ex:"종이에 이름을 써요.", exVi:"Viết tên lên giấy." },
+  { kr:"주변", en:"surroundings, around", vi:"xung quanh", hv:"周邊", hvR:"chu biên", pure:false,
+    explain:"Xung quanh, khu vực xung quanh. 주변을 둘러보다 = nhìn xung quanh.",
+    ex:"주변에 편의점이 있어요.", exVi:"Xung quanh đây có cửa hàng tiện lợi." },
+  { kr:"주위", en:"around, surroundings", vi:"xung quanh, chung quanh", hv:"周圍", hvR:"chu vi", pure:false,
+    explain:"Xung quanh — tương tự 주변 nhưng nhấn mạnh không gian vòng quanh hơn. Hay dùng lẫn nhau.",
+    ex:"주위를 조용히 해 주세요.", exVi:"Làm ơn giữ yên lặng xung quanh." },
+  { kr:"중국집", en:"Chinese restaurant", vi:"nhà hàng Trung Quốc", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nhà hàng Trung Quốc theo kiểu Hàn. 자장면, 짬뽕 là món đặc trưng. 중국(Trung Quốc) + 집(tiệm).",
+    ex:"중국집에서 자장면을 먹었어요.", exVi:"Tôi đã ăn mì đen ở nhà hàng Trung Quốc." },
+  { kr:"중심", en:"center, core", vi:"trung tâm, cốt lõi", hv:"中心", hvR:"trung tâm", pure:false,
+    explain:"Trung tâm, điểm giữa. 도시 중심 = trung tâm thành phố. 중심지 = khu trung tâm.",
+    ex:"서울 중심에 살아요.", exVi:"Tôi sống ở trung tâm Seoul." },
+  { kr:"지하", en:"underground, basement", vi:"tầng hầm, dưới đất", hv:"地下", hvR:"địa hạ", pure:false,
+    explain:"Tầng hầm, không gian dưới lòng đất. 지하 1층 = tầng hầm 1. 지하상가 = khu mua sắm dưới ngầm.",
+    ex:"주차장은 지하에 있어요.", exVi:"Bãi đỗ xe ở tầng hầm." },
+  { kr:"집", en:"house, home", vi:"nhà; tiệm", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Nhà, ngôi nhà. Cũng dùng sau danh từ để chỉ tiệm: 빵집, 꽃집,... 집에 가다 = về nhà.",
+    ex:"집에 가고 싶어요.", exVi:"Tôi muốn về nhà." },
+  { kr:"창문", en:"window", vi:"cửa sổ", hv:"窓門", hvR:"song môn", pure:false,
+    explain:"Cửa sổ. 창문을 열다/닫다 = mở/đóng cửa sổ. 창문 밖을 보다 = nhìn ra ngoài cửa sổ.",
+    ex:"창문을 열어요.", exVi:"Mở cửa sổ ra." },
+  { kr:"책방", en:"bookstore (casual)", vi:"hiệu sách (thân mật)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Hiệu sách — cách nói thân mật hơn 서점. 책(sách) + 방(phòng). Thường là tiệm sách nhỏ.",
+    ex:"동네 책방에 자주 가요.", exVi:"Tôi hay đến hiệu sách trong xóm." },
+  { kr:"책장", en:"bookshelf", vi:"kệ sách", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Kệ đựng sách. 책(sách) + 장(欌, tủ/kệ). 책장에 책을 꽂다 = cắm sách vào kệ.",
+    ex:"책장이 가득 찼어요.", exVi:"Kệ sách đầy rồi." },
+  { kr:"청소기", en:"vacuum cleaner", vi:"máy hút bụi", hv:"淸掃機", hvR:"thanh tảo cơ", pure:false,
+    explain:"Máy hút bụi. 청소기를 돌리다 = chạy máy hút bụi. 청소(淸掃, dọn dẹp) + 기(機, máy).",
+    ex:"청소기로 방을 청소해요.", exVi:"Tôi hút bụi phòng bằng máy hút bụi." },
+  { kr:"출구", en:"exit", vi:"lối ra, cửa ra", hv:"出口", hvR:"xuất khẩu", pure:false,
+    explain:"Lối ra, cửa thoát hiểm. 출구로 나가다 = ra qua lối thoát. Đối lập với 입구 (lối vào).",
+    ex:"출구가 어디예요?", exVi:"Lối ra ở đâu vậy?" },
+  { kr:"침대", en:"bed", vi:"cái giường", hv:"寢臺", hvR:"tẩm đài", pure:false,
+    explain:"Cái giường. 침대에 눕다 = nằm xuống giường. 침대를 정리하다 = dọn giường.",
+    ex:"침대가 너무 편해요.", exVi:"Cái giường thoải mái quá." },
+  { kr:"카페", en:"cafe", vi:"quán cà phê", hv:null, hvR:"từ tiếng Pháp 'café'", pure:true,
+    explain:"Quán cà phê. Từ vay mượn từ tiếng Pháp. Hàn Quốc nổi tiếng với văn hóa quán cà phê phong phú.",
+    ex:"카페에서 공부해요.", exVi:"Tôi học ở quán cà phê." },
+  { kr:"커피숍", en:"coffee shop", vi:"quán cà phê", hv:null, hvR:"từ tiếng Anh 'coffee shop'", pure:true,
+    explain:"Quán cà phê — cách nói từ tiếng Anh. Tương tự 카페 nhưng ít trang trọng hơn.",
+    ex:"커피숍에서 친구를 만났어요.", exVi:"Tôi đã gặp bạn ở quán cà phê." },
+  { kr:"테이블", en:"table", vi:"cái bàn", hv:null, hvR:"từ tiếng Anh 'table'", pure:true,
+    explain:"Cái bàn. Từ vay mượn tiếng Anh. Dùng trong nhà hàng, quán cà phê. 테이블을 예약하다 = đặt bàn.",
+    ex:"테이블이 있어요?", exVi:"Còn bàn trống không?" },
+  { kr:"하숙", en:"boarding house (lodging)", vi:"nhà trọ, phòng trọ", hv:"下宿", hvR:"hạ túc", pure:false,
+    explain:"Hình thức thuê trọ có ăn ở cùng chủ nhà. Truyền thống ở Hàn, nay ít phổ biến hơn 원룸.",
+    ex:"대학교 근처에서 하숙해요.", exVi:"Tôi thuê trọ gần trường đại học." },
+  { kr:"하숙집", en:"boarding house", vi:"nhà trọ (có chủ nhà)", hv:"下宿", hvR:"하숙 + 집(nhà)", pure:false,
+    explain:"Nhà trọ kiểu hàn có chủ nhà cung cấp bữa ăn. 하숙집 아주머니 = bà chủ nhà trọ.",
+    ex:"하숙집 아주머니가 친절해요.", exVi:"Bà chủ nhà trọ rất tốt bụng." },
+  { kr:"호텔", en:"hotel", vi:"khách sạn", hv:null, hvR:"từ tiếng Anh 'hotel'", pure:true,
+    explain:"Khách sạn. Từ vay mượn tiếng Anh. 호텔에 체크인하다 = check-in khách sạn.",
+    ex:"호텔을 예약했어요.", exVi:"Tôi đã đặt phòng khách sạn." },
+  { kr:"화장실", en:"restroom, toilet", vi:"nhà vệ sinh, toilet", hv:"化粧室", hvR:"hóa trang thất", pure:false,
+    explain:"Nhà vệ sinh. 화장실이 어디예요? = Nhà vệ sinh ở đâu? 화장(化粧, trang điểm) + 실(室, phòng) — nghĩa gốc là phòng trang điểm.",
+    ex:"화장실이 어디예요?", exVi:"Nhà vệ sinh ở đâu vậy?" },
+  { kr:"휴지통", en:"trash can, waste bin", vi:"thùng rác", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Thùng rác. 휴지(giấy dùng xong, giấy vệ sinh) + 통(thùng). 휴지통에 버리다 = bỏ vào thùng rác.",
+    ex:"휴지통이 가득 찼어요.", exVi:"Thùng rác đầy rồi." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    const hvCell = item.pure
+      ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
+      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${hvCell}</td>
+      <td><span class="explain">${item.explain}</span></td>
+      <td>
+        <span class="example-kr">${item.ex}</span>
+        <span class="example-vi">${item.exVi}</span>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all'
+      || (currentFilter === 'hv' && !item.pure)
+      || (currentFilter === 'pure' && item.pure);
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || (item.hv && item.hv.includes(q))
+      || item.hvR.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
