@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Giáo dục & Trường học</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f7f2;
+    --card: #ffffff;
+    --accent: #2e7d32;
+    --text: #1a2e1a;
+    --sub: #5a7a5a;
+    --border: #ccdacc;
+    --tag-hv: #e0f2e0;
+    --tag-pure: #fff8e1;
+    --highlight: #f0f7f0;
+    --row-alt: #f8fbf8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f5f7f2;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '학교';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #8aaa8a; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f5f7f2; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 130px; }
+  th:nth-child(3), td:nth-child(3) { width: 160px; }
+  th:nth-child(4), td:nth-child(4) { width: 185px; }
+  th:nth-child(5), td:nth-child(5) { width: 150px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
+  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #1b5e20; font-weight: 500; }
+  .hv-tag.pure { background: var(--tag-pure); color: #7a6000; }
+  .hv-hanja { font-weight: 600; font-size: 13px; }
+  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
+  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
+  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
+  .explain { font-size: 13px; color: #2a4a2a; line-height: 1.6; }
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>학교 & 교육 — Trường học & Giáo dục</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Giáo dục · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Trường học & Giáo dục</div>
+
+<script>
+const vocab = [
+  { kr:"강좌", en:"lecture, course", vi:"khóa học, buổi giảng", hv:"講座", hvR:"giảng tọa", pure:false,
+    explain:"Khóa học hoặc buổi giảng dạy có hệ thống. 온라인 강좌 = khóa học online.",
+    ex:"온라인 강좌를 들어요.", exVi:"Tôi học khóa học online." },
+  { kr:"결과", en:"result, outcome", vi:"kết quả", hv:"結果", hvR:"kết quả", pure:false,
+    explain:"Kết quả sau một hành động hoặc quá trình. 시험 결과 = kết quả thi.",
+    ex:"시험 결과가 나왔어요.", exVi:"Kết quả thi đã ra rồi." },
+  { kr:"고등학교", en:"high school", vi:"trường THPT", hv:"高等學校", hvR:"cao đẳng học hiệu", pure:false,
+    explain:"Trường Trung học Phổ thông (lớp 10–12). Thường gọi tắt là 고교 hoặc 고등학교.",
+    ex:"고등학교 때 공부를 열심히 했어요.", exVi:"Hồi THPT tôi đã học rất chăm chỉ." },
+  { kr:"고등학생", en:"high school student", vi:"học sinh THPT", hv:"高等學生", hvR:"cao đẳng học sinh", pure:false,
+    explain:"Học sinh đang học tại trường THPT (lớp 10–12).",
+    ex:"저는 고등학생이에요.", exVi:"Tôi là học sinh THPT." },
+  { kr:"공부", en:"study", vi:"việc học", hv:"工夫", hvR:"công phu", pure:false,
+    explain:"Việc học tập, ôn bài. 공부하다 = học bài. Từ rất phổ biến trong cuộc sống hàng ngày.",
+    ex:"공부가 재미있어요.", exVi:"Việc học thật thú vị." },
+  { kr:"공부하다", en:"to study", vi:"học bài, học tập", hv:"工夫", hvR:"công phu", pure:false,
+    explain:"Động từ 'học'. 공부 + 하다. Có thể học một mình hoặc với người khác.",
+    ex:"도서관에서 공부해요.", exVi:"Tôi học ở thư viện." },
+  { kr:"공책", en:"notebook", vi:"vở (học), tập", hv:"空冊", hvR:"không sách", pure:false,
+    explain:"Vở ghi chép. 공(空, trống) + 책(冊, sách) → sách trang trắng để ghi.",
+    ex:"공책에 필기해요.", exVi:"Tôi ghi chép vào vở." },
+  { kr:"과", en:"department, division", vi:"khoa, bộ phận", hv:"科", hvR:"khoa", pure:false,
+    explain:"Khoa trong trường đại học hoặc bộ phận trong tổ chức. 국어과 = khoa tiếng Hàn.",
+    ex:"무슨 과예요?", exVi:"Bạn học khoa gì vậy?" },
+  { kr:"과학", en:"science", vi:"khoa học", hv:"科學", hvR:"khoa học", pure:false,
+    explain:"Môn khoa học tự nhiên. Bao gồm vật lý, hóa học, sinh học,... trong chương trình học.",
+    ex:"과학을 좋아해요.", exVi:"Tôi thích môn khoa học." },
+  { kr:"교과서", en:"textbook", vi:"sách giáo khoa", hv:"敎科書", hvR:"giáo khoa thư", pure:false,
+    explain:"Sách giáo khoa do nhà nước phê duyệt dùng trong trường học.",
+    ex:"교과서를 펴세요.", exVi:"Hãy mở sách giáo khoa ra." },
+  { kr:"교실", en:"classroom", vi:"phòng học, lớp học", hv:"敎室", hvR:"giáo thất", pure:false,
+    explain:"Phòng học trong trường. 교(가르칠 교) + 실(방). Nơi diễn ra các tiết học.",
+    ex:"교실이 조용해요.", exVi:"Lớp học yên tĩnh quá." },
+  { kr:"국어", en:"Korean language (subject)", vi:"tiếng Hàn (môn học)", hv:"國語", hvR:"quốc ngữ", pure:false,
+    explain:"Môn tiếng Hàn trong trường học Hàn Quốc. Khi người Việt học tiếng Hàn thì gọi là 한국어.",
+    ex:"국어 시험이 어려웠어요.", exVi:"Bài thi tiếng Hàn khó quá." },
+  { kr:"규칙", en:"rule, regulation", vi:"quy tắc, quy định", hv:"規則", hvR:"quy tắc", pure:false,
+    explain:"Quy tắc, luật lệ cần tuân thủ. 규칙을 지키다 = tuân thủ quy tắc.",
+    ex:"규칙을 지켜야 해요.", exVi:"Phải tuân thủ quy tắc." },
+  { kr:"글", en:"writing, text, character", vi:"bài viết, câu, chữ", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bài viết, văn bản hoặc chữ viết nói chung. 글을 쓰다 = viết bài/viết chữ.",
+    ex:"글을 잘 써요.", exVi:"Bạn viết văn rất hay." },
+  { kr:"급", en:"class, grade, level", vi:"cấp, hạng", hv:"級", hvR:"cấp", pure:false,
+    explain:"Cấp độ, hạng trong hệ thống xếp loại. TOPIK 급 = cấp TOPIK (1~6급).",
+    ex:"TOPIK 3급을 목표로 해요.", exVi:"Tôi đặt mục tiêu TOPIK cấp 3." },
+  { kr:"남학생", en:"male student", vi:"học sinh nam", hv:"男學生", hvR:"nam học sinh", pure:false,
+    explain:"Học sinh hoặc sinh viên nam. Đối lập với 여학생 (học sinh nữ).",
+    ex:"남학생이 많아요.", exVi:"Có nhiều học sinh nam." },
+  { kr:"내용", en:"content", vi:"nội dung", hv:"內容", hvR:"nội dung", pure:false,
+    explain:"Nội dung, thông tin bên trong bài viết, bài học, cuốn sách,...",
+    ex:"내용이 어려워요.", exVi:"Nội dung khó quá." },
+  { kr:"노트", en:"note, notebook", vi:"vở ghi, ghi chú", hv:null, hvR:"từ tiếng Anh 'note'", pure:true,
+    explain:"Từ vay mượn tiếng Anh. Vở ghi hoặc hành động ghi chú. Tương tự 공책 nhưng mang tính hiện đại hơn.",
+    ex:"노트에 받아썼어요.", exVi:"Tôi đã ghi chép vào vở." },
+  { kr:"단어", en:"word, vocabulary", vi:"từ vựng, từ", hv:"單語", hvR:"đơn ngữ", pure:false,
+    explain:"Từ vựng, đơn vị từ trong ngôn ngữ. 단어를 외우다 = học thuộc từ vựng.",
+    ex:"단어를 매일 외워요.", exVi:"Tôi học thuộc từ vựng mỗi ngày." },
+  { kr:"대답", en:"answer, reply", vi:"câu trả lời", hv:"對答", hvR:"đối đáp", pure:false,
+    explain:"Câu trả lời cho một câu hỏi. 대답하다 = trả lời. Đối lập với 질문 (câu hỏi).",
+    ex:"대답을 잘 못했어요.", exVi:"Tôi đã không trả lời được tốt." },
+  { kr:"대학", en:"university, college", vi:"đại học", hv:"大學", hvR:"đại học", pure:false,
+    explain:"Trường đại học hoặc bậc học đại học nói chung. 대학에 가다 = vào đại học.",
+    ex:"대학에 합격했어요!", exVi:"Tôi đã đỗ đại học rồi!" },
+  { kr:"대학교", en:"university", vi:"trường đại học", hv:"大學校", hvR:"đại học hiệu", pure:false,
+    explain:"Trường đại học cụ thể. 대학 chỉ bậc học, 대학교 chỉ ngôi trường cụ thể.",
+    ex:"어느 대학교에 다녀요?", exVi:"Bạn học ở trường đại học nào?" },
+  { kr:"대학생", en:"college student", vi:"sinh viên đại học", hv:"大學生", hvR:"đại học sinh", pure:false,
+    explain:"Sinh viên đang theo học tại trường đại học.",
+    ex:"대학생이 된 게 신기해요.", exVi:"Trở thành sinh viên đại học thật kỳ diệu." },
+  { kr:"대학원", en:"graduate school", vi:"trường sau đại học", hv:"大學院", hvR:"đại học viên", pure:false,
+    explain:"Trường đào tạo sau đại học (thạc sĩ, tiến sĩ). 대학원에 진학하다 = học lên cao học.",
+    ex:"대학원에 진학할 거예요.", exVi:"Tôi sẽ học lên cao học." },
+  { kr:"대학원생", en:"graduate student", vi:"học viên cao học", hv:"大學院生", hvR:"đại học viên sinh", pure:false,
+    explain:"Học viên đang theo học tại trường sau đại học (thạc sĩ hoặc tiến sĩ).",
+    ex:"대학원생은 논문을 써요.", exVi:"Học viên cao học viết luận văn." },
+  { kr:"대화", en:"conversation, dialogue", vi:"cuộc trò chuyện, đối thoại", hv:"對話", hvR:"đối thoại", pure:false,
+    explain:"Cuộc hội thoại giữa hai hay nhiều người. 대화하다 = trò chuyện, đối thoại.",
+    ex:"한국어로 대화 연습해요.", exVi:"Tôi luyện tập hội thoại bằng tiếng Hàn." },
+  { kr:"독서", en:"reading (books)", vi:"việc đọc sách", hv:"讀書", hvR:"độc thư", pure:false,
+    explain:"Hành động đọc sách một cách có chủ đích. 독서하다 = đọc sách.",
+    ex:"독서를 즐겨요.", exVi:"Tôi thích đọc sách." },
+  { kr:"독서실", en:"reading room, study room", vi:"phòng đọc sách tự học", hv:"讀書室", hvR:"độc thư thất", pure:false,
+    explain:"Phòng tự học yên tĩnh, thường là dịch vụ trả phí ở Hàn Quốc. Học sinh hay đến đây ôn thi.",
+    ex:"독서실에서 공부해요.", exVi:"Tôi học ở phòng tự học." },
+  { kr:"독서하다", en:"to read (books)", vi:"đọc sách", hv:"讀書", hvR:"độc thư", pure:false,
+    explain:"Động từ đọc sách. Trang trọng hơn 책을 읽다.",
+    ex:"매일 독서해요.", exVi:"Tôi đọc sách mỗi ngày." },
+  { kr:"동아리", en:"club, student group", vi:"câu lạc bộ (trường)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Câu lạc bộ hoặc nhóm hoạt động ngoại khóa trong trường học. Rất phổ biến ở trường Hàn.",
+    ex:"영어 동아리에 들었어요.", exVi:"Tôi đã tham gia câu lạc bộ tiếng Anh." },
+  { kr:"듣기", en:"listening", vi:"kỹ năng nghe", hv:null, hvR:"thuần Hàn (동사 듣다)", pure:true,
+    explain:"Kỹ năng nghe — một trong 4 kỹ năng ngôn ngữ: 듣기, 말하기, 읽기, 쓰기.",
+    ex:"듣기 시험이 어려웠어요.", exVi:"Bài thi nghe khó quá." },
+  { kr:"뜻", en:"meaning", vi:"ý nghĩa, nghĩa", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Ý nghĩa của một từ hoặc câu. 뜻이 뭐예요? = Nghĩa là gì?",
+    ex:"이 단어 뜻이 뭐예요?", exVi:"Từ này nghĩa là gì vậy?" },
+  { kr:"말", en:"word, speech; horse", vi:"lời nói, từ ngữ; ngựa", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Lời nói, ngôn ngữ nói. 말을 하다 = nói. Chú ý: 말 cũng có nghĩa là 'ngựa' (tùy ngữ cảnh).",
+    ex:"말을 천천히 해 주세요.", exVi:"Xin hãy nói chậm thôi." },
+  { kr:"말하기", en:"speaking", vi:"kỹ năng nói", hv:null, hvR:"thuần Hàn (동사 말하다)", pure:true,
+    explain:"Kỹ năng nói — một trong 4 kỹ năng ngôn ngữ. 말하기 연습 = luyện kỹ năng nói.",
+    ex:"말하기 연습을 많이 해요.", exVi:"Tôi luyện kỹ năng nói nhiều." },
+  { kr:"모양", en:"shape, form, style", vi:"hình dạng, hình dáng", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Hình dạng bên ngoài của sự vật. Cũng có nghĩa là 'vẻ ngoài, trông có vẻ...' trong văn nói.",
+    ex:"모양이 이상해요.", exVi:"Hình dạng trông lạ thật." },
+  { kr:"문장", en:"sentence", vi:"câu (văn)", hv:"文章", hvR:"văn chương", pure:false,
+    explain:"Câu hoàn chỉnh trong văn bản. 문장을 만들다 = đặt câu.",
+    ex:"문장을 만들어 보세요.", exVi:"Hãy thử đặt câu xem." },
+  { kr:"문제", en:"problem, question", vi:"vấn đề, bài toán", hv:"問題", hvR:"vấn đề", pure:false,
+    explain:"Bài tập, câu hỏi trong bài thi hoặc vấn đề cần giải quyết. Dùng rất rộng.",
+    ex:"문제가 너무 어려워요.", exVi:"Bài toán/câu hỏi khó quá." },
+  { kr:"반", en:"class, group; half", vi:"một nửa; lớp học", hv:"班/半", hvR:"ban/bán", pure:false,
+    explain:"Hai nghĩa: (1) 班 — lớp học (1반, 2반...), (2) 半 — một nửa (반반 = nửa nửa).",
+    ex:"우리 반이 제일 좋아요.", exVi:"Tôi thích lớp mình nhất." },
+  { kr:"발음", en:"pronunciation", vi:"phát âm", hv:"發音", hvR:"phát âm", pure:false,
+    explain:"Cách phát âm của từ hoặc âm tiết. 발음이 좋다 = phát âm tốt.",
+    ex:"발음이 어려워요.", exVi:"Phát âm khó quá." },
+  { kr:"발표", en:"presentation, announcement", vi:"trình bày, thông báo", hv:"發表", hvR:"phát biểu", pure:false,
+    explain:"Thuyết trình, trình bày trước đám đông hoặc thông báo kết quả.",
+    ex:"발표가 떨려요.", exVi:"Tôi hồi hộp khi thuyết trình." },
+  { kr:"방법", en:"way, method", vi:"phương pháp, cách", hv:"方法", hvR:"phương pháp", pure:false,
+    explain:"Cách thức, phương pháp để làm điều gì đó. 공부 방법 = phương pháp học.",
+    ex:"좋은 공부 방법이 있어요?", exVi:"Bạn có phương pháp học tốt không?" },
+  { kr:"볼펜", en:"ballpoint pen", vi:"bút bi", hv:null, hvR:"từ tiếng Anh 'ball pen'", pure:true,
+    explain:"Bút bi — dụng cụ viết phổ biến nhất. Từ vay mượn tiếng Anh.",
+    ex:"볼펜 있어요?", exVi:"Bạn có bút bi không?" },
+  { kr:"사례", en:"case, example", vi:"ví dụ, trường hợp", hv:"事例", hvR:"sự lệ", pure:false,
+    explain:"Trường hợp cụ thể làm ví dụ minh họa. 사례를 들다 = đưa ra ví dụ.",
+    ex:"사례를 들어 설명해 주세요.", exVi:"Hãy lấy ví dụ để giải thích." },
+  { kr:"사전", en:"dictionary", vi:"từ điển", hv:"辭典", hvR:"từ điển", pure:false,
+    explain:"Từ điển tra cứu nghĩa của từ. 국어사전 = từ điển tiếng Hàn, 한영사전 = từ điển Hàn-Anh.",
+    ex:"사전을 찾아볼게요.", exVi:"Tôi sẽ tra từ điển." },
+  { kr:"설명", en:"explanation", vi:"lời giải thích", hv:"說明", hvR:"thuyết minh", pure:false,
+    explain:"Hành động giải thích, làm rõ một điều gì đó. 설명하다 = giải thích.",
+    ex:"설명을 잘 못 알아들었어요.", exVi:"Tôi không hiểu rõ lời giải thích." },
+  { kr:"수업", en:"class, lesson", vi:"tiết học, buổi học", hv:"授業", hvR:"thụ nghiệp", pure:false,
+    explain:"Tiết học, buổi học trên lớp. 수업이 있다 = có tiết học. 수업을 듣다 = nghe giảng.",
+    ex:"수업이 몇 시에 시작해요?", exVi:"Tiết học bắt đầu lúc mấy giờ?" },
+  { kr:"수첩", en:"pocket notebook", vi:"sổ tay nhỏ", hv:"手帖", hvR:"thủ thiếp", pure:false,
+    explain:"Sổ tay nhỏ cầm tay để ghi chú nhanh. 수(手, tay) + 첩(帖, sổ).",
+    ex:"수첩에 메모했어요.", exVi:"Tôi đã ghi chú vào sổ tay." },
+  { kr:"수학", en:"mathematics", vi:"toán học", hv:"數學", hvR:"số học", pure:false,
+    explain:"Môn toán học. 수학이 어렵다 = toán khó. Một trong những môn thi quan trọng nhất ở Hàn.",
+    ex:"수학 문제를 풀었어요.", exVi:"Tôi đã giải bài toán." },
+  { kr:"숙제", en:"homework", vi:"bài tập về nhà", hv:"宿題", hvR:"túc đề", pure:false,
+    explain:"Bài tập giáo viên giao về nhà. 숙제를 하다 = làm bài tập về nhà.",
+    ex:"숙제를 다 했어요?", exVi:"Bạn làm xong bài tập chưa?" },
+  { kr:"순서", en:"order, sequence, turn", vi:"thứ tự, lượt", hv:"順序", hvR:"thuận tự", pure:false,
+    explain:"Thứ tự sắp xếp hoặc lượt đến. 순서대로 = theo thứ tự.",
+    ex:"순서대로 발표해요.", exVi:"Trình bày theo thứ tự nhé." },
+  { kr:"시험", en:"exam, test", vi:"kỳ thi, bài kiểm tra", hv:"試驗", hvR:"thí nghiệm/thí nghiệm", pure:false,
+    explain:"Bài kiểm tra hoặc kỳ thi. 시험을 보다 = thi. 시험에 합격하다 = đỗ thi.",
+    ex:"내일 시험이 있어요.", exVi:"Ngày mai có bài thi." },
+  { kr:"쓰기", en:"writing", vi:"kỹ năng viết", hv:null, hvR:"thuần Hàn (동사 쓰다)", pure:true,
+    explain:"Kỹ năng viết — một trong 4 kỹ năng ngôn ngữ. 쓰기 연습 = luyện viết.",
+    ex:"쓰기 연습을 해요.", exVi:"Tôi luyện kỹ năng viết." },
+  { kr:"여학생", en:"female student", vi:"học sinh nữ", hv:"女學生", hvR:"nữ học sinh", pure:false,
+    explain:"Học sinh hoặc sinh viên nữ. Đối lập với 남학생 (học sinh nam).",
+    ex:"여학생이 더 많아요.", exVi:"Học sinh nữ nhiều hơn." },
+  { kr:"역사", en:"history", vi:"lịch sử", hv:"歷史", hvR:"lịch sử", pure:false,
+    explain:"Môn lịch sử hoặc lịch sử nói chung. 한국 역사 = lịch sử Hàn Quốc.",
+    ex:"역사가 재미있어요.", exVi:"Môn lịch sử thú vị." },
+  { kr:"연습", en:"practice", vi:"luyện tập, thực hành", hv:"練習", hvR:"luyện tập", pure:false,
+    explain:"Luyện tập để thành thạo một kỹ năng. 연습하다 = luyện tập.",
+    ex:"매일 연습하면 늘어요.", exVi:"Luyện tập mỗi ngày sẽ tiến bộ thôi." },
+  { kr:"연필", en:"pencil", vi:"bút chì", hv:"鉛筆", hvR:"duyên bút", pure:false,
+    explain:"Bút chì dùng để viết và vẽ. Có thể xóa được bằng cục tẩy (지우개).",
+    ex:"연필로 써요.", exVi:"Tôi viết bằng bút chì." },
+  { kr:"영어", en:"English", vi:"tiếng Anh", hv:"英語", hvR:"anh ngữ", pure:false,
+    explain:"Tiếng Anh — môn học bắt buộc và rất được coi trọng trong hệ thống giáo dục Hàn Quốc.",
+    ex:"영어를 잘 하고 싶어요.", exVi:"Tôi muốn giỏi tiếng Anh." },
+  { kr:"영어회화", en:"English conversation", vi:"hội thoại tiếng Anh", hv:"英語會話", hvR:"anh ngữ hội thoại", pure:false,
+    explain:"Lớp hoặc kỹ năng hội thoại tiếng Anh thực hành. Rất phổ biến ở các trung tâm Hàn Quốc.",
+    ex:"영어회화 학원에 다녀요.", exVi:"Tôi học ở trung tâm hội thoại tiếng Anh." },
+  { kr:"예문", en:"example sentence", vi:"câu ví dụ", hv:"例文", hvR:"lệ văn", pure:false,
+    explain:"Câu ví dụ minh họa cách dùng từ hoặc ngữ pháp.",
+    ex:"예문을 보면 이해가 돼요.", exVi:"Nhìn câu ví dụ là hiểu ngay." },
+  { kr:"외국어", en:"foreign language", vi:"ngoại ngữ", hv:"外國語", hvR:"ngoại quốc ngữ", pure:false,
+    explain:"Ngôn ngữ nước ngoài. 외국어를 배우다 = học ngoại ngữ.",
+    ex:"외국어를 배우는 게 좋아요.", exVi:"Tôi thích học ngoại ngữ." },
+  { kr:"유학", en:"study abroad", vi:"du học", hv:"留學", hvR:"lưu học", pure:false,
+    explain:"Việc đi học ở nước ngoài. 유학을 가다 = đi du học.",
+    ex:"한국에 유학 가고 싶어요.", exVi:"Tôi muốn đi du học ở Hàn Quốc." },
+  { kr:"유학생", en:"international student", vi:"du học sinh", hv:"留學生", hvR:"lưu học sinh", pure:false,
+    explain:"Học sinh/sinh viên đang du học ở nước ngoài.",
+    ex:"유학생이 많이 왔어요.", exVi:"Có nhiều du học sinh đến." },
+  { kr:"의미", en:"meaning, significance", vi:"ý nghĩa", hv:"意味", hvR:"ý vị", pure:false,
+    explain:"Ý nghĩa, giá trị của điều gì đó. Tương tự 뜻 nhưng mang tính văn viết và trừu tượng hơn.",
+    ex:"이 단어의 의미가 뭐예요?", exVi:"Ý nghĩa của từ này là gì?" },
+  { kr:"이야기", en:"story, talk", vi:"câu chuyện", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Câu chuyện, lời kể hoặc cuộc trò chuyện. 이야기하다 = kể chuyện, nói chuyện.",
+    ex:"재미있는 이야기를 해 줘요.", exVi:"Kể cho tôi nghe câu chuyện hay đi." },
+  { kr:"이유", en:"reason, cause", vi:"lý do, nguyên nhân", hv:"理由", hvR:"lý do", pure:false,
+    explain:"Lý do, nguyên nhân của một hành động hoặc sự việc.",
+    ex:"이유가 뭐예요?", exVi:"Lý do là gì vậy?" },
+  { kr:"이해", en:"understanding", vi:"sự hiểu, hiểu biết", hv:"理解", hvR:"lý giải", pure:false,
+    explain:"Sự hiểu biết, nắm bắt được nội dung. 이해하다 = hiểu.",
+    ex:"이해가 안 돼요.", exVi:"Tôi không hiểu." },
+  { kr:"일기", en:"diary", vi:"nhật ký", hv:"日記", hvR:"nhật ký", pure:false,
+    explain:"Nhật ký viết hàng ngày. 일기를 쓰다 = viết nhật ký — bài tập hay trong học tiếng Hàn.",
+    ex:"한국어로 일기를 써요.", exVi:"Tôi viết nhật ký bằng tiếng Hàn." },
+  { kr:"읽기", en:"reading", vi:"kỹ năng đọc", hv:null, hvR:"thuần Hàn (동사 읽다)", pure:true,
+    explain:"Kỹ năng đọc — một trong 4 kỹ năng ngôn ngữ. 읽기 능력 = năng lực đọc hiểu.",
+    ex:"읽기 실력이 늘었어요.", exVi:"Kỹ năng đọc của tôi đã tiến bộ." },
+  { kr:"입학", en:"admission, enrollment", vi:"nhập học", hv:"入學", hvR:"nhập học", pure:false,
+    explain:"Nhập học, bắt đầu vào trường. 입학식 = lễ nhập học.",
+    ex:"대학교에 입학했어요.", exVi:"Tôi đã nhập học vào đại học." },
+  { kr:"전공", en:"major, specialization", vi:"chuyên ngành", hv:"專攻", hvR:"chuyên công", pure:false,
+    explain:"Chuyên ngành học tại đại học. 전공을 선택하다 = chọn chuyên ngành.",
+    ex:"전공이 뭐예요?", exVi:"Chuyên ngành của bạn là gì?" },
+  { kr:"전자사전", en:"electronic dictionary", vi:"từ điển điện tử", hv:"電子辭典", hvR:"điện tử từ điển", pure:false,
+    explain:"Từ điển dạng điện tử, có thể là thiết bị riêng hoặc ứng dụng trên điện thoại.",
+    ex:"전자사전으로 찾았어요.", exVi:"Tôi đã tra bằng từ điển điện tử." },
+  { kr:"점수", en:"score, point", vi:"điểm số", hv:"點數", hvR:"điểm số", pure:false,
+    explain:"Điểm số trong bài thi hoặc bài kiểm tra. 점수가 높다/낮다 = điểm cao/thấp.",
+    ex:"시험 점수가 좋아요.", exVi:"Điểm thi tốt lắm." },
+  { kr:"제목", en:"title", vi:"tiêu đề, tên (bài)", hv:"題目", hvR:"đề mục", pure:false,
+    explain:"Tiêu đề của bài viết, bài học, cuốn sách hoặc bài hát.",
+    ex:"제목이 뭐예요?", exVi:"Tiêu đề là gì?" },
+  { kr:"졸업", en:"graduation", vi:"tốt nghiệp", hv:"卒業", hvR:"tốt nghiệp", pure:false,
+    explain:"Tốt nghiệp, hoàn thành chương trình học. 졸업식 = lễ tốt nghiệp.",
+    ex:"올해 졸업해요.", exVi:"Năm nay tôi tốt nghiệp." },
+  { kr:"종류", en:"kind, type", vi:"loại, thể loại", hv:"種類", hvR:"chủng loại", pure:false,
+    explain:"Loại, thể loại, phân loại. 어떤 종류예요? = Loại gì vậy?",
+    ex:"여러 종류의 책이 있어요.", exVi:"Có nhiều loại sách." },
+  { kr:"중학교", en:"middle school", vi:"trường THCS", hv:"中學校", hvR:"trung học hiệu", pure:false,
+    explain:"Trường Trung học Cơ sở (lớp 7–9). Bậc học giữa tiểu học và THPT.",
+    ex:"중학교 때가 그리워요.", exVi:"Tôi nhớ thời THCS." },
+  { kr:"중학생", en:"middle school student", vi:"học sinh THCS", hv:"中學生", hvR:"trung học sinh", pure:false,
+    explain:"Học sinh đang học tại trường THCS (lớp 7–9).",
+    ex:"중학생 때 친구들이 보고 싶어요.", exVi:"Tôi nhớ các bạn hồi THCS." },
+  { kr:"지각", en:"being late, tardy", vi:"đến muộn, trễ giờ", hv:"遲刻", hvR:"trì khắc", pure:false,
+    explain:"Đến trễ giờ học hoặc giờ làm. 지각하다 = đến muộn.",
+    ex:"지각하지 마세요.", exVi:"Đừng đến muộn nhé." },
+  { kr:"지우개", en:"eraser", vi:"cục tẩy", hv:null, hvR:"thuần Hàn (지우다 = xóa)", pure:true,
+    explain:"Cục tẩy dùng để xóa bút chì. 지우다(xóa) + 개(hậu tố tạo danh từ công cụ).",
+    ex:"지우개 빌려줄 수 있어요?", exVi:"Bạn có thể cho tôi mượn cục tẩy không?" },
+  { kr:"질문", en:"question", vi:"câu hỏi", hv:"質問", hvR:"chất vấn", pure:false,
+    explain:"Câu hỏi đặt ra để tìm hiểu. 질문하다 = đặt câu hỏi. Đối lập với 대답 (câu trả lời).",
+    ex:"질문 있어요?", exVi:"Có câu hỏi nào không?" },
+  { kr:"책", en:"book", vi:"sách", hv:"冊", hvR:"sách", pure:false,
+    explain:"Cuốn sách nói chung. 책을 읽다 = đọc sách. 책방/서점 = hiệu sách.",
+    ex:"책을 읽는 게 좋아요.", exVi:"Tôi thích đọc sách." },
+  { kr:"책상", en:"desk", vi:"bàn học, bàn làm việc", hv:"冊床", hvR:"sách sàng", pure:false,
+    explain:"Bàn học hoặc bàn làm việc. 책(sách) + 상(床, mặt bằng, bàn).",
+    ex:"책상이 너무 작아요.", exVi:"Bàn học nhỏ quá." },
+  { kr:"초등학교", en:"elementary school", vi:"trường tiểu học", hv:"初等學校", hvR:"sơ đẳng học hiệu", pure:false,
+    explain:"Trường Tiểu học (lớp 1–6). Bậc học đầu tiên trong hệ thống giáo dục Hàn Quốc.",
+    ex:"초등학교에 입학했어요.", exVi:"Tôi đã vào tiểu học." },
+  { kr:"초등학생", en:"elementary student", vi:"học sinh tiểu học", hv:"初等學生", hvR:"sơ đẳng học sinh", pure:false,
+    explain:"Học sinh đang học tại trường tiểu học (lớp 1–6).",
+    ex:"초등학생 때 뭘 좋아했어요?", exVi:"Hồi tiểu học bạn thích gì?" },
+  { kr:"칠판", en:"blackboard, whiteboard", vi:"bảng đen, bảng viết", hv:"漆板", hvR:"tất bản", pure:false,
+    explain:"Bảng viết trong lớp học. 칠판에 쓰다 = viết lên bảng. Nay có cả bảng trắng.",
+    ex:"선생님이 칠판에 쓰세요.", exVi:"Giáo viên viết lên bảng." },
+  { kr:"특징", en:"characteristic, feature", vi:"đặc trưng, đặc điểm", hv:"特徵", hvR:"đặc trưng", pure:false,
+    explain:"Đặc điểm nổi bật, riêng biệt của sự vật. 특징을 설명하다 = giải thích đặc điểm.",
+    ex:"한국어의 특징이 뭐예요?", exVi:"Đặc điểm của tiếng Hàn là gì?" },
+  { kr:"펜", en:"pen", vi:"cây bút", hv:null, hvR:"từ tiếng Anh 'pen'", pure:true,
+    explain:"Bút viết nói chung (vay mượn từ tiếng Anh). Rộng hơn 볼펜 (bút bi).",
+    ex:"펜으로 사인해 주세요.", exVi:"Xin hãy ký bằng bút." },
+  { kr:"표현", en:"expression", vi:"biểu hiện, cách diễn đạt", hv:"表現", hvR:"biểu hiện", pure:false,
+    explain:"Cách diễn đạt ý tưởng bằng lời nói hoặc chữ viết. 표현하다 = diễn đạt, bày tỏ.",
+    ex:"이 표현을 자주 써요.", exVi:"Tôi hay dùng cách diễn đạt này." },
+  { kr:"필통", en:"pencil case", vi:"hộp bút", hv:null, hvR:"thuần Hàn (필=붓 bút + 통=ống)", pure:true,
+    explain:"Hộp đựng bút. 필(筆, bút) + 통(桶, ống, hộp). Vật dụng quen thuộc của học sinh.",
+    ex:"필통에 볼펜이 있어요.", exVi:"Trong hộp bút có bút bi." },
+  { kr:"학교", en:"school", vi:"trường học", hv:"學校", hvR:"học hiệu", pure:false,
+    explain:"Trường học nói chung. 학교에 가다 = đi học/đến trường.",
+    ex:"학교가 집에서 가까워요.", exVi:"Trường gần nhà tôi." },
+  { kr:"학기", en:"semester", vi:"học kỳ", hv:"學期", hvR:"học kỳ", pure:false,
+    explain:"Học kỳ trong năm học. Hàn Quốc có 1학기 (học kỳ 1) và 2학기 (học kỳ 2).",
+    ex:"이번 학기 성적이 좋았어요.", exVi:"Học kỳ này kết quả học tập tốt." },
+  { kr:"학년", en:"grade, school year", vi:"lớp (năm học)", hv:"學年", hvR:"học niên", pure:false,
+    explain:"Năm học hoặc lớp học theo năm. 1학년 = lớp 1/năm nhất.",
+    ex:"몇 학년이에요?", exVi:"Bạn học năm mấy/lớp mấy?" },
+  { kr:"학생", en:"student", vi:"học sinh, sinh viên", hv:"學生", hvR:"học sinh", pure:false,
+    explain:"Người đang đi học ở bất kỳ cấp nào. Dùng cho cả học sinh lẫn sinh viên.",
+    ex:"저는 학생이에요.", exVi:"Tôi là học sinh/sinh viên." },
+  { kr:"학생증", en:"student ID card", vi:"thẻ học sinh/sinh viên", hv:"學生證", hvR:"học sinh chứng", pure:false,
+    explain:"Thẻ chứng minh tư cách học sinh/sinh viên. Dùng để được giảm giá vé nhiều nơi ở Hàn.",
+    ex:"학생증을 보여 주세요.", exVi:"Hãy cho xem thẻ học sinh." },
+  { kr:"학원", en:"private academy, cram school", vi:"trung tâm luyện thi, học thêm", hv:"學院", hvR:"học viện", pure:false,
+    explain:"Trung tâm học thêm tư nhân. Rất phổ biến ở Hàn Quốc — hầu hết học sinh đều học 학원.",
+    ex:"영어 학원에 다녀요.", exVi:"Tôi học ở trung tâm tiếng Anh." },
+  { kr:"한글", en:"Hangul (Korean alphabet)", vi:"chữ Hangul (bảng chữ cái Hàn)", hv:null, hvR:"thuần Hàn", pure:true,
+    explain:"Bảng chữ cái tiếng Hàn do vua Sejong sáng tạo năm 1443. Ngày Hangul là 9/10 hàng năm.",
+    ex:"한글은 배우기 쉬워요.", exVi:"Chữ Hangul dễ học lắm." },
+  { kr:"한자", en:"Chinese character", vi:"chữ Hán", hv:"漢字", hvR:"hán tự", pure:false,
+    explain:"Chữ Hán được dùng trong tiếng Hàn. Khoảng 60% từ vựng tiếng Hàn có gốc Hán.",
+    ex:"한자를 알면 단어 이해가 쉬워요.", exVi:"Biết chữ Hán thì hiểu từ vựng dễ hơn." },
+  { kr:"합격", en:"pass (an exam)", vi:"đỗ (kỳ thi), vượt qua", hv:"合格", hvR:"hợp cách", pure:false,
+    explain:"Đỗ kỳ thi, đạt tiêu chuẩn. Đối lập với 불합격 (trượt). 합격을 축하해요 = Chúc mừng đỗ thi!",
+    ex:"시험에 합격했어요!", exVi:"Tôi đã đỗ kỳ thi rồi!" },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    const hvCell = item.pure
+      ? `<span class="hv-tag pure">Thuần Hàn</span><span class="hv-reading">${item.hvR}</span>`
+      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${hvCell}</td>
+      <td><span class="explain">${item.explain}</span></td>
+      <td>
+        <span class="example-kr">${item.ex}</span>
+        <span class="example-vi">${item.exVi}</span>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all'
+      || (currentFilter === 'hv' && !item.pure)
+      || (currentFilter === 'pure' && item.pure);
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || (item.hv && item.hv.includes(q))
+      || item.hvR.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
