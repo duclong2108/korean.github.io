@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Sở thích & Giải trí</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f3f0fa;
+    --card: #ffffff;
+    --accent: #5a2d8a;
+    --text: #1a0a30;
+    --sub: #7a5a9a;
+    --border: #d8c8ee;
+    --tag-hv: #ede0fa;
+    --tag-pure: #e8f4ee;
+    --tag-loan: #fce8f0;
+    --highlight: #f5eeff;
+    --row-alt: #faf7fd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f3f0fa;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '취미';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #9a80ba; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f3f0fa; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 140px; }
+  th:nth-child(3), td:nth-child(3) { width: 160px; }
+  th:nth-child(4), td:nth-child(4) { width: 185px; }
+  th:nth-child(5), td:nth-child(5) { width: 155px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
+  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #3a1070; font-weight: 500; }
+  .hv-tag.pure { background: var(--tag-pure); color: #1a6040; }
+  .hv-tag.loan { background: var(--tag-loan); color: #8a1050; }
+  .hv-hanja { font-weight: 600; font-size: 13px; }
+  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
+  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
+  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
+  .explain { font-size: 13px; color: #2a1050; line-height: 1.6; }
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>취미 & 오락 — Sở thích & Giải trí</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Sở thích · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+  <button class="filter-btn" data-filter="loan">Vay mượn</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Sở thích & Giải trí</div>
+
+<script>
+// type: 'hv'=Hán Việt, 'pure'=Thuần Hàn, 'loan'=Vay mượn
+const vocab = [
+  { kr:"가요", en:"Korean pop song", vi:"bài hát (Kpop)", hv:"歌謠", hvR:"ca dao", type:"hv",
+    explain:"Bài hát nhạc pop Hàn Quốc. 가(歌, bài hát) + 요(謠, dân ca). 한국 가요 = nhạc Hàn. Tiền thân của K-pop ngày nay.",
+    ex:"한국 가요를 자주 들어요.", exVi:"Tôi thường nghe nhạc Hàn." },
+  { kr:"게임", en:"game", vi:"trò chơi", hv:null, hvR:"từ tiếng Anh 'game'", type:"loan",
+    explain:"Trò chơi điện tử hoặc trò chơi nói chung. 게임을 하다 = chơi game. Hàn Quốc là cường quốc esport thế giới.",
+    ex:"게임을 너무 많이 했어요.", exVi:"Tôi đã chơi game quá nhiều." },
+  { kr:"경기", en:"match, game, competition", vi:"trận đấu, cuộc thi", hv:"競技", hvR:"cạnh tranh kỹ", type:"hv",
+    explain:"Trận đấu thể thao. 경기를 보다 = xem trận đấu. 경기에 이기다/지다 = thắng/thua trận.",
+    ex:"축구 경기를 봤어요.", exVi:"Tôi đã xem trận bóng đá." },
+  { kr:"경기장", en:"stadium, arena", vi:"sân vận động", hv:"競技場", hvR:"cạnh kỹ trường", type:"hv",
+    explain:"Sân vận động, đấu trường. 경기장에 가다 = đến sân vận động. 야구 경기장 = sân bóng chày.",
+    ex:"경기장이 꽉 찼어요.", exVi:"Sân vận động chật kín người." },
+  { kr:"골프", en:"golf", vi:"golf", hv:null, hvR:"từ tiếng Anh 'golf'", type:"loan",
+    explain:"Môn golf. 골프를 치다 = chơi golf. 골프장 = sân golf. Môn thể thao phổ biến trong giới doanh nhân Hàn.",
+    ex:"골프를 배우고 싶어요.", exVi:"Tôi muốn học chơi golf." },
+  { kr:"공", en:"ball", vi:"quả bóng", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Quả bóng nói chung. 공을 던지다 = ném bóng. 공을 차다 = đá bóng. 공을 치다 = đánh bóng.",
+    ex:"공을 차면 안 돼요!", exVi:"Không được đá bóng ở đây!" },
+  { kr:"공연", en:"performance, show", vi:"buổi biểu diễn", hv:"公演", hvR:"công diễn", type:"hv",
+    explain:"Buổi biểu diễn trước khán giả. 공연을 보다 = xem biểu diễn. 콘서트 공연 = buổi hòa nhạc.",
+    ex:"공연이 정말 멋있었어요.", exVi:"Buổi biểu diễn thật tuyệt vời." },
+  { kr:"관광하다", en:"to sightsee, tour", vi:"du lịch, tham quan", hv:"觀光", hvR:"quan quang", type:"hv",
+    explain:"Đi tham quan du lịch. 관광하다 = tham quan. 관광지 = địa điểm du lịch. 관광객 = khách du lịch.",
+    ex:"서울을 관광했어요.", exVi:"Tôi đã tham quan Seoul." },
+  { kr:"그림", en:"picture, drawing, painting", vi:"bức tranh, hình vẽ", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Tranh vẽ, hình ảnh. 그림을 그리다 = vẽ tranh. 그림이 예쁘다 = tranh đẹp. 그림책 = sách tranh.",
+    ex:"그림 그리는 것을 좋아해요.", exVi:"Tôi thích vẽ tranh." },
+  { kr:"낚시", en:"fishing", vi:"câu cá", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Câu cá. 낚시하다 = đi câu cá. 낚싯대 = cần câu. 낚시터 = khu vực câu cá.",
+    ex:"강에서 낚시했어요.", exVi:"Tôi đã câu cá ở sông." },
+  { kr:"노래", en:"song", vi:"bài hát", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Bài hát. 노래를 부르다 = hát. 노래가 좋다 = bài hát hay. 노래방 = karaoke. 노래 실력 = tài năng ca hát.",
+    ex:"노래를 잘 불러요.", exVi:"Bạn hát rất hay." },
+  { kr:"노래방", en:"karaoke", vi:"quán karaoke", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Quán karaoke phòng riêng — đặc sản văn hóa Hàn Quốc. 노래(hát) + 방(phòng). Khác với karaoke kiểu sân khấu.",
+    ex:"노래방에 갔다 왔어요.", exVi:"Tôi vừa đi karaoke về." },
+  { kr:"농구", en:"basketball", vi:"bóng rổ", hv:"籠球", hvR:"lung cầu", type:"hv",
+    explain:"Bóng rổ. 농(籠, cái rổ) + 구(球, bóng). 농구를 하다 = chơi bóng rổ. NBA = giải bóng rổ Mỹ rất được yêu thích ở Hàn.",
+    ex:"농구를 좋아해요.", exVi:"Tôi thích bóng rổ." },
+  { kr:"눈싸움", en:"snowball fight", vi:"đánh nhau bằng tuyết", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Trận chiến ném bóng tuyết. 눈(tuyết) + 싸움(chiến đấu). Hoạt động vui chơi mùa đông phổ biến ở Hàn.",
+    ex:"눈싸움하고 싶어요.", exVi:"Tôi muốn đánh nhau bằng tuyết." },
+  { kr:"대회", en:"competition, tournament, contest", vi:"cuộc thi, giải đấu", hv:"大會", hvR:"đại hội", type:"hv",
+    explain:"Cuộc thi, giải đấu lớn. 대회에 참가하다 = tham gia cuộc thi. 노래 대회 = cuộc thi hát.",
+    ex:"요리 대회에 나갔어요.", exVi:"Tôi đã tham gia cuộc thi nấu ăn." },
+  { kr:"드라마", en:"TV drama, series", vi:"phim truyền hình, drama", hv:null, hvR:"từ tiếng Anh 'drama'", type:"loan",
+    explain:"Phim truyền hình nhiều tập. K-drama đã trở thành hiện tượng văn hóa toàn cầu nhờ làn sóng Hallyu.",
+    ex:"한국 드라마를 자주 봐요.", exVi:"Tôi thường xem phim Hàn." },
+  { kr:"등산", en:"hiking, mountain climbing", vi:"leo núi, đi bộ đường dài", hv:"登山", hvR:"đăng sơn", type:"hv",
+    explain:"Leo núi, đi bộ trên núi. 등산하다 = leo núi. 등산복 = quần áo leo núi. Sở thích cực kỳ phổ biến ở Hàn.",
+    ex:"주말에 등산을 해요.", exVi:"Cuối tuần tôi đi leo núi." },
+  { kr:"만화", en:"comic, cartoon, animation", vi:"truyện tranh, hoạt hình", hv:"漫畫", hvR:"mạn họa", type:"hv",
+    explain:"Truyện tranh hoặc hoạt hình. 만화책 = truyện tranh. 만화 영화 = phim hoạt hình. Manhwa = truyện tranh Hàn Quốc.",
+    ex:"만화책을 즐겨 읽어요.", exVi:"Tôi thích đọc truyện tranh." },
+  { kr:"모임", en:"gathering, meeting, group", vi:"buổi họp mặt, cuộc gặp gỡ", hv:null, hvR:"thuần Hàn (모이다)", type:"pure",
+    explain:"Buổi tụ họp, họp mặt. 모임이 있다 = có buổi họp mặt. 동창 모임 = họp lớp. 동호회 모임 = gặp mặt câu lạc bộ.",
+    ex:"친구 모임이 있어요.", exVi:"Tôi có buổi họp mặt bạn bè." },
+  { kr:"무용", en:"dance (formal/artistic)", vi:"múa, nghệ thuật múa", hv:"舞踊", hvR:"vũ dũng", type:"hv",
+    explain:"Nghệ thuật múa mang tính chính thống. 무용가 = vũ công. 한국 무용 = múa truyền thống Hàn Quốc. Trang trọng hơn 춤.",
+    ex:"한국 무용을 배우고 있어요.", exVi:"Tôi đang học múa truyền thống Hàn Quốc." },
+  { kr:"미술", en:"fine arts, visual art", vi:"mỹ thuật, nghệ thuật", hv:"美術", hvR:"mỹ thuật", type:"hv",
+    explain:"Mỹ thuật, nghệ thuật thị giác. 미술관 = bảo tàng mỹ thuật. 미술 수업 = lớp học mỹ thuật. 미술가 = nghệ sĩ.",
+    ex:"미술을 전공했어요.", exVi:"Tôi đã học chuyên ngành mỹ thuật." },
+  { kr:"바이올린", en:"violin", vi:"đàn vĩ cầm", hv:null, hvR:"từ tiếng Anh 'violin'", type:"loan",
+    explain:"Đàn vĩ cầm. 바이올린을 켜다 = kéo đàn violin. 바이올리니스트 = nghệ sĩ violin.",
+    ex:"바이올린을 배우고 있어요.", exVi:"Tôi đang học đàn violin." },
+  { kr:"박수", en:"applause, clap", vi:"tiếng vỗ tay", hv:"拍手", hvR:"phách thủ", type:"hv",
+    explain:"Tiếng vỗ tay, tràng pháo tay. 박수를 치다 = vỗ tay. 박수갈채 = tràng vỗ tay hoan hô.",
+    ex:"박수를 쳐 주세요!", exVi:"Hãy vỗ tay nào!" },
+  { kr:"배구", en:"volleyball", vi:"bóng chuyền", hv:"排球", hvR:"bài cầu", type:"hv",
+    explain:"Bóng chuyền. 배(排, xếp hàng) + 구(球, bóng). 배구를 하다 = chơi bóng chuyền. 배구 경기 = trận bóng chuyền.",
+    ex:"배구 경기를 봤어요.", exVi:"Tôi đã xem trận bóng chuyền." },
+  { kr:"사진", en:"photo, picture", vi:"ảnh, bức ảnh", hv:"寫眞", hvR:"tả chân", type:"hv",
+    explain:"Ảnh chụp. 사진을 찍다 = chụp ảnh. 사진이 잘 나오다 = ảnh chụp đẹp. 셀카 = selfie.",
+    ex:"사진 찍어도 돼요?", exVi:"Tôi có thể chụp ảnh không?" },
+  { kr:"산책", en:"walk, stroll", vi:"đi dạo", hv:"散策", hvR:"tản sách", type:"hv",
+    explain:"Đi dạo, tản bộ nhẹ nhàng. 산책하다 = đi dạo. 산책로 = đường đi bộ. 한강 산책 = đi dạo ven sông Hàn.",
+    ex:"저녁에 산책해요.", exVi:"Buổi tối tôi đi dạo." },
+  { kr:"선수", en:"player, athlete", vi:"vận động viên, cầu thủ", hv:"選手", hvR:"tuyển thủ", type:"hv",
+    explain:"Vận động viên, cầu thủ thi đấu. 축구 선수 = cầu thủ bóng đá. 국가 대표 선수 = vận động viên đội tuyển quốc gia.",
+    ex:"그는 유명한 축구 선수예요.", exVi:"Anh ấy là cầu thủ bóng đá nổi tiếng." },
+  { kr:"소설", en:"novel, fiction", vi:"tiểu thuyết", hv:"小說", hvR:"tiểu thuyết", type:"hv",
+    explain:"Tiểu thuyết. 소설을 읽다 = đọc tiểu thuyết. 소설가 = nhà văn. 추리소설 = tiểu thuyết trinh thám.",
+    ex:"소설 읽는 것을 좋아해요.", exVi:"Tôi thích đọc tiểu thuyết." },
+  { kr:"소풍", en:"picnic, field trip", vi:"dã ngoại, chuyến đi chơi", hv:"逍風", hvR:"tiêu phong", type:"hv",
+    explain:"Dã ngoại, chuyến đi chơi ngoài trời. 소풍을 가다 = đi dã ngoại. 학교 소풍 = dã ngoại của trường.",
+    ex:"학교 소풍이 재미있었어요.", exVi:"Chuyến dã ngoại của trường rất vui." },
+  { kr:"쇼핑", en:"shopping", vi:"mua sắm", hv:null, hvR:"từ tiếng Anh 'shopping'", type:"loan",
+    explain:"Mua sắm. 쇼핑하다 = đi mua sắm. 쇼핑몰 = trung tâm mua sắm. Sở thích rất phổ biến, đặc biệt với phụ nữ Hàn.",
+    ex:"쇼핑하러 백화점에 갔어요.", exVi:"Tôi đến trung tâm thương mại mua sắm." },
+  { kr:"수영", en:"swimming", vi:"bơi lội", hv:"水泳", hvR:"thủy vịnh", type:"hv",
+    explain:"Bơi lội. 수영하다 = bơi. 수영을 잘하다 = bơi giỏi. 수영장 = bể bơi.",
+    ex:"수영을 매일 해요.", exVi:"Tôi bơi mỗi ngày." },
+  { kr:"수영장", en:"swimming pool", vi:"hồ bơi, bể bơi", hv:"水泳場", hvR:"thủy vịnh trường", type:"hv",
+    explain:"Bể bơi, hồ bơi. 실내 수영장 = bể bơi trong nhà. 야외 수영장 = bể bơi ngoài trời.",
+    ex:"수영장에서 수영했어요.", exVi:"Tôi đã bơi ở bể bơi." },
+  { kr:"스케이트", en:"skating, skate", vi:"trượt băng", hv:null, hvR:"từ tiếng Anh 'skate'", type:"loan",
+    explain:"Trượt băng. 스케이트를 타다 = trượt băng. 아이스 스케이트 = trượt băng trên sân băng.",
+    ex:"겨울에 스케이트를 타요.", exVi:"Mùa đông tôi đi trượt băng." },
+  { kr:"스키", en:"ski, skiing", vi:"trượt tuyết", hv:null, hvR:"từ tiếng Anh 'ski'", type:"loan",
+    explain:"Trượt tuyết. 스키를 타다 = trượt tuyết. 스키장 = khu trượt tuyết. Phổ biến ở Hàn từ tháng 12 đến tháng 2.",
+    ex:"스키 타러 스키장에 가요.", exVi:"Tôi đến khu trượt tuyết để trượt tuyết." },
+  { kr:"스키장", en:"ski resort, ski slope", vi:"khu trượt tuyết", hv:null, hvR:"스키(ski) + 장(場)", type:"loan",
+    explain:"Khu trượt tuyết. 스키(ski) + 장(場, địa điểm). 용평 스키장 = khu trượt tuyết Yongpyong nổi tiếng.",
+    ex:"스키장에서 스키를 탔어요.", exVi:"Tôi đã trượt tuyết ở khu trượt tuyết." },
+  { kr:"스타", en:"star, celebrity", vi:"ngôi sao (nổi tiếng)", hv:null, hvR:"từ tiếng Anh 'star'", type:"loan",
+    explain:"Ngôi sao nổi tiếng trong giải trí. K-pop 스타 = ngôi sao K-pop. 스타가 되다 = trở thành ngôi sao.",
+    ex:"제가 좋아하는 스타예요.", exVi:"Đây là ngôi sao tôi yêu thích." },
+  { kr:"스포츠", en:"sports", vi:"thể thao", hv:null, hvR:"từ tiếng Anh 'sports'", type:"loan",
+    explain:"Thể thao nói chung. 스포츠를 즐기다 = tận hưởng thể thao. 스포츠 선수 = vận động viên.",
+    ex:"스포츠를 좋아해요?", exVi:"Bạn có thích thể thao không?" },
+  { kr:"악기", en:"musical instrument", vi:"nhạc cụ", hv:"樂器", hvR:"nhạc khí", type:"hv",
+    explain:"Nhạc cụ. 악기를 연주하다 = chơi nhạc cụ. 무슨 악기를 해요? = Bạn chơi nhạc cụ gì?",
+    ex:"무슨 악기를 배우고 싶어요?", exVi:"Bạn muốn học nhạc cụ gì?" },
+  { kr:"야구", en:"baseball", vi:"bóng chày", hv:"野球", hvR:"dã cầu", type:"hv",
+    explain:"Bóng chày. 야(野, ngoài đồng) + 구(球, bóng). Môn thể thao phổ biến nhất Hàn Quốc cùng với bóng đá.",
+    ex:"야구 경기를 보러 갔어요.", exVi:"Tôi đã đi xem trận bóng chày." },
+  { kr:"여행", en:"travel, trip", vi:"du lịch, đi du lịch", hv:"旅行", hvR:"lữ hành", type:"hv",
+    explain:"Du lịch, đi chơi xa. 여행하다 = đi du lịch. 여행을 가다 = đi du lịch. 여행지 = điểm du lịch.",
+    ex:"여행을 자주 가고 싶어요.", exVi:"Tôi muốn đi du lịch thường xuyên." },
+  { kr:"연예인", en:"celebrity, entertainer", vi:"người nổi tiếng, nghệ sĩ", hv:"演藝人", hvR:"diễn nghệ nhân", type:"hv",
+    explain:"Người nổi tiếng trong giới giải trí — diễn viên, ca sĩ, người mẫu,... 연예인이 되다 = trở thành nghệ sĩ.",
+    ex:"좋아하는 연예인이 있어요?", exVi:"Bạn có nghệ sĩ yêu thích không?" },
+  { kr:"영화", en:"movie, film", vi:"bộ phim, phim điện ảnh", hv:"映畫", hvR:"ánh hoạ", type:"hv",
+    explain:"Bộ phim điện ảnh. 영화를 보다 = xem phim. 영화관 = rạp chiếu phim. 한국 영화 = phim Hàn.",
+    ex:"영화 보러 갈래요?", exVi:"Bạn có muốn đi xem phim không?" },
+  { kr:"영화배우", en:"movie actor/actress", vi:"diễn viên điện ảnh", hv:"映畫俳優", hvR:"ánh hoạ bội ưu", type:"hv",
+    explain:"Diễn viên điện ảnh. 영화(phim) + 배우(diễn viên). 유명한 영화배우 = diễn viên điện ảnh nổi tiếng.",
+    ex:"그녀는 유명한 영화배우예요.", exVi:"Cô ấy là diễn viên điện ảnh nổi tiếng." },
+  { kr:"영화표", en:"movie ticket", vi:"vé xem phim", hv:"映畫票", hvR:"ánh hoạ phiếu", type:"hv",
+    explain:"Vé xem phim. 영화표를 사다 = mua vé phim. 영화표를 예매하다 = đặt vé phim trước.",
+    ex:"영화표를 두 장 샀어요.", exVi:"Tôi đã mua hai vé xem phim." },
+  { kr:"올림픽", en:"Olympic Games", vi:"Olympic", hv:null, hvR:"phiên âm 'Olympic'", type:"loan",
+    explain:"Thế vận hội Olympic. Hàn Quốc đã tổ chức Olympics năm 1988 (Seoul) và 2018 (PyeongChang).",
+    ex:"올림픽을 보는 것을 좋아해요.", exVi:"Tôi thích xem Olympic." },
+  { kr:"운동", en:"exercise, sports", vi:"thể dục, vận động", hv:"運動", hvR:"vận động", type:"hv",
+    explain:"Thể dục, vận động thể chất. 운동하다 = tập thể dục. 운동을 규칙적으로 하다 = tập thể dục đều đặn.",
+    ex:"매일 운동해요.", exVi:"Tôi tập thể dục mỗi ngày." },
+  { kr:"운동선수", en:"athlete, sportsperson", vi:"vận động viên", hv:"運動選手", hvR:"vận động tuyển thủ", type:"hv",
+    explain:"Vận động viên chuyên nghiệp. 운동(thể dục) + 선수(vận động viên). 올림픽 운동선수 = vận động viên Olympic.",
+    ex:"운동선수가 되고 싶어요.", exVi:"Tôi muốn trở thành vận động viên." },
+  { kr:"운동장", en:"sports field, playground", vi:"sân chơi, sân thể dục", hv:"運動場", hvR:"vận động trường", type:"hv",
+    explain:"Sân thể dục, sân chơi. 학교 운동장 = sân trường. 운동장에서 뛰다 = chạy ở sân thể dục.",
+    ex:"운동장에서 놀았어요.", exVi:"Tôi đã chơi ở sân trường." },
+  { kr:"월드컵", en:"World Cup", vi:"World Cup", hv:null, hvR:"từ tiếng Anh 'World Cup'", type:"loan",
+    explain:"Giải vô địch bóng đá thế giới. Hàn Quốc đồng tổ chức World Cup 2002 và vào đến vòng bán kết.",
+    ex:"월드컵에서 한국을 응원했어요.", exVi:"Tôi đã cổ vũ Hàn Quốc ở World Cup." },
+  { kr:"음반", en:"album, music record", vi:"đĩa nhạc, album", hv:"音盤", hvR:"âm bàn", type:"hv",
+    explain:"Đĩa nhạc, album âm nhạc. 음반을 내다 = phát hành album. K-pop 음반 = album K-pop.",
+    ex:"새 음반이 나왔어요.", exVi:"Album mới đã ra mắt rồi." },
+  { kr:"음악", en:"music", vi:"âm nhạc", hv:"音樂", hvR:"âm nhạc", type:"hv",
+    explain:"Âm nhạc. 음악을 듣다 = nghe nhạc. 음악가 = nhạc sĩ. 음악 감상 = thưởng thức âm nhạc.",
+    ex:"음악 듣는 것을 좋아해요.", exVi:"Tôi thích nghe nhạc." },
+  { kr:"인기", en:"popularity, fame", vi:"sự phổ biến, nổi tiếng", hv:"人氣", hvR:"nhân khí", type:"hv",
+    explain:"Sự nổi tiếng, được yêu thích. 인기가 있다 = nổi tiếng. 인기 있는 가수 = ca sĩ nổi tiếng. K-pop의 인기 = sự nổi tiếng của K-pop.",
+    ex:"이 노래가 요즘 인기 있어요.", exVi:"Bài hát này dạo này rất nổi tiếng." },
+  { kr:"인기스타", en:"popular star", vi:"ngôi sao nổi tiếng", hv:"人氣", hvR:"인기(nhân khí) + 스타(star)", type:"hv",
+    explain:"Ngôi sao đang được yêu thích. 인기(nổi tiếng) + 스타(star). K-pop idol thường được gọi là 인기스타.",
+    ex:"그는 한국의 인기스타예요.", exVi:"Anh ấy là ngôi sao nổi tiếng của Hàn Quốc." },
+  { kr:"인형", en:"doll, puppet", vi:"búp bê, con rối", hv:"人形", hvR:"nhân hình", type:"hv",
+    explain:"Búp bê, đồ chơi hình người. 인형을 가지고 놀다 = chơi búp bê. 곰 인형 = gấu bông.",
+    ex:"곰 인형을 샀어요.", exVi:"Tôi đã mua gấu bông." },
+  { kr:"일본드라마", en:"Japanese TV drama", vi:"phim truyền hình Nhật", hv:"日本", hvR:"일본(Nhật) + 드라마", type:"hv",
+    explain:"Phim truyền hình Nhật Bản. J-drama. Từng rất phổ biến ở Hàn trước khi K-drama bùng nổ.",
+    ex:"일본 드라마도 재미있어요.", exVi:"Phim Nhật cũng thú vị lắm." },
+  { kr:"축구", en:"soccer, football", vi:"bóng đá", hv:"蹴球", hvR:"túc cầu", type:"hv",
+    explain:"Bóng đá. 축(蹴, đá) + 구(球, bóng). 축구를 하다 = chơi bóng đá. 월드컵 = World Cup. Môn thể thao quốc dân Hàn.",
+    ex:"축구를 정말 좋아해요.", exVi:"Tôi thực sự yêu thích bóng đá." },
+  { kr:"축제", en:"festival, celebration", vi:"lễ hội", hv:"祝祭", hvR:"chúc tế", type:"hv",
+    explain:"Lễ hội. 축제에 가다 = đến lễ hội. 불꽃 축제 = lễ hội pháo hoa. 음악 축제 = lễ hội âm nhạc.",
+    ex:"축제가 정말 재미있었어요.", exVi:"Lễ hội thật vui." },
+  { kr:"춤", en:"dance", vi:"điệu múa, điệu nhảy", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Điệu nhảy, điệu múa. 춤을 추다 = nhảy múa. 춤을 잘 추다 = nhảy giỏi. K-pop nổi tiếng với vũ đạo đẹp mắt.",
+    ex:"춤을 정말 잘 춰요.", exVi:"Bạn nhảy rất giỏi." },
+  { kr:"취미", en:"hobby, interest", vi:"sở thích, thú vui", hv:"趣味", hvR:"thú vị", type:"hv",
+    explain:"Sở thích, thú vui cá nhân. 취미가 뭐예요? = Sở thích của bạn là gì? 취미 생활 = cuộc sống sở thích.",
+    ex:"취미가 뭐예요?", exVi:"Sở thích của bạn là gì?" },
+  { kr:"콧노래", en:"humming", vi:"huýt sáo miệng, hát khe khẽ", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Hát khe khẽ, ư ử. 콧(mũi) + 노래(bài hát). 콧노래를 부르다 = hát lẩm nhẩm.",
+    ex:"콧노래를 부르며 걸어요.", exVi:"Tôi vừa đi vừa hát khe khẽ." },
+  { kr:"탁구", en:"table tennis, ping-pong", vi:"bóng bàn", hv:"卓球", hvR:"trác cầu", type:"hv",
+    explain:"Bóng bàn. 탁(卓, cái bàn) + 구(球, bóng). 탁구를 치다 = đánh bóng bàn. 탁구장 = phòng bóng bàn.",
+    ex:"탁구를 배우고 싶어요.", exVi:"Tôi muốn học đánh bóng bàn." },
+  { kr:"태권도", en:"Taekwondo", vi:"Taekwondo (võ Taekwondo)", hv:"跆拳道", hvR:"thái quyền đạo", type:"hv",
+    explain:"Võ Taekwondo — môn võ truyền thống của Hàn Quốc. 태(跆, đá) + 권(拳, đấm) + 도(道, đạo). Được công nhận tại Olympic.",
+    ex:"태권도를 배우고 있어요.", exVi:"Tôi đang học Taekwondo." },
+  { kr:"탤런트", en:"TV actor/actress", vi:"diễn viên (truyền hình)", hv:null, hvR:"từ tiếng Anh 'talent'", type:"loan",
+    explain:"Diễn viên truyền hình. Từ vay mượn tiếng Anh 'talent'. Khác với 영화배우 (diễn viên điện ảnh).",
+    ex:"인기 있는 탤런트예요.", exVi:"Đây là diễn viên truyền hình nổi tiếng." },
+  { kr:"테니스", en:"tennis", vi:"quần vợt, tennis", hv:null, hvR:"từ tiếng Anh 'tennis'", type:"loan",
+    explain:"Quần vợt. 테니스를 치다 = chơi tennis. 테니스 코트 = sân tennis.",
+    ex:"테니스를 배우고 있어요.", exVi:"Tôi đang học chơi tennis." },
+  { kr:"팀", en:"team", vi:"đội, nhóm", hv:null, hvR:"từ tiếng Anh 'team'", type:"loan",
+    explain:"Đội, nhóm. 팀을 이루다 = lập thành đội. 우리 팀 = đội của chúng ta. K-pop 아이돌 팀 = nhóm nhạc K-pop.",
+    ex:"우리 팀이 이겼어요!", exVi:"Đội chúng ta thắng rồi!" },
+  { kr:"파티", en:"party", vi:"bữa tiệc, party", hv:null, hvR:"từ tiếng Anh 'party'", type:"loan",
+    explain:"Bữa tiệc, party. 파티를 열다 = tổ chức tiệc. 생일 파티 = tiệc sinh nhật.",
+    ex:"생일 파티를 열었어요.", exVi:"Tôi đã tổ chức tiệc sinh nhật." },
+  { kr:"피아노", en:"piano", vi:"đàn piano", hv:null, hvR:"từ tiếng Ý 'piano'", type:"loan",
+    explain:"Đàn piano. 피아노를 치다 = chơi đàn piano. 피아니스트 = nghệ sĩ piano. Nhạc cụ phổ biến nhất với trẻ em Hàn.",
+    ex:"피아노를 칠 수 있어요.", exVi:"Tôi biết chơi đàn piano." },
+  { kr:"한국드라마", en:"Korean drama, K-drama", vi:"phim Hàn Quốc", hv:"韓國", hvR:"한국(Hàn Quốc) + 드라마", type:"hv",
+    explain:"Phim truyền hình Hàn Quốc — K-drama. Đã trở thành hiện tượng văn hóa toàn cầu trong làn sóng Hallyu.",
+    ex:"한국 드라마를 좋아해요.", exVi:"Tôi thích phim Hàn Quốc." },
+  { kr:"해외여행", en:"overseas travel", vi:"du lịch nước ngoài", hv:"海外旅行", hvR:"hải ngoại lữ hành", type:"hv",
+    explain:"Du lịch nước ngoài. 해외(hải ngoại) + 여행(du lịch). 해외여행을 가다 = đi du lịch nước ngoài.",
+    ex:"해외여행을 가고 싶어요.", exVi:"Tôi muốn đi du lịch nước ngoài." },
+  { kr:"행사", en:"event, program", vi:"sự kiện, hoạt động", hv:"行事", hvR:"hành sự", type:"hv",
+    explain:"Sự kiện, hoạt động được tổ chức. 행사에 참가하다 = tham gia sự kiện. 학교 행사 = sự kiện nhà trường.",
+    ex:"학교 행사에 참가했어요.", exVi:"Tôi đã tham gia sự kiện của trường." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let hvCell;
+    if (item.type === 'hv') {
+      hvCell = `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+    } else if (item.type === 'pure') {
+      hvCell = `<span class="hv-tag pure">Thuần Hàn</span><span class="hv-reading">${item.hvR}</span>`;
+    } else {
+      hvCell = `<span class="hv-tag loan">Vay mượn</span><span class="hv-reading">${item.hvR}</span>`;
+    }
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${hvCell}</td>
+      <td><span class="explain">${item.explain}</span></td>
+      <td>
+        <span class="example-kr">${item.ex}</span>
+        <span class="example-vi">${item.exVi}</span>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || (item.hv && item.hv.includes(q))
+      || item.hvR.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
