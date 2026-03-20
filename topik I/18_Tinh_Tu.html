@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Tính từ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f4f0;
+    --card: #ffffff;
+    --accent: #7a3a1a;
+    --text: #2a1008;
+    --sub: #9a7060;
+    --border: #e4cdb8;
+    --tag-pure: #fdeee0;
+    --tag-hv: #e8f0fa;
+    --tag-irreg: #fce8f8;
+    --highlight: #fff5ee;
+    --row-alt: #fdf9f6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f8f4f0;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '형용사';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 110px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #b09080; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f8f4f0; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 150px; }
+  th:nth-child(3), td:nth-child(3) { width: 200px; }
+  th:nth-child(4), td:nth-child(4) { width: 210px; }
+  th:nth-child(5), td:nth-child(5) { width: 130px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; }
+  .tag-pure { background: var(--tag-pure); color: #6a2a00; }
+  .tag-hv { background: var(--tag-hv); color: #1a3060; }
+  .tag-irreg { background: var(--tag-irreg); color: #6a0a60; }
+  .tag-hv-irreg { background: #e8f8e8; color: #1a5020; }
+  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>형용사 — Tính từ tiếng Hàn</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Tính từ · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+  <button class="filter-btn" data-filter="hv">Hán Việt</button>
+  <button class="filter-btn" data-filter="irreg">Bất quy tắc ㅂ</button>
+  <button class="filter-btn" data-filter="irreg-other">Bất quy tắc khác</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tính từ</th>
+        <th>Tiếng Anh</th>
+        <th>Tiếng Việt</th>
+        <th>Phân loại</th>
+        <th>Ghi chú & Cách dùng</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy tính từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Tính từ TOPIK I & II</div>
+
+<script>
+// type: 'pure'=Thuần Hàn thường, 'hv'=Hán Việt (하다), 'irreg'=Bất quy tắc ㅂ, 'irreg-other'=Bất quy tắc ㅎ/ㄹ/ㅅ/기타
+const vocab = [
+  { kr:"가깝다", en:"close, near", vi:"gần (khoảng cách)", type:"irreg",
+    note:"ㅂ-bất quy tắc: 가깝다→가까워. 집이 가까워요(nhà gần). ↔ 멀다(xa)." },
+  { kr:"가볍다", en:"light (weight)", vi:"nhẹ", type:"irreg",
+    note:"ㅂ-bất quy tắc: 가볍다→가벼워. 가방이 가벼워요(túi nhẹ). ↔ 무겁다(nặng)." },
+  { kr:"간단하다", en:"simple, easy", vi:"đơn giản", type:"hv",
+    note:"간단(簡單) + 하다. 간단해요(đơn giản lắm). 간단한 질문(câu hỏi đơn giản)." },
+  { kr:"같다", en:"same, equal", vi:"giống, như nhau", type:"pure",
+    note:"N과/와 같다 = giống N. 나와 같아요(giống tôi). 다 같아요(đều như nhau). ↔ 다르다." },
+  { kr:"건강하다", en:"be healthy", vi:"khỏe mạnh", type:"hv",
+    note:"건강(健康) + 하다. 건강해요(khỏe lắm). 건강하게 지내세요(hãy giữ gìn sức khỏe)." },
+  { kr:"고프다", en:"hungry", vi:"đói", type:"pure",
+    note:"배가 고프다 = đói bụng. 고프다→고파. 배고프다 là dạng phổ biến hơn trong hội thoại." },
+  { kr:"곱다", en:"beautiful, fine", vi:"đẹp, mịn màng", type:"irreg",
+    note:"ㅂ-bất quy tắc: 곱다→고와. 손이 고와요(tay đẹp mịn). 고운 색(màu sắc đẹp)." },
+  { kr:"괜찮다", en:"be okay, fine, alright", vi:"được, ổn", type:"pure",
+    note:"괜찮아요(ổn rồi, không sao). 괜찮으면(nếu ổn thì). Rất hay dùng trong giao tiếp." },
+  { kr:"귀엽다", en:"cute, adorable", vi:"dễ thương, đáng yêu", type:"irreg",
+    note:"ㅂ-bất quy tắc: 귀엽다→귀여워. 너무 귀여워요(dễ thương quá). 귀여운 아기(em bé đáng yêu)." },
+  { kr:"그렇다", en:"be so, that's right", vi:"Đúng vậy, như vậy", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 그렇다→그래. 그래요(đúng vậy). 이렇다, 저렇다, 어떻다 cùng nhóm." },
+  { kr:"급하다", en:"urgent, in a hurry", vi:"gấp, khẩn cấp", type:"hv",
+    note:"급(急) + 하다. 급해요(gấp rồi). 급한 일이 있어요(có việc gấp). 천천히 해요(từ từ thôi)." },
+  { kr:"기쁘다", en:"happy, glad", vi:"vui, hạnh phúc", type:"pure",
+    note:"기쁘다→기뻐. 기뻐요(vui lắm). 기쁜 소식(tin vui). 기뻐하다(động từ 'vui mừng')." },
+  { kr:"길다", en:"long", vi:"dài", type:"irreg-other",
+    note:"ㄹ-bất quy tắc: 길다→길어. 머리가 길어요(tóc dài). ↔ 짧다(ngắn)." },
+  { kr:"까맣다", en:"black (deep)", vi:"đen (màu)", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 까맣다→까매. 까만 밤하늘(bầu trời đêm đen). 검다 cũng nghĩa tương tự." },
+  { kr:"깨끗하다", en:"clean, tidy", vi:"sạch sẽ, gọn gàng", type:"hv",
+    note:"깨끗(潔) + 하다? Thực ra thuần Hàn. 깨끗해요(sạch lắm). ↔ 더럽다(bẩn)." },
+  { kr:"나쁘다", en:"bad", vi:"xấu, tệ, tồi", type:"pure",
+    note:"나빠요(tệ lắm). 나쁜 습관(thói quen xấu). 나빠지다(trở nên xấu đi). ↔ 좋다(tốt)." },
+  { kr:"낮다", en:"low", vi:"thấp, thấp kém", type:"pure",
+    note:"키가 낮다(chiều cao thấp). 목소리가 낮다(giọng trầm). ↔ 높다(cao)." },
+  { kr:"넓다", en:"wide, spacious", vi:"rộng, rộng rãi", type:"pure",
+    note:"방이 넓어요(phòng rộng). 넓은 바다(biển rộng mênh mông). ↔ 좁다(hẹp)." },
+  { kr:"노랗다", en:"yellow", vi:"vàng (màu)", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 노랗다→노래. 노란 바나나(chuối vàng). 노란색이에요(màu vàng)." },
+  { kr:"높다", en:"high, tall", vi:"cao", type:"pure",
+    note:"산이 높다(núi cao). 목소리가 높다(giọng cao). ↔ 낮다(thấp)." },
+  { kr:"느리다", en:"slow", vi:"chậm chạp", type:"pure",
+    note:"걸음이 느려요(đi chậm). 인터넷이 느려요(internet chậm). ↔ 빠르다(nhanh)." },
+  { kr:"늦다", en:"late", vi:"muộn, trễ", type:"pure",
+    note:"늦었어요(muộn rồi). 늦게 일어나다(dậy muộn). ↔ 이르다(sớm)." },
+  { kr:"다르다", en:"different", vi:"khác, khác nhau", type:"irreg-other",
+    note:"ㄹ-bất quy tắc. N과/와 다르다 = khác N. 달라요(khác rồi). ↔ 같다(giống)." },
+  { kr:"다른", en:"other, another, different", vi:"... khác, ... khác biệt", type:"pure",
+    note:"다른 + N = N khác. 다른 나라(nước khác). 다른 방법(cách khác). Dạng định ngữ của 다르다." },
+  { kr:"달다", en:"sweet", vi:"ngọt", type:"irreg-other",
+    note:"ㄹ-bất quy tắc: 달다→달아. 달아요(ngọt lắm). 달콤하다 = ngọt ngào. ↔ 쓰다(đắng)." },
+  { kr:"더럽다", en:"dirty, filthy", vi:"bẩn, dơ", type:"irreg",
+    note:"ㅂ-bất quy tắc: 더럽다→더러워. 손이 더러워요(tay bẩn). ↔ 깨끗하다(sạch)." },
+  { kr:"덥다", en:"hot (weather)", vi:"nóng (thời tiết)", type:"irreg",
+    note:"ㅂ-bất quy tắc: 덥다→더워. 오늘 더워요(hôm nay nóng). ↔ 춥다(lạnh). Khác 뜨겁다(nóng khi chạm)." },
+  { kr:"두껍다", en:"thick", vi:"dày", type:"irreg",
+    note:"ㅂ-bất quy tắc: 두껍다→두꺼워. 책이 두꺼워요(sách dày). ↔ 얇다(mỏng)." },
+  { kr:"따뜻하다", en:"warm", vi:"ấm áp", type:"pure",
+    note:"날씨가 따뜻해요(thời tiết ấm). 마음이 따뜻하다(lòng ấm áp). ↔ 시원하다(mát) / 춥다(lạnh)." },
+  { kr:"똑같다", en:"exactly the same", vi:"giống y hệt, hoàn toàn giống", type:"pure",
+    note:"똑(hoàn toàn) + 같다. 쌍둥이는 똑같아요(cặp song sinh giống y hệt nhau). Mạnh hơn 같다." },
+  { kr:"뜨겁다", en:"hot (to touch)", vi:"nóng (khi chạm vào)", type:"irreg",
+    note:"ㅂ-bất quy tắc: 뜨겁다→뜨거워. 국이 뜨거워요(canh nóng). Khác 덥다(nóng thời tiết)." },
+  { kr:"마르다", en:"dry; thin, lean", vi:"khô, gầy", type:"irreg-other",
+    note:"ㄹ-bất quy tắc: 마르다→말라. 피부가 말라요(da khô). 몸이 말랐어요(người gầy)." },
+  { kr:"많다", en:"many, much, a lot", vi:"nhiều, đông", type:"pure",
+    note:"사람이 많아요(nhiều người). 많이(nhiều — phó từ). ↔ 적다(ít)." },
+  { kr:"맑다", en:"clear, clean", vi:"trong sáng, quang đãng", type:"pure",
+    note:"하늘이 맑아요(bầu trời trong). 공기가 맑다(không khí trong lành). 물이 맑다(nước trong)." },
+  { kr:"맛없다", en:"not delicious, tasteless", vi:"không ngon", type:"pure",
+    note:"맛(vị) + 없다(không có). 이 음식은 맛없어요(món này không ngon). ↔ 맛있다(ngon)." },
+  { kr:"맛있다", en:"delicious, tasty", vi:"ngon, ngon miệng", type:"pure",
+    note:"맛(vị) + 있다(có). 너무 맛있어요(ngon quá). Phát âm: [마시따]. ↔ 맛없다(không ngon)." },
+  { kr:"맞다", en:"correct, fit, right", vi:"đúng, phù hợp", type:"pure",
+    note:"맞아요(đúng rồi). 사이즈가 맞다(vừa cỡ). 답이 맞다(câu trả lời đúng). ↔ 틀리다(sai)." },
+  { kr:"맵다", en:"spicy, hot", vi:"cay, cay nồng", type:"irreg",
+    note:"ㅂ-bất quy tắc: 맵다→매워. 김치가 매워요(kim chi cay). 매운 음식을 좋아해요." },
+  { kr:"멀다", en:"far, distant", vi:"xa, xa xôi", type:"irreg-other",
+    note:"ㄹ-bất quy tắc: 멀다→멀어. 집이 멀어요(nhà xa). ↔ 가깝다(gần)." },
+  { kr:"멋있다", en:"cool, stylish, great", vi:"đẹp trai, ngầu, tuyệt", type:"pure",
+    note:"멋(멋짐) + 있다. 멋있어요(ngầu/tuyệt quá). 멋있는 사람(người ngầu). Mạnh hơn 예쁘다." },
+  { kr:"무겁다", en:"heavy", vi:"nặng", type:"irreg",
+    note:"ㅂ-bất quy tắc: 무겁다→무거워. 가방이 무거워요(túi nặng). ↔ 가볍다(nhẹ)." },
+  { kr:"무섭다", en:"scary, frightening", vi:"đáng sợ, sợ hãi", type:"irreg",
+    note:"ㅂ-bất quy tắc: 무섭다→무서워. 귀신이 무서워요(ma đáng sợ). 무서운 영화(phim kinh dị)." },
+  { kr:"바르다", en:"correct; apply, spread", vi:"đúng; bôi, thoa", type:"irreg-other",
+    note:"ㄹ-bất quy tắc. 두 가지: 바른 자세(tư thế đúng), 로션을 바르다(thoa kem dưỡng)." },
+  { kr:"바쁘다", en:"busy", vi:"bận rộn", type:"pure",
+    note:"바빠요(bận lắm). 요즘 많이 바빠요(dạo này rất bận). ↔ 한가하다(rảnh rỗi)." },
+  { kr:"반갑다", en:"glad to meet, pleased", vi:"vui được gặp", type:"irreg",
+    note:"ㅂ-bất quy tắc: 반갑다→반가워. 만나서 반가워요(rất vui được gặp bạn)." },
+  { kr:"밝다", en:"bright, cheerful", vi:"sáng, tươi sáng", type:"pure",
+    note:"방이 밝아요(phòng sáng). 성격이 밝다(tính cách vui tươi). ↔ 어둡다(tối)." },
+  { kr:"배고프다", en:"hungry", vi:"đói bụng", type:"pure",
+    note:"배(bụng) + 고프다. 배고파요(đói bụng rồi). Phổ biến hơn 고프다 trong hội thoại." },
+  { kr:"배부르다", en:"be full (after eating)", vi:"no bụng, ăn no", type:"irreg-other",
+    note:"배(bụng) + 부르다(ㄹ-bất quy tắc). 배불러요(no rồi). ↔ 배고프다(đói)." },
+  { kr:"복잡하다", en:"complicated, crowded", vi:"phức tạp; đông đúc", type:"hv",
+    note:"복잡(複雜) + 하다. 길이 복잡해요(đường tắc/phức tạp). 문제가 복잡하다(vấn đề phức tạp)." },
+  { kr:"부드럽다", en:"soft, gentle", vi:"mềm mại; nhẹ nhàng", type:"irreg",
+    note:"ㅂ-bất quy tắc: 부드럽다→부드러워. 피부가 부드러워요(da mềm mại). 성격이 부드럽다(tính cách dịu dàng)." },
+  { kr:"부지런하다", en:"diligent, hardworking", vi:"chăm chỉ, siêng năng", type:"hv",
+    note:"부지런(不懈 ?) + 하다. 부지런해요(chăm chỉ lắm). ↔ 게으르다(lười biếng)." },
+  { kr:"불편하다", en:"uncomfortable, inconvenient", vi:"không thoải mái, bất tiện", type:"hv",
+    note:"불편(不便) + 하다. 신발이 불편해요(giày không thoải mái). ↔ 편하다(thoải mái)." },
+  { kr:"비슷하다", en:"similar, alike", vi:"giống nhau, tương tự", type:"hv",
+    note:"비슷(比似?) + 하다. 둘이 비슷해요(hai cái giống nhau). 비슷한 것(thứ tương tự)." },
+  { kr:"비싸다", en:"expensive", vi:"đắt, đắt tiền", type:"pure",
+    note:"너무 비싸요(đắt quá). 비싼 레스토랑(nhà hàng đắt tiền). ↔ 싸다(rẻ)." },
+  { kr:"빠르다", en:"fast, quick", vi:"nhanh, nhanh chóng", type:"irreg-other",
+    note:"ㄹ-bất quy tắc: 빠르다→빨라. 빨라요(nhanh lắm). 빨리(nhanh lên — phó từ). ↔ 느리다(chậm)." },
+  { kr:"빨갛다", en:"red", vi:"đỏ (màu)", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 빨갛다→빨개. 빨간 장미(hoa hồng đỏ). 빨간색 = màu đỏ." },
+  { kr:"쉽다", en:"easy", vi:"dễ, dễ dàng", type:"irreg",
+    note:"ㅂ-bất quy tắc: 쉽다→쉬워. 한국어는 쉬워요?(tiếng Hàn có dễ không?). ↔ 어렵다(khó)." },
+  { kr:"슬프다", en:"sad, sorrowful", vi:"buồn, đau lòng", type:"pure",
+    note:"슬퍼요(buồn lắm). 슬픈 영화(phim buồn). 슬퍼하다(động từ 'buồn bã'). ↔ 기쁘다(vui)." },
+  { kr:"시끄럽다", en:"noisy, loud", vi:"ồn ào", type:"irreg",
+    note:"ㅂ-bất quy tắc: 시끄럽다→시끄러워. 시끄러워요(ồn ào quá). ↔ 조용하다(yên tĩnh)." },
+  { kr:"시다", en:"sour", vi:"chua", type:"pure",
+    note:"레몬이 셔요(chanh chua). 시다→셔. 시큼하다 = chua chua. ↔ 달다(ngọt)." },
+  { kr:"시원하다", en:"cool, refreshing", vi:"mát mẻ, sảng khoái", type:"pure",
+    note:"날씨가 시원해요(thời tiết mát mẻ). 음료수가 시원해요(đồ uống mát lạnh). Cũng nghĩa là 'sảng khoái'." },
+  { kr:"싫다", en:"dislike, hate", vi:"ghét, không thích", type:"pure",
+    note:"싫어요(tôi không thích). N이/가 싫다 = ghét N. 싫어하다(동사 = ghét). ↔ 좋다(thích)." },
+  { kr:"심하다", en:"severe, excessive", vi:"nghiêm trọng, quá mức", type:"hv",
+    note:"심(甚) + 하다. 심해요(quá mức rồi). 심한 감기(cảm nặng). 너무 심한 거 아니야?(có phải quá không?)" },
+  { kr:"싱겁다", en:"bland, not salty", vi:"nhạt (thức ăn)", type:"irreg",
+    note:"ㅂ-bất quy tắc: 싱겁다→싱거워. 국이 싱거워요(canh nhạt). ↔ 짜다(mặn)." },
+  { kr:"싸다", en:"cheap; wrap", vi:"rẻ; gói lại", type:"pure",
+    note:"두 가지: 값이 싸다(giá rẻ) ↔ 비싸다(đắt). 또는 포장을 싸다(gói lại)." },
+  { kr:"아름답다", en:"beautiful, gorgeous", vi:"đẹp, xinh đẹp", type:"irreg",
+    note:"ㅂ-bất quy tắc: 아름답다→아름다워. 경치가 아름다워요(phong cảnh đẹp). Trang trọng hơn 예쁘다." },
+  { kr:"아프다", en:"painful, sick", vi:"đau, bệnh", type:"pure",
+    note:"머리가 아파요(đau đầu). 아프다→아파. 몸이 아프다(cơ thể bệnh). 아프지 마세요(đừng bị ốm nhé)." },
+  { kr:"안전하다", en:"safe, secure", vi:"an toàn", type:"hv",
+    note:"안전(安全) + 하다. 안전해요(an toàn). ↔ 위험하다(nguy hiểm)." },
+  { kr:"알맞다", en:"appropriate, suitable", vi:"phù hợp, thích hợp", type:"pure",
+    note:"알맞아요(phù hợp lắm). 알맞은 크기(kích thước thích hợp). Tương tự 적당하다." },
+  { kr:"얇다", en:"thin", vi:"mỏng", type:"pure",
+    note:"종이가 얇아요(giấy mỏng). 얇은 옷(quần áo mỏng). ↔ 두껍다(dày)." },
+  { kr:"어둡다", en:"dark", vi:"tối, tối tăm", type:"irreg",
+    note:"ㅂ-bất quy tắc: 어둡다→어두워. 방이 어두워요(phòng tối). ↔ 밝다(sáng)." },
+  { kr:"어떻다", en:"how, what kind", vi:"như thế nào (tính từ)", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 어떻다→어때. 어때요?(thế nào?). 이렇다, 그렇다, 저렇다 cùng nhóm." },
+  { kr:"어렵다", en:"difficult, hard", vi:"khó, khó khăn", type:"irreg",
+    note:"ㅂ-bất quy tắc: 어렵다→어려워. 한국어가 어려워요(tiếng Hàn khó). ↔ 쉽다(dễ)." },
+  { kr:"어리다", en:"young (child)", vi:"còn nhỏ, trẻ nhỏ", type:"pure",
+    note:"어린 아이(trẻ nhỏ). 어리다 dùng cho trẻ em/người trẻ. 젊다 dùng cho thanh niên/trung niên." },
+  { kr:"없다", en:"not have, not exist", vi:"không có", type:"pure",
+    note:"돈이 없어요(không có tiền). 집에 없어요(không ở nhà). ↔ 있다(có)." },
+  { kr:"예쁘다", en:"pretty, cute", vi:"xinh, đẹp", type:"pure",
+    note:"예쁘다→예뻐. 예뻐요(đẹp quá). 예쁜 꽃(hoa đẹp). Dùng cho người/vật. ↔ 못생기다(xấu)." },
+  { kr:"외롭다", en:"lonely", vi:"cô đơn, cô đơn", type:"irreg",
+    note:"ㅂ-bất quy tắc: 외롭다→외로워. 외로워요(cô đơn quá). 외로운 밤(đêm cô đơn)." },
+  { kr:"웃기다", en:"funny, amusing", vi:"buồn cười, làm ai cười", type:"pure",
+    note:"웃다의 사동. 웃기다→웃겨. 너무 웃겨요(buồn cười quá). 웃긴 이야기(câu chuyện buồn cười)." },
+  { kr:"위험하다", en:"dangerous", vi:"nguy hiểm", type:"hv",
+    note:"위험(危險) + 하다. 위험해요(nguy hiểm lắm). ↔ 안전하다(an toàn)." },
+  { kr:"유명하다", en:"famous, well-known", vi:"nổi tiếng", type:"hv",
+    note:"유명(有名) + 하다. 유명해요(nổi tiếng lắm). 세계적으로 유명하다(nổi tiếng toàn cầu)." },
+  { kr:"이렇다", en:"be like this", vi:"như thế này (tính từ)", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 이렇다→이래. 이래서요(vì vậy). 이런 사람(người như thế này)." },
+  { kr:"이상하다", en:"strange, weird", vi:"kỳ lạ, lạ lùng", type:"hv",
+    note:"이상(異常) + 하다. 이상해요(kỳ lạ quá). 이상한 소리(tiếng kỳ lạ). 이상하다 = 이상(名사)도 있음." },
+  { kr:"작다", en:"small, little", vi:"nhỏ, nhỏ bé", type:"pure",
+    note:"방이 작아요(phòng nhỏ). 작은 것(thứ nhỏ). ↔ 크다(lớn). 어리다(nhỏ tuổi) ≠ 작다(nhỏ kích thước)." },
+  { kr:"잘생기다", en:"handsome, good-looking", vi:"đẹp trai, điển trai", type:"pure",
+    note:"잘(tốt) + 생기다(có vẻ). 잘생겼어요(đẹp trai quá). 잘생긴 남자(đàn ông đẹp trai). ↔ 못생기다(xấu)." },
+  { kr:"재미없다", en:"uninteresting, boring", vi:"nhạt nhẽo, không thú vị", type:"pure",
+    note:"재미(fun) + 없다. 재미없어요(chán quá). ↔ 재미있다(thú vị)." },
+  { kr:"재미있다", en:"interesting, fun", vi:"thú vị, hay", type:"pure",
+    note:"재미(fun) + 있다. 재미있어요(thú vị quá). 재미있는 영화(phim hay). ↔ 재미없다(chán)." },
+  { kr:"젊다", en:"young (adult)", vi:"trẻ (tuổi trung niên trở xuống)", type:"pure",
+    note:"ㄹ-bất quy tắc: 젊다→젊어. 젊어요(còn trẻ). Dùng cho thanh niên/trung niên. ↔ 어리다(còn nhỏ), 늙다(già)." },
+  { kr:"조용하다", en:"quiet, silent", vi:"yên tĩnh, lặng lẽ", type:"hv",
+    note:"조용(靜容?) + 하다. 조용해요(yên tĩnh lắm). 조용히 하세요(xin giữ yên lặng). ↔ 시끄럽다(ồn)." },
+  { kr:"좁다", en:"narrow, cramped", vi:"hẹp, chật", type:"pure",
+    note:"방이 좁아요(phòng chật). 좁은 골목(ngõ hẹm). ↔ 넓다(rộng)." },
+  { kr:"좋다", en:"good, nice, like", vi:"tốt, hay", type:"pure",
+    note:"좋아요(tốt lắm). N이/가 좋다 = thích N. 날씨가 좋다(thời tiết đẹp). ↔ 나쁘다(xấu)." },
+  { kr:"중요하다", en:"important", vi:"quan trọng", type:"hv",
+    note:"중요(重要) + 하다. 중요해요(quan trọng lắm). 제일 중요한 것(điều quan trọng nhất)." },
+  { kr:"즐겁다", en:"enjoyable, pleasant", vi:"vui, thú vị", type:"irreg",
+    note:"ㅂ-bất quy tắc: 즐겁다→즐거워. 즐거워요(vui quá). 즐거운 시간(thời gian vui vẻ)." },
+  { kr:"짜다", en:"salty; create (a plan)", vi:"mặn; lập (kế hoạch)", type:"pure",
+    note:"두 가지: 음식이 짜다(đồ ăn mặn) ↔ 싱겁다(nhạt). 또는 계획을 짜다(lập kế hoạch)." },
+  { kr:"짧다", en:"short", vi:"ngắn", type:"pure",
+    note:"치마가 짧아요(váy ngắn). 시간이 짧다(thời gian ngắn). ↔ 길다(dài)." },
+  { kr:"차갑다", en:"cold (to touch)", vi:"lạnh (khi chạm)", type:"irreg",
+    note:"ㅂ-bất quy tắc: 차갑다→차가워. 손이 차가워요(tay lạnh). Khác 춥다(lạnh thời tiết)." },
+  { kr:"착하다", en:"good-natured, kind", vi:"ngoan, tốt bụng", type:"pure",
+    note:"착한 사람(người tốt bụng). 착해요(ngoan/tốt lắm). 착하게 살아요(sống lương thiện)." },
+  { kr:"춥다", en:"cold (weather)", vi:"lạnh (thời tiết)", type:"irreg",
+    note:"ㅂ-bất quy tắc: 춥다→추워. 오늘 추워요(hôm nay lạnh). ↔ 덥다(nóng). Khác 차갑다(lạnh khi chạm)." },
+  { kr:"친절하다", en:"kind, friendly", vi:"thân thiện, tử tế", type:"hv",
+    note:"친절(親切) + 하다. 친절해요(tử tế lắm). 친절한 사람(người tử tế)." },
+  { kr:"친하다", en:"close, intimate", vi:"thân thiết, gần gũi", type:"hv",
+    note:"친(親) + 하다. 친한 친구(bạn thân). 친해지다(trở nên thân thiết). 우리 친해요(chúng tôi thân nhau)." },
+  { kr:"크다", en:"big, large, tall", vi:"lớn, to", type:"irreg-other",
+    note:"ㄹ-bất quy tắc: 크다→커. 커요(lớn lắm). 키가 크다(cao). ↔ 작다(nhỏ)." },
+  { kr:"틀리다", en:"wrong, incorrect", vi:"sai, nhầm", type:"pure",
+    note:"틀렸어요(sai rồi). 답이 틀리다(câu trả lời sai). ↔ 맞다(đúng). Không dùng cho 'khác nhau' (→ 다르다)." },
+  { kr:"파랗다", en:"blue, bluish", vi:"xanh (màu trời)", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 파랗다→파래. 하늘이 파래요(trời xanh). 파란색(màu xanh dương)." },
+  { kr:"편하다", en:"comfortable, convenient", vi:"thoải mái, tiện lợi", type:"hv",
+    note:"편(便) + 하다. 편해요(thoải mái lắm). ↔ 불편하다(không thoải mái)." },
+  { kr:"피곤하다", en:"tired, exhausted", vi:"mệt mỏi", type:"hv",
+    note:"피곤(疲困) + 하다. 피곤해요(mệt quá). 많이 피곤해요(mệt nhiều lắm). 힘들다 ≈ 피곤하다." },
+  { kr:"하얗다", en:"white (vivid)", vi:"trắng (màu)", type:"irreg-other",
+    note:"ㅎ-bất quy tắc: 하얗다→하얘. 하얀 눈(tuyết trắng). 희다/흰색 = dạng khác. Nhấn mạnh màu trắng sáng." },
+  { kr:"행복하다", en:"happy, blissful", vi:"hạnh phúc", type:"hv",
+    note:"행복(幸福) + 하다. 행복해요(hạnh phúc lắm). 행복한 삶(cuộc sống hạnh phúc). ↔ 불행하다." },
+];
+
+// Extra entries that aren't strictly adjectives but in the list
+const extra = [
+  { kr:"이상", en:"more than; strange", vi:"hơn, kỳ lạ", type:"pure",
+    note:"두 가지: (1) 이상(以上) = hơn, trên mức (10개 이상 = 10 cái trở lên), (2) 이상하다의 명사형(kỳ lạ)." },
+  { kr:"최고", en:"best, highest, top", vi:"tốt nhất, xuất sắc nhất", type:"hv",
+    note:"최고(最高) = tốt nhất. 최고예요!(tuyệt nhất!). 최고 기온(nhiệt độ cao nhất)." },
+];
+
+const allVocab = [...vocab, ...extra];
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let tagHtml;
+    if (item.type === 'pure') tagHtml = `<span class="tag tag-pure">Thuần Hàn</span>`;
+    else if (item.type === 'hv') tagHtml = `<span class="tag tag-hv">Hán Việt (하다)</span>`;
+    else if (item.type === 'irreg') tagHtml = `<span class="tag tag-irreg">Bất quy tắc ㅂ</span>`;
+    else tagHtml = `<span class="tag tag-hv-irreg">Bất quy tắc khác</span>`;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${tagHtml}</td>
+      <td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${allVocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = allVocab.filter(item => {
+    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || item.note.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = allVocab.length + ' tính từ';
+renderTable(allVocab);
+</script>
+</body>
+</html>
