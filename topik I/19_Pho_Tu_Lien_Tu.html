@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Phó từ & Liên từ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f8f5;
+    --card: #ffffff;
+    --accent: #1a6a4a;
+    --text: #081e14;
+    --sub: #5a8a70;
+    --border: #c4dcd0;
+    --tag-adv: #daf0e8;
+    --tag-conj: #e8f0fa;
+    --tag-loc: #faf0e0;
+    --tag-hv: #f0eafa;
+    --highlight: #ecfaf4;
+    --row-alt: #f6fdf9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f2f8f5;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '부사';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #7aaa90; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  /* Legend */
+  .legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; align-items: center; }
+  .legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .dot { width: 10px; height: 10px; border-radius: 2px; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f2f8f5; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 140px; }
+  th:nth-child(3), td:nth-child(3) { width: 200px; }
+  th:nth-child(4), td:nth-child(4) { width: 210px; }
+  th:nth-child(5), td:nth-child(5) { width: 130px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; }
+  .tag-adv { background: var(--tag-adv); color: #0a4a2a; }
+  .tag-conj { background: var(--tag-conj); color: #0a2a60; }
+  .tag-loc { background: var(--tag-loc); color: #6a3a00; }
+  .tag-hv { background: var(--tag-hv); color: #4a0a7a; }
+  .tag-degree { background: #fce8e8; color: #7a0a0a; }
+  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>부사 & 접속사 — Phó từ & Liên từ</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Phó từ · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="adv">Phó từ</button>
+  <button class="filter-btn" data-filter="conj">Liên từ</button>
+  <button class="filter-btn" data-filter="degree">Mức độ</button>
+  <button class="filter-btn" data-filter="loc">Địa điểm</button>
+  <div class="legend">
+    <span><span class="dot" style="background:#daf0e8;border:1px solid #5a8a70"></span>Phó từ</span>
+    <span><span class="dot" style="background:#e8f0fa;border:1px solid #5a70aa"></span>Liên từ</span>
+    <span><span class="dot" style="background:#fce8e8;border:1px solid #aa5a5a"></span>Mức độ</span>
+    <span><span class="dot" style="background:#faf0e0;border:1px solid #aa7a30"></span>Địa điểm</span>
+  </div>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Từ</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Phân loại</th><th>Ghi chú & Cách dùng</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Phó từ & Liên từ TOPIK I & II</div>
+
+<script>
+// type: 'adv'=Phó từ, 'conj'=Liên từ/Kết từ, 'degree'=Phó từ mức độ, 'loc'=Địa điểm/Chỉ nơi chốn
+const vocab = [
+  { kr:"가끔", en:"sometimes, occasionally", vi:"thỉnh thoảng", type:"adv",
+    note:"가끔 만나요(thỉnh thoảng gặp nhau). 자주 ↔ 가끔(thỉnh thoảng) ↔ 항상(luôn luôn)." },
+  { kr:"가운데", en:"in the middle, center", vi:"ở giữa", type:"loc",
+    note:"테이블 가운데(ở giữa bàn). 셋 중에서 가운데(ở giữa trong ba người). 가운데 앉다(ngồi ở giữa)." },
+  { kr:"가장", en:"most, the most", vi:"nhất, nhiều nhất", type:"degree",
+    note:"제일과 동의어. 가장 좋아요(tốt nhất). 가장 중요한 것(điều quan trọng nhất). 제일 = 가장." },
+  { kr:"각", en:"each, every", vi:"mỗi, từng", type:"adv",
+    note:"각(各, mỗi). 각 나라(mỗi quốc gia). 각자(mỗi người tự mình). 각각(từng cái một)." },
+  { kr:"간단히", en:"simply, briefly", vi:"một cách đơn giản", type:"adv",
+    note:"간단하다 → 간단히(부사). 간단히 설명해 주세요(giải thích đơn giản cho tôi nhé)." },
+  { kr:"갑자기", en:"suddenly, all of a sudden", vi:"đột ngột, bất ngờ", type:"adv",
+    note:"갑자기 비가 왔어요(đột nhiên trời mưa). 갑자기 생각났어요(bỗng nhiên nhớ ra rồi)." },
+  { kr:"같이", en:"together, with", vi:"cùng nhau", type:"adv",
+    note:"함께와 유사. 같이 가요(cùng đi nào). 친구와 같이(cùng với bạn). 같이 먹어요(ăn cùng nhau)." },
+  { kr:"거기", en:"there (near listener)", vi:"ở đó", type:"loc",
+    note:"지시 부사. 여기(đây)-거기(đó)-저기(kia). 거기 있어요(ở đó). 거기서 기다려요(chờ ở đó)." },
+  { kr:"거의", en:"almost, nearly", vi:"gần như, hầu như", type:"adv",
+    note:"거의 다 했어요(gần xong rồi). 거의 없어요(gần như không có). 거의 매일(gần như mỗi ngày)." },
+  { kr:"계속", en:"continuously, keep on", vi:"tiếp tục", type:"adv",
+    note:"계속(繼續). 계속 공부해요(tiếp tục học). 계속 비가 와요(mưa liên tục). 계속하다(동사도 됨)." },
+  { kr:"곧", en:"soon, shortly", vi:"sắp, ngay bây giờ", type:"adv",
+    note:"곧 올게요(tôi sẽ đến ngay). 곧 시작해요(sắp bắt đầu rồi). 곧 = 빨리 아님, '近日' 의미." },
+  { kr:"그냥", en:"just, as it is, without doing anything", vi:"cứ thế, vậy thôi", type:"adv",
+    note:"그냥 해요(cứ làm thôi). 그냥 있어요(cứ ngồi đó thôi). 그냥 가요(cứ đi thôi, không làm gì cả)." },
+  { kr:"그래서", en:"so, therefore, because of that", vi:"vì vậy, do đó", type:"conj",
+    note:"원인→결과. 비가 왔어요. 그래서 못 갔어요(trời mưa. Vì vậy không đi được). 매우 자주 쓰임." },
+  { kr:"그러나", en:"but, however", vi:"nhưng, tuy nhiên", type:"conj",
+    note:"문어체(văn viết). 노력했다. 그러나 실패했다(đã cố gắng. Tuy nhiên thất bại). 하지만보다 격식." },
+  { kr:"그러니까", en:"so, that's why, therefore", vi:"vì thế, bởi vậy", type:"conj",
+    note:"설명/결론. 늦었어요. 그러니까 빨리 해요(muộn rồi. Vì vậy làm nhanh lên). = '그래서' 구어체." },
+  { kr:"그러면", en:"then, if so, in that case", vi:"thì, trong trường hợp đó", type:"conj",
+    note:"그럼의 긴 형태. 그러면 내일 봐요(thì ngày mai gặp nhé). 조건에 대한 결과 제시." },
+  { kr:"그런", en:"such, that kind of", vi:"như vậy, như thế", type:"adv",
+    note:"그런 사람(người như vậy). 그런 말 하지 마세요(đừng nói những lời như vậy). 그렇다의 관형형." },
+  { kr:"그런데", en:"but, however, by the way", vi:"nhưng mà, thế mà", type:"conj",
+    note:"화제 전환 또는 역접. 좋아요. 그런데 비싸요(tốt đấy. Nhưng mà đắt). 대화 중 매우 자주 쓰임." },
+  { kr:"그럼", en:"then, well then", vi:"thì, vậy thì", type:"conj",
+    note:"그러면의 구어체. 그럼 내일 봐요(vậy thì ngày mai gặp nhé). 그럼!(Vậy thì!/Đương nhiên!)." },
+  { kr:"그렇게", en:"like that, that way", vi:"như vậy, như thế", type:"adv",
+    note:"이렇게-그렇게-저렇게. 그렇게 하세요(làm như thế đi). 그렇게 생각해요(tôi nghĩ như vậy)." },
+  { kr:"그렇지만", en:"but, nevertheless", vi:"nhưng mà, dù vậy", type:"conj",
+    note:"하지만, 그러나와 유사. 좋아요. 그렇지만 못 가요(tốt lắm. Nhưng mà không thể đi được)." },
+  { kr:"그리고", en:"and, and then", vi:"và, và rồi", type:"conj",
+    note:"나열 또는 순서. 사과와 바나나. 그리고 포도(táo và chuối. Và nho nữa). 매우 기본적인 접속사." },
+  { kr:"그만", en:"stop, that's enough", vi:"thôi, dừng lại", type:"adv",
+    note:"그만해요(thôi đi, dừng lại). 그만 먹어요(ăn vừa thôi). 그만 두다(bỏ, thôi làm)." },
+  { kr:"그중", en:"among them, of those", vi:"trong số đó", type:"adv",
+    note:"그(那) + 중(中). 여러 것 중에서. 그중에서 제일 좋아요(trong số đó tốt nhất). 그중 하나(một trong số đó)." },
+  { kr:"기타", en:"other, etc.", vi:"khác, ngoài ra", type:"adv",
+    note:"기타(其他). 기타 등등(v.v., và những thứ khác). 기타 사항(các vấn đề khác)." },
+  { kr:"깜짝", en:"startled, suddenly surprised", vi:"giật mình, bất ngờ", type:"adv",
+    note:"깜짝 놀랐어요(tôi giật mình bất ngờ). 깜짝 파티(tiệc bất ngờ). 깜짝하다 = bị giật mình." },
+  { kr:"꼭", en:"must, absolutely, exactly", vi:"nhất định, chắc chắn", type:"adv",
+    note:"꼭 와야 해요(nhất định phải đến). 꼭 필요해요(chắc chắn cần thiết). 반드시와 유사." },
+  { kr:"너무", en:"too, very (informal)", vi:"quá, rất", type:"degree",
+    note:"구어체에서 '매우'로도 사용. 너무 좋아요(tốt quá). 너무 비싸요(đắt quá). 공식: 너무 + 형용사/동사." },
+  { kr:"늘", en:"always, all the time", vi:"luôn luôn, hằng ngày", type:"adv",
+    note:"항상과 유사. 늘 행복하세요(luôn luôn hạnh phúc nhé). 늘 그런 건 아니에요(không phải lúc nào cũng vậy)." },
+  { kr:"다", en:"all, entirely, completely", vi:"tất cả, hết", type:"adv",
+    note:"다 먹었어요(ăn hết rồi). 다 알아요(biết hết rồi). 모두와 유사하나 더 짧고 일상적." },
+  { kr:"다시", en:"again, once more", vi:"lại, một lần nữa", type:"adv",
+    note:"다시 해 주세요(làm lại giúp tôi). 다시 한번(thêm một lần nữa). 또와 유사하나 '반복' 강조." },
+  { kr:"대부분", en:"mostly, for the most part", vi:"hầu hết, phần lớn", type:"adv",
+    note:"대부분(大部分). 대부분의 학생(hầu hết học sinh). 대부분 시간을 집에서 보내요." },
+  { kr:"더", en:"more, further", vi:"hơn, nhiều hơn", type:"degree",
+    note:"비교급. 더 빠르게(nhanh hơn). 조금 더(thêm một chút). 더 이상(không thêm nữa)." },
+  { kr:"덕분", en:"thanks to, owing to", vi:"nhờ, nhờ vào", type:"adv",
+    note:"덕분에(nhờ vào...). 선생님 덕분에 합격했어요(nhờ thầy mà tôi đỗ). 긍정적 원인에 사용." },
+  { kr:"따로", en:"separately, apart", vi:"riêng, tách biệt", type:"adv",
+    note:"따로 살다(sống riêng). 따로 계산해요(tính tiền riêng). 따로따로(mỗi người riêng)." },
+  { kr:"때문", en:"because of, due to", vi:"vì, bởi vì", type:"conj",
+    note:"N 때문에(vì N). 비 때문에 못 갔어요(vì mưa không đi được). V기 때문에(vì V)." },
+  { kr:"또", en:"also, again, additionally", vi:"lại, cũng, thêm nữa", type:"adv",
+    note:"또 왔어요(lại đến rồi). 또는(hoặc là). 또 다른(một cái khác). 그리고와 유사하나 반복/추가 강조." },
+  { kr:"또는", en:"or, alternatively", vi:"hoặc, hay là", type:"conj",
+    note:"선택. 커피 또는 차(cà phê hoặc trà). 이것 또는 저것(cái này hoặc cái kia). 아니면과 유사." },
+  { kr:"똑바로", en:"straight, upright, properly", vi:"thẳng, ngay thẳng", type:"adv",
+    note:"똑바로 서세요(đứng thẳng lên). 똑바로 봐요(nhìn thẳng vào mặt đi). 바르게와 유사." },
+  { kr:"만일", en:"if, in case", vi:"nếu như, giả sử", type:"conj",
+    note:"만일(萬一). 만일 비가 오면(nếu như trời mưa). 만약과 유사. 문어체에서 더 자주 사용." },
+  { kr:"많이", en:"a lot, very much", vi:"rất nhiều", type:"degree",
+    note:"많다 → 많이. 많이 먹어요(ăn nhiều vào). 많이 좋아해요(thích nhiều lắm). 조금과 반대." },
+  { kr:"매우", en:"very, extremely", vi:"rất, vô cùng", type:"degree",
+    note:"문어체·격식체. 매우 좋아요(rất tốt). 아주, 너무, 무척과 유사. 더 공식적인 표현." },
+  { kr:"먼저", en:"first, beforehand", vi:"trước tiên, đầu tiên", type:"adv",
+    note:"먼저 해요(làm trước đi). 나 먼저(tôi trước). 먼저 연락 주세요(liên lạc trước nhé)." },
+  { kr:"모두", en:"all, everyone, everything", vi:"tất cả mọi người, hết", type:"adv",
+    note:"모두 왔어요(tất cả đã đến). 모두 다(tất cả hết). 다와 비슷하나 '전원/전체' 강조." },
+  { kr:"무척", en:"very much, quite", vi:"rất, vô cùng", type:"degree",
+    note:"매우와 유사. 무척 좋아요(rất thích). 무척 힘들어요(khó khăn lắm). 구어체에서 자주 쓰임." },
+  { kr:"물론", en:"of course, certainly", vi:"tất nhiên, dĩ nhiên", type:"adv",
+    note:"물론(勿論). 물론이죠(tất nhiên rồi). 물론 좋아요(tất nhiên là tốt). 당연히와 유사." },
+  { kr:"미리", en:"in advance, beforehand", vi:"trước, chuẩn bị trước", type:"adv",
+    note:"미리 알려 주세요(thông báo trước nhé). 미리 예약해요(đặt chỗ trước). 사전에와 유사." },
+  { kr:"바로", en:"right away, exactly, just", vi:"ngay, ngay lập tức", type:"adv",
+    note:"바로 해요(làm ngay đi). 바로 여기(đúng ngay đây). 바로 그거예요(đúng cái đó)." },
+  { kr:"벌써", en:"already, by now", vi:"rồi, đã rồi", type:"adv",
+    note:"벌써 왔어요(đã đến rồi). 벌써 10시예요(đã 10 giờ rồi). 이미와 유사. 놀람의 뉘앙스 있음." },
+  { kr:"별로", en:"not particularly, not really", vi:"không mấy, không lắm", type:"degree",
+    note:"주로 부정문에. 별로 안 좋아요(không thích lắm). 별로예요(không được lắm). 별로 없어요." },
+  { kr:"보통", en:"usually, normally, generally", vi:"thường, bình thường", type:"adv",
+    note:"보통(普通). 보통 7시에 일어나요(thường dậy lúc 7 giờ). 보통 사람(người bình thường)." },
+  { kr:"빨리", en:"quickly, hurry", vi:"nhanh, nhanh lên", type:"adv",
+    note:"빠르다 → 빨리. 빨리 오세요(đến nhanh lên). 빨리빨리(문화: phong cách 'Ppalli-Ppalli' của Hàn)." },
+  { kr:"뿐", en:"only, just, nothing but", vi:"chỉ, chỉ thôi", type:"adv",
+    note:"N뿐이에요(chỉ có N thôi). 그것뿐이에요(chỉ thế thôi). N뿐만 아니라(không chỉ N mà còn...)." },
+  { kr:"새로", en:"newly, anew", vi:"mới, vừa mới", type:"adv",
+    note:"새롭다 → 새로. 새로 샀어요(mới mua). 새로 시작해요(bắt đầu mới). 새로운(định ngữ)." },
+  { kr:"서로", en:"each other, mutually", vi:"nhau, lẫn nhau", type:"adv",
+    note:"서로 도와요(giúp đỡ nhau). 서로 사랑해요(yêu nhau). 서로서로(cùng nhau, lẫn nhau)." },
+  { kr:"씩", en:"each, at a time", vi:"mỗi, từng ... một", type:"adv",
+    note:"N씩. 한 개씩(mỗi lần một cái). 하루에 한 번씩(mỗi ngày một lần). 조금씩(từng chút một)." },
+  { kr:"아마", en:"maybe, perhaps, probably", vi:"có lẽ, có thể", type:"adv",
+    note:"아마 올 거예요(có lẽ sẽ đến). 아마도(có lẽ là). 확실하지 않을 때 사용." },
+  { kr:"아주", en:"very, quite, completely", vi:"rất, hoàn toàn", type:"degree",
+    note:"아주 좋아요(rất tốt). 매우와 유사. 구어체에서 더 자주 쓰임. 아주 조금(rất ít)." },
+  { kr:"아직", en:"yet, still, not yet", vi:"vẫn còn, chưa", type:"adv",
+    note:"아직 못 했어요(chưa làm được). 아직 여기 있어요(vẫn còn ở đây). 아직도(vẫn còn đến bây giờ)." },
+  { kr:"약간", en:"slightly, a little bit", vi:"một chút, một ít", type:"degree",
+    note:"약간(若干). 약간 달아요(hơi ngọt). 조금과 유사하나 약간이 더 소량 강조." },
+  { kr:"어서", en:"please hurry, quickly", vi:"mau lên, nhanh lên", type:"adv",
+    note:"어서 오세요(chào mừng — 'mau vào đây'). 어서 해요(làm mau lên). 어서 와(nhanh vào đây)." },
+  { kr:"언제나", en:"always, at any time", vi:"luôn luôn, bất kỳ lúc nào", type:"adv",
+    note:"항상과 유사하나 '어느 때나' 강조. 언제나 행복해요(lúc nào cũng hạnh phúc). 언제나처럼(như mọi khi)." },
+  { kr:"없이", en:"without", vi:"không có, thiếu", type:"adv",
+    note:"N 없이. 돈 없이 살다(sống không có tiền). 이유 없이(không có lý do). 없다의 부사형." },
+  { kr:"여기", en:"here, this place", vi:"ở đây, đây", type:"loc",
+    note:"지시 부사. 여기-거기-저기. 여기 앉으세요(ngồi đây đi). 여기가 어디예요?(đây là đâu?)." },
+  { kr:"여기저기", en:"here and there, everywhere", vi:"khắp nơi, chỗ này chỗ kia", type:"loc",
+    note:"여기 + 저기. 여기저기 돌아다녀요(đi khắp nơi). 여기저기 찾았어요(tìm khắp nơi rồi)." },
+  { kr:"여러", en:"various, several, many kinds", vi:"nhiều, nhiều loại", type:"adv",
+    note:"여러 나라(nhiều nước). 여러 가지(nhiều loại). 여러 번(nhiều lần). 명사 앞에 붙어 사용." },
+  { kr:"여러가지", en:"various kinds, many kinds", vi:"nhiều thứ, đủ loại", type:"adv",
+    note:"여러 + 가지. 여러 가지 이유(nhiều lý do khác nhau). 여러 가지로(theo nhiều cách)." },
+  { kr:"열심히", en:"hard, diligently, enthusiastically", vi:"chăm chỉ, hăng hái", type:"adv",
+    note:"열심히 공부해요(học chăm chỉ). 열심히 일해요(làm việc chăm chỉ). 최선을 다해서와 유사." },
+  { kr:"오래", en:"for a long time", vi:"lâu, lâu dài", type:"adv",
+    note:"오래 기다렸어요(đã chờ lâu). 오래전(lâu rồi). 오래오래 행복하세요(mãi mãi hạnh phúc)." },
+  { kr:"왜냐하면", en:"because (explaining reason)", vi:"bởi vì, vì", type:"conj",
+    note:"이유 설명. 좋아해요. 왜냐하면 재미있기 때문이에요(thích vì thú vị). 왜냐면으로도 씀." },
+  { kr:"우선", en:"first of all, to begin with", vi:"trước tiên", type:"adv",
+    note:"우선(于先). 우선 앉으세요(trước tiên hãy ngồi đi). 먼저와 유사. 우선 이것부터 해요." },
+  { kr:"이렇게", en:"like this, in this way", vi:"như thế này", type:"adv",
+    note:"이렇게-그렇게-저렇게. 이렇게 하세요(làm như thế này đi). 이렇게 예쁘다니(đẹp đến vậy sao)." },
+  { kr:"일찍", en:"early", vi:"sớm, dậy sớm", type:"adv",
+    note:"일찍 일어나요(dậy sớm). 일찍 왔어요(đến sớm rồi). ↔ 늦게(muộn)." },
+  { kr:"자주", en:"often, frequently", vi:"thường xuyên, hay", type:"adv",
+    note:"자주 만나요(hay gặp nhau). 자주 먹어요(ăn thường xuyên). 가끔 ↔ 자주 ↔ 항상." },
+  { kr:"잘", en:"well, nicely, skillfully", vi:"tốt, giỏi, khéo", type:"adv",
+    note:"잘 해요(làm tốt). 잘 자요(ngủ ngon). 잘 모르겠어요(không biết rõ lắm). 잘 먹겠습니다(xin phép ăn)." },
+  { kr:"저기", en:"over there; excuse me", vi:"ở đó (xa); Này (gọi)", type:"loc",
+    note:"지시 부사. 저기 보여요?(thấy chỗ đó không?). 저기요!(Này! — gọi nhân viên). 저기저기(chỗ kia kia)." },
+  { kr:"저렇게", en:"like that (over there), in that way", vi:"như thế kia", type:"adv",
+    note:"저렇게 하세요(làm như thế kia đi). 저렇게 예뻐요(đẹp như vậy kia). 이렇게/그렇게와 대비." },
+  { kr:"전", en:"all; before, previously", vi:"tất cả; trước đây", type:"adv",
+    note:"두 가지: 전부(全部) = tất cả, 이전(以前) = trước đây. 전에(trước đây). 식사 전(trước bữa ăn)." },
+  { kr:"전혀", en:"not at all, completely not", vi:"hoàn toàn không", type:"degree",
+    note:"부정문에만 사용. 전혀 안 해요(hoàn toàn không làm). 전혀 몰랐어요(hoàn toàn không biết)." },
+  { kr:"절대", en:"absolutely, never (negative)", vi:"tuyệt đối, nhất định không", type:"degree",
+    note:"절대(絶對). 절대 안 해요(tuyệt đối không làm). 절대로(tuyệt đối không). 주로 부정문에." },
+  { kr:"정말", en:"really, truly", vi:"thật sự, thật ra", type:"degree",
+    note:"정말 좋아요(thật sự tốt). 정말이에요?(thật không?). 진짜와 유사. 구어체에서 매우 자주 쓰임." },
+  { kr:"제일", en:"most, number one, best", vi:"nhất, số một", type:"degree",
+    note:"가장과 동의어. 제일 좋아요(tốt nhất). 제일 먼저(đầu tiên nhất). 세상에서 제일(nhất trên đời)." },
+  { kr:"조금", en:"a little, a bit", vi:"một chút, một ít", type:"degree",
+    note:"조금 주세요(cho tôi một chút). 조금 기다려요(chờ một chút). 좀의 정식 형태. 많이 ↔ 조금." },
+  { kr:"조용히", en:"quietly, silently", vi:"yên lặng, nhẹ nhàng", type:"adv",
+    note:"조용하다 → 조용히. 조용히 하세요(xin giữ yên lặng). 조용히 앉아요(ngồi yên lặng)." },
+  { kr:"좀", en:"a little, please (softener)", vi:"một chút, làm ơn", type:"degree",
+    note:"조금의 구어체. 좀 도와주세요(giúp tôi một chút). 요청을 부드럽게 할 때 사용. 좀 더 = thêm một chút." },
+  { kr:"좀더", en:"a little more", vi:"thêm một chút", type:"degree",
+    note:"좀(một chút) + 더(hơn). 좀 더 크게 해 주세요(to hơn một chút). 좀 더 기다려요(chờ thêm chút nữa)." },
+  { kr:"주로", en:"mainly, primarily", vi:"chủ yếu, chủ yếu là", type:"adv",
+    note:"주로(主로). 주로 집에 있어요(chủ yếu ở nhà). 주로 한국 음식을 먹어요(chủ yếu ăn đồ Hàn)." },
+  { kr:"중", en:"among; during, in the middle of", vi:"giữa, trong lúc", type:"adv",
+    note:"중(中). 식사 중(đang ăn). 셋 중에서(trong số ba). 지금 통화 중(đang nghe điện thoại)." },
+  { kr:"직접", en:"directly, in person", vi:"trực tiếp", type:"adv",
+    note:"직접(直接). 직접 만나요(gặp trực tiếp). 직접 해요(tự làm lấy). ↔ 간접적으로(gián tiếp)." },
+  { kr:"쯤", en:"about, approximately", vi:"khoảng, vào khoảng", type:"adv",
+    note:"N쯤. 10시쯤 와요(đến khoảng 10 giờ). 얼마쯤(khoảng bao nhiêu). 정도와 유사." },
+  { kr:"참", en:"really, truly (emphatic)", vi:"thực sự, rất", type:"degree",
+    note:"참 좋아요(thật sự tốt). 참 이상해요(thật kỳ lạ). 구어체에서 감탄 표현으로 자주 사용." },
+  { kr:"천천히", en:"slowly, take your time", vi:"từ từ, chậm thôi", type:"adv",
+    note:"천천히 가세요(đi từ từ thôi). 천천히 말해 주세요(nói chậm thôi). ↔ 빨리(nhanh)." },
+  { kr:"특별히", en:"especially, particularly", vi:"đặc biệt, đặc biệt là", type:"adv",
+    note:"특별하다 → 특별히. 특별히 좋아해요(đặc biệt thích). 오늘 특별히 만들었어요(hôm nay đặc biệt làm)." },
+  { kr:"특히", en:"especially, in particular", vi:"đặc biệt là, nhất là", type:"adv",
+    note:"특히(特히). 특히 한국어를 좋아해요(đặc biệt thích tiếng Hàn). 특별히와 유사하나 더 짧고 자주 쓰임." },
+  { kr:"푹", en:"deeply, fully (sleep/rest)", vi:"sâu, ngủ say", type:"adv",
+    note:"푹 자다(ngủ say). 푹 쉬어요(nghỉ ngơi đầy đủ). 감기에 걸렸을 때 푹 쉬어요(bị cảm nên nghỉ ngơi đầy đủ)." },
+  { kr:"하지만", en:"but, however, yet", vi:"nhưng, tuy nhiên", type:"conj",
+    note:"구어체 역접. 좋아요. 하지만 비싸요(tốt đấy. Nhưng đắt). 그러나(문어체) ↔ 하지만(구어체)." },
+  { kr:"함께", en:"together, along with", vi:"cùng nhau", type:"adv",
+    note:"같이와 유사하나 함께가 좀 더 따뜻한 뉘앙스. 함께 가요(cùng đi nào). 함께라서 좋아요(vui vì có nhau)." },
+  { kr:"항상", en:"always, at all times", vi:"luôn luôn", type:"adv",
+    note:"항상(恒常). 항상 감사해요(luôn luôn biết ơn). 항상 행복하세요(luôn luôn hạnh phúc). 늘, 언제나 ≈ 항상." },
+  { kr:"혼자", en:"alone, by oneself", vi:"một mình, cô đơn", type:"adv",
+    note:"혼자 살아요(sống một mình). 혼자 가요(đi một mình). 혼자서(tự một mình làm). ↔ 같이/함께(cùng nhau)." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let tagHtml;
+    if (item.type === 'adv') tagHtml = `<span class="tag tag-adv">Phó từ</span>`;
+    else if (item.type === 'conj') tagHtml = `<span class="tag tag-conj">Liên từ</span>`;
+    else if (item.type === 'degree') tagHtml = `<span class="tag tag-degree">Mức độ</span>`;
+    else tagHtml = `<span class="tag tag-loc">Địa điểm</span>`;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${tagHtml}</td>
+      <td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || item.note.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
