@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Nhà ở & Địa điểm (Nâng cao)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f2f8;
+    --card: #ffffff;
+    --accent: #5a2a7a;
+    --text: #1a0830;
+    --sub: #7a5a9a;
+    --border: #dccce8;
+    --tag-room: #eee0fa;
+    --tag-item: #e0f0e8;
+    --tag-place: #fdf0d8;
+    --tag-shop: #fce8f0;
+    --tag-misc: #e8f0fa;
+    --highlight: #f5eeff;
+    --row-alt: #faf7fd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .header { background: var(--text); color: #f5f2f8; padding: 36px 40px 28px; position: relative; overflow: hidden; }
+  .header::before { content: '집'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-family: 'Noto Serif KR', serif; font-size: 140px; color: rgba(255,255,255,0.05); font-weight: 600; letter-spacing: -4px; user-select: none; }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #9a8aba; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+  .controls { padding: 20px 40px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput { width: 100%; padding: 10px 12px 10px 38px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s; }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+  .filter-btn { padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f5f2f8; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 145px; }
+  th:nth-child(3), td:nth-child(3) { width: 185px; }
+  th:nth-child(4), td:nth-child(4) { width: 210px; }
+  th:nth-child(5), td:nth-child(5) { width: 120px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
+  .tag-room  { background: var(--tag-room);  color: #3a0a6a; }
+  .tag-item  { background: var(--tag-item);  color: #0a4a20; }
+  .tag-place { background: var(--tag-place); color: #5a3000; }
+  .tag-shop  { background: var(--tag-shop);  color: #7a0a40; }
+  .tag-misc  { background: var(--tag-misc);  color: #0a2a60; }
+  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+  @media (max-width: 768px) { .header { padding: 24px 20px; } .header::before { display: none; } .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; } th, td { padding: 10px 12px; } .korean-word { font-size: 15px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>집 & 공간 (심화) — Nhà ở & Địa điểm (Nâng cao)</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Nhà ở nâng cao · Chủ đề TOPIK II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="room">Phòng &amp; Nhà</button>
+  <button class="filter-btn" data-filter="item">Đồ vật trong nhà</button>
+  <button class="filter-btn" data-filter="place">Địa điểm công cộng</button>
+  <button class="filter-btn" data-filter="shop">Cửa hàng</button>
+  <button class="filter-btn" data-filter="misc">Tổng quát</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Nhà ở &amp; Địa điểm (Nâng cao)</div>
+<script>
+const vocab = [
+  { kr:"가구점", en:"furniture store", vi:"cửa hàng đồ nội thất", type:"shop", note:"가구(家具,đồ nội thất)+점(店). 가구점에서 소파를 사다(mua sofa ở cửa hàng nội thất)." },
+  { kr:"가습기", en:"humidifier", vi:"máy tạo ẩm", type:"item", note:"가습(加濕)+기(機). 건조한 겨울에 사용(dùng vào mùa đông khô hanh). ↔ 제습기(máy hút ẩm)." },
+  { kr:"가전제품", en:"home appliances, electronics", vi:"đồ gia dụng điện tử", type:"item", note:"가전(家電)+제품. TV, 냉장고, 세탁기 등. 가전제품을 사다(mua đồ điện gia dụng)." },
+  { kr:"간판", en:"signboard, store sign", vi:"biển hiệu, bảng hiệu", type:"place", note:"간판(看板). 가게 간판(biển hiệu cửa hàng). 간판을 달다(treo biển hiệu). 거리의 간판들." },
+  { kr:"객실", en:"guest room, hotel room", vi:"phòng khách, phòng khách sạn", type:"room", note:"객실(客室). 호텔 객실(phòng khách sạn). 객실을 예약하다(đặt phòng). 객실 청소(dọn phòng)." },
+  { kr:"걸레", en:"rag, mop cloth", vi:"giẻ lau, cây lau", type:"item", note:"걸레로 닦다(lau bằng giẻ). 걸레질하다(lau nhà). 행주(khăn lau bàn) vs 걸레(giẻ lau sàn)." },
+  { kr:"결혼식장", en:"wedding hall", vi:"hội trường tiệc cưới", type:"place", note:"결혼식(đám cưới)+장(場). 결혼식장을 예약하다(đặt hội trường cưới). 예식장과 유사." },
+  { kr:"계산대", en:"cashier, checkout counter", vi:"quầy thu ngân", type:"shop", note:"계산(tính tiền)+대(台). 계산대에서 계산하다(thanh toán ở quầy). 셀프 계산대(tự thanh toán)." },
+  { kr:"고무줄", en:"rubber band, elastic band", vi:"dây chun", type:"item", note:"고무(cao su)+줄(dây). 고무줄로 묶다(buộc bằng dây chun). 머리 고무줄(dây chun buộc tóc)." },
+  { kr:"고층", en:"high floor, high-rise", vi:"tầng cao, cao tầng", type:"room", note:"고층(高層). 고층 아파트(chung cư cao tầng). 고층 건물(tòa nhà cao tầng). ↔ 저층(tầng thấp)." },
+  { kr:"공공장소", en:"public place", vi:"nơi công cộng", type:"place", note:"공공(公共)+장소(場所). 공공장소에서 지켜야 할 예절(lễ phép ở nơi công cộng). 금연 공공장소." },
+  { kr:"관리실", en:"management office, security room", vi:"phòng quản lý", type:"place", note:"관리(管理)+실(室). 아파트 관리실(phòng quản lý chung cư). 관리실에 신고하다(báo cáo lên BQL)." },
+  { kr:"광장", en:"square, plaza", vi:"quảng trường", type:"place", note:"광장(廣場). 서울 광장(Quảng trường Seoul). 광장에 모이다(tụ tập ở quảng trường)." },
+  { kr:"교외", en:"suburbs, outskirts", vi:"ngoại ô", type:"place", note:"교외(郊外). 교외 지역(khu vực ngoại ô). 교외에 살다(sống ở ngoại ô). 도심 ↔ 교외." },
+  { kr:"기념관", en:"memorial hall, museum", vi:"nhà kỷ niệm, đài kỷ niệm", type:"place", note:"기념(記念)+관(館). 독립 기념관(nhà tưởng niệm độc lập). 기념관을 방문하다(tham quan đài kỷ niệm)." },
+  { kr:"기둥", en:"pillar, column", vi:"cột trụ", type:"room", note:"기둥(柱). 건물의 기둥(cột trụ của tòa nhà). 기둥을 세우다(dựng cột). 기둥이 튼튼하다(cột vững chắc)." },
+  { kr:"길거리", en:"street, roadside", vi:"đường phố, vỉa hè", type:"place", note:"길(đường)+거리(phố). 길거리 음식(đồ ăn đường phố). 길거리에서 공연하다(biểu diễn ngoài phố)." },
+  { kr:"꽃병", en:"flower vase", vi:"bình hoa", type:"item", note:"꽃(hoa)+병(瓶,bình). 꽃병에 꽃을 꽂다(cắm hoa vào bình). 탁자 위의 꽃병(bình hoa trên bàn)." },
+  { kr:"끈", en:"string, cord, strap", vi:"sợi dây, dây thừng", type:"item", note:"끈으로 묶다(buộc bằng dây). 신발 끈(dây giày). 끈을 자르다(cắt dây)." },
+  { kr:"난로", en:"stove, fireplace, heater", vi:"lò sưởi", type:"item", note:"난로(煖爐). 난로를 피우다(đốt lò). 연탄 난로(lò than). 겨울 필수품. ↔ 선풍기(quạt)." },
+  { kr:"난방", en:"heating system", vi:"hệ thống sưởi", type:"room", note:"난방(暖房). 난방을 켜다/끄다(bật/tắt sưởi). 난방비(phí sưởi ấm). 바닥 난방(온돌, sàn nhiệt)." },
+  { kr:"내부", en:"inside, interior", vi:"bên trong, nội bộ", type:"room", note:"내부(內部). 건물 내부(bên trong tòa nhà). 내부 공사(xây dựng bên trong). ↔ 외부(bên ngoài)." },
+  { kr:"놀이터", en:"playground", vi:"sân chơi", type:"place", note:"놀이(chơi)+터(地). 놀이터에서 놀다(chơi ở sân). 아파트 놀이터(sân chơi chung cư). 어린이 놀이터." },
+  { kr:"담", en:"wall, fence", vi:"tường, hàng rào", type:"room", note:"담을 쌓다(xây tường). 담을 넘다(leo tường). 담벼락(tường bao). 돌담(tường đá)." },
+  { kr:"대문", en:"main gate, front door", vi:"cổng chính, cửa lớn", type:"room", note:"대문(大門). 대문을 열다/닫다(mở/đóng cổng). 대문 앞(trước cổng). ↔ 뒷문(cổng sau)." },
+  { kr:"대중목욕탕", en:"public bathhouse", vi:"nhà tắm công cộng", type:"place", note:"대중(公衆)+목욕탕. 한국 문화의 일부. 목욕탕에서 때를 밀다(kỳ ghét ở nhà tắm công cộng)." },
+  { kr:"대청소", en:"big cleaning, deep clean", vi:"dọn dẹp lớn, vệ sinh toàn bộ", type:"misc", note:"대(大)+청소(掃除). 이사 전 대청소(dọn dẹp lớn trước khi chuyển nhà). 연말 대청소(dọn cuối năm)." },
+  { kr:"독방", en:"private room, solitary room", vi:"phòng riêng", type:"room", note:"독(獨,riêng)+방(房). 독방을 쓰다(ở phòng riêng). 교도소 독방(phòng biệt giam). 기숙사 독방." },
+  { kr:"동물원", en:"zoo", vi:"vườn thú", type:"place", note:"동물(動物)+원(園). 동물원에 가다(đi vườn thú). 서울 동물원(vườn thú Seoul). 동물원 입장료(phí vào cổng)." },
+  { kr:"뒷문", en:"back door, back gate", vi:"cổng sau, cửa sau", type:"room", note:"뒤(sau)+문(門). 뒷문으로 나가다(ra cửa sau). ↔ 대문/앞문(cửa trước). 비상 뒷문(cửa sau khẩn cấp)." },
+  { kr:"등불", en:"lamp, lantern light", vi:"đèn lồng, ánh đèn", type:"item", note:"등(燈)+불(lửa/ánh sáng). 등불을 켜다(thắp đèn). 거리의 등불(ánh đèn trên phố). 등롱과 유사." },
+  { kr:"램프", en:"lamp", vi:"đèn, bóng đèn", type:"item", note:"lamp에서. 램프를 켜다(bật đèn). 스탠드 램프(đèn cây). 침대 옆 램프(đèn đầu giường)." },
+  { kr:"로비", en:"lobby", vi:"sảnh (khách sạn)", type:"room", note:"lobby에서. 호텔 로비(sảnh khách sạn). 로비에서 기다리다(chờ ở sảnh). 아파트 로비(sảnh chung cư)." },
+  { kr:"마당", en:"yard, garden, courtyard", vi:"sân, vườn", type:"room", note:"마당에서 놀다(chơi ở sân). 마당이 넓다(sân rộng). 앞마당(sân trước). 한국 전통 집의 마당." },
+  { kr:"마루", en:"wooden floor, living room floor", vi:"sàn nhà", type:"room", note:"마루(木板). 마루를 닦다(lau sàn). 마루에 앉다(ngồi trên sàn). 온돌과 마루(온돌-sàn nhiệt và sàn gỗ)." },
+  { kr:"마트", en:"supermarket, mart", vi:"siêu thị", type:"shop", note:"mart에서. 마트에서 장을 보다(đi chợ siêu thị). 대형 마트(siêu thị lớn). 이마트, 롯데마트 등." },
+  { kr:"막대기", en:"stick, rod, bar", vi:"gậy, cây gậy", type:"item", note:"막대기로 두드리다(gõ bằng gậy). 나무 막대기(gậy gỗ). 막대 사탕(kẹo que-막대기 모양)." },
+  { kr:"매점", en:"kiosk, snack bar, canteen", vi:"quầy hàng, ki-ốt", type:"shop", note:"매점(賣店). 학교 매점(căng-tin trường). 매점에서 과자를 사다(mua bánh ở căng-tin)." },
+  { kr:"목욕탕", en:"bathhouse, public bath", vi:"nhà tắm, nhà tắm công cộng", type:"place", note:"목욕(沐浴)+탕(湯). 목욕탕에 가다(đi nhà tắm). 동네 목욕탕(nhà tắm khu phố). 찜질방과 유사." },
+  { kr:"바가지", en:"gourd scoop; rip-off", vi:"gáo dừa; chặt chém", type:"item", note:"두 가지: (1) 바가지(gáo múc nước), (2) 바가지를 씌우다(chặt chém khách). 관광지 바가지 조심." },
+  { kr:"바구니", en:"basket", vi:"cái rổ, giỏ", type:"item", note:"바구니에 담다(bỏ vào rổ). 빨래 바구니(rổ đựng quần áo bẩn). 장바구니(giỏ đi chợ)." },
+  { kr:"바깥", en:"outside, outdoors", vi:"bên ngoài, ngoài trời", type:"misc", note:"바깥에 나가다(ra ngoài). 바깥 날씨(thời tiết bên ngoài). ↔ 안쪽/안(bên trong). 바깥 활동(hoạt động ngoài trời)." },
+  { kr:"바늘", en:"needle, pin", vi:"kim khâu", type:"item", note:"바늘에 실을 꿰다(xâu chỉ vào kim). 바늘로 꿰매다(khâu bằng kim). 바늘과 실(kim và chỉ)." },
+  { kr:"바닥", en:"floor, ground, bottom", vi:"sàn nhà; đáy", type:"room", note:"두 가지: 방 바닥(sàn nhà), 컵의 바닥(đáy cốc). 바닥을 닦다(lau sàn). 바닥이 미끄럽다(sàn trơn)." },
+  { kr:"박스", en:"box, carton", vi:"hộp, thùng", type:"item", note:"box에서. 박스에 담다(cho vào hộp). 이삿짐 박스(thùng chuyển nhà). 박스 테이프(băng dán thùng)." },
+  { kr:"반대쪽", en:"opposite side", vi:"phía đối diện", type:"misc", note:"반대(反對)+쪽(phía). 반대쪽으로 가다(đi phía đối diện). 길 반대쪽(bên kia đường)." },
+  { kr:"베개", en:"pillow", vi:"gối (cái gối)", type:"item", note:"베개를 베다(gối đầu lên gối). 베개 커버(vỏ gối). 낮은 베개(gối thấp). 잠 잘 때 필수품." },
+  { kr:"벨", en:"bell, buzzer, doorbell", vi:"chuông", type:"item", note:"bell에서. 벨을 누르다(bấm chuông). 초인종(chuông cửa). 알람 벨(chuông báo thức)." },
+  { kr:"벼룩시장", en:"flea market", vi:"chợ đồ cũ", type:"shop", note:"벼룩(bọ chét)+시장. 중고 물품을 파는 시장. 벼룩시장에서 쇼핑하다(mua đồ cũ ở chợ bọ chét)." },
+  { kr:"벽걸이", en:"wall hanging, wall-mounted item", vi:"đồ treo tường", type:"item", note:"벽(壁,tường)+걸이(móc treo). 벽걸이 TV(TV treo tường). 벽걸이 에어컨(điều hòa treo tường)." },
+  { kr:"벽돌", en:"brick", vi:"gạch xây", type:"misc", note:"벽돌(甓). 벽돌로 집을 짓다(xây nhà bằng gạch). 벽돌담(tường gạch). 붉은 벽돌(gạch đỏ)." },
+  { kr:"변기", en:"toilet bowl", vi:"bồn cầu", type:"room", note:"변기(便器). 변기를 청소하다(vệ sinh bồn cầu). 좌변기(bồn ngồi), 양변기(bồn kiểu Tây). 변기 막힘(tắc bồn cầu)." },
+  { kr:"보관실", en:"storage room, cloakroom", vi:"phòng lưu trữ", type:"place", note:"보관(保管)+실(室). 짐 보관실(phòng gửi đồ). 보관실에 짐을 맡기다(gửi hành lý)." },
+  { kr:"복도", en:"corridor, hallway", vi:"hành lang", type:"room", note:"복도(複道). 복도를 걷다(đi trong hành lang). 학교 복도(hành lang trường). 긴 복도(hành lang dài)." },
+  { kr:"블라인드", en:"blinds, window shade", vi:"mành che, rèm blinds", type:"item", note:"blind에서. 블라인드를 내리다(hạ mành). 블라인드를 올리다(kéo mành lên). 커튼 대신 사용." },
+  { kr:"비닐", en:"vinyl, plastic bag/wrap", vi:"nylon, nhựa vinyl", type:"item", note:"vinyl에서. 비닐봉지(túi nylon). 비닐 포장(đóng gói nylon). 비닐하우스(nhà kính nông nghiệp)." },
+  { kr:"사진관", en:"photo studio, photography shop", vi:"studio chụp ảnh", type:"shop", note:"사진(寫眞)+관(館). 사진관에서 증명사진을 찍다(chụp ảnh thẻ ở studio). 결혼 사진관(studio ảnh cưới)." },
+  { kr:"산책로", en:"walking path, promenade", vi:"đường dạo bộ", type:"place", note:"산책(散策)+로(路). 한강 산책로(đường dạo bộ sông Hàn). 산책로를 걷다(đi bộ trên đường dạo)." },
+  { kr:"상가", en:"shopping district, commercial building", vi:"khu mua sắm", type:"shop", note:"상가(商街). 아파트 상가(khu mua sắm chung cư). 상가 건물(tòa nhà thương mại)." },
+  { kr:"상담실", en:"counseling room, consultation room", vi:"phòng tư vấn", type:"place", note:"상담(相談)+실(室). 학교 상담실(phòng tư vấn trường). 심리 상담실(phòng tư vấn tâm lý)." },
+  { kr:"상점", en:"store, shop", vi:"cửa hàng", type:"shop", note:"상점(商店). 상점에서 물건을 사다(mua đồ ở cửa hàng). 다양한 상점(nhiều cửa hàng). 가게와 동의어." },
+  { kr:"서랍", en:"drawer", vi:"ngăn kéo", type:"item", note:"서랍을 열다/닫다(mở/đóng ngăn kéo). 서랍 안에 넣다(bỏ vào ngăn kéo). 책상 서랍(ngăn kéo bàn học)." },
+  { kr:"세면대", en:"washbasin, bathroom sink", vi:"bồn rửa mặt", type:"room", note:"세면(洗面)+대(台). 세면대에서 세수하다(rửa mặt ở bồn). 세면대 막힘(tắc bồn rửa mặt)." },
+  { kr:"세제", en:"detergent, cleaning agent", vi:"chất tẩy rửa", type:"item", note:"세제(洗劑). 세탁 세제(bột giặt). 주방 세제(nước rửa bát). 세제를 넣다(cho chất tẩy vào)." },
+  { kr:"소방서", en:"fire station", vi:"trạm cứu hỏa", type:"place", note:"소방(消防)+서(署). 소방서에 신고하다(báo cáo cho cứu hỏa). 119(số điện thoại cứu hỏa Hàn Quốc)." },
+  { kr:"손잡이", en:"handle, doorknob, railing", vi:"tay cầm, tay nắm", type:"item", note:"손(tay)+잡이(cái nắm). 문 손잡이(tay nắm cửa). 손잡이를 잡다(nắm tay vịn). 버스 손잡이(thanh vịn xe buýt)." },
+  { kr:"쇼핑몰", en:"shopping mall", vi:"trung tâm mua sắm", type:"shop", note:"shopping mall에서. 쇼핑몰에서 쇼핑하다(mua sắm ở trung tâm). 대형 쇼핑몰(TTTM lớn)." },
+  { kr:"쇼핑센터", en:"shopping center", vi:"trung tâm thương mại", type:"shop", note:"shopping center에서. 쇼핑몰과 유사. 쇼핑센터에 가다(đến trung tâm thương mại)." },
+  { kr:"수도꼭지", en:"faucet, water tap", vi:"vòi nước", type:"item", note:"수도(水道)+꼭지. 수도꼭지를 틀다/잠그다(mở/vặn vòi nước). 수도꼭지가 새다(vòi bị chảy)." },
+  { kr:"술집", en:"bar, pub, drinking place", vi:"quán rượu, bar", type:"place", note:"술(rượu)+집(quán). 술집에 가다(đến quán rượu). 호프집(quán bia)과 유사. 야식 후 술집." },
+  { kr:"승강기", en:"elevator, lift", vi:"thang máy", type:"room", note:"승강(昇降,lên xuống)+기(機). 엘리베이터와 동의어. 승강기를 타다(đi thang máy). 승강기 고장(hỏng thang máy)." },
+  { kr:"식물원", en:"botanical garden", vi:"vườn thực vật", type:"place", note:"식물(植物)+원(園). 식물원을 방문하다(tham quan vườn thực vật). 온실 식물원(vườn trong nhà kính)." },
+  { kr:"실내", en:"indoors, interior", vi:"trong nhà, nội thất", type:"room", note:"실내(室內). 실내 수영장(bể bơi trong nhà). 실내 장식(trang trí nội thất). ↔ 실외/야외(ngoài trời)." },
+  { kr:"싱크대", en:"kitchen sink", vi:"chậu rửa bát", type:"room", note:"sink에서. 싱크대에서 설거지하다(rửa bát ở bồn). 싱크대 막힘(tắc bồn rửa). 주방의 싱크대." },
+  { kr:"쓰레기통", en:"trash can, garbage bin", vi:"thùng rác", type:"item", note:"쓰레기(rác)+통(thùng). 쓰레기통에 버리다(bỏ vào thùng rác). 분리 쓰레기통(thùng rác phân loại)." },
+  { kr:"안내소", en:"information desk, info center", vi:"quầy thông tin", type:"place", note:"안내(案內)+소(所). 관광 안내소(quầy thông tin du lịch). 안내소에서 지도를 받다(nhận bản đồ)." },
+  { kr:"안방", en:"master bedroom, main bedroom", vi:"phòng ngủ chính", type:"room", note:"안(bên trong)+방(房). 한국 전통 주택의 주인 침실. 안방을 차지하다(chiếm phòng chính)." },
+  { kr:"안쪽", en:"inside, inner side", vi:"bên trong, phía trong", type:"misc", note:"안(trong)+쪽(phía). 안쪽으로 들어가다(đi vào bên trong). ↔ 바깥쪽(bên ngoài). 안쪽 자리(chỗ bên trong)." },
+  { kr:"액자", en:"picture frame, photo frame", vi:"khung ảnh", type:"item", note:"액자(額子). 액자에 사진을 넣다(bỏ ảnh vào khung). 벽에 액자를 걸다(treo khung ảnh lên tường)." },
+  { kr:"오피스텔", en:"officetel (office+hotel apartment)", vi:"căn hộ văn phòng", type:"room", note:"office+hotel에서. 사무실로도 주거로도 사용. 도심에 많음. 원룸형 오피스텔(studio officetel)." },
+  { kr:"욕실", en:"bathroom", vi:"phòng tắm", type:"room", note:"욕실(浴室). 욕실을 청소하다(dọn phòng tắm). 욕실용품(đồ dùng phòng tắm). 욕조(bồn tắm)." },
+  { kr:"원룸", en:"studio apartment, one-room flat", vi:"phòng trọ studio", type:"room", note:"one room에서. 원룸에서 살다(sống ở phòng studio). 원룸 월세(tiền thuê phòng studio). 혼자 살기 적합." },
+  { kr:"유리창", en:"glass window", vi:"kính cửa sổ", type:"room", note:"유리(玻璃,kính)+창(窓,cửa sổ). 유리창을 닦다(lau kính cửa sổ). 유리창이 깨지다(kính vỡ)." },
+  { kr:"음식점", en:"restaurant, eatery", vi:"nhà hàng, quán ăn", type:"shop", note:"음식(đồ ăn)+점(店). 음식점을 찾다(tìm nhà hàng). 맛있는 음식점(quán ăn ngon). 식당과 동의어." },
+  { kr:"이불", en:"blanket, duvet, bedding", vi:"chăn, mền", type:"item", note:"이불을 덮다(đắp chăn). 이불을 개다(gấp chăn). 이불 빨래(giặt chăn). 두꺼운 이불(chăn dày)." },
+  { kr:"이삿짐", en:"moving belongings, moving boxes", vi:"đồ đạc khi chuyển nhà", type:"misc", note:"이사(chuyển nhà)+짐(đồ đạc). 이삿짐을 싸다(đóng gói đồ). 이삿짐 센터(công ty chuyển nhà)." },
+  { kr:"장례식장", en:"funeral hall", vi:"nhà tang lễ", type:"place", note:"장례식(葬禮式)+장(場). 장례식장에 가다(đến nhà tang lễ). 장례식장 예약(đặt nhà tang lễ)." },
+  { kr:"장바구니", en:"shopping basket, shopping bag", vi:"giỏ đi chợ", type:"item", note:"장(시장)+바구니(rổ). 장바구니를 들다(xách giỏ chợ). 친환경 장바구니(giỏ đi chợ thân thiện môi trường)." },
+  { kr:"저금통", en:"piggy bank, coin bank", vi:"heo đất, lợn tiết kiệm", type:"item", note:"저금(tiết kiệm)+통(thùng). 저금통에 동전을 넣다(bỏ xu vào heo đất). 돼지 저금통(heo đất)." },
+  { kr:"전구", en:"light bulb", vi:"bóng đèn", type:"item", note:"전구(電球). 전구를 갈다(thay bóng đèn). 전구가 나가다(bóng đèn hỏng). LED 전구(bóng LED)." },
+  { kr:"전등", en:"electric light, lamp fixture", vi:"đèn điện", type:"item", note:"전등(電燈). 전등을 켜다/끄다(bật/tắt đèn). 방 전등(đèn phòng). 형광등(đèn huỳnh quang)." },
+  { kr:"전문점", en:"specialty shop, specialized store", vi:"cửa hàng chuyên dụng", type:"shop", note:"전문(專門)+점(店). 꽃 전문점(cửa hàng chuyên hoa). 가구 전문점(cửa hàng chuyên nội thất)." },
+  { kr:"전셋집", en:"jeonse rental house", vi:"nhà thuê theo hệ thống Jeonse", type:"room", note:"전세(傳貰)+집. 한국 특유의 임대 방식. 보증금을 목돈으로 내고 월세 없이 거주. ↔ 월세집." },
+  { kr:"전자레인지", en:"microwave oven", vi:"lò vi sóng", type:"item", note:"전자(電子)+레인지(range). 전자레인지로 데우다(hâm nóng bằng lò vi sóng). 음식을 돌리다(quay thức ăn)." },
+  { kr:"제자리", en:"original place, proper place", vi:"chỗ cũ, vị trí ban đầu", type:"misc", note:"제(정해진)+자리(chỗ). 제자리에 놓다(đặt về chỗ cũ). 제자리로 돌아가다(quay về vị trí ban đầu)." },
+  { kr:"조명", en:"lighting, illumination", vi:"chiếu sáng, ánh đèn", type:"item", note:"조명(照明). 조명을 조절하다(điều chỉnh ánh sáng). 인테리어 조명(đèn trang trí nội thất)." },
+  { kr:"종이컵", en:"paper cup", vi:"cốc giấy", type:"item", note:"종이(giấy)+컵(cup). 종이컵으로 마시다(uống bằng cốc giấy). 일회용 종이컵(cốc giấy dùng một lần)." },
+  { kr:"주거", en:"residence, dwelling, housing", vi:"nơi ở, chỗ cư trú", type:"room", note:"주거(住居). 주거 환경(môi trường cư trú). 주거 문제(vấn đề nhà ở). 주거비(chi phí nhà ở)." },
+  { kr:"주방", en:"kitchen", vi:"bếp, nhà bếp", type:"room", note:"주방(廚房). 주방에서 요리하다(nấu ăn trong bếp). 주방 가전(thiết bị bếp). 주방 용품(đồ dùng bếp)." },
+  { kr:"주택", en:"house, residence", vi:"nhà ở, nhà dân", type:"room", note:"주택(住宅). 단독 주택(nhà riêng). 공동 주택(nhà chung). 주택 시장(thị trường nhà ở). ↔ 아파트." },
+  { kr:"주택가", en:"residential area, housing area", vi:"khu dân cư", type:"place", note:"주택(nhà ở)+가(街,phố). 조용한 주택가(khu dân cư yên tĩnh). 주택가에 살다(sống ở khu dân cư)." },
+  { kr:"지붕", en:"roof", vi:"mái nhà", type:"room", note:"지붕이 새다(mái bị dột). 지붕을 고치다(sửa mái). 초가지붕(mái lợp rơm). 기와지붕(mái ngói)." },
+  { kr:"찻집", en:"tea house, café", vi:"quán trà", type:"shop", note:"차(trà)+집(quán). 찻집에서 차를 마시다(uống trà ở quán). 전통 찻집(quán trà truyền thống)." },
+  { kr:"창", en:"window; spear", vi:"cửa sổ; giáo, thương", type:"room", note:"두 가지: (1) 창문=cửa sổ, (2) 창(槍)=giáo. 창문을 열다(mở cửa sổ). 유리창(kính cửa sổ)." },
+  { kr:"천장", en:"ceiling", vi:"trần nhà", type:"room", note:"천장(天障). 천장이 높다(trần nhà cao). 천장을 올려다보다(nhìn lên trần). 천장 조명(đèn trần)." },
+  { kr:"침실", en:"bedroom", vi:"phòng ngủ", type:"room", note:"침실(寢室). 침실을 꾸미다(trang trí phòng ngủ). 1인 침실(phòng ngủ một người). 안방과 유사하나 더 현대적." },
+  { kr:"카펫", en:"carpet, rug", vi:"thảm trải sàn", type:"item", note:"carpet에서. 카펫을 깔다(trải thảm). 카펫을 청소하다(vệ sinh thảm). 두꺼운 카펫(thảm dày)." },
+  { kr:"커튼", en:"curtain, drape", vi:"rèm cửa", type:"item", note:"curtain에서. 커튼을 치다/걷다(kéo/mở rèm). 두꺼운 커튼(rèm dày). 레이스 커튼(rèm ren)." },
+  { kr:"편의점", en:"convenience store", vi:"cửa hàng tiện lợi", type:"shop", note:"편의(便宜)+점(店). 24시간 편의점(cửa hàng tiện lợi 24h). 세븐일레븐, CU, GS25 등. 한국에 엄청 많아요." },
+  { kr:"포장지", en:"wrapping paper, packaging", vi:"giấy gói", type:"item", note:"포장(包裝)+지(紙). 선물 포장지(giấy gói quà). 포장지로 싸다(bọc bằng giấy gói)." },
+  { kr:"할인점", en:"discount store", vi:"cửa hàng giảm giá", type:"shop", note:"할인(割引)+점(店). 할인점에서 싸게 사다(mua rẻ ở cửa hàng giảm giá). 대형 할인점(TTTM giảm giá lớn)." },
+  { kr:"현관", en:"entrance, entryway", vi:"lối vào, cửa vào nhà", type:"room", note:"현관(玄關). 현관에서 신발을 벗다(cởi giày ở lối vào). 현관문(cửa lối vào). 한국 집 필수 공간." },
+  { kr:"현관문", en:"front door, entrance door", vi:"cửa lối vào", type:"room", note:"현관(lối vào)+문(門). 현관문을 잠그다(khóa cửa). 현관문 비밀번호(mật khẩu cửa). 디지털 도어락." },
+  { kr:"화장지", en:"toilet paper, tissue paper", vi:"giấy vệ sinh", type:"item", note:"화장(化粧)+지(紙). 화장지를 사다(mua giấy vệ sinh). 두루마리 화장지(giấy cuộn). 휴지와 동의어." },
+  { kr:"환기", en:"ventilation, airing out", vi:"thông gió, thông khí", type:"misc", note:"환기(換氣). 환기하다=thông gió. 창문을 열어 환기시키다(mở cửa sổ thông gió). 환기 시스템(hệ thống thông gió)." },
+  { kr:"회의장", en:"conference hall, meeting room", vi:"phòng họp, hội trường", type:"place", note:"회의(會議)+장(場). 회의장을 예약하다(đặt phòng họp). 대형 회의장(hội trường lớn)." },
+  { kr:"후문", en:"back gate, rear entrance", vi:"cổng sau", type:"room", note:"후(後,sau)+문(門). 학교 후문(cổng sau trường). 후문으로 들어가다(vào cổng sau). ↔ 정문(cổng chính)." },
+  { kr:"휴게실", en:"break room, lounge", vi:"phòng nghỉ ngơi", type:"place", note:"휴게(休憩)+실(室). 휴게실에서 쉬다(nghỉ ở phòng nghỉ). 직원 휴게실(phòng nghỉ nhân viên). 공항 휴게실." },
+];
+
+let currentFilter = 'all';
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let tagHtml;
+    if      (item.type==='room')  tagHtml=`<span class="tag tag-room">Phòng &amp; Nhà</span>`;
+    else if (item.type==='item')  tagHtml=`<span class="tag tag-item">Đồ vật</span>`;
+    else if (item.type==='place') tagHtml=`<span class="tag tag-place">Địa điểm CC</span>`;
+    else if (item.type==='shop')  tagHtml=`<span class="tag tag-shop">Cửa hàng</span>`;
+    else                          tagHtml=`<span class="tag tag-misc">Tổng quát</span>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${tagHtml}</td><td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const mf = currentFilter==='all' || item.type===currentFilter;
+    const ms = !q || item.kr.includes(q) || item.en.toLowerCase().includes(q) || item.vi.toLowerCase().includes(q) || item.note.toLowerCase().includes(q);
+    return mf && ms;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length===0?'block':'none';
+  document.getElementById('vocabTable').style.display = result.length===0?'none':'';
+}
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
