@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Giáo dục (Nâng cao)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f3f7f2;
+    --card: #ffffff;
+    --accent: #2a5a2a;
+    --text: #0c200c;
+    --sub: #5a8a5a;
+    --border: #c4dcc4;
+    --tag-lang: #e0f4e0;
+    --tag-school: #e8f4fc;
+    --tag-acad: #fef8e0;
+    --tag-item: #f8e8f8;
+    --tag-degree: #fdeee0;
+    --highlight: #ecf8ec;
+    --row-alt: #f7fdf7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f3f7f2;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '교육';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #7aaa7a; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f3f7f2; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 145px; }
+  th:nth-child(3), td:nth-child(3) { width: 180px; }
+  th:nth-child(4), td:nth-child(4) { width: 215px; }
+  th:nth-child(5), td:nth-child(5) { width: 120px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
+  .tag-lang   { background: var(--tag-lang);   color: #0a4a0a; }
+  .tag-school { background: var(--tag-school);  color: #0a3060; }
+  .tag-acad   { background: var(--tag-acad);    color: #5a3a00; }
+  .tag-item   { background: var(--tag-item);    color: #5a0a5a; }
+  .tag-degree { background: var(--tag-degree);  color: #6a3000; }
+  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>교육 & 학문 (심화) — Giáo dục & Học thuật (Nâng cao)</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Giáo dục nâng cao · Chủ đề TOPIK II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="lang">Ngôn ngữ học</button>
+  <button class="filter-btn" data-filter="school">Trường học</button>
+  <button class="filter-btn" data-filter="acad">Học thuật</button>
+  <button class="filter-btn" data-filter="item">Tài liệu/Dụng cụ</button>
+  <button class="filter-btn" data-filter="degree">Chuyên ngành/Bằng cấp</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Phân loại</th><th>Ghi chú & Cách dùng</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Giáo dục & Học thuật (Nâng cao)</div>
+
+<script>
+const vocab = [
+  { kr:"강사", en:"instructor, lecturer", vi:"giảng viên, thầy dạy", type:"school",
+    note:"강사(講師). 강의를 하는 사람. 교수보다 직급이 낮음. 한국어 강사(giảng viên tiếng Hàn)." },
+  { kr:"강연", en:"lecture, public talk", vi:"bài giảng, buổi diễn thuyết", type:"school",
+    note:"강연(講演). 강연을 하다(diễn thuyết). 특별 강연(buổi nói chuyện đặc biệt). 강의보다 더 공개적." },
+  { kr:"강의", en:"lecture, class", vi:"bài giảng, tiết học", type:"school",
+    note:"강의(講義). 강의를 듣다(nghe giảng). 강의실(phòng giảng). 강의를 하다(giảng bài). 대학 필수 단어." },
+  { kr:"강의실", en:"lecture hall, classroom", vi:"phòng giảng", type:"school",
+    note:"강의(bài giảng) + 실(室, phòng). 강의실을 찾다(tìm phòng giảng). 강의실 번호(số phòng học)." },
+  { kr:"강조", en:"emphasis, stress", vi:"sự nhấn mạnh", type:"acad",
+    note:"강조(強調). 강조하다 = nhấn mạnh. 중요한 부분을 강조하다(nhấn mạnh phần quan trọng). 밑줄 강조(gạch chân để nhấn mạnh)." },
+  { kr:"개강", en:"start of semester/course", vi:"khai giảng, bắt đầu khóa học", type:"school",
+    note:"개강(開講). 개강 날(ngày khai giảng). 3월에 개강해요(tháng 3 khai giảng). ↔ 종강(kết thúc học kỳ)." },
+  { kr:"결론", en:"conclusion", vi:"kết luận", type:"acad",
+    note:"결론(結論). 결론을 내리다(đưa ra kết luận). 결론적으로(về mặt kết luận). 서론-본론-결론 구조." },
+  { kr:"결석", en:"absence, being absent", vi:"vắng mặt, bỏ học", type:"school",
+    note:"결석(缺席). 결석하다 = vắng mặt. 결석계(giấy xin vắng). 무단 결석(vắng không phép). ↔ 출석(có mặt)." },
+  { kr:"경영학", en:"business administration", vi:"quản trị kinh doanh", type:"degree",
+    note:"경영(經營) + 학(學). 경영학과(khoa quản trị). 경영학 석사(MBA). 많은 학생들이 선택하는 전공." },
+  { kr:"경제학", en:"economics", vi:"khoa học kinh tế", type:"degree",
+    note:"경제(經濟) + 학(學). 경제학자(nhà kinh tế học). 미시/거시 경제학(kinh tế vi/vĩ mô)." },
+  { kr:"과목", en:"subject, course", vi:"môn học", type:"school",
+    note:"과목(科目). 좋아하는 과목(môn học yêu thích). 선택 과목(môn tự chọn). 필수 과목(môn bắt buộc)." },
+  { kr:"과외", en:"private tutoring, after-school lessons", vi:"học thêm, dạy thêm", type:"school",
+    note:"과외(課外). 과외를 받다(được dạy kèm). 과외 선생님(gia sư). 한국에서 과외가 매우 일반적." },
+  { kr:"과정", en:"process, course, program", vi:"quá trình, quy trình", type:"acad",
+    note:"과정(過程/課程). 두 가지: (1) 過程 — quá trình, (2) 課程 — chương trình học. 박사 과정(chương trình tiến sĩ)." },
+  { kr:"과제", en:"assignment, task, homework", vi:"bài tập, nhiệm vụ", type:"school",
+    note:"과제(課題). 과제를 내다(giao bài tập). 과제를 하다(làm bài tập). 숙제와 유사하나 더 격식체." },
+  { kr:"관용어", en:"idiom, idiomatic expression", vi:"thành ngữ, thành ngữ quen dùng", type:"lang",
+    note:"관용어(慣用語). 한국어 관용어(thành ngữ tiếng Hàn). 관용어를 외우다(học thuộc thành ngữ). 속담과 다름." },
+  { kr:"관찰", en:"observation", vi:"quan sát", type:"acad",
+    note:"관찰(觀察). 관찰하다 = quan sát. 관찰 결과(kết quả quan sát). 과학 실험에서 중요." },
+  { kr:"교육", en:"education", vi:"giáo dục", type:"school",
+    note:"교육(教育). 교육을 받다(được giáo dục). 교육 시스템(hệ thống giáo dục). 교육부(Bộ Giáo dục)." },
+  { kr:"교육학", en:"pedagogy, education studies", vi:"khoa học giáo dục", type:"degree",
+    note:"교육(giáo dục) + 학(học). 교육학과(khoa giáo dục). 교육학자(nhà giáo dục học)." },
+  { kr:"교재", en:"textbook, teaching materials", vi:"tài liệu dạy học", type:"item",
+    note:"교재(教材). 교재를 구입하다(mua tài liệu). 교재가 어렵다(tài liệu khó). ≈ 교과서이지만 더 넓은 의미." },
+  { kr:"구별", en:"distinction, differentiation", vi:"phân biệt, sự phân biệt", type:"acad",
+    note:"구별(區別). 구별하다 = phân biệt. 두 단어의 구별(sự phân biệt hai từ). 구분과 유사하나 뉘앙스 다름." },
+  { kr:"구분", en:"division, classification", vi:"phân loại, chia", type:"acad",
+    note:"구분(區分). 구분하다 = phân loại. 종류를 구분하다(phân loại các loại). 구별보다 더 기계적 분류." },
+  { kr:"구성", en:"composition, structure, makeup", vi:"cấu thành, cấu trúc", type:"acad",
+    note:"구성(構成). 문장 구성(cấu trúc câu). 팀 구성(thành phần nhóm). 구성하다(tạo thành, cấu thành)." },
+  { kr:"국문학", en:"Korean literature", vi:"văn học quốc gia", type:"degree",
+    note:"국문(國文) + 학. 국문학과(khoa văn học Hàn). 한국 문학을 연구하는 학문." },
+  { kr:"그래프", en:"graph, chart", vi:"đồ thị, biểu đồ", type:"item",
+    note:"graph에서. 그래프를 그리다(vẽ đồ thị). 꺾은선 그래프(đồ thị đường gấp khúc). 통계 자료 표현에 사용." },
+  { kr:"그림책", en:"picture book", vi:"sách tranh", type:"item",
+    note:"그림(tranh) + 책. 어린이 그림책(sách tranh cho trẻ em). 그림책을 읽어주다(đọc sách tranh cho con)." },
+  { kr:"글쓴이", en:"author, writer", vi:"tác giả", type:"acad",
+    note:"글(bài viết) + 쓴이(người viết). 글쓴이의 의도(ý định tác giả). 작가와 유사하나 더 일반적." },
+  { kr:"글씨", en:"handwriting, written characters", vi:"chữ viết tay", type:"item",
+    note:"글씨를 쓰다(viết chữ tay). 글씨가 예쁘다(chữ viết đẹp). 글자(ký tự) vs 글씨(nét viết tay)." },
+  { kr:"글자", en:"letter, character, written symbol", vi:"chữ, ký tự", type:"lang",
+    note:"글자(文字). 한글 글자(chữ Hangul). 글자를 배우다(học chữ). 글씨는 필체, 글자는 기호 자체." },
+  { kr:"기초", en:"foundation, basics", vi:"nền tảng, cơ sở", type:"acad",
+    note:"기초(基礎). 기초를 쌓다(xây nền tảng). 기초 단계(giai đoạn cơ bản). 기초가 중요해요(nền tảng quan trọng)." },
+  { kr:"기행문", en:"travelogue, travel essay", vi:"bút ký du lịch", type:"item",
+    note:"기행(紀行) + 문(文). 기행문을 쓰다(viết bút ký du lịch). 여행 경험을 글로 표현한 것." },
+  { kr:"기호", en:"symbol, sign", vi:"ký hiệu, biểu tượng", type:"lang",
+    note:"기호(記號/嗜好). 두 가지: (1) 記號 — ký hiệu toán học/ngôn ngữ, (2) 嗜好 — sở thích(기호에 맞다)." },
+  { kr:"논문", en:"thesis, academic paper", vi:"luận văn, luận án", type:"acad",
+    note:"논문(論文). 논문을 쓰다(viết luận văn). 졸업 논문(luận văn tốt nghiệp). 박사 논문(luận án tiến sĩ)." },
+  { kr:"높임말", en:"honorific speech, polite language", vi:"kính ngữ, lời nói tôn kính", type:"lang",
+    note:"높이다 + 말. 한국어의 핵심. 높임말을 사용하다(dùng kính ngữ). 존댓말과 동의. ↔ 반말(thân mật)." },
+  { kr:"담임", en:"homeroom teacher, class teacher", vi:"giáo viên chủ nhiệm", type:"school",
+    note:"담임(擔任). 담임 선생님(thầy/cô chủ nhiệm). 담임을 맡다(đảm nhận vai trò chủ nhiệm)." },
+  { kr:"답", en:"answer, response", vi:"câu trả lời, đáp án", type:"acad",
+    note:"답(答). 답을 알다(biết đáp án). 답을 쓰다(viết đáp án). 정답(đáp án đúng). 오답(đáp án sai)." },
+  { kr:"답변", en:"answer, reply (formal)", vi:"câu trả lời, phúc đáp", type:"acad",
+    note:"답변(答辯). 질문에 답변하다(trả lời câu hỏi). 공식 맥락에서 더 자주. 답과 유사하나 더 격식." },
+  { kr:"도서", en:"books, library collection", vi:"sách (tổng quát)", type:"item",
+    note:"도서(圖書). 도서관(thư viện). 도서목록(danh mục sách). 도서를 대출하다(mượn sách)." },
+  { kr:"동창", en:"alumni, schoolmate", vi:"bạn cùng trường, đồng môn", type:"school",
+    note:"동창(同窓). 고등학교 동창(bạn đồng môn THPT). 동창회(hội đồng môn). 친한 동창(bạn đồng môn thân thiết)." },
+  { kr:"동창회", en:"alumni association, reunion", vi:"hội đồng môn", type:"school",
+    note:"동창(đồng môn) + 회(hội). 동창회를 열다(tổ chức họp đồng môn). 매년 동창회를 해요(hàng năm họp đồng môn)." },
+  { kr:"동화책", en:"fairy tale book, children's story book", vi:"sách truyện thiếu nhi", type:"item",
+    note:"동화(童話) + 책. 동화책을 읽어주다(đọc truyện cổ tích). 어린이에게 인기 있는 책." },
+  { kr:"등록", en:"registration, enrollment", vi:"đăng ký", type:"school",
+    note:"등록(登錄). 등록하다 = đăng ký. 수업 등록(đăng ký lớp học). 등록금(học phí đăng ký)." },
+  { kr:"등록금", en:"tuition fee, registration fee", vi:"học phí, lệ phí đăng ký", type:"school",
+    note:"등록(đăng ký) + 금(tiền). 등록금이 비싸요(học phí đắt). 등록금을 내다(đóng học phí)." },
+  { kr:"만년필", en:"fountain pen", vi:"bút mực", type:"item",
+    note:"만년필(萬年筆). 만년필로 쓰다(viết bằng bút mực). 고급 필기구. 볼펜보다 격식적." },
+  { kr:"만화책", en:"comic book, manga", vi:"truyện tranh", type:"item",
+    note:"만화(漫畫) + 책. 만화책을 읽다(đọc truyện tranh). 한국 만화를 웹툰이라고도 해요." },
+  { kr:"멀티미디어실", en:"multimedia room", vi:"phòng đa phương tiện", type:"school",
+    note:"멀티미디어(multimedia) + 실(室). 영상 수업을 위한 교실. 컴퓨터와 영상 기기 갖춤." },
+  { kr:"명사", en:"noun", vi:"danh từ", type:"lang",
+    note:"명사(名詞). 한국어 품사. 명사는 N이에요. 의존명사(danh từ phụ thuộc). ↔ 동사(동), 형용사(형)." },
+  { kr:"모국어", en:"native language, mother tongue", vi:"tiếng mẹ đẻ", type:"lang",
+    note:"모국(母國) + 어(語). 모국어 실력(năng lực tiếng mẹ đẻ). 모국어 화자(người nói ngôn ngữ mẹ đẻ)." },
+  { kr:"모범생", en:"model student, exemplary student", vi:"học sinh gương mẫu", type:"school",
+    note:"모범(模範) + 생(生). 모범생으로 표창받다(được khen thưởng là học sinh gương mẫu)." },
+  { kr:"모음", en:"vowel", vi:"nguyên âm", type:"lang",
+    note:"모음(母音). 한국어 모음: ㅏ ㅓ ㅗ ㅜ ㅡ ㅣ 등. ↔ 자음(phụ âm). 단모음/이중모음 구별." },
+  { kr:"문구", en:"stationery, writing materials", vi:"đồ dùng văn phòng phẩm", type:"item",
+    note:"문구(文具). 문구점(cửa hàng văn phòng phẩm). 학교 문구류(đồ dùng học sinh). 필기구 포함." },
+  { kr:"문법", en:"grammar", vi:"ngữ pháp", type:"lang",
+    note:"문법(文法). 문법 공부(học ngữ pháp). 문법 오류(lỗi ngữ pháp). 한국어 문법이 어려워요." },
+  { kr:"문학", en:"literature", vi:"văn học", type:"acad",
+    note:"문학(文學). 한국 문학(văn học Hàn Quốc). 문학 작품(tác phẩm văn học). 문학가(nhà văn)." },
+  { kr:"물음", en:"question, inquiry", vi:"câu hỏi", type:"acad",
+    note:"묻다 → 물음. 물음에 답하다(trả lời câu hỏi). 질문보다 더 순우리말 느낌. 물음표(dấu chấm hỏi)." },
+  { kr:"밑줄", en:"underline, underscore", vi:"gạch chân", type:"item",
+    note:"밑(dưới) + 줄(đường). 밑줄을 긋다(gạch chân). 중요한 부분에 밑줄을 쳐요(gạch chân phần quan trọng)." },
+  { kr:"박사", en:"Ph.D., doctoral degree", vi:"tiến sĩ", type:"degree",
+    note:"박사(博士). 박사 학위(bằng tiến sĩ). 박사 논문(luận án tiến sĩ). 석사→박사(thạc sĩ → tiến sĩ)." },
+  { kr:"반대말", en:"antonym, opposite word", vi:"từ trái nghĩa", type:"lang",
+    note:"반대(反對) + 말. 반대말을 찾다(tìm từ trái nghĩa). 크다↔작다(반대말). ↔ 동의어(từ đồng nghĩa)." },
+  { kr:"반말", en:"informal speech, casual language", vi:"lời nói thân mật không kính ngữ", type:"lang",
+    note:"반(半) + 말. 친한 사이나 아랫사람에게 사용. 반말을 하다(nói thân mật). ↔ 높임말/존댓말(kính ngữ)." },
+  { kr:"반복", en:"repetition, repeat", vi:"sự lặp lại", type:"acad",
+    note:"반복(反復). 반복하다 = lặp lại. 반복 연습(luyện tập lặp đi lặp lại). 반복 학습이 중요해요." },
+  { kr:"발견", en:"discovery, finding", vi:"sự phát hiện", type:"acad",
+    note:"발견(發見). 발견하다 = phát hiện. 새로운 사실을 발견하다(phát hiện sự thật mới). ↔ 발명(phát minh)." },
+  { kr:"발명", en:"invention", vi:"phát minh, sáng chế", type:"acad",
+    note:"발명(發明). 발명하다 = phát minh. 한글 발명(phát minh chữ Hangul). 발명가(nhà phát minh). ↔ 발견." },
+  { kr:"발표자", en:"presenter, speaker", vi:"người trình bày", type:"school",
+    note:"발표(phát biểu) + 자(者). 발표자를 정하다(chọn người trình bày). 오늘 발표자(người phát biểu hôm nay)." },
+  { kr:"발표회", en:"presentation event, recital", vi:"buổi phát biểu, hội thảo", type:"school",
+    note:"발표(phát biểu) + 회(hội). 발표회를 열다(tổ chức buổi phát biểu). 음악 발표회(buổi trình diễn âm nhạc)." },
+  { kr:"번역", en:"translation", vi:"dịch thuật", type:"lang",
+    note:"번역(翻譯). 번역하다 = dịch. 번역가(dịch giả). 한국어 번역(dịch tiếng Hàn). ↔ 통역(phiên dịch nói)." },
+  { kr:"보기", en:"example, sample, choice", vi:"ví dụ, mẫu", type:"acad",
+    note:"보다(xem) + 기. 보기를 들다(đưa ra ví dụ). 시험 보기(lựa chọn trong bài thi). 예시와 유사." },
+  { kr:"복습", en:"review, revision", vi:"ôn tập", type:"school",
+    note:"복습(復習). 복습하다 = ôn tập. 매일 복습해요(ôn tập mỗi ngày). ↔ 예습(học trước bài)." },
+  { kr:"본론", en:"main body, main discussion", vi:"chủ đề chính, nội dung chính", type:"acad",
+    note:"본론(本論). 서론-본론-결론(mở-thân-kết). 본론으로 들어가다(đi vào nội dung chính)." },
+  { kr:"본문", en:"main text, body text", vi:"văn bản gốc, nội dung chính", type:"acad",
+    note:"본문(本文). 본문을 읽다(đọc văn bản chính). 각주와 본문(chú thích và nội dung chính)." },
+  { kr:"부사", en:"adverb", vi:"trạng từ, phó từ", type:"lang",
+    note:"부사(副詞). 빨리, 천천히 등이 부사. 부사는 동사/형용사를 꾸밈. 한국어 품사 중 하나." },
+  { kr:"불규칙", en:"irregularity, irregular", vi:"bất quy tắc", type:"lang",
+    note:"불규칙(不規則). 불규칙 동사(động từ bất quy tắc). ㅂ불규칙, ㄷ불규칙 등. 한국어 학습의 어려운 부분." },
+  { kr:"비교", en:"comparison", vi:"sự so sánh", type:"acad",
+    note:"비교(比較). 비교하다 = so sánh. 비교 분석(phân tích so sánh). A와 B를 비교하다(so sánh A và B)." },
+  { kr:"사투리", en:"dialect, regional accent", vi:"tiếng địa phương", type:"lang",
+    note:"사투리. 경상도 사투리(tiếng địa phương Gyeongsang). 서울말과 사투리(tiếng Seoul và tiếng địa phương)." },
+  { kr:"상식", en:"common sense, general knowledge", vi:"kiến thức phổ thông", type:"acad",
+    note:"상식(常識). 상식이 풍부하다(có nhiều kiến thức phổ thông). 상식 문제(câu hỏi kiến thức chung)." },
+  { kr:"생략", en:"omission, abbreviation", vi:"bỏ qua, lược bỏ", type:"lang",
+    note:"생략(省略). 생략하다 = lược bỏ. 주어 생략(lược bỏ chủ ngữ). 한국어에서 자주 생략이 일어남." },
+  { kr:"서론", en:"introduction, preface", vi:"phần mở đầu, giới thiệu", type:"acad",
+    note:"서론(序論). 서론-본론-결론(mở-thân-kết). 서론에서 주제를 제시한다(phần mở đầu nêu chủ đề)." },
+  { kr:"석사", en:"master's degree", vi:"thạc sĩ", type:"degree",
+    note:"석사(碩士). 석사 학위(bằng thạc sĩ). 석사 논문(luận văn thạc sĩ). 학사→석사→박사." },
+  { kr:"설", en:"theory, hypothesis; New Year", vi:"giả thuyết, thuyết", type:"acad",
+    note:"두 가지: (1) 說 — thuyết, giả thuyết (진화설 = thuyết tiến hóa), (2) 설날(Tết Nguyên Đán). 문맥 구별." },
+  { kr:"성적", en:"grades, academic performance", vi:"kết quả học tập, điểm số", type:"school",
+    note:"성적(成績). 성적이 좋다/나쁘다(điểm tốt/xấu). 성적표(bảng điểm). 성적을 올리다(nâng điểm số)." },
+  { kr:"성적표", en:"grade report card", vi:"bảng điểm", type:"school",
+    note:"성적(điểm số) + 표(表, bảng). 성적표를 받다(nhận bảng điểm). 부모님께 성적표를 보여드린다." },
+  { kr:"세미나", en:"seminar", vi:"hội thảo, seminar", type:"school",
+    note:"seminar에서. 세미나를 열다(tổ chức hội thảo). 세미나에 참가하다(tham dự hội thảo)." },
+  { kr:"소설책", en:"novel, fiction book", vi:"cuốn tiểu thuyết", type:"item",
+    note:"소설(tiểu thuyết) + 책. 소설책을 읽다(đọc tiểu thuyết). 베스트셀러 소설책(tiểu thuyết bán chạy)." },
+  { kr:"속담", en:"proverb, saying", vi:"tục ngữ, thành ngữ", type:"lang",
+    note:"속담(俗談). 한국 속담(tục ngữ Hàn Quốc). 가는 말이 고와야...(lời hay ý đẹp...). 관용어와 다름." },
+  { kr:"수료식", en:"completion ceremony", vi:"lễ tốt nghiệp, lễ bế giảng", type:"school",
+    note:"수료(修了) + 식(式). 한국어 수료식(lễ bế giảng tiếng Hàn). ≈ 졸업식이나 더 짧은 과정 마칠 때." },
+  { kr:"수학여행", en:"school trip, educational excursion", vi:"du lịch học sinh", type:"school",
+    note:"수학(修學, học tập) + 여행. 경주로 수학여행을 갔어요(đi du lịch học sinh ở Gyeongju). 중고생 필수 행사." },
+  { kr:"시인", en:"poet", vi:"nhà thơ", type:"acad",
+    note:"시인(詩人). 유명한 시인(nhà thơ nổi tiếng). 시를 쓰는 사람. 김소월(Kim Sowol)은 유명한 시인이에요." },
+  { kr:"시집", en:"poetry collection; to marry into (woman)", vi:"tập thơ; về nhà chồng", type:"acad",
+    note:"두 가지: (1) 詩集 — tập thơ, (2) 媤집 — nhà chồng(시집가다). 시집을 읽다(đọc tập thơ)." },
+  { kr:"시청각실", en:"audiovisual room", vi:"phòng nghe nhìn", type:"school",
+    note:"시청각(視聽覺) + 실(室). 영화나 영상 수업용 교실. 멀티미디어실과 유사." },
+  { kr:"시험공부", en:"studying for an exam", vi:"ôn thi, học thi", type:"school",
+    note:"시험(thi) + 공부(học). 시험공부를 하다(ôn thi). 밤새 시험공부를 했어요(học thi thâu đêm)." },
+  { kr:"식", en:"formula; ceremony; style", vi:"công thức; cách thức", type:"acad",
+    note:"세 가지: (1) 式 — công thức toán(방정식), (2) 式 — lễ nghi(졸업식), (3) ~식 — theo kiểu(한식=kiểu Hàn)." },
+  { kr:"신입생", en:"freshmen, new student", vi:"sinh viên năm nhất", type:"school",
+    note:"신입(新入) + 생(生). 신입생 환영회(tiệc chào mừng sinh viên mới). 신입생 오리엔테이션(định hướng tân sinh)." },
+  { kr:"실험", en:"experiment, lab work", vi:"thí nghiệm, thực nghiệm", type:"acad",
+    note:"실험(實驗). 실험을 하다(làm thí nghiệm). 실험실(phòng thí nghiệm). 과학 수업에서 필수." },
+  { kr:"실험실", en:"laboratory", vi:"phòng thí nghiệm", type:"school",
+    note:"실험(thí nghiệm) + 실(室). 실험실에서 실험을 해요(làm thí nghiệm trong phòng thí nghiệm)." },
+  { kr:"심리학", en:"psychology", vi:"tâm lý học", type:"degree",
+    note:"심리(心理) + 학(學). 심리학과(khoa tâm lý). 심리학자(nhà tâm lý học). 인기 있는 학문." },
+  { kr:"안내서", en:"guidebook, handbook, manual", vi:"sách hướng dẫn", type:"item",
+    note:"안내(hướng dẫn) + 서(書). 사용 안내서(sách hướng dẫn sử dụng). 여행 안내서(hướng dẫn du lịch)." },
+  { kr:"어학", en:"language studies, linguistics", vi:"ngôn ngữ học", type:"lang",
+    note:"어학(語學). 어학원(trung tâm ngoại ngữ). 어학연수(tu nghiệp ngôn ngữ). 어학 실력(năng lực ngoại ngữ)." },
+  { kr:"어학연수", en:"language training abroad", vi:"học tiếng nước ngoài du học ngắn hạn", type:"lang",
+    note:"어학(ngôn ngữ) + 연수(đào tạo). 한국어 어학연수(tu nghiệp tiếng Hàn). 단기 유학의 일종." },
+  { kr:"어휘", en:"vocabulary, lexicon", vi:"từ vựng", type:"lang",
+    note:"어휘(語彙). 어휘력(khả năng từ vựng). 어휘를 늘리다(mở rộng vốn từ vựng). 단어와 유사하나 더 넓음." },
+  { kr:"억양", en:"intonation, accent", vi:"ngữ điệu, thanh điệu", type:"lang",
+    note:"억양(抑揚). 억양이 자연스럽다(ngữ điệu tự nhiên). 억양 연습(luyện ngữ điệu). 외국어 학습에서 중요." },
+  { kr:"언어", en:"language", vi:"ngôn ngữ", type:"lang",
+    note:"언어(言語). 언어 능력(năng lực ngôn ngữ). 언어를 배우다(học ngôn ngữ). 언어학(ngôn ngữ học)." },
+  { kr:"엠티", en:"membership training (MT)", vi:"huấn luyện đoàn thể (MT)", type:"school",
+    note:"MT(Membership Training). 대학생들의 단체 야외 활동. 동아리/학과 엠티(MT của CLB/khoa)." },
+  { kr:"여고생", en:"female high school student", vi:"nữ sinh THPT", type:"school",
+    note:"여고(女高) + 생(生). 여고생 교복(đồng phục nữ sinh THPT). 여자 고등학교 학생." },
+  { kr:"연구", en:"research, study", vi:"nghiên cứu", type:"acad",
+    note:"연구(硏究). 연구하다 = nghiên cứu. 연구 결과(kết quả nghiên cứu). 연구소(viện nghiên cứu)." },
+  { kr:"연구소", en:"research institute", vi:"viện nghiên cứu", type:"school",
+    note:"연구(nghiên cứu) + 소(所). 국립 연구소(viện nghiên cứu quốc gia). 연구소에서 일하다(làm việc tại viện nghiên cứu)." },
+  { kr:"연구실", en:"research room, professor's office", vi:"phòng nghiên cứu", type:"school",
+    note:"연구(nghiên cứu) + 실(室). 교수 연구실(phòng nghiên cứu của giáo sư). 연구실을 방문하다(ghé thăm phòng nghiên cứu)." },
+  { kr:"연수", en:"training, study program", vi:"đào tạo, tập huấn", type:"school",
+    note:"연수(硏修). 교사 연수(đào tạo giáo viên). 해외 연수(tu nghiệp ở nước ngoài). 어학연수와 관련." },
+  { kr:"열람실", en:"reading room (for documents)", vi:"phòng đọc tài liệu", type:"school",
+    note:"열람(閱覽) + 실(室). 도서관 열람실(phòng đọc sách trong thư viện). 독서실과 유사하나 더 공식적." },
+  { kr:"예습", en:"pre-study, preparation for class", vi:"học trước bài", type:"school",
+    note:"예습(豫習). 예습하다 = học trước bài. 예습을 하면 수업이 쉬워요(học trước bài thì tiết học dễ hơn). ↔ 복습." },
+  { kr:"오리엔테이션", en:"orientation", vi:"định hướng, buổi hướng dẫn", type:"school",
+    note:"orientation에서. 신입생 오리엔테이션(định hướng tân sinh viên). 줄여서 OT라고도 함." },
+  { kr:"외래어", en:"loanword, borrowed word", vi:"từ ngoại lai", type:"lang",
+    note:"외래어(外來語). 버스, 컴퓨터 등. 외래어 표기법(quy tắc phiên âm từ ngoại lai). 한국어의 약 5~10%." },
+  { kr:"요약", en:"summary, abstract", vi:"tóm tắt, tóm lược", type:"acad",
+    note:"요약(要約). 요약하다 = tóm tắt. 글을 요약하다(tóm tắt bài viết). 요약문(bản tóm tắt)." },
+  { kr:"우등상", en:"honor award, merit prize", vi:"giải thưởng xuất sắc", type:"school",
+    note:"우등(優等) + 상(賞). 우등상을 받다(nhận giải thưởng xuất sắc). 성적 우수자에게 수여됨." },
+  { kr:"우리말", en:"Korean language (informal)", vi:"tiếng Hàn (từ dân gian)", type:"lang",
+    note:"우리(của chúng ta) + 말(ngôn ngữ). 친근하게 한국어를 부르는 말. 우리말을 사랑합시다." },
+  { kr:"원고", en:"manuscript, draft", vi:"bản thảo, bản gốc", type:"item",
+    note:"원고(原稿). 원고를 쓰다(viết bản thảo). 원고지(giấy viết bản thảo). 출판 전 단계." },
+  { kr:"원리", en:"principle, mechanism", vi:"nguyên lý, nguyên tắc", type:"acad",
+    note:"원리(原理). 작동 원리(nguyên lý hoạt động). 기본 원리(nguyên lý cơ bản). 원칙과 유사." },
+  { kr:"유치원", en:"kindergarten", vi:"mẫu giáo, nhà trẻ", type:"school",
+    note:"유치(幼稚) + 원(園). 유치원생(trẻ mẫu giáo). 유치원에 입학하다(vào mẫu giáo). 초등학교 전 단계." },
+  { kr:"유행어", en:"buzzword, trendy expression", vi:"từ thịnh hành, từ mốt", type:"lang",
+    note:"유행(流行) + 어(語). 요즘 유행어(từ đang thịnh hành dạo này). 인터넷에서 자주 생겨남." },
+  { kr:"응시자", en:"test-taker, examinee", vi:"thí sinh dự thi", type:"school",
+    note:"응시(應試) + 자(者). 응시자가 많다(nhiều thí sinh). TOPIK 응시자(thí sinh thi TOPIK)." },
+  { kr:"의의", en:"significance, meaning", vi:"ý nghĩa, tầm quan trọng", type:"acad",
+    note:"의의(意義). 역사적 의의(ý nghĩa lịch sử). 큰 의의가 있다(có ý nghĩa lớn). 의미와 유사하나 더 格式." },
+  { kr:"의학", en:"medicine, medical science", vi:"y học", type:"degree",
+    note:"의학(醫學). 의학과(khoa y). 의학 발전(sự phát triển của y học). 의학 연구(nghiên cứu y học)." },
+  { kr:"이해력", en:"comprehension, understanding ability", vi:"khả năng hiểu", type:"acad",
+    note:"이해(理解) + 력(力). 이해력이 높다(khả năng hiểu cao). 독해 이해력(khả năng đọc hiểu)." },
+  { kr:"일기장", en:"diary, journal", vi:"cuốn nhật ký", type:"item",
+    note:"일기(nhật ký) + 장(帳, sổ). 일기장에 쓰다(viết vào nhật ký). 일기장을 사다(mua cuốn nhật ký)." },
+  { kr:"입시", en:"entrance examination, college admission", vi:"thi đầu vào", type:"school",
+    note:"입시(入試). 입시 준비(chuẩn bị thi đại học). 입시 경쟁이 치열하다(cạnh tranh thi đại học khốc liệt)." },
+  { kr:"입학시험", en:"entrance examination", vi:"kỳ thi tuyển sinh", type:"school",
+    note:"입학(nhập học) + 시험(kỳ thi). 대학교 입학시험(kỳ thi tuyển sinh đại học). 수능과 관련." },
+  { kr:"자료실", en:"reference room, archive", vi:"phòng tư liệu", type:"school",
+    note:"자료(tài liệu) + 실(室). 자료실에서 자료를 찾다(tìm tài liệu ở phòng tư liệu)." },
+  { kr:"자음", en:"consonant", vi:"phụ âm", type:"lang",
+    note:"자음(子音). 한국어 자음: ㄱ ㄴ ㄷ ㄹ 등. ↔ 모음(nguyên âm). 초성/중성/종성 구조." },
+  { kr:"작가", en:"writer, author", vi:"nhà văn, tác giả", type:"acad",
+    note:"작가(作家). 소설가, 시인, 극작가 등을 포함. 유명한 작가(nhà văn nổi tiếng). 작가가 되다." },
+  { kr:"작문", en:"essay writing, composition", vi:"bài luận, viết bài", type:"acad",
+    note:"작문(作文). 작문 숙제(bài tập viết). 작문 능력(kỹ năng viết). 한국어 작문(viết văn tiếng Hàn)." },
+  { kr:"장학", en:"scholarship (concept)", vi:"học bổng", type:"school",
+    note:"장학(奬學). 장학금(tiền học bổng). 장학생(học sinh/sinh viên học bổng). 장학 제도(chế độ học bổng)." },
+  { kr:"장학금", en:"scholarship money", vi:"tiền học bổng", type:"school",
+    note:"장학(học bổng) + 금(tiền). 장학금을 받다(nhận học bổng). 장학금 신청(nộp đơn xin học bổng)." },
+  { kr:"재학", en:"being enrolled, currently studying", vi:"đang học, trong thời gian học", type:"school",
+    note:"재학(在學). 재학생(học sinh/sinh viên đang theo học). 재학 중이에요(đang theo học). ↔ 졸업(tốt nghiệp)." },
+  { kr:"정답", en:"correct answer", vi:"đáp án đúng", type:"acad",
+    note:"정(正, đúng) + 답(答). 정답을 맞히다(đoán đúng đáp án). 정답률(tỷ lệ đúng). ↔ 오답(đáp án sai)." },
+  { kr:"정치학", en:"political science", vi:"khoa học chính trị", type:"degree",
+    note:"정치(政治) + 학(學). 정치학과(khoa khoa học chính trị). 정치학자(nhà khoa học chính trị)." },
+  { kr:"제자", en:"student, disciple", vi:"học trò, đệ tử", type:"school",
+    note:"제자(弟子). 스승과 제자(thầy và trò). 훌륭한 제자(học trò xuất sắc). 유교 문화에서 중요한 개념." },
+  { kr:"조교", en:"teaching assistant, lab assistant", vi:"trợ giảng, phụ tá", type:"school",
+    note:"조교(助敎). 조교를 뽑다(tuyển trợ giảng). 실험실 조교(trợ lý phòng thí nghiệm)." },
+  { kr:"졸업식", en:"graduation ceremony", vi:"lễ tốt nghiệp", type:"school",
+    note:"졸업(tốt nghiệp) + 식(式, lễ). 졸업식에서 우는 경우가 많아요(nhiều người khóc ở lễ tốt nghiệp)." },
+  { kr:"주제", en:"topic, theme, subject", vi:"chủ đề", type:"acad",
+    note:"주제(主題). 논문 주제(chủ đề luận văn). 발표 주제(chủ đề bài thuyết trình). 주제를 정하다(xác định chủ đề)." },
+  { kr:"줄거리", en:"plot, storyline, summary", vi:"tóm tắt nội dung", type:"acad",
+    note:"줄(hàng/chuỗi) + 거리(nội dung). 소설 줄거리(cốt truyện tiểu thuyết). 줄거리를 요약하다(tóm tắt cốt truyện)." },
+  { kr:"중급", en:"intermediate level", vi:"trung cấp, trung bình", type:"acad",
+    note:"중급(中級). 중급 한국어(tiếng Hàn trung cấp). 초급-중급-고급(sơ-trung-cao cấp). TOPIK 3~4급." },
+  { kr:"지식", en:"knowledge, information", vi:"kiến thức, tri thức", type:"acad",
+    note:"지식(知識). 지식을 쌓다(tích lũy kiến thức). 전문 지식(kiến thức chuyên môn). 상식과 구별." },
+  { kr:"진학", en:"advancing to a higher school", vi:"lên cấp, học lên cao", type:"school",
+    note:"진학(進學). 대학에 진학하다(tiến lên đại học). 대학원 진학(học lên cao học). 진학 상담(tư vấn học lên)." },
+  { kr:"참고", en:"reference, consultation", vi:"tham khảo", type:"acad",
+    note:"참고(參考). 참고하다 = tham khảo. 참고 자료(tài liệu tham khảo). 참고 문헌(tài liệu tham chiếu)." },
+  { kr:"천재", en:"genius; natural disaster", vi:"thiên tài; thiên tai", type:"acad",
+    note:"두 가지: (1) 天才 — thiên tài (음악 천재 = thiên tài âm nhạc), (2) 天災 — thiên tai. Ngữ cảnh phân biệt." },
+  { kr:"철학", en:"philosophy", vi:"triết học", type:"degree",
+    note:"철학(哲學). 철학과(khoa triết học). 철학자(triết gia). 인생 철학(triết lý sống)." },
+  { kr:"체육", en:"physical education, gym class", vi:"thể dục (môn học)", type:"school",
+    note:"체육(體育). 체육 수업(tiết thể dục). 체육관(phòng thể dục). 체육 선생님(thầy/cô thể dục)." },
+  { kr:"초급", en:"beginner level", vi:"cấp độ sơ cấp", type:"acad",
+    note:"초급(初級). 초급 한국어(tiếng Hàn sơ cấp). 초급-중급-고급. TOPIK 1~2급. 초보자용." },
+  { kr:"초보자", en:"beginner, novice", vi:"người mới bắt đầu", type:"acad",
+    note:"초보(初步) + 자(者). 초보자 코스(khóa học dành cho người mới). 초보자를 위한 안내(hướng dẫn cho người mới)." },
+  { kr:"출석", en:"attendance, being present", vi:"có mặt, điểm danh", type:"school",
+    note:"출석(出席). 출석을 부르다(điểm danh). 출석률(tỷ lệ chuyên cần). ↔ 결석(vắng mặt)." },
+  { kr:"캠퍼스", en:"campus", vi:"khuôn viên trường", type:"school",
+    note:"campus에서. 캠퍼스 생활(cuộc sống campus). 아름다운 캠퍼스(khuôn viên trường đẹp)." },
+  { kr:"토론", en:"discussion, debate", vi:"tranh luận, thảo luận", type:"acad",
+    note:"토론(討論). 토론하다 = tranh luận. 자유 토론(thảo luận tự do). 토론 대회(cuộc thi tranh luận)." },
+  { kr:"통계", en:"statistics", vi:"thống kê", type:"acad",
+    note:"통계(統計). 통계 자료(số liệu thống kê). 통계청(Tổng cục Thống kê). 통계를 내다(lập thống kê)." },
+  { kr:"통역", en:"interpretation (verbal)", vi:"phiên dịch", type:"lang",
+    note:"통역(通譯). 통역하다 = phiên dịch. 동시 통역(phiên dịch đồng thời). ↔ 번역(dịch viết)." },
+  { kr:"풀이", en:"explanation, solution, interpretation", vi:"diễn giải, giải thích", type:"acad",
+    note:"풀다 → 풀이. 문제 풀이(giải bài tập). 낱말 풀이(giải thích từ). 수학 풀이 과정(quá trình giải toán)." },
+  { kr:"학과", en:"department (at university)", vi:"khoa đại học", type:"school",
+    note:"학과(學科). 어느 학과예요?(bạn học khoa nào?). 한국어학과(khoa tiếng Hàn). 학과 사무실(văn phòng khoa)." },
+  { kr:"학력", en:"educational background", vi:"trình độ học vấn", type:"school",
+    note:"학력(學力/學歷). 두 가지: (1) 學力 — năng lực học tập, (2) 學歷 — trình độ học vấn(이력서에 씀)." },
+  { kr:"학문", en:"academic study, scholarship", vi:"học thuật, học vấn", type:"acad",
+    note:"학문(學問). 학문을 닦다(trau dồi học vấn). 학문적(mang tính học thuật). 학문의 자유(tự do học thuật)." },
+  { kr:"학비", en:"tuition fee, school fees", vi:"học phí", type:"school",
+    note:"학비(學費). 학비가 비싸요(học phí đắt). 학비를 내다(đóng học phí). 등록금과 유사." },
+  { kr:"학습", en:"learning, study", vi:"học tập", type:"school",
+    note:"학습(學習). 학습하다 = học tập. 자기 주도 학습(học tự định hướng). 학습 능력(năng lực học tập)." },
+  { kr:"학점", en:"grade, credit hour", vi:"điểm tín chỉ", type:"school",
+    note:"학점(學點). 학점을 받다(nhận điểm tín chỉ). 학점이 좋다(điểm tín chỉ cao). 졸업 학점(tín chỉ tốt nghiệp)." },
+  { kr:"한국학", en:"Korean studies", vi:"Hàn Quốc học", type:"degree",
+    note:"한국(韓國) + 학(學). 한국학을 연구하다(nghiên cứu Hàn Quốc học). 외국인 한국학 연구자." },
+  { kr:"합격자", en:"successful candidate, person who passed", vi:"người đỗ, người trúng tuyển", type:"school",
+    note:"합격(đỗ) + 자(者). 합격자 발표(thông báo danh sách trúng tuyển). 합격자 명단(danh sách người đỗ)." },
+  { kr:"형용사", en:"adjective", vi:"tính từ", type:"lang",
+    note:"형용사(形容詞). 한국어 품사. 좋다, 크다 등. 형용사는 명사를 꾸밈. 동사와 구별해야 함." },
+  { kr:"호칭", en:"title, form of address", vi:"danh xưng, cách gọi", type:"lang",
+    note:"호칭(呼稱). 한국어 호칭은 복잡해요(danh xưng tiếng Hàn rất phức tạp). 선생님, 오빠 등이 호칭." },
+  { kr:"휴학", en:"leave of absence from school", vi:"bảo lưu, nghỉ học tạm thời", type:"school",
+    note:"휴학(休學). 휴학하다 = bảo lưu. 군대 때문에 휴학하다(bảo lưu vì đi nghĩa vụ). 복학(quay lại học)." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let tagHtml;
+    if      (item.type === 'lang')   tagHtml = `<span class="tag tag-lang">Ngôn ngữ học</span>`;
+    else if (item.type === 'school') tagHtml = `<span class="tag tag-school">Trường học</span>`;
+    else if (item.type === 'acad')   tagHtml = `<span class="tag tag-acad">Học thuật</span>`;
+    else if (item.type === 'item')   tagHtml = `<span class="tag tag-item">Tài liệu/DC</span>`;
+    else                             tagHtml = `<span class="tag tag-degree">CM/Bằng cấp</span>`;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${tagHtml}</td>
+      <td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || item.note.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
