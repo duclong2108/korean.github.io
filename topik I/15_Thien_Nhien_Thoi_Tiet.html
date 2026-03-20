@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Thiên nhiên & Động vật</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2f8f2;
+    --card: #ffffff;
+    --accent: #2a6a2a;
+    --text: #0c200c;
+    --sub: #5a8a5a;
+    --border: #c4dcc4;
+    --tag-hv: #e0f0d8;
+    --tag-pure: #e8f4fc;
+    --tag-loan: #faf0e0;
+    --highlight: #ecf8ec;
+    --row-alt: #f7fdf7;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f2f8f2;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '자연';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #7aaa7a; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f2f8f2; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 130px; }
+  th:nth-child(3), td:nth-child(3) { width: 160px; }
+  th:nth-child(4), td:nth-child(4) { width: 185px; }
+  th:nth-child(5), td:nth-child(5) { width: 155px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
+  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #1a4a10; font-weight: 500; }
+  .hv-tag.pure { background: var(--tag-pure); color: #0a3060; }
+  .hv-tag.loan { background: var(--tag-loan); color: #6a4010; }
+  .hv-hanja { font-weight: 600; font-size: 13px; }
+  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
+  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
+  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
+  .explain { font-size: 13px; color: #0e2e0e; line-height: 1.6; }
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>자연 & 동물 — Thiên nhiên & Động vật</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Thiên nhiên · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="hv">Hán Việt</button>
+  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Thiên nhiên & Động vật</div>
+
+<script>
+const vocab = [
+  { kr:"가지", en:"branch; eggplant", vi:"cành (cây), cà tím", hv:null, hvR:"thuần Hàn (2 nghĩa)", type:"pure",
+    explain:"Hai nghĩa: (1) cành cây — 나뭇가지(cành cây), (2) cà tím — 가지볶음(cà tím xào). Ngữ cảnh phân biệt.",
+    ex:"나뭇가지가 부러졌어요.", exVi:"Cành cây đã gãy rồi." },
+  { kr:"강", en:"river", vi:"con sông", hv:"江", hvR:"giang", type:"hv",
+    explain:"Con sông. 한강 = sông Hàn. 강을 건너다 = vượt sông. 강가 = bờ sông. 강물 = nước sông.",
+    ex:"강이 정말 넓어요.", exVi:"Con sông thật rộng." },
+  { kr:"강아지", en:"puppy, dog (affectionate)", vi:"con chó con, cún con", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Chó con hoặc cách gọi thân mật cho chó nói chung. 강아지를 키우다 = nuôi chó. 귀여운 강아지 = cún dễ thương.",
+    ex:"강아지가 너무 귀여워요.", exVi:"Con chó con dễ thương quá." },
+  { kr:"개", en:"dog; piece (counter)", vi:"con chó; ...cái (đơn vị đếm)", hv:null, hvR:"thuần Hàn (2 nghĩa)", type:"pure",
+    explain:"Hai nghĩa: (1) con chó — 개가 짖다(chó sủa), (2) đơn vị đếm đồ vật — 사과 세 개(ba quả táo).",
+    ex:"개가 짖어요.", exVi:"Con chó đang sủa." },
+  { kr:"개나리", en:"forsythia", vi:"hoa liên kiều (hoa vàng)", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Hoa liên kiều màu vàng — một trong những loài hoa đầu tiên nở vào mùa xuân Hàn Quốc. Biểu tượng của mùa xuân.",
+    ex:"봄에 개나리가 피어요.", exVi:"Mùa xuân hoa liên kiều nở." },
+  { kr:"경치", en:"scenery, view, landscape", vi:"cảnh đẹp, phong cảnh", hv:"景致", hvR:"cảnh trí", type:"hv",
+    explain:"Cảnh đẹp thiên nhiên. 경치가 좋다 = cảnh đẹp. 경치를 감상하다 = thưởng thức phong cảnh.",
+    ex:"경치가 정말 아름다워요.", exVi:"Phong cảnh thật tuyệt đẹp." },
+  { kr:"고양이", en:"cat", vi:"con mèo", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Con mèo. 고양이를 키우다 = nuôi mèo. 고양이가 야옹 해요 = mèo kêu meo meo. 길고양이 = mèo hoang.",
+    ex:"고양이를 키우고 싶어요.", exVi:"Tôi muốn nuôi mèo." },
+  { kr:"공기", en:"air", vi:"không khí", hv:"空氣", hvR:"không khí", type:"hv",
+    explain:"Không khí. 공기가 맑다 = không khí trong lành. 공기가 나쁘다 = không khí ô nhiễm. 신선한 공기 = không khí trong lành.",
+    ex:"공기가 맑고 좋아요.", exVi:"Không khí trong lành và tốt." },
+  { kr:"구름", en:"cloud", vi:"đám mây", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Đám mây. 구름이 끼다 = mây kéo đến. 구름이 걷히다 = mây tan. 먹구름 = mây đen.",
+    ex:"하늘에 구름이 많아요.", exVi:"Trên bầu trời có nhiều mây." },
+  { kr:"기온", en:"temperature (air)", vi:"nhiệt độ (không khí)", hv:"氣溫", hvR:"khí ôn", type:"hv",
+    explain:"Nhiệt độ không khí. 기온이 올라가다/내려가다 = nhiệt độ tăng/giảm. 최고 기온 = nhiệt độ cao nhất.",
+    ex:"오늘 기온이 30도예요.", exVi:"Hôm nay nhiệt độ 30 độ." },
+  { kr:"꽃", en:"flower, blossom", vi:"bông hoa", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Bông hoa. 꽃이 피다 = hoa nở. 꽃이 지다 = hoa rụng. 꽃을 꺾다 = ngắt hoa. 꽃다발 = bó hoa.",
+    ex:"봄에 꽃이 활짝 피어요.", exVi:"Mùa xuân hoa nở rộ." },
+  { kr:"나무", en:"tree, wood", vi:"cây (cây cối)", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Cây cối hoặc gỗ. 나무를 심다 = trồng cây. 나무가 자라다 = cây lớn lên. 나뭇잎 = lá cây.",
+    ex:"공원에 나무가 많아요.", exVi:"Trong công viên có nhiều cây." },
+  { kr:"날씨", en:"weather", vi:"thời tiết", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Thời tiết. 날씨가 좋다/나쁘다 = thời tiết đẹp/xấu. 날씨가 어때요? = Thời tiết thế nào?",
+    ex:"오늘 날씨가 어때요?", exVi:"Hôm nay thời tiết thế nào?" },
+  { kr:"눈사람", en:"snowman", vi:"người tuyết", hv:null, hvR:"thuần Hàn (눈=tuyết + 사람=người)", type:"pure",
+    explain:"Người tuyết. 눈(tuyết) + 사람(người). 눈사람을 만들다 = làm người tuyết.",
+    ex:"눈사람을 만들었어요.", exVi:"Tôi đã làm người tuyết." },
+  { kr:"동물", en:"animal", vi:"động vật, con vật", hv:"動物", hvR:"động vật", type:"hv",
+    explain:"Động vật nói chung. 동물원 = vườn thú. 야생 동물 = động vật hoang dã. 반려동물 = thú cưng.",
+    ex:"동물원에 갔어요.", exVi:"Tôi đã đến vườn thú." },
+  { kr:"돼지", en:"pig", vi:"con lợn, con heo", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Con lợn/heo. 돼지고기 = thịt heo. 돼지 저금통 = heo đất. 꿈에 돼지를 보면 좋다 = mơ thấy heo là điềm may.",
+    ex:"돼지 저금통에 돈을 모아요.", exVi:"Tôi tiết kiệm tiền trong heo đất." },
+  { kr:"들", en:"field; (plural suffix)", vi:"cánh đồng; (hậu tố số nhiều)", hv:null, hvR:"thuần Hàn (2 nghĩa)", type:"pure",
+    explain:"Hai nghĩa: (1) cánh đồng — 들판(bãi cỏ rộng), (2) hậu tố số nhiều — 친구들(các bạn), 사람들(mọi người).",
+    ex:"들판에 꽃이 피었어요.", exVi:"Hoa nở trên cánh đồng." },
+  { kr:"무궁화", en:"Rose of Sharon, hibiscus", vi:"hoa Hàn Quốc (hoa vô cùng)", hv:"無窮花", hvR:"vô cùng hoa", type:"hv",
+    explain:"Quốc hoa của Hàn Quốc. 무궁(無窮, vô tận) + 화(花, hoa). Biểu tượng cho sức bền và tinh thần bất khuất của người Hàn.",
+    ex:"무궁화는 한국의 국화예요.", exVi:"Hoa vô cùng là quốc hoa của Hàn Quốc." },
+  { kr:"바다", en:"sea, ocean", vi:"biển", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Biển, đại dương. 바다에 가다 = đi biển. 바닷가 = bãi biển. 바다가 깊다 = biển sâu.",
+    ex:"여름에 바다에 가요.", exVi:"Mùa hè tôi đi biển." },
+  { kr:"바닷가", en:"beach, seaside", vi:"bãi biển", hv:null, hvR:"thuần Hàn (바다+가)", type:"pure",
+    explain:"Bãi biển, bờ biển. 바다(biển) + 가(bên cạnh). 바닷가에서 수영하다 = bơi ở bãi biển.",
+    ex:"바닷가에서 놀았어요.", exVi:"Tôi đã vui chơi ở bãi biển." },
+  { kr:"바람", en:"wind", vi:"gió", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Gió. 바람이 불다 = gió thổi. 바람이 강하다 = gió mạnh. 산들바람 = gió nhẹ. 바람이 차다 = gió lạnh.",
+    ex:"바람이 많이 불어요.", exVi:"Gió thổi nhiều quá." },
+  { kr:"벚꽃", en:"cherry blossom", vi:"hoa anh đào", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Hoa anh đào — biểu tượng mùa xuân Hàn Quốc. 벚꽃이 피다 = hoa anh đào nở. 벚꽃 축제 = lễ hội hoa anh đào.",
+    ex:"봄에 벚꽃이 정말 예뻐요.", exVi:"Mùa xuân hoa anh đào thật đẹp." },
+  { kr:"별", en:"star", vi:"ngôi sao", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Ngôi sao trên trời. 별이 빛나다 = sao lấp lánh. 별자리 = chòm sao. 별을 세다 = đếm sao.",
+    ex:"밤하늘에 별이 많아요.", exVi:"Trên bầu trời đêm có nhiều sao." },
+  { kr:"불", en:"fire; light", vi:"lửa; đèn điện", hv:null, hvR:"thuần Hàn (2 nghĩa)", type:"pure",
+    explain:"Hai nghĩa: (1) lửa — 불이 나다(bốc cháy), (2) đèn/ánh sáng — 불을 켜다/끄다(bật/tắt đèn).",
+    ex:"불을 켜 주세요.", exVi:"Bật đèn lên giúp tôi." },
+  { kr:"비", en:"rain", vi:"mưa", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Mưa. 비가 오다 = trời mưa. 비가 그치다 = mưa tạnh. 소나기 = mưa rào. 장마 = mùa mưa.",
+    ex:"비가 많이 와요.", exVi:"Trời mưa to lắm." },
+  { kr:"산", en:"mountain", vi:"núi", hv:"山", hvR:"sơn", type:"hv",
+    explain:"Núi. 산에 오르다 = leo núi. 산이 높다 = núi cao. 한라산 = núi Hallasan (cao nhất Hàn Quốc).",
+    ex:"산이 정말 아름다워요.", exVi:"Núi thật tuyệt đẹp." },
+  { kr:"새", en:"bird; new", vi:"con chim; mới", hv:null, hvR:"thuần Hàn (2 nghĩa)", type:"pure",
+    explain:"Hai nghĩa: (1) con chim — 새가 날다(chim bay), (2) mới — 새 학기(học kỳ mới), 새 옷(quần áo mới).",
+    ex:"새가 지저귀어요.", exVi:"Con chim đang hót." },
+  { kr:"섬", en:"island", vi:"hòn đảo", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Hòn đảo. 제주도는 섬이에요 = Jeju là một hòn đảo. 무인도 = đảo hoang.",
+    ex:"섬에 가고 싶어요.", exVi:"Tôi muốn đến đảo." },
+  { kr:"소", en:"cow, ox; small/prefix", vi:"nhỏ; con bò", hv:"小/牛", hvR:"tiểu / ngưu", type:"hv",
+    explain:"Hai nghĩa: (1) 牛 — con bò (소가 음매 = bò kêu), (2) 小 — nhỏ, tiền tố (소형=nhỏ). Chú ý: 소고기=thịt bò.",
+    ex:"소가 풀을 먹어요.", exVi:"Con bò đang ăn cỏ." },
+  { kr:"송이", en:"cluster, bunch; mushroom (counter)", vi:"chùm (hoa); cây nấm", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Đơn vị đếm hoa hoặc nấm. 꽃 한 송이 = một bông hoa. 버섯 두 송이 = hai cây nấm.",
+    ex:"꽃 한 송이 주세요.", exVi:"Cho tôi một bông hoa." },
+  { kr:"시골", en:"countryside, rural area", vi:"nông thôn, miền quê", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Nông thôn, miền quê. 시골에 살다 = sống ở nông thôn. 시골 공기 = không khí quê hương. Đối lập với 도시.",
+    ex:"시골이 조용하고 좋아요.", exVi:"Nông thôn yên tĩnh và dễ chịu." },
+  { kr:"양", en:"sheep; amount, quantity", vi:"lượng, số lượng; con cừu", hv:"量/羊", hvR:"lượng / dương", type:"hv",
+    explain:"Hai nghĩa: (1) 羊 — con cừu (양 떼 = đàn cừu), (2) 量 — lượng, số lượng (양이 많다 = lượng nhiều).",
+    ex:"양이 풀을 먹어요.", exVi:"Con cừu đang ăn cỏ." },
+  { kr:"영하", en:"below zero, subzero", vi:"dưới 0 độ, âm độ", hv:"零下", hvR:"linh hạ", type:"hv",
+    explain:"Nhiệt độ dưới 0 độ. 영(零, số không) + 하(下, dưới). 영하 10도 = âm 10 độ. 영하로 떨어지다 = xuống dưới 0 độ.",
+    ex:"오늘 영하 5도예요.", exVi:"Hôm nay âm 5 độ." },
+  { kr:"오리", en:"duck", vi:"con vịt", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Con vịt. 오리가 꽥꽥 해요 = vịt kêu quạc quạc. 오리 고기 = thịt vịt. 청둥오리 = vịt trời.",
+    ex:"연못에 오리가 있어요.", exVi:"Trong hồ có con vịt." },
+  { kr:"우산", en:"umbrella", vi:"dù, ô che mưa", hv:"雨傘", hvR:"vũ tán", type:"hv",
+    explain:"Cái dù, cái ô. 우(雨, mưa) + 산(傘, dù). 우산을 쓰다 = che dù. 우산을 잃어버리다 = mất dù.",
+    ex:"비가 와서 우산을 썼어요.", exVi:"Trời mưa nên tôi che dù." },
+  { kr:"일기예보", en:"weather forecast", vi:"dự báo thời tiết", hv:"日氣豫報", hvR:"nhật khí dự báo", type:"hv",
+    explain:"Dự báo thời tiết. 일기예보를 보다 = xem dự báo thời tiết. 일기예보에 따르면 = theo dự báo thời tiết.",
+    ex:"일기예보를 확인했어요.", exVi:"Tôi đã kiểm tra dự báo thời tiết." },
+  { kr:"자연", en:"nature", vi:"thiên nhiên", hv:"自然", hvR:"tự nhiên", type:"hv",
+    explain:"Thiên nhiên. 자연이 아름답다 = thiên nhiên đẹp. 자연을 보호하다 = bảo vệ thiên nhiên. 자연환경 = môi trường tự nhiên.",
+    ex:"자연이 참 아름다워요.", exVi:"Thiên nhiên thật tuyệt đẹp." },
+  { kr:"장마", en:"rainy season, monsoon", vi:"mùa mưa", hv:"長雨", hvR:"trường vũ", type:"hv",
+    explain:"Mùa mưa Hàn Quốc, thường từ cuối tháng 6 đến đầu tháng 8. Mưa liên tục trong nhiều tuần.",
+    ex:"장마가 시작됐어요.", exVi:"Mùa mưa đã bắt đầu rồi." },
+  { kr:"장마철", en:"rainy season period", vi:"thời kỳ mưa", hv:"長雨節", hvR:"trường vũ tiết", type:"hv",
+    explain:"Thời kỳ mùa mưa. 장마(mùa mưa) + 철(thời kỳ/mùa). Cụ thể hơn 장마, nhấn mạnh tính thời kỳ.",
+    ex:"장마철에는 습도가 높아요.", exVi:"Trong mùa mưa độ ẩm rất cao." },
+  { kr:"장미", en:"rose", vi:"hoa hồng", hv:"薔薇", hvR:"tường vi", type:"hv",
+    explain:"Hoa hồng. 장미꽃 = bông hoa hồng. 빨간 장미 = hoa hồng đỏ. 장미를 선물하다 = tặng hoa hồng.",
+    ex:"빨간 장미가 예뻐요.", exVi:"Hoa hồng đỏ đẹp quá." },
+  { kr:"진달래", en:"azalea", vi:"hoa đỗ quyên (azalea)", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Hoa đỗ quyên — hoa màu hồng tím nở vào mùa xuân Hàn Quốc. Rất được yêu thích và xuất hiện nhiều trong thơ ca.",
+    ex:"진달래가 산에 가득 피었어요.", exVi:"Hoa đỗ quyên nở đầy trên núi." },
+  { kr:"태풍", en:"typhoon", vi:"bão (nhiệt đới)", hv:"颱風", hvR:"đài phong", type:"hv",
+    explain:"Bão nhiệt đới. 태풍이 오다 = bão đến. 태풍 경보 = cảnh báo bão. Mùa bão ở Hàn thường vào tháng 7–9.",
+    ex:"태풍이 오고 있어요.", exVi:"Bão đang đến." },
+  { kr:"풀", en:"grass; glue; pool", vi:"hồ; cỏ", hv:null, hvR:"thuần Hàn (2 nghĩa)", type:"pure",
+    explain:"Hai nghĩa phổ biến: (1) cỏ — 풀이 자라다(cỏ mọc), (2) hồ dán — 풀로 붙이다(dán bằng hồ). Cũng là tiếng Anh 'pool' (수영장).",
+    ex:"풀밭에 앉았어요.", exVi:"Tôi đã ngồi trên bãi cỏ." },
+  { kr:"하늘", en:"sky", vi:"bầu trời", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Bầu trời. 하늘이 맑다 = trời trong xanh. 하늘을 날다 = bay trên trời. 하늘색 = màu xanh da trời.",
+    ex:"하늘이 정말 맑아요.", exVi:"Bầu trời thật trong xanh." },
+  { kr:"학", en:"crane (bird)", vi:"con hạc (chim)", hv:"鶴", hvR:"hạc", type:"hv",
+    explain:"Con hạc — loài chim biểu tượng của trường thọ và may mắn trong văn hóa Hàn. 두루미 cũng là tên khác của hạc.",
+    ex:"학이 날아가요.", exVi:"Con hạc đang bay đi." },
+  { kr:"햇빛", en:"sunlight, sunshine", vi:"ánh nắng mặt trời", hv:null, hvR:"thuần Hàn (해=mặt trời + 빛=ánh sáng)", type:"pure",
+    explain:"Ánh nắng mặt trời. 햇빛이 강하다 = nắng mạnh. 햇빛을 받다 = đón nắng. 햇빛 차단 = chống nắng.",
+    ex:"햇빛이 너무 강해요.", exVi:"Nắng mạnh quá." },
+  { kr:"호랑이", en:"tiger", vi:"con hổ, hổ", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Con hổ — biểu tượng quan trọng nhất của văn hóa Hàn Quốc. Xuất hiện nhiều trong truyện cổ tích và biểu tượng dân tộc.",
+    ex:"호랑이는 용감한 동물이에요.", exVi:"Hổ là loài động vật dũng mãnh." },
+  { kr:"흐리다", en:"to be cloudy, overcast", vi:"흐리다 (trời흐림, mây)", hv:null, hvR:"thuần Hàn", type:"pure",
+    explain:"Tính từ/động từ chỉ trời nhiều mây, u ám. 하늘이 흐리다 = trời nhiều mây. 날씨가 흐려요 = thời tiết âm u.",
+    ex:"오늘은 날씨가 흐려요.", exVi:"Hôm nay thời tiết nhiều mây." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let hvCell;
+    if (item.type === 'hv') {
+      hvCell = `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+    } else if (item.type === 'pure') {
+      hvCell = `<span class="hv-tag pure">Thuần Hàn</span><span class="hv-reading">${item.hvR}</span>`;
+    } else {
+      hvCell = `<span class="hv-tag loan">Vay mượn</span><span class="hv-reading">${item.hvR}</span>`;
+    }
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${hvCell}</td>
+      <td><span class="explain">${item.explain}</span></td>
+      <td>
+        <span class="example-kr">${item.ex}</span>
+        <span class="example-vi">${item.exVi}</span>
+      </td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || (item.hv && item.hv.includes(q))
+      || item.hvR.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
