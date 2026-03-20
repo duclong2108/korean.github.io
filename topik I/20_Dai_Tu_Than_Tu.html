@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Đại từ & Giao tiếp cơ bản</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f0f5fa;
+    --card: #ffffff;
+    --accent: #1a4a7a;
+    --text: #081828;
+    --sub: #5a7a9a;
+    --border: #c4d4e8;
+    --tag-pro: #dce8f8;
+    --tag-greet: #e0f8e8;
+    --tag-expr: #fef8e0;
+    --tag-particle: #f8e8f8;
+    --tag-demo: #f8ece0;
+    --highlight: #eaf4ff;
+    --row-alt: #f6fafd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f0f5fa;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '대화';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #7a9aba; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 7px 13px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f0f5fa; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 170px; }
+  th:nth-child(3), td:nth-child(3) { width: 200px; }
+  th:nth-child(4), td:nth-child(4) { width: 210px; }
+  th:nth-child(5), td:nth-child(5) { width: 130px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 17px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
+  .tag-pro    { background: var(--tag-pro);     color: #0a2a60; }
+  .tag-greet  { background: var(--tag-greet);   color: #0a4020; }
+  .tag-expr   { background: var(--tag-expr);    color: #5a3a00; }
+  .tag-particle { background: var(--tag-particle); color: #5a0a6a; }
+  .tag-demo   { background: var(--tag-demo);    color: #6a2a00; }
+  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>대화 기본 — Đại từ & Giao tiếp cơ bản</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Hội thoại hàng ngày · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="pro">Đại từ</button>
+  <button class="filter-btn" data-filter="demo">Từ chỉ định</button>
+  <button class="filter-btn" data-filter="greet">Chào hỏi</button>
+  <button class="filter-btn" data-filter="expr">Thành ngữ</button>
+  <button class="filter-btn" data-filter="particle">Hậu tố/Kính ngữ</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th><th>Từ / Cụm từ</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
+        <th>Phân loại</th><th>Ghi chú & Cách dùng</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Đại từ & Giao tiếp cơ bản</div>
+
+<script>
+// type: 'pro'=Đại từ, 'demo'=Từ chỉ định (이/그/저), 'greet'=Chào hỏi, 'expr'=Thành ngữ/Biểu đạt, 'particle'=Hậu tố/Kính ngữ
+const vocab = [
+  { kr:"감사드립니다", en:"Thank you (very formal, humble)", vi:"Cảm ơn (rất trang trọng)", type:"greet",
+    note:"감사합니다보다 더 겸손한 표현. 드리다(주다의 겸양어). Dùng khi cảm ơn người bề trên một cách rất khiêm tốn." },
+  { kr:"감사합니다", en:"Thank you", vi:"Cảm ơn bạn", type:"greet",
+    note:"가장 일반적인 감사 표현. 일상, 업무, 서비스 등 어디서나 사용. Phổ biến nhất trong giao tiếp." },
+  { kr:"개인", en:"individual, personal", vi:"cá nhân", type:"pro",
+    note:"개인(個人). 개인 정보(thông tin cá nhân). 개인적으로(cá nhân tôi). 개인 사업(kinh doanh cá nhân)." },
+  { kr:"것", en:"thing, fact, the one that", vi:"cái đó, điều đó", type:"pro",
+    note:"거의 모든 명사 대신 사용. 좋은 것(cái tốt). V+는 것(việc V). 제 것(của tôi). 구어: 거." },
+  { kr:"고마웠습니다", en:"Thank you (for what you did)", vi:"Cảm ơn (đã giúp đỡ)", type:"greet",
+    note:"과거의 도움에 감사할 때. 고맙다의 과거형(formal). 많이 도와줘서 고마웠어요(cảm ơn vì đã giúp đỡ nhiều)." },
+  { kr:"고맙습니다", en:"Thank you (casual formal)", vi:"Cảm ơn bạn", type:"greet",
+    note:"고맙다의 합쇼체. 감사합니다보다 약간 더 따뜻한 뉘앙스. 고마워요(비격식) ↔ 고맙습니다(격식)." },
+  { kr:"괜찮습니다", en:"It's okay, No problem", vi:"Không sao đâu", type:"expr",
+    note:"괜찮아요의 격식체. 걱정 말라고 할 때. 미안하다는 말에 답할 때: 괜찮습니다(không sao đâu)." },
+  { kr:"그", en:"it, that (near listener)", vi:"đó, ấy", type:"demo",
+    note:"이-그-저 지시체계. 그 사람(người đó). 그 책(quyển sách đó). Chỉ thứ gần người nghe." },
+  { kr:"그거", en:"that thing (casual)", vi:"cái đó (thân mật)", type:"demo",
+    note:"그것의 구어체. 그거 뭐예요?(cái đó là gì vậy?). 그거 줘(đưa cái đó cho tôi). 대화체에서 자주." },
+  { kr:"그것", en:"that thing", vi:"cái đó", type:"demo",
+    note:"그 + 것. 그것은 무엇입니까?(cái đó là gì?). 이것-그것-저것 지시 체계의 중간 항." },
+  { kr:"그곳", en:"that place, there", vi:"nơi đó", type:"demo",
+    note:"그 + 곳. 그곳에 가 봤어요?(bạn đã đến nơi đó chưa?). 이곳-그곳-저곳 지시 체계." },
+  { kr:"그들", en:"they, them", vi:"họ, bọn họ", type:"pro",
+    note:"주로 문어체. 그들은 한국 사람이에요(họ là người Hàn Quốc). 구어: 그 사람들, 걔들." },
+  { kr:"그래", en:"Yes, Yeah, Okay (casual)", vi:"Ừ, Vâng (thân mật)", type:"expr",
+    note:"친한 사이에서 동의/긍정. 그래요(격식체). 그래, 알겠어(ừ, hiểu rồi). ↔ 아니(아니오)." },
+  { kr:"그렇구나", en:"Oh I see, Is that so", vi:"À ra vậy, ừ nhỉ", type:"expr",
+    note:"새로운 정보에 반응. 그렇구나, 몰랐어(à ra vậy, tôi không biết). 그렇군요(격식). 상대 말에 공감." },
+  { kr:"그렇습니다", en:"That's right (formal)", vi:"Đúng vậy (trang trọng)", type:"expr",
+    note:"그렇다의 격식체. 네, 그렇습니다(vâng, đúng vậy). 회의/공식 상황에서 많이 사용." },
+  { kr:"그분", en:"that person (honorific)", vi:"người đó (kính ngữ)", type:"pro",
+    note:"그 사람의 존칭. 그분이 선생님이에요(người đó là giáo viên). 이분-그분-저분 존칭 체계." },
+  { kr:"그쪽", en:"that way; you (indirect polite)", vi:"phía đó; người đó", type:"pro",
+    note:"두 가지: 방향(hướng đó) 또는 상대방을 간접 지칭. 그쪽은요?(còn phía bạn thì sao?). Lịch sự hơn 당신." },
+  { kr:"글쎄요", en:"Well, I'm not sure, Hmm", vi:"Hm, tôi không biết", type:"expr",
+    note:"확신 없을 때 또는 시간이 필요할 때. 글쎄요, 잘 모르겠어요(hmm, tôi không chắc). 대화 채우기 표현." },
+  { kr:"나", en:"I, me (casual)", vi:"tôi (thân mật)", type:"pro",
+    note:"친한 사이 또는 아랫사람에게. 나는(주격), 나를(목적격), 나의→내(소유격). ↔ 저(겸손체)." },
+  { kr:"내", en:"my, mine (casual)", vi:"của tôi, tôi (thân mật)", type:"pro",
+    note:"나의의 축약형. 내 가방(túi của tôi). 내가(주격, thân mật). ↔ 제(저의, khiêm tốn)." },
+  { kr:"내가", en:"I (subject, casual)", vi:"tôi (chủ ngữ, thân mật)", type:"pro",
+    note:"나 + 가(주격조사). 내가 할게(tôi sẽ làm). 내가 잘못했어(lỗi của tôi). ↔ 제가(겸양)." },
+  { kr:"너", en:"you (casual, informal)", vi:"bạn (thân mật)", type:"pro",
+    note:"친한 사이/아랫사람에게만. 너는(주격), 너를/널(목적격), 너의→네(소유격). 낯선 사람에게 사용 금지." },
+  { kr:"네", en:"yes; number 4 (before counter)", vi:"vâng; số 4", type:"expr",
+    note:"두 가지: 네(예의 있는 긍정), 네 개(bốn cái - trước danh từ). 예와 동의. 네, 알겠습니다(vâng, hiểu rồi)." },
+  { kr:"누가", en:"who (subject)", vi:"ai (chủ ngữ)", type:"pro",
+    note:"누구 + 가(주격조사). 누가 했어요?(ai đã làm vậy?). 누가 왔어요?(ai đến rồi?)." },
+  { kr:"누구", en:"who", vi:"ai", type:"pro",
+    note:"의문대명사. 누구예요?(là ai vậy?). 누구를 만났어요?(đã gặp ai?). 누가(주격), 누구를(목적격)." },
+  { kr:"님", en:"Mr./Ms./Sir (honorific suffix)", vi:"ngài, ông/bà (hậu tố kính ngữ)", type:"particle",
+    note:"이름/직함 뒤에 붙임. 선생님(thầy/cô giáo). 김철수 님(ông Kim Cheolsu). SNS에서도 자주 사용." },
+  { kr:"당신", en:"you (formal/literary)", vi:"bạn (trang trọng)", type:"pro",
+    note:"격식체 또는 문학적 표현. 일상 대화에서는 이름+씨 또는 직함 선호. 노래 가사에 자주 등장." },
+  { kr:"말씀", en:"words, speech (honorific)", vi:"lời nói (kính ngữ)", type:"particle",
+    note:"말의 존칭. 말씀하세요(mời ngài nói). 말씀드리다(thưa với ngài). 선생님 말씀(lời thầy/cô)." },
+  { kr:"맞습니다", en:"That's correct (formal)", vi:"Đúng vậy (trang trọng)", type:"expr",
+    note:"맞다의 격식체. 네, 맞습니다(vâng, đúng vậy). 공식 상황에서 확인할 때. ↔ 틀립니다(sai)." },
+  { kr:"맞아요", en:"That's right (casual)", vi:"Đúng rồi (thân mật)", type:"expr",
+    note:"맞습니다의 비격식체. 맞아요, 저도 그렇게 생각해요(đúng rồi, tôi cũng nghĩ vậy). 구어에서 자주." },
+  { kr:"모르겠습니다", en:"I don't know (formal)", vi:"Tôi không biết (trang trọng)", type:"expr",
+    note:"공식적으로 모를 때. 죄송하지만 모르겠습니다(xin lỗi nhưng tôi không biết). 격식 상황에 적합." },
+  { kr:"무슨", en:"what kind of, what", vi:"gì, loại gì", type:"pro",
+    note:"무슨 + 명사. 무슨 일이에요?(có chuyện gì vậy?). 무슨 뜻이에요?(nghĩa là gì?). 어떤과 유사." },
+  { kr:"무엇", en:"what (formal)", vi:"cái gì, điều gì", type:"pro",
+    note:"뭐의 격식체. 무엇을 원해요?(bạn muốn gì?). 무엇이 문제예요?(vấn đề là gì?). 구어: 뭐." },
+  { kr:"무엇이", en:"what (subject, formal)", vi:"cái gì (chủ ngữ)", type:"pro",
+    note:"무엇 + 이(주격조사). 무엇이 중요해요?(cái gì là quan trọng?). 무엇이 문제예요?" },
+  { kr:"뭐", en:"what (casual)", vi:"cái gì (thân mật)", type:"pro",
+    note:"무엇의 구어체. 뭐예요?(là gì vậy?). 뭐 먹을까요?(ăn gì nhỉ?). 일상 대화에서 가장 자주 사용." },
+  { kr:"미안합니다", en:"I'm sorry (formal)", vi:"Tôi xin lỗi", type:"greet",
+    note:"미안하다의 격식체. 미안해요(비격식). 정말 미안합니다(tôi thực sự xin lỗi). ↔ 죄송합니다(더 격식)." },
+  { kr:"반갑습니다", en:"Nice to meet you, Pleased to meet you", vi:"Rất vui được gặp bạn", type:"greet",
+    note:"처음 만날 때. 만나서 반갑습니다(rất vui được gặp bạn). 처음 뵙겠습니다와 함께 사용." },
+  { kr:"사람", en:"person, human, people", vi:"người", type:"pro",
+    note:"이 사람(người này). 저 사람(người kia). 한국 사람(người Hàn Quốc). 사람들(mọi người)." },
+  { kr:"성함", en:"name (honorific)", vi:"tên (kính ngữ)", type:"particle",
+    note:"이름의 존칭. 성함이 어떻게 되세요?(tên ngài là gì?). 어른이나 공식 자리에서 사용." },
+  { kr:"실례", en:"excuse, rudeness", vi:"sự thất lễ, xin lỗi", type:"greet",
+    note:"실례합니다(xin lỗi vì làm phiền/xin phép). 실례지만(xin lỗi nhưng...). 모르는 사람에게 말걸 때." },
+  { kr:"씨", en:"Mr./Ms./Miss (name suffix)", vi:"hậu tố gọi tên lịch sự", type:"particle",
+    note:"이름 뒤에 붙여 부름. 김민준 씨(anh/chị Kim Minjun). 보통 성+이름+씨. 직함보다 아래 어른에게." },
+  { kr:"아뇨", en:"No (casual)", vi:"Không (thân mật)", type:"expr",
+    note:"아니요의 구어 단축형. 아뇨, 그렇지 않아요(không, không phải vậy). 친한 관계에서 사용." },
+  { kr:"아니오", en:"No (neutral)", vi:"Không (bình thường)", type:"expr",
+    note:"아니요와 혼용. 공식 표기는 아니요. 아니오/아니요 둘 다 맞음. 표준어는 아니요." },
+  { kr:"아니요", en:"No (polite)", vi:"Không (lịch sự)", type:"expr",
+    note:"표준어. 아니요, 괜찮아요(không, không sao). 예/네의 반대. ↔ 예/네(vâng)." },
+  { kr:"아무", en:"any, anyone, no (with negative)", vi:"bất kỳ, bất cứ", type:"pro",
+    note:"아무도 없어요(không có ai). 아무거나(bất cứ thứ gì). 아무데나(bất kỳ nơi nào). 부정문에 자주." },
+  { kr:"안녕하세요", en:"Hello, Hi (polite)", vi:"Xin chào (lịch sự)", type:"greet",
+    note:"가장 기본적인 인사. 아침/낮/저녁 구분 없이 사용. 안녕하세요?(=Hi/Hello/How are you?). 필수 표현." },
+  { kr:"안녕하십니까", en:"Hello (very formal)", vi:"Xin chào (trang trọng)", type:"greet",
+    note:"합쇼체(격식). 발표/공식 행사에서 사용. 안녕하세요보다 훨씬 격식. 안녕하세요가 더 일반적." },
+  { kr:"알았습니다", en:"Understood, I got it (formal)", vi:"Tôi hiểu rồi (trang trọng)", type:"expr",
+    note:"알겠습니다와 유사. 명령이나 지시를 받았을 때. 네, 알았습니다(vâng, tôi hiểu rồi). 군대식 표현." },
+  { kr:"어느", en:"which, a certain", vi:"cái nào, nào đó", type:"pro",
+    note:"어느 + 명사. 어느 나라(nước nào). 어느 학교(trường nào). 어느 것(cái nào). 의문/불특정." },
+  { kr:"어디", en:"where", vi:"ở đâu, đâu", type:"pro",
+    note:"장소 의문. 어디예요?(ở đâu?). 어디 가요?(đi đâu?). 어디서(từ đâu). 어디에(ở đâu - không gian)." },
+  { kr:"어떤", en:"what kind of, some", vi:"nào, loại nào", type:"pro",
+    note:"어떤 + 명사. 어떤 음식을 좋아해요?(thích loại đồ ăn nào?). 어떤 사람(người như thế nào)." },
+  { kr:"어떻게", en:"how, in what way", vi:"như thế nào", type:"pro",
+    note:"방법 의문. 어떻게 해요?(làm như thế nào?). 어떻게 오셨어요?(bạn đến đây bằng cách nào?). 필수 의문사." },
+  { kr:"어떻습니까", en:"How is it? What do you think? (formal)", vi:"Thế nào rồi?", type:"expr",
+    note:"어떻다의 합쇼체 의문형. 요즘 어떻습니까?(dạo này thế nào?). 격식체. 비격식: 어때요?" },
+  { kr:"어머", en:"Oh my, Oh! (exclamation, female)", vi:"Ồ, ơi (thán từ nữ giới)", type:"expr",
+    note:"주로 여성이 사용. 어머, 어떡해(ồ trời ơi). 어머나(mạnh hơn). 놀람/당황할 때." },
+  { kr:"언제", en:"when", vi:"khi nào, lúc nào", type:"pro",
+    note:"시간 의문. 언제 와요?(khi nào đến?). 언제부터(từ khi nào). 언제까지(cho đến khi nào)." },
+  { kr:"얼마나", en:"how much, how many, how long", vi:"bao nhiêu, bao lâu", type:"pro",
+    note:"정도/양 의문. 얼마나 걸려요?(mất bao lâu?). 얼마나 멀어요?(xa bao nhiêu?). 얼마(가격)와 구별." },
+  { kr:"여러분", en:"everyone, ladies and gentlemen", vi:"mọi người", type:"pro",
+    note:"여럿을 한꺼번에 부를 때. 여러분, 안녕하세요(mọi người ơi, xin chào). 발표/강의 시작할 때 자주." },
+  { kr:"여보세요", en:"Hello (on the phone)", vi:"A lô (điện thoại)", type:"greet",
+    note:"전화할 때 첫 인사. 여보세요?(a lô?). 길에서 모르는 사람 부를 때도 가능. 저기요와 비슷." },
+  { kr:"예", en:"Yes (formal/polite)", vi:"Vâng, Ừ", type:"expr",
+    note:"네와 동의. 예, 알겠습니다(vâng, hiểu rồi). 더 격식적인 느낌. 예/네 둘 다 표준어." },
+  { kr:"오래간만입니다", en:"Long time no see (formal)", vi:"Lâu không gặp", type:"greet",
+    note:"오래간만이에요의 격식체. 오랜만이에요(비격식). 시간이 많이 지나 다시 만날 때. 반갑습니다와 함께." },
+  { kr:"왜", en:"why, what for", vi:"tại sao, vì sao", type:"pro",
+    note:"이유 의문. 왜 안 와요?(sao không đến?). 왜요?(sao vậy?). 왜냐하면(접속사: bởi vì)." },
+  { kr:"우리", en:"we, us, our", vi:"chúng tôi, chúng ta", type:"pro",
+    note:"우리(chúng ta/chúng tôi). 우리 나라(đất nước chúng ta). 우리 엄마(mẹ tôi — dùng thân mật). 저희(겸양)." },
+  { kr:"웬일", en:"What's the matter? What brings you here?", vi:"sao vậy, chuyện gì vậy", type:"expr",
+    note:"예상치 못한 만남/상황에 반응. 웬일이에요?(chuyện gì vậy?). 웬일로 여기 왔어요?(sao lại đến đây?)." },
+  { kr:"응", en:"Yeah, Uh-huh (very casual)", vi:"Ừ (trả lời thân mật)", type:"expr",
+    note:"매우 친한 사이에서만. 응, 그래(ừ, đúng rồi). 어린이가 어른에게 사용 금지. ↔ 네/예(격식)." },
+  { kr:"이", en:"this (near speaker)", vi:"này", type:"demo",
+    note:"이-그-저 지시 체계의 첫 번째. 이 책(quyển sách này). 이 사람(người này). 화자 가까이 있는 것." },
+  { kr:"이거", en:"this (casual)", vi:"cái này (thân mật)", type:"demo",
+    note:"이것의 구어체. 이거 뭐예요?(cái này là gì?). 이거 줄게요(tôi cho bạn cái này). 대화체에서 자주." },
+  { kr:"이것", en:"this thing", vi:"cái này", type:"demo",
+    note:"이 + 것. 이것은 무엇입니까?(cái này là gì?). 이것-그것-저것 지시 체계. 구어: 이거." },
+  { kr:"이곳", en:"this place, here", vi:"nơi này, đây", type:"demo",
+    note:"이 + 곳. 이곳이 우리 학교예요(đây là trường chúng tôi). 이곳-그곳-저곳 장소 지시 체계." },
+  { kr:"이런", en:"like this, such, oh no!", vi:"như vậy, thế này", type:"demo",
+    note:"이런 일이(chuyện như thế này). 이런!(ồ trời ơi! — thán từ). 이런 사람(người như thế này)." },
+  { kr:"이름", en:"name", vi:"tên (người)", type:"pro",
+    note:"일반적인 이름. 이름이 뭐예요?(tên bạn là gì?). ↔ 성함(존칭). 이름을 부르다(gọi tên)." },
+  { kr:"이분", en:"this person (honorific)", vi:"người này (kính ngữ)", type:"pro",
+    note:"이 사람의 존칭. 이분이 우리 선생님이에요(người này là thầy/cô của chúng tôi). 이분-그분-저분." },
+  { kr:"이쪽", en:"this way, this side, (introducing) this person", vi:"phía này, người này", type:"demo",
+    note:"두 가지: 방향(phía này), 사람 소개(người này). 이쪽으로 오세요(mời phía này). 이쪽은 제 친구예요." },
+  { kr:"자", en:"Here, Let's go, Come on (starter)", vi:"chữ; nào (bắt đầu)", type:"expr",
+    note:"행동 시작 신호. 자, 시작합시다!(nào, bắt đầu thôi!). 자, 이제 가요(nào, đi thôi). 짧은 감탄사." },
+  { kr:"자기", en:"oneself, own, honey (term of endearment)", vi:"bản thân, của mình", type:"pro",
+    note:"두 가지: 재귀(자기 자신 = chính bản thân), 연인 사이 호칭(người yêu ơi). 자기야(honey/em ơi/anh ơi)." },
+  { kr:"자신", en:"oneself, self, confidence", vi:"bản thân, chính mình", type:"pro",
+    note:"자기보다 격식체. 자신감(tự tin). 자신을 믿어요(tin vào bản thân). 자신 있어요(tôi tự tin)." },
+  { kr:"저", en:"that (over there, far from both)", vi:"đó, kia (xa)", type:"demo",
+    note:"이-그-저 중 가장 멀리 있는 것. 저 산(ngọn núi kia). 저 사람(người kia). 저(tôi, khiêm tốn)도 됨." },
+  { kr:"저거", en:"that over there (casual)", vi:"cái đó (thân mật, xa)", type:"demo",
+    note:"저것의 구어체. 저거 뭐야?(cái kia là gì?). 저거 사고 싶어요(muốn mua cái kia). 대화체에서." },
+  { kr:"저것", en:"that thing over there", vi:"cái đó (xa)", type:"demo",
+    note:"저 + 것. 저것은 무엇입니까?(cái kia là gì?). 이것-그것-저것 중 가장 먼 것. 구어: 저거." },
+  { kr:"저곳", en:"that place over there", vi:"nơi đó (xa)", type:"demo",
+    note:"저 + 곳. 저곳이 경복궁이에요(nơi kia là Cung Gyeongbokgung). 이곳-그곳-저곳 체계의 마지막." },
+  { kr:"저분", en:"that person over there (honorific)", vi:"người đó (kính ngữ, xa)", type:"pro",
+    note:"저 사람의 존칭. 저분이 교장 선생님이에요(người kia là hiệu trưởng). 이분-그분-저분 체계." },
+  { kr:"저쪽", en:"over there, that direction", vi:"phía đó (xa)", type:"demo",
+    note:"저 + 쪽. 저쪽으로 가세요(đi về phía đó). 저쪽에 있어요(ở phía đó). 이쪽-그쪽-저쪽 체계." },
+  { kr:"저희", en:"we, our (humble)", vi:"chúng tôi (khiêm tốn)", type:"pro",
+    note:"우리의 겸양어. 저희 회사(công ty chúng tôi). 저희가 도와드릴게요(chúng tôi sẽ giúp đỡ ngài). 격식 상황." },
+  { kr:"제가", en:"I (subject, humble)", vi:"tôi (khiêm tốn, chủ ngữ)", type:"pro",
+    note:"저 + 가(주격). 제가 할게요(tôi sẽ làm). 제가 잘못했습니다(tôi đã sai). 격식/겸양 표현. ↔ 내가(thân mật)." },
+  { kr:"처음 뵙겠습니다", en:"Nice to meet you (very formal first meeting)", vi:"Rất hân hạnh được gặp", type:"greet",
+    note:"공식적인 첫 만남. 처음 뵙겠습니다, 저는 김민준입니다(rất hân hạnh được gặp, tôi là Kim Minjun)." },
+  { kr:"축하합니다", en:"Congratulations", vi:"Chúc mừng bạn", type:"greet",
+    note:"축하하다의 격식체. 졸업 축하합니다(chúc mừng tốt nghiệp). 생일 축하합니다(chúc mừng sinh nhật)." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let tagHtml;
+    if (item.type === 'pro') tagHtml = `<span class="tag tag-pro">Đại từ</span>`;
+    else if (item.type === 'demo') tagHtml = `<span class="tag tag-demo">Từ chỉ định</span>`;
+    else if (item.type === 'greet') tagHtml = `<span class="tag tag-greet">Chào hỏi</span>`;
+    else if (item.type === 'expr') tagHtml = `<span class="tag tag-expr">Thành ngữ</span>`;
+    else tagHtml = `<span class="tag tag-particle">Hậu tố</span>`;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${tagHtml}</td>
+      <td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || item.note.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
