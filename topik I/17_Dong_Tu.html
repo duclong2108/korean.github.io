@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Động từ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f2f8;
+    --card: #ffffff;
+    --accent: #4a2a7a;
+    --text: #1a0a2e;
+    --sub: #7a6a9a;
+    --border: #d8ceec;
+    --tag-hv: #ede0fa;
+    --tag-pure: #e4f0ea;
+    --tag-loan: #fce8f0;
+    --highlight: #f2ecff;
+    --row-alt: #f9f7fd;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .header {
+    background: var(--text);
+    color: #f4f2f8;
+    padding: 36px 40px 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '동사';
+    position: absolute;
+    right: 40px; top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Noto Serif KR', serif;
+    font-size: 120px;
+    color: rgba(255,255,255,0.05);
+    font-weight: 600;
+    letter-spacing: -4px;
+    user-select: none;
+  }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #9a8aba; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+
+  .controls {
+    padding: 20px 40px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput {
+    width: 100%; padding: 10px 12px 10px 38px;
+    border: 1.5px solid var(--border); border-radius: 8px;
+    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
+    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
+  }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+
+  .filter-btn {
+    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #f4f2f8; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 140px; }
+  th:nth-child(3), td:nth-child(3) { width: 200px; }
+  th:nth-child(4), td:nth-child(4) { width: 220px; }
+  th:nth-child(5), td:nth-child(5) { width: 120px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+
+  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; }
+  .tag-hv { background: var(--tag-hv); color: #3a1060; }
+  .tag-pure { background: var(--tag-pure); color: #1a5030; }
+  .tag-loan { background: var(--tag-loan); color: #7a1040; }
+  .tag-honorific { background: #fef0d8; color: #7a4000; }
+  .tag-passive { background: #e8f4fc; color: #0a3060; }
+  .note { font-size: 11px; color: var(--sub); display: block; margin-top: 2px; font-style: italic; }
+
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+
+  @media (max-width: 768px) {
+    .header { padding: 24px 20px; } .header::before { display: none; }
+    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
+    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>동사 — Động từ tiếng Hàn</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Động từ · Chủ đề TOPIK I & II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+  <button class="filter-btn" data-filter="hv">Hán Việt</button>
+  <button class="filter-btn" data-filter="honorific">Kính ngữ</button>
+  <button class="filter-btn" data-filter="passive">Bị động</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Động từ</th>
+        <th>Tiếng Anh</th>
+        <th>Tiếng Việt</th>
+        <th>Phân loại</th>
+        <th>Ghi chú & Cách dùng</th>
+      </tr>
+    </thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy động từ nào phù hợp.</div>
+</div>
+
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Động từ TOPIK I & II</div>
+
+<script>
+// type: 'pure'=Thuần Hàn, 'hv'=Hán Việt (하다 verb), 'honorific'=Kính ngữ, 'passive'=Bị động/Thụ động
+const vocab = [
+  { kr:"가다", en:"go", vi:"đi", type:"pure", note:"Động từ cơ bản nhất. 학교에 가다(đi học). 어디 가요?(Bạn đi đâu?)" },
+  { kr:"가르치다", en:"teach", vi:"dạy, giảng dạy", type:"pure", note:"가르치다 ↔ 배우다(học). 한국어를 가르쳐요(dạy tiếng Hàn)." },
+  { kr:"가져가다", en:"take away", vi:"mang đi", type:"pure", note:"가져(mang) + 가다(đi) = mang đi. 이것 가져가세요(mang cái này đi)." },
+  { kr:"가져오다", en:"bring", vi:"mang đến, mang lại", type:"pure", note:"가져(mang) + 오다(đến) = mang lại. 물 가져다 주세요(mang nước đến giúp tôi)." },
+  { kr:"가지다", en:"have, possess", vi:"có, sở hữu", type:"pure", note:"갖다 là dạng rút gọn. 꿈을 가지다(có ước mơ). 자신감을 가지다(có tự tin)." },
+  { kr:"감다", en:"close (eyes); wash (hair)", vi:"nhắm (mắt), gội (đầu)", type:"pure", note:"Hai nghĩa: 눈을 감다(nhắm mắt), 머리를 감다(gội đầu). Ngữ cảnh phân biệt." },
+  { kr:"감동하다", en:"be moved, touched", vi:"cảm động", type:"hv", note:"감동(感動) + 하다. 영화에 감동받았어요(Tôi đã cảm động vì bộ phim)." },
+  { kr:"감사하다", en:"be grateful, thank", vi:"cảm ơn, biết ơn", type:"hv", note:"감사합니다 = cảm ơn (rất trang trọng). 감사(感謝) + 하다." },
+  { kr:"갖다", en:"have", vi:"có, giữ", type:"pure", note:"Dạng rút gọn của 가지다. Văn nói. 갖고 싶다(muốn có)." },
+  { kr:"걱정하다", en:"worry", vi:"lo lắng", type:"pure", note:"걱정(名) + 하다. 걱정하지 마세요(đừng lo). 걱정이 돼요(tôi lo lắng)." },
+  { kr:"건너가다", en:"cross (go over)", vi:"đi qua, băng qua", type:"pure", note:"건너(vượt) + 가다(đi). 길을 건너가다(băng qua đường)." },
+  { kr:"건너다", en:"cross over", vi:"băng qua, vượt qua", type:"pure", note:"횡단보도를 건너다(băng qua vạch kẻ đường). 강을 건너다(vượt sông)." },
+  { kr:"걷다", en:"walk", vi:"đi bộ", type:"pure", note:"ㄷ-bất quy tắc: 걷다→걸어. 걸어서 가다(đi bộ đến). 산책하다 = đi dạo." },
+  { kr:"걸다", en:"hang; call (phone)", vi:"treo; gọi điện", type:"pure", note:"Hai nghĩa: 그림을 걸다(treo tranh), 전화를 걸다(gọi điện). Ngữ cảnh phân biệt." },
+  { kr:"걸리다", en:"get caught; take (time)", vi:"bị vướng; mất (thời gian)", type:"pure", note:"두 가지 뜻: 감기에 걸리다(bị cảm), 시간이 걸리다(mất thời gian)." },
+  { kr:"걸어가다", en:"walk to, go on foot", vi:"đi bộ đến", type:"pure", note:"걷다(đi bộ) + 가다(đi). 걸어서 가요(tôi đi bộ đến)." },
+  { kr:"걸어오다", en:"walk here, come on foot", vi:"đi bộ đến đây", type:"pure", note:"걷다 + 오다. 걸어왔어요(tôi đã đi bộ đến đây)." },
+  { kr:"결정하다", en:"decide", vi:"quyết định", type:"hv", note:"결정(決定) + 하다. 결정을 내리다 = đưa ra quyết định." },
+  { kr:"계산하다", en:"calculate; pay the bill", vi:"tính toán, thanh toán", type:"hv", note:"계산(計算) + 하다. 계산서 주세요(cho tôi hóa đơn). 계산해요(thanh toán)." },
+  { kr:"계시다", en:"be, exist (honorific)", vi:"có, ở (kính ngữ)", type:"honorific", note:"있다의 kính ngữ. 어디 계세요?(Ngài đang ở đâu?) Dùng với người lớn tuổi hơn." },
+  { kr:"고르다", en:"choose, select", vi:"chọn lựa", type:"pure", note:"ㄹ-bất quy tắc: 고르다→골라. 마음에 드는 걸 고르세요(chọn cái bạn thích)." },
+  { kr:"고맙다", en:"be thankful", vi:"cảm ơn, biết ơn", type:"pure", note:"ㅂ-bất quy tắc: 고맙다→고마워. Thân mật hơn 감사합니다. 고마워요!" },
+  { kr:"고치다", en:"fix, repair", vi:"sửa chữa, chữa", type:"pure", note:"컴퓨터를 고치다(sửa máy tính). 병을 고치다(chữa bệnh)." },
+  { kr:"구경하다", en:"watch, sightsee", vi:"xem, ngắm, tham quan", type:"hv", note:"구경(求景) + 하다. 구경하러 가요(đi tham quan). 시장 구경(xem chợ)." },
+  { kr:"구하다", en:"save; seek; get", vi:"tìm kiếm, cứu", type:"pure", note:"Ba nghĩa: 일자리를 구하다(tìm việc), 사람을 구하다(cứu người), 재료를 구하다(kiếm nguyên liệu)." },
+  { kr:"그리다", en:"draw, paint", vi:"vẽ", type:"pure", note:"그림을 그리다(vẽ tranh). 그리워하다(nhớ nhung) là từ khác." },
+  { kr:"그치다", en:"stop, cease", vi:"dừng lại, chấm dứt", type:"pure", note:"비가 그치다(mưa tạnh). 거기서 그쳐라(dừng lại ở đó)." },
+  { kr:"기다리다", en:"wait", vi:"chờ đợi", type:"pure", note:"오래 기다렸어요(đã chờ lâu rồi). 기다려 주세요(xin chờ chút)." },
+  { kr:"기르다", en:"raise, grow, cultivate", vi:"nuôi, trồng", type:"pure", note:"ㄹ-bất quy tắc. 동물을 기르다(nuôi thú). 머리를 기르다(để tóc dài)." },
+  { kr:"기뻐하다", en:"be glad, rejoice", vi:"vui mừng", type:"pure", note:"기쁘다(형용사) → 기뻐하다(động từ). 모두 기뻐했어요(mọi người đều vui mừng)." },
+  { kr:"기억하다", en:"remember", vi:"nhớ, ghi nhớ", type:"hv", note:"기억(記憶) + 하다. 기억나요?(bạn có nhớ không?) 기억이 안 나요(tôi không nhớ)." },
+  { kr:"깎다", en:"cut, peel, shave", vi:"cắt, gọt, cạo", type:"pure", note:"사과를 깎다(gọt táo). 머리를 깎다(cắt tóc). 값을 깎다(trả giá)." },
+  { kr:"깨다", en:"wake up; break, crack", vi:"thức dậy; đập vỡ", type:"pure", note:"잠에서 깨다(thức dậy). 컵을 깨다(làm vỡ ly)." },
+  { kr:"깨지다", en:"break, crack (passive)", vi:"bị vỡ, bị nứt", type:"passive", note:"깨다의 bị động. 컵이 깨졌어요(cái ly bị vỡ rồi)." },
+  { kr:"꺼내다", en:"take out, pull out", vi:"lấy ra, rút ra", type:"pure", note:"가방에서 꺼내다(lấy ra từ túi). 핸드폰을 꺼내다(lấy điện thoại ra)." },
+  { kr:"꾸다", en:"dream", vi:"mơ, mơ thấy", type:"pure", note:"꿈을 꾸다(mơ thấy giấc mơ). 어젯밤에 꿈을 꿨어요(tối qua tôi đã mơ)." },
+  { kr:"끄다", en:"turn off, extinguish", vi:"tắt (điện), dập (lửa)", type:"pure", note:"불을 끄다(tắt đèn/dập lửa). 컴퓨터를 끄다(tắt máy tính). ↔ 켜다(bật)." },
+  { kr:"끝나다", en:"end, finish (intransitive)", vi:"kết thúc, xong", type:"pure", note:"수업이 끝났어요(tiết học kết thúc rồi). Bản thân sự việc kết thúc." },
+  { kr:"끝내다", en:"finish (transitive)", vi:"hoàn thành, kết thúc", type:"pure", note:"숙제를 끝냈어요(tôi đã hoàn thành bài tập). Chủ thể hoàn thành việc gì đó." },
+  { kr:"끼다", en:"put on; plug in; (fog) rolls in", vi:"đeo; cắm; (sương) kéo đến", type:"pure", note:"반지를 끼다(đeo nhẫn), 안경을 끼다(đeo kính), 안개가 끼다(sương mù kéo đến)." },
+  { kr:"나가다", en:"go out, exit", vi:"đi ra, ra ngoài", type:"pure", note:"밖에 나가다(ra ngoài). 나가세요(xin mời ra). ↔ 들어가다(đi vào)." },
+  { kr:"나누다", en:"share, divide", vi:"chia sẻ, chia ra", type:"pure", note:"음식을 나누다(chia đồ ăn). 이야기를 나누다(trò chuyện). 반으로 나누다(chia đôi)." },
+  { kr:"나다", en:"occur, come out", vi:"xảy ra, xuất hiện", type:"pure", note:"소리가 나다(có tiếng). 냄새가 나다(có mùi). 사고가 나다(xảy ra tai nạn)." },
+  { kr:"나빠지다", en:"get worse, deteriorate", vi:"trở nên xấu, xuống cấp", type:"pure", note:"나쁘다 + 지다(trở thành). 건강이 나빠졌어요(sức khỏe xuống dốc rồi)." },
+  { kr:"나오다", en:"come out, appear", vi:"ra ngoài, xuất hiện", type:"pure", note:"TV에 나오다(xuất hiện trên TV). 밖으로 나오세요(ra ngoài đi)." },
+  { kr:"나타나다", en:"appear, show up", vi:"xuất hiện, hiện ra", type:"pure", note:"갑자기 나타났어요(xuất hiện đột ngột). ↔ 사라지다(biến mất)." },
+  { kr:"남기다", en:"leave (behind)", vi:"để lại, còn lại", type:"pure", note:"메모를 남기다(để lại ghi chú). 음식을 남기다(để thừa đồ ăn)." },
+  { kr:"내다", en:"pay; put out", vi:"trả (tiền); đưa ra", type:"pure", note:"돈을 내다(trả tiền). 서류를 내다(nộp tài liệu). 소리를 내다(tạo ra tiếng)." },
+  { kr:"내려가다", en:"go down", vi:"đi xuống", type:"pure", note:"내리다 + 가다. 아래층으로 내려가다(xuống tầng dưới). ↔ 올라가다." },
+  { kr:"내려오다", en:"come down", vi:"xuống dưới đây", type:"pure", note:"내리다 + 오다. 산에서 내려오다(xuống núi đến đây)." },
+  { kr:"내리다", en:"get off; come down", vi:"xuống (xe, cầu thang)", type:"pure", note:"버스에서 내리다(xuống xe buýt). 비가 내리다(mưa rơi xuống)." },
+  { kr:"넘다", en:"exceed, go over", vi:"vượt quá, hơn", type:"pure", note:"100명이 넘었어요(đã hơn 100 người). 선을 넘다(vượt ranh giới)." },
+  { kr:"넘어지다", en:"fall down", vi:"ngã, té", type:"pure", note:"계단에서 넘어졌어요(ngã ở cầu thang). 조심하세요, 넘어져요(cẩn thận kẻo ngã)." },
+  { kr:"넣다", en:"put in, insert", vi:"bỏ vào, cho vào", type:"pure", note:"가방에 넣다(bỏ vào túi). 소금을 넣다(cho muối vào). ↔ 꺼내다(lấy ra)." },
+  { kr:"노래하다", en:"sing", vi:"hát", type:"hv", note:"노래(名) + 하다. 노래를 부르다 cũng có nghĩa tương tự. 노래하는 것을 좋아해요." },
+  { kr:"노력하다", en:"endeavor, make effort", vi:"cố gắng, nỗ lực", type:"hv", note:"노력(努力) + 하다. 열심히 노력했어요(đã nỗ lực hết mình). 노력하면 돼요(cố gắng là được)." },
+  { kr:"놀다", en:"play, hang out", vi:"chơi, vui chơi", type:"pure", note:"ㄹ-bất quy tắc: 놀다→놀아. 친구랑 놀다(chơi với bạn). 놀러 오세요(đến chơi nhé)." },
+  { kr:"놀라다", en:"be surprised, startled", vi:"ngạc nhiên, bị bất ngờ", type:"pure", note:"깜짝 놀랐어요(tôi giật mình). 놀랍다(형용사) = đáng ngạc nhiên." },
+  { kr:"놓다", en:"put down, place", vi:"đặt, để xuống", type:"pure", note:"책상에 놓다(đặt lên bàn). 놓치다(để lỡ). 손을 놓다(buông tay)." },
+  { kr:"누르다", en:"press, push", vi:"ấn, nhấn", type:"pure", note:"ㄹ-bất quy tắc. 버튼을 누르다(nhấn nút). 벨을 누르다(bấm chuông)." },
+  { kr:"눕다", en:"lie down", vi:"nằm xuống", type:"pure", note:"ㅂ-bất quy tắc: 눕다→누워. 침대에 눕다(nằm xuống giường)." },
+  { kr:"느끼다", en:"feel, sense", vi:"cảm thấy, cảm nhận", type:"pure", note:"행복을 느끼다(cảm thấy hạnh phúc). 무언가를 느끼다(cảm nhận điều gì đó)." },
+  { kr:"늘다", en:"increase, improve", vi:"tăng lên, tiến bộ", type:"pure", note:"ㄹ-bất quy tắc. 실력이 늘었어요(tôi đã tiến bộ). ↔ 줄다(giảm)." },
+  { kr:"다녀오다", en:"go and come back", vi:"đi rồi về, trở lại", type:"pure", note:"다니다 + 오다. 다녀왔어요(tôi đã về rồi — nói khi vừa về nhà)." },
+  { kr:"다니다", en:"go regularly, commute", vi:"đi lại, thường xuyên đến", type:"pure", note:"학교에 다니다(đi học). 회사에 다니다(đi làm). Chỉ hành động lặp lại đều đặn." },
+  { kr:"닦다", en:"wipe, polish, brush", vi:"lau chùi, đánh bóng", type:"pure", note:"이를 닦다(đánh răng). 신발을 닦다(đánh giày). 바닥을 닦다(lau sàn)." },
+  { kr:"닫다", en:"close", vi:"đóng (cửa)", type:"pure", note:"문을 닫다(đóng cửa). ↔ 열다(mở). 닫힌 문(cửa đóng)." },
+  { kr:"닫히다", en:"be closed (passive)", vi:"bị đóng lại", type:"passive", note:"닫다의 bị động. 문이 닫혔어요(cửa đã đóng rồi)." },
+  { kr:"달리다", en:"run", vi:"chạy", type:"pure", note:"빨리 달리다(chạy nhanh). 뛰다 cũng có nghĩa chạy nhưng 달리다 thiên về chạy liên tục." },
+  { kr:"닮다", en:"resemble, look like", vi:"giống, trông giống", type:"pure", note:"엄마를 닮다(giống mẹ). 많이 닮았어요(trông rất giống nhau)." },
+  { kr:"대답하다", en:"answer, reply", vi:"trả lời, hồi đáp", type:"hv", note:"대답(對答) + 하다. 질문에 대답하다(trả lời câu hỏi). ↔ 질문하다." },
+  { kr:"덮다", en:"cover", vi:"đậy lại, phủ lên", type:"pure", note:"이불을 덮다(đắp chăn). 뚜껑으로 덮다(đậy nắp lại)." },
+  { kr:"데리다", en:"bring someone, take along", vi:"đưa, dẫn đi", type:"pure", note:"아이를 데리다(dẫn con đi). 데려가다(đưa đi), 데려오다(đưa đến)." },
+  { kr:"도와주다", en:"help, assist", vi:"giúp đỡ", type:"pure", note:"돕다 + 주다. 도와주세요(giúp tôi với). Lịch sự hơn 돕다." },
+  { kr:"돌아가다", en:"go back, return", vi:"quay lại, trở về", type:"pure", note:"집에 돌아가다(về nhà). 돌아가세요(về đi thôi). ↔ 떠나다(ra đi)." },
+  { kr:"돌아오다", en:"come back, return", vi:"trở về, về nhà", type:"pure", note:"집에 돌아오다(trở về nhà). 돌아왔어요(tôi đã trở về rồi)." },
+  { kr:"돕다", en:"help", vi:"giúp đỡ", type:"pure", note:"ㅂ-bất quy tắc: 돕다→도와. 친구를 돕다(giúp bạn). 도움이 되다(có ích)." },
+  { kr:"되다", en:"become", vi:"trở thành, trở nên", type:"pure", note:"의사가 되다(trở thành bác sĩ). 안 돼요(không được). Cực kỳ quan trọng và đa nghĩa." },
+  { kr:"두다", en:"put, place, leave", vi:"đặt, để", type:"pure", note:"책을 두다(đặt sách). 시간을 두다(để thêm thời gian). 마음에 두다(để tâm)." },
+  { kr:"드리다", en:"give (honorific)", vi:"cho, tặng (kính ngữ)", type:"honorific", note:"주다의 kính ngữ. 선물을 드리다(tặng quà). 말씀 드리다(thưa/trình bày)." },
+  { kr:"드시다", en:"eat, drink (honorific)", vi:"ăn, dùng bữa (kính ngữ)", type:"honorific", note:"먹다/마시다의 kính ngữ. 많이 드세요(xin mời dùng nhiều)." },
+  { kr:"듣다", en:"listen, hear", vi:"nghe, lắng nghe", type:"pure", note:"ㄷ-bất quy tắc: 듣다→들어. 음악을 듣다(nghe nhạc). 수업을 듣다(nghe giảng)." },
+  { kr:"들다", en:"hold; enter; cost", vi:"cầm; vào (bên trong)", type:"pure", note:"가방을 들다(cầm túi). 돈이 들다(tốn tiền). 마음에 들다(ưng ý)." },
+  { kr:"들어가다", en:"go in, enter", vi:"đi vào, vào bên trong", type:"pure", note:"방에 들어가다(vào phòng). 어서 들어가세요(xin mời vào)." },
+  { kr:"들어오다", en:"come in, enter (here)", vi:"vào đây, bước vào", type:"pure", note:"들어오세요(mời vào). 집에 들어오다(bước vào nhà)." },
+  { kr:"따라가다", en:"follow, go along", vi:"đi theo, bám theo", type:"pure", note:"선생님을 따라가다(đi theo thầy). 따라오지 마세요(đừng đi theo)." },
+  { kr:"따라오다", en:"come along, follow", vi:"đến theo, đi cùng", type:"pure", note:"나를 따라오세요(hãy đi theo tôi). 따라오다(đến theo)." },
+  { kr:"따르다", en:"follow, obey, pour", vi:"tuân theo, làm theo", type:"pure", note:"ㄹ-bất quy tắc. 규칙을 따르다(tuân theo quy tắc). 물을 따르다(rót nước)." },
+  { kr:"떠나다", en:"leave, depart", vi:"rời đi, ra đi", type:"pure", note:"서울을 떠나다(rời Seoul). 여행을 떠나다(lên đường du lịch). ↔ 도착하다." },
+  { kr:"떠들다", en:"make noise, chatter", vi:"ồn ào, làm ồn", type:"pure", note:"ㄹ-bất quy tắc. 떠들지 마세요(đừng ồn ào). 시끄럽게 떠들다." },
+  { kr:"떨어지다", en:"fall, drop, run out", vi:"rơi, rụng xuống", type:"pure", note:"사과가 떨어지다(táo rơi). 돈이 떨어지다(hết tiền). 성적이 떨어지다(điểm giảm)." },
+  { kr:"뛰다", en:"run; jump", vi:"chạy, nhảy", type:"pure", note:"빨리 뛰다(chạy nhanh). 높이 뛰다(nhảy cao). 심장이 뛰다(tim đập)." },
+  { kr:"뜨다", en:"rise; open (eyes)", vi:"mọc lên; mở (mắt)", type:"pure", note:"해가 뜨다(mặt trời mọc). 눈을 뜨다(mở mắt). ↔ 지다(lặn/nhắm)." },
+  { kr:"마시다", en:"drink", vi:"uống", type:"pure", note:"물을 마시다(uống nước). 커피를 마시다(uống cà phê). 술을 마시다(uống rượu)." },
+  { kr:"마치다", en:"finish, complete", vi:"kết thúc, xong việc", type:"pure", note:"일을 마치다(kết thúc công việc). 수업을 마치다(kết thúc tiết học)." },
+  { kr:"막히다", en:"be blocked, be stuck", vi:"bị kẹt, bị tắc", type:"passive", note:"막다의 bị động. 길이 막혀요(đường tắc rồi). 코가 막히다(nghẹt mũi)." },
+  { kr:"만나다", en:"meet", vi:"gặp, gặp gỡ", type:"pure", note:"친구를 만나다(gặp bạn). 만나서 반갑습니다(rất vui được gặp bạn)." },
+  { kr:"만들다", en:"make, create", vi:"làm, tạo ra", type:"pure", note:"ㄹ-bất quy tắc. 음식을 만들다(làm đồ ăn). 친구를 만들다(kết bạn)." },
+  { kr:"만지다", en:"touch", vi:"chạm, sờ", type:"pure", note:"만지지 마세요(đừng chạm vào). 조심해서 만지다(chạm nhẹ nhàng cẩn thận)." },
+  { kr:"말씀하다", en:"speak, say (honorific)", vi:"nói chuyện (kính ngữ)", type:"honorific", note:"말하다의 kính ngữ. 말씀하세요(thưa ngài, mời nói). 말씀드리다 = tôi thưa." },
+  { kr:"말하다", en:"say, speak, talk", vi:"nói, nói chuyện", type:"hv", note:"말(말하기) + 하다. 한국어로 말하다(nói tiếng Hàn). 말해 주세요(hãy nói đi)." },
+  { kr:"매다", en:"tie, fasten", vi:"buộc, cột", type:"pure", note:"넥타이를 매다(thắt cà vạt). 끈을 매다(buộc dây). ↔ 풀다(tháo)." },
+  { kr:"먹다", en:"eat", vi:"ăn", type:"pure", note:"밥을 먹다(ăn cơm). 약을 먹다(uống thuốc). 나이를 먹다(thêm tuổi)." },
+  { kr:"메다", en:"carry on shoulder", vi:"khoác (vai), vác", type:"pure", note:"가방을 메다(đeo túi trên vai). 배낭을 메다(đeo ba lô)." },
+  { kr:"모르다", en:"not know", vi:"không biết", type:"pure", note:"ㄹ-bất quy tắc: 모르다→몰라. 모르겠어요(tôi không biết). ↔ 알다(biết)." },
+  { kr:"모시다", en:"accompany, serve (honorific)", vi:"đưa đi, phục vụ (kính ngữ)", type:"honorific", note:"데리다의 kính ngữ. 부모님을 모시다(phụng dưỡng cha mẹ). 모셔다 드리다." },
+  { kr:"모으다", en:"collect, save up", vi:"thu thập, tập hợp", type:"pure", note:"돈을 모으다(tiết kiệm tiền). 우표를 모으다(sưu tầm tem)." },
+  { kr:"모이다", en:"gather, assemble", vi:"tụ tập lại, họp lại", type:"pure", note:"모으다의 bị động/자동. 사람들이 모였어요(mọi người đã tụ tập)." },
+  { kr:"목욕하다", en:"take a bath", vi:"tắm (tắm bồn)", type:"hv", note:"목욕(沐浴) + 하다. 목욕탕에서 목욕하다(tắm ở nhà tắm công cộng)." },
+  { kr:"못하다", en:"cannot do, be bad at", vi:"không thể, không làm được", type:"pure", note:"못 + 하다. 수영을 못해요(tôi không biết bơi). 잘못하다 ≠ 못하다." },
+  { kr:"묻다", en:"ask; bury", vi:"hỏi, đặt câu hỏi", type:"pure", note:"두 가지: 질문을 묻다(hỏi câu hỏi), 땅에 묻다(chôn xuống đất). Bất quy tắc ㄷ." },
+  { kr:"물어보다", en:"ask, inquire", vi:"hỏi thăm", type:"pure", note:"묻다 + 보다. 길을 물어보다(hỏi đường). 물어봐도 돼요?(tôi có thể hỏi không?)" },
+  { kr:"미안하다", en:"be sorry", vi:"xin lỗi", type:"pure", note:"미안해요(xin lỗi — thân mật). Trang trọng hơn dùng 죄송합니다. 미안한 마음(lòng hối lỗi)." },
+  { kr:"밀리다", en:"be pushed, be backed up", vi:"bị đẩy, bị dồn", type:"passive", note:"밀다의 bị động. 버스에서 밀렸어요(bị dồn trên xe buýt). 일이 밀렸어요(công việc bị tồn đọng)." },
+  { kr:"바꾸다", en:"change, exchange", vi:"thay đổi, đổi", type:"pure", note:"돈을 바꾸다(đổi tiền). 옷을 바꾸다(đổi quần áo). 생각을 바꾸다(thay đổi suy nghĩ)." },
+  { kr:"바뀌다", en:"be changed (passive)", vi:"bị thay đổi, thay đổi", type:"passive", note:"바꾸다의 bị động. 생각이 바뀌었어요(suy nghĩ đã thay đổi rồi)." },
+  { kr:"바라다", en:"hope, wish", vi:"hy vọng, mong muốn", type:"pure", note:"성공하기를 바라다(mong muốn thành công). 잘 되길 바라요(mong mọi việc tốt đẹp)." },
+  { kr:"받다", en:"receive, get", vi:"nhận, tiếp nhận", type:"pure", note:"선물을 받다(nhận quà). 전화를 받다(nghe điện thoại). ↔ 주다(cho)." },
+  { kr:"배우다", en:"learn, study", vi:"học, học hỏi", type:"pure", note:"한국어를 배우다(học tiếng Hàn). 배울 점이 많아요(có nhiều điều để học)." },
+  { kr:"버리다", en:"throw away, discard", vi:"bỏ đi, vứt đi", type:"pure", note:"쓰레기를 버리다(vứt rác). 어보다(thử làm → V+아/어 버리다 = làm xong/mất đi)." },
+  { kr:"벌다", en:"earn money", vi:"kiếm (tiền), làm ra", type:"pure", note:"돈을 벌다(kiếm tiền). 많이 벌었어요(kiếm được nhiều). ↔ 쓰다(tiêu)." },
+  { kr:"벗다", en:"take off (clothes)", vi:"cởi (quần áo), tháo (giày)", type:"pure", note:"옷을 벗다(cởi quần áo). 신발을 벗다(cởi giày). ↔ 입다/신다(mặc/mang)." },
+  { kr:"보내다", en:"send; spend (time)", vi:"gửi; trải qua (thời gian)", type:"pure", note:"편지를 보내다(gửi thư). 시간을 보내다(trải qua thời gian)." },
+  { kr:"보다", en:"see, look, watch", vi:"nhìn, xem, thấy", type:"pure", note:"영화를 보다(xem phim). 얼마나 됐어요?(có vẻ như...). 해 보다(thử làm)." },
+  { kr:"보이다", en:"be seen; show", vi:"cho thấy; trông như", type:"passive", note:"보다의 피동. 안 보여요(không thấy). 행복해 보여요(trông có vẻ hạnh phúc)." },
+  { kr:"뵙다", en:"meet, see (honorific)", vi:"gặp (kính ngữ)", type:"honorific", note:"만나다의 kính ngữ. 처음 뵙겠습니다(rất hân hạnh được gặp ngài)." },
+  { kr:"부르다", en:"call; sing", vi:"gọi; hát", type:"pure", note:"ㄹ-bất quy tắc. 이름을 부르다(gọi tên). 노래를 부르다(hát bài hát)." },
+  { kr:"부치다", en:"send; fry", vi:"gửi; chiên", type:"pure", note:"편지를 부치다(gửi thư). 부침개를 부치다(chiên bánh). 힘에 부치다(quá sức)." },
+  { kr:"부탁하다", en:"ask a favor, request", vi:"nhờ vả, yêu cầu", type:"hv", note:"부탁(付託) + 하다. 부탁드려요(tôi nhờ ngài). 부탁 좀 해도 될까요?" },
+  { kr:"불다", en:"blow", vi:"thổi (gió, nhạc cụ)", type:"pure", note:"ㄹ-bất quy tắc. 바람이 불다(gió thổi). 피리를 불다(thổi sáo)." },
+  { kr:"붓다", en:"pour; swell", vi:"đổ, rót ra", type:"pure", note:"ㄷ-bất quy tắc: 붓다→부어. 물을 붓다(đổ nước). 얼굴이 붓다(mặt bị sưng)." },
+  { kr:"붙다", en:"stick; pass (exam)", vi:"dính; đỗ (thi)", type:"pure", note:"스티커가 붙다(nhãn dán). 시험에 붙다(đỗ kỳ thi). ↔ 떨어지다(rớt thi)." },
+  { kr:"붙이다", en:"attach, stick on", vi:"dán, đính vào", type:"pure", note:"붙다의 사동. 우표를 붙이다(dán tem). 메모를 붙이다(dán ghi chú)." },
+  { kr:"빌리다", en:"borrow; lend", vi:"mượn; cho mượn", type:"pure", note:"책을 빌리다(mượn sách). 돈을 빌려주다(cho mượn tiền). 도서관에서 빌리다." },
+  { kr:"빨다", en:"suck; do laundry", vi:"hút; giặt (quần áo)", type:"pure", note:"세탁기로 빨다(giặt bằng máy giặt). 아이가 손을 빨다(trẻ mút tay)." },
+  { kr:"빼다", en:"remove, subtract", vi:"bỏ ra, trừ đi", type:"pure", note:"10에서 3을 빼다(lấy 10 trừ 3). 양파를 빼다(bỏ hành tây ra)." },
+  { kr:"사다", en:"buy, purchase", vi:"mua", type:"pure", note:"물건을 사다(mua đồ). 사 줄게요(tôi sẽ mua cho bạn). ↔ 팔다(bán)." },
+  { kr:"사랑하다", en:"love", vi:"yêu, yêu thương", type:"hv", note:"사랑(名) + 하다. 사랑해요(tôi yêu bạn/em). 사랑하는 사람(người mình yêu)." },
+  { kr:"사용하다", en:"use, utilize", vi:"sử dụng, dùng", type:"hv", note:"사용(使用) + 하다. 이용하다 ≈ 사용하다. 이 방법을 사용해요(dùng phương pháp này)." },
+  { kr:"사인하다", en:"sign, autograph", vi:"ký tên, ký tặng", type:"loan", note:"사인(sign) + 하다. 계약서에 사인하다(ký hợp đồng). 사인해 주세요(ký tặng cho tôi nhé)." },
+  { kr:"살다", en:"live, reside", vi:"sống, sinh sống", type:"pure", note:"ㄹ-bất quy tắc. 서울에 살다(sống ở Seoul). 잘 살아요(sống tốt)." },
+  { kr:"생각되다", en:"seem, be considered", vi:"có vẻ như, được nghĩ đến", type:"pure", note:"생각하다의 수동. ~인 것 같다와 유사. 좋은 것 같다고 생각돼요." },
+  { kr:"생각하다", en:"think, consider", vi:"suy nghĩ, nghĩ", type:"pure", note:"생각(名) + 하다. 어떻게 생각해요?(bạn nghĩ sao?). 잘 생각해 봐요(hãy suy nghĩ kỹ)." },
+  { kr:"생기다", en:"arise, form, appear", vi:"xuất hiện, nảy sinh", type:"pure", note:"문제가 생기다(vấn đề nảy sinh). 여유가 생기다(có thêm thời gian rảnh)." },
+  { kr:"샤워하다", en:"take a shower", vi:"tắm vòi hoa sen", type:"loan", note:"샤워(shower) + 하다. 샤워하고 왔어요(tôi vừa tắm xong)." },
+  { kr:"서다", en:"stand", vi:"đứng", type:"pure", note:"일어서다(đứng dậy). 줄을 서다(xếp hàng). 차가 서다(xe dừng lại)." },
+  { kr:"선택하다", en:"choose, select", vi:"lựa chọn, chọn", type:"hv", note:"선택(選擇) + 하다. 하나를 선택해요(chọn một cái). 선택의 여지가 없다(không có lựa chọn)." },
+  { kr:"설명하다", en:"explain", vi:"giải thích", type:"hv", note:"설명(說明) + 하다. 자세히 설명해 주세요(giải thích chi tiết cho tôi nhé)." },
+  { kr:"세수하다", en:"wash one's face", vi:"rửa mặt", type:"hv", note:"세수(洗手/洗顔) + 하다. 아침에 세수해요(buổi sáng tôi rửa mặt)." },
+  { kr:"세우다", en:"set up, establish; stop", vi:"dựng lên, thành lập", type:"pure", note:"서다의 사동. 계획을 세우다(lập kế hoạch). 차를 세우다(dừng xe)." },
+  { kr:"소개하다", en:"introduce", vi:"giới thiệu", type:"hv", note:"소개(紹介) + 하다. 자기소개를 하다(tự giới thiệu). 친구를 소개해 줄게요." },
+  { kr:"쉬다", en:"rest, take a break", vi:"nghỉ ngơi", type:"pure", note:"좀 쉬어요(nghỉ chút đi). 휴일에 쉬다(nghỉ ngày lễ). 목이 쉬다(khan giọng)." },
+  { kr:"슬퍼하다", en:"feel sad, mourn", vi:"buồn bã, đau buồn", type:"pure", note:"슬프다(형용사) → 슬퍼하다(동사). 친구의 죽음에 슬퍼하다." },
+  { kr:"시작되다", en:"begin (passive)", vi:"bắt đầu (bị động)", type:"passive", note:"시작하다의 수동. 수업이 시작됐어요(tiết học đã bắt đầu rồi)." },
+  { kr:"시작하다", en:"start, begin", vi:"bắt đầu", type:"hv", note:"시작(始作) + 하다. 시작이 반이에요(bắt đầu là đã được một nửa). ↔ 끝내다." },
+  { kr:"시키다", en:"order; make someone do", vi:"bảo ai làm gì; gọi món", type:"pure", note:"음식을 시키다(gọi món ăn). 청소를 시키다(bảo ai đó dọn dẹp)." },
+  { kr:"신다", en:"put on (shoes)", vi:"đi (giày dép)", type:"pure", note:"신발을 신다(mang giày). ↔ 벗다(cởi). 운동화를 신다(đi giày thể thao)." },
+  { kr:"신청하다", en:"apply, register", vi:"đăng ký, nộp đơn", type:"hv", note:"신청(申請) + 하다. 수업을 신청하다(đăng ký lớp học). 신청서를 내다(nộp đơn)." },
+  { kr:"실례하다", en:"excuse oneself, be rude", vi:"xin phép, thất lễ", type:"hv", note:"실례합니다(xin lỗi vì làm phiền/xin phép). 실례(失禮) + 하다." },
+  { kr:"싫어하다", en:"dislike, hate", vi:"không thích, ghét", type:"pure", note:"↔ 좋아하다(thích). 공부를 싫어해요(không thích học)." },
+  { kr:"싶다", en:"want to", vi:"muốn", type:"pure", note:"V+고 싶다 = muốn làm gì. 가고 싶어요(tôi muốn đi). 먹고 싶어요(tôi muốn ăn)." },
+  { kr:"싸우다", en:"fight, argue", vi:"cãi nhau, đánh nhau", type:"pure", note:"싸우지 마세요(đừng cãi nhau). 싸움(명사, cuộc chiến/cãi vã)." },
+  { kr:"쌓이다", en:"pile up, accumulate", vi:"chồng chất, tích lũy", type:"passive", note:"쌓다의 피동. 눈이 쌓이다(tuyết tích lại). 스트레스가 쌓이다(stress tích lũy)." },
+  { kr:"쓰다", en:"write; use; wear (glasses)", vi:"viết; dùng; đeo (kính)", type:"pure", note:"ㄹ-bất규칙 아님. 편지를 쓰다(viết thư). 안경을 쓰다(đeo kính). 돈을 쓰다(tiêu tiền)." },
+  { kr:"쓰이다", en:"be used, be written", vi:"được viết; được dùng", type:"passive", note:"쓰다의 피동. 많이 쓰이는 표현(cách diễn đạt được dùng nhiều)." },
+  { kr:"씹다", en:"chew, bite", vi:"nhai, cắn", type:"pure", note:"껌을 씹다(nhai kẹo cao su). 음식을 잘 씹다(nhai kỹ đồ ăn)." },
+  { kr:"씻다", en:"wash", vi:"rửa, tắm rửa", type:"pure", note:"손을 씻다(rửa tay). 몸을 씻다(tắm rửa cơ thể). 설거지하다 ≈ rửa bát." },
+  { kr:"아니다", en:"be not, not be", vi:"không phải", type:"pure", note:"이/가 아니다. 학생이 아니에요(không phải là học sinh). ↔ 이다(là)." },
+  { kr:"안내하다", en:"guide, direct", vi:"hướng dẫn, mời", type:"hv", note:"안내(案內) + 하다. 관광지를 안내하다(hướng dẫn địa điểm du lịch)." },
+  { kr:"안다", en:"hug, embrace", vi:"ôm, bế", type:"pure", note:"아이를 안다(bế trẻ). 꼭 안아 주세요(hãy ôm chặt tôi đi)." },
+  { kr:"앉다", en:"sit down", vi:"ngồi", type:"pure", note:"앉으세요(xin ngồi). 의자에 앉다(ngồi vào ghế). ↔ 서다(đứng), 눕다(nằm)." },
+  { kr:"알다", en:"know, understand", vi:"biết, hiểu", type:"pure", note:"ㄹ-bất quy tắc. 알아요(tôi biết). 알겠어요(tôi hiểu rồi). ↔ 모르다(không biết)." },
+  { kr:"알리다", en:"inform, notify", vi:"thông báo, cho biết", type:"pure", note:"알다의 사동. 미리 알려 주세요(hãy thông báo trước). 소식을 알리다(báo tin)." },
+  { kr:"얘기하다", en:"talk, chat (casual)", vi:"nói chuyện (thân mật)", type:"pure", note:"이야기하다의 구어체. 친구와 얘기하다(nói chuyện với bạn)." },
+  { kr:"어울리다", en:"suit, match, go together", vi:"hợp, phù hợp (trang phục)", type:"pure", note:"옷이 잘 어울려요(quần áo rất hợp). 이게 너한테 잘 어울려(cái này hợp với bạn)." },
+  { kr:"연습하다", en:"practice", vi:"luyện tập, rèn luyện", type:"hv", note:"연습(練習) + 하다. 매일 연습하다(luyện tập mỗi ngày). 발음 연습(luyện phát âm)." },
+  { kr:"열다", en:"open", vi:"mở (cửa, hộp)", type:"pure", note:"문을 열다(mở cửa). 가게를 열다(mở cửa hàng). ↔ 닫다(đóng)." },
+  { kr:"열리다", en:"be opened (passive)", vi:"bị mở ra", type:"passive", note:"열다의 피동. 행사가 열려요(sự kiện được tổ chức). 문이 열렸어요(cửa mở rồi)." },
+  { kr:"오다", en:"come", vi:"đến, lại", type:"pure", note:"어서 오세요(chào mừng đến). 비가 오다(mưa đến). ↔ 가다(đi)." },
+  { kr:"오르다", en:"climb, go up, rise", vi:"leo, leo lên", type:"pure", note:"ㄹ-bất quy tắc. 산을 오르다(leo núi). 물가가 오르다(giá cả tăng lên)." },
+  { kr:"올라가다", en:"go up", vi:"đi lên, leo lên", type:"pure", note:"오르다 + 가다. 위로 올라가다(đi lên trên). ↔ 내려가다(đi xuống)." },
+  { kr:"올라오다", en:"come up", vi:"lên đây, tiến lên", type:"pure", note:"오르다 + 오다. 2층으로 올라오세요(lên tầng 2 đây)." },
+  { kr:"올려놓다", en:"put up on, place on top", vi:"đặt lên trên", type:"pure", note:"올리다 + 놓다. 선반에 올려놓다(đặt lên kệ)." },
+  { kr:"옮기다", en:"move, transfer", vi:"di chuyển; chuyển dịch", type:"pure", note:"짐을 옮기다(chuyển đồ đạc). 파일을 옮기다(chuyển file)." },
+  { kr:"외출하다", en:"go out", vi:"đi ra ngoài", type:"hv", note:"외출(外出) + 하다. 오늘 외출했어요?(hôm nay bạn có ra ngoài không?)" },
+  { kr:"운동하다", en:"exercise, work out", vi:"tập thể dục", type:"hv", note:"운동(運動) + 하다. 매일 운동해요(tôi tập thể dục mỗi ngày)." },
+  { kr:"운전하다", en:"drive", vi:"lái xe", type:"hv", note:"운전(運轉) + 하다. 운전할 줄 알아요?(bạn biết lái xe không?)" },
+  { kr:"울다", en:"cry, weep", vi:"khóc", type:"pure", note:"ㄹ-bất quy tắc. 왜 울어요?(sao khóc vậy?) 웃다(cười) ↔ 울다(khóc)." },
+  { kr:"울리다", en:"make cry; ring, sound", vi:"làm khóc; vang lên", type:"pure", note:"울다의 사동. 전화가 울리다(điện thoại đổ chuông). 아이를 울리다(làm trẻ khóc)." },
+  { kr:"움직이다", en:"move", vi:"di chuyển, cử động", type:"pure", note:"몸을 움직이다(cử động cơ thể). 움직이지 마세요(đừng cử động)." },
+  { kr:"웃다", en:"laugh, smile", vi:"cười", type:"pure", note:"ㄷ-bất quy tắc. 많이 웃어요(cười nhiều lên). ↔ 울다(khóc)." },
+  { kr:"원하다", en:"want, wish, desire", vi:"muốn, mong muốn", type:"pure", note:"원하는 것이 뭐예요?(bạn muốn gì?). 바라다 ≈ 원하다." },
+  { kr:"위하다", en:"be for, be in favor of", vi:"vì, vì lợi ích của", type:"pure", note:"가족을 위하다(vì gia đình). N을/를 위해서 = vì..., để..." },
+  { kr:"이야기하다", en:"talk, tell a story", vi:"kể chuyện, nói chuyện", type:"pure", note:"이야기(名) + 하다. 재미있는 이야기를 하다(kể câu chuyện hay)." },
+  { kr:"이용하다", en:"use, utilize", vi:"sử dụng, tận dụng", type:"hv", note:"이용(利用) + 하다. 대중교통을 이용하다(sử dụng phương tiện công cộng)." },
+  { kr:"이해하다", en:"understand", vi:"hiểu, thấu hiểu", type:"hv", note:"이해(理解) + 하다. 이해해요(tôi hiểu). 이해가 안 돼요(tôi không hiểu)." },
+  { kr:"인사하다", en:"greet, bow", vi:"chào hỏi", type:"hv", note:"인사(人事) + 하다. 인사를 잘 해요(chào hỏi lịch sự). 먼저 인사하세요(hãy chào trước)." },
+  { kr:"인터뷰하다", en:"interview", vi:"phỏng vấn", type:"loan", note:"인터뷰(interview) + 하다. 기자가 인터뷰했어요(phóng viên đã phỏng vấn)." },
+  { kr:"일어나다", en:"get up; occur", vi:"thức dậy; xảy ra", type:"pure", note:"아침에 일어나다(thức dậy buổi sáng). 사고가 일어나다(tai nạn xảy ra)." },
+  { kr:"일어서다", en:"stand up", vi:"đứng dậy", type:"pure", note:"일어나다 + 서다. 자리에서 일어서다(đứng dậy khỏi chỗ ngồi)." },
+  { kr:"일하다", en:"work", vi:"làm việc", type:"pure", note:"열심히 일하다(làm việc chăm chỉ). 무슨 일 해요?(bạn làm nghề gì?)" },
+  { kr:"읽다", en:"read", vi:"đọc (sách, báo)", type:"pure", note:"책을 읽다(đọc sách). 읽기 능력(kỹ năng đọc). [읽다] → phát âm [익따]." },
+  { kr:"잃다", en:"lose", vi:"mất (đồ vật)", type:"pure", note:"지갑을 잃다(mất ví). 잃어버리다 = bị mất hẳn. 기억을 잃다(mất ký ức)." },
+  { kr:"잃어버리다", en:"lose (completely)", vi:"đánh mất, bị mất", type:"pure", note:"잃다 + 버리다(mất hẳn). 핸드폰을 잃어버렸어요(tôi bị mất điện thoại rồi)." },
+  { kr:"입다", en:"put on, wear (clothes)", vi:"mặc (quần áo)", type:"pure", note:"옷을 입다(mặc quần áo). ↔ 벗다(cởi). 교복을 입다(mặc đồng phục)." },
+  { kr:"있다", en:"have; exist, be", vi:"có; ở, tồn tại", type:"pure", note:"두 가지: 가방이 있다(có túi), 집에 있다(ở nhà). Một trong những từ quan trọng nhất." },
+  { kr:"잊다", en:"forget", vi:"quên", type:"pure", note:"잊어버리다 = quên mất (hoàn toàn). 생일을 잊다(quên sinh nhật). ↔ 기억하다(nhớ)." },
+  { kr:"잊어버리다", en:"forget (completely)", vi:"quên mất", type:"pure", note:"잊다 + 버리다. 완전히 잊어버렸어요(tôi đã quên hoàn toàn rồi)." },
+  { kr:"자다", en:"sleep", vi:"ngủ", type:"pure", note:"잘 자요(ngủ ngon). 일찍 자다(ngủ sớm). 자는 중이에요(đang ngủ)." },
+  { kr:"자르다", en:"cut", vi:"cắt, chặt", type:"pure", note:"ㄹ-bất quy tắc. 머리를 자르다(cắt tóc). 종이를 자르다(cắt giấy)." },
+  { kr:"잘하다", en:"do well, be good at", vi:"làm tốt, giỏi", type:"pure", note:"한국어를 잘해요(tôi giỏi tiếng Hàn). 잘했어요(làm tốt lắm!). ↔ 못하다." },
+  { kr:"잠자다", en:"sleep, go to bed", vi:"ngủ, đi ngủ", type:"pure", note:"잠(名) + 자다. 잠을 자다와 동일. 아이가 잠자고 있어요(đứa bé đang ngủ)." },
+  { kr:"잡다", en:"catch, grab, hold", vi:"bắt, nắm, cầm", type:"pure", note:"손을 잡다(nắm tay). 버스를 잡다(bắt xe buýt). 기회를 잡다(nắm bắt cơ hội)." },
+  { kr:"잡수시다", en:"eat, have (highest honorific)", vi:"ăn, dùng (kính ngữ cao)", type:"honorific", note:"먹다의 최고 kính ngữ. 할아버지, 많이 잡수세요(thưa ông, mời ông dùng nhiều)." },
+  { kr:"적다", en:"write down; be few", vi:"ít; viết xuống", type:"pure", note:"두 가지: 메모를 적다(viết xuống ghi chú), 사람이 적다(ít người)." },
+  { kr:"전하다", en:"convey, pass on", vi:"truyền đạt, nhắn lại", type:"hv", note:"전(傳) + 하다. 말을 전하다(nhắn lời). 인사를 전하다(gửi lời chào)." },
+  { kr:"정리하다", en:"organize, tidy up", vi:"sắp xếp, dọn dẹp", type:"hv", note:"정리(整理) + 하다. 방을 정리하다(dọn phòng). 생각을 정리하다(sắp xếp suy nghĩ)." },
+  { kr:"정하다", en:"decide, set, establish", vi:"quyết định, định ra", type:"hv", note:"정(定) + 하다. 날짜를 정하다(quyết định ngày). 규칙을 정하다(đặt ra quy tắc)." },
+  { kr:"조사하다", en:"investigate, research", vi:"điều tra, nghiên cứu", type:"hv", note:"조사(調査) + 하다. 자료를 조사하다(nghiên cứu tài liệu)." },
+  { kr:"조심하다", en:"be careful", vi:"cẩn thận, chú ý", type:"hv", note:"조심(操心) + 하다. 조심하세요(cẩn thận nhé). 차 조심해요(cẩn thận xe)." },
+  { kr:"졸업하다", en:"graduate", vi:"tốt nghiệp", type:"hv", note:"졸업(卒業) + 하다. 대학교를 졸업하다(tốt nghiệp đại học). 졸업식(lễ tốt nghiệp)." },
+  { kr:"좋아하다", en:"like", vi:"thích", type:"pure", note:"좋다(형용사) → 좋아하다(동사). 한국어를 좋아해요(tôi thích tiếng Hàn). ↔ 싫어하다." },
+  { kr:"죄송하다", en:"be sorry (formal)", vi:"xin lỗi (trang trọng)", type:"hv", note:"죄송(罪悚) + 하다. 죄송합니다(xin lỗi — rất trang trọng). Trang trọng hơn 미안하다." },
+  { kr:"주다", en:"give", vi:"đưa, cho", type:"pure", note:"선물을 주다(tặng quà). V+아/어 주다 = làm gì đó cho ai. ↔ 받다(nhận)." },
+  { kr:"주무시다", en:"sleep (honorific)", vi:"ngủ (kính ngữ)", type:"honorific", note:"자다의 kính ngữ. 잘 주무셨어요?(ngài ngủ ngon không?)" },
+  { kr:"주문하다", en:"order (food/goods)", vi:"đặt hàng, gọi món", type:"hv", note:"주문(注文) + 하다. 음식을 주문하다(gọi món ăn). 온라인으로 주문하다(đặt hàng online)." },
+  { kr:"주차하다", en:"park (a car)", vi:"đậu xe", type:"hv", note:"주차(駐車) + 하다. 여기 주차하면 안 돼요(không được đỗ xe ở đây)." },
+  { kr:"죽다", en:"die, pass away", vi:"chết, mất", type:"pure", note:"ㄱ-규칙. 죽었어요(đã mất rồi). 죽을 것 같아요(suýt chết rồi — cách nói cường điệu)." },
+  { kr:"준비하다", en:"prepare", vi:"chuẩn bị", type:"hv", note:"준비(準備) + 하다. 준비됐어요?(bạn đã sẵn sàng chưa?). 여행 준비를 하다." },
+  { kr:"줄다", en:"decrease, shrink", vi:"giảm, thu nhỏ", type:"pure", note:"ㄹ-bất quy tắc. 인구가 줄었어요(dân số đã giảm). ↔ 늘다(tăng)." },
+  { kr:"즐거워하다", en:"feel pleased, have fun", vi:"vui vẻ, thích thú", type:"pure", note:"즐겁다(형) → 즐거워하다(동). 아이들이 즐거워해요(các bạn nhỏ đang vui)." },
+  { kr:"즐기다", en:"enjoy, have fun", vi:"thưởng thức, tận hưởng", type:"pure", note:"여행을 즐기다(tận hưởng chuyến đi). 음악을 즐기다(thưởng thức âm nhạc)." },
+  { kr:"지나다", en:"pass by, go by", vi:"đi qua, trôi qua", type:"pure", note:"시간이 지나다(thời gian trôi qua). 역을 지나다(đi qua ga)." },
+  { kr:"지내다", en:"live, get along, spend", vi:"sống, trải qua", type:"pure", note:"잘 지내요(sống tốt). 어떻게 지내요?(bạn sống thế nào?). 어른을 모시고 지내다." },
+  { kr:"지다", en:"lose; set (sun)", vi:"thua (trận)", type:"pure", note:"게임에서 지다(thua trò chơi). 해가 지다(mặt trời lặn). ↔ 이기다(thắng)." },
+  { kr:"지키다", en:"protect, keep, guard", vi:"bảo vệ, giữ gìn", type:"pure", note:"약속을 지키다(giữ lời hứa). 규칙을 지키다(tuân theo quy tắc). 나라를 지키다(bảo vệ đất nước)." },
+  { kr:"질문하다", en:"ask a question", vi:"đặt câu hỏi", type:"hv", note:"질문(質問) + 하다. 질문 있어요?(có câu hỏi không?). ↔ 대답하다." },
+  { kr:"짓다", en:"build; make; compose", vi:"xây dựng; làm (cơm)", type:"pure", note:"ㅅ-bất quy tắc: 짓다→지어. 집을 짓다(xây nhà). 밥을 짓다(nấu cơm). 죄를 짓다(phạm tội)." },
+  { kr:"찍다", en:"take (photo); stamp; pierce", vi:"chụp (ảnh); đóng dấu", type:"pure", note:"사진을 찍다(chụp ảnh). 도장을 찍다(đóng con dấu)." },
+  { kr:"차다", en:"kick", vi:"đá (bóng)", type:"pure", note:"공을 차다(đá bóng). 발로 차다(đá bằng chân)." },
+  { kr:"차리다", en:"prepare, set (table)", vi:"chuẩn bị (bàn ăn), bày ra", type:"pure", note:"밥상을 차리다(dọn bàn ăn). 정신을 차리다(lấy lại tinh thần)." },
+  { kr:"찾다", en:"find; visit; withdraw", vi:"tìm; đến thăm", type:"pure", note:"지갑을 찾다(tìm ví). 은행에서 돈을 찾다(rút tiền). 친구를 찾아가다(đến thăm bạn)." },
+  { kr:"찾아가다", en:"go to visit, go find", vi:"đến thăm", type:"pure", note:"찾다 + 가다. 친구 집을 찾아가다(đến nhà bạn thăm)." },
+  { kr:"찾아오다", en:"come to visit, come find", vi:"đến thăm (đến đây)", type:"pure", note:"찾다 + 오다. 친구가 찾아왔어요(bạn tôi đã đến thăm)." },
+  { kr:"청소하다", en:"clean, sweep", vi:"quét dọn, lau chùi", type:"hv", note:"청소(淸掃) + 하다. 방을 청소하다(dọn phòng). 청소기를 돌리다(chạy máy hút bụi)." },
+  { kr:"초대하다", en:"invite", vi:"mời, mời dự", type:"hv", note:"초대(招待) + 하다. 파티에 초대하다(mời đến dự tiệc). 초대장(thiệp mời)." },
+  { kr:"촬영하다", en:"film, photograph", vi:"quay phim, chụp ảnh", type:"hv", note:"촬영(撮影) + 하다. 영화를 촬영하다(quay phim). 촬영 금지(cấm quay phim)." },
+  { kr:"추다", en:"dance", vi:"nhảy múa", type:"pure", note:"춤을 추다(nhảy múa). 춤추다 = 춤을 추다의 줄임말." },
+  { kr:"축하하다", en:"congratulate, celebrate", vi:"chúc mừng", type:"hv", note:"축하(祝賀) + 하다. 축하해요(chúc mừng). 생일을 축하하다(chúc mừng sinh nhật)." },
+  { kr:"출근하다", en:"go to work, clock in", vi:"đi làm, đến công ty", type:"hv", note:"출근(出勤) + 하다. 몇 시에 출근해요?(mấy giờ đi làm?). ↔ 퇴근하다." },
+  { kr:"출발하다", en:"depart, set off", vi:"khởi hành, xuất phát", type:"hv", note:"출발(出發) + 하다. 몇 시에 출발해요?(mấy giờ khởi hành?). ↔ 도착하다." },
+  { kr:"춤추다", en:"dance", vi:"nhảy múa, khiêu vũ", type:"pure", note:"춤(名) + 추다. 잘 춤춰요(nhảy rất giỏi). 춤추러 가요(đi nhảy nào)." },
+  { kr:"취소하다", en:"cancel", vi:"hủy bỏ", type:"hv", note:"취소(取消) + 하다. 예약을 취소하다(hủy đặt chỗ). 취소할 수 없어요(không thể hủy được)." },
+  { kr:"취직하다", en:"get a job, be employed", vi:"xin được việc, có việc làm", type:"hv", note:"취직(就職) + 하다. 취직했어요(tôi đã có việc làm rồi). 취직 준비(chuẩn bị xin việc)." },
+  { kr:"치료하다", en:"treat, cure", vi:"điều trị, chữa bệnh", type:"hv", note:"치료(治療) + 하다. 병을 치료하다(chữa bệnh). 치료가 잘 됐어요(điều trị hiệu quả)." },
+  { kr:"켜다", en:"turn on (light/device)", vi:"bật (đèn, điện)", type:"pure", note:"불을 켜다(bật đèn). 컴퓨터를 켜다(bật máy tính). ↔ 끄다(tắt)." },
+  { kr:"타다", en:"ride, get on", vi:"đi (xe), lên (xe)", type:"pure", note:"버스를 타다(đi xe buýt). 배를 타다(đi thuyền). ↔ 내리다(xuống)." },
+  { kr:"태어나다", en:"be born", vi:"được sinh ra", type:"pure", note:"언제 태어났어요?(bạn sinh năm nào?). 서울에서 태어났어요(sinh ra ở Seoul)." },
+  { kr:"통하다", en:"pass through; communicate", vi:"thông qua, dẫn đến", type:"hv", note:"통(通) + 하다. 전화가 안 통해요(điện thoại không kết nối được). ~을 통해(thông qua)." },
+  { kr:"퇴근하다", en:"leave work, clock out", vi:"tan làm, về nhà sau giờ làm", type:"hv", note:"퇴근(退勤) + 하다. 퇴근 후에 만나요(gặp sau giờ làm nhé). ↔ 출근하다." },
+  { kr:"틀다", en:"turn on (switch, music)", vi:"bật (công tắc, nhạc)", type:"pure", note:"음악을 틀다(bật nhạc lên). 선풍기를 틀다(bật quạt). Giống 켜다 nhưng dùng cho nhạc/quạt." },
+  { kr:"팔다", en:"sell", vi:"bán", type:"pure", note:"ㄹ-bất quy tắc. 물건을 팔다(bán đồ). 팔렸어요(đã bán hết rồi). ↔ 사다(mua)." },
+  { kr:"팔리다", en:"be sold (passive)", vi:"được bán, bán được", type:"passive", note:"팔다의 피동. 잘 팔려요(bán chạy lắm). 다 팔렸어요(bán hết sạch rồi)." },
+  { kr:"펴다", en:"spread, open out", vi:"mở ra, trải ra", type:"pure", note:"책을 펴다(mở sách ra). 날개를 펴다(xòe cánh). 이불을 펴다(trải chăn)." },
+  { kr:"풀다", en:"solve; untie; relax", vi:"giải (bài toán), tháo ra", type:"pure", note:"문제를 풀다(giải bài toán). 끈을 풀다(tháo dây). 스트레스를 풀다(giải tỏa stress)." },
+  { kr:"피다", en:"bloom, blossom", vi:"nở (hoa)", type:"pure", note:"꽃이 피다(hoa nở). 봄에 벚꽃이 펴요(mùa xuân hoa anh đào nở)." },
+  { kr:"피우다", en:"smoke; make bloom", vi:"hút (thuốc); làm nở", type:"pure", note:"피다의 사동. 담배를 피우다(hút thuốc). 꽃을 피우다(làm nở hoa)." },
+  { kr:"필요하다", en:"need, be necessary", vi:"cần, cần thiết", type:"hv", note:"필요(必要) + 하다. 도움이 필요해요(cần giúp đỡ). 필요 없어요(không cần thiết)." },
+  { kr:"하다", en:"do, say, play", vi:"làm, nói", type:"pure", note:"가장 많이 쓰이는 동사. 공부하다, 운동하다,... 모두 N+하다 형태. 어떻게 해요?(làm thế nào?)" },
+  { kr:"화나다", en:"get angry, be angry", vi:"tức giận, nổi giận", type:"pure", note:"화(名) + 나다. 화가 났어요(tôi tức rồi). 화나지 마세요(đừng tức giận)." },
+  { kr:"화내다", en:"show anger, get angry", vi:"nổi giận", type:"pure", note:"화(名) + 내다. 화내지 마세요(đừng nổi giận). 화나다(cảm thấy tức) vs 화내다(bộc lộ cơn tức)." },
+  { kr:"화장하다", en:"put on makeup", vi:"trang điểm, make up", type:"hv", note:"화장(化粧) + 하다. 화장하는 데 30분 걸려요(trang điểm mất 30 phút)." },
+  { kr:"확인하다", en:"confirm, check", vi:"xác nhận, kiểm tra", type:"hv", note:"확인(確認) + 하다. 확인해 주세요(hãy xác nhận/kiểm tra giúp tôi)." },
+  { kr:"환영하다", en:"welcome", vi:"chào đón, hoan nghênh", type:"hv", note:"환영(歡迎) + 하다. 환영합니다(xin chào mừng). 따뜻하게 환영하다(đón tiếp nồng hậu)." },
+];
+
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let tagHtml;
+    if (item.type === 'pure') tagHtml = `<span class="tag tag-pure">Thuần Hàn</span>`;
+    else if (item.type === 'hv') tagHtml = `<span class="tag tag-hv">Hán Việt</span>`;
+    else if (item.type === 'honorific') tagHtml = `<span class="tag tag-honorific">Kính ngữ</span>`;
+    else if (item.type === 'passive') tagHtml = `<span class="tag tag-passive">Bị động</span>`;
+    else tagHtml = `<span class="tag tag-loan">Vay mượn</span>`;
+
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i + 1}</td>
+      <td><span class="korean-word">${item.kr}</span></td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${tagHtml}</td>
+      <td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
+    const matchSearch = !q
+      || item.kr.includes(q)
+      || item.en.toLowerCase().includes(q)
+      || item.vi.toLowerCase().includes(q)
+      || item.note.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' động từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
