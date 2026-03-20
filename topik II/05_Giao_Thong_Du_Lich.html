@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Ẩm thực (Nâng cao)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fdf5ef;
+    --card: #ffffff;
+    --accent: #b04010;
+    --text: #2c1008;
+    --sub: #9a6050;
+    --border: #ecd0c0;
+    --tag-dish: #fde8d8;
+    --tag-ingr: #e8f4e0;
+    --tag-cook: #e8f0fc;
+    --tag-drink: #f8e8f8;
+    --tag-misc: #fef8e0;
+    --highlight: #fff5ee;
+    --row-alt: #fdf9f6;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  .header { background: var(--text); color: #fdf5ef; padding: 36px 40px 28px; position: relative; overflow: hidden; }
+  .header::before { content: '음식'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-family: 'Noto Serif KR', serif; font-size: 120px; color: rgba(255,255,255,0.05); font-weight: 600; letter-spacing: -4px; user-select: none; }
+  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
+  .header p { font-size: 13px; font-weight: 300; color: #b08878; letter-spacing: 0.5px; }
+  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+  .controls { padding: 20px 40px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .search-wrap { position: relative; flex: 1; min-width: 200px; }
+  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
+  #searchInput { width: 100%; padding: 10px 12px 10px 38px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s; }
+  #searchInput:focus { border-color: var(--accent); }
+  #searchInput::placeholder { color: var(--sub); }
+  .filter-btn { padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  thead { background: var(--text); color: #fdf5ef; }
+  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
+  th:nth-child(2), td:nth-child(2) { width: 145px; }
+  th:nth-child(3), td:nth-child(3) { width: 185px; }
+  th:nth-child(4), td:nth-child(4) { width: 210px; }
+  th:nth-child(5), td:nth-child(5) { width: 120px; }
+  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:nth-child(even) { background: var(--row-alt); }
+  tbody tr:hover { background: var(--highlight); }
+  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
+  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
+  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
+  .tag-dish  { background: var(--tag-dish);  color: #7a2000; }
+  .tag-ingr  { background: var(--tag-ingr);  color: #2a5000; }
+  .tag-cook  { background: var(--tag-cook);  color: #0a2a60; }
+  .tag-drink { background: var(--tag-drink); color: #5a0a6a; }
+  .tag-misc  { background: var(--tag-misc);  color: #5a3a00; }
+  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
+  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+  @media (max-width: 768px) { .header { padding: 24px 20px; } .header::before { display: none; } .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; } th, td { padding: 10px 12px; } .korean-word { font-size: 15px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>음식 & 요리 (심화) — Ẩm thực & Nấu ăn (Nâng cao)</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Ẩm thực nâng cao · Chủ đề TOPIK II</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="dish">Món ăn</button>
+  <button class="filter-btn" data-filter="ingr">Nguyên liệu</button>
+  <button class="filter-btn" data-filter="cook">Nấu ăn</button>
+  <button class="filter-btn" data-filter="drink">Đồ uống</button>
+  <button class="filter-btn" data-filter="misc">Tổng quát</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Ẩm thực &amp; Nấu ăn (Nâng cao)</div>
+<script>
+const vocab = [
+  { kr:"건강식", en:"healthy diet", vi:"chế độ ăn lành mạnh", type:"misc", note:"건강(健康)+식(食). 건강식을 먹다(ăn uống lành mạnh). 건강식 레스토랑(nhà hàng đồ ăn lành mạnh)." },
+  { kr:"건강식품", en:"health food", vi:"thực phẩm lành mạnh", type:"ingr", note:"건강+식품. 건강식품 매장(cửa hàng thực phẩm sức khỏe). 보조식품과 유사하나 범위 더 넓음." },
+  { kr:"건더기", en:"solid ingredients in soup", vi:"cái (phần đặc của canh)", type:"ingr", note:"국의 건더기(phần đặc trong canh). 건더기가 많다. ↔ 국물(nước canh). 고기나 채소 부분." },
+  { kr:"고구마", en:"sweet potato", vi:"khoai lang", type:"ingr", note:"고구마를 굽다(nướng khoai lang). 고구마 라떼. 겨울 간식으로 매우 인기 있어요." },
+  { kr:"고춧가루", en:"red pepper powder", vi:"bột ớt", type:"ingr", note:"고추+가루. 김치에 꼭 필요(cần để làm kim chi). 맵기를 조절할 때 사용." },
+  { kr:"구이", en:"grilled dish", vi:"đồ nướng", type:"dish", note:"굽다→구이. 삼겹살 구이(thịt ba chỉ nướng). 생선 구이(cá nướng). 구이 요리(món nướng)." },
+  { kr:"국그릇", en:"soup bowl", vi:"bát canh", type:"misc", note:"국+그릇. 국그릇에 담다(đựng vào bát canh). 깊은 국그릇(bát canh sâu lòng)." },
+  { kr:"국물", en:"soup broth, soup liquid", vi:"nước canh", type:"ingr", note:"국+물. 국물이 시원하다. 국물을 마시다. ↔ 건더기(phần đặc). 시원한 국물(nước canh thanh mát)." },
+  { kr:"깨소금", en:"sesame salt", vi:"muối vừng (muối mè)", type:"ingr", note:"깨+소금. 나물에 뿌리다(rắc lên rau trộn). 한국 요리 양념의 기본 재료 중 하나." },
+  { kr:"깻잎", en:"perilla leaf", vi:"lá vừng (lá mè)", type:"ingr", note:"깨+잎. 삼겹살에 싸먹다(cuốn thịt ba chỉ). 독특한 향이 있어요. 쌈 채소로 인기." },
+  { kr:"꿀", en:"honey", vi:"mật ong", type:"ingr", note:"꿀을 넣다. 꿀차(trà mật ong). 꿀물(nước mật ong). 꿀 같다(ngọt ngào như mật—thành ngữ)." },
+  { kr:"나물", en:"Korean seasoned vegetables", vi:"rau trộn kiểu Hàn", type:"dish", note:"나물을 무치다(trộn rau). 시금치 나물. 비빔밥의 핵심. 삶거나 볶아서 양념해 먹음." },
+  { kr:"닭갈비", en:"spicy stir-fried chicken (Dak galbi)", vi:"Dak galbi (gà xào cay)", type:"dish", note:"닭+갈비. 춘천 닭갈비가 유명(Chuncheon nổi tiếng). 고추장 양념으로 볶음. 치즈 토핑도 인기." },
+  { kr:"도시락", en:"lunchbox, bento", vi:"hộp cơm, bento", type:"misc", note:"도시락을 싸다(chuẩn bị hộp cơm). 편의점 도시락(hộp cơm tiện lợi). 직장인/학생 필수품." },
+  { kr:"돌솥", en:"stone pot", vi:"nồi đất", type:"misc", note:"돌+솥. 돌솥 비빔밥(cơm trộn nồi đất). 바닥에 누룽지(cơm cháy)가 생겨요. 뜨거운 돌솥 주의." },
+  { kr:"땅콩", en:"peanut", vi:"lạc, đậu phộng", type:"ingr", note:"땅(đất)+콩(đậu). 땅콩 버터(bơ đậu phộng). 땅콩을 볶다(rang lạc). 맥주 안주로 인기." },
+  { kr:"레몬", en:"lemon", vi:"quả chanh vàng", type:"ingr", note:"lemon에서. 레몬차(trà chanh). 레몬을 짜다(vắt chanh). 레몬에이드(nước chanh)." },
+  { kr:"맛보다", en:"to taste, to sample", vi:"nếm thử", type:"cook", note:"맛+보다. 요리 중에 맛을 봐요(nếm khi nấu). 맛보다=시식하다. 간을 맞추기 위해 중요." },
+  { kr:"매운탕", en:"spicy fish stew", vi:"canh cá cay", type:"dish", note:"매운+탕. 생선으로 끓인 얼큰한 찌개. 생선 매운탕(canh cá cay). 칼칼하고 시원해요." },
+  { kr:"먹을거리", en:"food, things to eat", vi:"thức ăn, đồ ăn tổng quát", type:"misc", note:"먹다+을거리. 먹을거리가 풍부하다. 길거리 먹을거리(đồ ăn vỉa hè). 식품보다 구어적." },
+  { kr:"멜론", en:"melon", vi:"dưa lưới", type:"ingr", note:"melon에서. 멜론이 달다. 멜론 주스. 여름 과일. 멜론빵(bánh mì melone)도 인기." },
+  { kr:"면", en:"noodles; side/direction", vi:"mặt; mì, sợi", type:"ingr", note:"두 가지: 麵(mì—냉면,짜장면), 面(mặt/phía). 면을 삶다(luộc mì). 면 요리(món mì)." },
+  { kr:"물냉면", en:"cold noodles in broth", vi:"mì lạnh nước (Mul Naengmyeon)", type:"dish", note:"물+냉면. 시원한 육수에 담긴 냉면. 평양냉면과 유사. ↔ 비빔냉면(trộn cay)." },
+  { kr:"미역", en:"seaweed (wakame)", vi:"rong biển (tươi)", type:"ingr", note:"미역을 불리다(ngâm). 미역국의 재료. 생일날 미역국을 먹어요(sinh nhật ăn canh rong biển)." },
+  { kr:"미역국", en:"seaweed soup", vi:"canh rong biển", type:"dish", note:"미역+국. 생일 음식(món ăn ngày sinh nhật). 미역국을 끓이다. 산후에도 먹어요." },
+  { kr:"밥그릇", en:"rice bowl", vi:"bát cơm", type:"misc", note:"밥+그릇. 밥그릇에 담다. 밥그릇을 씻다. 금속 밥그릇이 한국 특유의 문화." },
+  { kr:"밥맛", en:"taste of rice; appetite", vi:"khẩu vị, vị cơm", type:"misc", note:"밥+맛. 밥맛이 없다(mất ngon/không có khẩu vị). 밥맛이 좋다(cơm ngon). 기분에 따라 달라짐." },
+  { kr:"밥상", en:"meal table, dining table", vi:"mâm cơm", type:"misc", note:"밥+상. 밥상을 차리다(dọn mâm). 밥상에 앉다. 가족 밥상(mâm gia đình). 따뜻한 밥상 이미지." },
+  { kr:"배추", en:"napa cabbage", vi:"cải thảo, bắp cải", type:"ingr", note:"김치의 주재료. 배추김치(kimchi cải thảo). 배추를 절이다(ướp muối). 한국 요리 핵심 재료." },
+  { kr:"버섯", en:"mushroom", vi:"nấm", type:"ingr", note:"표고(shiitake), 느타리(nấm sò), 팽이(kim châm). 버섯을 볶다. 버섯찌개(canh nấm)." },
+  { kr:"붕어빵", en:"fish-shaped red bean pastry", vi:"bánh cá nhân đậu đỏ", type:"dish", note:"붕어+빵. 겨울 길거리 간식. 팥소. 잉어빵과 유사. 겨울의 명물. 따뜻하게 먹어요." },
+  { kr:"뷔페", en:"buffet", vi:"bữa tiệc buffet", type:"misc", note:"buffet에서. 뷔페 식당(nhà hàng buffet). 한국에서 인기 있는 식사 형태. 무한리필 형태." },
+  { kr:"비빔냉면", en:"spicy mixed cold noodles", vi:"mì lạnh trộn cay", type:"dish", note:"비빔+냉면. 고추장 소스로 비빈 냉면. 매콤달콤해요. ↔ 물냉면(nước). 함흥냉면 스타일." },
+  { kr:"삶다", en:"to boil, to simmer", vi:"luộc, đun sôi", type:"cook", note:"계란을 삶다(luộc trứng). 면을 삶다. 삶은 달걀(trứng luộc). 끓이다보다 재료를 넣는 것 강조." },
+  { kr:"삼겹살", en:"pork belly (grilled)", vi:"thịt ba chỉ nướng", type:"dish", note:"삼겹+살. 한국에서 가장 인기 있는 고기. 상추/깻잎에 싸먹음. 삼겹살 파티(tiệc ba chỉ)." },
+  { kr:"생강차", en:"ginger tea", vi:"trà gừng", type:"drink", note:"생강+차. 감기에 좋아요. 따뜻한 생강차(trà gừng ấm). 겨울 음료. 꿀과 함께 마시면 좋아요." },
+  { kr:"석식", en:"dinner (formal)", vi:"bữa tối (lịch sự)", type:"misc", note:"석식(夕食). 격식체. 조식-중식-석식 체계. 호텔 석식(bữa tối khách sạn). 공식 문서에서." },
+  { kr:"소스", en:"sauce", vi:"nước sốt, sauce", type:"ingr", note:"sauce에서. 소스를 뿌리다(rưới). 소스를 찍다(chấm). 케첩, 마요네즈, 굴소스 등이 소스." },
+  { kr:"소주", en:"soju (Korean distilled liquor)", vi:"Soju (rượu gạo Hàn Quốc)", type:"drink", note:"소주(燒酒). 도수 약 16~25%. 맥주와 폭탄주. 한국에서 가장 많이 팔리는 술. 삼겹살 조합 최고." },
+  { kr:"쇠고기", en:"beef", vi:"thịt bò", type:"ingr", note:"쇠+고기. 쇠고기국. 쇠고기 볶음. 한우가 제일 맛있어요. 소고기라고도 함." },
+  { kr:"수산물", en:"seafood, marine products", vi:"hải sản, thủy sản", type:"ingr", note:"수산(水産)+물. 수산물 시장(chợ hải sản). 수산물을 구입하다. 해산물과 유사." },
+  { kr:"순두부찌개", en:"soft tofu stew", vi:"canh đậu phụ non", type:"dish", note:"순두부+찌개. 매운 국물에 순두부. 계란을 풀어 넣음. 아주 인기 있는 찌개 중 하나." },
+  { kr:"술잔", en:"drinking glass, cup", vi:"ly rượu", type:"misc", note:"술+잔. 술잔을 채우다(rót đầy). 술잔을 기울이다(nâng ly). 소주잔(ly soju), 맥주잔(ly bia)." },
+  { kr:"스프", en:"Western-style soup", vi:"súp kiểu Tây", type:"dish", note:"soup에서. 호박 스프(súp bí đỏ). 한국식 국과 달리 서양식. 스프를 끓이다(nấu súp)." },
+  { kr:"식료품", en:"groceries, food products", vi:"thực phẩm", type:"misc", note:"식료+품. 식료품점(cửa hàng thực phẩm). 식료품을 구입하다. 마트에서 구매하는 것들." },
+  { kr:"식용유", en:"cooking oil, edible oil", vi:"dầu ăn", type:"ingr", note:"식용(食用)+유(油). 식용유로 볶다. 포도씨유, 올리브유, 콩기름 등이 식용유." },
+  { kr:"식초", en:"vinegar", vi:"giấm", type:"ingr", note:"식초(食醋). 식초를 넣다. 냉면에 식초를 넣어요. 새콤한 맛. 잡채, 탕수육에도 사용." },
+  { kr:"식품", en:"food product, foodstuff", vi:"thực phẩm", type:"misc", note:"식품(食品). 식품 회사. 건강 식품. 가공식품(thực phẩm chế biến). 식품 안전(an toàn thực phẩm)." },
+  { kr:"식후", en:"after a meal", vi:"sau bữa ăn", type:"misc", note:"식(食)+후(後). 식후에 약을 먹다(uống thuốc sau ăn). 식후 운동. ↔ 식전(trước ăn)." },
+  { kr:"안주", en:"food served with drinks", vi:"đồ nhắm ăn với rượu", type:"dish", note:"안주(按酒). 술과 함께 먹는 음식. 치킨이 인기 안주. 맥주 안주(đồ nhắm bia). 소주 안주." },
+  { kr:"양념", en:"seasoning, marinade", vi:"gia vị, nước ướp", type:"ingr", note:"양념을 하다(ướp gia vị). 양념 치킨(gà tẩm gia vị). 고추장, 간장, 참기름 등이 양념." },
+  { kr:"엿", en:"Korean malt candy", vi:"kẹo mạch nha truyền thống", type:"dish", note:"전통 한국 사탕. 쌀엿, 조청. 엿 먹어라!(thành ngữ tức giận). 겨울 간식." },
+  { kr:"와인", en:"wine", vi:"rượu vang", type:"drink", note:"wine에서. 레드 와인(vang đỏ). 화이트 와인(vang trắng). 와인을 따르다(rót rượu vang)." },
+  { kr:"외식", en:"eating out", vi:"ăn ngoài", type:"misc", note:"외식(外食). 오늘 외식해요(hôm nay ăn ngoài nhé). 외식 문화(văn hóa ăn ngoài). 집밥 ↔ 외식." },
+  { kr:"요구르트", en:"yogurt", vi:"sữa chua, yogurt", type:"drink", note:"yogurt에서. 요구르트를 먹다. 한국 요구르트(야쿠르트 브랜드). 아침 식사로 인기." },
+  { kr:"요리법", en:"recipe, cooking method", vi:"công thức nấu ăn", type:"cook", note:"요리+법. 요리법을 따르다(theo công thức). 요리법을 알려주다(hướng dẫn nấu). 레시피와 동의어." },
+  { kr:"육식", en:"meat-eating diet", vi:"ăn thịt, ăn mặn", type:"misc", note:"육식(肉食). 육식을 하다. 육식 동물(động vật ăn thịt). ↔ 채식(ăn chay)." },
+  { kr:"음료", en:"beverage, drink", vi:"đồ uống, nước uống", type:"drink", note:"음료(飮料). 탄산음료(nước có ga). 음료수(nước uống). 음료 코너(khu đồ uống)." },
+  { kr:"음식물", en:"food and drink", vi:"thức ăn đồ uống", type:"misc", note:"음식+물. 음식물 쓰레기(rác thực phẩm). 음식물을 낭비하지 마세요(đừng lãng phí)." },
+  { kr:"음주", en:"drinking (alcohol)", vi:"uống rượu, việc uống", type:"drink", note:"음주(飮酒). 음주 운전(lái xe say). 음주가무(uống-ca-múa). 음주 측정(đo nồng độ cồn)." },
+  { kr:"인스턴트", en:"instant food", vi:"đồ ăn liền", type:"misc", note:"instant에서. 인스턴트 식품(thực phẩm ăn liền). 인스턴트 라면(mì ăn liền). 건강에 좋지 않아요." },
+  { kr:"입맛", en:"appetite, taste preference", vi:"khẩu vị, cảm giác thèm ăn", type:"misc", note:"입+맛. 입맛이 없다(không có khẩu vị). 입맛에 맞다(hợp khẩu vị). 입맛을 돋우다(kích thích)." },
+  { kr:"잡채", en:"Japchae (glass noodles dish)", vi:"Japchae (miến xào rau thịt)", type:"dish", note:"당면+채소+고기. 명절 음식으로 필수. 잡채를 만들다. 달콤하고 짭짤한 맛이에요." },
+  { kr:"조개", en:"shellfish, clam", vi:"sò, nghêu", type:"ingr", note:"조개를 캐다(cào). 조개찜(hấp), 조개구이(nướng). 조개 해물탕(canh hải sản)." },
+  { kr:"조리", en:"cooking, food preparation", vi:"nấu ăn, chế biến", type:"cook", note:"조리(調理). 조리하다=nấu. 조리법(công thức). 조리 시간(thời gian nấu)." },
+  { kr:"조리법", en:"recipe, cooking instructions", vi:"công thức nấu ăn", type:"cook", note:"조리+법. 요리법과 동의어. 조리법대로 하다(theo công thức). 레시피와 동의어." },
+  { kr:"조림", en:"braised/simmered dish", vi:"món kho, rim", type:"dish", note:"조리다→조림. 생선조림(cá kho), 감자조림(khoai rim). 졸이면서 양념이 배어들게 해요." },
+  { kr:"조미료", en:"seasoning, flavor enhancer", vi:"gia vị (bột ngọt v.v.)", type:"ingr", note:"조미(調味)+료(料). 인공 조미료(bột ngọt nhân tạo). 천연 조미료. MSG 포함." },
+  { kr:"족발", en:"braised pig's feet", vi:"chân giò heo (món ăn Hàn)", type:"dish", note:"족(足)+발. 족발+맥주=조합 최고. 새우젓에 찍어 먹어요. 야식으로 매우 인기." },
+  { kr:"찬물", en:"cold water", vi:"nước lạnh", type:"drink", note:"찬+물. 찬물을 마시다. 찬물 샤워. ↔ 뜨거운 물(nước nóng). 운동 후 찬물은 주의." },
+  { kr:"참기름", en:"sesame oil", vi:"dầu vừng, dầu mè", type:"ingr", note:"참+기름. 참기름을 넣다. 고소한 향. 한국 요리 필수 재료. 들기름과 구별해요." },
+  { kr:"참치", en:"tuna", vi:"cá ngừ", type:"ingr", note:"참치 통조림(đóng hộp). 참치김밥, 참치찌개. 한국인이 많이 먹어요. 저렴하고 맛있어요." },
+  { kr:"채식", en:"vegetarian diet", vi:"ăn chay, chế độ ăn chay", type:"misc", note:"채식(菜食). 채식을 하다. 채식 메뉴(thực đơn chay). 채식주의자가 늘고 있어요. ↔ 육식." },
+  { kr:"채식주의자", en:"vegetarian person", vi:"người ăn chay", type:"misc", note:"채식+주의자. 채식주의자를 위한 식당(nhà hàng chay). 비건(vegan)과 구별." },
+  { kr:"치즈", en:"cheese", vi:"phô mai", type:"ingr", note:"cheese에서. 치즈를 올리다. 치즈 떡볶이. 치즈 버거. 한국 음식에 치즈 토핑이 트렌드." },
+  { kr:"칼국수", en:"knife-cut noodle soup", vi:"mì cắt (mì Hàn)", type:"dish", note:"칼+국수. 손으로 만든 밀가루 국수를 칼로 자름. 시원한 국물 특징. 바지락 칼국수 인기." },
+  { kr:"콩나물", en:"bean sprouts", vi:"giá đỗ", type:"ingr", note:"콩+나물. 콩나물국, 콩나물밥. 해장에 좋아요. 비빔밥 재료. 아삭한 식감." },
+  { kr:"탕", en:"soup, stew (general)", vi:"canh, súp tổng quát", type:"dish", note:"탕(湯). 매운탕, 삼계탕, 육개장 등. 탕 요리. 뜨거운 국물 요리를 통칭. 보양식에 많음." },
+  { kr:"튀기다", en:"to deep-fry; to bounce", vi:"chiên; bật lên, tung lên", type:"cook", note:"두 가지: 기름에 튀기다(chiên ngập dầu), 공이 튀기다(bóng bật). 튀김(đồ chiên)." },
+  { kr:"특산물", en:"specialty, local product", vi:"đặc sản địa phương", type:"misc", note:"특산(特産)+물. 제주도 특산물(đặc sản Jeju). 지역 특산물을 사다. 여행 선물로 인기." },
+  { kr:"파전", en:"green onion pancake", vi:"bánh xèo hành lá Hàn", type:"dish", note:"파+전. 비 오는 날 먹는 음식. 막걸리와 최고 조합. 해물파전(hải sản), 김치전도 있어요." },
+  { kr:"팥빙수", en:"shaved ice with red bean", vi:"đá bào đậu đỏ", type:"dish", note:"팥+빙수. 한국 여름 디저트 대표. 위에 팥, 떡, 과일 등. 더운 여름에 최고의 디저트." },
+  { kr:"패스트푸드", en:"fast food", vi:"đồ ăn nhanh", type:"misc", note:"fast food에서. 패스트푸드 식당. 패스트푸드를 자주 먹으면 건강에 좋지 않아요." },
+  { kr:"포도주", en:"wine, grape wine", vi:"rượu nho", type:"drink", note:"포도+주(酒). 와인의 한자어 표현. 포도주를 마시다. 공식 문서에서 사용." },
+  { kr:"프라이팬", en:"frying pan, skillet", vi:"chảo chiên", type:"misc", note:"frying pan에서. 프라이팬에 볶다. 달군 프라이팬(chảo nóng). 계란 후라이(trứng chiên)." },
+  { kr:"한우", en:"Korean beef", vi:"thịt bò Hàn Quốc", type:"ingr", note:"한(韓)+우(牛). 맛있고 비싸요. 1++ 등급이 최고급. 한우 불고기(thịt bò Hàn nướng)." },
+  { kr:"한정식", en:"Korean full-course meal", vi:"cơm Hàn trọn bộ", type:"dish", note:"한(韓)+정식(定食). 여러 반찬이 나오는 코스 요리. 한정식 식당(nhà hàng cơm Hàn trọn bộ)." },
+  { kr:"해물", en:"seafood", vi:"hải sản", type:"ingr", note:"해(海)+물. 해물 요리(món hải sản). 해물찜(hấp). 해물파전(bánh hành hải sản)." },
+  { kr:"해산물", en:"marine products, seafood", vi:"hải sản, đồ biển", type:"ingr", note:"해산(海産)+물. 수산물과 유사. 해산물 알레르기. 신선한 해산물(hải sản tươi)." },
+  { kr:"후식", en:"dessert, sweet course", vi:"tráng miệng", type:"dish", note:"후식(後食). 식사 후에 먹는 달콤한 음식. 아이스크림, 과일 등. ≈ 디저트(desert)." },
+];
+
+let currentFilter = 'all';
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let tagHtml;
+    if      (item.type==='dish')  tagHtml=`<span class="tag tag-dish">Món ăn</span>`;
+    else if (item.type==='ingr')  tagHtml=`<span class="tag tag-ingr">Nguyên liệu</span>`;
+    else if (item.type==='cook')  tagHtml=`<span class="tag tag-cook">Nấu ăn</span>`;
+    else if (item.type==='drink') tagHtml=`<span class="tag tag-drink">Đồ uống</span>`;
+    else                          tagHtml=`<span class="tag tag-misc">Tổng quát</span>`;
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${tagHtml}</td><td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const mf = currentFilter==='all' || item.type===currentFilter;
+    const ms = !q || item.kr.includes(q) || item.en.toLowerCase().includes(q) || item.vi.toLowerCase().includes(q) || item.note.toLowerCase().includes(q);
+    return mf && ms;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length===0?'block':'none';
+  document.getElementById('vocabTable').style.display = result.length===0?'none':'';
+}
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
