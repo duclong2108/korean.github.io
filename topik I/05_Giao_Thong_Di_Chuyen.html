@@ -1,281 +1,891 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Giao thông & Di chuyển</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f2f4f8;
-    --card: #ffffff;
-    --accent: #1a3a7a;
-    --text: #0e1a30;
-    --sub: #5a6a8a;
-    --border: #ccd4e8;
-    --tag-hv: #dde4f8;
-    --tag-pure: #e8f4e8;
-    --highlight: #eef2ff;
-    --row-alt: #f7f9fd;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Giao thông & Di chuyển</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f2f4f8;
+        --card: #ffffff;
+        --accent: #1a3a7a;
+        --text: #0e1a30;
+        --sub: #5a6a8a;
+        --border: #ccd4e8;
+        --tag-hv: #dde4f8;
+        --tag-pure: #e8f4e8;
+        --highlight: #eef2ff;
+        --row-alt: #f7f9fd;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f2f4f8;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '교통';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #7a90b8; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #f2f4f8;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "교통";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #7a90b8;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f2f4f8; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f2f4f8;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 140px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 185px; }
-  th:nth-child(5), td:nth-child(5) { width: 155px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 140px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 185px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 155px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      }
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #1a3060; font-weight: 500; }
-  .hv-tag.pure { background: var(--tag-pure); color: #2a6030; }
-  .hv-hanja { font-weight: 600; font-size: 13px; }
-  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
-  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
-  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
-  .explain { font-size: 13px; color: #1e3050; line-height: 1.6; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #1a3060;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #2a6030;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #1e3050;
+        line-height: 1.6;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>교통 & 이동 — Giao thông & Di chuyển</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Giao thông · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>교통 & 이동 — Giao thông & Di chuyển</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Giao thông · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+      <button class="filter-btn" data-filter="pure">
+        Thuần Hàn / Vay mượn
+      </button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn / Vay mượn</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Hán Việt</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Giao thông & Di chuyển
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Giao thông & Di chuyển</div>
+    <script>
+      const vocab = [
+        {
+          kr: "갈아타다",
+          en: "to transfer, change vehicles",
+          vi: "chuyển xe, đổi tàu",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Chuyển sang phương tiện khác giữa chừng. 갈아(đổi) + 타다(lên xe). Dùng khi đi tàu, xe buýt.",
+          ex: "2호선으로 갈아타세요.",
+          exVi: "Hãy chuyển sang tuyến số 2.",
+        },
+        {
+          kr: "고속버스",
+          en: "express bus",
+          vi: "xe buýt tốc hành",
+          hv: "高速",
+          hvR: "고속(cao tốc) + 버스",
+          pure: false,
+          explain:
+            "Xe buýt liên tỉnh tốc hành. 고속(高速, cao tốc) + 버스(bus). Chạy trên đường cao tốc giữa các thành phố.",
+          ex: "고속버스로 부산에 가요.",
+          exVi: "Tôi đi xe buýt tốc hành đến Busan.",
+        },
+        {
+          kr: "공항",
+          en: "airport",
+          vi: "sân bay",
+          hv: "空港",
+          hvR: "không cảng",
+          pure: false,
+          explain:
+            "Sân bay. 공(空, bầu trời) + 항(港, cảng). 인천공항 = sân bay Incheon — lớn nhất Hàn Quốc.",
+          ex: "공항에 일찍 도착했어요.",
+          exVi: "Tôi đã đến sân bay sớm.",
+        },
+        {
+          kr: "교통",
+          en: "traffic, transportation",
+          vi: "giao thông",
+          hv: "交通",
+          hvR: "giao thông",
+          pure: false,
+          explain:
+            "Giao thông, hệ thống di chuyển. 교통이 복잡하다 = giao thông đông đúc/phức tạp.",
+          ex: "서울은 교통이 복잡해요.",
+          exVi: "Giao thông Seoul rất phức tạp.",
+        },
+        {
+          kr: "교통사고",
+          en: "traffic accident",
+          vi: "tai nạn giao thông",
+          hv: "交通事故",
+          hvR: "giao thông sự cố",
+          pure: false,
+          explain:
+            "Tai nạn giao thông. 교통(giao thông) + 사고(事故, sự cố). 교통사고가 났다 = xảy ra tai nạn.",
+          ex: "교통사고가 났어요.",
+          exVi: "Đã xảy ra tai nạn giao thông.",
+        },
+        {
+          kr: "기차",
+          en: "train",
+          vi: "tàu hỏa",
+          hv: "汽車",
+          hvR: "khí xa",
+          pure: false,
+          explain:
+            "Tàu hỏa chạy bằng hơi nước/điện. 기차를 타다 = đi tàu. Khác với 지하철 (tàu điện ngầm).",
+          ex: "기차로 여행해요.",
+          exVi: "Tôi đi du lịch bằng tàu hỏa.",
+        },
+        {
+          kr: "길",
+          en: "road, way, path",
+          vi: "con đường, lối đi",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Đường đi, con đường. 길을 잃다 = lạc đường. 길을 묻다 = hỏi đường. Rất phổ biến trong hội thoại.",
+          ex: "길을 잃었어요.",
+          exVi: "Tôi bị lạc đường rồi.",
+        },
+        {
+          kr: "도로",
+          en: "road, highway",
+          vi: "đường lộ, đường bộ",
+          hv: "道路",
+          hvR: "đạo lộ",
+          pure: false,
+          explain:
+            "Đường bộ, mặt đường dành cho xe cộ. Trang trọng và rộng hơn 길.",
+          ex: "도로가 많이 막혀요.",
+          exVi: "Đường bộ tắc nghẽn lắm.",
+        },
+        {
+          kr: "도착",
+          en: "arrival",
+          vi: "sự đến nơi",
+          hv: "到着",
+          hvR: "đáo trước",
+          pure: false,
+          explain:
+            "Sự đến nơi, đến đích. 도착하다 = đến nơi. Đối lập với 출발 (xuất phát).",
+          ex: "도착 시간이 언제예요?",
+          exVi: "Thời gian đến nơi là mấy giờ?",
+        },
+        {
+          kr: "도착하다",
+          en: "to arrive",
+          vi: "đến nơi",
+          hv: "到着",
+          hvR: "đáo trước",
+          pure: false,
+          explain:
+            "Động từ 'đến nơi'. 집에 도착하다 = đến nhà. 역에 도착하다 = đến ga.",
+          ex: "집에 잘 도착했어요.",
+          exVi: "Tôi đã về đến nhà an toàn rồi.",
+        },
+        {
+          kr: "배",
+          en: "ship; stomach; pear",
+          vi: "tàu; bụng; quả lê",
+          hv: null,
+          hvR: "thuần Hàn (3 nghĩa khác nhau)",
+          pure: true,
+          explain:
+            "Ba nghĩa hoàn toàn khác nhau: (1) tàu/thuyền, (2) cái bụng, (3) quả lê. Ngữ cảnh quyết định nghĩa.",
+          ex: "배를 타고 섬에 가요.",
+          exVi: "Đi tàu ra đảo.",
+        },
+        {
+          kr: "버스",
+          en: "bus",
+          vi: "xe buýt",
+          hv: null,
+          hvR: "từ tiếng Anh 'bus'",
+          pure: true,
+          explain:
+            "Xe buýt. Từ vay mượn tiếng Anh. 버스를 타다 = lên xe buýt. 버스 정류장 = trạm xe buýt.",
+          ex: "버스를 타고 학교에 가요.",
+          exVi: "Tôi đi xe buýt đến trường.",
+        },
+        {
+          kr: "비행기",
+          en: "airplane",
+          vi: "máy bay",
+          hv: "飛行機",
+          hvR: "phi hành cơ",
+          pure: false,
+          explain:
+            "Máy bay. 비행(飛行, bay) + 기(機, máy). 비행기를 타다 = đi máy bay.",
+          ex: "비행기로 두 시간 걸려요.",
+          exVi: "Đi máy bay mất hai tiếng.",
+        },
+        {
+          kr: "비행장",
+          en: "airfield, small airport",
+          vi: "sân bay (nhỏ)",
+          hv: "飛行場",
+          hvR: "phi hành trường",
+          pure: false,
+          explain:
+            "Sân bay nhỏ hơn 공항. 비행(bay) + 장(場, bãi, trường). Thường dùng cho sân bay quân sự hoặc nhỏ.",
+          ex: "비행장이 가까워요.",
+          exVi: "Sân bay ở gần đây.",
+        },
+        {
+          kr: "사거리",
+          en: "four-way intersection",
+          vi: "ngã tư",
+          hv: "四거리",
+          hvR: "tứ + 거리(phố)",
+          pure: false,
+          explain:
+            "Ngã tư — nơi bốn đường giao nhau. 사(四, bốn) + 거리(đường). Hay dùng khi chỉ đường.",
+          ex: "사거리에서 좌회전하세요.",
+          exVi: "Rẽ trái ở ngã tư.",
+        },
+        {
+          kr: "사고",
+          en: "accident, incident",
+          vi: "tai nạn, sự cố",
+          hv: "事故",
+          hvR: "sự cố",
+          pure: false,
+          explain:
+            "Tai nạn, sự cố bất ngờ. 사고가 나다 = xảy ra tai nạn. Dùng rộng hơn 교통사고.",
+          ex: "사고가 났어요.",
+          exVi: "Đã xảy ra tai nạn/sự cố rồi.",
+        },
+        {
+          kr: "삼거리",
+          en: "three-way intersection",
+          vi: "ngã ba",
+          hv: "三거리",
+          hvR: "tam + 거리(phố)",
+          pure: false,
+          explain:
+            "Ngã ba — nơi ba đường giao nhau. 삼(三, ba) + 거리(đường). Đối lập với 사거리 (ngã tư).",
+          ex: "삼거리에서 오른쪽으로 가세요.",
+          exVi: "Đi sang phải ở ngã ba.",
+        },
+        {
+          kr: "서울역",
+          en: "Seoul Station",
+          vi: "ga Seoul",
+          hv: "驛",
+          hvR: "서울 + 역(ga)",
+          pure: false,
+          explain:
+            "Ga Seoul — đầu mối giao thông lớn nhất Hàn Quốc. Có KTX, tàu thường, tàu điện ngầm và xe buýt.",
+          ex: "서울역에서 KTX를 타요.",
+          exVi: "Tôi đi KTX từ ga Seoul.",
+        },
+        {
+          kr: "여권",
+          en: "passport",
+          vi: "hộ chiếu",
+          hv: "旅券",
+          hvR: "lữ quyền",
+          pure: false,
+          explain:
+            "Hộ chiếu. 여(旅, đi lại) + 권(券, giấy tờ). Cần thiết khi xuất nhập cảnh.",
+          ex: "여권을 잃어버렸어요.",
+          exVi: "Tôi bị mất hộ chiếu rồi.",
+        },
+        {
+          kr: "역",
+          en: "station",
+          vi: "ga (xe lửa/tàu điện)",
+          hv: "驛",
+          hvR: "dịch",
+          pure: false,
+          explain:
+            "Nhà ga tàu hỏa hoặc tàu điện ngầm. 서울역, 강남역,... Rất phổ biến khi đặt địa điểm hẹn.",
+          ex: "강남역에서 만나요.",
+          exVi: "Gặp nhau ở ga Gangnam nhé.",
+        },
+        {
+          kr: "열차",
+          en: "train, rail car",
+          vi: "tàu hỏa, đoàn tàu",
+          hv: "列車",
+          hvR: "liệt xa",
+          pure: false,
+          explain:
+            "Đoàn tàu hỏa — cách nói trang trọng hơn 기차. Dùng nhiều trong thông báo, biển hiệu.",
+          ex: "열차가 곧 출발합니다.",
+          exVi: "Đoàn tàu sắp khởi hành.",
+        },
+        {
+          kr: "자동차",
+          en: "car, automobile",
+          vi: "xe ô tô, xe hơi",
+          hv: "自動車",
+          hvR: "tự động xa",
+          pure: false,
+          explain:
+            "Xe ô tô. 자동(自動, tự động) + 차(車, xe). Cách nói chính thức. Thông thường dùng 차 cho ngắn gọn.",
+          ex: "자동차로 출근해요.",
+          exVi: "Tôi đi làm bằng ô tô.",
+        },
+        {
+          kr: "자전거",
+          en: "bicycle",
+          vi: "xe đạp",
+          hv: "自轉車",
+          hvR: "tự chuyển xa",
+          pure: false,
+          explain:
+            "Xe đạp. 자전(自轉, tự quay) + 거(車, xe). 자전거를 타다 = đi xe đạp.",
+          ex: "자전거로 공원에 가요.",
+          exVi: "Tôi đạp xe đến công viên.",
+        },
+        {
+          kr: "전기자동차",
+          en: "electric car, EV",
+          vi: "xe điện",
+          hv: "電氣自動車",
+          hvR: "điện khí tự động xa",
+          pure: false,
+          explain:
+            "Xe ô tô chạy bằng điện. 전기(電氣, điện) + 자동차(ô tô). Ngày càng phổ biến ở Hàn Quốc.",
+          ex: "전기자동차가 늘고 있어요.",
+          exVi: "Xe điện ngày càng nhiều hơn.",
+        },
+        {
+          kr: "정거장",
+          en: "station, stop",
+          vi: "bến xe, trạm dừng",
+          hv: "停車場",
+          hvR: "đình xa trường",
+          pure: false,
+          explain:
+            "Bến xe, điểm dừng của phương tiện. Rộng nghĩa hơn 정류장. Dùng cho cả tàu và xe buýt.",
+          ex: "다음 정거장에서 내려요.",
+          exVi: "Tôi xuống ở trạm tiếp theo.",
+        },
+        {
+          kr: "정류장",
+          en: "bus stop",
+          vi: "trạm xe buýt",
+          hv: "停留場",
+          hvR: "đình lưu trường",
+          pure: false,
+          explain:
+            "Trạm xe buýt cụ thể. 정류(停留, dừng lại) + 장(場, chỗ). Thường dùng cho xe buýt hơn.",
+          ex: "버스 정류장이 어디예요?",
+          exVi: "Trạm xe buýt ở đâu vậy?",
+        },
+        {
+          kr: "주차장",
+          en: "parking lot",
+          vi: "bãi đậu xe",
+          hv: "駐車場",
+          hvR: "trú xa trường",
+          pure: false,
+          explain:
+            "Bãi đỗ xe. 주차(駐車, đỗ xe) + 장(場, chỗ). 주차하다 = đỗ xe.",
+          ex: "주차장이 꽉 찼어요.",
+          exVi: "Bãi đỗ xe đầy rồi.",
+        },
+        {
+          kr: "지도",
+          en: "map",
+          vi: "bản đồ",
+          hv: "地圖",
+          hvR: "địa đồ",
+          pure: false,
+          explain:
+            "Bản đồ. 지(地, đất) + 도(圖, bản vẽ). 지도를 보다 = xem bản đồ. 네이버지도 = Naver Maps.",
+          ex: "지도로 길을 찾아요.",
+          exVi: "Tôi tìm đường bằng bản đồ.",
+        },
+        {
+          kr: "지하도",
+          en: "underpass, pedestrian tunnel",
+          vi: "đường hầm đi bộ",
+          hv: "地下道",
+          hvR: "địa hạ đạo",
+          pure: false,
+          explain:
+            "Đường hầm dành cho người đi bộ qua đường ở dưới lòng đất. 지하(địa hạ) + 도(道, đường).",
+          ex: "지하도로 길을 건너요.",
+          exVi: "Tôi đi qua đường hầm để sang đường.",
+        },
+        {
+          kr: "지하철",
+          en: "subway, metro",
+          vi: "tàu điện ngầm, metro",
+          hv: "地下鐵",
+          hvR: "địa hạ thiết",
+          pure: false,
+          explain:
+            "Tàu điện ngầm. 지하(地下, dưới đất) + 철(鐵, sắt/đường ray). Seoul có mạng lưới metro rất phát triển.",
+          ex: "지하철이 빠르고 편해요.",
+          exVi: "Tàu điện ngầm nhanh và tiện lợi.",
+        },
+        {
+          kr: "지하철역",
+          en: "subway station",
+          vi: "ga tàu điện ngầm",
+          hv: "地下鐵驛",
+          hvR: "địa hạ thiết dịch",
+          pure: false,
+          explain:
+            "Ga tàu điện ngầm. 지하철 + 역(ga). Seoul có hơn 300 ga metro trên 9 tuyến chính.",
+          ex: "지하철역이 가까워요.",
+          exVi: "Ga tàu điện ngầm ở gần đây.",
+        },
+        {
+          kr: "짐",
+          en: "baggage, load",
+          vi: "hành lý, đồ đạc",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Hành lý, đồ đạc mang theo. 짐을 싸다 = đóng gói hành lý. 짐이 무겁다 = hành lý nặng.",
+          ex: "짐이 너무 많아요.",
+          exVi: "Hành lý nhiều quá.",
+        },
+        {
+          kr: "차",
+          en: "car; tea",
+          vi: "xe ô tô; trà",
+          hv: "車/茶",
+          hvR: "xa / trà",
+          pure: false,
+          explain:
+            "Hai nghĩa: (1) 車 — xe ô tô (cách nói ngắn của 자동차), (2) 茶 — trà. Ngữ cảnh phân biệt.",
+          ex: "차를 타고 가요.",
+          exVi: "Đi bằng ô tô nhé.",
+        },
+        {
+          kr: "출발",
+          en: "departure, start",
+          vi: "sự khởi hành, xuất phát",
+          hv: "出發",
+          hvR: "xuất phát",
+          pure: false,
+          explain:
+            "Sự khởi hành, lên đường. 출발하다 = xuất phát. Đối lập với 도착 (đến nơi).",
+          ex: "출발 시간이 언제예요?",
+          exVi: "Giờ khởi hành là mấy giờ?",
+        },
+        {
+          kr: "택시",
+          en: "taxi",
+          vi: "xe taxi",
+          hv: null,
+          hvR: "từ tiếng Anh 'taxi'",
+          pure: true,
+          explain:
+            "Xe taxi. Từ vay mượn tiếng Anh. 택시를 잡다 = bắt taxi. 카카오택시 = ứng dụng gọi xe Hàn.",
+          ex: "택시를 타고 갔어요.",
+          exVi: "Tôi đã đi bằng taxi.",
+        },
+        {
+          kr: "터미널",
+          en: "terminal, bus station",
+          vi: "bến xe, nhà ga",
+          hv: null,
+          hvR: "từ tiếng Anh 'terminal'",
+          pure: true,
+          explain:
+            "Bến xe liên tỉnh hoặc sân bay. Từ vay mượn tiếng Anh. 고속버스터미널 = bến xe tốc hành.",
+          ex: "터미널에서 표를 샀어요.",
+          exVi: "Tôi đã mua vé ở bến xe.",
+        },
+        {
+          kr: "표",
+          en: "ticket, table",
+          vi: "bảng; vé (tàu xe)",
+          hv: "票/表",
+          hvR: "phiếu / biểu",
+          pure: false,
+          explain:
+            "Vé tàu/xe hoặc bảng biểu. 표를 사다 = mua vé. 기차표 = vé tàu. 시간표 = thời khóa biểu.",
+          ex: "기차표를 미리 샀어요.",
+          exVi: "Tôi đã mua vé tàu trước.",
+        },
+        {
+          kr: "횡단보도",
+          en: "crosswalk, pedestrian crossing",
+          vi: "vạch sang đường, đường băng",
+          hv: "橫斷步道",
+          hvR: "hoành đoạn bộ đạo",
+          pure: false,
+          explain:
+            "Vạch kẻ đường dành cho người đi bộ sang đường. 횡단(橫斷, cắt ngang) + 보도(步道, đường đi bộ).",
+          ex: "횡단보도에서 건너세요.",
+          exVi: "Hãy sang đường ở vạch băng qua đường.",
+        },
+      ];
 
-<script>
-const vocab = [
-  { kr:"갈아타다", en:"to transfer, change vehicles", vi:"chuyển xe, đổi tàu", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Chuyển sang phương tiện khác giữa chừng. 갈아(đổi) + 타다(lên xe). Dùng khi đi tàu, xe buýt.",
-    ex:"2호선으로 갈아타세요.", exVi:"Hãy chuyển sang tuyến số 2." },
-  { kr:"고속버스", en:"express bus", vi:"xe buýt tốc hành", hv:"高速", hvR:"고속(cao tốc) + 버스", pure:false,
-    explain:"Xe buýt liên tỉnh tốc hành. 고속(高速, cao tốc) + 버스(bus). Chạy trên đường cao tốc giữa các thành phố.",
-    ex:"고속버스로 부산에 가요.", exVi:"Tôi đi xe buýt tốc hành đến Busan." },
-  { kr:"공항", en:"airport", vi:"sân bay", hv:"空港", hvR:"không cảng", pure:false,
-    explain:"Sân bay. 공(空, bầu trời) + 항(港, cảng). 인천공항 = sân bay Incheon — lớn nhất Hàn Quốc.",
-    ex:"공항에 일찍 도착했어요.", exVi:"Tôi đã đến sân bay sớm." },
-  { kr:"교통", en:"traffic, transportation", vi:"giao thông", hv:"交通", hvR:"giao thông", pure:false,
-    explain:"Giao thông, hệ thống di chuyển. 교통이 복잡하다 = giao thông đông đúc/phức tạp.",
-    ex:"서울은 교통이 복잡해요.", exVi:"Giao thông Seoul rất phức tạp." },
-  { kr:"교통사고", en:"traffic accident", vi:"tai nạn giao thông", hv:"交通事故", hvR:"giao thông sự cố", pure:false,
-    explain:"Tai nạn giao thông. 교통(giao thông) + 사고(事故, sự cố). 교통사고가 났다 = xảy ra tai nạn.",
-    ex:"교통사고가 났어요.", exVi:"Đã xảy ra tai nạn giao thông." },
-  { kr:"기차", en:"train", vi:"tàu hỏa", hv:"汽車", hvR:"khí xa", pure:false,
-    explain:"Tàu hỏa chạy bằng hơi nước/điện. 기차를 타다 = đi tàu. Khác với 지하철 (tàu điện ngầm).",
-    ex:"기차로 여행해요.", exVi:"Tôi đi du lịch bằng tàu hỏa." },
-  { kr:"길", en:"road, way, path", vi:"con đường, lối đi", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Đường đi, con đường. 길을 잃다 = lạc đường. 길을 묻다 = hỏi đường. Rất phổ biến trong hội thoại.",
-    ex:"길을 잃었어요.", exVi:"Tôi bị lạc đường rồi." },
-  { kr:"도로", en:"road, highway", vi:"đường lộ, đường bộ", hv:"道路", hvR:"đạo lộ", pure:false,
-    explain:"Đường bộ, mặt đường dành cho xe cộ. Trang trọng và rộng hơn 길.",
-    ex:"도로가 많이 막혀요.", exVi:"Đường bộ tắc nghẽn lắm." },
-  { kr:"도착", en:"arrival", vi:"sự đến nơi", hv:"到着", hvR:"đáo trước", pure:false,
-    explain:"Sự đến nơi, đến đích. 도착하다 = đến nơi. Đối lập với 출발 (xuất phát).",
-    ex:"도착 시간이 언제예요?", exVi:"Thời gian đến nơi là mấy giờ?" },
-  { kr:"도착하다", en:"to arrive", vi:"đến nơi", hv:"到着", hvR:"đáo trước", pure:false,
-    explain:"Động từ 'đến nơi'. 집에 도착하다 = đến nhà. 역에 도착하다 = đến ga.",
-    ex:"집에 잘 도착했어요.", exVi:"Tôi đã về đến nhà an toàn rồi." },
-  { kr:"배", en:"ship; stomach; pear", vi:"tàu; bụng; quả lê", hv:null, hvR:"thuần Hàn (3 nghĩa khác nhau)", pure:true,
-    explain:"Ba nghĩa hoàn toàn khác nhau: (1) tàu/thuyền, (2) cái bụng, (3) quả lê. Ngữ cảnh quyết định nghĩa.",
-    ex:"배를 타고 섬에 가요.", exVi:"Đi tàu ra đảo." },
-  { kr:"버스", en:"bus", vi:"xe buýt", hv:null, hvR:"từ tiếng Anh 'bus'", pure:true,
-    explain:"Xe buýt. Từ vay mượn tiếng Anh. 버스를 타다 = lên xe buýt. 버스 정류장 = trạm xe buýt.",
-    ex:"버스를 타고 학교에 가요.", exVi:"Tôi đi xe buýt đến trường." },
-  { kr:"비행기", en:"airplane", vi:"máy bay", hv:"飛行機", hvR:"phi hành cơ", pure:false,
-    explain:"Máy bay. 비행(飛行, bay) + 기(機, máy). 비행기를 타다 = đi máy bay.",
-    ex:"비행기로 두 시간 걸려요.", exVi:"Đi máy bay mất hai tiếng." },
-  { kr:"비행장", en:"airfield, small airport", vi:"sân bay (nhỏ)", hv:"飛行場", hvR:"phi hành trường", pure:false,
-    explain:"Sân bay nhỏ hơn 공항. 비행(bay) + 장(場, bãi, trường). Thường dùng cho sân bay quân sự hoặc nhỏ.",
-    ex:"비행장이 가까워요.", exVi:"Sân bay ở gần đây." },
-  { kr:"사거리", en:"four-way intersection", vi:"ngã tư", hv:"四거리", hvR:"tứ + 거리(phố)", pure:false,
-    explain:"Ngã tư — nơi bốn đường giao nhau. 사(四, bốn) + 거리(đường). Hay dùng khi chỉ đường.",
-    ex:"사거리에서 좌회전하세요.", exVi:"Rẽ trái ở ngã tư." },
-  { kr:"사고", en:"accident, incident", vi:"tai nạn, sự cố", hv:"事故", hvR:"sự cố", pure:false,
-    explain:"Tai nạn, sự cố bất ngờ. 사고가 나다 = xảy ra tai nạn. Dùng rộng hơn 교통사고.",
-    ex:"사고가 났어요.", exVi:"Đã xảy ra tai nạn/sự cố rồi." },
-  { kr:"삼거리", en:"three-way intersection", vi:"ngã ba", hv:"三거리", hvR:"tam + 거리(phố)", pure:false,
-    explain:"Ngã ba — nơi ba đường giao nhau. 삼(三, ba) + 거리(đường). Đối lập với 사거리 (ngã tư).",
-    ex:"삼거리에서 오른쪽으로 가세요.", exVi:"Đi sang phải ở ngã ba." },
-  { kr:"서울역", en:"Seoul Station", vi:"ga Seoul", hv:"驛", hvR:"서울 + 역(ga)", pure:false,
-    explain:"Ga Seoul — đầu mối giao thông lớn nhất Hàn Quốc. Có KTX, tàu thường, tàu điện ngầm và xe buýt.",
-    ex:"서울역에서 KTX를 타요.", exVi:"Tôi đi KTX từ ga Seoul." },
-  { kr:"여권", en:"passport", vi:"hộ chiếu", hv:"旅券", hvR:"lữ quyền", pure:false,
-    explain:"Hộ chiếu. 여(旅, đi lại) + 권(券, giấy tờ). Cần thiết khi xuất nhập cảnh.",
-    ex:"여권을 잃어버렸어요.", exVi:"Tôi bị mất hộ chiếu rồi." },
-  { kr:"역", en:"station", vi:"ga (xe lửa/tàu điện)", hv:"驛", hvR:"dịch", pure:false,
-    explain:"Nhà ga tàu hỏa hoặc tàu điện ngầm. 서울역, 강남역,... Rất phổ biến khi đặt địa điểm hẹn.",
-    ex:"강남역에서 만나요.", exVi:"Gặp nhau ở ga Gangnam nhé." },
-  { kr:"열차", en:"train, rail car", vi:"tàu hỏa, đoàn tàu", hv:"列車", hvR:"liệt xa", pure:false,
-    explain:"Đoàn tàu hỏa — cách nói trang trọng hơn 기차. Dùng nhiều trong thông báo, biển hiệu.",
-    ex:"열차가 곧 출발합니다.", exVi:"Đoàn tàu sắp khởi hành." },
-  { kr:"자동차", en:"car, automobile", vi:"xe ô tô, xe hơi", hv:"自動車", hvR:"tự động xa", pure:false,
-    explain:"Xe ô tô. 자동(自動, tự động) + 차(車, xe). Cách nói chính thức. Thông thường dùng 차 cho ngắn gọn.",
-    ex:"자동차로 출근해요.", exVi:"Tôi đi làm bằng ô tô." },
-  { kr:"자전거", en:"bicycle", vi:"xe đạp", hv:"自轉車", hvR:"tự chuyển xa", pure:false,
-    explain:"Xe đạp. 자전(自轉, tự quay) + 거(車, xe). 자전거를 타다 = đi xe đạp.",
-    ex:"자전거로 공원에 가요.", exVi:"Tôi đạp xe đến công viên." },
-  { kr:"전기자동차", en:"electric car, EV", vi:"xe điện", hv:"電氣自動車", hvR:"điện khí tự động xa", pure:false,
-    explain:"Xe ô tô chạy bằng điện. 전기(電氣, điện) + 자동차(ô tô). Ngày càng phổ biến ở Hàn Quốc.",
-    ex:"전기자동차가 늘고 있어요.", exVi:"Xe điện ngày càng nhiều hơn." },
-  { kr:"정거장", en:"station, stop", vi:"bến xe, trạm dừng", hv:"停車場", hvR:"đình xa trường", pure:false,
-    explain:"Bến xe, điểm dừng của phương tiện. Rộng nghĩa hơn 정류장. Dùng cho cả tàu và xe buýt.",
-    ex:"다음 정거장에서 내려요.", exVi:"Tôi xuống ở trạm tiếp theo." },
-  { kr:"정류장", en:"bus stop", vi:"trạm xe buýt", hv:"停留場", hvR:"đình lưu trường", pure:false,
-    explain:"Trạm xe buýt cụ thể. 정류(停留, dừng lại) + 장(場, chỗ). Thường dùng cho xe buýt hơn.",
-    ex:"버스 정류장이 어디예요?", exVi:"Trạm xe buýt ở đâu vậy?" },
-  { kr:"주차장", en:"parking lot", vi:"bãi đậu xe", hv:"駐車場", hvR:"trú xa trường", pure:false,
-    explain:"Bãi đỗ xe. 주차(駐車, đỗ xe) + 장(場, chỗ). 주차하다 = đỗ xe.",
-    ex:"주차장이 꽉 찼어요.", exVi:"Bãi đỗ xe đầy rồi." },
-  { kr:"지도", en:"map", vi:"bản đồ", hv:"地圖", hvR:"địa đồ", pure:false,
-    explain:"Bản đồ. 지(地, đất) + 도(圖, bản vẽ). 지도를 보다 = xem bản đồ. 네이버지도 = Naver Maps.",
-    ex:"지도로 길을 찾아요.", exVi:"Tôi tìm đường bằng bản đồ." },
-  { kr:"지하도", en:"underpass, pedestrian tunnel", vi:"đường hầm đi bộ", hv:"地下道", hvR:"địa hạ đạo", pure:false,
-    explain:"Đường hầm dành cho người đi bộ qua đường ở dưới lòng đất. 지하(địa hạ) + 도(道, đường).",
-    ex:"지하도로 길을 건너요.", exVi:"Tôi đi qua đường hầm để sang đường." },
-  { kr:"지하철", en:"subway, metro", vi:"tàu điện ngầm, metro", hv:"地下鐵", hvR:"địa hạ thiết", pure:false,
-    explain:"Tàu điện ngầm. 지하(地下, dưới đất) + 철(鐵, sắt/đường ray). Seoul có mạng lưới metro rất phát triển.",
-    ex:"지하철이 빠르고 편해요.", exVi:"Tàu điện ngầm nhanh và tiện lợi." },
-  { kr:"지하철역", en:"subway station", vi:"ga tàu điện ngầm", hv:"地下鐵驛", hvR:"địa hạ thiết dịch", pure:false,
-    explain:"Ga tàu điện ngầm. 지하철 + 역(ga). Seoul có hơn 300 ga metro trên 9 tuyến chính.",
-    ex:"지하철역이 가까워요.", exVi:"Ga tàu điện ngầm ở gần đây." },
-  { kr:"짐", en:"baggage, load", vi:"hành lý, đồ đạc", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Hành lý, đồ đạc mang theo. 짐을 싸다 = đóng gói hành lý. 짐이 무겁다 = hành lý nặng.",
-    ex:"짐이 너무 많아요.", exVi:"Hành lý nhiều quá." },
-  { kr:"차", en:"car; tea", vi:"xe ô tô; trà", hv:"車/茶", hvR:"xa / trà", pure:false,
-    explain:"Hai nghĩa: (1) 車 — xe ô tô (cách nói ngắn của 자동차), (2) 茶 — trà. Ngữ cảnh phân biệt.",
-    ex:"차를 타고 가요.", exVi:"Đi bằng ô tô nhé." },
-  { kr:"출발", en:"departure, start", vi:"sự khởi hành, xuất phát", hv:"出發", hvR:"xuất phát", pure:false,
-    explain:"Sự khởi hành, lên đường. 출발하다 = xuất phát. Đối lập với 도착 (đến nơi).",
-    ex:"출발 시간이 언제예요?", exVi:"Giờ khởi hành là mấy giờ?" },
-  { kr:"택시", en:"taxi", vi:"xe taxi", hv:null, hvR:"từ tiếng Anh 'taxi'", pure:true,
-    explain:"Xe taxi. Từ vay mượn tiếng Anh. 택시를 잡다 = bắt taxi. 카카오택시 = ứng dụng gọi xe Hàn.",
-    ex:"택시를 타고 갔어요.", exVi:"Tôi đã đi bằng taxi." },
-  { kr:"터미널", en:"terminal, bus station", vi:"bến xe, nhà ga", hv:null, hvR:"từ tiếng Anh 'terminal'", pure:true,
-    explain:"Bến xe liên tỉnh hoặc sân bay. Từ vay mượn tiếng Anh. 고속버스터미널 = bến xe tốc hành.",
-    ex:"터미널에서 표를 샀어요.", exVi:"Tôi đã mua vé ở bến xe." },
-  { kr:"표", en:"ticket, table", vi:"bảng; vé (tàu xe)", hv:"票/表", hvR:"phiếu / biểu", pure:false,
-    explain:"Vé tàu/xe hoặc bảng biểu. 표를 사다 = mua vé. 기차표 = vé tàu. 시간표 = thời khóa biểu.",
-    ex:"기차표를 미리 샀어요.", exVi:"Tôi đã mua vé tàu trước." },
-  { kr:"횡단보도", en:"crosswalk, pedestrian crossing", vi:"vạch sang đường, đường băng", hv:"橫斷步道", hvR:"hoành đoạn bộ đạo", pure:false,
-    explain:"Vạch kẻ đường dành cho người đi bộ sang đường. 횡단(橫斷, cắt ngang) + 보도(步道, đường đi bộ).",
-    ex:"횡단보도에서 건너세요.", exVi:"Hãy sang đường ở vạch băng qua đường." },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    const hvCell = item.pure
-      ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
-      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          const hvCell = item.pure
+            ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
+            : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -284,42 +894,52 @@ function renderTable(data) {
         <span class="example-kr">${item.ex}</span>
         <span class="example-vi">${item.exVi}</span>
       </td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all'
-      || (currentFilter === 'hv' && !item.pure)
-      || (currentFilter === 'pure' && item.pure);
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || (item.hv && item.hv.includes(q))
-      || item.hvR.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" ||
+            (currentFilter === "hv" && !item.pure) ||
+            (currentFilter === "pure" && item.pure);
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            item.hvR.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
