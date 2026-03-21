@@ -1,268 +1,836 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Cảm xúc & Tâm trạng</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #fdf4f8;
-    --card: #ffffff;
-    --accent: #8a1a5a;
-    --text: #2a0820;
-    --sub: #8a5a70;
-    --border: #e8c8d8;
-    --tag-hv: #fce8f4;
-    --tag-pure: #eaf4f0;
-    --tag-loan: #f0eafa;
-    --highlight: #fdf0f8;
-    --row-alt: #fdf8fb;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Cảm xúc & Tâm trạng</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fdf4f8;
+        --card: #ffffff;
+        --accent: #8a1a5a;
+        --text: #2a0820;
+        --sub: #8a5a70;
+        --border: #e8c8d8;
+        --tag-hv: #fce8f4;
+        --tag-pure: #eaf4f0;
+        --tag-loan: #f0eafa;
+        --highlight: #fdf0f8;
+        --row-alt: #fdf8fb;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #fdf4f8;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '마음';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #b080a0; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #fdf4f8;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "마음";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #b080a0;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #fdf4f8; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #fdf4f8;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 130px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 185px; }
-  th:nth-child(5), td:nth-child(5) { width: 155px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 130px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 185px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 155px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      }
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #6a1040; font-weight: 500; }
-  .hv-tag.pure { background: var(--tag-pure); color: #1a6040; }
-  .hv-tag.loan { background: var(--tag-loan); color: #4a1a7a; }
-  .hv-hanja { font-weight: 600; font-size: 13px; }
-  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
-  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
-  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
-  .explain { font-size: 13px; color: #3a1030; line-height: 1.6; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #6a1040;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #1a6040;
+      }
+      .hv-tag.loan {
+        background: var(--tag-loan);
+        color: #4a1a7a;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #3a1030;
+        line-height: 1.6;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>마음 & 감정 — Cảm xúc & Tâm trạng</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Cảm xúc · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>마음 & 감정 — Cảm xúc & Tâm trạng</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Cảm xúc · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+      <button class="filter-btn" data-filter="pure">
+        Thuần Hàn / Vay mượn
+      </button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn / Vay mượn</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Hán Việt</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Cảm xúc & Tâm trạng
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Cảm xúc & Tâm trạng</div>
+    <script>
+      const vocab = [
+        {
+          kr: "감동",
+          en: "moving, touching sensation",
+          vi: "sự cảm động",
+          hv: "感動",
+          hvR: "cảm động",
+          pure: false,
+          explain:
+            "Sự xúc động, cảm động trong lòng. 감동을 받다 = bị cảm động. 감동적이다 = cảm động, xúc động.",
+          ex: "영화가 너무 감동적이에요.",
+          exVi: "Bộ phim cảm động quá.",
+        },
+        {
+          kr: "감사",
+          en: "gratitude, thank you",
+          vi: "lòng biết ơn, cảm ơn",
+          hv: "感謝",
+          hvR: "cảm tạ",
+          pure: false,
+          explain:
+            "Lòng biết ơn, sự cảm ơn. 감사합니다 = cảm ơn (trang trọng). 감사드리다 = xin cảm ơn (kính ngữ).",
+          ex: "감사합니다!",
+          exVi: "Cảm ơn!",
+        },
+        {
+          kr: "거짓말",
+          en: "lie, falsehood",
+          vi: "lời nói dối",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Lời nói dối. 거짓말하다 = nói dối. 거짓말쟁이 = kẻ hay nói dối. Đối lập với 사실(sự thật).",
+          ex: "거짓말하지 마세요.",
+          exVi: "Đừng nói dối.",
+        },
+        {
+          kr: "걱정",
+          en: "worry, anxiety",
+          vi: "sự lo lắng",
+          hv: "憂慮",
+          hvR: "우려 (걱정 thuần Hàn)",
+          pure: true,
+          explain:
+            "Sự lo lắng, lo âu. 걱정하다 = lo lắng. 걱정하지 마세요 = đừng lo. 걱정이 많다 = lo nhiều chuyện.",
+          ex: "걱정하지 마세요!",
+          exVi: "Đừng lo lắng!",
+        },
+        {
+          kr: "결정",
+          en: "decision",
+          vi: "quyết định",
+          hv: "決定",
+          hvR: "quyết định",
+          pure: false,
+          explain:
+            "Quyết định. 결정하다 = quyết định. 결정을 내리다 = đưa ra quyết định. 결정이 어렵다 = khó quyết định.",
+          ex: "결정하기가 어려워요.",
+          exVi: "Thật khó để quyết định.",
+        },
+        {
+          kr: "관심",
+          en: "interest, attention",
+          vi: "sự quan tâm",
+          hv: "關心",
+          hvR: "quan tâm",
+          pure: false,
+          explain:
+            "Sự quan tâm, chú ý. 관심이 있다/없다 = có/không có quan tâm. 관심을 갖다 = quan tâm đến.",
+          ex: "한국 문화에 관심이 있어요.",
+          exVi: "Tôi quan tâm đến văn hóa Hàn Quốc.",
+        },
+        {
+          kr: "기분",
+          en: "feeling, mood",
+          vi: "tâm trạng, cảm giác",
+          hv: "氣分",
+          hvR: "khí phận",
+          pure: false,
+          explain:
+            "Tâm trạng, cảm xúc nhất thời. 기분이 좋다/나쁘다 = tâm trạng tốt/xấu. 기분이 어때요? = Bạn cảm thấy thế nào?",
+          ex: "오늘 기분이 어때요?",
+          exVi: "Hôm nay bạn tâm trạng thế nào?",
+        },
+        {
+          kr: "긴장되다",
+          en: "to be nervous, tense",
+          vi: "hồi hộp, lo lắng",
+          hv: "緊張",
+          hvR: "khẩn trương",
+          pure: false,
+          explain:
+            "Cảm thấy hồi hộp, căng thẳng. 긴장하다 = lo hồi hộp. 발표 전에 긴장돼요 = hồi hộp trước khi thuyết trình.",
+          ex: "시험 때문에 긴장돼요.",
+          exVi: "Tôi hồi hộp vì kỳ thi.",
+        },
+        {
+          kr: "꿈",
+          en: "dream",
+          vi: "giấc mơ",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Giấc mơ khi ngủ hoặc ước mơ trong cuộc sống. 꿈을 꾸다 = mơ. 꿈을 이루다 = thực hiện ước mơ.",
+          ex: "어젯밤에 이상한 꿈을 꿨어요.",
+          exVi: "Tối qua tôi đã mơ một giấc mơ kỳ lạ.",
+        },
+        {
+          kr: "느낌",
+          en: "feeling, sensation, vibe",
+          vi: "cảm giác, cảm nhận",
+          hv: null,
+          hvR: "thuần Hàn (느끼다)",
+          pure: true,
+          explain:
+            "Cảm giác, cảm nhận trực quan. 느낌이 좋다 = cảm giác tốt. 이상한 느낌 = cảm giác kỳ lạ.",
+          ex: "느낌이 좋아요.",
+          exVi: "Cảm giác tốt lắm.",
+        },
+        {
+          kr: "단점",
+          en: "shortcoming, weakness",
+          vi: "nhược điểm, hạn chế",
+          hv: "短點",
+          hvR: "đoản điểm",
+          pure: false,
+          explain:
+            "Nhược điểm, điểm yếu. 단(短, ngắn/thiếu) + 점(點, điểm). Đối lập với 장점 (ưu điểm).",
+          ex: "제 단점은 너무 급한 거예요.",
+          exVi: "Nhược điểm của tôi là quá nóng vội.",
+        },
+        {
+          kr: "도움",
+          en: "help, assistance",
+          vi: "sự giúp đỡ",
+          hv: null,
+          hvR: "thuần Hàn (돕다)",
+          pure: true,
+          explain:
+            "Sự giúp đỡ. 도움이 되다 = có ích, giúp ích. 도움을 요청하다 = xin giúp đỡ. 도움을 주다 = giúp đỡ ai.",
+          ex: "도움이 필요해요?",
+          exVi: "Bạn có cần giúp đỡ không?",
+        },
+        {
+          kr: "마음",
+          en: "mind, heart, feeling",
+          vi: "lòng, tâm hồn, cảm xúc",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Lòng, tâm trí, cảm xúc. 마음이 따뜻하다 = lòng ấm áp. 마음을 열다 = mở lòng. 마음에 들다 = ưng ý.",
+          ex: "마음에 들어요.",
+          exVi: "Tôi thích cái này.",
+        },
+        {
+          kr: "무리",
+          en: "group; unreasonable",
+          vi: "bất hợp lý; đàn (vật)",
+          hv: "無理/群",
+          hvR: "vô lý / quần",
+          pure: false,
+          explain:
+            "Hai nghĩa: (1) 無理 — bất hợp lý, quá sức (무리하지 마세요 = đừng ép bản thân), (2) 群 — đàn, bầy (무리 지어 다니다 = đi theo đàn).",
+          ex: "무리하지 마세요.",
+          exVi: "Đừng cố quá sức nhé.",
+        },
+        {
+          kr: "부탁",
+          en: "request, favor",
+          vi: "lời nhờ vả, yêu cầu",
+          hv: "付託",
+          hvR: "phó thác",
+          pure: false,
+          explain:
+            "Lời nhờ vả, nhờ ai làm gì. 부탁하다 = nhờ vả. 부탁이 있어요 = tôi có điều muốn nhờ. 부탁드려요 = xin hãy (kính ngữ).",
+          ex: "부탁이 있어요.",
+          exVi: "Tôi có điều muốn nhờ bạn.",
+        },
+        {
+          kr: "분위기",
+          en: "atmosphere, mood, vibe",
+          vi: "không khí, bầu không khí",
+          hv: "雰圍氣",
+          hvR: "phân vi khí",
+          pure: false,
+          explain:
+            "Bầu không khí, không khí của nơi chốn hoặc tình huống. 분위기가 좋다 = không khí tốt/vui. 분위기 파악 = đọc không khí xung quanh.",
+          ex: "분위기가 정말 좋아요.",
+          exVi: "Không khí ở đây thật tuyệt.",
+        },
+        {
+          kr: "비밀",
+          en: "secret",
+          vi: "bí mật",
+          hv: "秘密",
+          hvR: "bí mật",
+          pure: false,
+          explain:
+            "Bí mật. 비밀을 지키다 = giữ bí mật. 비밀이에요 = đây là bí mật. 비밀번호 = mật khẩu.",
+          ex: "이건 비밀이에요.",
+          exVi: "Đây là bí mật nhé.",
+        },
+        {
+          kr: "사랑",
+          en: "love",
+          vi: "tình yêu, tình cảm",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Tình yêu, tình cảm yêu thương. 사랑하다 = yêu. 사랑해요 = tôi yêu bạn. 사랑에 빠지다 = yêu, sa vào tình yêu.",
+          ex: "사랑해요!",
+          exVi: "Tôi yêu bạn!",
+        },
+        {
+          kr: "상관",
+          en: "relation, connection",
+          vi: "liên quan",
+          hv: "相關",
+          hvR: "tương quan",
+          pure: false,
+          explain:
+            "Sự liên quan. 상관없다 = không liên quan, không sao. 상관이 있다 = có liên quan. 내 상관이 아니다 = không phải việc của tôi.",
+          ex: "상관없어요.",
+          exVi: "Không sao cả.",
+        },
+        {
+          kr: "생각",
+          en: "thought, idea, thinking",
+          vi: "suy nghĩ, ý kiến",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Suy nghĩ, ý kiến. 생각하다 = suy nghĩ. 생각이 있다 = có ý kiến. 어떻게 생각해요? = Bạn nghĩ thế nào?",
+          ex: "어떻게 생각해요?",
+          exVi: "Bạn nghĩ thế nào?",
+        },
+        {
+          kr: "성격",
+          en: "personality, character",
+          vi: "tính cách, tính khí",
+          hv: "性格",
+          hvR: "tính cách",
+          pure: false,
+          explain:
+            "Tính cách, cá tính. 성격이 좋다 = tính tốt. 성격이 급하다 = nóng tính. 성격이 맞다 = hợp tính nhau.",
+          ex: "성격이 참 좋아요.",
+          exVi: "Tính cách bạn thật tốt.",
+        },
+        {
+          kr: "스트레스",
+          en: "stress",
+          vi: "căng thẳng, stress",
+          hv: null,
+          hvR: "từ tiếng Anh 'stress'",
+          pure: true,
+          explain:
+            "Căng thẳng, stress. 스트레스를 받다 = bị stress. 스트레스를 풀다 = giải tỏa stress. Rất phổ biến trong cuộc sống hiện đại.",
+          ex: "요즘 스트레스를 많이 받아요.",
+          exVi: "Dạo này tôi bị stress nhiều lắm.",
+        },
+        {
+          kr: "습관",
+          en: "habit, custom",
+          vi: "thói quen",
+          hv: "習慣",
+          hvR: "tập quán",
+          pure: false,
+          explain:
+            "Thói quen. 좋은 습관 = thói quen tốt. 나쁜 습관 = thói quen xấu. 습관을 바꾸다 = thay đổi thói quen.",
+          ex: "좋은 습관을 만들어야 해요.",
+          exVi: "Phải tạo thói quen tốt.",
+        },
+        {
+          kr: "실수",
+          en: "mistake, error",
+          vi: "lỗi lầm, sự nhầm lẫn",
+          hv: "失手",
+          hvR: "thất thủ",
+          pure: false,
+          explain:
+            "Sai lầm vô ý. 실수하다 = phạm sai lầm. 실수를 인정하다 = thừa nhận sai lầm. 실수해도 괜찮아요 = sai lầm rồi cũng không sao.",
+          ex: "실수해서 죄송해요.",
+          exVi: "Tôi xin lỗi vì đã nhầm lẫn.",
+        },
+        {
+          kr: "인상",
+          en: "impression, expression",
+          vi: "ấn tượng, biểu hiện",
+          hv: "印象",
+          hvR: "ấn tượng",
+          pure: false,
+          explain:
+            "Ấn tượng ban đầu. 첫인상 = ấn tượng đầu tiên. 인상이 좋다 = ấn tượng tốt. 인상적이다 = ấn tượng.",
+          ex: "첫인상이 좋았어요.",
+          exVi: "Ấn tượng đầu tiên rất tốt.",
+        },
+        {
+          kr: "자유",
+          en: "freedom, liberty",
+          vi: "tự do",
+          hv: "自由",
+          hvR: "tự do",
+          pure: false,
+          explain:
+            "Tự do. 자유롭다 = tự do. 자유 시간 = thời gian tự do. 자유를 원하다 = muốn tự do.",
+          ex: "자유 시간이 생겼어요.",
+          exVi: "Tôi có thời gian tự do rồi.",
+        },
+        {
+          kr: "잘못",
+          en: "mistake, fault, wrong",
+          vi: "lỗi lầm, sai lầm",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Lỗi lầm, điều sai. 잘못하다 = làm sai. 제 잘못이에요 = lỗi của tôi. 잘못을 인정하다 = nhận lỗi. Khác 실수 ở chỗ có thể cố ý.",
+          ex: "제 잘못이에요, 죄송해요.",
+          exVi: "Lỗi của tôi, tôi xin lỗi.",
+        },
+        {
+          kr: "장점",
+          en: "advantage, strength",
+          vi: "ưu điểm, thế mạnh",
+          hv: "長點",
+          hvR: "trường điểm",
+          pure: false,
+          explain:
+            "Ưu điểm, điểm mạnh. 장(長, dài/giỏi) + 점(點, điểm). Đối lập với 단점 (nhược điểm).",
+          ex: "제 장점은 성실한 거예요.",
+          exVi: "Ưu điểm của tôi là sự chăm chỉ.",
+        },
+        {
+          kr: "적",
+          en: "enemy",
+          vi: "kẻ thù",
+          hv: "敵",
+          hvR: "địch",
+          pure: false,
+          explain:
+            "Kẻ thù, đối địch. 적이 생기다 = có kẻ thù. 공공의 적 = kẻ thù chung. Cũng có nghĩa là 'phía đối lập'.",
+          ex: "적을 만들지 마세요.",
+          exVi: "Đừng tạo ra kẻ thù.",
+        },
+        {
+          kr: "추억",
+          en: "memory, recollection",
+          vi: "kỷ niệm, ký ức",
+          hv: "追憶",
+          hvR: "truy ức",
+          pure: false,
+          explain:
+            "Kỷ niệm, ký ức đẹp trong quá khứ. 추억이 많다 = có nhiều kỷ niệm. 추억을 만들다 = tạo kỷ niệm.",
+          ex: "좋은 추억이 많아요.",
+          exVi: "Tôi có nhiều kỷ niệm đẹp.",
+        },
+        {
+          kr: "축하",
+          en: "congratulation, celebration",
+          vi: "lời chúc mừng",
+          hv: "祝賀",
+          hvR: "chúc hạ",
+          pure: false,
+          explain:
+            "Lời chúc mừng. 축하해요 = chúc mừng. 축하드려요 = xin chúc mừng (kính ngữ). 생일 축하해요 = chúc mừng sinh nhật.",
+          ex: "합격 축하해요!",
+          exVi: "Chúc mừng đỗ thi!",
+        },
+        {
+          kr: "행복",
+          en: "happiness, bliss",
+          vi: "hạnh phúc",
+          hv: "幸福",
+          hvR: "hạnh phúc",
+          pure: false,
+          explain:
+            "Hạnh phúc. 행복하다 = hạnh phúc. 행복을 찾다 = tìm hạnh phúc. 행복해 보이다 = trông có vẻ hạnh phúc.",
+          ex: "지금 정말 행복해요.",
+          exVi: "Bây giờ tôi thực sự hạnh phúc.",
+        },
+        {
+          kr: "화",
+          en: "anger, rage",
+          vi: "cơn giận, tức giận",
+          hv: "火",
+          hvR: "hỏa",
+          pure: false,
+          explain:
+            "Cơn giận, sự tức giận. 화가 나다 = nổi giận. 화를 내다 = bộc lộ cơn giận. 화를 참다 = nhịn giận.",
+          ex: "화가 많이 났어요.",
+          exVi: "Tôi đã rất tức giận.",
+        },
+      ];
 
-<script>
-const vocab = [
-  { kr:"감동", en:"moving, touching sensation", vi:"sự cảm động", hv:"感動", hvR:"cảm động", pure:false,
-    explain:"Sự xúc động, cảm động trong lòng. 감동을 받다 = bị cảm động. 감동적이다 = cảm động, xúc động.",
-    ex:"영화가 너무 감동적이에요.", exVi:"Bộ phim cảm động quá." },
-  { kr:"감사", en:"gratitude, thank you", vi:"lòng biết ơn, cảm ơn", hv:"感謝", hvR:"cảm tạ", pure:false,
-    explain:"Lòng biết ơn, sự cảm ơn. 감사합니다 = cảm ơn (trang trọng). 감사드리다 = xin cảm ơn (kính ngữ).",
-    ex:"감사합니다!", exVi:"Cảm ơn!" },
-  { kr:"거짓말", en:"lie, falsehood", vi:"lời nói dối", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Lời nói dối. 거짓말하다 = nói dối. 거짓말쟁이 = kẻ hay nói dối. Đối lập với 사실(sự thật).",
-    ex:"거짓말하지 마세요.", exVi:"Đừng nói dối." },
-  { kr:"걱정", en:"worry, anxiety", vi:"sự lo lắng", hv:"憂慮", hvR:"우려 (걱정 thuần Hàn)", pure:true,
-    explain:"Sự lo lắng, lo âu. 걱정하다 = lo lắng. 걱정하지 마세요 = đừng lo. 걱정이 많다 = lo nhiều chuyện.",
-    ex:"걱정하지 마세요!", exVi:"Đừng lo lắng!" },
-  { kr:"결정", en:"decision", vi:"quyết định", hv:"決定", hvR:"quyết định", pure:false,
-    explain:"Quyết định. 결정하다 = quyết định. 결정을 내리다 = đưa ra quyết định. 결정이 어렵다 = khó quyết định.",
-    ex:"결정하기가 어려워요.", exVi:"Thật khó để quyết định." },
-  { kr:"관심", en:"interest, attention", vi:"sự quan tâm", hv:"關心", hvR:"quan tâm", pure:false,
-    explain:"Sự quan tâm, chú ý. 관심이 있다/없다 = có/không có quan tâm. 관심을 갖다 = quan tâm đến.",
-    ex:"한국 문화에 관심이 있어요.", exVi:"Tôi quan tâm đến văn hóa Hàn Quốc." },
-  { kr:"기분", en:"feeling, mood", vi:"tâm trạng, cảm giác", hv:"氣分", hvR:"khí phận", pure:false,
-    explain:"Tâm trạng, cảm xúc nhất thời. 기분이 좋다/나쁘다 = tâm trạng tốt/xấu. 기분이 어때요? = Bạn cảm thấy thế nào?",
-    ex:"오늘 기분이 어때요?", exVi:"Hôm nay bạn tâm trạng thế nào?" },
-  { kr:"긴장되다", en:"to be nervous, tense", vi:"hồi hộp, lo lắng", hv:"緊張", hvR:"khẩn trương", pure:false,
-    explain:"Cảm thấy hồi hộp, căng thẳng. 긴장하다 = lo hồi hộp. 발표 전에 긴장돼요 = hồi hộp trước khi thuyết trình.",
-    ex:"시험 때문에 긴장돼요.", exVi:"Tôi hồi hộp vì kỳ thi." },
-  { kr:"꿈", en:"dream", vi:"giấc mơ", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Giấc mơ khi ngủ hoặc ước mơ trong cuộc sống. 꿈을 꾸다 = mơ. 꿈을 이루다 = thực hiện ước mơ.",
-    ex:"어젯밤에 이상한 꿈을 꿨어요.", exVi:"Tối qua tôi đã mơ một giấc mơ kỳ lạ." },
-  { kr:"느낌", en:"feeling, sensation, vibe", vi:"cảm giác, cảm nhận", hv:null, hvR:"thuần Hàn (느끼다)", pure:true,
-    explain:"Cảm giác, cảm nhận trực quan. 느낌이 좋다 = cảm giác tốt. 이상한 느낌 = cảm giác kỳ lạ.",
-    ex:"느낌이 좋아요.", exVi:"Cảm giác tốt lắm." },
-  { kr:"단점", en:"shortcoming, weakness", vi:"nhược điểm, hạn chế", hv:"短點", hvR:"đoản điểm", pure:false,
-    explain:"Nhược điểm, điểm yếu. 단(短, ngắn/thiếu) + 점(點, điểm). Đối lập với 장점 (ưu điểm).",
-    ex:"제 단점은 너무 급한 거예요.", exVi:"Nhược điểm của tôi là quá nóng vội." },
-  { kr:"도움", en:"help, assistance", vi:"sự giúp đỡ", hv:null, hvR:"thuần Hàn (돕다)", pure:true,
-    explain:"Sự giúp đỡ. 도움이 되다 = có ích, giúp ích. 도움을 요청하다 = xin giúp đỡ. 도움을 주다 = giúp đỡ ai.",
-    ex:"도움이 필요해요?", exVi:"Bạn có cần giúp đỡ không?" },
-  { kr:"마음", en:"mind, heart, feeling", vi:"lòng, tâm hồn, cảm xúc", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Lòng, tâm trí, cảm xúc. 마음이 따뜻하다 = lòng ấm áp. 마음을 열다 = mở lòng. 마음에 들다 = ưng ý.",
-    ex:"마음에 들어요.", exVi:"Tôi thích cái này." },
-  { kr:"무리", en:"group; unreasonable", vi:"bất hợp lý; đàn (vật)", hv:"無理/群", hvR:"vô lý / quần", pure:false,
-    explain:"Hai nghĩa: (1) 無理 — bất hợp lý, quá sức (무리하지 마세요 = đừng ép bản thân), (2) 群 — đàn, bầy (무리 지어 다니다 = đi theo đàn).",
-    ex:"무리하지 마세요.", exVi:"Đừng cố quá sức nhé." },
-  { kr:"부탁", en:"request, favor", vi:"lời nhờ vả, yêu cầu", hv:"付託", hvR:"phó thác", pure:false,
-    explain:"Lời nhờ vả, nhờ ai làm gì. 부탁하다 = nhờ vả. 부탁이 있어요 = tôi có điều muốn nhờ. 부탁드려요 = xin hãy (kính ngữ).",
-    ex:"부탁이 있어요.", exVi:"Tôi có điều muốn nhờ bạn." },
-  { kr:"분위기", en:"atmosphere, mood, vibe", vi:"không khí, bầu không khí", hv:"雰圍氣", hvR:"phân vi khí", pure:false,
-    explain:"Bầu không khí, không khí của nơi chốn hoặc tình huống. 분위기가 좋다 = không khí tốt/vui. 분위기 파악 = đọc không khí xung quanh.",
-    ex:"분위기가 정말 좋아요.", exVi:"Không khí ở đây thật tuyệt." },
-  { kr:"비밀", en:"secret", vi:"bí mật", hv:"秘密", hvR:"bí mật", pure:false,
-    explain:"Bí mật. 비밀을 지키다 = giữ bí mật. 비밀이에요 = đây là bí mật. 비밀번호 = mật khẩu.",
-    ex:"이건 비밀이에요.", exVi:"Đây là bí mật nhé." },
-  { kr:"사랑", en:"love", vi:"tình yêu, tình cảm", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tình yêu, tình cảm yêu thương. 사랑하다 = yêu. 사랑해요 = tôi yêu bạn. 사랑에 빠지다 = yêu, sa vào tình yêu.",
-    ex:"사랑해요!", exVi:"Tôi yêu bạn!" },
-  { kr:"상관", en:"relation, connection", vi:"liên quan", hv:"相關", hvR:"tương quan", pure:false,
-    explain:"Sự liên quan. 상관없다 = không liên quan, không sao. 상관이 있다 = có liên quan. 내 상관이 아니다 = không phải việc của tôi.",
-    ex:"상관없어요.", exVi:"Không sao cả." },
-  { kr:"생각", en:"thought, idea, thinking", vi:"suy nghĩ, ý kiến", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Suy nghĩ, ý kiến. 생각하다 = suy nghĩ. 생각이 있다 = có ý kiến. 어떻게 생각해요? = Bạn nghĩ thế nào?",
-    ex:"어떻게 생각해요?", exVi:"Bạn nghĩ thế nào?" },
-  { kr:"성격", en:"personality, character", vi:"tính cách, tính khí", hv:"性格", hvR:"tính cách", pure:false,
-    explain:"Tính cách, cá tính. 성격이 좋다 = tính tốt. 성격이 급하다 = nóng tính. 성격이 맞다 = hợp tính nhau.",
-    ex:"성격이 참 좋아요.", exVi:"Tính cách bạn thật tốt." },
-  { kr:"스트레스", en:"stress", vi:"căng thẳng, stress", hv:null, hvR:"từ tiếng Anh 'stress'", pure:true,
-    explain:"Căng thẳng, stress. 스트레스를 받다 = bị stress. 스트레스를 풀다 = giải tỏa stress. Rất phổ biến trong cuộc sống hiện đại.",
-    ex:"요즘 스트레스를 많이 받아요.", exVi:"Dạo này tôi bị stress nhiều lắm." },
-  { kr:"습관", en:"habit, custom", vi:"thói quen", hv:"習慣", hvR:"tập quán", pure:false,
-    explain:"Thói quen. 좋은 습관 = thói quen tốt. 나쁜 습관 = thói quen xấu. 습관을 바꾸다 = thay đổi thói quen.",
-    ex:"좋은 습관을 만들어야 해요.", exVi:"Phải tạo thói quen tốt." },
-  { kr:"실수", en:"mistake, error", vi:"lỗi lầm, sự nhầm lẫn", hv:"失手", hvR:"thất thủ", pure:false,
-    explain:"Sai lầm vô ý. 실수하다 = phạm sai lầm. 실수를 인정하다 = thừa nhận sai lầm. 실수해도 괜찮아요 = sai lầm rồi cũng không sao.",
-    ex:"실수해서 죄송해요.", exVi:"Tôi xin lỗi vì đã nhầm lẫn." },
-  { kr:"인상", en:"impression, expression", vi:"ấn tượng, biểu hiện", hv:"印象", hvR:"ấn tượng", pure:false,
-    explain:"Ấn tượng ban đầu. 첫인상 = ấn tượng đầu tiên. 인상이 좋다 = ấn tượng tốt. 인상적이다 = ấn tượng.",
-    ex:"첫인상이 좋았어요.", exVi:"Ấn tượng đầu tiên rất tốt." },
-  { kr:"자유", en:"freedom, liberty", vi:"tự do", hv:"自由", hvR:"tự do", pure:false,
-    explain:"Tự do. 자유롭다 = tự do. 자유 시간 = thời gian tự do. 자유를 원하다 = muốn tự do.",
-    ex:"자유 시간이 생겼어요.", exVi:"Tôi có thời gian tự do rồi." },
-  { kr:"잘못", en:"mistake, fault, wrong", vi:"lỗi lầm, sai lầm", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Lỗi lầm, điều sai. 잘못하다 = làm sai. 제 잘못이에요 = lỗi của tôi. 잘못을 인정하다 = nhận lỗi. Khác 실수 ở chỗ có thể cố ý.",
-    ex:"제 잘못이에요, 죄송해요.", exVi:"Lỗi của tôi, tôi xin lỗi." },
-  { kr:"장점", en:"advantage, strength", vi:"ưu điểm, thế mạnh", hv:"長點", hvR:"trường điểm", pure:false,
-    explain:"Ưu điểm, điểm mạnh. 장(長, dài/giỏi) + 점(點, điểm). Đối lập với 단점 (nhược điểm).",
-    ex:"제 장점은 성실한 거예요.", exVi:"Ưu điểm của tôi là sự chăm chỉ." },
-  { kr:"적", en:"enemy", vi:"kẻ thù", hv:"敵", hvR:"địch", pure:false,
-    explain:"Kẻ thù, đối địch. 적이 생기다 = có kẻ thù. 공공의 적 = kẻ thù chung. Cũng có nghĩa là 'phía đối lập'.",
-    ex:"적을 만들지 마세요.", exVi:"Đừng tạo ra kẻ thù." },
-  { kr:"추억", en:"memory, recollection", vi:"kỷ niệm, ký ức", hv:"追憶", hvR:"truy ức", pure:false,
-    explain:"Kỷ niệm, ký ức đẹp trong quá khứ. 추억이 많다 = có nhiều kỷ niệm. 추억을 만들다 = tạo kỷ niệm.",
-    ex:"좋은 추억이 많아요.", exVi:"Tôi có nhiều kỷ niệm đẹp." },
-  { kr:"축하", en:"congratulation, celebration", vi:"lời chúc mừng", hv:"祝賀", hvR:"chúc hạ", pure:false,
-    explain:"Lời chúc mừng. 축하해요 = chúc mừng. 축하드려요 = xin chúc mừng (kính ngữ). 생일 축하해요 = chúc mừng sinh nhật.",
-    ex:"합격 축하해요!", exVi:"Chúc mừng đỗ thi!" },
-  { kr:"행복", en:"happiness, bliss", vi:"hạnh phúc", hv:"幸福", hvR:"hạnh phúc", pure:false,
-    explain:"Hạnh phúc. 행복하다 = hạnh phúc. 행복을 찾다 = tìm hạnh phúc. 행복해 보이다 = trông có vẻ hạnh phúc.",
-    ex:"지금 정말 행복해요.", exVi:"Bây giờ tôi thực sự hạnh phúc." },
-  { kr:"화", en:"anger, rage", vi:"cơn giận, tức giận", hv:"火", hvR:"hỏa", pure:false,
-    explain:"Cơn giận, sự tức giận. 화가 나다 = nổi giận. 화를 내다 = bộc lộ cơn giận. 화를 참다 = nhịn giận.",
-    ex:"화가 많이 났어요.", exVi:"Tôi đã rất tức giận." },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    const hvCell = item.pure
-      ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
-      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          const hvCell = item.pure
+            ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
+            : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -271,42 +839,52 @@ function renderTable(data) {
         <span class="example-kr">${item.ex}</span>
         <span class="example-vi">${item.exVi}</span>
       </td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all'
-      || (currentFilter === 'hv' && !item.pure)
-      || (currentFilter === 'pure' && item.pure);
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || (item.hv && item.hv.includes(q))
-      || item.hvR.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" ||
+            (currentFilter === "hv" && !item.pure) ||
+            (currentFilter === "pure" && item.pure);
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            item.hvR.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
