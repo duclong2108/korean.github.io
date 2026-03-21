@@ -1,402 +1,1149 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Gia đình & Tình cảm (Nâng cao)</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #fdf4f0;
-    --card: #ffffff;
-    --accent: #a03020;
-    --text: #2c0c08;
-    --sub: #9a6a60;
-    --border: #ecd0c8;
-    --tag-family: #fde8e0;
-    --tag-love: #fce8f4;
-    --tag-social: #e8f4fc;
-    --tag-hv: #e8f0e4;
-    --highlight: #fff5f2;
-    --row-alt: #fdf9f8;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Gia đình & Tình cảm (Nâng cao)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fdf4f0;
+        --card: #ffffff;
+        --accent: #a03020;
+        --text: #2c0c08;
+        --sub: #9a6a60;
+        --border: #ecd0c8;
+        --tag-family: #fde8e0;
+        --tag-love: #fce8f4;
+        --tag-social: #e8f4fc;
+        --tag-hv: #e8f0e4;
+        --highlight: #fff5f2;
+        --row-alt: #fdf9f8;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #fdf4f0;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '가족';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #b08080; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #fdf4f0;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "가족";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #b08080;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 7px 13px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 7px 13px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #fdf4f0; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #fdf4f0;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 140px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 210px; }
-  th:nth-child(5), td:nth-child(5) { width: 130px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 140px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 130px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
-  .tag-family  { background: var(--tag-family);  color: #7a1a10; }
-  .tag-love    { background: var(--tag-love);    color: #7a0a60; }
-  .tag-social  { background: var(--tag-social);  color: #0a3a6a; }
-  .tag-hv      { background: var(--tag-hv);      color: #2a4a10; }
-  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-family {
+        background: var(--tag-family);
+        color: #7a1a10;
+      }
+      .tag-love {
+        background: var(--tag-love);
+        color: #7a0a60;
+      }
+      .tag-social {
+        background: var(--tag-social);
+        color: #0a3a6a;
+      }
+      .tag-hv {
+        background: var(--tag-hv);
+        color: #2a4a10;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
 
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>가족 & 연애 (심화) — Gia đình & Tình cảm (Nâng cao)</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Gia đình nâng cao · Chủ đề TOPIK II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>가족 & 연애 (심화) — Gia đình & Tình cảm (Nâng cao)</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Gia đình nâng cao · Chủ đề TOPIK II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="family">Gia đình</button>
+      <button class="filter-btn" data-filter="love">Tình yêu & Hôn nhân</button>
+      <button class="filter-btn" data-filter="social">Xã hội & Gặp gỡ</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="family">Gia đình</button>
-  <button class="filter-btn" data-filter="love">Tình yêu & Hôn nhân</button>
-  <button class="filter-btn" data-filter="social">Xã hội & Gặp gỡ</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú & Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Phân loại</th><th>Ghi chú & Cách dùng</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Gia đình & Tình cảm (Nâng cao)
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Gia đình & Tình cảm (Nâng cao)</div>
+    <script>
+      const vocab = [
+        {
+          kr: "가사",
+          en: "housework, lyrics",
+          vi: "việc nhà",
+          type: "family",
+          note: "두 가지: (1) 家事 — việc nhà (가사를 돕다 = giúp việc nhà), (2) 歌詞 — lời bài hát. Ngữ cảnh phân biệt.",
+        },
+        {
+          kr: "가정",
+          en: "family, home; assumption",
+          vi: "gia đình, giả định",
+          type: "family",
+          note: "가정(家庭) = gia đình/ngôi nhà. 가정하다 = giả định. 행복한 가정(gia đình hạnh phúc). 가정적(hướng gia đình).",
+        },
+        {
+          kr: "가족적",
+          en: "family-oriented, family-like",
+          vi: "hướng gia đình, coi trọng gia đình",
+          type: "family",
+          note: "가족(gia đình) + 적(tính). 가족적인 분위기(không khí gia đình). 가족적인 사람(người coi trọng gia đình).",
+        },
+        {
+          kr: "개구쟁이",
+          en: "naughty kid, rascal",
+          vi: "đứa trẻ nghịch ngợm",
+          type: "family",
+          note: "장난꾸러기와 유사. 개구쟁이처럼 놀다(chơi nghịch ngợm). Thân mật, thường mang ý yêu thương.",
+        },
+        {
+          kr: "결혼기념일",
+          en: "wedding anniversary",
+          vi: "kỷ niệm ngày cưới",
+          type: "love",
+          note: "결혼(kết hôn) + 기념일(ngày kỷ niệm). 결혼기념일을 축하해요(chúc mừng kỷ niệm ngày cưới). 매년 챙겨요.",
+        },
+        {
+          kr: "국제결혼",
+          en: "international marriage",
+          vi: "hôn nhân quốc tế",
+          type: "love",
+          note: "국제(國際, quốc tế) + 결혼. 한국에서 국제결혼이 늘고 있어요(hôn nhân quốc tế đang tăng ở Hàn Quốc).",
+        },
+        {
+          kr: "기혼",
+          en: "married",
+          vi: "đã kết hôn",
+          type: "love",
+          note: "기혼(旣婚). 기혼자(người đã có gia đình). ↔ 미혼(chưa kết hôn). 기혼 여성(phụ nữ đã kết hôn).",
+        },
+        {
+          kr: "독신자",
+          en: "single person, bachelor/bachelorette",
+          vi: "người độc thân",
+          type: "love",
+          note: "독신(獨身) + 자(者). 독신 생활(cuộc sống độc thân). 독신주의자(người chủ trương sống độc thân).",
+        },
+        {
+          kr: "룸메이트",
+          en: "roommate",
+          vi: "bạn cùng phòng",
+          type: "social",
+          note: "room + mate. 룸메이트를 구하다(tìm bạn cùng phòng). 좋은 룸메이트(bạn cùng phòng tốt). 기숙사에서 자주.",
+        },
+        {
+          kr: "막내",
+          en: "the youngest child",
+          vi: "con út, em út",
+          type: "family",
+          note: "가장 어린 자녀. 막내아들(con trai út). 막내딸(con gái út). 막내가 귀엽다(con út dễ thương). ↔ 맏이(con cả).",
+        },
+        {
+          kr: "만남",
+          en: "meeting, encounter",
+          vi: "cuộc gặp gỡ",
+          type: "social",
+          note: "만나다 → 만남(명사). 운명적인 만남(cuộc gặp gỡ định mệnh). 만남과 헤어짐(gặp gỡ và chia tay).",
+        },
+        {
+          kr: "맏딸",
+          en: "eldest daughter",
+          vi: "con gái đầu",
+          type: "family",
+          note: "맏(đầu, cả) + 딸(con gái). 장녀와 동의. 맏딸로 태어나다(sinh ra là con gái cả).",
+        },
+        {
+          kr: "맏아들",
+          en: "eldest son",
+          vi: "con trai đầu",
+          type: "family",
+          note: "맏(đầu, cả) + 아들(con trai). 장남과 동의. 맏아들의 책임감(trách nhiệm của con trai cả).",
+        },
+        {
+          kr: "맞벌이",
+          en: "dual-income family",
+          vi: "gia đình hai vợ chồng cùng đi làm",
+          type: "family",
+          note: "맞(cùng) + 벌이(kiếm tiền). 맞벌이 부부(cặp vợ chồng cùng đi làm). 한국에서 점점 늘어나는 추세.",
+        },
+        {
+          kr: "며느리",
+          en: "daughter-in-law",
+          vi: "con dâu",
+          type: "family",
+          note: "아들의 아내. 며느리를 보다(nhận con dâu). 며느리가 생겼어요(có con dâu rồi). ↔ 사위(con rể).",
+        },
+        {
+          kr: "미팅",
+          en: "blind date (group)",
+          vi: "hẹn hò mù, blind date",
+          type: "love",
+          note: "meeting에서. 주로 그룹으로 만나는 형태. 미팅을 주선하다(sắp xếp buổi hẹn hò). 소개팅은 1:1.",
+        },
+        {
+          kr: "미혼",
+          en: "unmarried, single",
+          vi: "độc thân, chưa kết hôn",
+          type: "love",
+          note: "미혼(未婚). 미혼자(người chưa kết hôn). ↔ 기혼(đã kết hôn). 미혼 여성(phụ nữ chưa lập gia đình).",
+        },
+        {
+          kr: "방문",
+          en: "visit",
+          vi: "chuyến thăm, ghé thăm",
+          type: "social",
+          note: "방문(訪問). 방문하다 = thăm. 집을 방문하다(đến thăm nhà). 방문객(khách ghé thăm).",
+        },
+        {
+          kr: "배우자",
+          en: "spouse (husband or wife)",
+          vi: "vợ/chồng",
+          type: "love",
+          note: "배우자(配偶者). 법적 표현. 배우자를 구하다(tìm người bạn đời). 이상적인 배우자(người bạn đời lý tưởng).",
+        },
+        {
+          kr: "별명",
+          en: "nickname",
+          vi: "biệt danh, tên hiệu",
+          type: "social",
+          note: "별명(別名). 별명이 뭐예요?(biệt danh của bạn là gì?). 별명을 붙이다(đặt biệt danh).",
+        },
+        {
+          kr: "부잣집",
+          en: "wealthy family, rich family",
+          vi: "gia đình giàu có",
+          type: "family",
+          note: "부자(người giàu) + 집(nhà). 부잣집에서 태어나다(sinh ra trong gia đình giàu). ↔ 가난한 집(nhà nghèo).",
+        },
+        {
+          kr: "부케",
+          en: "bridal bouquet",
+          vi: "bó hoa cưới",
+          type: "love",
+          note: "bouquet에서. 부케를 던지다(ném bó hoa cô dâu). 부케를 받다(bắt được bó hoa) = sắp lấy chồng/vợ.",
+        },
+        {
+          kr: "사귀다",
+          en: "to date, be in a relationship",
+          vi: "quen, hẹn hò",
+          type: "love",
+          note: "사귀다 = đang hẹn hò. 사귀고 있어요?(bạn có người yêu không?). 사귄 지 얼마나 됐어요?(quen nhau bao lâu?).",
+        },
+        {
+          kr: "사모님",
+          en: "wife (of a respected man), madam",
+          vi: "bà chủ, vợ sếp",
+          type: "family",
+          note: "사모(師母) + 님. 선생님/사장님 등의 아내를 높여 부를 때. 사모님, 안녕하세요(thưa bà, xin chào).",
+        },
+        {
+          kr: "살림",
+          en: "housekeeping, household",
+          vi: "sinh hoạt gia đình",
+          type: "family",
+          note: "살림을 하다(quản lý việc nhà). 살림을 차리다(lập gia đình). 살림이 어렵다(cuộc sống gia đình khó khăn).",
+        },
+        {
+          kr: "새어머니",
+          en: "stepmother",
+          vi: "mẹ kế",
+          type: "family",
+          note: "새(mới) + 어머니. 계모와 동의. 새아버지(bố dượng). 새부모(bố mẹ kế). 재혼 가정에서 사용.",
+        },
+        {
+          kr: "소개팅",
+          en: "blind date (1-on-1, set up)",
+          vi: "hẹn hò mai mối",
+          type: "love",
+          note: "소개(giới thiệu) + 팅(meeting). 1대1 소개 형태. 소개팅을 주선해 주다(mai mối). 한국 연애 문화의 핵심.",
+        },
+        {
+          kr: "손자",
+          en: "grandson",
+          vi: "cháu trai",
+          type: "family",
+          note: "손자(孫子). 할아버지/할머니의 아들의 아들. ↔ 손녀(cháu gái). 손자를 보다(có cháu trai).",
+        },
+        {
+          kr: "시부모님",
+          en: "parents-in-law (husband's parents)",
+          vi: "bố mẹ chồng/vợ",
+          type: "family",
+          note: "시부모(媤父母) + 님. 시아버지 + 시어머니. 시부모님을 모시다(phụng dưỡng bố mẹ chồng).",
+        },
+        {
+          kr: "시아버지",
+          en: "father-in-law (husband's father)",
+          vi: "bố chồng",
+          type: "family",
+          note: "시(媤, bên chồng) + 아버지. 시아버님(kính ngữ). 장인(bố vợ) ↔ 시아버지(bố chồng).",
+        },
+        {
+          kr: "시어머니",
+          en: "mother-in-law (husband's mother)",
+          vi: "mẹ chồng",
+          type: "family",
+          note: "시(媤) + 어머니. 시어머님(kính ngữ). 장모(mẹ vợ) ↔ 시어머니(mẹ chồng).",
+        },
+        {
+          kr: "시집가다",
+          en: "to get married (of a woman)",
+          vi: "lấy chồng (về nhà chồng)",
+          type: "love",
+          note: "시집(nhà chồng) + 가다. 전통적 표현. 딸이 시집갔어요(con gái đã lấy chồng rồi). ↔ 장가가다(lấy vợ).",
+        },
+        {
+          kr: "식구",
+          en: "family members, household",
+          vi: "thành viên gia đình",
+          type: "family",
+          note: "식구(食口). 식구가 몇 명이에요?(gia đình có mấy người?). 우리 식구(gia đình tôi). 가족과 유사.",
+        },
+        {
+          kr: "신랑",
+          en: "groom, bridegroom",
+          vi: "chú rể",
+          type: "love",
+          note: "신랑(新郞). 신랑 입장!(chú rể tiến vào!). 신랑이 잘생겼어요(chú rể đẹp trai). ↔ 신부(cô dâu).",
+        },
+        {
+          kr: "신랑감",
+          en: "man suitable to be a groom",
+          vi: "người phù hợp làm chú rể",
+          type: "love",
+          note: "신랑 + 감(~감, người phù hợp). 신랑감을 찾다(tìm chú rể phù hợp). 신부감(người phù hợp làm cô dâu).",
+        },
+        {
+          kr: "신부",
+          en: "bride; Catholic priest",
+          vi: "cô dâu; cha (Thiên Chúa giáo)",
+          type: "love",
+          note: "두 가지: (1) 新婦 — cô dâu (신부 입장!), (2) 神父 — cha đạo Công giáo. Ngữ cảnh phân biệt.",
+        },
+        {
+          kr: "신혼",
+          en: "newly married",
+          vi: "mới cưới",
+          type: "love",
+          note: "신혼(新婚). 신혼 생활(cuộc sống mới cưới). 신혼부부(đôi vợ chồng mới cưới). 신혼여행(tuần trăng mật).",
+        },
+        {
+          kr: "신혼부부",
+          en: "newlyweds",
+          vi: "đôi vợ chồng mới cưới",
+          type: "love",
+          note: "신혼(mới cưới) + 부부(vợ chồng). 신혼부부를 축하해요(chúc mừng đôi vợ chồng mới cưới).",
+        },
+        {
+          kr: "신혼여행",
+          en: "honeymoon",
+          vi: "tuần trăng mật",
+          type: "love",
+          note: "신혼(mới cưới) + 여행(du lịch). 신혼여행을 가다(đi tuần trăng mật). 제주도가 인기 있어요.",
+        },
+        {
+          kr: "쌍둥이",
+          en: "twins",
+          vi: "cặp sinh đôi",
+          type: "family",
+          note: "일란성 쌍둥이(cặp sinh đôi cùng trứng). 이란성 쌍둥이(cặp sinh đôi khác trứng). 쌍둥이를 낳다(sinh đôi).",
+        },
+        {
+          kr: "아랫사람",
+          en: "junior, subordinate",
+          vi: "người dưới, cấp dưới",
+          type: "social",
+          note: "아래(dưới) + 사람(người). 나이/직급이 아래인 사람. 아랫사람에게 반말을 해요. ↔ 윗사람(người trên).",
+        },
+        {
+          kr: "악수",
+          en: "handshake",
+          vi: "bắt tay",
+          type: "social",
+          note: "악수(握手). 악수를 하다(bắt tay). 처음 만날 때 악수해요. 한국에서는 두 손으로 악수하면 더 공손.",
+        },
+        {
+          kr: "안부",
+          en: "regards, well-being",
+          vi: "tin thăm hỏi, lời hỏi thăm",
+          type: "social",
+          note: "안부(安否). 안부를 전하다(gửi lời thăm hỏi). 안부를 묻다(hỏi thăm). 부모님 안부를 전해 주세요.",
+        },
+        {
+          kr: "애기",
+          en: "baby (casual)",
+          vi: "em bé (thân mật)",
+          type: "family",
+          note: "아기의 구어체. 애기가 너무 귀여워요(em bé dễ thương quá). 우리 애기(con cưng của tôi). 애칭적 표현.",
+        },
+        {
+          kr: "애인",
+          en: "boyfriend/girlfriend, lover",
+          vi: "người yêu",
+          type: "love",
+          note: "애인(愛人). 애인이 생겼어요(có người yêu rồi). 애인을 사귀다(có người yêu). 남자친구/여자친구와 유사.",
+        },
+        {
+          kr: "약혼",
+          en: "engagement, betrothal",
+          vi: "đính hôn",
+          type: "love",
+          note: "약혼(約婚). 약혼하다 = đính hôn. 약혼반지(nhẫn đính hôn). 약혼식(lễ đính hôn). 결혼 전 단계.",
+        },
+        {
+          kr: "약혼자",
+          en: "fiancé/fiancée",
+          vi: "người đính hôn, vị hôn phu/thê",
+          type: "love",
+          note: "약혼(đính hôn) + 자(者). 약혼자를 소개하다(giới thiệu người đính hôn). 약혼녀(cô đính hôn), 약혼남.",
+        },
+        {
+          kr: "어린아이",
+          en: "young child",
+          vi: "trẻ nhỏ",
+          type: "family",
+          note: "어리다(nhỏ tuổi) + 아이(trẻ em). 어린아이를 돌보다(chăm sóc trẻ nhỏ). 어린이보다 더 어린 느낌.",
+        },
+        {
+          kr: "연상",
+          en: "older (partner); association",
+          vi: "người lớn tuổi hơn; liên tưởng",
+          type: "love",
+          note: "두 가지: (1) 年上 — nhiều tuổi hơn (연상 여자 = cô ấy lớn tuổi hơn), (2) 聯想 — liên tưởng.",
+        },
+        {
+          kr: "연애",
+          en: "romance, dating",
+          vi: "tình yêu đôi lứa, hẹn hò",
+          type: "love",
+          note: "연애(戀愛). 연애하다 = hẹn hò, yêu nhau. 연애 중이에요(đang trong mối quan hệ). 연애 경험(kinh nghiệm hẹn hò).",
+        },
+        {
+          kr: "연애결혼",
+          en: "love marriage (not arranged)",
+          vi: "kết hôn vì tình yêu",
+          type: "love",
+          note: "연애(tình yêu) + 결혼(kết hôn). ↔ 중매결혼(hôn nhân mai mối). 한국에서 연애결혼이 더 일반적.",
+        },
+        {
+          kr: "연인",
+          en: "lovers, couple",
+          vi: "người yêu, đôi tình nhân",
+          type: "love",
+          note: "연인(戀人). 연인 사이(quan hệ tình nhân). 연인과 함께(cùng với người yêu). 커플과 유사.",
+        },
+        {
+          kr: "연하",
+          en: "younger (partner)",
+          vi: "người trẻ hơn",
+          type: "love",
+          note: "연하(年下). 연하 남자(bạn trai nhỏ tuổi hơn). 연하를 좋아해요(thích người nhỏ tuổi hơn). ↔ 연상(lớn hơn).",
+        },
+        {
+          kr: "옆집",
+          en: "neighbor's house, next door",
+          vi: "nhà hàng xóm",
+          type: "social",
+          note: "옆(cạnh) + 집(nhà). 옆집 사람(người nhà bên). 옆집에서 소리가 나요(có tiếng từ nhà bên).",
+        },
+        {
+          kr: "예식장",
+          en: "wedding hall, reception hall",
+          vi: "hội trường tiệc cưới",
+          type: "love",
+          note: "예식(禮式, lễ) + 장(場, nơi). 예식장을 예약하다(đặt hội trường cưới). 한국 결혼식의 일반적인 장소.",
+        },
+        {
+          kr: "외가",
+          en: "mother's family, maternal side",
+          vi: "bên ngoại",
+          type: "family",
+          note: "외가(外家). 외갓집(nhà bên ngoại). 외가에 가다(đến nhà ngoại). ↔ 친가(bên nội).",
+        },
+        {
+          kr: "외동딸",
+          en: "only daughter",
+          vi: "con gái một",
+          type: "family",
+          note: "외동(độc nhất) + 딸. 외동딸로 자라다(lớn lên là con gái một). 외동아들(con trai một). 귀하게 자라요.",
+        },
+        {
+          kr: "외동아들",
+          en: "only son",
+          vi: "con trai một",
+          type: "family",
+          note: "외동(độc nhất) + 아들. 외아들과 동의. 외동아들을 귀하게 키우다(nuôi con trai một rất nâng niu).",
+        },
+        {
+          kr: "외아들",
+          en: "only son (no siblings)",
+          vi: "con trai duy nhất",
+          type: "family",
+          note: "외(獨, một mình) + 아들. 외동아들과 동의. 외아들로 자랐어요(lớn lên là con trai duy nhất).",
+        },
+        {
+          kr: "우정",
+          en: "friendship",
+          vi: "tình bạn",
+          type: "social",
+          note: "우정(友情). 우정을 나누다(chia sẻ tình bạn). 우정이 깊다(tình bạn sâu đậm). 사랑보다 오래가요.",
+        },
+        {
+          kr: "웃어른",
+          en: "elder, senior person",
+          vi: "bậc trên, người lớn tuổi hơn",
+          type: "social",
+          note: "웃(위, trên) + 어른(người lớn). 웃어른을 공경하다(kính trọng bậc trên). 유교 문화의 핵심 개념.",
+        },
+        {
+          kr: "윗사람",
+          en: "superior, senior person",
+          vi: "người trên, cấp trên",
+          type: "social",
+          note: "위(trên) + 사람. 나이/직위가 위인 사람. 윗사람에게 존댓말을 써요. ↔ 아랫사람(cấp dưới).",
+        },
+        {
+          kr: "육아",
+          en: "childcare, child-rearing",
+          vi: "nuôi dưỡng trẻ, chăm con",
+          type: "family",
+          note: "육아(育兒). 육아를 하다(chăm sóc con). 육아 휴직(nghỉ phép chăm con). 육아가 힘들어요(nuôi con vất vả).",
+        },
+        {
+          kr: "이별",
+          en: "farewell, separation, breakup",
+          vi: "chia tay, chia ly",
+          type: "love",
+          note: "이별(離別). 이별하다 = chia tay. 이별의 아픔(nỗi đau chia ly). 이별 노래(bài hát chia tay).",
+        },
+        {
+          kr: "이상형",
+          en: "ideal type, dream partner",
+          vi: "người lý tưởng, người trong mộng",
+          type: "love",
+          note: "이상(理想) + 형(型). 이상형이 누구예요?(người trong mộng của bạn là ai?). 이상형을 만나다(gặp được người lý tưởng).",
+        },
+        {
+          kr: "이성",
+          en: "opposite sex; reason/rationality",
+          vi: "lý trí; người khác giới",
+          type: "love",
+          note: "두 가지: (1) 異性 — người khác giới (이성 친구 = bạn khác giới), (2) 理性 — lý trí.",
+        },
+        {
+          kr: "이웃",
+          en: "neighbor, neighborhood",
+          vi: "hàng xóm",
+          type: "social",
+          note: "이웃(隣). 이웃과 잘 지내다(sống hòa thuận với hàng xóm). 이웃집(nhà hàng xóm). 좋은 이웃(hàng xóm tốt).",
+        },
+        {
+          kr: "이웃집",
+          en: "neighbor's house",
+          vi: "nhà hàng xóm",
+          type: "social",
+          note: "이웃 + 집. 이웃집에 놀러 가다(sang nhà hàng xóm chơi). 이웃집 아주머니(bà hàng xóm).",
+        },
+        {
+          kr: "이혼",
+          en: "divorce",
+          vi: "ly hôn",
+          type: "love",
+          note: "이혼(離婚). 이혼하다 = ly hôn. 이혼 서류(giấy tờ ly hôn). 이혼율(tỷ lệ ly hôn). ↔ 결혼(kết hôn).",
+        },
+        {
+          kr: "인간관계",
+          en: "human relationships, interpersonal relationships",
+          vi: "quan hệ con người",
+          type: "social",
+          note: "인간(人間) + 관계(關係). 인간관계가 중요해요(quan hệ con người quan trọng). 인간관계를 잘 유지하다.",
+        },
+        {
+          kr: "인사말",
+          en: "greeting words, salutation",
+          vi: "lời chào",
+          type: "social",
+          note: "인사(chào hỏi) + 말(lời). 인사말을 전하다(gửi lời chào). 새해 인사말(lời chúc năm mới).",
+        },
+        {
+          kr: "자녀",
+          en: "children (sons and daughters)",
+          vi: "con cái",
+          type: "family",
+          note: "자녀(子女). 자녀가 몇 명이에요?(bạn có mấy con?). 자녀 교육(giáo dục con cái). 자식과 유사.",
+        },
+        {
+          kr: "자매",
+          en: "sisters",
+          vi: "chị em (gái)",
+          type: "family",
+          note: "자매(姊妹). 자매지간(quan hệ chị em gái). 자매가 있어요?(bạn có chị/em gái không?). ↔ 형제(anh em trai).",
+        },
+        {
+          kr: "자식",
+          en: "child, offspring",
+          vi: "con cái",
+          type: "family",
+          note: "자식(子息). 자식이 생기다(có con). 자식을 키우다(nuôi con). 내 자식(con của tôi). 자녀와 유사.",
+        },
+        {
+          kr: "자취",
+          en: "living alone, self-catering",
+          vi: "ở một mình, tự sống",
+          type: "social",
+          note: "자취(自炊). 자취하다 = sống một mình và tự nấu ăn. 자취방(phòng trọ sống một mình). 대학생에게 흔함.",
+        },
+        {
+          kr: "장가",
+          en: "marriage (of a man), getting a wife",
+          vi: "lấy vợ (kết hôn của đàn ông)",
+          type: "love",
+          note: "장가(丈家, nhà vợ). 장가가다(lấy vợ). 아들이 장가갔어요(con trai đã lấy vợ). ↔ 시집가다(lấy chồng).",
+        },
+        {
+          kr: "장가가다",
+          en: "to get married (of a man)",
+          vi: "lấy vợ",
+          type: "love",
+          note: "장가(nhà vợ) + 가다(đi). 언제 장가갈 거예요?(khi nào lấy vợ?). 전통적 표현. ↔ 시집가다(lấy chồng).",
+        },
+        {
+          kr: "장난꾸러기",
+          en: "mischievous child, troublemaker",
+          vi: "đứa trẻ tinh nghịch",
+          type: "family",
+          note: "장난(trò nghịch) + 꾸러기(người hay làm gì). 개구쟁이와 유사. 우리 아이는 장난꾸러기예요.",
+        },
+        {
+          kr: "장남",
+          en: "eldest son",
+          vi: "con trai cả",
+          type: "family",
+          note: "장남(長男). 장남이라서 책임감이 커요(là con trai cả nên trách nhiệm lớn). ↔ 막내(con út).",
+        },
+        {
+          kr: "장녀",
+          en: "eldest daughter",
+          vi: "con gái cả",
+          type: "family",
+          note: "장녀(長女). 장녀로 태어나다(sinh ra là con gái cả). 맏딸과 동의.",
+        },
+        {
+          kr: "재혼",
+          en: "remarriage",
+          vi: "tái hôn",
+          type: "love",
+          note: "재혼(再婚). 재혼하다 = tái hôn. 재혼 가정(gia đình tái hôn). 이혼 후 재혼(tái hôn sau ly hôn).",
+        },
+        {
+          kr: "집들이",
+          en: "housewarming party",
+          vi: "tiệc tân gia",
+          type: "social",
+          note: "집(nhà) + 들이(mời vào). 집들이를 하다(tổ chức tiệc tân gia). 집들이 선물로 세제를 줘요(tặng nước giặt khi tân gia).",
+        },
+        {
+          kr: "집안",
+          en: "family, household (inside)",
+          vi: "gia đình (bên trong)",
+          type: "family",
+          note: "집(nhà) + 안(bên trong). 집안일(việc nhà). 집안이 좋다(gia đình tốt/danh giá). 집안 형편(hoàn cảnh gia đình).",
+        },
+        {
+          kr: "집안일",
+          en: "housework, household chores",
+          vi: "việc nhà",
+          type: "family",
+          note: "집안 + 일. 집안일을 돕다(giúp việc nhà). 집안일을 나눠서 하다(chia nhau làm việc nhà).",
+        },
+        {
+          kr: "짝사랑",
+          en: "one-sided love, unrequited love",
+          vi: "tình đơn phương",
+          type: "love",
+          note: "짝(짝꿍, người kia) + 사랑. 짝사랑하다(yêu đơn phương). 짝사랑이 힘들어요(tình đơn phương thật khó khăn).",
+        },
+        {
+          kr: "처녀",
+          en: "unmarried woman, virgin",
+          vi: "trinh nữ, con gái chưa chồng",
+          type: "love",
+          note: "처녀(處女). 처녀 시절(thời còn là con gái). 처녀 작품(tác phẩm đầu tay). ↔ 총각(trai chưa vợ).",
+        },
+        {
+          kr: "첫사랑",
+          en: "first love",
+          vi: "tình yêu đầu tiên",
+          type: "love",
+          note: "첫(đầu tiên) + 사랑. 첫사랑을 잊지 못해요(không quên được tình yêu đầu). 첫사랑은 이루어지지 않는다?",
+        },
+        {
+          kr: "청첩장",
+          en: "wedding invitation",
+          vi: "thiệp mời (đám cưới)",
+          type: "love",
+          note: "청첩(請牒, giấy mời) + 장(狀). 청첩장을 받다(nhận thiệp cưới). 청첩장을 돌리다(gửi thiệp cưới).",
+        },
+        {
+          kr: "청혼",
+          en: "marriage proposal",
+          vi: "cầu hôn",
+          type: "love",
+          note: "청혼(請婚). 청혼하다 = cầu hôn. 청혼을 받다(nhận lời cầu hôn). 청혼을 거절하다(từ chối lời cầu hôn).",
+        },
+        {
+          kr: "초대장",
+          en: "invitation card",
+          vi: "giấy mời",
+          type: "social",
+          note: "초대(招待) + 장(狀, giấy). 초대장을 보내다(gửi giấy mời). 파티 초대장(thiệp mời tiệc).",
+        },
+        {
+          kr: "초청장",
+          en: "formal invitation letter",
+          vi: "thư mời (trang trọng)",
+          type: "social",
+          note: "초청(招請) + 장. 초대장보다 더 격식체. 공식 행사 초청장(thư mời sự kiện chính thức).",
+        },
+        {
+          kr: "친어머니",
+          en: "biological mother",
+          vi: "mẹ ruột",
+          type: "family",
+          note: "친(親, ruột) + 어머니. ↔ 새어머니(mẹ kế). 친아버지(bố ruột). 입양 가정에서 자주 사용.",
+        },
+        {
+          kr: "커플",
+          en: "couple",
+          vi: "cặp đôi",
+          type: "love",
+          note: "couple에서. 커플이 되다(thành cặp đôi). 커플 아이템(đồ đôi). 커플티(áo đôi — phổ biến ở Hàn).",
+        },
+        {
+          kr: "헤어지다",
+          en: "break up, part ways",
+          vi: "chia tay, chia ly",
+          type: "love",
+          note: "해어지다 + 지다. 남자친구랑 헤어졌어요(tôi đã chia tay bạn trai). ↔ 사귀다(hẹn hò). 이별과 유사.",
+        },
+        {
+          kr: "환송회",
+          en: "farewell party",
+          vi: "tiệc tiễn đưa",
+          type: "social",
+          note: "환송(歡送) + 회(會). 환송회를 열다(tổ chức tiệc tiễn). 이직/유학/전근 시 주로 개최.",
+        },
+        {
+          kr: "환영회",
+          en: "welcome party",
+          vi: "tiệc chào mừng",
+          type: "social",
+          note: "환영(歡迎) + 회(會). 신입사원 환영회(tiệc chào mừng nhân viên mới). ↔ 환송회(tiệc tiễn).",
+        },
+        {
+          kr: "효녀",
+          en: "devoted/filial daughter",
+          vi: "con gái hiếu thảo",
+          type: "family",
+          note: "효(孝, hiếu thảo) + 녀(女, con gái). 효녀심청(Shim Cheong hiếu thảo — nhân vật cổ tích). ↔ 효자(con trai hiếu thảo).",
+        },
+      ];
 
-<script>
-const vocab = [
-  { kr:"가사", en:"housework, lyrics", vi:"việc nhà", type:"family",
-    note:"두 가지: (1) 家事 — việc nhà (가사를 돕다 = giúp việc nhà), (2) 歌詞 — lời bài hát. Ngữ cảnh phân biệt." },
-  { kr:"가정", en:"family, home; assumption", vi:"gia đình, giả định", type:"family",
-    note:"가정(家庭) = gia đình/ngôi nhà. 가정하다 = giả định. 행복한 가정(gia đình hạnh phúc). 가정적(hướng gia đình)." },
-  { kr:"가족적", en:"family-oriented, family-like", vi:"hướng gia đình, coi trọng gia đình", type:"family",
-    note:"가족(gia đình) + 적(tính). 가족적인 분위기(không khí gia đình). 가족적인 사람(người coi trọng gia đình)." },
-  { kr:"개구쟁이", en:"naughty kid, rascal", vi:"đứa trẻ nghịch ngợm", type:"family",
-    note:"장난꾸러기와 유사. 개구쟁이처럼 놀다(chơi nghịch ngợm). Thân mật, thường mang ý yêu thương." },
-  { kr:"결혼기념일", en:"wedding anniversary", vi:"kỷ niệm ngày cưới", type:"love",
-    note:"결혼(kết hôn) + 기념일(ngày kỷ niệm). 결혼기념일을 축하해요(chúc mừng kỷ niệm ngày cưới). 매년 챙겨요." },
-  { kr:"국제결혼", en:"international marriage", vi:"hôn nhân quốc tế", type:"love",
-    note:"국제(國際, quốc tế) + 결혼. 한국에서 국제결혼이 늘고 있어요(hôn nhân quốc tế đang tăng ở Hàn Quốc)." },
-  { kr:"기혼", en:"married", vi:"đã kết hôn", type:"love",
-    note:"기혼(旣婚). 기혼자(người đã có gia đình). ↔ 미혼(chưa kết hôn). 기혼 여성(phụ nữ đã kết hôn)." },
-  { kr:"독신자", en:"single person, bachelor/bachelorette", vi:"người độc thân", type:"love",
-    note:"독신(獨身) + 자(者). 독신 생활(cuộc sống độc thân). 독신주의자(người chủ trương sống độc thân)." },
-  { kr:"룸메이트", en:"roommate", vi:"bạn cùng phòng", type:"social",
-    note:"room + mate. 룸메이트를 구하다(tìm bạn cùng phòng). 좋은 룸메이트(bạn cùng phòng tốt). 기숙사에서 자주." },
-  { kr:"막내", en:"the youngest child", vi:"con út, em út", type:"family",
-    note:"가장 어린 자녀. 막내아들(con trai út). 막내딸(con gái út). 막내가 귀엽다(con út dễ thương). ↔ 맏이(con cả)." },
-  { kr:"만남", en:"meeting, encounter", vi:"cuộc gặp gỡ", type:"social",
-    note:"만나다 → 만남(명사). 운명적인 만남(cuộc gặp gỡ định mệnh). 만남과 헤어짐(gặp gỡ và chia tay)." },
-  { kr:"맏딸", en:"eldest daughter", vi:"con gái đầu", type:"family",
-    note:"맏(đầu, cả) + 딸(con gái). 장녀와 동의. 맏딸로 태어나다(sinh ra là con gái cả)." },
-  { kr:"맏아들", en:"eldest son", vi:"con trai đầu", type:"family",
-    note:"맏(đầu, cả) + 아들(con trai). 장남과 동의. 맏아들의 책임감(trách nhiệm của con trai cả)." },
-  { kr:"맞벌이", en:"dual-income family", vi:"gia đình hai vợ chồng cùng đi làm", type:"family",
-    note:"맞(cùng) + 벌이(kiếm tiền). 맞벌이 부부(cặp vợ chồng cùng đi làm). 한국에서 점점 늘어나는 추세." },
-  { kr:"며느리", en:"daughter-in-law", vi:"con dâu", type:"family",
-    note:"아들의 아내. 며느리를 보다(nhận con dâu). 며느리가 생겼어요(có con dâu rồi). ↔ 사위(con rể)." },
-  { kr:"미팅", en:"blind date (group)", vi:"hẹn hò mù, blind date", type:"love",
-    note:"meeting에서. 주로 그룹으로 만나는 형태. 미팅을 주선하다(sắp xếp buổi hẹn hò). 소개팅은 1:1." },
-  { kr:"미혼", en:"unmarried, single", vi:"độc thân, chưa kết hôn", type:"love",
-    note:"미혼(未婚). 미혼자(người chưa kết hôn). ↔ 기혼(đã kết hôn). 미혼 여성(phụ nữ chưa lập gia đình)." },
-  { kr:"방문", en:"visit", vi:"chuyến thăm, ghé thăm", type:"social",
-    note:"방문(訪問). 방문하다 = thăm. 집을 방문하다(đến thăm nhà). 방문객(khách ghé thăm)." },
-  { kr:"배우자", en:"spouse (husband or wife)", vi:"vợ/chồng", type:"love",
-    note:"배우자(配偶者). 법적 표현. 배우자를 구하다(tìm người bạn đời). 이상적인 배우자(người bạn đời lý tưởng)." },
-  { kr:"별명", en:"nickname", vi:"biệt danh, tên hiệu", type:"social",
-    note:"별명(別名). 별명이 뭐예요?(biệt danh của bạn là gì?). 별명을 붙이다(đặt biệt danh)." },
-  { kr:"부잣집", en:"wealthy family, rich family", vi:"gia đình giàu có", type:"family",
-    note:"부자(người giàu) + 집(nhà). 부잣집에서 태어나다(sinh ra trong gia đình giàu). ↔ 가난한 집(nhà nghèo)." },
-  { kr:"부케", en:"bridal bouquet", vi:"bó hoa cưới", type:"love",
-    note:"bouquet에서. 부케를 던지다(ném bó hoa cô dâu). 부케를 받다(bắt được bó hoa) = sắp lấy chồng/vợ." },
-  { kr:"사귀다", en:"to date, be in a relationship", vi:"quen, hẹn hò", type:"love",
-    note:"사귀다 = đang hẹn hò. 사귀고 있어요?(bạn có người yêu không?). 사귄 지 얼마나 됐어요?(quen nhau bao lâu?)." },
-  { kr:"사모님", en:"wife (of a respected man), madam", vi:"bà chủ, vợ sếp", type:"family",
-    note:"사모(師母) + 님. 선생님/사장님 등의 아내를 높여 부를 때. 사모님, 안녕하세요(thưa bà, xin chào)." },
-  { kr:"살림", en:"housekeeping, household", vi:"sinh hoạt gia đình", type:"family",
-    note:"살림을 하다(quản lý việc nhà). 살림을 차리다(lập gia đình). 살림이 어렵다(cuộc sống gia đình khó khăn)." },
-  { kr:"새어머니", en:"stepmother", vi:"mẹ kế", type:"family",
-    note:"새(mới) + 어머니. 계모와 동의. 새아버지(bố dượng). 새부모(bố mẹ kế). 재혼 가정에서 사용." },
-  { kr:"소개팅", en:"blind date (1-on-1, set up)", vi:"hẹn hò mai mối", type:"love",
-    note:"소개(giới thiệu) + 팅(meeting). 1대1 소개 형태. 소개팅을 주선해 주다(mai mối). 한국 연애 문화의 핵심." },
-  { kr:"손자", en:"grandson", vi:"cháu trai", type:"family",
-    note:"손자(孫子). 할아버지/할머니의 아들의 아들. ↔ 손녀(cháu gái). 손자를 보다(có cháu trai)." },
-  { kr:"시부모님", en:"parents-in-law (husband's parents)", vi:"bố mẹ chồng/vợ", type:"family",
-    note:"시부모(媤父母) + 님. 시아버지 + 시어머니. 시부모님을 모시다(phụng dưỡng bố mẹ chồng)." },
-  { kr:"시아버지", en:"father-in-law (husband's father)", vi:"bố chồng", type:"family",
-    note:"시(媤, bên chồng) + 아버지. 시아버님(kính ngữ). 장인(bố vợ) ↔ 시아버지(bố chồng)." },
-  { kr:"시어머니", en:"mother-in-law (husband's mother)", vi:"mẹ chồng", type:"family",
-    note:"시(媤) + 어머니. 시어머님(kính ngữ). 장모(mẹ vợ) ↔ 시어머니(mẹ chồng)." },
-  { kr:"시집가다", en:"to get married (of a woman)", vi:"lấy chồng (về nhà chồng)", type:"love",
-    note:"시집(nhà chồng) + 가다. 전통적 표현. 딸이 시집갔어요(con gái đã lấy chồng rồi). ↔ 장가가다(lấy vợ)." },
-  { kr:"식구", en:"family members, household", vi:"thành viên gia đình", type:"family",
-    note:"식구(食口). 식구가 몇 명이에요?(gia đình có mấy người?). 우리 식구(gia đình tôi). 가족과 유사." },
-  { kr:"신랑", en:"groom, bridegroom", vi:"chú rể", type:"love",
-    note:"신랑(新郞). 신랑 입장!(chú rể tiến vào!). 신랑이 잘생겼어요(chú rể đẹp trai). ↔ 신부(cô dâu)." },
-  { kr:"신랑감", en:"man suitable to be a groom", vi:"người phù hợp làm chú rể", type:"love",
-    note:"신랑 + 감(~감, người phù hợp). 신랑감을 찾다(tìm chú rể phù hợp). 신부감(người phù hợp làm cô dâu)." },
-  { kr:"신부", en:"bride; Catholic priest", vi:"cô dâu; cha (Thiên Chúa giáo)", type:"love",
-    note:"두 가지: (1) 新婦 — cô dâu (신부 입장!), (2) 神父 — cha đạo Công giáo. Ngữ cảnh phân biệt." },
-  { kr:"신혼", en:"newly married", vi:"mới cưới", type:"love",
-    note:"신혼(新婚). 신혼 생활(cuộc sống mới cưới). 신혼부부(đôi vợ chồng mới cưới). 신혼여행(tuần trăng mật)." },
-  { kr:"신혼부부", en:"newlyweds", vi:"đôi vợ chồng mới cưới", type:"love",
-    note:"신혼(mới cưới) + 부부(vợ chồng). 신혼부부를 축하해요(chúc mừng đôi vợ chồng mới cưới)." },
-  { kr:"신혼여행", en:"honeymoon", vi:"tuần trăng mật", type:"love",
-    note:"신혼(mới cưới) + 여행(du lịch). 신혼여행을 가다(đi tuần trăng mật). 제주도가 인기 있어요." },
-  { kr:"쌍둥이", en:"twins", vi:"cặp sinh đôi", type:"family",
-    note:"일란성 쌍둥이(cặp sinh đôi cùng trứng). 이란성 쌍둥이(cặp sinh đôi khác trứng). 쌍둥이를 낳다(sinh đôi)." },
-  { kr:"아랫사람", en:"junior, subordinate", vi:"người dưới, cấp dưới", type:"social",
-    note:"아래(dưới) + 사람(người). 나이/직급이 아래인 사람. 아랫사람에게 반말을 해요. ↔ 윗사람(người trên)." },
-  { kr:"악수", en:"handshake", vi:"bắt tay", type:"social",
-    note:"악수(握手). 악수를 하다(bắt tay). 처음 만날 때 악수해요. 한국에서는 두 손으로 악수하면 더 공손." },
-  { kr:"안부", en:"regards, well-being", vi:"tin thăm hỏi, lời hỏi thăm", type:"social",
-    note:"안부(安否). 안부를 전하다(gửi lời thăm hỏi). 안부를 묻다(hỏi thăm). 부모님 안부를 전해 주세요." },
-  { kr:"애기", en:"baby (casual)", vi:"em bé (thân mật)", type:"family",
-    note:"아기의 구어체. 애기가 너무 귀여워요(em bé dễ thương quá). 우리 애기(con cưng của tôi). 애칭적 표현." },
-  { kr:"애인", en:"boyfriend/girlfriend, lover", vi:"người yêu", type:"love",
-    note:"애인(愛人). 애인이 생겼어요(có người yêu rồi). 애인을 사귀다(có người yêu). 남자친구/여자친구와 유사." },
-  { kr:"약혼", en:"engagement, betrothal", vi:"đính hôn", type:"love",
-    note:"약혼(約婚). 약혼하다 = đính hôn. 약혼반지(nhẫn đính hôn). 약혼식(lễ đính hôn). 결혼 전 단계." },
-  { kr:"약혼자", en:"fiancé/fiancée", vi:"người đính hôn, vị hôn phu/thê", type:"love",
-    note:"약혼(đính hôn) + 자(者). 약혼자를 소개하다(giới thiệu người đính hôn). 약혼녀(cô đính hôn), 약혼남." },
-  { kr:"어린아이", en:"young child", vi:"trẻ nhỏ", type:"family",
-    note:"어리다(nhỏ tuổi) + 아이(trẻ em). 어린아이를 돌보다(chăm sóc trẻ nhỏ). 어린이보다 더 어린 느낌." },
-  { kr:"연상", en:"older (partner); association", vi:"người lớn tuổi hơn; liên tưởng", type:"love",
-    note:"두 가지: (1) 年上 — nhiều tuổi hơn (연상 여자 = cô ấy lớn tuổi hơn), (2) 聯想 — liên tưởng." },
-  { kr:"연애", en:"romance, dating", vi:"tình yêu đôi lứa, hẹn hò", type:"love",
-    note:"연애(戀愛). 연애하다 = hẹn hò, yêu nhau. 연애 중이에요(đang trong mối quan hệ). 연애 경험(kinh nghiệm hẹn hò)." },
-  { kr:"연애결혼", en:"love marriage (not arranged)", vi:"kết hôn vì tình yêu", type:"love",
-    note:"연애(tình yêu) + 결혼(kết hôn). ↔ 중매결혼(hôn nhân mai mối). 한국에서 연애결혼이 더 일반적." },
-  { kr:"연인", en:"lovers, couple", vi:"người yêu, đôi tình nhân", type:"love",
-    note:"연인(戀人). 연인 사이(quan hệ tình nhân). 연인과 함께(cùng với người yêu). 커플과 유사." },
-  { kr:"연하", en:"younger (partner)", vi:"người trẻ hơn", type:"love",
-    note:"연하(年下). 연하 남자(bạn trai nhỏ tuổi hơn). 연하를 좋아해요(thích người nhỏ tuổi hơn). ↔ 연상(lớn hơn)." },
-  { kr:"옆집", en:"neighbor's house, next door", vi:"nhà hàng xóm", type:"social",
-    note:"옆(cạnh) + 집(nhà). 옆집 사람(người nhà bên). 옆집에서 소리가 나요(có tiếng từ nhà bên)." },
-  { kr:"예식장", en:"wedding hall, reception hall", vi:"hội trường tiệc cưới", type:"love",
-    note:"예식(禮式, lễ) + 장(場, nơi). 예식장을 예약하다(đặt hội trường cưới). 한국 결혼식의 일반적인 장소." },
-  { kr:"외가", en:"mother's family, maternal side", vi:"bên ngoại", type:"family",
-    note:"외가(外家). 외갓집(nhà bên ngoại). 외가에 가다(đến nhà ngoại). ↔ 친가(bên nội)." },
-  { kr:"외동딸", en:"only daughter", vi:"con gái một", type:"family",
-    note:"외동(độc nhất) + 딸. 외동딸로 자라다(lớn lên là con gái một). 외동아들(con trai một). 귀하게 자라요." },
-  { kr:"외동아들", en:"only son", vi:"con trai một", type:"family",
-    note:"외동(độc nhất) + 아들. 외아들과 동의. 외동아들을 귀하게 키우다(nuôi con trai một rất nâng niu)." },
-  { kr:"외아들", en:"only son (no siblings)", vi:"con trai duy nhất", type:"family",
-    note:"외(獨, một mình) + 아들. 외동아들과 동의. 외아들로 자랐어요(lớn lên là con trai duy nhất)." },
-  { kr:"우정", en:"friendship", vi:"tình bạn", type:"social",
-    note:"우정(友情). 우정을 나누다(chia sẻ tình bạn). 우정이 깊다(tình bạn sâu đậm). 사랑보다 오래가요." },
-  { kr:"웃어른", en:"elder, senior person", vi:"bậc trên, người lớn tuổi hơn", type:"social",
-    note:"웃(위, trên) + 어른(người lớn). 웃어른을 공경하다(kính trọng bậc trên). 유교 문화의 핵심 개념." },
-  { kr:"윗사람", en:"superior, senior person", vi:"người trên, cấp trên", type:"social",
-    note:"위(trên) + 사람. 나이/직위가 위인 사람. 윗사람에게 존댓말을 써요. ↔ 아랫사람(cấp dưới)." },
-  { kr:"육아", en:"childcare, child-rearing", vi:"nuôi dưỡng trẻ, chăm con", type:"family",
-    note:"육아(育兒). 육아를 하다(chăm sóc con). 육아 휴직(nghỉ phép chăm con). 육아가 힘들어요(nuôi con vất vả)." },
-  { kr:"이별", en:"farewell, separation, breakup", vi:"chia tay, chia ly", type:"love",
-    note:"이별(離別). 이별하다 = chia tay. 이별의 아픔(nỗi đau chia ly). 이별 노래(bài hát chia tay)." },
-  { kr:"이상형", en:"ideal type, dream partner", vi:"người lý tưởng, người trong mộng", type:"love",
-    note:"이상(理想) + 형(型). 이상형이 누구예요?(người trong mộng của bạn là ai?). 이상형을 만나다(gặp được người lý tưởng)." },
-  { kr:"이성", en:"opposite sex; reason/rationality", vi:"lý trí; người khác giới", type:"love",
-    note:"두 가지: (1) 異性 — người khác giới (이성 친구 = bạn khác giới), (2) 理性 — lý trí." },
-  { kr:"이웃", en:"neighbor, neighborhood", vi:"hàng xóm", type:"social",
-    note:"이웃(隣). 이웃과 잘 지내다(sống hòa thuận với hàng xóm). 이웃집(nhà hàng xóm). 좋은 이웃(hàng xóm tốt)." },
-  { kr:"이웃집", en:"neighbor's house", vi:"nhà hàng xóm", type:"social",
-    note:"이웃 + 집. 이웃집에 놀러 가다(sang nhà hàng xóm chơi). 이웃집 아주머니(bà hàng xóm)." },
-  { kr:"이혼", en:"divorce", vi:"ly hôn", type:"love",
-    note:"이혼(離婚). 이혼하다 = ly hôn. 이혼 서류(giấy tờ ly hôn). 이혼율(tỷ lệ ly hôn). ↔ 결혼(kết hôn)." },
-  { kr:"인간관계", en:"human relationships, interpersonal relationships", vi:"quan hệ con người", type:"social",
-    note:"인간(人間) + 관계(關係). 인간관계가 중요해요(quan hệ con người quan trọng). 인간관계를 잘 유지하다." },
-  { kr:"인사말", en:"greeting words, salutation", vi:"lời chào", type:"social",
-    note:"인사(chào hỏi) + 말(lời). 인사말을 전하다(gửi lời chào). 새해 인사말(lời chúc năm mới)." },
-  { kr:"자녀", en:"children (sons and daughters)", vi:"con cái", type:"family",
-    note:"자녀(子女). 자녀가 몇 명이에요?(bạn có mấy con?). 자녀 교육(giáo dục con cái). 자식과 유사." },
-  { kr:"자매", en:"sisters", vi:"chị em (gái)", type:"family",
-    note:"자매(姊妹). 자매지간(quan hệ chị em gái). 자매가 있어요?(bạn có chị/em gái không?). ↔ 형제(anh em trai)." },
-  { kr:"자식", en:"child, offspring", vi:"con cái", type:"family",
-    note:"자식(子息). 자식이 생기다(có con). 자식을 키우다(nuôi con). 내 자식(con của tôi). 자녀와 유사." },
-  { kr:"자취", en:"living alone, self-catering", vi:"ở một mình, tự sống", type:"social",
-    note:"자취(自炊). 자취하다 = sống một mình và tự nấu ăn. 자취방(phòng trọ sống một mình). 대학생에게 흔함." },
-  { kr:"장가", en:"marriage (of a man), getting a wife", vi:"lấy vợ (kết hôn của đàn ông)", type:"love",
-    note:"장가(丈家, nhà vợ). 장가가다(lấy vợ). 아들이 장가갔어요(con trai đã lấy vợ). ↔ 시집가다(lấy chồng)." },
-  { kr:"장가가다", en:"to get married (of a man)", vi:"lấy vợ", type:"love",
-    note:"장가(nhà vợ) + 가다(đi). 언제 장가갈 거예요?(khi nào lấy vợ?). 전통적 표현. ↔ 시집가다(lấy chồng)." },
-  { kr:"장난꾸러기", en:"mischievous child, troublemaker", vi:"đứa trẻ tinh nghịch", type:"family",
-    note:"장난(trò nghịch) + 꾸러기(người hay làm gì). 개구쟁이와 유사. 우리 아이는 장난꾸러기예요." },
-  { kr:"장남", en:"eldest son", vi:"con trai cả", type:"family",
-    note:"장남(長男). 장남이라서 책임감이 커요(là con trai cả nên trách nhiệm lớn). ↔ 막내(con út)." },
-  { kr:"장녀", en:"eldest daughter", vi:"con gái cả", type:"family",
-    note:"장녀(長女). 장녀로 태어나다(sinh ra là con gái cả). 맏딸과 동의." },
-  { kr:"재혼", en:"remarriage", vi:"tái hôn", type:"love",
-    note:"재혼(再婚). 재혼하다 = tái hôn. 재혼 가정(gia đình tái hôn). 이혼 후 재혼(tái hôn sau ly hôn)." },
-  { kr:"집들이", en:"housewarming party", vi:"tiệc tân gia", type:"social",
-    note:"집(nhà) + 들이(mời vào). 집들이를 하다(tổ chức tiệc tân gia). 집들이 선물로 세제를 줘요(tặng nước giặt khi tân gia)." },
-  { kr:"집안", en:"family, household (inside)", vi:"gia đình (bên trong)", type:"family",
-    note:"집(nhà) + 안(bên trong). 집안일(việc nhà). 집안이 좋다(gia đình tốt/danh giá). 집안 형편(hoàn cảnh gia đình)." },
-  { kr:"집안일", en:"housework, household chores", vi:"việc nhà", type:"family",
-    note:"집안 + 일. 집안일을 돕다(giúp việc nhà). 집안일을 나눠서 하다(chia nhau làm việc nhà)." },
-  { kr:"짝사랑", en:"one-sided love, unrequited love", vi:"tình đơn phương", type:"love",
-    note:"짝(짝꿍, người kia) + 사랑. 짝사랑하다(yêu đơn phương). 짝사랑이 힘들어요(tình đơn phương thật khó khăn)." },
-  { kr:"처녀", en:"unmarried woman, virgin", vi:"trinh nữ, con gái chưa chồng", type:"love",
-    note:"처녀(處女). 처녀 시절(thời còn là con gái). 처녀 작품(tác phẩm đầu tay). ↔ 총각(trai chưa vợ)." },
-  { kr:"첫사랑", en:"first love", vi:"tình yêu đầu tiên", type:"love",
-    note:"첫(đầu tiên) + 사랑. 첫사랑을 잊지 못해요(không quên được tình yêu đầu). 첫사랑은 이루어지지 않는다?" },
-  { kr:"청첩장", en:"wedding invitation", vi:"thiệp mời (đám cưới)", type:"love",
-    note:"청첩(請牒, giấy mời) + 장(狀). 청첩장을 받다(nhận thiệp cưới). 청첩장을 돌리다(gửi thiệp cưới)." },
-  { kr:"청혼", en:"marriage proposal", vi:"cầu hôn", type:"love",
-    note:"청혼(請婚). 청혼하다 = cầu hôn. 청혼을 받다(nhận lời cầu hôn). 청혼을 거절하다(từ chối lời cầu hôn)." },
-  { kr:"초대장", en:"invitation card", vi:"giấy mời", type:"social",
-    note:"초대(招待) + 장(狀, giấy). 초대장을 보내다(gửi giấy mời). 파티 초대장(thiệp mời tiệc)." },
-  { kr:"초청장", en:"formal invitation letter", vi:"thư mời (trang trọng)", type:"social",
-    note:"초청(招請) + 장. 초대장보다 더 격식체. 공식 행사 초청장(thư mời sự kiện chính thức)." },
-  { kr:"친어머니", en:"biological mother", vi:"mẹ ruột", type:"family",
-    note:"친(親, ruột) + 어머니. ↔ 새어머니(mẹ kế). 친아버지(bố ruột). 입양 가정에서 자주 사용." },
-  { kr:"커플", en:"couple", vi:"cặp đôi", type:"love",
-    note:"couple에서. 커플이 되다(thành cặp đôi). 커플 아이템(đồ đôi). 커플티(áo đôi — phổ biến ở Hàn)." },
-  { kr:"헤어지다", en:"break up, part ways", vi:"chia tay, chia ly", type:"love",
-    note:"해어지다 + 지다. 남자친구랑 헤어졌어요(tôi đã chia tay bạn trai). ↔ 사귀다(hẹn hò). 이별과 유사." },
-  { kr:"환송회", en:"farewell party", vi:"tiệc tiễn đưa", type:"social",
-    note:"환송(歡送) + 회(會). 환송회를 열다(tổ chức tiệc tiễn). 이직/유학/전근 시 주로 개최." },
-  { kr:"환영회", en:"welcome party", vi:"tiệc chào mừng", type:"social",
-    note:"환영(歡迎) + 회(會). 신입사원 환영회(tiệc chào mừng nhân viên mới). ↔ 환송회(tiệc tiễn)." },
-  { kr:"효녀", en:"devoted/filial daughter", vi:"con gái hiếu thảo", type:"family",
-    note:"효(孝, hiếu thảo) + 녀(女, con gái). 효녀심청(Shim Cheong hiếu thảo — nhân vật cổ tích). ↔ 효자(con trai hiếu thảo)." },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    let tagHtml;
-    if (item.type === 'family') tagHtml = `<span class="tag tag-family">Gia đình</span>`;
-    else if (item.type === 'love') tagHtml = `<span class="tag tag-love">Tình yêu & HN</span>`;
-    else tagHtml = `<span class="tag tag-social">Xã hội</span>`;
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let tagHtml;
+          if (item.type === "family")
+            tagHtml = `<span class="tag tag-family">Gia đình</span>`;
+          else if (item.type === "love")
+            tagHtml = `<span class="tag tag-love">Tình yêu & HN</span>`;
+          else tagHtml = `<span class="tag tag-social">Xã hội</span>`;
 
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${tagHtml}</td>
       <td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || item.note.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" || item.type === currentFilter;
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
