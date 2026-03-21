@@ -1,263 +1,1327 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Xã hội & Chính trị (Nâng cao)</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f3f3f8;
-    --card: #fff;
-    --accent: #2a2a7a;
-    --text: #0a0a28;
-    --sub: #6a6a9a;
-    --border: #d0d0e8;
-    --tag-society: #e0e8fa;
-    --tag-law: #fce8e8;
-    --tag-politics: #fef0d8;
-    --tag-people: #e8f8e8;
-    --tag-crime: #f8e8f8;
-    --highlight: #eeeeff;
-    --row-alt: #f8f8fd;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Be Vietnam Pro',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
-  .header { background:var(--text); color:#f3f3f8; padding:36px 40px 28px; position:relative; overflow:hidden; }
-  .header::before { content:'사회'; position:absolute; right:40px; top:50%; transform:translateY(-50%); font-family:'Noto Serif KR',serif; font-size:120px; color:rgba(255,255,255,.05); font-weight:600; letter-spacing:-4px; user-select:none; }
-  .header h1 { font-family:'Noto Serif KR',serif; font-size:28px; font-weight:600; letter-spacing:1px; margin-bottom:6px; }
-  .header p { font-size:13px; font-weight:300; color:#9a9aba; letter-spacing:.5px; }
-  .count-badge { display:inline-block; background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:10px; letter-spacing:.5px; }
-  .controls { padding:20px 40px; background:var(--card); border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-  .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--sub); }
-  #searchInput { width:100%; padding:10px 12px 10px 38px; border:1.5px solid var(--border); border-radius:8px; font-family:'Be Vietnam Pro',sans-serif; font-size:14px; background:var(--bg); color:var(--text); outline:none; transition:border-color .2s; }
-  #searchInput:focus { border-color:var(--accent); }
-  #searchInput::placeholder { color:var(--sub); }
-  .filter-btn { padding:7px 12px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); font-family:'Be Vietnam Pro',sans-serif; font-size:11px; font-weight:500; color:var(--sub); cursor:pointer; transition:all .2s; white-space:nowrap; }
-  .filter-btn:hover,.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .result-count { font-size:12px; color:var(--sub); white-space:nowrap; }
-  .table-wrap { padding:24px 40px 60px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); }
-  thead { background:var(--text); color:#f3f3f8; }
-  th { padding:14px 16px; text-align:left; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
-  th:nth-child(1),td:nth-child(1) { width:60px; text-align:center; }
-  th:nth-child(2),td:nth-child(2) { width:145px; }
-  th:nth-child(3),td:nth-child(3) { width:185px; }
-  th:nth-child(4),td:nth-child(4) { width:210px; }
-  th:nth-child(5),td:nth-child(5) { width:120px; }
-  th:nth-child(6),td:nth-child(6) { min-width:280px; }
-  tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
-  tbody tr:nth-child(even) { background:var(--row-alt); }
-  tbody tr:hover { background:var(--highlight); }
-  td { padding:12px 16px; font-size:13.5px; vertical-align:middle; line-height:1.5; }
-  td:nth-child(1) { font-size:11px; color:var(--sub); font-weight:600; }
-  .korean-word { font-family:'Noto Serif KR',serif; font-size:18px; font-weight:600; color:var(--accent); display:block; line-height:1.3; }
-  .tag { display:inline-flex; align-items:center; border-radius:4px; padding:2px 8px; font-size:11px; font-weight:500; white-space:nowrap; }
-  .tag-society  { background:var(--tag-society);  color:#0a0a60; }
-  .tag-law      { background:var(--tag-law);      color:#7a0a0a; }
-  .tag-politics { background:var(--tag-politics);  color:#5a3000; }
-  .tag-people   { background:var(--tag-people);   color:#0a4a20; }
-  .tag-crime    { background:var(--tag-crime);    color:#5a0a5a; }
-  .note { font-size:12px; color:var(--sub); font-style:italic; }
-  .no-results { text-align:center; padding:60px; color:var(--sub); font-size:15px; display:none; }
-  .footer { text-align:center; padding:20px; font-size:11px; color:var(--sub); border-top:1px solid var(--border); }
-  @media(max-width:768px){.header{padding:24px 20px}.header::before{display:none}.controls{padding:16px 20px}.table-wrap{padding:16px 20px 40px}th,td{padding:10px 12px}.korean-word{font-size:15px}}
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>사회 & 정치 (심화) — Xã hội & Chính trị (Nâng cao)</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Xã hội nâng cao · Chủ đề TOPIK II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="society">Xã hội</button>
-  <button class="filter-btn" data-filter="politics">Chính trị/Nhà nước</button>
-  <button class="filter-btn" data-filter="law">Pháp luật</button>
-  <button class="filter-btn" data-filter="crime">Tội phạm</button>
-  <button class="filter-btn" data-filter="people">Con người/Nhóm người</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Xã hội &amp; Chính trị (Nâng cao)</div>
-<script>
-const vocab=[
-  {kr:"가난",en:"poverty",vi:"nghèo khó, sự nghèo đói",type:"society",note:"가난(家難). 가난하다=nghèo. 가난을 극복하다(vượt qua nghèo khó). 빈곤과 유사. ↔ 부유(giàu có)."},
-  {kr:"개방",en:"opening, opening to the public",vi:"mở cửa, khai thông",type:"politics",note:"개방(開放). 개방하다=mở cửa. 시장 개방(mở cửa thị trường). 개방 정책(chính sách mở cửa). ↔ 폐쇄."},
-  {kr:"경고",en:"warning, caution",vi:"cảnh báo",type:"law",note:"경고(警告). 경고하다=cảnh báo. 경고문(thông báo cảnh báo). 경고를 무시하다(bỏ qua cảnh báo)."},
-  {kr:"계층",en:"class, stratum, hierarchy",vi:"tầng lớp, cấp bậc",type:"society",note:"계층(階層). 사회 계층(tầng lớp xã hội). 중산층(tầng lớp trung lưu). 계층 간 갈등(xung đột giữa các tầng lớp)."},
-  {kr:"고아원",en:"orphanage",vi:"trại trẻ mồ côi",type:"society",note:"고아(孤兒,trẻ mồ côi)+원(院). 고아원에서 자라다(lớn lên ở trại mồ côi). 고아원을 운영하다."},
-  {kr:"공동",en:"joint, shared, communal",vi:"chung, cộng đồng",type:"society",note:"공동(共同). 공동 작업(công việc chung). 공동체(cộng đồng). 공동 책임(trách nhiệm chung)."},
-  {kr:"공동생활",en:"community life, living together",vi:"cuộc sống cộng đồng",type:"society",note:"공동(chung)+생활(生活). 공동생활을 하다(sống chung). 기숙사 공동생활(cuộc sống KTX chung)."},
-  {kr:"공통점",en:"common point, similarity",vi:"điểm chung",type:"society",note:"공통(共通)+점(點). 공통점을 찾다(tìm điểm chung). 공통점이 있다/없다. ↔ 차이점(điểm khác biệt)."},
-  {kr:"교포",en:"overseas Korean, diaspora",vi:"kiều bào",type:"people",note:"교포(僑胞). 재미 교포(kiều bào ở Mỹ). 교포 2세(thế hệ thứ 2 kiều bào). 재외 동포와 유사."},
-  {kr:"구조대",en:"rescue team",vi:"đội cứu hộ",type:"society",note:"구조(救助)+대(隊). 구조대를 보내다(cử đội cứu hộ). 소방 구조대(đội cứu hộ cứu hỏa). 119 구조대."},
-  {kr:"국가",en:"nation, state, country",vi:"quốc gia, đất nước",type:"politics",note:"국가(國家). 국가를 운영하다(vận hành quốc gia). 국가 안보(an ninh quốc gia). 선진 국가(quốc gia phát triển)."},
-  {kr:"국민",en:"citizen, national, people",vi:"công dân, nhân dân",type:"politics",note:"국민(國民). 국민의 의무(nghĩa vụ công dân). 국민 투표(trưng cầu dân ý). 국민을 대표하다(đại diện nhân dân)."},
-  {kr:"국외",en:"overseas, abroad",vi:"ở nước ngoài",type:"society",note:"국외(國外). 국외에 나가다(ra nước ngoài). 국외 거주자(người sinh sống ở nước ngoài). ↔ 국내."},
-  {kr:"군대",en:"military, army",vi:"quân đội",type:"politics",note:"군대(軍隊). 군대에 가다(đi nghĩa vụ quân sự). 군대를 제대하다(xuất ngũ). 한국 남성 의무 복무."},
-  {kr:"그룹",en:"group",vi:"nhóm",type:"society",note:"group에서. 그룹을 이루다(hình thành nhóm). 소그룹(nhóm nhỏ). 연구 그룹(nhóm nghiên cứu)."},
-  {kr:"금지",en:"prohibition, ban",vi:"cấm, lệnh cấm",type:"law",note:"금지(禁止). 금지하다=cấm. 출입 금지(cấm ra vào). 흡연 금지(cấm hút thuốc). 금지 구역(khu vực cấm)."},
-  {kr:"기부",en:"donation, contribution",vi:"quyên góp, từ thiện",type:"society",note:"기부(寄附). 기부하다=quyên góp. 기부금(tiền quyên góp). 자선 기부(từ thiện). 기부 문화(văn hóa từ thiện)."},
-  {kr:"남녀노소",en:"people of all ages and genders",vi:"nam phụ lão ấu, mọi lứa tuổi",type:"people",note:"남(男)+녀(女)+노(老)+소(少). 남녀노소 누구나(tất cả mọi người không phân biệt). 모든 세대를 포함."},
-  {kr:"남녀평등",en:"gender equality",vi:"bình đẳng giới",type:"society",note:"남녀(男女)+평등(平等). 남녀평등을 실현하다(thực hiện bình đẳng giới). 성평등과 유사."},
-  {kr:"남부",en:"southern part, the south",vi:"phía nam, miền nam",type:"society",note:"남부(南部). 한국 남부(miền nam Hàn Quốc). 남부 지방(vùng phía nam). ↔ 북부(miền bắc)."},
-  {kr:"남성",en:"male, man",vi:"nam giới",type:"people",note:"남성(男性). 남성 직원(nhân viên nam). 남성 화장품(mỹ phẩm nam). ↔ 여성(nữ giới). 남성성(nam tính)."},
-  {kr:"노약자",en:"elderly and weak persons",vi:"người già và người tàn tật",type:"people",note:"노(老,già)+약자(弱者,người yếu). 노약자석(ghế dành cho người già và yếu thế). 노약자 우선."},
-  {kr:"노인",en:"elderly person, senior",vi:"người cao tuổi, người già",type:"people",note:"노인(老人). 노인 복지(phúc lợi người cao tuổi). 노인 인구(dân số cao tuổi). 고령화 사회."},
-  {kr:"노처녀",en:"unmarried older woman",vi:"gái già chưa lấy chồng",type:"people",note:"노(老,già)+처녀(cô gái). 결혼 적령기를 넘긴 미혼 여성. 구어체, 주의해서 사용. ↔ 노총각."},
-  {kr:"노총각",en:"unmarried older man",vi:"trai già chưa lấy vợ",type:"people",note:"노(老)+총각(trai chưa vợ). 결혼 안 한 중년 남성. 노처녀와 쌍. 구어체, 주의해서 사용."},
-  {kr:"농민",en:"farmer, peasant",vi:"nông dân",type:"people",note:"농민(農民). 농민 운동(phong trào nông dân). 농민 생활(cuộc sống nông dân). 농부와 유사하나 더 집단적."},
-  {kr:"농부",en:"farmer",vi:"người nông dân",type:"people",note:"농부(農夫). 농부가 밭을 갈다(người nông dân cày ruộng). 농민과 유사하나 개인적 뉘앙스."},
-  {kr:"단속",en:"crackdown, regulation",vi:"kiểm soát, trấn áp",type:"law",note:"단속(團束). 단속하다=trấn áp. 불법 단속(trấn áp bất hợp pháp). 교통 단속(kiểm soát giao thông)."},
-  {kr:"단체",en:"organization, group",vi:"nhóm, tập thể",type:"society",note:"단체(團體). 시민 단체(tổ chức dân sự). 단체 행동(hành động tập thể). 단체 여행(du lịch tập thể)."},
-  {kr:"대도시",en:"large city, metropolis",vi:"đô thị lớn, đại đô thị",type:"society",note:"대(大)+도시(都市). 대도시에 살다(sống ở đô thị lớn). 서울, 부산이 대표적 대도시. ↔ 농촌(nông thôn)."},
-  {kr:"대중",en:"the public, the masses",vi:"đại chúng, công chúng",type:"society",note:"대중(大衆). 대중 매체(phương tiện đại chúng). 대중문화(văn hóa đại chúng). 대중의 지지(sự ủng hộ của công chúng)."},
-  {kr:"대책",en:"countermeasure, policy response",vi:"biện pháp đối phó",type:"politics",note:"대책(對策). 대책을 마련하다(đưa ra biện pháp). 긴급 대책(biện pháp khẩn cấp). 대책 회의(họp đối phó)."},
-  {kr:"대통령",en:"president (of a country)",vi:"tổng thống",type:"politics",note:"대통령(大統領). 대통령 선거(bầu cử tổng thống). 대통령이 되다(trở thành tổng thống). 현직 대통령(tổng thống đương nhiệm)."},
-  {kr:"도난",en:"theft, robbery",vi:"trộm cắp, vụ trộm",type:"crime",note:"도난(盜難). 도난 사건(vụ trộm cắp). 도난을 당하다(bị mất trộm). 도난 방지(phòng chống trộm cắp)."},
-  {kr:"도둑",en:"thief, burglar",vi:"kẻ trộm",type:"crime",note:"도둑(盜). 도둑이 들다(có trộm vào). 도둑을 잡다(bắt kẻ trộm). 소매치기(kẻ móc túi)와 구별."},
-  {kr:"독립",en:"independence",vi:"độc lập",type:"politics",note:"독립(獨立). 독립하다=độc lập. 독립운동(phong trào độc lập). 광복절(ngày giải phóng). 독립 국가(quốc gia độc lập)."},
-  {kr:"동부",en:"eastern part, the east",vi:"miền đông",type:"society",note:"동부(東部). 동부 지역(khu vực miền đông). ↔ 서부(miền tây). 동부 해안(bờ biển phía đông)."},
-  {kr:"마약",en:"illegal drug, narcotic",vi:"ma túy, thuốc phiện",type:"crime",note:"마약(痲藥). 마약 밀수(buôn lậu ma túy). 마약 중독(nghiện ma túy). 마약 단속(trấn áp ma túy)."},
-  {kr:"민족",en:"ethnic group, nation",vi:"dân tộc, tộc người",type:"society",note:"민족(民族). 한민족(dân tộc Hàn). 민족 문화(văn hóa dân tộc). 단일 민족(dân tộc đơn nhất)."},
-  {kr:"반대",en:"opposition, opposite",vi:"đối lập, phản đối",type:"politics",note:"반대(反對). 반대하다=phản đối. 찬성 ↔ 반대(đồng ý ↔ phản đối). 반대 의견(ý kiến phản đối)."},
-  {kr:"벌금",en:"fine, penalty",vi:"tiền phạt",type:"law",note:"벌금(罰金). 벌금을 내다(nộp tiền phạt). 과속 벌금(phạt tốc độ). 벌금형(hình phạt tiền)."},
-  {kr:"범인",en:"criminal, culprit",vi:"kẻ phạm tội, tội phạm",type:"crime",note:"범인(犯人). 범인을 잡다(bắt tội phạm). 범인을 검거하다(bắt giữ tội phạm). 용의자와 범인 구별."},
-  {kr:"범죄",en:"crime",vi:"tội phạm, tội ác",type:"crime",note:"범죄(犯罪). 범죄를 저지르다(phạm tội). 범죄 예방(phòng ngừa tội phạm). 범죄율(tỷ lệ tội phạm)."},
-  {kr:"법",en:"law, rule",vi:"pháp luật, luật pháp",type:"law",note:"법(法). 법을 지키다(tuân thủ pháp luật). 법을 어기다(vi phạm pháp luật). 법 앞에 평등(bình đẳng trước pháp luật)."},
-  {kr:"법원",en:"court of law",vi:"tòa án",type:"law",note:"법원(法院). 법원에 가다(đến tòa án). 법원 판결(phán quyết tòa án). 대법원(Tòa án tối cao)."},
-  {kr:"보호",en:"protection",vi:"sự bảo vệ",type:"law",note:"보호(保護). 보호하다=bảo vệ. 아동 보호(bảo vệ trẻ em). 환경 보호(bảo vệ môi trường). 보호자(người bảo hộ)."},
-  {kr:"봉사",en:"volunteer service",vi:"tình nguyện, phục vụ",type:"society",note:"봉사(奉仕). 봉사하다=tình nguyện. 봉사 활동(hoạt động tình nguyện). 사회 봉사(phục vụ xã hội)."},
-  {kr:"봉사자",en:"volunteer",vi:"người tình nguyện",type:"people",note:"봉사(tình nguyện)+자(者). 봉사자를 모집하다(tuyển người tình nguyện). 자원봉사자와 동의어."},
-  {kr:"분리",en:"separation, segregation",vi:"sự tách biệt",type:"society",note:"분리(分離). 분리하다=tách biệt. 분리 수거(phân loại rác). 쓰레기 분리(phân loại rác thải)."},
-  {kr:"불법",en:"illegal, unlawful",vi:"bất hợp pháp",type:"law",note:"불법(不法). 불법 행위(hành vi bất hợp pháp). 불법 체류(cư trú bất hợp pháp). ↔ 합법(hợp pháp)."},
-  {kr:"사건",en:"incident, case, event",vi:"sự kiện, vụ việc",type:"crime",note:"사건(事件). 사건이 발생하다(vụ việc xảy ra). 살인 사건(vụ giết người). 사건을 해결하다(giải quyết vụ án)."},
-  {kr:"사망자",en:"the dead, fatality",vi:"người chết, nạn nhân",type:"society",note:"사망(死亡)+자(者). 사망자 수(số người chết). 사고 사망자(nạn nhân tử vong vụ tai nạn). 희생자와 유사."},
-  {kr:"사생활",en:"private life, privacy",vi:"đời tư, cuộc sống riêng",type:"society",note:"사생활(私生活). 사생활을 침해하다(xâm phạm đời tư). 사생활 보호(bảo vệ quyền riêng tư)."},
-  {kr:"사회",en:"society",vi:"xã hội",type:"society",note:"사회(社會). 사회 문제(vấn đề xã hội). 사회생활(cuộc sống xã hội). 사회적 책임(trách nhiệm xã hội)."},
-  {kr:"사회생활",en:"social life, life in society",vi:"cuộc sống xã hội",type:"society",note:"사회(xã hội)+생활(生活). 사회생활을 하다(sống trong xã hội). 원만한 사회생활(cuộc sống xã hội hòa thuận)."},
-  {kr:"살인",en:"murder, homicide",vi:"giết người, tội giết người",type:"crime",note:"살인(殺人). 살인을 저지르다(thực hiện hành vi giết người). 살인 사건(vụ án giết người). 살인자(kẻ giết người)."},
-  {kr:"상대",en:"other party, opponent",vi:"đối phương, đối tác",type:"society",note:"상대(相對). 상대방(đối phương). 상대를 존중하다(tôn trọng đối phương). 경기 상대(đối thủ thi đấu)."},
-  {kr:"상대방",en:"the other party",vi:"đối phương",type:"society",note:"상대(相對)+방(方). 상대방의 입장(lập trường đối phương). 상대방을 이해하다(hiểu đối phương)."},
-  {kr:"상대편",en:"the other side",vi:"bên kia, phe đối lập",type:"society",note:"상대(相對)+편(便,phe). 상대편 팀(đội đối lập). 상대편의 주장(lập luận của phe đối lập)."},
-  {kr:"새치기",en:"cutting in line, queue-jumping",vi:"chen hàng, chen ngang",type:"society",note:"새치기를 하다(chen hàng). 새치기 금지(cấm chen hàng). 공공장소에서 매너 위반."},
-  {kr:"생활수준",en:"standard of living",vi:"mức sống",type:"society",note:"생활(生活)+수준(水準). 생활수준이 높다/낮다(mức sống cao/thấp). 생활수준을 높이다(nâng cao mức sống)."},
-  {kr:"서부",en:"western part, the west",vi:"phía tây, miền tây",type:"society",note:"서부(西部). 서부 영화(phim cao bồi viễn tây). 서부 지역(vùng phía tây). ↔ 동부(miền đông)."},
-  {kr:"선진국",en:"developed country",vi:"nước phát triển",type:"politics",note:"선진(先進)+국(國). 선진국이 되다(trở thành nước phát triển). ↔ 개발도상국(nước đang phát triển)."},
-  {kr:"성명",en:"statement; full name",vi:"tuyên bố; họ tên",type:"politics",note:"두 가지: (1) 聲明 — tuyên bố (성명을 발표하다=ra tuyên bố), (2) 姓名 — họ và tên (성명을 적다=ghi họ tên)."},
-  {kr:"성별",en:"gender, sex",vi:"giới tính",type:"society",note:"성별(性別). 성별을 묻다(hỏi giới tính). 성별 차이(khác biệt giới tính). 성별 불문(không phân biệt giới tính)."},
-  {kr:"성인",en:"adult",vi:"người lớn, người trưởng thành",type:"people",note:"성인(成人). 성인이 되다(trở thành người lớn). 성인 교육(giáo dục người lớn). 미성년자 ↔ 성인."},
-  {kr:"세대",en:"generation",vi:"thế hệ",type:"society",note:"세대(世代). 세대 차이(khoảng cách thế hệ). MZ 세대(thế hệ MZ). 세대 간 갈등(xung đột thế hệ)."},
-  {kr:"세상",en:"world, society",vi:"thế giới, cuộc đời",type:"society",note:"세상(世上). 세상이 변하다(thế giới thay đổi). 세상을 떠나다(rời cõi đời=qua đời). 넓은 세상(thế giới rộng lớn)."},
-  {kr:"소년",en:"boy, young male",vi:"thiếu niên, cậu bé",type:"people",note:"소년(少年). 소년원(trại cải tạo thiếu niên). 소년 범죄(tội phạm vị thành niên). ↔ 소녀(thiếu nữ)."},
-  {kr:"소매치기",en:"pickpocket, pickpocketing",vi:"móc túi, trộm cắp",type:"crime",note:"소매(tay áo)+치기(kẻ đánh cắp). 소매치기를 당하다(bị móc túi). 관광지에서 주의하세요."},
-  {kr:"소문",en:"rumor, gossip",vi:"tin đồn",type:"society",note:"소문(所聞). 소문이 나다(tin đồn lan ra). 소문을 내다(tung tin đồn). 나쁜 소문(tin đồn xấu). 소문이 퍼지다."},
-  {kr:"수상",en:"prime minister",vi:"thủ tướng",type:"politics",note:"수상(首相). 국무총리와 유사. 수상을 선출하다(bầu thủ tướng). 현직 수상(thủ tướng đương nhiệm)."},
-  {kr:"신고",en:"report, declaration",vi:"báo cáo, tố cáo",type:"law",note:"신고(申告). 신고하다=báo cáo/tố cáo. 범죄를 신고하다(tố cáo tội phạm). 분실 신고(báo cáo mất đồ). 112 신고."},
-  {kr:"신도시",en:"new town, new city",vi:"đô thị mới",type:"society",note:"신(新)+도시(都市). 신도시 개발(phát triển đô thị mới). 수도권 신도시(đô thị mới vùng Seoul)."},
-  {kr:"신세대",en:"new generation",vi:"thế hệ mới",type:"people",note:"신(新)+세대(世代). 신세대의 가치관(giá trị quan của thế hệ mới). 젊은 신세대(thế hệ mới trẻ). ↔ 구세대."},
-  {kr:"실종",en:"disappearance, going missing",vi:"mất tích",type:"crime",note:"실종(失踪). 실종되다=mất tích. 실종 신고(báo cáo mất tích). 실종자를 찾다(tìm người mất tích)."},
-  {kr:"실종자",en:"missing person",vi:"người mất tích",type:"people",note:"실종(mất tích)+자(者). 실종자를 수색하다(tìm kiếm người mất tích). 실종자 신고 센터."},
-  {kr:"아동",en:"child (formal)",vi:"trẻ em, nhi đồng",type:"people",note:"아동(兒童). 아동 학대(bạo hành trẻ em). 아동 권리(quyền trẻ em). 아동 복지(phúc lợi trẻ em)."},
-  {kr:"양로원",en:"nursing home, retirement home",vi:"nhà dưỡng lão",type:"society",note:"양로(養老)+원(院). 양로원에 입소하다(vào nhà dưỡng lão). 고령화 사회에서 중요."},
-  {kr:"여성",en:"female, woman",vi:"phụ nữ, nữ giới",type:"people",note:"여성(女性). 여성 인권(quyền phụ nữ). 여성 취업(phụ nữ đi làm). 여성 할당제(chế độ quota phụ nữ). ↔ 남성."},
-  {kr:"외교관",en:"diplomat",vi:"nhà ngoại giao",type:"politics",note:"외교(外交)+관(官). 외교관이 되다(trở thành nhà ngoại giao). 외교관 면책특권(quyền miễn trừ ngoại giao)."},
-  {kr:"위반",en:"violation, breach",vi:"vi phạm",type:"law",note:"위반(違反). 위반하다=vi phạm. 교통 위반(vi phạm giao thông). 법 위반(vi phạm pháp luật). 위반자(người vi phạm)."},
-  {kr:"의무",en:"obligation, duty",vi:"nghĩa vụ, bổn phận",type:"law",note:"의무(義務). 의무를 다하다(thực hiện nghĩa vụ). 납세 의무(nghĩa vụ đóng thuế). 권리와 의무(quyền lợi và nghĩa vụ)."},
-  {kr:"의식주",en:"clothing, food, and housing",vi:"ăn mặc ở (3 nhu cầu cơ bản)",type:"society",note:"의(衣,mặc)+식(食,ăn)+주(住,ở). 인간의 기본 욕구. 의식주 해결(đáp ứng nhu cầu ăn mặc ở)."},
-  {kr:"이민",en:"immigration, emigration",vi:"di dân, nhập cư",type:"society",note:"이민(移民). 이민을 가다(di cư). 이민자(người nhập cư). 불법 이민(nhập cư bất hợp pháp)."},
-  {kr:"인간",en:"human being",vi:"con người, loài người",type:"people",note:"인간(人間). 인간 관계(quan hệ con người). 인간적(mang tính con người). 인간 존엄성(phẩm giá con người)."},
-  {kr:"인류",en:"humanity, humankind",vi:"nhân loại",type:"people",note:"인류(人類). 인류의 역사(lịch sử nhân loại). 인류 발전(sự phát triển của nhân loại). 인류를 위해(vì nhân loại)."},
-  {kr:"일반인",en:"ordinary person, member of the public",vi:"người bình thường",type:"people",note:"일반(一般)+인(人). 일반인에게 개방(mở cửa cho người bình thường). 전문가 ↔ 일반인."},
-  {kr:"장애",en:"disability, obstacle",vi:"khuyết tật, trở ngại",type:"society",note:"장애(障礙). 신체 장애(khuyết tật thể chất). 장애물(vật cản). 정신 장애(rối loạn tâm thần)."},
-  {kr:"장애인",en:"disabled person, person with disability",vi:"người khuyết tật",type:"people",note:"장애(khuyết tật)+인(人). 장애인 복지(phúc lợi người khuyết tật). 장애인 편의시설(tiện ích cho người khuyết tật)."},
-  {kr:"전국",en:"nationwide, whole country",vi:"cả nước, toàn quốc",type:"politics",note:"전국(全國). 전국적으로(trên toàn quốc). 전국 방방곡곡(khắp nơi trên cả nước). 전국 대회(giải đấu toàn quốc)."},
-  {kr:"전쟁",en:"war",vi:"chiến tranh",type:"politics",note:"전쟁(戰爭). 전쟁이 일어나다(chiến tranh nổ ra). 전쟁을 끝내다(chấm dứt chiến tranh). 한국 전쟁(chiến tranh Triều Tiên)."},
-  {kr:"젊은이",en:"young people, the youth",vi:"người trẻ, giới trẻ",type:"people",note:"젊다(trẻ)+은이(người). 요즘 젊은이(giới trẻ ngày nay). 젊은이들의 문화(văn hóa của giới trẻ)."},
-  {kr:"정부",en:"government",vi:"chính phủ",type:"politics",note:"정부(政府). 정부 정책(chính sách chính phủ). 정부를 비판하다(chỉ trích chính phủ). 현 정부(chính phủ hiện tại)."},
-  {kr:"정의",en:"justice, righteousness",vi:"công lý, chính nghĩa",type:"law",note:"정의(正義). 정의를 실현하다(thực hiện công lý). 사회 정의(công lý xã hội). 정의로운 사회(xã hội công bằng)."},
-  {kr:"정치",en:"politics",vi:"chính trị",type:"politics",note:"정치(政治). 정치에 관심이 있다(quan tâm đến chính trị). 정치 제도(chế độ chính trị). 정치가(chính khách)."},
-  {kr:"정치가",en:"politician, statesman",vi:"chính khách",type:"people",note:"정치(政治)+가(家). 훌륭한 정치가(chính khách giỏi). 정치인과 유사하나 더 존경의 뉘앙스."},
-  {kr:"정치인",en:"politician",vi:"chính trị gia",type:"people",note:"정치(政治)+인(人). 정치인이 되다(trở thành chính trị gia). 정치인의 공약(cam kết của chính trị gia)."},
-  {kr:"제도",en:"system, institution",vi:"chế độ, hệ thống",type:"politics",note:"제도(制度). 교육 제도(chế độ giáo dục). 제도를 개선하다(cải thiện chế độ). 민주주의 제도(thể chế dân chủ)."},
-  {kr:"주민",en:"resident, inhabitant",vi:"cư dân, người dân",type:"people",note:"주민(住民). 지역 주민(cư dân địa phương). 주민 등록증(thẻ cư dân). 주민 투표(bầu cử của cư dân)."},
-  {kr:"중부",en:"central part",vi:"miền trung",type:"society",note:"중부(中部). 중부 지방(miền trung). 한반도 중부(miền trung bán đảo Triều Tiên). 남부 ↔ 북부 ↔ 중부."},
-  {kr:"중심지",en:"center, hub",vi:"trung tâm, điểm trọng yếu",type:"society",note:"중심(中心)+지(地). 상업 중심지(trung tâm thương mại). 문화 중심지(trung tâm văn hóa). 교통 중심지."},
-  {kr:"중앙",en:"center, central",vi:"trung tâm, trung ương",type:"politics",note:"중앙(中央). 중앙 정부(chính phủ trung ương). 중앙 은행(ngân hàng trung ương). 서울 중앙(trung tâm Seoul)."},
-  {kr:"지역",en:"area, region, district",vi:"khu vực, vùng",type:"society",note:"지역(地域). 지역 사회(xã hội địa phương). 지역 특색(đặc trưng địa phương). 지역 주민(cư dân địa phương)."},
-  {kr:"지위",en:"status, position",vi:"địa vị, chức vị",type:"society",note:"지위(地位). 사회적 지위(địa vị xã hội). 지위가 높다/낮다(địa vị cao/thấp). 지위를 얻다(có được địa vị)."},
-  {kr:"질서",en:"order, discipline",vi:"trật tự",type:"society",note:"질서(秩序). 질서를 지키다(giữ trật tự). 사회 질서(trật tự xã hội). 공중 질서(trật tự công cộng)."},
-  {kr:"참여",en:"participation, involvement",vi:"sự tham gia",type:"society",note:"참여(參與). 참여하다=tham gia. 사회 참여(tham gia xã hội). 정치 참여(tham gia chính trị). 적극적 참여."},
-  {kr:"청년",en:"youth, young adult",vi:"thanh niên",type:"people",note:"청년(靑年). 청년 실업(thất nghiệp trong thanh niên). 청년 세대(thế hệ thanh niên). 청년층(tầng lớp thanh niên)."},
-  {kr:"청소년",en:"teenager, adolescent",vi:"thiếu niên, tuổi teen",type:"people",note:"청소년(靑少年). 청소년 보호법(luật bảo vệ thiếu niên). 청소년 문제(vấn đề tuổi teen). 미성년자와 유사."},
-  {kr:"총",en:"gun, firearm",vi:"súng",type:"crime",note:"총(銃). 총을 쏘다(bắn súng). 총기 사건(vụ súng). 총기 소지(sở hữu súng). 총기 규제(kiểm soát súng)."},
-  {kr:"출산율",en:"birth rate",vi:"tỷ lệ sinh",type:"society",note:"출산(出産)+율(率). 출산율이 낮다(tỷ lệ sinh thấp). 저출산 문제(vấn đề sinh đẻ thấp). 한국 저출산 심각."},
-  {kr:"출신",en:"origin, hometown, background",vi:"xuất thân, gốc gác",type:"society",note:"출신(出身). 출신이 어디예요?(gốc gác ở đâu?). 서울 출신(người gốc Seoul). 명문대 출신(xuất thân danh tiếng)."},
-  {kr:"통일",en:"unification",vi:"thống nhất",type:"politics",note:"통일(統一). 남북 통일(thống nhất Nam-Bắc). 통일을 이루다(thực hiện thống nhất). 통일 운동(phong trào thống nhất)."},
-  {kr:"투표",en:"vote, voting",vi:"bỏ phiếu, bầu cử",type:"politics",note:"투표(投票). 투표하다=bỏ phiếu. 투표율(tỷ lệ bỏ phiếu). 선거 투표(bầu cử). 투표권(quyền bầu cử)."},
-  {kr:"평등",en:"equality",vi:"bình đẳng",type:"law",note:"평등(平等). 평등하다=bình đẳng. 기회 평등(bình đẳng cơ hội). 법 앞의 평등(bình đẳng trước pháp luật). ↔ 차별."},
-  {kr:"평화",en:"peace",vi:"hòa bình",type:"politics",note:"평화(平和). 평화를 유지하다(duy trì hòa bình). 세계 평화(hòa bình thế giới). 평화 협정(hiệp định hòa bình)."},
-  {kr:"폭발",en:"explosion, burst",vi:"vụ nổ, bùng phát",type:"crime",note:"폭발(爆發). 폭발이 일어나다(vụ nổ xảy ra). 폭발물(vật liệu nổ). 감정 폭발(bùng nổ cảm xúc—nghĩa bóng)."},
-  {kr:"피해",en:"damage, harm, loss",vi:"thiệt hại, tổn hại",type:"society",note:"피해(被害). 피해를 입다(chịu thiệt hại). 피해를 주다(gây thiệt hại). 피해액(số tiền thiệt hại)."},
-  {kr:"피해자",en:"victim",vi:"nạn nhân",type:"people",note:"피해(thiệt hại)+자(者). 범죄 피해자(nạn nhân tội phạm). 피해자 지원(hỗ trợ nạn nhân). 사고 피해자(nạn nhân tai nạn)."},
-  {kr:"현대인",en:"modern person, people of today",vi:"người hiện đại",type:"people",note:"현대(現代)+인(人). 현대인의 스트레스(stress của người hiện đại). 현대인의 생활 방식(lối sống hiện đại)."},
-  {kr:"혼잡",en:"congestion, crowding, chaos",vi:"hỗn loạn, tắc nghẽn",type:"society",note:"혼잡(混雜). 혼잡하다=hỗn loạn/đông đúc. 교통 혼잡(tắc nghẽn giao thông). 혼잡한 도시(đô thị đông đúc)."},
-  {kr:"화재",en:"fire, blaze",vi:"hỏa hoạn, đám cháy",type:"crime",note:"화재(火災). 화재가 발생하다(xảy ra hỏa hoạn). 화재를 진압하다(dập tắt đám cháy). 화재 신고(báo cháy 119)."},
-  {kr:"후보",en:"candidate",vi:"ứng cử viên, người ứng tuyển",type:"politics",note:"후보(候補). 대통령 후보(ứng cử viên tổng thống). 후보를 지지하다(ủng hộ ứng cử viên). 후보 등록(đăng ký ứng cử)."},
-  {kr:"희생자",en:"victim, casualty, sacrifice",vi:"nạn nhân, người hy sinh",type:"people",note:"희생(犧牲)+자(者). 전쟁 희생자(nạn nhân chiến tranh). 사고 희생자(nạn nhân tai nạn). 피해자보다 더 비극적 뉘앙스."},
-];
-let currentFilter='all';
-function renderTable(data){
-  const tbody=document.getElementById('vocabBody');
-  tbody.innerHTML='';
-  data.forEach((item,i)=>{
-    let t;
-    if(item.type==='society')t=`<span class="tag tag-society">Xã hội</span>`;
-    else if(item.type==='politics')t=`<span class="tag tag-politics">Chính trị</span>`;
-    else if(item.type==='law')t=`<span class="tag tag-law">Pháp luật</span>`;
-    else if(item.type==='crime')t=`<span class="tag tag-crime">Tội phạm</span>`;
-    else t=`<span class="tag tag-people">Con người</span>`;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent=`${data.length} / ${vocab.length} từ`;
-}
-function filterAndSearch(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const result=vocab.filter(item=>{
-    const mf=currentFilter==='all'||item.type===currentFilter;
-    const ms=!q||item.kr.includes(q)||item.en.toLowerCase().includes(q)||item.vi.toLowerCase().includes(q)||item.note.toLowerCase().includes(q);
-    return mf&&ms;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display=result.length===0?'block':'none';
-  document.getElementById('vocabTable').style.display=result.length===0?'none':'';
-}
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter=btn.dataset.filter;
-    filterAndSearch();
-  });
-});
-document.getElementById('searchInput').addEventListener('input',filterAndSearch);
-document.getElementById('totalCount').textContent=vocab.length+' từ';
-renderTable(vocab);
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Xã hội & Chính trị (Nâng cao)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f3f3f8;
+        --card: #fff;
+        --accent: #2a2a7a;
+        --text: #0a0a28;
+        --sub: #6a6a9a;
+        --border: #d0d0e8;
+        --tag-society: #e0e8fa;
+        --tag-law: #fce8e8;
+        --tag-politics: #fef0d8;
+        --tag-people: #e8f8e8;
+        --tag-crime: #f8e8f8;
+        --highlight: #eeeeff;
+        --row-alt: #f8f8fd;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--text);
+        color: #f3f3f8;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "사회";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #9a9aba;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f3f3f8;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 145px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 185px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-society {
+        background: var(--tag-society);
+        color: #0a0a60;
+      }
+      .tag-law {
+        background: var(--tag-law);
+        color: #7a0a0a;
+      }
+      .tag-politics {
+        background: var(--tag-politics);
+        color: #5a3000;
+      }
+      .tag-people {
+        background: var(--tag-people);
+        color: #0a4a20;
+      }
+      .tag-crime {
+        background: var(--tag-crime);
+        color: #5a0a5a;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>사회 & 정치 (심화) — Xã hội & Chính trị (Nâng cao)</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Xã hội nâng cao · Chủ đề TOPIK II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="society">Xã hội</button>
+      <button class="filter-btn" data-filter="politics">
+        Chính trị/Nhà nước
+      </button>
+      <button class="filter-btn" data-filter="law">Pháp luật</button>
+      <button class="filter-btn" data-filter="crime">Tội phạm</button>
+      <button class="filter-btn" data-filter="people">
+        Con người/Nhóm người
+      </button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú &amp; Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Xã hội &amp; Chính trị (Nâng cao)
+    </div>
+    <script>
+      const vocab = [
+        {
+          kr: "가난",
+          en: "poverty",
+          vi: "nghèo khó, sự nghèo đói",
+          type: "society",
+          note: "가난(家難). 가난하다=nghèo. 가난을 극복하다(vượt qua nghèo khó). 빈곤과 유사. ↔ 부유(giàu có).",
+        },
+        {
+          kr: "개방",
+          en: "opening, opening to the public",
+          vi: "mở cửa, khai thông",
+          type: "politics",
+          note: "개방(開放). 개방하다=mở cửa. 시장 개방(mở cửa thị trường). 개방 정책(chính sách mở cửa). ↔ 폐쇄.",
+        },
+        {
+          kr: "경고",
+          en: "warning, caution",
+          vi: "cảnh báo",
+          type: "law",
+          note: "경고(警告). 경고하다=cảnh báo. 경고문(thông báo cảnh báo). 경고를 무시하다(bỏ qua cảnh báo).",
+        },
+        {
+          kr: "계층",
+          en: "class, stratum, hierarchy",
+          vi: "tầng lớp, cấp bậc",
+          type: "society",
+          note: "계층(階層). 사회 계층(tầng lớp xã hội). 중산층(tầng lớp trung lưu). 계층 간 갈등(xung đột giữa các tầng lớp).",
+        },
+        {
+          kr: "고아원",
+          en: "orphanage",
+          vi: "trại trẻ mồ côi",
+          type: "society",
+          note: "고아(孤兒,trẻ mồ côi)+원(院). 고아원에서 자라다(lớn lên ở trại mồ côi). 고아원을 운영하다.",
+        },
+        {
+          kr: "공동",
+          en: "joint, shared, communal",
+          vi: "chung, cộng đồng",
+          type: "society",
+          note: "공동(共同). 공동 작업(công việc chung). 공동체(cộng đồng). 공동 책임(trách nhiệm chung).",
+        },
+        {
+          kr: "공동생활",
+          en: "community life, living together",
+          vi: "cuộc sống cộng đồng",
+          type: "society",
+          note: "공동(chung)+생활(生活). 공동생활을 하다(sống chung). 기숙사 공동생활(cuộc sống KTX chung).",
+        },
+        {
+          kr: "공통점",
+          en: "common point, similarity",
+          vi: "điểm chung",
+          type: "society",
+          note: "공통(共通)+점(點). 공통점을 찾다(tìm điểm chung). 공통점이 있다/없다. ↔ 차이점(điểm khác biệt).",
+        },
+        {
+          kr: "교포",
+          en: "overseas Korean, diaspora",
+          vi: "kiều bào",
+          type: "people",
+          note: "교포(僑胞). 재미 교포(kiều bào ở Mỹ). 교포 2세(thế hệ thứ 2 kiều bào). 재외 동포와 유사.",
+        },
+        {
+          kr: "구조대",
+          en: "rescue team",
+          vi: "đội cứu hộ",
+          type: "society",
+          note: "구조(救助)+대(隊). 구조대를 보내다(cử đội cứu hộ). 소방 구조대(đội cứu hộ cứu hỏa). 119 구조대.",
+        },
+        {
+          kr: "국가",
+          en: "nation, state, country",
+          vi: "quốc gia, đất nước",
+          type: "politics",
+          note: "국가(國家). 국가를 운영하다(vận hành quốc gia). 국가 안보(an ninh quốc gia). 선진 국가(quốc gia phát triển).",
+        },
+        {
+          kr: "국민",
+          en: "citizen, national, people",
+          vi: "công dân, nhân dân",
+          type: "politics",
+          note: "국민(國民). 국민의 의무(nghĩa vụ công dân). 국민 투표(trưng cầu dân ý). 국민을 대표하다(đại diện nhân dân).",
+        },
+        {
+          kr: "국외",
+          en: "overseas, abroad",
+          vi: "ở nước ngoài",
+          type: "society",
+          note: "국외(國外). 국외에 나가다(ra nước ngoài). 국외 거주자(người sinh sống ở nước ngoài). ↔ 국내.",
+        },
+        {
+          kr: "군대",
+          en: "military, army",
+          vi: "quân đội",
+          type: "politics",
+          note: "군대(軍隊). 군대에 가다(đi nghĩa vụ quân sự). 군대를 제대하다(xuất ngũ). 한국 남성 의무 복무.",
+        },
+        {
+          kr: "그룹",
+          en: "group",
+          vi: "nhóm",
+          type: "society",
+          note: "group에서. 그룹을 이루다(hình thành nhóm). 소그룹(nhóm nhỏ). 연구 그룹(nhóm nghiên cứu).",
+        },
+        {
+          kr: "금지",
+          en: "prohibition, ban",
+          vi: "cấm, lệnh cấm",
+          type: "law",
+          note: "금지(禁止). 금지하다=cấm. 출입 금지(cấm ra vào). 흡연 금지(cấm hút thuốc). 금지 구역(khu vực cấm).",
+        },
+        {
+          kr: "기부",
+          en: "donation, contribution",
+          vi: "quyên góp, từ thiện",
+          type: "society",
+          note: "기부(寄附). 기부하다=quyên góp. 기부금(tiền quyên góp). 자선 기부(từ thiện). 기부 문화(văn hóa từ thiện).",
+        },
+        {
+          kr: "남녀노소",
+          en: "people of all ages and genders",
+          vi: "nam phụ lão ấu, mọi lứa tuổi",
+          type: "people",
+          note: "남(男)+녀(女)+노(老)+소(少). 남녀노소 누구나(tất cả mọi người không phân biệt). 모든 세대를 포함.",
+        },
+        {
+          kr: "남녀평등",
+          en: "gender equality",
+          vi: "bình đẳng giới",
+          type: "society",
+          note: "남녀(男女)+평등(平等). 남녀평등을 실현하다(thực hiện bình đẳng giới). 성평등과 유사.",
+        },
+        {
+          kr: "남부",
+          en: "southern part, the south",
+          vi: "phía nam, miền nam",
+          type: "society",
+          note: "남부(南部). 한국 남부(miền nam Hàn Quốc). 남부 지방(vùng phía nam). ↔ 북부(miền bắc).",
+        },
+        {
+          kr: "남성",
+          en: "male, man",
+          vi: "nam giới",
+          type: "people",
+          note: "남성(男性). 남성 직원(nhân viên nam). 남성 화장품(mỹ phẩm nam). ↔ 여성(nữ giới). 남성성(nam tính).",
+        },
+        {
+          kr: "노약자",
+          en: "elderly and weak persons",
+          vi: "người già và người tàn tật",
+          type: "people",
+          note: "노(老,già)+약자(弱者,người yếu). 노약자석(ghế dành cho người già và yếu thế). 노약자 우선.",
+        },
+        {
+          kr: "노인",
+          en: "elderly person, senior",
+          vi: "người cao tuổi, người già",
+          type: "people",
+          note: "노인(老人). 노인 복지(phúc lợi người cao tuổi). 노인 인구(dân số cao tuổi). 고령화 사회.",
+        },
+        {
+          kr: "노처녀",
+          en: "unmarried older woman",
+          vi: "gái già chưa lấy chồng",
+          type: "people",
+          note: "노(老,già)+처녀(cô gái). 결혼 적령기를 넘긴 미혼 여성. 구어체, 주의해서 사용. ↔ 노총각.",
+        },
+        {
+          kr: "노총각",
+          en: "unmarried older man",
+          vi: "trai già chưa lấy vợ",
+          type: "people",
+          note: "노(老)+총각(trai chưa vợ). 결혼 안 한 중년 남성. 노처녀와 쌍. 구어체, 주의해서 사용.",
+        },
+        {
+          kr: "농민",
+          en: "farmer, peasant",
+          vi: "nông dân",
+          type: "people",
+          note: "농민(農民). 농민 운동(phong trào nông dân). 농민 생활(cuộc sống nông dân). 농부와 유사하나 더 집단적.",
+        },
+        {
+          kr: "농부",
+          en: "farmer",
+          vi: "người nông dân",
+          type: "people",
+          note: "농부(農夫). 농부가 밭을 갈다(người nông dân cày ruộng). 농민과 유사하나 개인적 뉘앙스.",
+        },
+        {
+          kr: "단속",
+          en: "crackdown, regulation",
+          vi: "kiểm soát, trấn áp",
+          type: "law",
+          note: "단속(團束). 단속하다=trấn áp. 불법 단속(trấn áp bất hợp pháp). 교통 단속(kiểm soát giao thông).",
+        },
+        {
+          kr: "단체",
+          en: "organization, group",
+          vi: "nhóm, tập thể",
+          type: "society",
+          note: "단체(團體). 시민 단체(tổ chức dân sự). 단체 행동(hành động tập thể). 단체 여행(du lịch tập thể).",
+        },
+        {
+          kr: "대도시",
+          en: "large city, metropolis",
+          vi: "đô thị lớn, đại đô thị",
+          type: "society",
+          note: "대(大)+도시(都市). 대도시에 살다(sống ở đô thị lớn). 서울, 부산이 대표적 대도시. ↔ 농촌(nông thôn).",
+        },
+        {
+          kr: "대중",
+          en: "the public, the masses",
+          vi: "đại chúng, công chúng",
+          type: "society",
+          note: "대중(大衆). 대중 매체(phương tiện đại chúng). 대중문화(văn hóa đại chúng). 대중의 지지(sự ủng hộ của công chúng).",
+        },
+        {
+          kr: "대책",
+          en: "countermeasure, policy response",
+          vi: "biện pháp đối phó",
+          type: "politics",
+          note: "대책(對策). 대책을 마련하다(đưa ra biện pháp). 긴급 대책(biện pháp khẩn cấp). 대책 회의(họp đối phó).",
+        },
+        {
+          kr: "대통령",
+          en: "president (of a country)",
+          vi: "tổng thống",
+          type: "politics",
+          note: "대통령(大統領). 대통령 선거(bầu cử tổng thống). 대통령이 되다(trở thành tổng thống). 현직 대통령(tổng thống đương nhiệm).",
+        },
+        {
+          kr: "도난",
+          en: "theft, robbery",
+          vi: "trộm cắp, vụ trộm",
+          type: "crime",
+          note: "도난(盜難). 도난 사건(vụ trộm cắp). 도난을 당하다(bị mất trộm). 도난 방지(phòng chống trộm cắp).",
+        },
+        {
+          kr: "도둑",
+          en: "thief, burglar",
+          vi: "kẻ trộm",
+          type: "crime",
+          note: "도둑(盜). 도둑이 들다(có trộm vào). 도둑을 잡다(bắt kẻ trộm). 소매치기(kẻ móc túi)와 구별.",
+        },
+        {
+          kr: "독립",
+          en: "independence",
+          vi: "độc lập",
+          type: "politics",
+          note: "독립(獨立). 독립하다=độc lập. 독립운동(phong trào độc lập). 광복절(ngày giải phóng). 독립 국가(quốc gia độc lập).",
+        },
+        {
+          kr: "동부",
+          en: "eastern part, the east",
+          vi: "miền đông",
+          type: "society",
+          note: "동부(東部). 동부 지역(khu vực miền đông). ↔ 서부(miền tây). 동부 해안(bờ biển phía đông).",
+        },
+        {
+          kr: "마약",
+          en: "illegal drug, narcotic",
+          vi: "ma túy, thuốc phiện",
+          type: "crime",
+          note: "마약(痲藥). 마약 밀수(buôn lậu ma túy). 마약 중독(nghiện ma túy). 마약 단속(trấn áp ma túy).",
+        },
+        {
+          kr: "민족",
+          en: "ethnic group, nation",
+          vi: "dân tộc, tộc người",
+          type: "society",
+          note: "민족(民族). 한민족(dân tộc Hàn). 민족 문화(văn hóa dân tộc). 단일 민족(dân tộc đơn nhất).",
+        },
+        {
+          kr: "반대",
+          en: "opposition, opposite",
+          vi: "đối lập, phản đối",
+          type: "politics",
+          note: "반대(反對). 반대하다=phản đối. 찬성 ↔ 반대(đồng ý ↔ phản đối). 반대 의견(ý kiến phản đối).",
+        },
+        {
+          kr: "벌금",
+          en: "fine, penalty",
+          vi: "tiền phạt",
+          type: "law",
+          note: "벌금(罰金). 벌금을 내다(nộp tiền phạt). 과속 벌금(phạt tốc độ). 벌금형(hình phạt tiền).",
+        },
+        {
+          kr: "범인",
+          en: "criminal, culprit",
+          vi: "kẻ phạm tội, tội phạm",
+          type: "crime",
+          note: "범인(犯人). 범인을 잡다(bắt tội phạm). 범인을 검거하다(bắt giữ tội phạm). 용의자와 범인 구별.",
+        },
+        {
+          kr: "범죄",
+          en: "crime",
+          vi: "tội phạm, tội ác",
+          type: "crime",
+          note: "범죄(犯罪). 범죄를 저지르다(phạm tội). 범죄 예방(phòng ngừa tội phạm). 범죄율(tỷ lệ tội phạm).",
+        },
+        {
+          kr: "법",
+          en: "law, rule",
+          vi: "pháp luật, luật pháp",
+          type: "law",
+          note: "법(法). 법을 지키다(tuân thủ pháp luật). 법을 어기다(vi phạm pháp luật). 법 앞에 평등(bình đẳng trước pháp luật).",
+        },
+        {
+          kr: "법원",
+          en: "court of law",
+          vi: "tòa án",
+          type: "law",
+          note: "법원(法院). 법원에 가다(đến tòa án). 법원 판결(phán quyết tòa án). 대법원(Tòa án tối cao).",
+        },
+        {
+          kr: "보호",
+          en: "protection",
+          vi: "sự bảo vệ",
+          type: "law",
+          note: "보호(保護). 보호하다=bảo vệ. 아동 보호(bảo vệ trẻ em). 환경 보호(bảo vệ môi trường). 보호자(người bảo hộ).",
+        },
+        {
+          kr: "봉사",
+          en: "volunteer service",
+          vi: "tình nguyện, phục vụ",
+          type: "society",
+          note: "봉사(奉仕). 봉사하다=tình nguyện. 봉사 활동(hoạt động tình nguyện). 사회 봉사(phục vụ xã hội).",
+        },
+        {
+          kr: "봉사자",
+          en: "volunteer",
+          vi: "người tình nguyện",
+          type: "people",
+          note: "봉사(tình nguyện)+자(者). 봉사자를 모집하다(tuyển người tình nguyện). 자원봉사자와 동의어.",
+        },
+        {
+          kr: "분리",
+          en: "separation, segregation",
+          vi: "sự tách biệt",
+          type: "society",
+          note: "분리(分離). 분리하다=tách biệt. 분리 수거(phân loại rác). 쓰레기 분리(phân loại rác thải).",
+        },
+        {
+          kr: "불법",
+          en: "illegal, unlawful",
+          vi: "bất hợp pháp",
+          type: "law",
+          note: "불법(不法). 불법 행위(hành vi bất hợp pháp). 불법 체류(cư trú bất hợp pháp). ↔ 합법(hợp pháp).",
+        },
+        {
+          kr: "사건",
+          en: "incident, case, event",
+          vi: "sự kiện, vụ việc",
+          type: "crime",
+          note: "사건(事件). 사건이 발생하다(vụ việc xảy ra). 살인 사건(vụ giết người). 사건을 해결하다(giải quyết vụ án).",
+        },
+        {
+          kr: "사망자",
+          en: "the dead, fatality",
+          vi: "người chết, nạn nhân",
+          type: "society",
+          note: "사망(死亡)+자(者). 사망자 수(số người chết). 사고 사망자(nạn nhân tử vong vụ tai nạn). 희생자와 유사.",
+        },
+        {
+          kr: "사생활",
+          en: "private life, privacy",
+          vi: "đời tư, cuộc sống riêng",
+          type: "society",
+          note: "사생활(私生活). 사생활을 침해하다(xâm phạm đời tư). 사생활 보호(bảo vệ quyền riêng tư).",
+        },
+        {
+          kr: "사회",
+          en: "society",
+          vi: "xã hội",
+          type: "society",
+          note: "사회(社會). 사회 문제(vấn đề xã hội). 사회생활(cuộc sống xã hội). 사회적 책임(trách nhiệm xã hội).",
+        },
+        {
+          kr: "사회생활",
+          en: "social life, life in society",
+          vi: "cuộc sống xã hội",
+          type: "society",
+          note: "사회(xã hội)+생활(生活). 사회생활을 하다(sống trong xã hội). 원만한 사회생활(cuộc sống xã hội hòa thuận).",
+        },
+        {
+          kr: "살인",
+          en: "murder, homicide",
+          vi: "giết người, tội giết người",
+          type: "crime",
+          note: "살인(殺人). 살인을 저지르다(thực hiện hành vi giết người). 살인 사건(vụ án giết người). 살인자(kẻ giết người).",
+        },
+        {
+          kr: "상대",
+          en: "other party, opponent",
+          vi: "đối phương, đối tác",
+          type: "society",
+          note: "상대(相對). 상대방(đối phương). 상대를 존중하다(tôn trọng đối phương). 경기 상대(đối thủ thi đấu).",
+        },
+        {
+          kr: "상대방",
+          en: "the other party",
+          vi: "đối phương",
+          type: "society",
+          note: "상대(相對)+방(方). 상대방의 입장(lập trường đối phương). 상대방을 이해하다(hiểu đối phương).",
+        },
+        {
+          kr: "상대편",
+          en: "the other side",
+          vi: "bên kia, phe đối lập",
+          type: "society",
+          note: "상대(相對)+편(便,phe). 상대편 팀(đội đối lập). 상대편의 주장(lập luận của phe đối lập).",
+        },
+        {
+          kr: "새치기",
+          en: "cutting in line, queue-jumping",
+          vi: "chen hàng, chen ngang",
+          type: "society",
+          note: "새치기를 하다(chen hàng). 새치기 금지(cấm chen hàng). 공공장소에서 매너 위반.",
+        },
+        {
+          kr: "생활수준",
+          en: "standard of living",
+          vi: "mức sống",
+          type: "society",
+          note: "생활(生活)+수준(水準). 생활수준이 높다/낮다(mức sống cao/thấp). 생활수준을 높이다(nâng cao mức sống).",
+        },
+        {
+          kr: "서부",
+          en: "western part, the west",
+          vi: "phía tây, miền tây",
+          type: "society",
+          note: "서부(西部). 서부 영화(phim cao bồi viễn tây). 서부 지역(vùng phía tây). ↔ 동부(miền đông).",
+        },
+        {
+          kr: "선진국",
+          en: "developed country",
+          vi: "nước phát triển",
+          type: "politics",
+          note: "선진(先進)+국(國). 선진국이 되다(trở thành nước phát triển). ↔ 개발도상국(nước đang phát triển).",
+        },
+        {
+          kr: "성명",
+          en: "statement; full name",
+          vi: "tuyên bố; họ tên",
+          type: "politics",
+          note: "두 가지: (1) 聲明 — tuyên bố (성명을 발표하다=ra tuyên bố), (2) 姓名 — họ và tên (성명을 적다=ghi họ tên).",
+        },
+        {
+          kr: "성별",
+          en: "gender, sex",
+          vi: "giới tính",
+          type: "society",
+          note: "성별(性別). 성별을 묻다(hỏi giới tính). 성별 차이(khác biệt giới tính). 성별 불문(không phân biệt giới tính).",
+        },
+        {
+          kr: "성인",
+          en: "adult",
+          vi: "người lớn, người trưởng thành",
+          type: "people",
+          note: "성인(成人). 성인이 되다(trở thành người lớn). 성인 교육(giáo dục người lớn). 미성년자 ↔ 성인.",
+        },
+        {
+          kr: "세대",
+          en: "generation",
+          vi: "thế hệ",
+          type: "society",
+          note: "세대(世代). 세대 차이(khoảng cách thế hệ). MZ 세대(thế hệ MZ). 세대 간 갈등(xung đột thế hệ).",
+        },
+        {
+          kr: "세상",
+          en: "world, society",
+          vi: "thế giới, cuộc đời",
+          type: "society",
+          note: "세상(世上). 세상이 변하다(thế giới thay đổi). 세상을 떠나다(rời cõi đời=qua đời). 넓은 세상(thế giới rộng lớn).",
+        },
+        {
+          kr: "소년",
+          en: "boy, young male",
+          vi: "thiếu niên, cậu bé",
+          type: "people",
+          note: "소년(少年). 소년원(trại cải tạo thiếu niên). 소년 범죄(tội phạm vị thành niên). ↔ 소녀(thiếu nữ).",
+        },
+        {
+          kr: "소매치기",
+          en: "pickpocket, pickpocketing",
+          vi: "móc túi, trộm cắp",
+          type: "crime",
+          note: "소매(tay áo)+치기(kẻ đánh cắp). 소매치기를 당하다(bị móc túi). 관광지에서 주의하세요.",
+        },
+        {
+          kr: "소문",
+          en: "rumor, gossip",
+          vi: "tin đồn",
+          type: "society",
+          note: "소문(所聞). 소문이 나다(tin đồn lan ra). 소문을 내다(tung tin đồn). 나쁜 소문(tin đồn xấu). 소문이 퍼지다.",
+        },
+        {
+          kr: "수상",
+          en: "prime minister",
+          vi: "thủ tướng",
+          type: "politics",
+          note: "수상(首相). 국무총리와 유사. 수상을 선출하다(bầu thủ tướng). 현직 수상(thủ tướng đương nhiệm).",
+        },
+        {
+          kr: "신고",
+          en: "report, declaration",
+          vi: "báo cáo, tố cáo",
+          type: "law",
+          note: "신고(申告). 신고하다=báo cáo/tố cáo. 범죄를 신고하다(tố cáo tội phạm). 분실 신고(báo cáo mất đồ). 112 신고.",
+        },
+        {
+          kr: "신도시",
+          en: "new town, new city",
+          vi: "đô thị mới",
+          type: "society",
+          note: "신(新)+도시(都市). 신도시 개발(phát triển đô thị mới). 수도권 신도시(đô thị mới vùng Seoul).",
+        },
+        {
+          kr: "신세대",
+          en: "new generation",
+          vi: "thế hệ mới",
+          type: "people",
+          note: "신(新)+세대(世代). 신세대의 가치관(giá trị quan của thế hệ mới). 젊은 신세대(thế hệ mới trẻ). ↔ 구세대.",
+        },
+        {
+          kr: "실종",
+          en: "disappearance, going missing",
+          vi: "mất tích",
+          type: "crime",
+          note: "실종(失踪). 실종되다=mất tích. 실종 신고(báo cáo mất tích). 실종자를 찾다(tìm người mất tích).",
+        },
+        {
+          kr: "실종자",
+          en: "missing person",
+          vi: "người mất tích",
+          type: "people",
+          note: "실종(mất tích)+자(者). 실종자를 수색하다(tìm kiếm người mất tích). 실종자 신고 센터.",
+        },
+        {
+          kr: "아동",
+          en: "child (formal)",
+          vi: "trẻ em, nhi đồng",
+          type: "people",
+          note: "아동(兒童). 아동 학대(bạo hành trẻ em). 아동 권리(quyền trẻ em). 아동 복지(phúc lợi trẻ em).",
+        },
+        {
+          kr: "양로원",
+          en: "nursing home, retirement home",
+          vi: "nhà dưỡng lão",
+          type: "society",
+          note: "양로(養老)+원(院). 양로원에 입소하다(vào nhà dưỡng lão). 고령화 사회에서 중요.",
+        },
+        {
+          kr: "여성",
+          en: "female, woman",
+          vi: "phụ nữ, nữ giới",
+          type: "people",
+          note: "여성(女性). 여성 인권(quyền phụ nữ). 여성 취업(phụ nữ đi làm). 여성 할당제(chế độ quota phụ nữ). ↔ 남성.",
+        },
+        {
+          kr: "외교관",
+          en: "diplomat",
+          vi: "nhà ngoại giao",
+          type: "politics",
+          note: "외교(外交)+관(官). 외교관이 되다(trở thành nhà ngoại giao). 외교관 면책특권(quyền miễn trừ ngoại giao).",
+        },
+        {
+          kr: "위반",
+          en: "violation, breach",
+          vi: "vi phạm",
+          type: "law",
+          note: "위반(違反). 위반하다=vi phạm. 교통 위반(vi phạm giao thông). 법 위반(vi phạm pháp luật). 위반자(người vi phạm).",
+        },
+        {
+          kr: "의무",
+          en: "obligation, duty",
+          vi: "nghĩa vụ, bổn phận",
+          type: "law",
+          note: "의무(義務). 의무를 다하다(thực hiện nghĩa vụ). 납세 의무(nghĩa vụ đóng thuế). 권리와 의무(quyền lợi và nghĩa vụ).",
+        },
+        {
+          kr: "의식주",
+          en: "clothing, food, and housing",
+          vi: "ăn mặc ở (3 nhu cầu cơ bản)",
+          type: "society",
+          note: "의(衣,mặc)+식(食,ăn)+주(住,ở). 인간의 기본 욕구. 의식주 해결(đáp ứng nhu cầu ăn mặc ở).",
+        },
+        {
+          kr: "이민",
+          en: "immigration, emigration",
+          vi: "di dân, nhập cư",
+          type: "society",
+          note: "이민(移民). 이민을 가다(di cư). 이민자(người nhập cư). 불법 이민(nhập cư bất hợp pháp).",
+        },
+        {
+          kr: "인간",
+          en: "human being",
+          vi: "con người, loài người",
+          type: "people",
+          note: "인간(人間). 인간 관계(quan hệ con người). 인간적(mang tính con người). 인간 존엄성(phẩm giá con người).",
+        },
+        {
+          kr: "인류",
+          en: "humanity, humankind",
+          vi: "nhân loại",
+          type: "people",
+          note: "인류(人類). 인류의 역사(lịch sử nhân loại). 인류 발전(sự phát triển của nhân loại). 인류를 위해(vì nhân loại).",
+        },
+        {
+          kr: "일반인",
+          en: "ordinary person, member of the public",
+          vi: "người bình thường",
+          type: "people",
+          note: "일반(一般)+인(人). 일반인에게 개방(mở cửa cho người bình thường). 전문가 ↔ 일반인.",
+        },
+        {
+          kr: "장애",
+          en: "disability, obstacle",
+          vi: "khuyết tật, trở ngại",
+          type: "society",
+          note: "장애(障礙). 신체 장애(khuyết tật thể chất). 장애물(vật cản). 정신 장애(rối loạn tâm thần).",
+        },
+        {
+          kr: "장애인",
+          en: "disabled person, person with disability",
+          vi: "người khuyết tật",
+          type: "people",
+          note: "장애(khuyết tật)+인(人). 장애인 복지(phúc lợi người khuyết tật). 장애인 편의시설(tiện ích cho người khuyết tật).",
+        },
+        {
+          kr: "전국",
+          en: "nationwide, whole country",
+          vi: "cả nước, toàn quốc",
+          type: "politics",
+          note: "전국(全國). 전국적으로(trên toàn quốc). 전국 방방곡곡(khắp nơi trên cả nước). 전국 대회(giải đấu toàn quốc).",
+        },
+        {
+          kr: "전쟁",
+          en: "war",
+          vi: "chiến tranh",
+          type: "politics",
+          note: "전쟁(戰爭). 전쟁이 일어나다(chiến tranh nổ ra). 전쟁을 끝내다(chấm dứt chiến tranh). 한국 전쟁(chiến tranh Triều Tiên).",
+        },
+        {
+          kr: "젊은이",
+          en: "young people, the youth",
+          vi: "người trẻ, giới trẻ",
+          type: "people",
+          note: "젊다(trẻ)+은이(người). 요즘 젊은이(giới trẻ ngày nay). 젊은이들의 문화(văn hóa của giới trẻ).",
+        },
+        {
+          kr: "정부",
+          en: "government",
+          vi: "chính phủ",
+          type: "politics",
+          note: "정부(政府). 정부 정책(chính sách chính phủ). 정부를 비판하다(chỉ trích chính phủ). 현 정부(chính phủ hiện tại).",
+        },
+        {
+          kr: "정의",
+          en: "justice, righteousness",
+          vi: "công lý, chính nghĩa",
+          type: "law",
+          note: "정의(正義). 정의를 실현하다(thực hiện công lý). 사회 정의(công lý xã hội). 정의로운 사회(xã hội công bằng).",
+        },
+        {
+          kr: "정치",
+          en: "politics",
+          vi: "chính trị",
+          type: "politics",
+          note: "정치(政治). 정치에 관심이 있다(quan tâm đến chính trị). 정치 제도(chế độ chính trị). 정치가(chính khách).",
+        },
+        {
+          kr: "정치가",
+          en: "politician, statesman",
+          vi: "chính khách",
+          type: "people",
+          note: "정치(政治)+가(家). 훌륭한 정치가(chính khách giỏi). 정치인과 유사하나 더 존경의 뉘앙스.",
+        },
+        {
+          kr: "정치인",
+          en: "politician",
+          vi: "chính trị gia",
+          type: "people",
+          note: "정치(政治)+인(人). 정치인이 되다(trở thành chính trị gia). 정치인의 공약(cam kết của chính trị gia).",
+        },
+        {
+          kr: "제도",
+          en: "system, institution",
+          vi: "chế độ, hệ thống",
+          type: "politics",
+          note: "제도(制度). 교육 제도(chế độ giáo dục). 제도를 개선하다(cải thiện chế độ). 민주주의 제도(thể chế dân chủ).",
+        },
+        {
+          kr: "주민",
+          en: "resident, inhabitant",
+          vi: "cư dân, người dân",
+          type: "people",
+          note: "주민(住民). 지역 주민(cư dân địa phương). 주민 등록증(thẻ cư dân). 주민 투표(bầu cử của cư dân).",
+        },
+        {
+          kr: "중부",
+          en: "central part",
+          vi: "miền trung",
+          type: "society",
+          note: "중부(中部). 중부 지방(miền trung). 한반도 중부(miền trung bán đảo Triều Tiên). 남부 ↔ 북부 ↔ 중부.",
+        },
+        {
+          kr: "중심지",
+          en: "center, hub",
+          vi: "trung tâm, điểm trọng yếu",
+          type: "society",
+          note: "중심(中心)+지(地). 상업 중심지(trung tâm thương mại). 문화 중심지(trung tâm văn hóa). 교통 중심지.",
+        },
+        {
+          kr: "중앙",
+          en: "center, central",
+          vi: "trung tâm, trung ương",
+          type: "politics",
+          note: "중앙(中央). 중앙 정부(chính phủ trung ương). 중앙 은행(ngân hàng trung ương). 서울 중앙(trung tâm Seoul).",
+        },
+        {
+          kr: "지역",
+          en: "area, region, district",
+          vi: "khu vực, vùng",
+          type: "society",
+          note: "지역(地域). 지역 사회(xã hội địa phương). 지역 특색(đặc trưng địa phương). 지역 주민(cư dân địa phương).",
+        },
+        {
+          kr: "지위",
+          en: "status, position",
+          vi: "địa vị, chức vị",
+          type: "society",
+          note: "지위(地位). 사회적 지위(địa vị xã hội). 지위가 높다/낮다(địa vị cao/thấp). 지위를 얻다(có được địa vị).",
+        },
+        {
+          kr: "질서",
+          en: "order, discipline",
+          vi: "trật tự",
+          type: "society",
+          note: "질서(秩序). 질서를 지키다(giữ trật tự). 사회 질서(trật tự xã hội). 공중 질서(trật tự công cộng).",
+        },
+        {
+          kr: "참여",
+          en: "participation, involvement",
+          vi: "sự tham gia",
+          type: "society",
+          note: "참여(參與). 참여하다=tham gia. 사회 참여(tham gia xã hội). 정치 참여(tham gia chính trị). 적극적 참여.",
+        },
+        {
+          kr: "청년",
+          en: "youth, young adult",
+          vi: "thanh niên",
+          type: "people",
+          note: "청년(靑年). 청년 실업(thất nghiệp trong thanh niên). 청년 세대(thế hệ thanh niên). 청년층(tầng lớp thanh niên).",
+        },
+        {
+          kr: "청소년",
+          en: "teenager, adolescent",
+          vi: "thiếu niên, tuổi teen",
+          type: "people",
+          note: "청소년(靑少年). 청소년 보호법(luật bảo vệ thiếu niên). 청소년 문제(vấn đề tuổi teen). 미성년자와 유사.",
+        },
+        {
+          kr: "총",
+          en: "gun, firearm",
+          vi: "súng",
+          type: "crime",
+          note: "총(銃). 총을 쏘다(bắn súng). 총기 사건(vụ súng). 총기 소지(sở hữu súng). 총기 규제(kiểm soát súng).",
+        },
+        {
+          kr: "출산율",
+          en: "birth rate",
+          vi: "tỷ lệ sinh",
+          type: "society",
+          note: "출산(出産)+율(率). 출산율이 낮다(tỷ lệ sinh thấp). 저출산 문제(vấn đề sinh đẻ thấp). 한국 저출산 심각.",
+        },
+        {
+          kr: "출신",
+          en: "origin, hometown, background",
+          vi: "xuất thân, gốc gác",
+          type: "society",
+          note: "출신(出身). 출신이 어디예요?(gốc gác ở đâu?). 서울 출신(người gốc Seoul). 명문대 출신(xuất thân danh tiếng).",
+        },
+        {
+          kr: "통일",
+          en: "unification",
+          vi: "thống nhất",
+          type: "politics",
+          note: "통일(統一). 남북 통일(thống nhất Nam-Bắc). 통일을 이루다(thực hiện thống nhất). 통일 운동(phong trào thống nhất).",
+        },
+        {
+          kr: "투표",
+          en: "vote, voting",
+          vi: "bỏ phiếu, bầu cử",
+          type: "politics",
+          note: "투표(投票). 투표하다=bỏ phiếu. 투표율(tỷ lệ bỏ phiếu). 선거 투표(bầu cử). 투표권(quyền bầu cử).",
+        },
+        {
+          kr: "평등",
+          en: "equality",
+          vi: "bình đẳng",
+          type: "law",
+          note: "평등(平等). 평등하다=bình đẳng. 기회 평등(bình đẳng cơ hội). 법 앞의 평등(bình đẳng trước pháp luật). ↔ 차별.",
+        },
+        {
+          kr: "평화",
+          en: "peace",
+          vi: "hòa bình",
+          type: "politics",
+          note: "평화(平和). 평화를 유지하다(duy trì hòa bình). 세계 평화(hòa bình thế giới). 평화 협정(hiệp định hòa bình).",
+        },
+        {
+          kr: "폭발",
+          en: "explosion, burst",
+          vi: "vụ nổ, bùng phát",
+          type: "crime",
+          note: "폭발(爆發). 폭발이 일어나다(vụ nổ xảy ra). 폭발물(vật liệu nổ). 감정 폭발(bùng nổ cảm xúc—nghĩa bóng).",
+        },
+        {
+          kr: "피해",
+          en: "damage, harm, loss",
+          vi: "thiệt hại, tổn hại",
+          type: "society",
+          note: "피해(被害). 피해를 입다(chịu thiệt hại). 피해를 주다(gây thiệt hại). 피해액(số tiền thiệt hại).",
+        },
+        {
+          kr: "피해자",
+          en: "victim",
+          vi: "nạn nhân",
+          type: "people",
+          note: "피해(thiệt hại)+자(者). 범죄 피해자(nạn nhân tội phạm). 피해자 지원(hỗ trợ nạn nhân). 사고 피해자(nạn nhân tai nạn).",
+        },
+        {
+          kr: "현대인",
+          en: "modern person, people of today",
+          vi: "người hiện đại",
+          type: "people",
+          note: "현대(現代)+인(人). 현대인의 스트레스(stress của người hiện đại). 현대인의 생활 방식(lối sống hiện đại).",
+        },
+        {
+          kr: "혼잡",
+          en: "congestion, crowding, chaos",
+          vi: "hỗn loạn, tắc nghẽn",
+          type: "society",
+          note: "혼잡(混雜). 혼잡하다=hỗn loạn/đông đúc. 교통 혼잡(tắc nghẽn giao thông). 혼잡한 도시(đô thị đông đúc).",
+        },
+        {
+          kr: "화재",
+          en: "fire, blaze",
+          vi: "hỏa hoạn, đám cháy",
+          type: "crime",
+          note: "화재(火災). 화재가 발생하다(xảy ra hỏa hoạn). 화재를 진압하다(dập tắt đám cháy). 화재 신고(báo cháy 119).",
+        },
+        {
+          kr: "후보",
+          en: "candidate",
+          vi: "ứng cử viên, người ứng tuyển",
+          type: "politics",
+          note: "후보(候補). 대통령 후보(ứng cử viên tổng thống). 후보를 지지하다(ủng hộ ứng cử viên). 후보 등록(đăng ký ứng cử).",
+        },
+        {
+          kr: "희생자",
+          en: "victim, casualty, sacrifice",
+          vi: "nạn nhân, người hy sinh",
+          type: "people",
+          note: "희생(犧牲)+자(者). 전쟁 희생자(nạn nhân chiến tranh). 사고 희생자(nạn nhân tai nạn). 피해자보다 더 비극적 뉘앙스.",
+        },
+      ];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let t;
+          if (item.type === "society")
+            t = `<span class="tag tag-society">Xã hội</span>`;
+          else if (item.type === "politics")
+            t = `<span class="tag tag-politics">Chính trị</span>`;
+          else if (item.type === "law")
+            t = `<span class="tag tag-law">Pháp luật</span>`;
+          else if (item.type === "crime")
+            t = `<span class="tag tag-crime">Tội phạm</span>`;
+          else t = `<span class="tag tag-people">Con người</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${i + 1}</td><td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const mf = currentFilter === "all" || item.type === currentFilter;
+          const ms =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return mf && ms;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
