@@ -1,284 +1,1466 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Sức khỏe & Y tế (Nâng cao)</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f2f7f5;
-    --card: #ffffff;
-    --accent: #1a6a5a;
-    --text: #081e18;
-    --sub: #5a8a78;
-    --border: #c4dcd4;
-    --tag-body: #ddf4ec;
-    --tag-disease: #fce8e8;
-    --tag-medicine: #e8f0fc;
-    --tag-habit: #fef8e0;
-    --tag-dept: #f0eafa;
-    --highlight: #ecfaf6;
-    --row-alt: #f6fdf9;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-  .header { background: var(--text); color: #f2f7f5; padding: 36px 40px 28px; position: relative; overflow: hidden; }
-  .header::before { content: '건강'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-family: 'Noto Serif KR', serif; font-size: 120px; color: rgba(255,255,255,0.05); font-weight: 600; letter-spacing: -4px; user-select: none; }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #7aaa98; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
-  .controls { padding: 20px 40px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput { width: 100%; padding: 10px 12px 10px 38px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s; }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
-  .filter-btn { padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f2f7f5; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 145px; }
-  th:nth-child(3), td:nth-child(3) { width: 185px; }
-  th:nth-child(4), td:nth-child(4) { width: 210px; }
-  th:nth-child(5), td:nth-child(5) { width: 120px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
-  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
-  .tag-body    { background: var(--tag-body);    color: #0a4a30; }
-  .tag-disease { background: var(--tag-disease);  color: #7a0a0a; }
-  .tag-medicine{ background: var(--tag-medicine); color: #0a2a60; }
-  .tag-habit   { background: var(--tag-habit);    color: #5a3a00; }
-  .tag-dept    { background: var(--tag-dept);     color: #4a0a7a; }
-  .note { font-size: 12px; color: var(--sub); font-style: italic; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
-  @media (max-width: 768px) { .header { padding: 24px 20px; } .header::before { display: none; } .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; } th, td { padding: 10px 12px; } .korean-word { font-size: 15px; } }
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>건강 & 의료 (심화) — Sức khỏe & Y tế (Nâng cao)</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Sức khỏe nâng cao · Chủ đề TOPIK II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="body">Cơ thể</button>
-  <button class="filter-btn" data-filter="disease">Bệnh tật</button>
-  <button class="filter-btn" data-filter="medicine">Thuốc &amp; Điều trị</button>
-  <button class="filter-btn" data-filter="habit">Lối sống</button>
-  <button class="filter-btn" data-filter="dept">Khoa/Chuyên ngành</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Sức khỏe &amp; Y tế (Nâng cao)</div>
-<script>
-const vocab = [
-  { kr:"가루비누", en:"powder soap, soap powder", vi:"xà phòng bột", type:"habit", note:"가루(bột)+비누(xà phòng). 세탁에 사용(dùng để giặt). 가루비누로 빨다(giặt bằng xà phòng bột)." },
-  { kr:"간호", en:"nursing, patient care", vi:"chăm sóc bệnh nhân", type:"medicine", note:"간호(看護). 간호하다=chăm sóc bệnh nhân. 간호사(y tá). 집에서 간호하다(chăm sóc tại nhà)." },
-  { kr:"감각", en:"sense, sensation", vi:"giác quan, cảm giác", type:"body", note:"감각(感覺). 오감(五感, ngũ giác). 감각이 예민하다(giác quan nhạy bén). 감각을 잃다(mất cảm giác)." },
-  { kr:"건망증", en:"forgetfulness, absent-mindedness", vi:"chứng hay quên", type:"disease", note:"건망증(健忘症). 건망증이 심하다(hay quên quá). 치매 초기 증상과 구별 필요." },
-  { kr:"걸음", en:"steps, gait, pace", vi:"bước đi, bước chân", type:"body", note:"걸음을 걷다(bước đi). 걸음걸이(dáng đi). 만 보(10,000 bước). 걸음 수를 세다(đếm bước)." },
-  { kr:"고개", en:"head; hill, pass", vi:"cái đầu; dốc, đèo", type:"body", note:"두 가지: 고개를 끄덕이다(gật đầu), 고개를 넘다(vượt đèo). 고개를 젓다(lắc đầu)." },
-  { kr:"과로", en:"overwork, exhaustion", vi:"làm việc quá sức", type:"habit", note:"과로(過勞). 과로하다=làm việc quá sức. 과로로 쓰러지다(ngã vì làm việc quá sức). 과로사(chết vì làm quá sức)." },
-  { kr:"과식", en:"overeating", vi:"ăn quá nhiều", type:"habit", note:"과식(過食). 과식하다=ăn quá nhiều. 과식은 건강에 나빠요(ăn quá nhiều hại sức khỏe). ↔ 소식(ăn ít)." },
-  { kr:"과음", en:"excessive drinking", vi:"uống quá nhiều rượu", type:"habit", note:"과음(過飮). 과음하다=uống quá nhiều. 과음 후 두통(đau đầu sau khi uống quá). ↔ 금주(kiêng rượu)." },
-  { kr:"근육", en:"muscle", vi:"cơ (bắp)", type:"body", note:"근육(筋肉). 근육을 키우다(tăng cơ bắp). 근육통(đau cơ). 근육이 뭉치다(cơ bị căng)." },
-  { kr:"기억력", en:"memory, memory capacity", vi:"trí nhớ, khả năng ghi nhớ", type:"body", note:"기억(記憶)+력(力). 기억력이 좋다/나쁘다(trí nhớ tốt/kém). 기억력을 높이다(cải thiện trí nhớ)." },
-  { kr:"기운", en:"energy, vitality, strength", vi:"sức lực, khí lực", type:"body", note:"기운(氣運). 기운이 없다(không có sức). 기운을 차리다(lấy lại sức). 기운이 넘치다(tràn đầy năng lượng)." },
-  { kr:"냉방병", en:"air-conditioning illness", vi:"bệnh do điều hòa quá lạnh", type:"disease", note:"냉방(冷房)+병. 여름철 에어컨 과다 사용으로 생기는 증상. 두통, 피로, 감기 증상." },
-  { kr:"눈길", en:"gaze, glance; snowy road", vi:"ánh nhìn, sự chú ý", type:"body", note:"두 가지: (1) 눈(mắt)+길(đường) = ánh nhìn(눈길을 끌다=thu hút ánh mắt), (2) 눈(tuyết)+길 = đường tuyết." },
-  { kr:"눈병", en:"eye disease, eye infection", vi:"bệnh mắt", type:"disease", note:"눈(mắt)+병(bệnh). 눈병에 걸리다(bị bệnh mắt). 결막염(viêm kết mạc). 안약을 넣다(nhỏ thuốc mắt)." },
-  { kr:"눈썹", en:"eyebrow", vi:"lông mày", type:"body", note:"눈(mắt)+썹. 눈썹이 짙다(lông mày đậm). 눈썹을 다듬다(tỉa lông mày). 눈썹 문신(xăm lông mày)." },
-  { kr:"단백질", en:"protein", vi:"chất đạm, protein", type:"habit", note:"단백질(蛋白質). 단백질을 섭취하다(tiêu thụ protein). 근육 형성에 필요. 고기, 달걀에 풍부." },
-  { kr:"담뱃불", en:"cigarette fire, lit cigarette", vi:"lửa thuốc lá", type:"habit", note:"담배(thuốc lá)+불(lửa). 담뱃불을 끄다(tắt điếu thuốc). 담뱃불로 인한 화재(hỏa hoạn do thuốc lá)." },
-  { kr:"독", en:"poison, toxin", vi:"độc, chất độc", type:"disease", note:"독(毒). 독을 마시다(uống thuốc độc). 독이 있다(có độc). 뱀독(nọc rắn). 독성(tính độc)." },
-  { kr:"독감", en:"influenza, flu (severe)", vi:"bệnh cúm, cúm nặng", type:"disease", note:"독감(毒感). 독감에 걸리다(bị cúm). 독감 예방 주사(tiêm phòng cúm). 감기보다 증상이 심함." },
-  { kr:"동작", en:"motion, movement, action", vi:"động tác, cử động", type:"body", note:"동작(動作). 동작이 빠르다/느리다(động tác nhanh/chậm). 운동 동작(động tác thể dục)." },
-  { kr:"두통", en:"headache", vi:"đau đầu, nhức đầu", type:"disease", note:"두통(頭痛). 두통이 생기다(bị đau đầu). 편두통(đau nửa đầu). 두통약을 먹다(uống thuốc đau đầu)." },
-  { kr:"두통약", en:"headache medicine", vi:"thuốc đau đầu", type:"medicine", note:"두통(đau đầu)+약(thuốc). 두통약을 복용하다(dùng thuốc đau đầu). 타이레놀이 대표적." },
-  { kr:"뒷모습", en:"back view, view from behind", vi:"dáng từ sau lưng", type:"body", note:"뒤(sau)+모습(dáng). 뒷모습이 아름답다(dáng từ sau đẹp). ↔ 앞모습(dáng từ trước)." },
-  { kr:"디스크", en:"disc; spinal disc herniation", vi:"đĩa nhạc; thoát vị đĩa đệm", type:"disease", note:"두 가지: (1) disc(đĩa), (2) 추간판 디스크(thoát vị đĩa đệm). 허리 디스크(đĩa đệm lưng)." },
-  { kr:"마스크", en:"mask, face mask", vi:"khẩu trang", type:"medicine", note:"mask에서. 마스크를 쓰다(đeo khẩu trang). 코로나로 마스크가 필수가 됐어요. 미세먼지 마스크." },
-  { kr:"맨발", en:"barefoot", vi:"chân trần, đi chân đất", type:"body", note:"맨(trần, không có gì)+발(chân). 맨발로 걷다(đi chân trần). 맨발 걷기(đi bộ chân trần để tốt sức khỏe)." },
-  { kr:"맨손", en:"bare hands, empty-handed", vi:"tay không, không có gì", type:"body", note:"맨+손(tay). 맨손으로 하다(làm bằng tay không). 맨손 체조(thể dục tay không)." },
-  { kr:"맹인", en:"blind person, visually impaired", vi:"người mù", type:"disease", note:"맹인(盲人). 시각 장애인이 더 현대적 표현. 맹인 안내견(chó dẫn đường người mù)." },
-  { kr:"머리카락", en:"hair (strand)", vi:"sợi tóc, tóc", type:"body", note:"머리(đầu)+카락(sợi). 머리카락이 빠지다(rụng tóc). 머리카락을 기르다(để tóc dài). 탈모(rụng tóc)." },
-  { kr:"멍", en:"bruise, contusion", vi:"vết bầm, bầm tím", type:"disease", note:"멍이 들다(bị bầm). 멍이 생기다(xuất hiện vết bầm). 멍을 없애다(xóa vết bầm). 파란 멍(bầm xanh tím)." },
-  { kr:"목숨", en:"life, one's life", vi:"tính mạng, sinh mệnh", type:"body", note:"목숨을 걸다(đánh cược tính mạng). 목숨을 구하다(cứu tính mạng). 목숨이 위험하다(tính mạng bị đe dọa)." },
-  { kr:"몸무게", en:"body weight", vi:"cân nặng cơ thể", type:"body", note:"몸(cơ thể)+무게(trọng lượng). 몸무게를 재다(cân trọng lượng). 몸무게가 늘다/줄다(tăng/giảm cân). 체중과 동의." },
-  { kr:"몸짓", en:"gesture, body movement", vi:"cử chỉ, động tác", type:"body", note:"몸(cơ thể)+짓(hành động). 몸짓으로 표현하다(diễn đạt bằng cử chỉ). 몸짓 언어(ngôn ngữ cơ thể)." },
-  { kr:"문병", en:"visiting a sick person", vi:"thăm bệnh nhân", type:"medicine", note:"문병(問病). 문병을 가다(đi thăm bệnh nhân). 병문안과 동의어. 문병 선물(quà thăm bệnh)." },
-  { kr:"물약", en:"liquid medicine, syrup", vi:"thuốc nước", type:"medicine", note:"물(nước)+약(thuốc). 물약을 먹다(uống thuốc nước). 기침 물약(siro ho). ↔ 알약(thuốc viên)." },
-  { kr:"바이러스", en:"virus", vi:"vi-rút", type:"disease", note:"virus에서. 바이러스에 감염되다(bị nhiễm virus). 바이러스 확산(lây lan virus). 백신으로 예방." },
-  { kr:"발걸음", en:"footsteps, pace", vi:"bước chân", type:"body", note:"발(chân)+걸음(bước). 발걸음 소리(tiếng bước chân). 발걸음이 가볍다(bước chân nhẹ nhàng)." },
-  { kr:"발목", en:"ankle", vi:"mắt cá chân", type:"body", note:"발(chân)+목(cổ). 발목을 삐다(bong gân mắt cá). 발목이 붓다(mắt cá sưng). 발목 스트레칭." },
-  { kr:"발자국", en:"footprint, footstep", vi:"dấu chân", type:"body", note:"발(chân)+자국(dấu vết). 눈 위의 발자국(dấu chân trên tuyết). 발자국을 남기다(để lại dấu chân)." },
-  { kr:"배꼽", en:"belly button, navel", vi:"rốn", type:"body", note:"배꼽이 나오다(rốn lồi). 배꼽을 보이다(để lộ rốn). 배꼽 피어싱(xỏ khuyên rốn)." },
-  { kr:"변비", en:"constipation", vi:"táo bón", type:"disease", note:"변비(便秘). 변비가 생기다(bị táo bón). 변비에 좋은 음식(thức ăn tốt cho táo bón). ↔ 설사(tiêu chảy)." },
-  { kr:"병문안", en:"visit to a sick person", vi:"thăm bệnh nhân", type:"medicine", note:"병(病,bệnh)+문안(thăm hỏi). 병문안을 가다(đi thăm bệnh). 문병과 동의. 병문안 꽃(hoa thăm bệnh)." },
-  { kr:"보약", en:"restorative medicine, tonic", vi:"thuốc bổ", type:"medicine", note:"보약(補藥). 몸에 좋은 한약. 보약을 지어 먹다(sắc uống thuốc bổ). 기력 회복에 도움." },
-  { kr:"복통", en:"stomachache, abdominal pain", vi:"đau bụng", type:"disease", note:"복통(腹痛). 복통을 호소하다(than đau bụng). 심한 복통(đau bụng dữ dội). 배탈과 유사." },
-  { kr:"부상", en:"injury, wound", vi:"chấn thương, vết thương", type:"disease", note:"부상(負傷). 부상을 입다(bị chấn thương). 부상을 당하다(chịu thương tích). 스포츠 부상(chấn thương thể thao)." },
-  { kr:"부상자", en:"injured person, casualty", vi:"người bị thương", type:"disease", note:"부상(chấn thương)+자(者). 부상자를 돕다(giúp người bị thương). 사망자와 부상자(tử vong và bị thương)." },
-  { kr:"부작용", en:"side effects, adverse effects", vi:"tác dụng phụ", type:"medicine", note:"부작용(副作用). 약의 부작용(tác dụng phụ của thuốc). 부작용이 생기다(phát sinh tác dụng phụ)." },
-  { kr:"불면증", en:"insomnia", vi:"chứng mất ngủ", type:"disease", note:"불면증(不眠症). 불면증에 시달리다(khổ sở vì mất ngủ). 수면제를 먹다(uống thuốc ngủ). 스트레스가 원인." },
-  { kr:"비만", en:"obesity", vi:"béo phì", type:"disease", note:"비만(肥滿). 비만이 되다(trở nên béo phì). 소아 비만(béo phì ở trẻ em). 비만 치료(điều trị béo phì)." },
-  { kr:"비상약", en:"emergency medicine", vi:"thuốc khẩn cấp", type:"medicine", note:"비상(非常,khẩn cấp)+약(thuốc). 비상약을 준비하다(chuẩn bị thuốc khẩn cấp). 여행 시 필수." },
-  { kr:"비타민", en:"vitamin", vi:"vitamin", type:"medicine", note:"vitamin에서. 비타민을 섭취하다(bổ sung vitamin). 비타민 C(vitamin C). 종합 비타민(vitamin tổng hợp)." },
-  { kr:"뺨", en:"cheek", vi:"má (khuôn mặt)", type:"body", note:"뺨을 때리다(tát má). 뺨이 빨개지다(má đỏ lên). 볼과 유사하나 뺨은 더 넓은 부위." },
-  { kr:"사망", en:"death, passing away", vi:"cái chết, tử vong", type:"disease", note:"사망(死亡). 사망하다=qua đời. 사망 원인(nguyên nhân tử vong). 사망률(tỷ lệ tử vong)." },
-  { kr:"사우나", en:"sauna", vi:"phòng xông hơi", type:"habit", note:"sauna에서. 사우나를 하다(tắm xông hơi). 찜질방 사우나(phòng xông hơi jjimjilbang). 노폐물 배출에 좋아요." },
-  { kr:"사춘기", en:"puberty, adolescence", vi:"tuổi dậy thì", type:"body", note:"사춘기(思春期). 사춘기를 겪다(trải qua tuổi dậy thì). 사춘기 청소년(thiếu niên tuổi dậy thì)." },
-  { kr:"산부인과", en:"obstetrics and gynecology", vi:"khoa sản phụ", type:"dept", note:"산부인과(産婦人科). 산부인과 진료(khám phụ khoa/sản). 임산부가 주로 가는 곳." },
-  { kr:"생명", en:"life, living thing", vi:"sinh mệnh, cuộc sống", type:"body", note:"생명(生命). 생명을 구하다(cứu sinh mệnh). 생명이 위험하다(sinh mệnh nguy hiểm). 생명 과학(khoa học sinh mệnh)." },
-  { kr:"설사", en:"diarrhea", vi:"tiêu chảy", type:"disease", note:"설사(泄瀉). 설사를 하다(bị tiêu chảy). 설사약(thuốc tiêu chảy). ↔ 변비(táo bón). 장염 증상." },
-  { kr:"성인병", en:"lifestyle disease, adult disease", vi:"bệnh người lớn, bệnh lối sống", type:"disease", note:"성인(成人)+병(病). 당뇨, 고혈압, 비만 등. 잘못된 식습관이 원인. 예방이 중요." },
-  { kr:"성형", en:"plastic surgery, cosmetic surgery", vi:"phẫu thuật thẩm mỹ", type:"medicine", note:"성형(成形). 성형 수술(phẫu thuật thẩm mỹ). 성형 외과(khoa thẩm mỹ). 한국에서 매우 보편적." },
-  { kr:"세면도구", en:"toiletries, washing accessories", vi:"đồ vệ sinh cá nhân", type:"habit", note:"세면(洗面)+도구(道具). 세면도구를 챙기다(chuẩn bị đồ vệ sinh). 칫솔, 치약, 샴푸 등이 세면도구." },
-  { kr:"소화", en:"digestion", vi:"tiêu hóa", type:"body", note:"소화(消化). 소화가 잘 되다(tiêu hóa tốt). 소화가 안 되다(khó tiêu). 소화제(thuốc tiêu hóa)." },
-  { kr:"손바닥", en:"palm of hand", vi:"lòng bàn tay", type:"body", note:"손(tay)+바닥(đáy). 손바닥을 펴다(xòe lòng bàn tay). 손바닥이 땀이 나다(lòng tay đổ mồ hôi)." },
-  { kr:"손발", en:"hands and feet", vi:"tay chân", type:"body", note:"손(tay)+발(chân). 손발이 차다(tay chân lạnh). 손발을 뻗다(duỗi tay chân). 손발이 저리다(tay chân tê)." },
-  { kr:"수면", en:"sleep", vi:"giấc ngủ", type:"habit", note:"수면(睡眠). 수면 시간(thời gian ngủ). 수면 부족(thiếu ngủ). 수면의 질(chất lượng giấc ngủ). 건강에 필수." },
-  { kr:"수면제", en:"sleeping pills, sedative", vi:"thuốc ngủ", type:"medicine", note:"수면(ngủ)+제(劑). 수면제를 먹다(uống thuốc ngủ). 수면제 중독(nghiện thuốc ngủ). 불면증 치료에 사용." },
-  { kr:"수명", en:"lifespan, life expectancy", vi:"tuổi thọ", type:"body", note:"수명(壽命). 평균 수명(tuổi thọ trung bình). 수명이 길다/짧다(sống lâu/ngắn). 한국인 수명이 늘고 있어요." },
-  { kr:"시각", en:"visual sense; point in time", vi:"thị giác, thời điểm", type:"body", note:"두 가지: (1) 視覺 — thị giác (시각 장애 = khiếm thị), (2) 時刻 — thời điểm (약속 시각 = giờ hẹn)." },
-  { kr:"시력", en:"eyesight, visual acuity", vi:"thị lực", type:"body", note:"시력(視力). 시력이 좋다/나쁘다(thị lực tốt/kém). 시력 검사(kiểm tra thị lực). 시력이 떨어지다(thị lực giảm)." },
-  { kr:"식생활", en:"dietary life, eating lifestyle", vi:"chế độ ăn uống sinh hoạt", type:"habit", note:"식생활(食生活). 건강한 식생활(chế độ ăn lành mạnh). 식생활 습관(thói quen ăn uống)." },
-  { kr:"식습관", en:"eating habits", vi:"thói quen ăn uống", type:"habit", note:"식(食)+습관(習慣). 올바른 식습관(thói quen ăn uống đúng đắn). 나쁜 식습관을 고치다(sửa thói quen xấu)." },
-  { kr:"식욕", en:"appetite, desire to eat", vi:"sự thèm ăn, cảm giác đói", type:"body", note:"식욕(食慾). 식욕이 있다/없다(có/không có cảm giác thèm ăn). 식욕 부진(chán ăn). 식욕 억제제." },
-  { kr:"신체", en:"body, physical body", vi:"cơ thể, thân thể", type:"body", note:"신체(身體). 신체 검사(kiểm tra thể chất). 신체 활동(hoạt động thể chất). 몸과 동의어." },
-  { kr:"심장", en:"heart (organ)", vi:"tim (cơ quan)", type:"body", note:"심장(心臟). 심장이 뛰다(tim đập). 심장 박동(nhịp tim). 심장 수술(phẫu thuật tim). 심장 마비(nhồi máu cơ tim)." },
-  { kr:"심장병", en:"heart disease", vi:"bệnh tim", type:"disease", note:"심장(tim)+병(病). 심장병 환자(bệnh nhân tim mạch). 심장병을 예방하다(phòng ngừa bệnh tim)." },
-  { kr:"아픔", en:"pain, ache, suffering", vi:"nỗi đau, sự đau đớn", type:"body", note:"아프다→아픔. 아픔을 참다(chịu đựng đau). 마음의 아픔(nỗi đau tâm hồn). 신체적 아픔(đau thể xác)." },
-  { kr:"안과", en:"ophthalmology, eye clinic", vi:"khoa mắt, nhãn khoa", type:"dept", note:"안과(眼科). 안과에 가다(đi khám mắt). 안과 검진(kiểm tra mắt). 안경 처방(kê đơn kính mắt)." },
-  { kr:"안색", en:"complexion, facial color", vi:"sắc mặt, nước da", type:"body", note:"안색(顔色). 안색이 좋다/나쁘다(sắc mặt tốt/xấu). 안색이 창백하다(mặt tái nhợt). 건강 상태를 반영." },
-  { kr:"안약", en:"eye drops", vi:"thuốc nhỏ mắt", type:"medicine", note:"안(眼,mắt)+약(thuốc). 안약을 넣다(nhỏ thuốc mắt). 눈이 충혈됐을 때 사용. 안과에서 처방." },
-  { kr:"알레르기", en:"allergy", vi:"dị ứng", type:"disease", note:"allergy에서. 알레르기가 있다(bị dị ứng). 꽃가루 알레르기(dị ứng phấn hoa). 음식 알레르기(dị ứng thức ăn)." },
-  { kr:"알약", en:"pill, tablet", vi:"thuốc viên", type:"medicine", note:"알(hạt tròn)+약(thuốc). 알약을 먹다(uống thuốc viên). 알약을 삼키다(nuốt thuốc viên). ↔ 물약(thuốc nước)." },
-  { kr:"알코올", en:"alcohol", vi:"cồn, rượu cồn", type:"medicine", note:"alcohol에서. 알코올로 소독하다(khử trùng bằng cồn). 알코올 중독(nghiện rượu). 알코올 함량(hàm lượng cồn)." },
-  { kr:"암", en:"cancer", vi:"ung thư", type:"disease", note:"암(癌). 암에 걸리다(bị ung thư). 암 치료(điều trị ung thư). 폐암, 위암, 유방암 등. 조기 발견이 중요." },
-  { kr:"엉덩이", en:"buttocks, bottom, hip", vi:"mông", type:"body", note:"엉덩이가 크다(mông to). 엉덩이를 흔들다(lắc mông). 엉덩이 근육(cơ mông). 낙상 시 엉덩이 골절." },
-  { kr:"에이즈", en:"AIDS", vi:"AIDS (bệnh)", type:"disease", note:"AIDS에서. 에이즈 감염(nhiễm AIDS). 에이즈 예방(phòng ngừa AIDS). HIV 바이러스로 인한 질병." },
-  { kr:"여드름", en:"acne, pimple", vi:"mụn trứng cá", type:"disease", note:"여드름이 나다(nổi mụn). 여드름 피부(da mụn). 여드름 치료(điều trị mụn). 사춘기에 많이 생겨요." },
-  { kr:"영양", en:"nutrition, nourishment", vi:"dinh dưỡng", type:"habit", note:"영양(營養). 영양을 섭취하다(tiêu thụ dinh dưỡng). 영양이 부족하다(thiếu dinh dưỡng). 균형 잡힌 영양." },
-  { kr:"영양가", en:"nutritional value", vi:"giá trị dinh dưỡng", type:"habit", note:"영양(dinh dưỡng)+가(價,giá trị). 영양가가 높다/낮다(giá trị dinh dưỡng cao/thấp)." },
-  { kr:"영양분", en:"nutrients, nutritional content", vi:"chất dinh dưỡng", type:"habit", note:"영양+분(分). 영양분을 흡수하다(hấp thu chất dinh dưỡng). 영양분이 풍부한 음식." },
-  { kr:"영양소", en:"nutrients, nutritional elements", vi:"dưỡng chất", type:"habit", note:"영양+소(素). 필수 영양소(dưỡng chất thiết yếu). 탄수화물, 단백질, 지방 등이 3대 영양소." },
-  { kr:"영양제", en:"nutritional supplement", vi:"thực phẩm chức năng", type:"medicine", note:"영양(dinh dưỡng)+제(劑). 영양제를 복용하다(uống thực phẩm chức năng). 비타민, 미네랄 등." },
-  { kr:"예방", en:"prevention", vi:"phòng ngừa, dự phòng", type:"medicine", note:"예방(豫防). 예방하다=phòng ngừa. 질병 예방(phòng ngừa bệnh tật). 예방 접종(tiêm phòng)." },
-  { kr:"오른손", en:"right hand", vi:"tay phải", type:"body", note:"오른(phải)+손(tay). 오른손잡이(thuận tay phải). ↔ 왼손(tay trái). 오른손으로 쓰다(viết bằng tay phải)." },
-  { kr:"온몸", en:"whole body, entire body", vi:"toàn thân", type:"body", note:"온(toàn)+몸(cơ thể). 온몸이 아프다(đau toàn thân). 온몸에 힘이 빠지다(toàn thân rã rời)." },
-  { kr:"온천욕", en:"hot spring bath", vi:"tắm suối nước nóng", type:"habit", note:"온천(溫泉)+욕(浴). 온천욕을 즐기다(tận hưởng tắm suối nóng). 피로 회복에 좋아요." },
-  { kr:"외과", en:"surgery department, surgical clinic", vi:"khoa ngoại, phẫu thuật", type:"dept", note:"외과(外科). 외과 수술(phẫu thuật). 외과 의사(bác sĩ ngoại khoa). ↔ 내과(khoa nội)." },
-  { kr:"우울증", en:"depression", vi:"trầm cảm", type:"disease", note:"우울증(憂鬱症). 우울증을 앓다(bị trầm cảm). 우울증 치료(điều trị trầm cảm). 정신과에서 진료." },
-  { kr:"음성", en:"voice; negative (test result)", vi:"giọng nói, âm thanh", type:"body", note:"두 가지: (1) 音聲 — giọng nói (음성이 크다), (2) 陰性 — âm tính (검사 음성=kết quả âm tính). ↔ 양성(dương tính)." },
-  { kr:"응급실", en:"emergency room, ER", vi:"phòng cấp cứu", type:"dept", note:"응급(應急)+실(室). 응급실에 가다(đến phòng cấp cứu). 응급 처치(sơ cứu). 24시간 운영." },
-  { kr:"이마", en:"forehead", vi:"trán", type:"body", note:"이마에 땀이 나다(mồ hôi trán). 이마에 열이 있다(trán nóng-đo nhiệt). 이마를 찡그리다(nhăn trán)." },
-  { kr:"이비인후과", en:"ENT clinic (ear, nose, throat)", vi:"khoa tai mũi họng", type:"dept", note:"이(耳,tai)+비(鼻,mũi)+인후(咽喉,họng)+과. 감기, 축농증 등으로 방문. 이비인후과 전문의." },
-  { kr:"임산부", en:"pregnant woman", vi:"phụ nữ mang thai", type:"body", note:"임산부(妊産婦). 임산부 배려석(ghế ưu tiên bà bầu). 임산부 건강 관리(chăm sóc sức khỏe bà bầu)." },
-  { kr:"임신", en:"pregnancy", vi:"mang thai, thai nghén", type:"body", note:"임신(妊娠). 임신하다=mang thai. 임신 테스트(xét nghiệm thai). 임신 중(đang mang thai). 임신부와 동의어." },
-  { kr:"입술", en:"lips", vi:"môi", type:"body", note:"입술이 트다(môi nứt nẻ). 입술을 깨물다(cắn môi). 입술 색(màu môi). 립스틱을 바르다(thoa son môi)." },
-  { kr:"자살", en:"suicide", vi:"tự tử", type:"disease", note:"자살(自殺). 자살을 시도하다(cố tự tử). 자살 예방(phòng ngừa tự tử). 정신 건강과 관련. 생명 존중 중요." },
-  { kr:"졸음", en:"sleepiness, drowsiness", vi:"buồn ngủ", type:"body", note:"졸다→졸음. 졸음이 오다(buồn ngủ). 졸음 운전(lái xe ngủ gật). 졸음을 참다(cố kìm buồn ngủ)." },
-  { kr:"주름", en:"wrinkles, creases", vi:"nếp nhăn", type:"body", note:"주름이 생기다(xuất hiện nếp nhăn). 주름을 펴다(làm phẳng nếp nhăn). 노화의 증거. 주름살과 동의어." },
-  { kr:"주먹", en:"fist, clenched hand", vi:"nắm đấm, nắm tay", type:"body", note:"주먹을 쥐다(nắm đấm). 주먹으로 치다(đấm). 주먹 쥐고 참다(nắm đấm chịu đựng — thành ngữ)." },
-  { kr:"죽음", en:"death", vi:"cái chết", type:"body", note:"죽음(死). 죽음을 맞이하다(đối mặt cái chết). 죽음을 두려워하다(sợ cái chết). 사망과 유사하나 더 철학적." },
-  { kr:"증상", en:"symptom", vi:"triệu chứng", type:"disease", note:"증상(症狀). 증상이 나타나다(triệu chứng xuất hiện). 증상을 완화하다(giảm nhẹ triệu chứng). 증세와 유사." },
-  { kr:"진찰", en:"medical examination, consultation", vi:"khám bệnh", type:"medicine", note:"진찰(診察). 진찰을 받다(được khám bệnh). 의사에게 진찰을 받다(được bác sĩ khám). 진료와 유사." },
-  { kr:"진통제", en:"painkiller, analgesic", vi:"thuốc giảm đau", type:"medicine", note:"진통(鎭痛)+제(劑). 진통제를 먹다(uống thuốc giảm đau). 두통, 치통 등에 사용. 타이레놀이 대표적." },
-  { kr:"질병", en:"disease, illness", vi:"bệnh tật", type:"disease", note:"질병(疾病). 질병을 예방하다(phòng ngừa bệnh tật). 만성 질병(bệnh mãn tính). 질환과 유사." },
-  { kr:"질환", en:"disease, condition", vi:"bệnh lý, bệnh tật", type:"disease", note:"질환(疾患). 만성 질환(bệnh mãn tính). 질병보다 더 의학적 표현. 심혈관 질환(bệnh tim mạch)." },
-  { kr:"찜질", en:"heat/cold compress, jjimjil", vi:"đắp nóng, chườm", type:"habit", note:"찜질(蒸질). 찜질방(phòng xông hơi Hàn). 온찜질(chườm nóng), 냉찜질(chườm lạnh). 통증 완화에 사용." },
-  { kr:"처방", en:"prescription, medical order", vi:"đơn thuốc, kê đơn", type:"medicine", note:"처방(處方). 처방을 받다(nhận đơn thuốc). 의사가 처방하다(bác sĩ kê đơn). 처방전 없이 살 수 없는 약." },
-  { kr:"처방전", en:"prescription slip", vi:"toa thuốc", type:"medicine", note:"처방(đơn thuốc)+전(箋,tờ). 처방전을 받다(nhận toa thuốc). 처방전을 약국에 제출하다(nộp toa ở nhà thuốc)." },
-  { kr:"체격", en:"physique, build, frame", vi:"thể hình, vóc dáng", type:"body", note:"체격(體格). 체격이 좋다(vóc dáng tốt/vạm vỡ). 탄탄한 체격(thể hình chắc khỏe). 운동으로 체격을 가꾸다." },
-  { kr:"체온", en:"body temperature", vi:"nhiệt độ cơ thể", type:"body", note:"체온(體溫). 체온을 재다(đo nhiệt độ). 정상 체온 36.5도. 체온이 높다(sốt). 체온계(nhiệt kế)." },
-  { kr:"체중", en:"body weight", vi:"cân nặng", type:"body", note:"체중(體重). 체중을 재다(cân). 체중이 늘다/줄다(tăng/giảm cân). 몸무게와 동의어. 체중 관리(quản lý cân nặng)." },
-  { kr:"출산", en:"childbirth, delivery", vi:"sinh con, đẻ", type:"body", note:"출산(出産). 출산하다=sinh con. 출산 후(sau khi sinh). 출산율(tỷ lệ sinh). 출산을 돕다(hỗ trợ sinh nở)." },
-  { kr:"출생", en:"birth, nativity", vi:"sự ra đời, sinh ra", type:"body", note:"출생(出生). 출생하다=được sinh ra. 출생 증명서(giấy khai sinh). 출생지(nơi sinh). 출산과 유사하나 더 공식적." },
-  { kr:"취침", en:"going to bed, bedtime", vi:"đi ngủ", type:"habit", note:"취침(就寢). 취침 시간(giờ đi ngủ). 취침 전 루틴(thói quen trước khi ngủ). 취침하다=đi ngủ." },
-  { kr:"치료제", en:"therapeutic medicine, treatment drug", vi:"thuốc điều trị", type:"medicine", note:"치료(治療)+제(劑). 암 치료제(thuốc điều trị ung thư). 치료제를 개발하다(phát triển thuốc điều trị)." },
-  { kr:"침", en:"saliva; acupuncture needle", vi:"nước bọt", type:"body", note:"두 가지: (1) 침(nước bọt—침을 삼키다=nuốt nước bọt), (2) 침(針, kim châm cứu—침을 맞다=được châm cứu)." },
-  { kr:"카페인", en:"caffeine", vi:"caffeine", type:"habit", note:"caffeine에서. 카페인을 섭취하다(tiêu thụ caffeine). 커피, 녹차에 풍부. 과다 섭취 시 수면 방해." },
-  { kr:"토하다", en:"to vomit, to throw up", vi:"nôn, nôn mửa", type:"disease", note:"토하다=nôn. 구토하다와 동의어. 식중독이나 멀미로 토하다(nôn do ngộ độc/say xe)." },
-  { kr:"통증", en:"pain, ache (clinical)", vi:"cơn đau, đau nhói", type:"disease", note:"통증(痛症). 통증을 느끼다(cảm thấy đau). 만성 통증(đau mãn tính). 통증 완화(giảm đau). 아픔보다 의학적." },
-  { kr:"퇴원", en:"hospital discharge", vi:"xuất viện", type:"medicine", note:"퇴원(退院). 퇴원하다=xuất viện. 퇴원 후 관리(chăm sóc sau xuất viện). ↔ 입원(nhập viện)." },
-  { kr:"편식", en:"picky eating, unbalanced diet", vi:"ăn uống không cân bằng", type:"habit", note:"편식(偏食). 편식하다=ăn kén. 편식은 건강에 나빠요(ăn kén hại sức khỏe). 채소를 안 먹는 것 등." },
-  { kr:"폭식", en:"binge eating, overeating at once", vi:"ăn quá nhiều một lúc", type:"habit", note:"폭식(暴食). 폭식하다=ăn thật nhiều. 스트레스 폭식(ăn xả stress). 폭식증(chứng ăn vô độ)." },
-  { kr:"표정", en:"facial expression", vi:"biểu cảm, nét mặt", type:"body", note:"표정(表情). 표정이 밝다/어둡다(mặt vui/buồn). 표정을 읽다(đọc biểu cảm). 무표정(mặt lạnh, vô cảm)." },
-  { kr:"피로", en:"fatigue, tiredness", vi:"mệt mỏi, kiệt sức", type:"body", note:"피로(疲勞). 피로가 쌓이다(mệt mỏi tích lũy). 피로 회복(hồi phục sau mệt mỏi). 만성 피로(mệt mỏi mãn tính)." },
-  { kr:"피부", en:"skin", vi:"da cơ thể", type:"body", note:"피부(皮膚). 피부가 좋다(da đẹp). 피부 관리(chăm sóc da). 건성/지성 피부(da khô/dầu). 피부 트러블(vấn đề về da)." },
-  { kr:"피부과", en:"dermatology clinic", vi:"khoa da liễu", type:"dept", note:"피부(皮膚)+과(科). 피부과에 가다(đi khám da liễu). 여드름, 피부병 치료. 피부과 전문의." },
-  { kr:"피부병", en:"skin disease, skin condition", vi:"bệnh ngoài da", type:"disease", note:"피부(da)+병(病). 피부병을 치료하다(điều trị bệnh da). 아토피, 습진 등이 피부병." },
-  { kr:"하품", en:"yawn", vi:"ngáp, cái ngáp", type:"body", note:"하품을 하다(ngáp). 하품이 나다(buồn ngủ nên ngáp). 졸릴 때 하품이 나요(khi buồn ngủ thì hay ngáp)." },
-  { kr:"한약", en:"Korean traditional medicine, herbal medicine", vi:"thuốc đông y", type:"medicine", note:"한약(韓藥). 한약을 짓다(sắc thuốc đông y). 한약재(dược liệu đông y). 한의원에서 처방." },
-  { kr:"해열제", en:"antipyretic, fever reducer", vi:"thuốc hạ sốt", type:"medicine", note:"해열(解熱)+제(劑). 해열제를 먹다(uống thuốc hạ sốt). 타이레놀, 부루펜 등이 해열제." },
-  { kr:"화상", en:"burn, scald; video call", vi:"bỏng nhiệt", type:"disease", note:"두 가지: (1) 火傷 — bỏng (화상을 입다=bị bỏng), (2) 畫像 — hình ảnh video (화상 통화=gọi video)." },
-  { kr:"회복", en:"recovery, recuperation", vi:"hồi phục, phục hồi", type:"medicine", note:"회복(回復). 회복하다=hồi phục. 빨리 회복되다(hồi phục nhanh). 회복 기간(thời gian hồi phục)." },
-  { kr:"휴식", en:"rest, break", vi:"sự nghỉ ngơi", type:"habit", note:"휴식(休息). 휴식을 취하다(nghỉ ngơi). 충분한 휴식(nghỉ ngơi đủ). 휴식 시간(thời gian nghỉ ngơi)." },
-  { kr:"흡연", en:"smoking", vi:"hút thuốc lá", type:"habit", note:"흡연(吸煙). 흡연하다=hút thuốc. 흡연 구역(khu vực hút thuốc). 금연 vs 흡연. 흡연이 건강에 나쁩니다." },
-];
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Sức khỏe & Y tế (Nâng cao)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f2f7f5;
+        --card: #ffffff;
+        --accent: #1a6a5a;
+        --text: #081e18;
+        --sub: #5a8a78;
+        --border: #c4dcd4;
+        --tag-body: #ddf4ec;
+        --tag-disease: #fce8e8;
+        --tag-medicine: #e8f0fc;
+        --tag-habit: #fef8e0;
+        --tag-dept: #f0eafa;
+        --highlight: #ecfaf6;
+        --row-alt: #f6fdf9;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--text);
+        color: #f2f7f5;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "건강";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #7aaa98;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f2f7f5;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 145px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 185px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-body {
+        background: var(--tag-body);
+        color: #0a4a30;
+      }
+      .tag-disease {
+        background: var(--tag-disease);
+        color: #7a0a0a;
+      }
+      .tag-medicine {
+        background: var(--tag-medicine);
+        color: #0a2a60;
+      }
+      .tag-habit {
+        background: var(--tag-habit);
+        color: #5a3a00;
+      }
+      .tag-dept {
+        background: var(--tag-dept);
+        color: #4a0a7a;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>건강 & 의료 (심화) — Sức khỏe & Y tế (Nâng cao)</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Sức khỏe nâng cao · Chủ đề TOPIK II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="body">Cơ thể</button>
+      <button class="filter-btn" data-filter="disease">Bệnh tật</button>
+      <button class="filter-btn" data-filter="medicine">
+        Thuốc &amp; Điều trị
+      </button>
+      <button class="filter-btn" data-filter="habit">Lối sống</button>
+      <button class="filter-btn" data-filter="dept">Khoa/Chuyên ngành</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú &amp; Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Sức khỏe &amp; Y tế (Nâng cao)
+    </div>
+    <script>
+      const vocab = [
+        {
+          kr: "가루비누",
+          en: "powder soap, soap powder",
+          vi: "xà phòng bột",
+          type: "habit",
+          note: "가루(bột)+비누(xà phòng). 세탁에 사용(dùng để giặt). 가루비누로 빨다(giặt bằng xà phòng bột).",
+        },
+        {
+          kr: "간호",
+          en: "nursing, patient care",
+          vi: "chăm sóc bệnh nhân",
+          type: "medicine",
+          note: "간호(看護). 간호하다=chăm sóc bệnh nhân. 간호사(y tá). 집에서 간호하다(chăm sóc tại nhà).",
+        },
+        {
+          kr: "감각",
+          en: "sense, sensation",
+          vi: "giác quan, cảm giác",
+          type: "body",
+          note: "감각(感覺). 오감(五感, ngũ giác). 감각이 예민하다(giác quan nhạy bén). 감각을 잃다(mất cảm giác).",
+        },
+        {
+          kr: "건망증",
+          en: "forgetfulness, absent-mindedness",
+          vi: "chứng hay quên",
+          type: "disease",
+          note: "건망증(健忘症). 건망증이 심하다(hay quên quá). 치매 초기 증상과 구별 필요.",
+        },
+        {
+          kr: "걸음",
+          en: "steps, gait, pace",
+          vi: "bước đi, bước chân",
+          type: "body",
+          note: "걸음을 걷다(bước đi). 걸음걸이(dáng đi). 만 보(10,000 bước). 걸음 수를 세다(đếm bước).",
+        },
+        {
+          kr: "고개",
+          en: "head; hill, pass",
+          vi: "cái đầu; dốc, đèo",
+          type: "body",
+          note: "두 가지: 고개를 끄덕이다(gật đầu), 고개를 넘다(vượt đèo). 고개를 젓다(lắc đầu).",
+        },
+        {
+          kr: "과로",
+          en: "overwork, exhaustion",
+          vi: "làm việc quá sức",
+          type: "habit",
+          note: "과로(過勞). 과로하다=làm việc quá sức. 과로로 쓰러지다(ngã vì làm việc quá sức). 과로사(chết vì làm quá sức).",
+        },
+        {
+          kr: "과식",
+          en: "overeating",
+          vi: "ăn quá nhiều",
+          type: "habit",
+          note: "과식(過食). 과식하다=ăn quá nhiều. 과식은 건강에 나빠요(ăn quá nhiều hại sức khỏe). ↔ 소식(ăn ít).",
+        },
+        {
+          kr: "과음",
+          en: "excessive drinking",
+          vi: "uống quá nhiều rượu",
+          type: "habit",
+          note: "과음(過飮). 과음하다=uống quá nhiều. 과음 후 두통(đau đầu sau khi uống quá). ↔ 금주(kiêng rượu).",
+        },
+        {
+          kr: "근육",
+          en: "muscle",
+          vi: "cơ (bắp)",
+          type: "body",
+          note: "근육(筋肉). 근육을 키우다(tăng cơ bắp). 근육통(đau cơ). 근육이 뭉치다(cơ bị căng).",
+        },
+        {
+          kr: "기억력",
+          en: "memory, memory capacity",
+          vi: "trí nhớ, khả năng ghi nhớ",
+          type: "body",
+          note: "기억(記憶)+력(力). 기억력이 좋다/나쁘다(trí nhớ tốt/kém). 기억력을 높이다(cải thiện trí nhớ).",
+        },
+        {
+          kr: "기운",
+          en: "energy, vitality, strength",
+          vi: "sức lực, khí lực",
+          type: "body",
+          note: "기운(氣運). 기운이 없다(không có sức). 기운을 차리다(lấy lại sức). 기운이 넘치다(tràn đầy năng lượng).",
+        },
+        {
+          kr: "냉방병",
+          en: "air-conditioning illness",
+          vi: "bệnh do điều hòa quá lạnh",
+          type: "disease",
+          note: "냉방(冷房)+병. 여름철 에어컨 과다 사용으로 생기는 증상. 두통, 피로, 감기 증상.",
+        },
+        {
+          kr: "눈길",
+          en: "gaze, glance; snowy road",
+          vi: "ánh nhìn, sự chú ý",
+          type: "body",
+          note: "두 가지: (1) 눈(mắt)+길(đường) = ánh nhìn(눈길을 끌다=thu hút ánh mắt), (2) 눈(tuyết)+길 = đường tuyết.",
+        },
+        {
+          kr: "눈병",
+          en: "eye disease, eye infection",
+          vi: "bệnh mắt",
+          type: "disease",
+          note: "눈(mắt)+병(bệnh). 눈병에 걸리다(bị bệnh mắt). 결막염(viêm kết mạc). 안약을 넣다(nhỏ thuốc mắt).",
+        },
+        {
+          kr: "눈썹",
+          en: "eyebrow",
+          vi: "lông mày",
+          type: "body",
+          note: "눈(mắt)+썹. 눈썹이 짙다(lông mày đậm). 눈썹을 다듬다(tỉa lông mày). 눈썹 문신(xăm lông mày).",
+        },
+        {
+          kr: "단백질",
+          en: "protein",
+          vi: "chất đạm, protein",
+          type: "habit",
+          note: "단백질(蛋白質). 단백질을 섭취하다(tiêu thụ protein). 근육 형성에 필요. 고기, 달걀에 풍부.",
+        },
+        {
+          kr: "담뱃불",
+          en: "cigarette fire, lit cigarette",
+          vi: "lửa thuốc lá",
+          type: "habit",
+          note: "담배(thuốc lá)+불(lửa). 담뱃불을 끄다(tắt điếu thuốc). 담뱃불로 인한 화재(hỏa hoạn do thuốc lá).",
+        },
+        {
+          kr: "독",
+          en: "poison, toxin",
+          vi: "độc, chất độc",
+          type: "disease",
+          note: "독(毒). 독을 마시다(uống thuốc độc). 독이 있다(có độc). 뱀독(nọc rắn). 독성(tính độc).",
+        },
+        {
+          kr: "독감",
+          en: "influenza, flu (severe)",
+          vi: "bệnh cúm, cúm nặng",
+          type: "disease",
+          note: "독감(毒感). 독감에 걸리다(bị cúm). 독감 예방 주사(tiêm phòng cúm). 감기보다 증상이 심함.",
+        },
+        {
+          kr: "동작",
+          en: "motion, movement, action",
+          vi: "động tác, cử động",
+          type: "body",
+          note: "동작(動作). 동작이 빠르다/느리다(động tác nhanh/chậm). 운동 동작(động tác thể dục).",
+        },
+        {
+          kr: "두통",
+          en: "headache",
+          vi: "đau đầu, nhức đầu",
+          type: "disease",
+          note: "두통(頭痛). 두통이 생기다(bị đau đầu). 편두통(đau nửa đầu). 두통약을 먹다(uống thuốc đau đầu).",
+        },
+        {
+          kr: "두통약",
+          en: "headache medicine",
+          vi: "thuốc đau đầu",
+          type: "medicine",
+          note: "두통(đau đầu)+약(thuốc). 두통약을 복용하다(dùng thuốc đau đầu). 타이레놀이 대표적.",
+        },
+        {
+          kr: "뒷모습",
+          en: "back view, view from behind",
+          vi: "dáng từ sau lưng",
+          type: "body",
+          note: "뒤(sau)+모습(dáng). 뒷모습이 아름답다(dáng từ sau đẹp). ↔ 앞모습(dáng từ trước).",
+        },
+        {
+          kr: "디스크",
+          en: "disc; spinal disc herniation",
+          vi: "đĩa nhạc; thoát vị đĩa đệm",
+          type: "disease",
+          note: "두 가지: (1) disc(đĩa), (2) 추간판 디스크(thoát vị đĩa đệm). 허리 디스크(đĩa đệm lưng).",
+        },
+        {
+          kr: "마스크",
+          en: "mask, face mask",
+          vi: "khẩu trang",
+          type: "medicine",
+          note: "mask에서. 마스크를 쓰다(đeo khẩu trang). 코로나로 마스크가 필수가 됐어요. 미세먼지 마스크.",
+        },
+        {
+          kr: "맨발",
+          en: "barefoot",
+          vi: "chân trần, đi chân đất",
+          type: "body",
+          note: "맨(trần, không có gì)+발(chân). 맨발로 걷다(đi chân trần). 맨발 걷기(đi bộ chân trần để tốt sức khỏe).",
+        },
+        {
+          kr: "맨손",
+          en: "bare hands, empty-handed",
+          vi: "tay không, không có gì",
+          type: "body",
+          note: "맨+손(tay). 맨손으로 하다(làm bằng tay không). 맨손 체조(thể dục tay không).",
+        },
+        {
+          kr: "맹인",
+          en: "blind person, visually impaired",
+          vi: "người mù",
+          type: "disease",
+          note: "맹인(盲人). 시각 장애인이 더 현대적 표현. 맹인 안내견(chó dẫn đường người mù).",
+        },
+        {
+          kr: "머리카락",
+          en: "hair (strand)",
+          vi: "sợi tóc, tóc",
+          type: "body",
+          note: "머리(đầu)+카락(sợi). 머리카락이 빠지다(rụng tóc). 머리카락을 기르다(để tóc dài). 탈모(rụng tóc).",
+        },
+        {
+          kr: "멍",
+          en: "bruise, contusion",
+          vi: "vết bầm, bầm tím",
+          type: "disease",
+          note: "멍이 들다(bị bầm). 멍이 생기다(xuất hiện vết bầm). 멍을 없애다(xóa vết bầm). 파란 멍(bầm xanh tím).",
+        },
+        {
+          kr: "목숨",
+          en: "life, one's life",
+          vi: "tính mạng, sinh mệnh",
+          type: "body",
+          note: "목숨을 걸다(đánh cược tính mạng). 목숨을 구하다(cứu tính mạng). 목숨이 위험하다(tính mạng bị đe dọa).",
+        },
+        {
+          kr: "몸무게",
+          en: "body weight",
+          vi: "cân nặng cơ thể",
+          type: "body",
+          note: "몸(cơ thể)+무게(trọng lượng). 몸무게를 재다(cân trọng lượng). 몸무게가 늘다/줄다(tăng/giảm cân). 체중과 동의.",
+        },
+        {
+          kr: "몸짓",
+          en: "gesture, body movement",
+          vi: "cử chỉ, động tác",
+          type: "body",
+          note: "몸(cơ thể)+짓(hành động). 몸짓으로 표현하다(diễn đạt bằng cử chỉ). 몸짓 언어(ngôn ngữ cơ thể).",
+        },
+        {
+          kr: "문병",
+          en: "visiting a sick person",
+          vi: "thăm bệnh nhân",
+          type: "medicine",
+          note: "문병(問病). 문병을 가다(đi thăm bệnh nhân). 병문안과 동의어. 문병 선물(quà thăm bệnh).",
+        },
+        {
+          kr: "물약",
+          en: "liquid medicine, syrup",
+          vi: "thuốc nước",
+          type: "medicine",
+          note: "물(nước)+약(thuốc). 물약을 먹다(uống thuốc nước). 기침 물약(siro ho). ↔ 알약(thuốc viên).",
+        },
+        {
+          kr: "바이러스",
+          en: "virus",
+          vi: "vi-rút",
+          type: "disease",
+          note: "virus에서. 바이러스에 감염되다(bị nhiễm virus). 바이러스 확산(lây lan virus). 백신으로 예방.",
+        },
+        {
+          kr: "발걸음",
+          en: "footsteps, pace",
+          vi: "bước chân",
+          type: "body",
+          note: "발(chân)+걸음(bước). 발걸음 소리(tiếng bước chân). 발걸음이 가볍다(bước chân nhẹ nhàng).",
+        },
+        {
+          kr: "발목",
+          en: "ankle",
+          vi: "mắt cá chân",
+          type: "body",
+          note: "발(chân)+목(cổ). 발목을 삐다(bong gân mắt cá). 발목이 붓다(mắt cá sưng). 발목 스트레칭.",
+        },
+        {
+          kr: "발자국",
+          en: "footprint, footstep",
+          vi: "dấu chân",
+          type: "body",
+          note: "발(chân)+자국(dấu vết). 눈 위의 발자국(dấu chân trên tuyết). 발자국을 남기다(để lại dấu chân).",
+        },
+        {
+          kr: "배꼽",
+          en: "belly button, navel",
+          vi: "rốn",
+          type: "body",
+          note: "배꼽이 나오다(rốn lồi). 배꼽을 보이다(để lộ rốn). 배꼽 피어싱(xỏ khuyên rốn).",
+        },
+        {
+          kr: "변비",
+          en: "constipation",
+          vi: "táo bón",
+          type: "disease",
+          note: "변비(便秘). 변비가 생기다(bị táo bón). 변비에 좋은 음식(thức ăn tốt cho táo bón). ↔ 설사(tiêu chảy).",
+        },
+        {
+          kr: "병문안",
+          en: "visit to a sick person",
+          vi: "thăm bệnh nhân",
+          type: "medicine",
+          note: "병(病,bệnh)+문안(thăm hỏi). 병문안을 가다(đi thăm bệnh). 문병과 동의. 병문안 꽃(hoa thăm bệnh).",
+        },
+        {
+          kr: "보약",
+          en: "restorative medicine, tonic",
+          vi: "thuốc bổ",
+          type: "medicine",
+          note: "보약(補藥). 몸에 좋은 한약. 보약을 지어 먹다(sắc uống thuốc bổ). 기력 회복에 도움.",
+        },
+        {
+          kr: "복통",
+          en: "stomachache, abdominal pain",
+          vi: "đau bụng",
+          type: "disease",
+          note: "복통(腹痛). 복통을 호소하다(than đau bụng). 심한 복통(đau bụng dữ dội). 배탈과 유사.",
+        },
+        {
+          kr: "부상",
+          en: "injury, wound",
+          vi: "chấn thương, vết thương",
+          type: "disease",
+          note: "부상(負傷). 부상을 입다(bị chấn thương). 부상을 당하다(chịu thương tích). 스포츠 부상(chấn thương thể thao).",
+        },
+        {
+          kr: "부상자",
+          en: "injured person, casualty",
+          vi: "người bị thương",
+          type: "disease",
+          note: "부상(chấn thương)+자(者). 부상자를 돕다(giúp người bị thương). 사망자와 부상자(tử vong và bị thương).",
+        },
+        {
+          kr: "부작용",
+          en: "side effects, adverse effects",
+          vi: "tác dụng phụ",
+          type: "medicine",
+          note: "부작용(副作用). 약의 부작용(tác dụng phụ của thuốc). 부작용이 생기다(phát sinh tác dụng phụ).",
+        },
+        {
+          kr: "불면증",
+          en: "insomnia",
+          vi: "chứng mất ngủ",
+          type: "disease",
+          note: "불면증(不眠症). 불면증에 시달리다(khổ sở vì mất ngủ). 수면제를 먹다(uống thuốc ngủ). 스트레스가 원인.",
+        },
+        {
+          kr: "비만",
+          en: "obesity",
+          vi: "béo phì",
+          type: "disease",
+          note: "비만(肥滿). 비만이 되다(trở nên béo phì). 소아 비만(béo phì ở trẻ em). 비만 치료(điều trị béo phì).",
+        },
+        {
+          kr: "비상약",
+          en: "emergency medicine",
+          vi: "thuốc khẩn cấp",
+          type: "medicine",
+          note: "비상(非常,khẩn cấp)+약(thuốc). 비상약을 준비하다(chuẩn bị thuốc khẩn cấp). 여행 시 필수.",
+        },
+        {
+          kr: "비타민",
+          en: "vitamin",
+          vi: "vitamin",
+          type: "medicine",
+          note: "vitamin에서. 비타민을 섭취하다(bổ sung vitamin). 비타민 C(vitamin C). 종합 비타민(vitamin tổng hợp).",
+        },
+        {
+          kr: "뺨",
+          en: "cheek",
+          vi: "má (khuôn mặt)",
+          type: "body",
+          note: "뺨을 때리다(tát má). 뺨이 빨개지다(má đỏ lên). 볼과 유사하나 뺨은 더 넓은 부위.",
+        },
+        {
+          kr: "사망",
+          en: "death, passing away",
+          vi: "cái chết, tử vong",
+          type: "disease",
+          note: "사망(死亡). 사망하다=qua đời. 사망 원인(nguyên nhân tử vong). 사망률(tỷ lệ tử vong).",
+        },
+        {
+          kr: "사우나",
+          en: "sauna",
+          vi: "phòng xông hơi",
+          type: "habit",
+          note: "sauna에서. 사우나를 하다(tắm xông hơi). 찜질방 사우나(phòng xông hơi jjimjilbang). 노폐물 배출에 좋아요.",
+        },
+        {
+          kr: "사춘기",
+          en: "puberty, adolescence",
+          vi: "tuổi dậy thì",
+          type: "body",
+          note: "사춘기(思春期). 사춘기를 겪다(trải qua tuổi dậy thì). 사춘기 청소년(thiếu niên tuổi dậy thì).",
+        },
+        {
+          kr: "산부인과",
+          en: "obstetrics and gynecology",
+          vi: "khoa sản phụ",
+          type: "dept",
+          note: "산부인과(産婦人科). 산부인과 진료(khám phụ khoa/sản). 임산부가 주로 가는 곳.",
+        },
+        {
+          kr: "생명",
+          en: "life, living thing",
+          vi: "sinh mệnh, cuộc sống",
+          type: "body",
+          note: "생명(生命). 생명을 구하다(cứu sinh mệnh). 생명이 위험하다(sinh mệnh nguy hiểm). 생명 과학(khoa học sinh mệnh).",
+        },
+        {
+          kr: "설사",
+          en: "diarrhea",
+          vi: "tiêu chảy",
+          type: "disease",
+          note: "설사(泄瀉). 설사를 하다(bị tiêu chảy). 설사약(thuốc tiêu chảy). ↔ 변비(táo bón). 장염 증상.",
+        },
+        {
+          kr: "성인병",
+          en: "lifestyle disease, adult disease",
+          vi: "bệnh người lớn, bệnh lối sống",
+          type: "disease",
+          note: "성인(成人)+병(病). 당뇨, 고혈압, 비만 등. 잘못된 식습관이 원인. 예방이 중요.",
+        },
+        {
+          kr: "성형",
+          en: "plastic surgery, cosmetic surgery",
+          vi: "phẫu thuật thẩm mỹ",
+          type: "medicine",
+          note: "성형(成形). 성형 수술(phẫu thuật thẩm mỹ). 성형 외과(khoa thẩm mỹ). 한국에서 매우 보편적.",
+        },
+        {
+          kr: "세면도구",
+          en: "toiletries, washing accessories",
+          vi: "đồ vệ sinh cá nhân",
+          type: "habit",
+          note: "세면(洗面)+도구(道具). 세면도구를 챙기다(chuẩn bị đồ vệ sinh). 칫솔, 치약, 샴푸 등이 세면도구.",
+        },
+        {
+          kr: "소화",
+          en: "digestion",
+          vi: "tiêu hóa",
+          type: "body",
+          note: "소화(消化). 소화가 잘 되다(tiêu hóa tốt). 소화가 안 되다(khó tiêu). 소화제(thuốc tiêu hóa).",
+        },
+        {
+          kr: "손바닥",
+          en: "palm of hand",
+          vi: "lòng bàn tay",
+          type: "body",
+          note: "손(tay)+바닥(đáy). 손바닥을 펴다(xòe lòng bàn tay). 손바닥이 땀이 나다(lòng tay đổ mồ hôi).",
+        },
+        {
+          kr: "손발",
+          en: "hands and feet",
+          vi: "tay chân",
+          type: "body",
+          note: "손(tay)+발(chân). 손발이 차다(tay chân lạnh). 손발을 뻗다(duỗi tay chân). 손발이 저리다(tay chân tê).",
+        },
+        {
+          kr: "수면",
+          en: "sleep",
+          vi: "giấc ngủ",
+          type: "habit",
+          note: "수면(睡眠). 수면 시간(thời gian ngủ). 수면 부족(thiếu ngủ). 수면의 질(chất lượng giấc ngủ). 건강에 필수.",
+        },
+        {
+          kr: "수면제",
+          en: "sleeping pills, sedative",
+          vi: "thuốc ngủ",
+          type: "medicine",
+          note: "수면(ngủ)+제(劑). 수면제를 먹다(uống thuốc ngủ). 수면제 중독(nghiện thuốc ngủ). 불면증 치료에 사용.",
+        },
+        {
+          kr: "수명",
+          en: "lifespan, life expectancy",
+          vi: "tuổi thọ",
+          type: "body",
+          note: "수명(壽命). 평균 수명(tuổi thọ trung bình). 수명이 길다/짧다(sống lâu/ngắn). 한국인 수명이 늘고 있어요.",
+        },
+        {
+          kr: "시각",
+          en: "visual sense; point in time",
+          vi: "thị giác, thời điểm",
+          type: "body",
+          note: "두 가지: (1) 視覺 — thị giác (시각 장애 = khiếm thị), (2) 時刻 — thời điểm (약속 시각 = giờ hẹn).",
+        },
+        {
+          kr: "시력",
+          en: "eyesight, visual acuity",
+          vi: "thị lực",
+          type: "body",
+          note: "시력(視力). 시력이 좋다/나쁘다(thị lực tốt/kém). 시력 검사(kiểm tra thị lực). 시력이 떨어지다(thị lực giảm).",
+        },
+        {
+          kr: "식생활",
+          en: "dietary life, eating lifestyle",
+          vi: "chế độ ăn uống sinh hoạt",
+          type: "habit",
+          note: "식생활(食生活). 건강한 식생활(chế độ ăn lành mạnh). 식생활 습관(thói quen ăn uống).",
+        },
+        {
+          kr: "식습관",
+          en: "eating habits",
+          vi: "thói quen ăn uống",
+          type: "habit",
+          note: "식(食)+습관(習慣). 올바른 식습관(thói quen ăn uống đúng đắn). 나쁜 식습관을 고치다(sửa thói quen xấu).",
+        },
+        {
+          kr: "식욕",
+          en: "appetite, desire to eat",
+          vi: "sự thèm ăn, cảm giác đói",
+          type: "body",
+          note: "식욕(食慾). 식욕이 있다/없다(có/không có cảm giác thèm ăn). 식욕 부진(chán ăn). 식욕 억제제.",
+        },
+        {
+          kr: "신체",
+          en: "body, physical body",
+          vi: "cơ thể, thân thể",
+          type: "body",
+          note: "신체(身體). 신체 검사(kiểm tra thể chất). 신체 활동(hoạt động thể chất). 몸과 동의어.",
+        },
+        {
+          kr: "심장",
+          en: "heart (organ)",
+          vi: "tim (cơ quan)",
+          type: "body",
+          note: "심장(心臟). 심장이 뛰다(tim đập). 심장 박동(nhịp tim). 심장 수술(phẫu thuật tim). 심장 마비(nhồi máu cơ tim).",
+        },
+        {
+          kr: "심장병",
+          en: "heart disease",
+          vi: "bệnh tim",
+          type: "disease",
+          note: "심장(tim)+병(病). 심장병 환자(bệnh nhân tim mạch). 심장병을 예방하다(phòng ngừa bệnh tim).",
+        },
+        {
+          kr: "아픔",
+          en: "pain, ache, suffering",
+          vi: "nỗi đau, sự đau đớn",
+          type: "body",
+          note: "아프다→아픔. 아픔을 참다(chịu đựng đau). 마음의 아픔(nỗi đau tâm hồn). 신체적 아픔(đau thể xác).",
+        },
+        {
+          kr: "안과",
+          en: "ophthalmology, eye clinic",
+          vi: "khoa mắt, nhãn khoa",
+          type: "dept",
+          note: "안과(眼科). 안과에 가다(đi khám mắt). 안과 검진(kiểm tra mắt). 안경 처방(kê đơn kính mắt).",
+        },
+        {
+          kr: "안색",
+          en: "complexion, facial color",
+          vi: "sắc mặt, nước da",
+          type: "body",
+          note: "안색(顔色). 안색이 좋다/나쁘다(sắc mặt tốt/xấu). 안색이 창백하다(mặt tái nhợt). 건강 상태를 반영.",
+        },
+        {
+          kr: "안약",
+          en: "eye drops",
+          vi: "thuốc nhỏ mắt",
+          type: "medicine",
+          note: "안(眼,mắt)+약(thuốc). 안약을 넣다(nhỏ thuốc mắt). 눈이 충혈됐을 때 사용. 안과에서 처방.",
+        },
+        {
+          kr: "알레르기",
+          en: "allergy",
+          vi: "dị ứng",
+          type: "disease",
+          note: "allergy에서. 알레르기가 있다(bị dị ứng). 꽃가루 알레르기(dị ứng phấn hoa). 음식 알레르기(dị ứng thức ăn).",
+        },
+        {
+          kr: "알약",
+          en: "pill, tablet",
+          vi: "thuốc viên",
+          type: "medicine",
+          note: "알(hạt tròn)+약(thuốc). 알약을 먹다(uống thuốc viên). 알약을 삼키다(nuốt thuốc viên). ↔ 물약(thuốc nước).",
+        },
+        {
+          kr: "알코올",
+          en: "alcohol",
+          vi: "cồn, rượu cồn",
+          type: "medicine",
+          note: "alcohol에서. 알코올로 소독하다(khử trùng bằng cồn). 알코올 중독(nghiện rượu). 알코올 함량(hàm lượng cồn).",
+        },
+        {
+          kr: "암",
+          en: "cancer",
+          vi: "ung thư",
+          type: "disease",
+          note: "암(癌). 암에 걸리다(bị ung thư). 암 치료(điều trị ung thư). 폐암, 위암, 유방암 등. 조기 발견이 중요.",
+        },
+        {
+          kr: "엉덩이",
+          en: "buttocks, bottom, hip",
+          vi: "mông",
+          type: "body",
+          note: "엉덩이가 크다(mông to). 엉덩이를 흔들다(lắc mông). 엉덩이 근육(cơ mông). 낙상 시 엉덩이 골절.",
+        },
+        {
+          kr: "에이즈",
+          en: "AIDS",
+          vi: "AIDS (bệnh)",
+          type: "disease",
+          note: "AIDS에서. 에이즈 감염(nhiễm AIDS). 에이즈 예방(phòng ngừa AIDS). HIV 바이러스로 인한 질병.",
+        },
+        {
+          kr: "여드름",
+          en: "acne, pimple",
+          vi: "mụn trứng cá",
+          type: "disease",
+          note: "여드름이 나다(nổi mụn). 여드름 피부(da mụn). 여드름 치료(điều trị mụn). 사춘기에 많이 생겨요.",
+        },
+        {
+          kr: "영양",
+          en: "nutrition, nourishment",
+          vi: "dinh dưỡng",
+          type: "habit",
+          note: "영양(營養). 영양을 섭취하다(tiêu thụ dinh dưỡng). 영양이 부족하다(thiếu dinh dưỡng). 균형 잡힌 영양.",
+        },
+        {
+          kr: "영양가",
+          en: "nutritional value",
+          vi: "giá trị dinh dưỡng",
+          type: "habit",
+          note: "영양(dinh dưỡng)+가(價,giá trị). 영양가가 높다/낮다(giá trị dinh dưỡng cao/thấp).",
+        },
+        {
+          kr: "영양분",
+          en: "nutrients, nutritional content",
+          vi: "chất dinh dưỡng",
+          type: "habit",
+          note: "영양+분(分). 영양분을 흡수하다(hấp thu chất dinh dưỡng). 영양분이 풍부한 음식.",
+        },
+        {
+          kr: "영양소",
+          en: "nutrients, nutritional elements",
+          vi: "dưỡng chất",
+          type: "habit",
+          note: "영양+소(素). 필수 영양소(dưỡng chất thiết yếu). 탄수화물, 단백질, 지방 등이 3대 영양소.",
+        },
+        {
+          kr: "영양제",
+          en: "nutritional supplement",
+          vi: "thực phẩm chức năng",
+          type: "medicine",
+          note: "영양(dinh dưỡng)+제(劑). 영양제를 복용하다(uống thực phẩm chức năng). 비타민, 미네랄 등.",
+        },
+        {
+          kr: "예방",
+          en: "prevention",
+          vi: "phòng ngừa, dự phòng",
+          type: "medicine",
+          note: "예방(豫防). 예방하다=phòng ngừa. 질병 예방(phòng ngừa bệnh tật). 예방 접종(tiêm phòng).",
+        },
+        {
+          kr: "오른손",
+          en: "right hand",
+          vi: "tay phải",
+          type: "body",
+          note: "오른(phải)+손(tay). 오른손잡이(thuận tay phải). ↔ 왼손(tay trái). 오른손으로 쓰다(viết bằng tay phải).",
+        },
+        {
+          kr: "온몸",
+          en: "whole body, entire body",
+          vi: "toàn thân",
+          type: "body",
+          note: "온(toàn)+몸(cơ thể). 온몸이 아프다(đau toàn thân). 온몸에 힘이 빠지다(toàn thân rã rời).",
+        },
+        {
+          kr: "온천욕",
+          en: "hot spring bath",
+          vi: "tắm suối nước nóng",
+          type: "habit",
+          note: "온천(溫泉)+욕(浴). 온천욕을 즐기다(tận hưởng tắm suối nóng). 피로 회복에 좋아요.",
+        },
+        {
+          kr: "외과",
+          en: "surgery department, surgical clinic",
+          vi: "khoa ngoại, phẫu thuật",
+          type: "dept",
+          note: "외과(外科). 외과 수술(phẫu thuật). 외과 의사(bác sĩ ngoại khoa). ↔ 내과(khoa nội).",
+        },
+        {
+          kr: "우울증",
+          en: "depression",
+          vi: "trầm cảm",
+          type: "disease",
+          note: "우울증(憂鬱症). 우울증을 앓다(bị trầm cảm). 우울증 치료(điều trị trầm cảm). 정신과에서 진료.",
+        },
+        {
+          kr: "음성",
+          en: "voice; negative (test result)",
+          vi: "giọng nói, âm thanh",
+          type: "body",
+          note: "두 가지: (1) 音聲 — giọng nói (음성이 크다), (2) 陰性 — âm tính (검사 음성=kết quả âm tính). ↔ 양성(dương tính).",
+        },
+        {
+          kr: "응급실",
+          en: "emergency room, ER",
+          vi: "phòng cấp cứu",
+          type: "dept",
+          note: "응급(應急)+실(室). 응급실에 가다(đến phòng cấp cứu). 응급 처치(sơ cứu). 24시간 운영.",
+        },
+        {
+          kr: "이마",
+          en: "forehead",
+          vi: "trán",
+          type: "body",
+          note: "이마에 땀이 나다(mồ hôi trán). 이마에 열이 있다(trán nóng-đo nhiệt). 이마를 찡그리다(nhăn trán).",
+        },
+        {
+          kr: "이비인후과",
+          en: "ENT clinic (ear, nose, throat)",
+          vi: "khoa tai mũi họng",
+          type: "dept",
+          note: "이(耳,tai)+비(鼻,mũi)+인후(咽喉,họng)+과. 감기, 축농증 등으로 방문. 이비인후과 전문의.",
+        },
+        {
+          kr: "임산부",
+          en: "pregnant woman",
+          vi: "phụ nữ mang thai",
+          type: "body",
+          note: "임산부(妊産婦). 임산부 배려석(ghế ưu tiên bà bầu). 임산부 건강 관리(chăm sóc sức khỏe bà bầu).",
+        },
+        {
+          kr: "임신",
+          en: "pregnancy",
+          vi: "mang thai, thai nghén",
+          type: "body",
+          note: "임신(妊娠). 임신하다=mang thai. 임신 테스트(xét nghiệm thai). 임신 중(đang mang thai). 임신부와 동의어.",
+        },
+        {
+          kr: "입술",
+          en: "lips",
+          vi: "môi",
+          type: "body",
+          note: "입술이 트다(môi nứt nẻ). 입술을 깨물다(cắn môi). 입술 색(màu môi). 립스틱을 바르다(thoa son môi).",
+        },
+        {
+          kr: "자살",
+          en: "suicide",
+          vi: "tự tử",
+          type: "disease",
+          note: "자살(自殺). 자살을 시도하다(cố tự tử). 자살 예방(phòng ngừa tự tử). 정신 건강과 관련. 생명 존중 중요.",
+        },
+        {
+          kr: "졸음",
+          en: "sleepiness, drowsiness",
+          vi: "buồn ngủ",
+          type: "body",
+          note: "졸다→졸음. 졸음이 오다(buồn ngủ). 졸음 운전(lái xe ngủ gật). 졸음을 참다(cố kìm buồn ngủ).",
+        },
+        {
+          kr: "주름",
+          en: "wrinkles, creases",
+          vi: "nếp nhăn",
+          type: "body",
+          note: "주름이 생기다(xuất hiện nếp nhăn). 주름을 펴다(làm phẳng nếp nhăn). 노화의 증거. 주름살과 동의어.",
+        },
+        {
+          kr: "주먹",
+          en: "fist, clenched hand",
+          vi: "nắm đấm, nắm tay",
+          type: "body",
+          note: "주먹을 쥐다(nắm đấm). 주먹으로 치다(đấm). 주먹 쥐고 참다(nắm đấm chịu đựng — thành ngữ).",
+        },
+        {
+          kr: "죽음",
+          en: "death",
+          vi: "cái chết",
+          type: "body",
+          note: "죽음(死). 죽음을 맞이하다(đối mặt cái chết). 죽음을 두려워하다(sợ cái chết). 사망과 유사하나 더 철학적.",
+        },
+        {
+          kr: "증상",
+          en: "symptom",
+          vi: "triệu chứng",
+          type: "disease",
+          note: "증상(症狀). 증상이 나타나다(triệu chứng xuất hiện). 증상을 완화하다(giảm nhẹ triệu chứng). 증세와 유사.",
+        },
+        {
+          kr: "진찰",
+          en: "medical examination, consultation",
+          vi: "khám bệnh",
+          type: "medicine",
+          note: "진찰(診察). 진찰을 받다(được khám bệnh). 의사에게 진찰을 받다(được bác sĩ khám). 진료와 유사.",
+        },
+        {
+          kr: "진통제",
+          en: "painkiller, analgesic",
+          vi: "thuốc giảm đau",
+          type: "medicine",
+          note: "진통(鎭痛)+제(劑). 진통제를 먹다(uống thuốc giảm đau). 두통, 치통 등에 사용. 타이레놀이 대표적.",
+        },
+        {
+          kr: "질병",
+          en: "disease, illness",
+          vi: "bệnh tật",
+          type: "disease",
+          note: "질병(疾病). 질병을 예방하다(phòng ngừa bệnh tật). 만성 질병(bệnh mãn tính). 질환과 유사.",
+        },
+        {
+          kr: "질환",
+          en: "disease, condition",
+          vi: "bệnh lý, bệnh tật",
+          type: "disease",
+          note: "질환(疾患). 만성 질환(bệnh mãn tính). 질병보다 더 의학적 표현. 심혈관 질환(bệnh tim mạch).",
+        },
+        {
+          kr: "찜질",
+          en: "heat/cold compress, jjimjil",
+          vi: "đắp nóng, chườm",
+          type: "habit",
+          note: "찜질(蒸질). 찜질방(phòng xông hơi Hàn). 온찜질(chườm nóng), 냉찜질(chườm lạnh). 통증 완화에 사용.",
+        },
+        {
+          kr: "처방",
+          en: "prescription, medical order",
+          vi: "đơn thuốc, kê đơn",
+          type: "medicine",
+          note: "처방(處方). 처방을 받다(nhận đơn thuốc). 의사가 처방하다(bác sĩ kê đơn). 처방전 없이 살 수 없는 약.",
+        },
+        {
+          kr: "처방전",
+          en: "prescription slip",
+          vi: "toa thuốc",
+          type: "medicine",
+          note: "처방(đơn thuốc)+전(箋,tờ). 처방전을 받다(nhận toa thuốc). 처방전을 약국에 제출하다(nộp toa ở nhà thuốc).",
+        },
+        {
+          kr: "체격",
+          en: "physique, build, frame",
+          vi: "thể hình, vóc dáng",
+          type: "body",
+          note: "체격(體格). 체격이 좋다(vóc dáng tốt/vạm vỡ). 탄탄한 체격(thể hình chắc khỏe). 운동으로 체격을 가꾸다.",
+        },
+        {
+          kr: "체온",
+          en: "body temperature",
+          vi: "nhiệt độ cơ thể",
+          type: "body",
+          note: "체온(體溫). 체온을 재다(đo nhiệt độ). 정상 체온 36.5도. 체온이 높다(sốt). 체온계(nhiệt kế).",
+        },
+        {
+          kr: "체중",
+          en: "body weight",
+          vi: "cân nặng",
+          type: "body",
+          note: "체중(體重). 체중을 재다(cân). 체중이 늘다/줄다(tăng/giảm cân). 몸무게와 동의어. 체중 관리(quản lý cân nặng).",
+        },
+        {
+          kr: "출산",
+          en: "childbirth, delivery",
+          vi: "sinh con, đẻ",
+          type: "body",
+          note: "출산(出産). 출산하다=sinh con. 출산 후(sau khi sinh). 출산율(tỷ lệ sinh). 출산을 돕다(hỗ trợ sinh nở).",
+        },
+        {
+          kr: "출생",
+          en: "birth, nativity",
+          vi: "sự ra đời, sinh ra",
+          type: "body",
+          note: "출생(出生). 출생하다=được sinh ra. 출생 증명서(giấy khai sinh). 출생지(nơi sinh). 출산과 유사하나 더 공식적.",
+        },
+        {
+          kr: "취침",
+          en: "going to bed, bedtime",
+          vi: "đi ngủ",
+          type: "habit",
+          note: "취침(就寢). 취침 시간(giờ đi ngủ). 취침 전 루틴(thói quen trước khi ngủ). 취침하다=đi ngủ.",
+        },
+        {
+          kr: "치료제",
+          en: "therapeutic medicine, treatment drug",
+          vi: "thuốc điều trị",
+          type: "medicine",
+          note: "치료(治療)+제(劑). 암 치료제(thuốc điều trị ung thư). 치료제를 개발하다(phát triển thuốc điều trị).",
+        },
+        {
+          kr: "침",
+          en: "saliva; acupuncture needle",
+          vi: "nước bọt",
+          type: "body",
+          note: "두 가지: (1) 침(nước bọt—침을 삼키다=nuốt nước bọt), (2) 침(針, kim châm cứu—침을 맞다=được châm cứu).",
+        },
+        {
+          kr: "카페인",
+          en: "caffeine",
+          vi: "caffeine",
+          type: "habit",
+          note: "caffeine에서. 카페인을 섭취하다(tiêu thụ caffeine). 커피, 녹차에 풍부. 과다 섭취 시 수면 방해.",
+        },
+        {
+          kr: "토하다",
+          en: "to vomit, to throw up",
+          vi: "nôn, nôn mửa",
+          type: "disease",
+          note: "토하다=nôn. 구토하다와 동의어. 식중독이나 멀미로 토하다(nôn do ngộ độc/say xe).",
+        },
+        {
+          kr: "통증",
+          en: "pain, ache (clinical)",
+          vi: "cơn đau, đau nhói",
+          type: "disease",
+          note: "통증(痛症). 통증을 느끼다(cảm thấy đau). 만성 통증(đau mãn tính). 통증 완화(giảm đau). 아픔보다 의학적.",
+        },
+        {
+          kr: "퇴원",
+          en: "hospital discharge",
+          vi: "xuất viện",
+          type: "medicine",
+          note: "퇴원(退院). 퇴원하다=xuất viện. 퇴원 후 관리(chăm sóc sau xuất viện). ↔ 입원(nhập viện).",
+        },
+        {
+          kr: "편식",
+          en: "picky eating, unbalanced diet",
+          vi: "ăn uống không cân bằng",
+          type: "habit",
+          note: "편식(偏食). 편식하다=ăn kén. 편식은 건강에 나빠요(ăn kén hại sức khỏe). 채소를 안 먹는 것 등.",
+        },
+        {
+          kr: "폭식",
+          en: "binge eating, overeating at once",
+          vi: "ăn quá nhiều một lúc",
+          type: "habit",
+          note: "폭식(暴食). 폭식하다=ăn thật nhiều. 스트레스 폭식(ăn xả stress). 폭식증(chứng ăn vô độ).",
+        },
+        {
+          kr: "표정",
+          en: "facial expression",
+          vi: "biểu cảm, nét mặt",
+          type: "body",
+          note: "표정(表情). 표정이 밝다/어둡다(mặt vui/buồn). 표정을 읽다(đọc biểu cảm). 무표정(mặt lạnh, vô cảm).",
+        },
+        {
+          kr: "피로",
+          en: "fatigue, tiredness",
+          vi: "mệt mỏi, kiệt sức",
+          type: "body",
+          note: "피로(疲勞). 피로가 쌓이다(mệt mỏi tích lũy). 피로 회복(hồi phục sau mệt mỏi). 만성 피로(mệt mỏi mãn tính).",
+        },
+        {
+          kr: "피부",
+          en: "skin",
+          vi: "da cơ thể",
+          type: "body",
+          note: "피부(皮膚). 피부가 좋다(da đẹp). 피부 관리(chăm sóc da). 건성/지성 피부(da khô/dầu). 피부 트러블(vấn đề về da).",
+        },
+        {
+          kr: "피부과",
+          en: "dermatology clinic",
+          vi: "khoa da liễu",
+          type: "dept",
+          note: "피부(皮膚)+과(科). 피부과에 가다(đi khám da liễu). 여드름, 피부병 치료. 피부과 전문의.",
+        },
+        {
+          kr: "피부병",
+          en: "skin disease, skin condition",
+          vi: "bệnh ngoài da",
+          type: "disease",
+          note: "피부(da)+병(病). 피부병을 치료하다(điều trị bệnh da). 아토피, 습진 등이 피부병.",
+        },
+        {
+          kr: "하품",
+          en: "yawn",
+          vi: "ngáp, cái ngáp",
+          type: "body",
+          note: "하품을 하다(ngáp). 하품이 나다(buồn ngủ nên ngáp). 졸릴 때 하품이 나요(khi buồn ngủ thì hay ngáp).",
+        },
+        {
+          kr: "한약",
+          en: "Korean traditional medicine, herbal medicine",
+          vi: "thuốc đông y",
+          type: "medicine",
+          note: "한약(韓藥). 한약을 짓다(sắc thuốc đông y). 한약재(dược liệu đông y). 한의원에서 처방.",
+        },
+        {
+          kr: "해열제",
+          en: "antipyretic, fever reducer",
+          vi: "thuốc hạ sốt",
+          type: "medicine",
+          note: "해열(解熱)+제(劑). 해열제를 먹다(uống thuốc hạ sốt). 타이레놀, 부루펜 등이 해열제.",
+        },
+        {
+          kr: "화상",
+          en: "burn, scald; video call",
+          vi: "bỏng nhiệt",
+          type: "disease",
+          note: "두 가지: (1) 火傷 — bỏng (화상을 입다=bị bỏng), (2) 畫像 — hình ảnh video (화상 통화=gọi video).",
+        },
+        {
+          kr: "회복",
+          en: "recovery, recuperation",
+          vi: "hồi phục, phục hồi",
+          type: "medicine",
+          note: "회복(回復). 회복하다=hồi phục. 빨리 회복되다(hồi phục nhanh). 회복 기간(thời gian hồi phục).",
+        },
+        {
+          kr: "휴식",
+          en: "rest, break",
+          vi: "sự nghỉ ngơi",
+          type: "habit",
+          note: "휴식(休息). 휴식을 취하다(nghỉ ngơi). 충분한 휴식(nghỉ ngơi đủ). 휴식 시간(thời gian nghỉ ngơi).",
+        },
+        {
+          kr: "흡연",
+          en: "smoking",
+          vi: "hút thuốc lá",
+          type: "habit",
+          note: "흡연(吸煙). 흡연하다=hút thuốc. 흡연 구역(khu vực hút thuốc). 금연 vs 흡연. 흡연이 건강에 나쁩니다.",
+        },
+      ];
 
-let currentFilter = 'all';
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    let tagHtml;
-    if      (item.type==='body')     tagHtml=`<span class="tag tag-body">Cơ thể</span>`;
-    else if (item.type==='disease')  tagHtml=`<span class="tag tag-disease">Bệnh tật</span>`;
-    else if (item.type==='medicine') tagHtml=`<span class="tag tag-medicine">Thuốc &amp; ĐT</span>`;
-    else if (item.type==='habit')    tagHtml=`<span class="tag tag-habit">Lối sống</span>`;
-    else                             tagHtml=`<span class="tag tag-dept">Khoa/CN</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${tagHtml}</td><td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const mf = currentFilter==='all' || item.type===currentFilter;
-    const ms = !q || item.kr.includes(q) || item.en.toLowerCase().includes(q) || item.vi.toLowerCase().includes(q) || item.note.toLowerCase().includes(q);
-    return mf && ms;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length===0?'block':'none';
-  document.getElementById('vocabTable').style.display = result.length===0?'none':'';
-}
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let tagHtml;
+          if (item.type === "body")
+            tagHtml = `<span class="tag tag-body">Cơ thể</span>`;
+          else if (item.type === "disease")
+            tagHtml = `<span class="tag tag-disease">Bệnh tật</span>`;
+          else if (item.type === "medicine")
+            tagHtml = `<span class="tag tag-medicine">Thuốc &amp; ĐT</span>`;
+          else if (item.type === "habit")
+            tagHtml = `<span class="tag tag-habit">Lối sống</span>`;
+          else tagHtml = `<span class="tag tag-dept">Khoa/CN</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${i + 1}</td><td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td><td>${item.en}</td><td>${item.vi}</td><td>${tagHtml}</td><td><span class="note">${item.note}</span></td>`;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const mf = currentFilter === "all" || item.type === currentFilter;
+          const ms =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return mf && ms;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
