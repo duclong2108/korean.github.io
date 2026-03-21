@@ -1,223 +1,1037 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Giao thông & Du lịch (Nâng cao)</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f0f4f8;
-    --card: #ffffff;
-    --accent: #1a3a6a;
-    --text: #081428;
-    --sub: #5a7090;
-    --border: #c4d0e4;
-    --tag-road: #dce8f8;
-    --tag-air: #e0f4fc;
-    --tag-travel: #e8f8e8;
-    --tag-vehicle: #fef0d8;
-    --tag-misc: #f0eafa;
-    --highlight: #eaf2ff;
-    --row-alt: #f6fafd;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-  .header { background: var(--text); color: #f0f4f8; padding: 36px 40px 28px; position: relative; overflow: hidden; }
-  .header::before { content: '교통'; position: absolute; right: 40px; top: 50%; transform: translateY(-50%); font-family: 'Noto Serif KR', serif; font-size: 120px; color: rgba(255,255,255,0.05); font-weight: 600; letter-spacing: -4px; user-select: none; }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #7a9aba; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
-  .controls { padding: 20px 40px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput { width: 100%; padding: 10px 12px 10px 38px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px; background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s; }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
-  .filter-btn { padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 8px; background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif; font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f0f4f8; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 145px; }
-  th:nth-child(3), td:nth-child(3) { width: 185px; }
-  th:nth-child(4), td:nth-child(4) { width: 210px; }
-  th:nth-child(5), td:nth-child(5) { width: 120px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
-  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
-  .tag-road    { background: var(--tag-road);    color: #0a2a60; }
-  .tag-air     { background: var(--tag-air);     color: #0a3a50; }
-  .tag-travel  { background: var(--tag-travel);  color: #0a4020; }
-  .tag-vehicle { background: var(--tag-vehicle); color: #5a3000; }
-  .tag-misc    { background: var(--tag-misc);    color: #3a0a6a; }
-  .note { font-size: 12px; color: var(--sub); font-style: italic; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
-  @media (max-width: 768px) { .header { padding: 24px 20px; } .header::before { display: none; } .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; } th, td { padding: 10px 12px; } .korean-word { font-size: 15px; } }
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>교통 & 여행 (심화) — Giao thông & Du lịch (Nâng cao)</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Giao thông nâng cao · Chủ đề TOPIK II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="road">Đường bộ</button>
-  <button class="filter-btn" data-filter="air">Hàng không</button>
-  <button class="filter-btn" data-filter="travel">Du lịch</button>
-  <button class="filter-btn" data-filter="vehicle">Phương tiện</button>
-  <button class="filter-btn" data-filter="misc">Tổng quát</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Giao thông &amp; Du lịch (Nâng cao)</div>
-<script>
-const vocab = [
-  { kr:"고속", en:"high speed", vi:"tốc độ cao", type:"road", note:"고속(高速). 고속 열차(tàu tốc độ cao). 고속도로(đường cao tốc). 고속 버스(xe buýt tốc hành)." },
-  { kr:"고속도로", en:"highway, expressway", vi:"đường cao tốc", type:"road", note:"고속(tốc độ cao)+도로(đường). 고속도로를 타다(đi đường cao tốc). 고속도로 요금(phí cao tốc)." },
-  { kr:"골목길", en:"alley, narrow lane", vi:"ngõ hẻm", type:"road", note:"골목(ngõ)+길(đường). 좁은 골목길(ngõ hẻm hẹp). 골목길에서 놀다(chơi trong ngõ). 도심 골목길." },
-  { kr:"과속", en:"speeding, excessive speed", vi:"chạy quá tốc độ", type:"road", note:"과(過,quá)+속(速,tốc độ). 과속 운전(lái xe quá tốc độ). 과속 카메라(camera bắt tốc độ). 속도위반과 유사." },
-  { kr:"관광", en:"tourism, sightseeing", vi:"du lịch, tham quan", type:"travel", note:"관광(觀光). 관광하다=tham quan. 관광 명소(danh lam thắng cảnh). 관광 버스(xe buýt du lịch)." },
-  { kr:"관광객", en:"tourist, sightseer", vi:"khách du lịch", type:"travel", note:"관광(du lịch)+객(客,khách). 외국인 관광객(khách du lịch nước ngoài). 관광객이 많아요." },
-  { kr:"관광지", en:"tourist attraction, tourist spot", vi:"điểm du lịch", type:"travel", note:"관광(du lịch)+지(地,địa điểm). 유명한 관광지(điểm du lịch nổi tiếng). 관광지를 방문하다." },
-  { kr:"교통수단", en:"means of transportation", vi:"phương tiện giao thông", type:"misc", note:"교통(giao thông)+수단(手段,phương tiện). 대중 교통수단(phương tiện giao thông công cộng). 다양한 교통수단." },
-  { kr:"교통편", en:"transportation, transit options", vi:"phương tiện vận chuyển", type:"misc", note:"교통(giao thông)+편(便,tiện lợi). 교통편이 좋다(giao thông thuận tiện). 교통편을 이용하다." },
-  { kr:"국내선", en:"domestic flight", vi:"chuyến bay nội địa", type:"air", note:"국내(nội địa)+선(線,tuyến). 국내선 탑승구(cửa lên máy bay nội địa). ↔ 국제선(quốc tế)." },
-  { kr:"국제선", en:"international flight", vi:"chuyến bay quốc tế", type:"air", note:"국제(國際)+선(線). 국제선 출발(khởi hành chuyến bay quốc tế). ↔ 국내선(nội địa)." },
-  { kr:"귀국", en:"return to home country", vi:"về nước", type:"travel", note:"귀국(歸國). 귀국하다=về nước. 귀국 날짜(ngày về nước). 귀국 비행기(máy bay về nước)." },
-  { kr:"기념품", en:"souvenir, memento", vi:"quà lưu niệm", type:"travel", note:"기념(kỷ niệm)+품(品). 기념품을 사다(mua quà lưu niệm). 기념품 가게(cửa hàng quà lưu niệm)." },
-  { kr:"기차역", en:"train station", vi:"ga tàu hỏa", type:"road", note:"기차(tàu hỏa)+역(驛,ga). 기차역에서 만나다(gặp ở ga tàu). 기차역 대합실(phòng chờ ga tàu)." },
-  { kr:"기차표", en:"train ticket", vi:"vé tàu hỏa", type:"road", note:"기차(tàu)+표(票,vé). 기차표를 끊다(mua vé tàu). 기차표 예매(đặt vé tàu trước). KTX표(vé KTX)." },
-  { kr:"길가", en:"roadside, wayside", vi:"bên đường, lề đường", type:"road", note:"길(đường)+가(bên cạnh). 길가에 앉다(ngồi bên đường). 길가 식당(nhà hàng ven đường)." },
-  { kr:"노선", en:"route, line", vi:"tuyến đường", type:"road", note:"노선(路線). 버스 노선(tuyến xe buýt). 지하철 노선(tuyến metro). 노선도(bản đồ tuyến đường)." },
-  { kr:"대중교통", en:"public transportation", vi:"giao thông công cộng", type:"road", note:"대중(大衆)+교통(交通). 대중교통을 이용하다(đi lại bằng giao thông công cộng). 환경에 좋아요." },
-  { kr:"도중", en:"on the way, midway", vi:"giữa đường, trên đường", type:"road", note:"도중(途中). 도중에 멈추다(dừng lại giữa đường). 귀국 도중(trên đường về nước)." },
-  { kr:"뒷자리", en:"back seat", vi:"ghế phía sau", type:"vehicle", note:"뒤(sau)+자리(chỗ). 뒷자리에 앉다(ngồi ghế sau). 택시 뒷자리(ghế sau taxi). ↔ 앞자리(ghế trước)." },
-  { kr:"렌터카", en:"car rental, rental car", vi:"xe thuê", type:"vehicle", note:"rent-a-car에서. 렌터카를 빌리다(thuê xe). 렌터카 서비스(dịch vụ thuê xe). 여행 시 편리해요." },
-  { kr:"막차", en:"last train/bus of the day", vi:"chuyến tàu/xe cuối", type:"road", note:"막(마지막=cuối)+차(xe). 막차를 타다(đi chuyến cuối). 막차 시간(giờ chạy chuyến cuối). ↔ 첫차(chuyến đầu)." },
-  { kr:"매표소", en:"ticket office, box office", vi:"phòng bán vé", type:"road", note:"매표(賣票)+소(所). 매표소에서 표를 사다(mua vé tại phòng vé). 버스 매표소(phòng vé xe buýt)." },
-  { kr:"면세점", en:"duty-free shop", vi:"cửa hàng miễn thuế", type:"air", note:"면세(免稅)+점(店). 공항 면세점(cửa hàng miễn thuế sân bay). 면세점에서 쇼핑하다." },
-  { kr:"명소", en:"famous place, landmark", vi:"danh lam thắng cảnh", type:"travel", note:"명소(名所). 서울의 명소(danh lam thắng cảnh Seoul). 관광 명소(điểm du lịch nổi tiếng)." },
-  { kr:"목적지", en:"destination", vi:"điểm đến, nơi đến", type:"travel", note:"목적(目的,mục đích)+지(地,nơi). 목적지에 도착하다(đến điểm đến). 최종 목적지(điểm đến cuối cùng)." },
-  { kr:"묵다", en:"to stay, to lodge (at a hotel)", vi:"nghỉ lại, ở trọ", type:"travel", note:"호텔에 묵다(nghỉ ở khách sạn). 하룻밤 묵다(nghỉ một đêm). 어디서 묵을 거예요?(nghỉ ở đâu?)" },
-  { kr:"민박", en:"homestay, local lodging", vi:"nhà nghỉ dân dã, homestay", type:"travel", note:"민박(民泊). 민박집(nhà nghỉ tư nhân). 민박을 하다(ở homestay). 저렴한 숙박 형태." },
-  { kr:"바퀴", en:"wheel, tire", vi:"bánh xe", type:"vehicle", note:"바퀴가 펑크나다(bánh xe bị thủng). 네 바퀴(4 bánh). 자전거 바퀴(bánh xe đạp)." },
-  { kr:"배낭", en:"backpack, rucksack", vi:"ba lô", type:"travel", note:"배낭을 메다(đeo ba lô). 배낭여행(du lịch ba lô). 배낭에 짐을 넣다(cho đồ vào ba lô)." },
-  { kr:"배낭여행", en:"backpacking trip", vi:"du lịch ba lô", type:"travel", note:"배낭+여행. 배낭여행을 하다(đi du lịch ba lô). 저렴하고 자유로운 여행 방식." },
-  { kr:"브레이크", en:"brake", vi:"phanh, thắng xe", type:"vehicle", note:"brake에서. 브레이크를 밟다(đạp phanh). 급브레이크(phanh gấp). 브레이크 고장(hỏng phanh)." },
-  { kr:"비자", en:"visa", vi:"thị thực (visa)", type:"air", note:"visa에서. 비자를 발급받다(được cấp visa). 비자 신청(xin visa). 무비자(miễn visa)." },
-  { kr:"셔틀버스", en:"shuttle bus", vi:"xe buýt đưa đón", type:"vehicle", note:"shuttle bus에서. 공항 셔틀버스(xe buýt sân bay). 셔틀버스를 타다(đi xe buýt đưa đón)." },
-  { kr:"소방차", en:"fire truck", vi:"xe cứu hỏa", type:"vehicle", note:"소방(消防,cứu hỏa)+차(車). 소방차가 출동하다(xe cứu hỏa xuất động). 소방차에 길을 비켜줘요." },
-  { kr:"속도위반", en:"speed violation", vi:"vi phạm tốc độ", type:"road", note:"속도(速度)+위반(違反). 속도위반으로 벌금을 내다(nộp phạt vi phạm tốc độ). 과속과 유사." },
-  { kr:"숙박", en:"lodging, overnight stay", vi:"chỗ ở, nơi nghỉ", type:"travel", note:"숙박(宿泊). 숙박하다=nghỉ lại. 숙박 시설(cơ sở lưu trú). 1박 숙박비(chi phí nghỉ 1 đêm)." },
-  { kr:"숙박비", en:"accommodation fee", vi:"phí thuê phòng", type:"travel", note:"숙박(nghỉ)+비(費,phí). 숙박비를 내다(trả phí thuê phòng). 1인당 숙박비(phí mỗi người)." },
-  { kr:"숙소", en:"accommodation, lodging place", vi:"nơi lưu trú", type:"travel", note:"숙소(宿所). 숙소를 잡다(đặt chỗ ở). 숙소가 편하다(nơi nghỉ thoải mái). 호텔, 게스트하우스 등." },
-  { kr:"승객", en:"passenger", vi:"hành khách", type:"road", note:"승객(乘客). 승객을 태우다(đón khách). 승객이 많다(nhiều hành khách). 항공 승객(hành khách hàng không)." },
-  { kr:"승용차", en:"passenger car, sedan", vi:"xe ô tô con", type:"vehicle", note:"승용(乘用,để đi)+차(車). 승용차를 운전하다(lái xe ô tô). 소형 승용차(xe ô tô con nhỏ)." },
-  { kr:"승차", en:"boarding, getting on (a vehicle)", vi:"lên xe, lên tàu", type:"road", note:"승차(乘車). 승차하다=lên xe. 승차권(vé lên xe). 무임승차(đi xe không vé). ↔ 하차(xuống xe)." },
-  { kr:"시외버스", en:"intercity bus", vi:"xe buýt liên tỉnh", type:"vehicle", note:"시외(市外,ngoại ô)+버스. 시외버스 터미널(bến xe liên tỉnh). 시외버스를 타다(đi xe liên tỉnh)." },
-  { kr:"신호", en:"signal, traffic light", vi:"tín hiệu, đèn hiệu", type:"road", note:"신호(信號). 신호를 지키다(tuân thủ tín hiệu). 신호 위반(vi phạm tín hiệu). 신호등(đèn tín hiệu)." },
-  { kr:"안전선", en:"safety line", vi:"đường an toàn", type:"road", note:"안전(安全)+선(線). 지하철 안전선(đường an전 metro). 안전선 안에서 기다리세요(chờ trong vạch an toàn)." },
-  { kr:"여관", en:"inn, small hotel", vi:"nhà trọ, khách sạn nhỏ", type:"travel", note:"여관(旅館). 저렴한 숙박 시설. 여관에 묵다(nghỉ ở nhà trọ). 모텔과 유사하나 더 전통적." },
-  { kr:"여행비", en:"travel expenses", vi:"chi phí đi du lịch", type:"travel", note:"여행+비(費). 여행비가 얼마예요?(chi phí đi du lịch là bao nhiêu?). 여행비를 절약하다." },
-  { kr:"여행자", en:"traveler", vi:"du khách, người đi du lịch", type:"travel", note:"여행+자(者). 여행자 보험(bảo hiểm du khách). 장기 여행자(du khách dài ngày)." },
-  { kr:"여행지", en:"travel destination", vi:"điểm du lịch", type:"travel", note:"여행+지(地). 인기 여행지(điểm du lịch phổ biến). 여행지를 정하다(chọn điểm đến)." },
-  { kr:"예매", en:"advance reservation, booking", vi:"đặt vé trước", type:"misc", note:"예매(豫買). 기차표를 예매하다(đặt vé tàu trước). 온라인 예매(đặt vé online). 현장 구매보다 저렴." },
-  { kr:"오토바이", en:"motorcycle, motorbike", vi:"xe máy, mô tô", type:"vehicle", note:"auto+bike에서. 오토바이를 타다(đi xe máy). 오토바이 헬멧(mũ bảo hiểm xe máy). 배달 오토바이." },
-  { kr:"왕복", en:"round trip", vi:"khứ hồi", type:"misc", note:"왕복(往復). 왕복 티켓(vé khứ hồi). 왕복 요금(giá khứ hồi). ↔ 편도(một chiều)." },
-  { kr:"운전면허", en:"driver's license", vi:"bằng lái xe", type:"vehicle", note:"운전(운전)+면허(免許,giấy phép). 운전면허를 따다(thi lấy bằng lái). 운전면허증(bằng lái xe)." },
-  { kr:"운전자", en:"driver", vi:"người lái xe", type:"vehicle", note:"운전(lái xe)+자(者). 운전자 주의(lái xe chú ý). 대리 운전자(tài xế đại diện). 안전 운전자." },
-  { kr:"유람선", en:"cruise ship, pleasure boat", vi:"tàu du lịch", type:"vehicle", note:"유람(遊覽,tham quan)+선(船,tàu). 유람선을 타다(đi tàu du lịch). 한강 유람선(tàu du lịch sông Hàn)." },
-  { kr:"이동", en:"movement, travel, transfer", vi:"di chuyển, dịch chuyển", type:"misc", note:"이동(移動). 이동하다=di chuyển. 이동 수단(phương tiện di chuyển). 이동 시간(thời gian di chuyển)." },
-  { kr:"전동차", en:"electric train (subway car)", vi:"tàu điện ngầm (toa)", type:"vehicle", note:"전동(電動)+차(車). 전동차에 타다(lên tàu điện). 지하철 전동차(toa tàu metro)." },
-  { kr:"전철", en:"subway, metro, electric train", vi:"tàu điện, metro", type:"vehicle", note:"전철(電鐵). 전철을 타다(đi metro). 전철역(ga metro). 지하철과 유사하나 더 넓은 의미." },
-  { kr:"정차", en:"stop, halt (of vehicle)", vi:"dừng xe, tạm dừng", type:"road", note:"정차(停車). 정차하다=dừng xe. 임시 정차(dừng tạm). 정류장에 정차하다(dừng ở điểm dừng)." },
-  { kr:"좌석", en:"seat, chair", vi:"ghế ngồi, chỗ ngồi", type:"misc", note:"좌석(座席). 좌석을 예약하다(đặt chỗ ngồi). 창가 좌석(ghế cạnh cửa sổ). 좌석 번호(số ghế)." },
-  { kr:"좌회전", en:"left turn", vi:"rẽ trái", type:"road", note:"좌(左,trái)+회전(回轉,quay). 좌회전 금지(cấm rẽ trái). 신호에 따라 좌회전하다. ↔ 우회전(rẽ phải)." },
-  { kr:"주유소", en:"gas station, fuel station", vi:"trạm xăng", type:"road", note:"주유(注油)+소(所). 주유소에서 기름을 넣다(đổ xăng ở trạm). 셀프 주유소(tự phục vụ)." },
-  { kr:"중고차", en:"used car, second-hand car", vi:"xe cũ", type:"vehicle", note:"중고(中古,đã qua sử dụng)+차(車). 중고차를 사다(mua xe cũ). 중고차 시장(thị trường xe cũ)." },
-  { kr:"직진", en:"going straight ahead", vi:"đi thẳng", type:"road", note:"직진(直進). 직진하다=đi thẳng. 직진 금지(cấm đi thẳng). 좌회전-우회전-직진(trái-phải-thẳng)." },
-  { kr:"출국", en:"departure (from a country)", vi:"xuất cảnh, rời khỏi đất nước", type:"air", note:"출국(出國). 출국하다=xuất cảnh. 출국 심사(kiểm tra xuất cảnh). ↔ 입국(nhập cảnh)." },
-  { kr:"출근길", en:"commute to work, way to work", vi:"trên đường đi làm", type:"road", note:"출근(đi làm)+길(đường). 출근길에 막혀요(tắc đường đi làm). 출근길 교통(giao thông giờ đi làm)." },
-  { kr:"출입국", en:"immigration, entry and exit", vi:"xuất nhập cảnh", type:"air", note:"출입국(出入國). 출입국 심사(kiểm tra xuất nhập cảnh). 출입국 관리소(cơ quan quản lý XNC)." },
-  { kr:"충돌", en:"collision, crash, conflict", vi:"va chạm, xung đột", type:"road", note:"충돌(衝突). 충돌 사고(tai nạn va chạm). 차량 충돌(va chạm xe cộ). 의견 충돌(xung đột ý kiến)." },
-  { kr:"카센터", en:"car repair shop, auto shop", vi:"gara ô tô", type:"vehicle", note:"car center에서. 카센터에서 수리하다(sửa ở gara). 자동차 수리점과 동의." },
-  { kr:"큰길", en:"main road, main street", vi:"đường lớn, đường chính", type:"road", note:"큰(lớn)+길(đường). 큰길로 나가다(ra đường lớn). ↔ 골목길(ngõ hẻm). 큰길 건너편(bên kia đường lớn)." },
-  { kr:"탑승구", en:"boarding gate", vi:"cửa lên máy bay", type:"air", note:"탑승(搭乘,lên)+구(口,cửa). 탑승구 번호(số cổng). 탑승구에서 기다리다(chờ ở cổng lên máy bay)." },
-  { kr:"퇴근길", en:"commute home, way back from work", vi:"đường về sau giờ làm", type:"road", note:"퇴근(về nhà sau giờ làm)+길(đường). 퇴근길에 장을 봐요(đi chợ trên đường về). ↔ 출근길." },
-  { kr:"트럭", en:"truck, lorry", vi:"xe tải", type:"vehicle", note:"truck에서. 트럭을 운전하다(lái xe tải). 화물 트럭(xe tải hàng hóa). 대형 트럭(xe tải lớn)." },
-  { kr:"티켓", en:"ticket", vi:"vé", type:"misc", note:"ticket에서. 티켓을 구입하다(mua vé). 콘서트 티켓(vé concert). 티켓 예매(đặt vé trước). 표와 동의어." },
-  { kr:"표지판", en:"sign, signboard", vi:"biển báo", type:"road", note:"표지(標識)+판(板). 도로 표지판(biển báo đường). 표지판을 확인하다(kiểm tra biển báo)." },
-  { kr:"항공", en:"aviation, air travel", vi:"hàng không", type:"air", note:"항공(航空). 항공 회사(hãng hàng không). 항공 노선(tuyến bay). 항공 안전(an toàn hàng không)." },
-  { kr:"항공권", en:"flight ticket, airline ticket", vi:"vé máy bay", type:"air", note:"항공(hàng không)+권(券,vé). 항공권을 예매하다(đặt vé máy bay). 편도/왕복 항공권(1 chiều/khứ hồi)." },
-  { kr:"항공기", en:"aircraft, airplane", vi:"máy bay tổng quát", type:"air", note:"항공(hàng không)+기(機,máy). 항공기에 탑승하다(lên máy bay). 비행기와 동의어이나 더 격식." },
-  { kr:"항공료", en:"airfare, flight cost", vi:"giá vé máy bay", type:"air", note:"항공(hàng không)+료(料,phí). 항공료가 비싸다(giá vé đắt). 항공료를 비교하다(so sánh giá vé)." },
-  { kr:"항공사", en:"airline (company)", vi:"hãng hàng không", type:"air", note:"항공(hàng không)+사(社,công ty). 대한항공(Korean Air). 항공사를 선택하다(chọn hãng bay)." },
-  { kr:"항공편", en:"flight, flight number", vi:"chuyến bay", type:"air", note:"항공(hàng không)+편(便,chuyến). 항공편을 예약하다(đặt chuyến bay). 항공편 번호(số hiệu chuyến bay)." },
-  { kr:"헬멧", en:"helmet", vi:"mũ bảo hiểm", type:"vehicle", note:"helmet에서. 헬멧을 쓰다(đội mũ bảo hiểm). 오토바이 헬멧(mũ xe máy). 헬멧 착용 의무(bắt buộc đội mũ)." },
-  { kr:"화물", en:"cargo, freight, luggage", vi:"hàng hóa, hàng chuyên chở", type:"misc", note:"화물(貨物). 화물 운송(vận chuyển hàng hóa). 화물칸(khoang hàng). 화물 트럭(xe tải hàng)." },
-];
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Giao thông & Du lịch (Nâng cao)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f0f4f8;
+        --card: #ffffff;
+        --accent: #1a3a6a;
+        --text: #081428;
+        --sub: #5a7090;
+        --border: #c4d0e4;
+        --tag-road: #dce8f8;
+        --tag-air: #e0f4fc;
+        --tag-travel: #e8f8e8;
+        --tag-vehicle: #fef0d8;
+        --tag-misc: #f0eafa;
+        --highlight: #eaf2ff;
+        --row-alt: #f6fafd;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--text);
+        color: #f0f4f8;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "교통";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #7a9aba;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f0f4f8;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 145px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 185px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-road {
+        background: var(--tag-road);
+        color: #0a2a60;
+      }
+      .tag-air {
+        background: var(--tag-air);
+        color: #0a3a50;
+      }
+      .tag-travel {
+        background: var(--tag-travel);
+        color: #0a4020;
+      }
+      .tag-vehicle {
+        background: var(--tag-vehicle);
+        color: #5a3000;
+      }
+      .tag-misc {
+        background: var(--tag-misc);
+        color: #3a0a6a;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>교통 & 여행 (심화) — Giao thông & Du lịch (Nâng cao)</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Giao thông nâng cao · Chủ đề TOPIK II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="road">Đường bộ</button>
+      <button class="filter-btn" data-filter="air">Hàng không</button>
+      <button class="filter-btn" data-filter="travel">Du lịch</button>
+      <button class="filter-btn" data-filter="vehicle">Phương tiện</button>
+      <button class="filter-btn" data-filter="misc">Tổng quát</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú &amp; Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Giao thông &amp; Du lịch (Nâng cao)
+    </div>
+    <script>
+      const vocab = [
+        {
+          kr: "고속",
+          en: "high speed",
+          vi: "tốc độ cao",
+          type: "road",
+          note: "고속(高速). 고속 열차(tàu tốc độ cao). 고속도로(đường cao tốc). 고속 버스(xe buýt tốc hành).",
+        },
+        {
+          kr: "고속도로",
+          en: "highway, expressway",
+          vi: "đường cao tốc",
+          type: "road",
+          note: "고속(tốc độ cao)+도로(đường). 고속도로를 타다(đi đường cao tốc). 고속도로 요금(phí cao tốc).",
+        },
+        {
+          kr: "골목길",
+          en: "alley, narrow lane",
+          vi: "ngõ hẻm",
+          type: "road",
+          note: "골목(ngõ)+길(đường). 좁은 골목길(ngõ hẻm hẹp). 골목길에서 놀다(chơi trong ngõ). 도심 골목길.",
+        },
+        {
+          kr: "과속",
+          en: "speeding, excessive speed",
+          vi: "chạy quá tốc độ",
+          type: "road",
+          note: "과(過,quá)+속(速,tốc độ). 과속 운전(lái xe quá tốc độ). 과속 카메라(camera bắt tốc độ). 속도위반과 유사.",
+        },
+        {
+          kr: "관광",
+          en: "tourism, sightseeing",
+          vi: "du lịch, tham quan",
+          type: "travel",
+          note: "관광(觀光). 관광하다=tham quan. 관광 명소(danh lam thắng cảnh). 관광 버스(xe buýt du lịch).",
+        },
+        {
+          kr: "관광객",
+          en: "tourist, sightseer",
+          vi: "khách du lịch",
+          type: "travel",
+          note: "관광(du lịch)+객(客,khách). 외국인 관광객(khách du lịch nước ngoài). 관광객이 많아요.",
+        },
+        {
+          kr: "관광지",
+          en: "tourist attraction, tourist spot",
+          vi: "điểm du lịch",
+          type: "travel",
+          note: "관광(du lịch)+지(地,địa điểm). 유명한 관광지(điểm du lịch nổi tiếng). 관광지를 방문하다.",
+        },
+        {
+          kr: "교통수단",
+          en: "means of transportation",
+          vi: "phương tiện giao thông",
+          type: "misc",
+          note: "교통(giao thông)+수단(手段,phương tiện). 대중 교통수단(phương tiện giao thông công cộng). 다양한 교통수단.",
+        },
+        {
+          kr: "교통편",
+          en: "transportation, transit options",
+          vi: "phương tiện vận chuyển",
+          type: "misc",
+          note: "교통(giao thông)+편(便,tiện lợi). 교통편이 좋다(giao thông thuận tiện). 교통편을 이용하다.",
+        },
+        {
+          kr: "국내선",
+          en: "domestic flight",
+          vi: "chuyến bay nội địa",
+          type: "air",
+          note: "국내(nội địa)+선(線,tuyến). 국내선 탑승구(cửa lên máy bay nội địa). ↔ 국제선(quốc tế).",
+        },
+        {
+          kr: "국제선",
+          en: "international flight",
+          vi: "chuyến bay quốc tế",
+          type: "air",
+          note: "국제(國際)+선(線). 국제선 출발(khởi hành chuyến bay quốc tế). ↔ 국내선(nội địa).",
+        },
+        {
+          kr: "귀국",
+          en: "return to home country",
+          vi: "về nước",
+          type: "travel",
+          note: "귀국(歸國). 귀국하다=về nước. 귀국 날짜(ngày về nước). 귀국 비행기(máy bay về nước).",
+        },
+        {
+          kr: "기념품",
+          en: "souvenir, memento",
+          vi: "quà lưu niệm",
+          type: "travel",
+          note: "기념(kỷ niệm)+품(品). 기념품을 사다(mua quà lưu niệm). 기념품 가게(cửa hàng quà lưu niệm).",
+        },
+        {
+          kr: "기차역",
+          en: "train station",
+          vi: "ga tàu hỏa",
+          type: "road",
+          note: "기차(tàu hỏa)+역(驛,ga). 기차역에서 만나다(gặp ở ga tàu). 기차역 대합실(phòng chờ ga tàu).",
+        },
+        {
+          kr: "기차표",
+          en: "train ticket",
+          vi: "vé tàu hỏa",
+          type: "road",
+          note: "기차(tàu)+표(票,vé). 기차표를 끊다(mua vé tàu). 기차표 예매(đặt vé tàu trước). KTX표(vé KTX).",
+        },
+        {
+          kr: "길가",
+          en: "roadside, wayside",
+          vi: "bên đường, lề đường",
+          type: "road",
+          note: "길(đường)+가(bên cạnh). 길가에 앉다(ngồi bên đường). 길가 식당(nhà hàng ven đường).",
+        },
+        {
+          kr: "노선",
+          en: "route, line",
+          vi: "tuyến đường",
+          type: "road",
+          note: "노선(路線). 버스 노선(tuyến xe buýt). 지하철 노선(tuyến metro). 노선도(bản đồ tuyến đường).",
+        },
+        {
+          kr: "대중교통",
+          en: "public transportation",
+          vi: "giao thông công cộng",
+          type: "road",
+          note: "대중(大衆)+교통(交通). 대중교통을 이용하다(đi lại bằng giao thông công cộng). 환경에 좋아요.",
+        },
+        {
+          kr: "도중",
+          en: "on the way, midway",
+          vi: "giữa đường, trên đường",
+          type: "road",
+          note: "도중(途中). 도중에 멈추다(dừng lại giữa đường). 귀국 도중(trên đường về nước).",
+        },
+        {
+          kr: "뒷자리",
+          en: "back seat",
+          vi: "ghế phía sau",
+          type: "vehicle",
+          note: "뒤(sau)+자리(chỗ). 뒷자리에 앉다(ngồi ghế sau). 택시 뒷자리(ghế sau taxi). ↔ 앞자리(ghế trước).",
+        },
+        {
+          kr: "렌터카",
+          en: "car rental, rental car",
+          vi: "xe thuê",
+          type: "vehicle",
+          note: "rent-a-car에서. 렌터카를 빌리다(thuê xe). 렌터카 서비스(dịch vụ thuê xe). 여행 시 편리해요.",
+        },
+        {
+          kr: "막차",
+          en: "last train/bus of the day",
+          vi: "chuyến tàu/xe cuối",
+          type: "road",
+          note: "막(마지막=cuối)+차(xe). 막차를 타다(đi chuyến cuối). 막차 시간(giờ chạy chuyến cuối). ↔ 첫차(chuyến đầu).",
+        },
+        {
+          kr: "매표소",
+          en: "ticket office, box office",
+          vi: "phòng bán vé",
+          type: "road",
+          note: "매표(賣票)+소(所). 매표소에서 표를 사다(mua vé tại phòng vé). 버스 매표소(phòng vé xe buýt).",
+        },
+        {
+          kr: "면세점",
+          en: "duty-free shop",
+          vi: "cửa hàng miễn thuế",
+          type: "air",
+          note: "면세(免稅)+점(店). 공항 면세점(cửa hàng miễn thuế sân bay). 면세점에서 쇼핑하다.",
+        },
+        {
+          kr: "명소",
+          en: "famous place, landmark",
+          vi: "danh lam thắng cảnh",
+          type: "travel",
+          note: "명소(名所). 서울의 명소(danh lam thắng cảnh Seoul). 관광 명소(điểm du lịch nổi tiếng).",
+        },
+        {
+          kr: "목적지",
+          en: "destination",
+          vi: "điểm đến, nơi đến",
+          type: "travel",
+          note: "목적(目的,mục đích)+지(地,nơi). 목적지에 도착하다(đến điểm đến). 최종 목적지(điểm đến cuối cùng).",
+        },
+        {
+          kr: "묵다",
+          en: "to stay, to lodge (at a hotel)",
+          vi: "nghỉ lại, ở trọ",
+          type: "travel",
+          note: "호텔에 묵다(nghỉ ở khách sạn). 하룻밤 묵다(nghỉ một đêm). 어디서 묵을 거예요?(nghỉ ở đâu?)",
+        },
+        {
+          kr: "민박",
+          en: "homestay, local lodging",
+          vi: "nhà nghỉ dân dã, homestay",
+          type: "travel",
+          note: "민박(民泊). 민박집(nhà nghỉ tư nhân). 민박을 하다(ở homestay). 저렴한 숙박 형태.",
+        },
+        {
+          kr: "바퀴",
+          en: "wheel, tire",
+          vi: "bánh xe",
+          type: "vehicle",
+          note: "바퀴가 펑크나다(bánh xe bị thủng). 네 바퀴(4 bánh). 자전거 바퀴(bánh xe đạp).",
+        },
+        {
+          kr: "배낭",
+          en: "backpack, rucksack",
+          vi: "ba lô",
+          type: "travel",
+          note: "배낭을 메다(đeo ba lô). 배낭여행(du lịch ba lô). 배낭에 짐을 넣다(cho đồ vào ba lô).",
+        },
+        {
+          kr: "배낭여행",
+          en: "backpacking trip",
+          vi: "du lịch ba lô",
+          type: "travel",
+          note: "배낭+여행. 배낭여행을 하다(đi du lịch ba lô). 저렴하고 자유로운 여행 방식.",
+        },
+        {
+          kr: "브레이크",
+          en: "brake",
+          vi: "phanh, thắng xe",
+          type: "vehicle",
+          note: "brake에서. 브레이크를 밟다(đạp phanh). 급브레이크(phanh gấp). 브레이크 고장(hỏng phanh).",
+        },
+        {
+          kr: "비자",
+          en: "visa",
+          vi: "thị thực (visa)",
+          type: "air",
+          note: "visa에서. 비자를 발급받다(được cấp visa). 비자 신청(xin visa). 무비자(miễn visa).",
+        },
+        {
+          kr: "셔틀버스",
+          en: "shuttle bus",
+          vi: "xe buýt đưa đón",
+          type: "vehicle",
+          note: "shuttle bus에서. 공항 셔틀버스(xe buýt sân bay). 셔틀버스를 타다(đi xe buýt đưa đón).",
+        },
+        {
+          kr: "소방차",
+          en: "fire truck",
+          vi: "xe cứu hỏa",
+          type: "vehicle",
+          note: "소방(消防,cứu hỏa)+차(車). 소방차가 출동하다(xe cứu hỏa xuất động). 소방차에 길을 비켜줘요.",
+        },
+        {
+          kr: "속도위반",
+          en: "speed violation",
+          vi: "vi phạm tốc độ",
+          type: "road",
+          note: "속도(速度)+위반(違反). 속도위반으로 벌금을 내다(nộp phạt vi phạm tốc độ). 과속과 유사.",
+        },
+        {
+          kr: "숙박",
+          en: "lodging, overnight stay",
+          vi: "chỗ ở, nơi nghỉ",
+          type: "travel",
+          note: "숙박(宿泊). 숙박하다=nghỉ lại. 숙박 시설(cơ sở lưu trú). 1박 숙박비(chi phí nghỉ 1 đêm).",
+        },
+        {
+          kr: "숙박비",
+          en: "accommodation fee",
+          vi: "phí thuê phòng",
+          type: "travel",
+          note: "숙박(nghỉ)+비(費,phí). 숙박비를 내다(trả phí thuê phòng). 1인당 숙박비(phí mỗi người).",
+        },
+        {
+          kr: "숙소",
+          en: "accommodation, lodging place",
+          vi: "nơi lưu trú",
+          type: "travel",
+          note: "숙소(宿所). 숙소를 잡다(đặt chỗ ở). 숙소가 편하다(nơi nghỉ thoải mái). 호텔, 게스트하우스 등.",
+        },
+        {
+          kr: "승객",
+          en: "passenger",
+          vi: "hành khách",
+          type: "road",
+          note: "승객(乘客). 승객을 태우다(đón khách). 승객이 많다(nhiều hành khách). 항공 승객(hành khách hàng không).",
+        },
+        {
+          kr: "승용차",
+          en: "passenger car, sedan",
+          vi: "xe ô tô con",
+          type: "vehicle",
+          note: "승용(乘用,để đi)+차(車). 승용차를 운전하다(lái xe ô tô). 소형 승용차(xe ô tô con nhỏ).",
+        },
+        {
+          kr: "승차",
+          en: "boarding, getting on (a vehicle)",
+          vi: "lên xe, lên tàu",
+          type: "road",
+          note: "승차(乘車). 승차하다=lên xe. 승차권(vé lên xe). 무임승차(đi xe không vé). ↔ 하차(xuống xe).",
+        },
+        {
+          kr: "시외버스",
+          en: "intercity bus",
+          vi: "xe buýt liên tỉnh",
+          type: "vehicle",
+          note: "시외(市外,ngoại ô)+버스. 시외버스 터미널(bến xe liên tỉnh). 시외버스를 타다(đi xe liên tỉnh).",
+        },
+        {
+          kr: "신호",
+          en: "signal, traffic light",
+          vi: "tín hiệu, đèn hiệu",
+          type: "road",
+          note: "신호(信號). 신호를 지키다(tuân thủ tín hiệu). 신호 위반(vi phạm tín hiệu). 신호등(đèn tín hiệu).",
+        },
+        {
+          kr: "안전선",
+          en: "safety line",
+          vi: "đường an toàn",
+          type: "road",
+          note: "안전(安全)+선(線). 지하철 안전선(đường an전 metro). 안전선 안에서 기다리세요(chờ trong vạch an toàn).",
+        },
+        {
+          kr: "여관",
+          en: "inn, small hotel",
+          vi: "nhà trọ, khách sạn nhỏ",
+          type: "travel",
+          note: "여관(旅館). 저렴한 숙박 시설. 여관에 묵다(nghỉ ở nhà trọ). 모텔과 유사하나 더 전통적.",
+        },
+        {
+          kr: "여행비",
+          en: "travel expenses",
+          vi: "chi phí đi du lịch",
+          type: "travel",
+          note: "여행+비(費). 여행비가 얼마예요?(chi phí đi du lịch là bao nhiêu?). 여행비를 절약하다.",
+        },
+        {
+          kr: "여행자",
+          en: "traveler",
+          vi: "du khách, người đi du lịch",
+          type: "travel",
+          note: "여행+자(者). 여행자 보험(bảo hiểm du khách). 장기 여행자(du khách dài ngày).",
+        },
+        {
+          kr: "여행지",
+          en: "travel destination",
+          vi: "điểm du lịch",
+          type: "travel",
+          note: "여행+지(地). 인기 여행지(điểm du lịch phổ biến). 여행지를 정하다(chọn điểm đến).",
+        },
+        {
+          kr: "예매",
+          en: "advance reservation, booking",
+          vi: "đặt vé trước",
+          type: "misc",
+          note: "예매(豫買). 기차표를 예매하다(đặt vé tàu trước). 온라인 예매(đặt vé online). 현장 구매보다 저렴.",
+        },
+        {
+          kr: "오토바이",
+          en: "motorcycle, motorbike",
+          vi: "xe máy, mô tô",
+          type: "vehicle",
+          note: "auto+bike에서. 오토바이를 타다(đi xe máy). 오토바이 헬멧(mũ bảo hiểm xe máy). 배달 오토바이.",
+        },
+        {
+          kr: "왕복",
+          en: "round trip",
+          vi: "khứ hồi",
+          type: "misc",
+          note: "왕복(往復). 왕복 티켓(vé khứ hồi). 왕복 요금(giá khứ hồi). ↔ 편도(một chiều).",
+        },
+        {
+          kr: "운전면허",
+          en: "driver's license",
+          vi: "bằng lái xe",
+          type: "vehicle",
+          note: "운전(운전)+면허(免許,giấy phép). 운전면허를 따다(thi lấy bằng lái). 운전면허증(bằng lái xe).",
+        },
+        {
+          kr: "운전자",
+          en: "driver",
+          vi: "người lái xe",
+          type: "vehicle",
+          note: "운전(lái xe)+자(者). 운전자 주의(lái xe chú ý). 대리 운전자(tài xế đại diện). 안전 운전자.",
+        },
+        {
+          kr: "유람선",
+          en: "cruise ship, pleasure boat",
+          vi: "tàu du lịch",
+          type: "vehicle",
+          note: "유람(遊覽,tham quan)+선(船,tàu). 유람선을 타다(đi tàu du lịch). 한강 유람선(tàu du lịch sông Hàn).",
+        },
+        {
+          kr: "이동",
+          en: "movement, travel, transfer",
+          vi: "di chuyển, dịch chuyển",
+          type: "misc",
+          note: "이동(移動). 이동하다=di chuyển. 이동 수단(phương tiện di chuyển). 이동 시간(thời gian di chuyển).",
+        },
+        {
+          kr: "전동차",
+          en: "electric train (subway car)",
+          vi: "tàu điện ngầm (toa)",
+          type: "vehicle",
+          note: "전동(電動)+차(車). 전동차에 타다(lên tàu điện). 지하철 전동차(toa tàu metro).",
+        },
+        {
+          kr: "전철",
+          en: "subway, metro, electric train",
+          vi: "tàu điện, metro",
+          type: "vehicle",
+          note: "전철(電鐵). 전철을 타다(đi metro). 전철역(ga metro). 지하철과 유사하나 더 넓은 의미.",
+        },
+        {
+          kr: "정차",
+          en: "stop, halt (of vehicle)",
+          vi: "dừng xe, tạm dừng",
+          type: "road",
+          note: "정차(停車). 정차하다=dừng xe. 임시 정차(dừng tạm). 정류장에 정차하다(dừng ở điểm dừng).",
+        },
+        {
+          kr: "좌석",
+          en: "seat, chair",
+          vi: "ghế ngồi, chỗ ngồi",
+          type: "misc",
+          note: "좌석(座席). 좌석을 예약하다(đặt chỗ ngồi). 창가 좌석(ghế cạnh cửa sổ). 좌석 번호(số ghế).",
+        },
+        {
+          kr: "좌회전",
+          en: "left turn",
+          vi: "rẽ trái",
+          type: "road",
+          note: "좌(左,trái)+회전(回轉,quay). 좌회전 금지(cấm rẽ trái). 신호에 따라 좌회전하다. ↔ 우회전(rẽ phải).",
+        },
+        {
+          kr: "주유소",
+          en: "gas station, fuel station",
+          vi: "trạm xăng",
+          type: "road",
+          note: "주유(注油)+소(所). 주유소에서 기름을 넣다(đổ xăng ở trạm). 셀프 주유소(tự phục vụ).",
+        },
+        {
+          kr: "중고차",
+          en: "used car, second-hand car",
+          vi: "xe cũ",
+          type: "vehicle",
+          note: "중고(中古,đã qua sử dụng)+차(車). 중고차를 사다(mua xe cũ). 중고차 시장(thị trường xe cũ).",
+        },
+        {
+          kr: "직진",
+          en: "going straight ahead",
+          vi: "đi thẳng",
+          type: "road",
+          note: "직진(直進). 직진하다=đi thẳng. 직진 금지(cấm đi thẳng). 좌회전-우회전-직진(trái-phải-thẳng).",
+        },
+        {
+          kr: "출국",
+          en: "departure (from a country)",
+          vi: "xuất cảnh, rời khỏi đất nước",
+          type: "air",
+          note: "출국(出國). 출국하다=xuất cảnh. 출국 심사(kiểm tra xuất cảnh). ↔ 입국(nhập cảnh).",
+        },
+        {
+          kr: "출근길",
+          en: "commute to work, way to work",
+          vi: "trên đường đi làm",
+          type: "road",
+          note: "출근(đi làm)+길(đường). 출근길에 막혀요(tắc đường đi làm). 출근길 교통(giao thông giờ đi làm).",
+        },
+        {
+          kr: "출입국",
+          en: "immigration, entry and exit",
+          vi: "xuất nhập cảnh",
+          type: "air",
+          note: "출입국(出入國). 출입국 심사(kiểm tra xuất nhập cảnh). 출입국 관리소(cơ quan quản lý XNC).",
+        },
+        {
+          kr: "충돌",
+          en: "collision, crash, conflict",
+          vi: "va chạm, xung đột",
+          type: "road",
+          note: "충돌(衝突). 충돌 사고(tai nạn va chạm). 차량 충돌(va chạm xe cộ). 의견 충돌(xung đột ý kiến).",
+        },
+        {
+          kr: "카센터",
+          en: "car repair shop, auto shop",
+          vi: "gara ô tô",
+          type: "vehicle",
+          note: "car center에서. 카센터에서 수리하다(sửa ở gara). 자동차 수리점과 동의.",
+        },
+        {
+          kr: "큰길",
+          en: "main road, main street",
+          vi: "đường lớn, đường chính",
+          type: "road",
+          note: "큰(lớn)+길(đường). 큰길로 나가다(ra đường lớn). ↔ 골목길(ngõ hẻm). 큰길 건너편(bên kia đường lớn).",
+        },
+        {
+          kr: "탑승구",
+          en: "boarding gate",
+          vi: "cửa lên máy bay",
+          type: "air",
+          note: "탑승(搭乘,lên)+구(口,cửa). 탑승구 번호(số cổng). 탑승구에서 기다리다(chờ ở cổng lên máy bay).",
+        },
+        {
+          kr: "퇴근길",
+          en: "commute home, way back from work",
+          vi: "đường về sau giờ làm",
+          type: "road",
+          note: "퇴근(về nhà sau giờ làm)+길(đường). 퇴근길에 장을 봐요(đi chợ trên đường về). ↔ 출근길.",
+        },
+        {
+          kr: "트럭",
+          en: "truck, lorry",
+          vi: "xe tải",
+          type: "vehicle",
+          note: "truck에서. 트럭을 운전하다(lái xe tải). 화물 트럭(xe tải hàng hóa). 대형 트럭(xe tải lớn).",
+        },
+        {
+          kr: "티켓",
+          en: "ticket",
+          vi: "vé",
+          type: "misc",
+          note: "ticket에서. 티켓을 구입하다(mua vé). 콘서트 티켓(vé concert). 티켓 예매(đặt vé trước). 표와 동의어.",
+        },
+        {
+          kr: "표지판",
+          en: "sign, signboard",
+          vi: "biển báo",
+          type: "road",
+          note: "표지(標識)+판(板). 도로 표지판(biển báo đường). 표지판을 확인하다(kiểm tra biển báo).",
+        },
+        {
+          kr: "항공",
+          en: "aviation, air travel",
+          vi: "hàng không",
+          type: "air",
+          note: "항공(航空). 항공 회사(hãng hàng không). 항공 노선(tuyến bay). 항공 안전(an toàn hàng không).",
+        },
+        {
+          kr: "항공권",
+          en: "flight ticket, airline ticket",
+          vi: "vé máy bay",
+          type: "air",
+          note: "항공(hàng không)+권(券,vé). 항공권을 예매하다(đặt vé máy bay). 편도/왕복 항공권(1 chiều/khứ hồi).",
+        },
+        {
+          kr: "항공기",
+          en: "aircraft, airplane",
+          vi: "máy bay tổng quát",
+          type: "air",
+          note: "항공(hàng không)+기(機,máy). 항공기에 탑승하다(lên máy bay). 비행기와 동의어이나 더 격식.",
+        },
+        {
+          kr: "항공료",
+          en: "airfare, flight cost",
+          vi: "giá vé máy bay",
+          type: "air",
+          note: "항공(hàng không)+료(料,phí). 항공료가 비싸다(giá vé đắt). 항공료를 비교하다(so sánh giá vé).",
+        },
+        {
+          kr: "항공사",
+          en: "airline (company)",
+          vi: "hãng hàng không",
+          type: "air",
+          note: "항공(hàng không)+사(社,công ty). 대한항공(Korean Air). 항공사를 선택하다(chọn hãng bay).",
+        },
+        {
+          kr: "항공편",
+          en: "flight, flight number",
+          vi: "chuyến bay",
+          type: "air",
+          note: "항공(hàng không)+편(便,chuyến). 항공편을 예약하다(đặt chuyến bay). 항공편 번호(số hiệu chuyến bay).",
+        },
+        {
+          kr: "헬멧",
+          en: "helmet",
+          vi: "mũ bảo hiểm",
+          type: "vehicle",
+          note: "helmet에서. 헬멧을 쓰다(đội mũ bảo hiểm). 오토바이 헬멧(mũ xe máy). 헬멧 착용 의무(bắt buộc đội mũ).",
+        },
+        {
+          kr: "화물",
+          en: "cargo, freight, luggage",
+          vi: "hàng hóa, hàng chuyên chở",
+          type: "misc",
+          note: "화물(貨物). 화물 운송(vận chuyển hàng hóa). 화물칸(khoang hàng). 화물 트럭(xe tải hàng).",
+        },
+      ];
 
-let currentFilter = 'all';
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    let tagHtml;
-    if      (item.type==='road')    tagHtml=`<span class="tag tag-road">Đường bộ</span>`;
-    else if (item.type==='air')     tagHtml=`<span class="tag tag-air">Hàng không</span>`;
-    else if (item.type==='travel')  tagHtml=`<span class="tag tag-travel">Du lịch</span>`;
-    else if (item.type==='vehicle') tagHtml=`<span class="tag tag-vehicle">Phương tiện</span>`;
-    else                            tagHtml=`<span class="tag tag-misc">Tổng quát</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${tagHtml}</td><td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const mf = currentFilter==='all' || item.type===currentFilter;
-    const ms = !q || item.kr.includes(q) || item.en.toLowerCase().includes(q) || item.vi.toLowerCase().includes(q) || item.note.toLowerCase().includes(q);
-    return mf && ms;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length===0?'block':'none';
-  document.getElementById('vocabTable').style.display = result.length===0?'none':'';
-}
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let tagHtml;
+          if (item.type === "road")
+            tagHtml = `<span class="tag tag-road">Đường bộ</span>`;
+          else if (item.type === "air")
+            tagHtml = `<span class="tag tag-air">Hàng không</span>`;
+          else if (item.type === "travel")
+            tagHtml = `<span class="tag tag-travel">Du lịch</span>`;
+          else if (item.type === "vehicle")
+            tagHtml = `<span class="tag tag-vehicle">Phương tiện</span>`;
+          else tagHtml = `<span class="tag tag-misc">Tổng quát</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${i + 1}</td><td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td><td>${item.en}</td><td>${item.vi}</td><td>${tagHtml}</td><td><span class="note">${item.note}</span></td>`;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const mf = currentFilter === "all" || item.type === currentFilter;
+          const ms =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return mf && ms;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
