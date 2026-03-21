@@ -1,206 +1,924 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Số lượng & Đo lường</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f4f0fc;
-    --card: #fff;
-    --accent: #4a1a8a;
-    --text: #180830;
-    --sub: #7a5a9a;
-    --border: #d8c8f0;
-    --tag-measure: #ede0fa;
-    --tag-shape: #e0f0fa;
-    --tag-quantity: #e8f8e8;
-    --tag-unit: #fef0d8;
-    --tag-direction: #fce8f0;
-    --highlight: #f4eeff;
-    --row-alt: #faf7fd;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Be Vietnam Pro',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
-  .header { background:var(--text); color:#f4f0fc; padding:36px 40px 28px; position:relative; overflow:hidden; }
-  .header::before { content:'수량'; position:absolute; right:40px; top:50%; transform:translateY(-50%); font-family:'Noto Serif KR',serif; font-size:120px; color:rgba(255,255,255,.05); font-weight:600; letter-spacing:-4px; user-select:none; }
-  .header h1 { font-family:'Noto Serif KR',serif; font-size:28px; font-weight:600; letter-spacing:1px; margin-bottom:6px; }
-  .header p { font-size:13px; font-weight:300; color:#9a80ba; letter-spacing:.5px; }
-  .count-badge { display:inline-block; background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:10px; letter-spacing:.5px; }
-  .controls { padding:20px 40px; background:var(--card); border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-  .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--sub); }
-  #searchInput { width:100%; padding:10px 12px 10px 38px; border:1.5px solid var(--border); border-radius:8px; font-family:'Be Vietnam Pro',sans-serif; font-size:14px; background:var(--bg); color:var(--text); outline:none; transition:border-color .2s; }
-  #searchInput:focus { border-color:var(--accent); }
-  #searchInput::placeholder { color:var(--sub); }
-  .filter-btn { padding:7px 12px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); font-family:'Be Vietnam Pro',sans-serif; font-size:11px; font-weight:500; color:var(--sub); cursor:pointer; transition:all .2s; white-space:nowrap; }
-  .filter-btn:hover,.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .result-count { font-size:12px; color:var(--sub); white-space:nowrap; }
-  .table-wrap { padding:24px 40px 60px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); }
-  thead { background:var(--text); color:#f4f0fc; }
-  th { padding:14px 16px; text-align:left; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
-  th:nth-child(1),td:nth-child(1) { width:60px; text-align:center; }
-  th:nth-child(2),td:nth-child(2) { width:145px; }
-  th:nth-child(3),td:nth-child(3) { width:185px; }
-  th:nth-child(4),td:nth-child(4) { width:210px; }
-  th:nth-child(5),td:nth-child(5) { width:120px; }
-  th:nth-child(6),td:nth-child(6) { min-width:280px; }
-  tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
-  tbody tr:nth-child(even) { background:var(--row-alt); }
-  tbody tr:hover { background:var(--highlight); }
-  td { padding:12px 16px; font-size:13.5px; vertical-align:middle; line-height:1.5; }
-  td:nth-child(1) { font-size:11px; color:var(--sub); font-weight:600; }
-  .korean-word { font-family:'Noto Serif KR',serif; font-size:18px; font-weight:600; color:var(--accent); display:block; line-height:1.3; }
-  .tag { display:inline-flex; align-items:center; border-radius:4px; padding:2px 8px; font-size:11px; font-weight:500; white-space:nowrap; }
-  .tag-measure   { background:var(--tag-measure);   color:#3a0a7a; }
-  .tag-shape     { background:var(--tag-shape);     color:#0a2a60; }
-  .tag-quantity  { background:var(--tag-quantity);  color:#0a4a10; }
-  .tag-unit      { background:var(--tag-unit);      color:#5a3000; }
-  .tag-direction { background:var(--tag-direction); color:#7a0a40; }
-  .note { font-size:12px; color:var(--sub); font-style:italic; }
-  .no-results { text-align:center; padding:60px; color:var(--sub); font-size:15px; display:none; }
-  .footer { text-align:center; padding:20px; font-size:11px; color:var(--sub); border-top:1px solid var(--border); }
-  @media(max-width:768px){.header{padding:24px 20px}.header::before{display:none}.controls{padding:16px 20px}.table-wrap{padding:16px 20px 40px}th,td{padding:10px 12px}.korean-word{font-size:15px}}
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>수량 & 측정 — Số lượng & Đo lường</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Số lượng & Đơn vị · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="measure">Đo lường</button>
-  <button class="filter-btn" data-filter="quantity">Số lượng</button>
-  <button class="filter-btn" data-filter="unit">Đơn vị đếm</button>
-  <button class="filter-btn" data-filter="shape">Hình dạng & Vị trí</button>
-  <button class="filter-btn" data-filter="direction">Hướng & Chiều</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Số lượng &amp; Đo lường</div>
-<script>
-const vocab=[
-  {kr:"간격",en:"interval, gap, spacing",vi:"khoảng cách, khoảng trống",type:"measure",note:"간격(間隔). 간격을 두다(giữ khoảng cách). 줄 간격(khoảng cách dòng). 일정한 간격(khoảng cách đều đặn)."},
-  {kr:"구멍",en:"hole, opening",vi:"lỗ, lỗ hổng",type:"shape",note:"구멍이 나다(xuất hiện lỗ hổng). 구멍을 뚫다(khoét lỗ). 양말에 구멍이 났어요(tất bị thủng lỗ). 허점과 비유적으로 유사."},
-  {kr:"군데",en:"place, spot (counter)",vi:"nơi, chỗ",type:"unit",note:"장소 수 세기. 두 군데(hai nơi). 여러 군데(nhiều nơi). 몇 군데에 연락했어요(liên hệ vài nơi rồi)."},
-  {kr:"그루",en:"counter for trees",vi:"cây (đơn vị đếm cây)",type:"unit",note:"나무를 세는 단위. 나무 두 그루(hai cây). 소나무 세 그루(ba cây thông). 그루터기(gốc cây còn lại)."},
-  {kr:"금",en:"gold; line, scratch",vi:"vàng (kim loại)",type:"measure",note:"두 가지: (1) 金 — vàng (금반지=nhẫn vàng), (2) 금(선/흠집) — đường/vết nứt (금이 가다=xuất hiện vết nứt)."},
-  {kr:"길이",en:"length",vi:"chiều dài",type:"measure",note:"길다→길이. 길이를 재다(đo chiều dài). 길이가 얼마예요?(chiều dài bao nhiêu?). 1미터 길이(chiều dài 1 mét)."},
-  {kr:"깊이",en:"depth",vi:"độ sâu, chiều sâu",type:"measure",note:"깊다→깊이. 깊이를 재다(đo độ sâu). 수심 깊이(độ sâu mực nước). 깊이가 5미터(độ sâu 5 mét)."},
-  {kr:"나머지",en:"remainder, the rest",vi:"phần còn lại, số dư",type:"quantity",note:"나머지를 처리하다(xử lý phần còn lại). 10에서 3을 빼면 나머지는 7(10 trừ 3 dư 7). 나머지 사람들(những người còn lại)."},
-  {kr:"내용물",en:"contents (of a container)",vi:"nội dung bên trong",type:"quantity",note:"내용(內容)+물(物). 상자의 내용물(nội dung bên trong hộp). 내용물을 확인하다(kiểm tra nội dung)."},
-  {kr:"높이",en:"height",vi:"chiều cao, độ cao",type:"measure",note:"높다→높이. 높이를 재다(đo chiều cao). 건물 높이(chiều cao tòa nhà). 높이가 100미터(cao 100 mét)."},
-  {kr:"눈높이",en:"eye level; standard",vi:"tầm mắt, tiêu chuẩn",type:"measure",note:"눈(mắt)+높이(chiều cao). 눈높이에 맞추다(phù hợp tầm mắt). 학생 눈높이 교육(giáo dục phù hợp trình độ học sinh)."},
-  {kr:"다수",en:"majority, many",vi:"đa số, nhiều",type:"quantity",note:"다수(多數). 다수의 의견(ý kiến đa số). 다수결(đa số quyết định). ↔ 소수(thiểu số). 다수가 찬성했어요."},
-  {kr:"단계",en:"stage, step, level",vi:"giai đoạn, bước",type:"unit",note:"단계(段階). 1단계(giai đoạn 1). 단계별로(từng bước). 단계를 밟다(đi từng bước). 초급-중급-고급 단계."},
-  {kr:"단위",en:"unit (of measurement)",vi:"đơn vị",type:"unit",note:"단위(單位). 측정 단위(đơn vị đo lường). 단위를 확인하다(xác nhận đơn vị). 미터, 킬로그램 등이 단위."},
-  {kr:"대량",en:"large quantity, mass",vi:"số lượng lớn, đại lượng",type:"quantity",note:"대량(大量). 대량 생산(sản xuất đại trà). 대량 구매(mua số lượng lớn). ↔ 소량(số lượng nhỏ)."},
-  {kr:"대형",en:"large size, large-scale",vi:"cỡ lớn, quy mô lớn",type:"measure",note:"대형(大型). 대형 마트(siêu thị lớn). 대형 사고(tai nạn lớn). ↔ 소형(cỡ nhỏ). 대형 버스(xe buýt lớn)."},
-  {kr:"두세",en:"two or three",vi:"hai ba (khoảng)",type:"quantity",note:"둘이나 셋. 두세 명(hai ba người). 두세 개(hai ba cái). 몇 개 안 되는 수량을 나타냄."},
-  {kr:"마디",en:"joint, segment; musical bar",vi:"đốt, mấu; khúc âm nhạc",type:"unit",note:"두 가지: (1) 마디(đốt — 손가락 마디=đốt ngón tay), (2) 마디(nhịp nhạc — 한 마디=một nhịp). 한 마디만요(chỉ một câu thôi)."},
-  {kr:"몇몇",en:"some, a few",vi:"một vài, một số",type:"quantity",note:"몇몇 사람(một vài người). 몇몇이 모였어요(một số người đã tụ tập). 여럿과 유사하나 더 적은 수."},
-  {kr:"무게",en:"weight",vi:"trọng lượng, cân nặng",type:"measure",note:"무게를 재다(đo trọng lượng). 무게가 얼마예요?(nặng bao nhiêu?). 무게 제한(giới hạn trọng lượng). 체중과 유사."},
-  {kr:"밀리미터",en:"millimeter",vi:"mili-mét (đơn vị)",type:"unit",note:"밀리미터(mm). 1센티미터=10밀리미터. 강수량을 밀리미터로 측정해요(đo lượng mưa bằng mm). 정밀 측정에 사용."},
-  {kr:"방향",en:"direction",vi:"hướng, phương hướng",type:"direction",note:"방향(方向). 방향을 잡다(xác định hướng). 방향을 잃다(mất phương hướng). 동서남북(đông tây nam bắc) 방향."},
-  {kr:"범위",en:"range, scope",vi:"phạm vi, tầm",type:"measure",note:"범위(範圍). 범위를 정하다(xác định phạm vi). 활동 범위(phạm vi hoạt động). 시험 범위(phạm vi thi)."},
-  {kr:"부분",en:"part, portion, section",vi:"phần, bộ phận",type:"quantity",note:"부분(部分). 일부분(một phần). 전체와 부분(toàn thể và bộ phận). 이 부분이 중요해요(phần này quan trọng)."},
-  {kr:"부피",en:"volume, bulk",vi:"thể tích, dung tích",type:"measure",note:"부피를 재다(đo thể tích). 부피가 크다/작다(thể tích lớn/nhỏ). 리터로 부피를 측정해요(đo thể tích bằng lít)."},
-  {kr:"분량",en:"quantity, amount, portion",vi:"khối lượng, số lượng",type:"quantity",note:"분량(分量). 분량이 많다/적다(khối lượng nhiều/ít). 적당한 분량(khối lượng vừa phải). 1인분 분량(khẩu phần 1 người)."},
-  {kr:"서너",en:"three or four",vi:"ba bốn (khoảng)",type:"quantity",note:"셋이나 넷. 서너 명(ba bốn người). 서너 번(ba bốn lần). 두세와 유사하나 숫자가 조금 더 많음."},
-  {kr:"선",en:"line",vi:"đường, tuyến",type:"shape",note:"선(線). 선을 긋다(kẻ đường thẳng). 직선(đường thẳng). 곡선(đường cong). 선을 넘다(vượt ranh giới — nghĩa bóng)."},
-  {kr:"소수",en:"minority; decimal",vi:"thiểu số, con số nhỏ",type:"quantity",note:"두 가지: (1) 少數 — thiểu số (소수 의견=ý kiến thiểu số) ↔ 다수, (2) 小數 — thập phân (소수점=dấu thập phân)."},
-  {kr:"속도",en:"speed, rate",vi:"tốc độ",type:"measure",note:"속도(速度). 속도를 높이다/낮추다(tăng/giảm tốc độ). 최고 속도(tốc độ tối đa). 속도 제한(giới hạn tốc độ)."},
-  {kr:"속력",en:"speed, velocity (physics)",vi:"vận tốc",type:"measure",note:"속력(速力). 속도와 유사하나 물리학에서 스칼라량. 평균 속력(vận tốc trung bình). 속도보다 전문적 표현."},
-  {kr:"수량",en:"quantity, amount",vi:"số lượng",type:"quantity",note:"수량(數量). 수량을 확인하다(kiểm tra số lượng). 수량이 부족하다(số lượng không đủ). 수량 제한(giới hạn số lượng)."},
-  {kr:"숫자",en:"number, numeral",vi:"con số, số đếm",type:"unit",note:"숫자(數字). 숫자를 세다(đếm số). 행운의 숫자(con số may mắn). 큰 숫자(con số lớn). 숫자로 표현하다."},
-  {kr:"앞뒤",en:"front and back, before and after",vi:"trước sau",type:"direction",note:"앞(trước)+뒤(sau). 앞뒤로 움직이다(di chuyển qua lại). 앞뒤가 맞다(trước sau hợp lý). 앞뒤 없이(không kể trước sau)."},
-  {kr:"양쪽",en:"both sides",vi:"cả hai bên, hai phía",type:"direction",note:"양(兩)+쪽(phía). 양쪽에 앉다(ngồi cả hai bên). 양쪽 모두(cả hai phía). 양쪽 귀(cả hai tai)."},
-  {kr:"억",en:"100 million",vi:"một trăm triệu (đơn vị Hàn Quốc)",type:"unit",note:"억(億). 한국 수 체계: 만(10,000)→억(100,000,000). 1억 원(100 triệu won). 억만장자(tỉ phú)."},
-  {kr:"여럿",en:"several, many",vi:"nhiều người, nhiều cái",type:"quantity",note:"여럿이 모이다(nhiều người tụ họp). 여럿 중에서 하나(một trong nhiều cái). 몇몇보다 더 많은 수를 나타냄."},
-  {kr:"이하",en:"below, less than or equal to",vi:"ít hơn, dưới mức",type:"quantity",note:"이하(以下). 18세 이하(dưới 18 tuổi). 100 이하(100 trở xuống). ↔ 이상(以上, trở lên). 미만(未滿)은 해당값 미포함."},
-  {kr:"인원",en:"number of people, personnel",vi:"số người, nhân số",type:"quantity",note:"인원(人員). 인원을 파악하다(nắm số người). 참가 인원(số người tham gia). 인원이 부족하다(thiếu nhân lực)."},
-  {kr:"일부",en:"part, some, a portion",vi:"một phần",type:"quantity",note:"일부(一部). 일부 사람들(một số người). 일부만 해당(chỉ áp dụng một phần). ↔ 전부(toàn bộ). 일부분과 유사."},
-  {kr:"절반",en:"half",vi:"một nửa",type:"quantity",note:"절반(折半). 절반으로 나누다(chia đôi). 절반이 남았어요(còn lại một nửa). 반(半)과 동의어. 절반의 성공(thành công một nửa)."},
-  {kr:"좌우",en:"left and right",vi:"trái phải",type:"direction",note:"좌(左)+우(右). 좌우로 움직이다(di chuyển trái phải). 좌우를 살피다(nhìn trái phải). 좌회전 ↔ 우회전."},
-  {kr:"중간",en:"middle, midpoint",vi:"giữa, trung gian",type:"direction",note:"중간(中間). 중간에 있다(ở giữa). 중간 지점(điểm giữa). 중간에 그만두다(bỏ giữa chừng). 중간 역할(vai trò trung gian)."},
-  {kr:"직선",en:"straight line",vi:"đường thẳng",type:"shape",note:"직선(直線). 직선을 긋다(kẻ đường thẳng). 직선 거리(khoảng cách đường thẳng). 곡선(đường cong) ↔ 직선."},
-  {kr:"짝",en:"pair, partner",vi:"cặp đôi, đôi",type:"unit",note:"짝이 맞다(thành đôi). 짝을 이루다(tạo thành cặp). 한 짝(một chiếc). 짝사랑(yêu đơn phương). 짝수(số chẵn)와 관련."},
-  {kr:"짝수",en:"even number",vi:"số chẵn",type:"unit",note:"짝수(짝+數). 2, 4, 6, 8이 짝수. 짝수 날(ngày chẵn). ↔ 홀수(số lẻ). 짝수를 고르다(chọn số chẵn)."},
-  {kr:"차례",en:"order, turn; memorial rite",vi:"thứ tự, lượt",type:"unit",note:"두 가지: (1) 次例 — thứ tự/lượt (차례대로=theo thứ tự, 내 차례=đến lượt tôi), (2) 차례(lễ cúng ngày Tết)."},
-  {kr:"차이",en:"difference, gap",vi:"sự khác biệt, khoảng cách",type:"measure",note:"차이(差異). 차이가 있다/없다(có/không có sự khác biệt). 가격 차이(chênh lệch giá). 세대 차이(khoảng cách thế hệ)."},
-  {kr:"차이점",en:"point of difference",vi:"điểm khác biệt",type:"measure",note:"차이(khác biệt)+점(點). 차이점을 찾다(tìm điểm khác biệt). ↔ 공통점(điểm chung). 차이점을 설명하다."},
-  {kr:"최대",en:"maximum",vi:"tối đa, lớn nhất",type:"quantity",note:"최대(最大). 최대한(tối đa). 최대 인원(số người tối đa). ↔ 최소(tối thiểu). 최대치(giá trị tối đa)."},
-  {kr:"최저",en:"minimum, lowest",vi:"tối thiểu, thấp nhất",type:"quantity",note:"최저(最低). 최저 임금(lương tối thiểu). 최저 기온(nhiệt độ thấp nhất). ↔ 최고(cao nhất). 최저치(giá trị thấp nhất)."},
-  {kr:"측",en:"side, party",vi:"phía, bên",type:"direction",note:"측(側). 우리 측(phía chúng tôi). 상대측(phía đối phương). 오른쪽 측면(bề mặt bên phải). 양측(cả hai phía)."},
-  {kr:"치수",en:"size, measurements",vi:"kích thước, số đo",type:"measure",note:"치수(尺數). 치수를 재다(đo kích thước). 옷 치수(kích cỡ quần áo). 치수가 맞다(vừa kích thước). 사이즈와 유사."},
-  {kr:"칸",en:"cell, box, column, compartment",vi:"ô trống, cột",type:"shape",note:"칸을 채우다(điền vào ô trống). 빈칸(ô trống). 여러 칸(nhiều ô/cột). 기차 칸(toa tàu). 칸막이(vách ngăn)."},
-  {kr:"코너",en:"corner",vi:"góc, góc phòng",type:"direction",note:"corner에서. 코너를 돌다(rẽ ở góc đường). 책의 코너(góc sách). 슈퍼마켓 코너(góc siêu thị)."},
-  {kr:"타입",en:"type, kind",vi:"kiểu, loại",type:"unit",note:"type에서. 어떤 타입이에요?(loại nào vậy?). 성격 타입(kiểu tính cách). A 타입(típ A). 유형과 유사."},
-  {kr:"틈",en:"gap, crack, spare moment",vi:"khe hở, lúc rảnh",type:"shape",note:"두 가지: (1) 틈(khe hở — 문틈=khe cửa), (2) 틈(thời gian rảnh — 틈이 나다=có lúc rảnh). 틈새 시장(thị trường ngách)."},
-  {kr:"평균",en:"average, mean",vi:"bình quân, trung bình",type:"measure",note:"평균(平均). 평균을 내다(tính trung bình). 평균 점수(điểm trung bình). 평균 기온(nhiệt độ trung bình). 평균값."},
-  {kr:"포인트",en:"point, key point",vi:"điểm, ưu điểm",type:"unit",note:"point에서. 포인트를 쌓다(tích điểm). 핵심 포인트(điểm cốt lõi). 패션 포인트(điểm nhấn thời trang)."},
-  {kr:"표시",en:"mark, sign, indication",vi:"ký hiệu, dấu hiệu",type:"shape",note:"표시(表示). 표시하다=đánh dấu. 표시를 해두다(để lại dấu hiệu). X 표시(dấu X). 위험 표시(dấu nguy hiểm)."},
-  {kr:"한눈",en:"at a glance; looking away",vi:"một mắt; liếc nhìn",type:"measure",note:"두 가지: (1) 한눈에 보다(nhìn một lượt). (2) 한눈팔다(lơ đãng, không chú ý). 한눈에 들어오다(nhìn thấy ngay)."},
-  {kr:"한두",en:"one or two",vi:"một hai khoảng",type:"quantity",note:"하나나 둘. 한두 명(một hai người). 한두 번(một hai lần). 매우 소수를 나타내는 표현."},
-  {kr:"한마디",en:"a word, a remark",vi:"một câu, một lời",type:"unit",note:"한(một)+마디(câu/nhịp). 한마디만 해요(chỉ nói một câu thôi). 한마디로(nói một câu). 따끔한 한마디(lời khuyên thẳng thắn)."},
-  {kr:"형태",en:"form, shape, type",vi:"hình thức, dạng",type:"shape",note:"형태(形態). 다양한 형태(nhiều hình thức). 형태를 갖추다(có hình dạng). 원형 형태(hình tròn). 형태소(hình vị)."},
-  {kr:"홀수",en:"odd number",vi:"số lẻ",type:"unit",note:"홀(홀로=lẻ)+수(數). 1, 3, 5, 7이 홀수. 홀수 날(ngày lẻ). ↔ 짝수(số chẵn). 홀수를 고르다(chọn số lẻ)."},
-  {kr:"〜회",en:"counter for times/rounds",vi:"...lần, ...lượt (đơn vị)",type:"unit",note:"회(回). 횟수를 세는 단위. 1회(lần 1), 3회(3 lần). 1회용(dùng 1 lần). 제3회 대회(cuộc thi lần thứ 3)."},
-  {kr:"횟수",en:"number of times, frequency",vi:"số lần",type:"quantity",note:"횟수(回數). 횟수를 세다(đếm số lần). 이용 횟수(số lần sử dụng). 반복 횟수(số lần lặp lại). 빈도와 유사."},
-];
-let currentFilter='all';
-function renderTable(data){
-  const tbody=document.getElementById('vocabBody');
-  tbody.innerHTML='';
-  data.forEach((item,i)=>{
-    let t;
-    if(item.type==='measure')   t=`<span class="tag tag-measure">Đo lường</span>`;
-    else if(item.type==='quantity') t=`<span class="tag tag-quantity">Số lượng</span>`;
-    else if(item.type==='unit')     t=`<span class="tag tag-unit">Đơn vị</span>`;
-    else if(item.type==='shape')    t=`<span class="tag tag-shape">Hình dạng</span>`;
-    else                            t=`<span class="tag tag-direction">Hướng/Chiều</span>`;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent=`${data.length} / ${vocab.length} từ`;
-}
-function filterAndSearch(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const result=vocab.filter(item=>{
-    const mf=currentFilter==='all'||item.type===currentFilter;
-    const ms=!q||item.kr.includes(q)||item.en.toLowerCase().includes(q)||item.vi.toLowerCase().includes(q)||item.note.toLowerCase().includes(q);
-    return mf&&ms;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display=result.length===0?'block':'none';
-  document.getElementById('vocabTable').style.display=result.length===0?'none':'';
-}
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter=btn.dataset.filter;
-    filterAndSearch();
-  });
-});
-document.getElementById('searchInput').addEventListener('input',filterAndSearch);
-document.getElementById('totalCount').textContent=vocab.length+' từ';
-renderTable(vocab);
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Số lượng & Đo lường</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f0fc;
+        --card: #fff;
+        --accent: #4a1a8a;
+        --text: #180830;
+        --sub: #7a5a9a;
+        --border: #d8c8f0;
+        --tag-measure: #ede0fa;
+        --tag-shape: #e0f0fa;
+        --tag-quantity: #e8f8e8;
+        --tag-unit: #fef0d8;
+        --tag-direction: #fce8f0;
+        --highlight: #f4eeff;
+        --row-alt: #faf7fd;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--text);
+        color: #f4f0fc;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "수량";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #9a80ba;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f4f0fc;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 145px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 185px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-measure {
+        background: var(--tag-measure);
+        color: #3a0a7a;
+      }
+      .tag-shape {
+        background: var(--tag-shape);
+        color: #0a2a60;
+      }
+      .tag-quantity {
+        background: var(--tag-quantity);
+        color: #0a4a10;
+      }
+      .tag-unit {
+        background: var(--tag-unit);
+        color: #5a3000;
+      }
+      .tag-direction {
+        background: var(--tag-direction);
+        color: #7a0a40;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>수량 & 측정 — Số lượng & Đo lường</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Số lượng & Đơn vị · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="measure">Đo lường</button>
+      <button class="filter-btn" data-filter="quantity">Số lượng</button>
+      <button class="filter-btn" data-filter="unit">Đơn vị đếm</button>
+      <button class="filter-btn" data-filter="shape">Hình dạng & Vị trí</button>
+      <button class="filter-btn" data-filter="direction">Hướng & Chiều</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú &amp; Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Số lượng &amp; Đo lường
+    </div>
+    <script>
+      const vocab = [
+        {
+          kr: "간격",
+          en: "interval, gap, spacing",
+          vi: "khoảng cách, khoảng trống",
+          type: "measure",
+          note: "간격(間隔). 간격을 두다(giữ khoảng cách). 줄 간격(khoảng cách dòng). 일정한 간격(khoảng cách đều đặn).",
+        },
+        {
+          kr: "구멍",
+          en: "hole, opening",
+          vi: "lỗ, lỗ hổng",
+          type: "shape",
+          note: "구멍이 나다(xuất hiện lỗ hổng). 구멍을 뚫다(khoét lỗ). 양말에 구멍이 났어요(tất bị thủng lỗ). 허점과 비유적으로 유사.",
+        },
+        {
+          kr: "군데",
+          en: "place, spot (counter)",
+          vi: "nơi, chỗ",
+          type: "unit",
+          note: "장소 수 세기. 두 군데(hai nơi). 여러 군데(nhiều nơi). 몇 군데에 연락했어요(liên hệ vài nơi rồi).",
+        },
+        {
+          kr: "그루",
+          en: "counter for trees",
+          vi: "cây (đơn vị đếm cây)",
+          type: "unit",
+          note: "나무를 세는 단위. 나무 두 그루(hai cây). 소나무 세 그루(ba cây thông). 그루터기(gốc cây còn lại).",
+        },
+        {
+          kr: "금",
+          en: "gold; line, scratch",
+          vi: "vàng (kim loại)",
+          type: "measure",
+          note: "두 가지: (1) 金 — vàng (금반지=nhẫn vàng), (2) 금(선/흠집) — đường/vết nứt (금이 가다=xuất hiện vết nứt).",
+        },
+        {
+          kr: "길이",
+          en: "length",
+          vi: "chiều dài",
+          type: "measure",
+          note: "길다→길이. 길이를 재다(đo chiều dài). 길이가 얼마예요?(chiều dài bao nhiêu?). 1미터 길이(chiều dài 1 mét).",
+        },
+        {
+          kr: "깊이",
+          en: "depth",
+          vi: "độ sâu, chiều sâu",
+          type: "measure",
+          note: "깊다→깊이. 깊이를 재다(đo độ sâu). 수심 깊이(độ sâu mực nước). 깊이가 5미터(độ sâu 5 mét).",
+        },
+        {
+          kr: "나머지",
+          en: "remainder, the rest",
+          vi: "phần còn lại, số dư",
+          type: "quantity",
+          note: "나머지를 처리하다(xử lý phần còn lại). 10에서 3을 빼면 나머지는 7(10 trừ 3 dư 7). 나머지 사람들(những người còn lại).",
+        },
+        {
+          kr: "내용물",
+          en: "contents (of a container)",
+          vi: "nội dung bên trong",
+          type: "quantity",
+          note: "내용(內容)+물(物). 상자의 내용물(nội dung bên trong hộp). 내용물을 확인하다(kiểm tra nội dung).",
+        },
+        {
+          kr: "높이",
+          en: "height",
+          vi: "chiều cao, độ cao",
+          type: "measure",
+          note: "높다→높이. 높이를 재다(đo chiều cao). 건물 높이(chiều cao tòa nhà). 높이가 100미터(cao 100 mét).",
+        },
+        {
+          kr: "눈높이",
+          en: "eye level; standard",
+          vi: "tầm mắt, tiêu chuẩn",
+          type: "measure",
+          note: "눈(mắt)+높이(chiều cao). 눈높이에 맞추다(phù hợp tầm mắt). 학생 눈높이 교육(giáo dục phù hợp trình độ học sinh).",
+        },
+        {
+          kr: "다수",
+          en: "majority, many",
+          vi: "đa số, nhiều",
+          type: "quantity",
+          note: "다수(多數). 다수의 의견(ý kiến đa số). 다수결(đa số quyết định). ↔ 소수(thiểu số). 다수가 찬성했어요.",
+        },
+        {
+          kr: "단계",
+          en: "stage, step, level",
+          vi: "giai đoạn, bước",
+          type: "unit",
+          note: "단계(段階). 1단계(giai đoạn 1). 단계별로(từng bước). 단계를 밟다(đi từng bước). 초급-중급-고급 단계.",
+        },
+        {
+          kr: "단위",
+          en: "unit (of measurement)",
+          vi: "đơn vị",
+          type: "unit",
+          note: "단위(單位). 측정 단위(đơn vị đo lường). 단위를 확인하다(xác nhận đơn vị). 미터, 킬로그램 등이 단위.",
+        },
+        {
+          kr: "대량",
+          en: "large quantity, mass",
+          vi: "số lượng lớn, đại lượng",
+          type: "quantity",
+          note: "대량(大量). 대량 생산(sản xuất đại trà). 대량 구매(mua số lượng lớn). ↔ 소량(số lượng nhỏ).",
+        },
+        {
+          kr: "대형",
+          en: "large size, large-scale",
+          vi: "cỡ lớn, quy mô lớn",
+          type: "measure",
+          note: "대형(大型). 대형 마트(siêu thị lớn). 대형 사고(tai nạn lớn). ↔ 소형(cỡ nhỏ). 대형 버스(xe buýt lớn).",
+        },
+        {
+          kr: "두세",
+          en: "two or three",
+          vi: "hai ba (khoảng)",
+          type: "quantity",
+          note: "둘이나 셋. 두세 명(hai ba người). 두세 개(hai ba cái). 몇 개 안 되는 수량을 나타냄.",
+        },
+        {
+          kr: "마디",
+          en: "joint, segment; musical bar",
+          vi: "đốt, mấu; khúc âm nhạc",
+          type: "unit",
+          note: "두 가지: (1) 마디(đốt — 손가락 마디=đốt ngón tay), (2) 마디(nhịp nhạc — 한 마디=một nhịp). 한 마디만요(chỉ một câu thôi).",
+        },
+        {
+          kr: "몇몇",
+          en: "some, a few",
+          vi: "một vài, một số",
+          type: "quantity",
+          note: "몇몇 사람(một vài người). 몇몇이 모였어요(một số người đã tụ tập). 여럿과 유사하나 더 적은 수.",
+        },
+        {
+          kr: "무게",
+          en: "weight",
+          vi: "trọng lượng, cân nặng",
+          type: "measure",
+          note: "무게를 재다(đo trọng lượng). 무게가 얼마예요?(nặng bao nhiêu?). 무게 제한(giới hạn trọng lượng). 체중과 유사.",
+        },
+        {
+          kr: "밀리미터",
+          en: "millimeter",
+          vi: "mili-mét (đơn vị)",
+          type: "unit",
+          note: "밀리미터(mm). 1센티미터=10밀리미터. 강수량을 밀리미터로 측정해요(đo lượng mưa bằng mm). 정밀 측정에 사용.",
+        },
+        {
+          kr: "방향",
+          en: "direction",
+          vi: "hướng, phương hướng",
+          type: "direction",
+          note: "방향(方向). 방향을 잡다(xác định hướng). 방향을 잃다(mất phương hướng). 동서남북(đông tây nam bắc) 방향.",
+        },
+        {
+          kr: "범위",
+          en: "range, scope",
+          vi: "phạm vi, tầm",
+          type: "measure",
+          note: "범위(範圍). 범위를 정하다(xác định phạm vi). 활동 범위(phạm vi hoạt động). 시험 범위(phạm vi thi).",
+        },
+        {
+          kr: "부분",
+          en: "part, portion, section",
+          vi: "phần, bộ phận",
+          type: "quantity",
+          note: "부분(部分). 일부분(một phần). 전체와 부분(toàn thể và bộ phận). 이 부분이 중요해요(phần này quan trọng).",
+        },
+        {
+          kr: "부피",
+          en: "volume, bulk",
+          vi: "thể tích, dung tích",
+          type: "measure",
+          note: "부피를 재다(đo thể tích). 부피가 크다/작다(thể tích lớn/nhỏ). 리터로 부피를 측정해요(đo thể tích bằng lít).",
+        },
+        {
+          kr: "분량",
+          en: "quantity, amount, portion",
+          vi: "khối lượng, số lượng",
+          type: "quantity",
+          note: "분량(分量). 분량이 많다/적다(khối lượng nhiều/ít). 적당한 분량(khối lượng vừa phải). 1인분 분량(khẩu phần 1 người).",
+        },
+        {
+          kr: "서너",
+          en: "three or four",
+          vi: "ba bốn (khoảng)",
+          type: "quantity",
+          note: "셋이나 넷. 서너 명(ba bốn người). 서너 번(ba bốn lần). 두세와 유사하나 숫자가 조금 더 많음.",
+        },
+        {
+          kr: "선",
+          en: "line",
+          vi: "đường, tuyến",
+          type: "shape",
+          note: "선(線). 선을 긋다(kẻ đường thẳng). 직선(đường thẳng). 곡선(đường cong). 선을 넘다(vượt ranh giới — nghĩa bóng).",
+        },
+        {
+          kr: "소수",
+          en: "minority; decimal",
+          vi: "thiểu số, con số nhỏ",
+          type: "quantity",
+          note: "두 가지: (1) 少數 — thiểu số (소수 의견=ý kiến thiểu số) ↔ 다수, (2) 小數 — thập phân (소수점=dấu thập phân).",
+        },
+        {
+          kr: "속도",
+          en: "speed, rate",
+          vi: "tốc độ",
+          type: "measure",
+          note: "속도(速度). 속도를 높이다/낮추다(tăng/giảm tốc độ). 최고 속도(tốc độ tối đa). 속도 제한(giới hạn tốc độ).",
+        },
+        {
+          kr: "속력",
+          en: "speed, velocity (physics)",
+          vi: "vận tốc",
+          type: "measure",
+          note: "속력(速力). 속도와 유사하나 물리학에서 스칼라량. 평균 속력(vận tốc trung bình). 속도보다 전문적 표현.",
+        },
+        {
+          kr: "수량",
+          en: "quantity, amount",
+          vi: "số lượng",
+          type: "quantity",
+          note: "수량(數量). 수량을 확인하다(kiểm tra số lượng). 수량이 부족하다(số lượng không đủ). 수량 제한(giới hạn số lượng).",
+        },
+        {
+          kr: "숫자",
+          en: "number, numeral",
+          vi: "con số, số đếm",
+          type: "unit",
+          note: "숫자(數字). 숫자를 세다(đếm số). 행운의 숫자(con số may mắn). 큰 숫자(con số lớn). 숫자로 표현하다.",
+        },
+        {
+          kr: "앞뒤",
+          en: "front and back, before and after",
+          vi: "trước sau",
+          type: "direction",
+          note: "앞(trước)+뒤(sau). 앞뒤로 움직이다(di chuyển qua lại). 앞뒤가 맞다(trước sau hợp lý). 앞뒤 없이(không kể trước sau).",
+        },
+        {
+          kr: "양쪽",
+          en: "both sides",
+          vi: "cả hai bên, hai phía",
+          type: "direction",
+          note: "양(兩)+쪽(phía). 양쪽에 앉다(ngồi cả hai bên). 양쪽 모두(cả hai phía). 양쪽 귀(cả hai tai).",
+        },
+        {
+          kr: "억",
+          en: "100 million",
+          vi: "một trăm triệu (đơn vị Hàn Quốc)",
+          type: "unit",
+          note: "억(億). 한국 수 체계: 만(10,000)→억(100,000,000). 1억 원(100 triệu won). 억만장자(tỉ phú).",
+        },
+        {
+          kr: "여럿",
+          en: "several, many",
+          vi: "nhiều người, nhiều cái",
+          type: "quantity",
+          note: "여럿이 모이다(nhiều người tụ họp). 여럿 중에서 하나(một trong nhiều cái). 몇몇보다 더 많은 수를 나타냄.",
+        },
+        {
+          kr: "이하",
+          en: "below, less than or equal to",
+          vi: "ít hơn, dưới mức",
+          type: "quantity",
+          note: "이하(以下). 18세 이하(dưới 18 tuổi). 100 이하(100 trở xuống). ↔ 이상(以上, trở lên). 미만(未滿)은 해당값 미포함.",
+        },
+        {
+          kr: "인원",
+          en: "number of people, personnel",
+          vi: "số người, nhân số",
+          type: "quantity",
+          note: "인원(人員). 인원을 파악하다(nắm số người). 참가 인원(số người tham gia). 인원이 부족하다(thiếu nhân lực).",
+        },
+        {
+          kr: "일부",
+          en: "part, some, a portion",
+          vi: "một phần",
+          type: "quantity",
+          note: "일부(一部). 일부 사람들(một số người). 일부만 해당(chỉ áp dụng một phần). ↔ 전부(toàn bộ). 일부분과 유사.",
+        },
+        {
+          kr: "절반",
+          en: "half",
+          vi: "một nửa",
+          type: "quantity",
+          note: "절반(折半). 절반으로 나누다(chia đôi). 절반이 남았어요(còn lại một nửa). 반(半)과 동의어. 절반의 성공(thành công một nửa).",
+        },
+        {
+          kr: "좌우",
+          en: "left and right",
+          vi: "trái phải",
+          type: "direction",
+          note: "좌(左)+우(右). 좌우로 움직이다(di chuyển trái phải). 좌우를 살피다(nhìn trái phải). 좌회전 ↔ 우회전.",
+        },
+        {
+          kr: "중간",
+          en: "middle, midpoint",
+          vi: "giữa, trung gian",
+          type: "direction",
+          note: "중간(中間). 중간에 있다(ở giữa). 중간 지점(điểm giữa). 중간에 그만두다(bỏ giữa chừng). 중간 역할(vai trò trung gian).",
+        },
+        {
+          kr: "직선",
+          en: "straight line",
+          vi: "đường thẳng",
+          type: "shape",
+          note: "직선(直線). 직선을 긋다(kẻ đường thẳng). 직선 거리(khoảng cách đường thẳng). 곡선(đường cong) ↔ 직선.",
+        },
+        {
+          kr: "짝",
+          en: "pair, partner",
+          vi: "cặp đôi, đôi",
+          type: "unit",
+          note: "짝이 맞다(thành đôi). 짝을 이루다(tạo thành cặp). 한 짝(một chiếc). 짝사랑(yêu đơn phương). 짝수(số chẵn)와 관련.",
+        },
+        {
+          kr: "짝수",
+          en: "even number",
+          vi: "số chẵn",
+          type: "unit",
+          note: "짝수(짝+數). 2, 4, 6, 8이 짝수. 짝수 날(ngày chẵn). ↔ 홀수(số lẻ). 짝수를 고르다(chọn số chẵn).",
+        },
+        {
+          kr: "차례",
+          en: "order, turn; memorial rite",
+          vi: "thứ tự, lượt",
+          type: "unit",
+          note: "두 가지: (1) 次例 — thứ tự/lượt (차례대로=theo thứ tự, 내 차례=đến lượt tôi), (2) 차례(lễ cúng ngày Tết).",
+        },
+        {
+          kr: "차이",
+          en: "difference, gap",
+          vi: "sự khác biệt, khoảng cách",
+          type: "measure",
+          note: "차이(差異). 차이가 있다/없다(có/không có sự khác biệt). 가격 차이(chênh lệch giá). 세대 차이(khoảng cách thế hệ).",
+        },
+        {
+          kr: "차이점",
+          en: "point of difference",
+          vi: "điểm khác biệt",
+          type: "measure",
+          note: "차이(khác biệt)+점(點). 차이점을 찾다(tìm điểm khác biệt). ↔ 공통점(điểm chung). 차이점을 설명하다.",
+        },
+        {
+          kr: "최대",
+          en: "maximum",
+          vi: "tối đa, lớn nhất",
+          type: "quantity",
+          note: "최대(最大). 최대한(tối đa). 최대 인원(số người tối đa). ↔ 최소(tối thiểu). 최대치(giá trị tối đa).",
+        },
+        {
+          kr: "최저",
+          en: "minimum, lowest",
+          vi: "tối thiểu, thấp nhất",
+          type: "quantity",
+          note: "최저(最低). 최저 임금(lương tối thiểu). 최저 기온(nhiệt độ thấp nhất). ↔ 최고(cao nhất). 최저치(giá trị thấp nhất).",
+        },
+        {
+          kr: "측",
+          en: "side, party",
+          vi: "phía, bên",
+          type: "direction",
+          note: "측(側). 우리 측(phía chúng tôi). 상대측(phía đối phương). 오른쪽 측면(bề mặt bên phải). 양측(cả hai phía).",
+        },
+        {
+          kr: "치수",
+          en: "size, measurements",
+          vi: "kích thước, số đo",
+          type: "measure",
+          note: "치수(尺數). 치수를 재다(đo kích thước). 옷 치수(kích cỡ quần áo). 치수가 맞다(vừa kích thước). 사이즈와 유사.",
+        },
+        {
+          kr: "칸",
+          en: "cell, box, column, compartment",
+          vi: "ô trống, cột",
+          type: "shape",
+          note: "칸을 채우다(điền vào ô trống). 빈칸(ô trống). 여러 칸(nhiều ô/cột). 기차 칸(toa tàu). 칸막이(vách ngăn).",
+        },
+        {
+          kr: "코너",
+          en: "corner",
+          vi: "góc, góc phòng",
+          type: "direction",
+          note: "corner에서. 코너를 돌다(rẽ ở góc đường). 책의 코너(góc sách). 슈퍼마켓 코너(góc siêu thị).",
+        },
+        {
+          kr: "타입",
+          en: "type, kind",
+          vi: "kiểu, loại",
+          type: "unit",
+          note: "type에서. 어떤 타입이에요?(loại nào vậy?). 성격 타입(kiểu tính cách). A 타입(típ A). 유형과 유사.",
+        },
+        {
+          kr: "틈",
+          en: "gap, crack, spare moment",
+          vi: "khe hở, lúc rảnh",
+          type: "shape",
+          note: "두 가지: (1) 틈(khe hở — 문틈=khe cửa), (2) 틈(thời gian rảnh — 틈이 나다=có lúc rảnh). 틈새 시장(thị trường ngách).",
+        },
+        {
+          kr: "평균",
+          en: "average, mean",
+          vi: "bình quân, trung bình",
+          type: "measure",
+          note: "평균(平均). 평균을 내다(tính trung bình). 평균 점수(điểm trung bình). 평균 기온(nhiệt độ trung bình). 평균값.",
+        },
+        {
+          kr: "포인트",
+          en: "point, key point",
+          vi: "điểm, ưu điểm",
+          type: "unit",
+          note: "point에서. 포인트를 쌓다(tích điểm). 핵심 포인트(điểm cốt lõi). 패션 포인트(điểm nhấn thời trang).",
+        },
+        {
+          kr: "표시",
+          en: "mark, sign, indication",
+          vi: "ký hiệu, dấu hiệu",
+          type: "shape",
+          note: "표시(表示). 표시하다=đánh dấu. 표시를 해두다(để lại dấu hiệu). X 표시(dấu X). 위험 표시(dấu nguy hiểm).",
+        },
+        {
+          kr: "한눈",
+          en: "at a glance; looking away",
+          vi: "một mắt; liếc nhìn",
+          type: "measure",
+          note: "두 가지: (1) 한눈에 보다(nhìn một lượt). (2) 한눈팔다(lơ đãng, không chú ý). 한눈에 들어오다(nhìn thấy ngay).",
+        },
+        {
+          kr: "한두",
+          en: "one or two",
+          vi: "một hai khoảng",
+          type: "quantity",
+          note: "하나나 둘. 한두 명(một hai người). 한두 번(một hai lần). 매우 소수를 나타내는 표현.",
+        },
+        {
+          kr: "한마디",
+          en: "a word, a remark",
+          vi: "một câu, một lời",
+          type: "unit",
+          note: "한(một)+마디(câu/nhịp). 한마디만 해요(chỉ nói một câu thôi). 한마디로(nói một câu). 따끔한 한마디(lời khuyên thẳng thắn).",
+        },
+        {
+          kr: "형태",
+          en: "form, shape, type",
+          vi: "hình thức, dạng",
+          type: "shape",
+          note: "형태(形態). 다양한 형태(nhiều hình thức). 형태를 갖추다(có hình dạng). 원형 형태(hình tròn). 형태소(hình vị).",
+        },
+        {
+          kr: "홀수",
+          en: "odd number",
+          vi: "số lẻ",
+          type: "unit",
+          note: "홀(홀로=lẻ)+수(數). 1, 3, 5, 7이 홀수. 홀수 날(ngày lẻ). ↔ 짝수(số chẵn). 홀수를 고르다(chọn số lẻ).",
+        },
+        {
+          kr: "〜회",
+          en: "counter for times/rounds",
+          vi: "...lần, ...lượt (đơn vị)",
+          type: "unit",
+          note: "회(回). 횟수를 세는 단위. 1회(lần 1), 3회(3 lần). 1회용(dùng 1 lần). 제3회 대회(cuộc thi lần thứ 3).",
+        },
+        {
+          kr: "횟수",
+          en: "number of times, frequency",
+          vi: "số lần",
+          type: "quantity",
+          note: "횟수(回數). 횟수를 세다(đếm số lần). 이용 횟수(số lần sử dụng). 반복 횟수(số lần lặp lại). 빈도와 유사.",
+        },
+      ];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let t;
+          if (item.type === "measure")
+            t = `<span class="tag tag-measure">Đo lường</span>`;
+          else if (item.type === "quantity")
+            t = `<span class="tag tag-quantity">Số lượng</span>`;
+          else if (item.type === "unit")
+            t = `<span class="tag tag-unit">Đơn vị</span>`;
+          else if (item.type === "shape")
+            t = `<span class="tag tag-shape">Hình dạng</span>`;
+          else t = `<span class="tag tag-direction">Hướng/Chiều</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${i + 1}</td><td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const mf = currentFilter === "all" || item.type === currentFilter;
+          const ms =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return mf && ms;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
