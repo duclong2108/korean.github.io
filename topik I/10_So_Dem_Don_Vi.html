@@ -1,427 +1,1424 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Số đếm & Đơn vị</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f5f3f0;
-    --card: #ffffff;
-    --accent: #6a4a1a;
-    --text: #2a1a08;
-    --sub: #8a7060;
-    --border: #ddd0c0;
-    --tag-hv: #f4ece0;
-    --tag-pure: #e8f0f8;
-    --tag-loan: #f0eafa;
-    --highlight: #fdf8f2;
-    --row-alt: #faf8f5;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Số đếm & Đơn vị</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5f3f0;
+        --card: #ffffff;
+        --accent: #6a4a1a;
+        --text: #2a1a08;
+        --sub: #8a7060;
+        --border: #ddd0c0;
+        --tag-hv: #f4ece0;
+        --tag-pure: #e8f0f8;
+        --tag-loan: #f0eafa;
+        --highlight: #fdf8f2;
+        --row-alt: #faf8f5;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f5f3f0;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '숫자';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #aa9070; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #f5f3f0;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "숫자";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #aa9070;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 7px 14px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 7px 14px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f5f3f0; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f5f3f0;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 130px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 185px; }
-  th:nth-child(5), td:nth-child(5) { width: 155px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 130px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 185px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 155px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      }
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #5a3000; font-weight: 500; }
-  .hv-tag.pure { background: var(--tag-pure); color: #1a3a6a; }
-  .hv-tag.loan { background: var(--tag-loan); color: #4a1a7a; }
-  .hv-hanja { font-weight: 600; font-size: 13px; }
-  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
-  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
-  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
-  .explain { font-size: 13px; color: #3a2010; line-height: 1.6; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #5a3000;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #1a3a6a;
+      }
+      .hv-tag.loan {
+        background: var(--tag-loan);
+        color: #4a1a7a;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #3a2010;
+        line-height: 1.6;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  /* legend */
-  .legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 11px; }
-  .legend span { display: inline-flex; align-items: center; gap: 5px; }
-  .legend .dot { width: 10px; height: 10px; border-radius: 2px; }
-  .dot-hv { background: #f4ece0; border: 1px solid #c0a060; }
-  .dot-pure { background: #e8f0f8; border: 1px solid #6090c0; }
-  .dot-loan { background: #f0eafa; border: 1px solid #9060c0; }
+      /* legend */
+      .legend {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        font-size: 11px;
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .legend .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+      }
+      .dot-hv {
+        background: #f4ece0;
+        border: 1px solid #c0a060;
+      }
+      .dot-pure {
+        background: #e8f0f8;
+        border: 1px solid #6090c0;
+      }
+      .dot-loan {
+        background: #f0eafa;
+        border: 1px solid #9060c0;
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>숫자 & 단위 — Số đếm & Đơn vị</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Số đếm · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>숫자 & 단위 — Số đếm & Đơn vị</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Số đếm · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Hán Hàn</button>
+      <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+      <button class="filter-btn" data-filter="loan">Vay mượn</button>
+      <div class="legend">
+        <span><span class="dot dot-hv"></span>Hán Hàn</span>
+        <span><span class="dot dot-pure"></span>Thuần Hàn</span>
+        <span><span class="dot dot-loan"></span>Vay mượn</span>
+      </div>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Hán Hàn</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
-  <button class="filter-btn" data-filter="loan">Vay mượn</button>
-  <div class="legend">
-    <span><span class="dot dot-hv"></span>Hán Hàn</span>
-    <span><span class="dot dot-pure"></span>Thuần Hàn</span>
-    <span><span class="dot dot-loan"></span>Vay mượn</span>
-  </div>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Phân loại</th><th>Giải thích</th><th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Số đếm & Đơn vị
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Số đếm & Đơn vị</div>
+    <script>
+      // type: 'hv' = Hán Hàn, 'pure' = Thuần Hàn, 'loan' = Vay mượn
+      const vocab = [
+        {
+          kr: "구",
+          en: "9, nine",
+          vi: "số 9",
+          hv: "九",
+          hvR: "cửu",
+          type: "hv",
+          explain:
+            "Số 9 theo hệ Hán Hàn. Dùng với: 구 층(tầng 9), 구 월(tháng 9), 구십(90).",
+          ex: "구 층에 살아요.",
+          exVi: "Tôi sống ở tầng 9.",
+        },
+        {
+          kr: "구십",
+          en: "90, ninety",
+          vi: "90 (chín mươi)",
+          hv: "九十",
+          hvR: "cửu thập",
+          type: "hv",
+          explain:
+            "Chín mươi — hệ Hán Hàn. 구(9) + 십(10). Dùng khi đếm số thứ tự, tháng, năm,...",
+          ex: "할아버지가 구십 살이에요.",
+          exVi: "Ông tôi 90 tuổi.",
+        },
+        {
+          kr: "권",
+          en: "volume, copy (books)",
+          vi: "...quyển (sách)",
+          hv: "卷",
+          hvR: "quyển",
+          type: "hv",
+          explain:
+            "Đơn vị đếm sách, tạp chí. 책 두 권 = hai quyển sách. 한 권에 얼마예요? = một quyển bao nhiêu?",
+          ex: "책을 세 권 샀어요.",
+          exVi: "Tôi đã mua ba quyển sách.",
+        },
+        {
+          kr: "그램",
+          en: "gram",
+          vi: "gam (đơn vị)",
+          hv: null,
+          hvR: "từ tiếng Anh 'gram'",
+          type: "loan",
+          explain:
+            "Đơn vị khối lượng gam. 100그램 = 100 gam. 킬로그램(kg) = ki-lô-gam.",
+          ex: "고기 200그램 주세요.",
+          exVi: "Cho tôi 200 gam thịt.",
+        },
+        {
+          kr: "넷",
+          en: "4, four",
+          vi: "bốn (số đếm thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 4 thuần Hàn. Dùng với đơn vị đếm thuần Hàn: 넷이서 = bốn người (chúng tôi). Trước danh từ đổi thành 네.",
+          ex: "우리 넷이서 갔어요.",
+          exVi: "Bốn chúng tôi đã đi.",
+        },
+        {
+          kr: "넷째",
+          en: "fourth (ordinal)",
+          vi: "thứ tư (thứ tự)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Thứ tư trong thứ tự. 넷(4) + 째(hậu tố thứ tự). 넷째 딸 = con gái thứ tư.",
+          ex: "넷째로 도착했어요.",
+          exVi: "Tôi đến nơi thứ tư.",
+        },
+        {
+          kr: "다섯",
+          en: "5, five",
+          vi: "năm (số đếm thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 5 thuần Hàn. 다섯 명 = năm người. 다섯 살 = 5 tuổi. Trước danh từ giữ nguyên.",
+          ex: "사과 다섯 개 주세요.",
+          exVi: "Cho tôi năm quả táo.",
+        },
+        {
+          kr: "달러",
+          en: "dollar",
+          vi: "đô la",
+          hv: null,
+          hvR: "từ tiếng Anh 'dollar'",
+          type: "loan",
+          explain:
+            "Đô la Mỹ. 달러(dollar). 100달러 = 100 đô la. 환율 = tỷ giá hối đoái.",
+          ex: "100달러를 원으로 바꿨어요.",
+          exVi: "Tôi đã đổi 100 đô la sang won.",
+        },
+        {
+          kr: "대",
+          en: "versus; large size",
+          vi: "đối (so sánh); lớn, cỡ lớn",
+          hv: "對/大",
+          hvR: "đối / đại",
+          type: "hv",
+          explain:
+            "Hai nghĩa: (1) 對 — đối lập, so sánh (한국 대 일본 = Hàn Quốc vs Nhật Bản), (2) 大 — cỡ lớn (대자 = size L).",
+          ex: "한국 대 일본 경기예요.",
+          exVi: "Đây là trận đấu Hàn Quốc vs Nhật Bản.",
+        },
+        {
+          kr: "동전",
+          en: "coin",
+          vi: "đồng xu, tiền xu",
+          hv: "銅錢",
+          hvR: "đồng tiền",
+          type: "hv",
+          explain:
+            "Tiền xu. 동(銅, đồng) + 전(錢, tiền). 동전을 모으다 = gom tiền xu. 동전 지갑 = ví đựng xu.",
+          ex: "동전이 많이 있어요.",
+          exVi: "Tôi có nhiều tiền xu.",
+        },
+        {
+          kr: "두",
+          en: "two (before nouns)",
+          vi: "hai (từ Hán Hàn)",
+          hv: null,
+          hvR: "thuần Hàn (dạng trước danh từ)",
+          type: "pure",
+          explain:
+            "Dạng rút gọn của 둘 dùng trước danh từ. 두 명(hai người), 두 개(hai cái), 두 시(2 giờ).",
+          ex: "두 시에 만나요.",
+          exVi: "Gặp nhau lúc 2 giờ nhé.",
+        },
+        {
+          kr: "둘",
+          en: "2, two",
+          vi: "hai (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 2 thuần Hàn — dùng khi đứng một mình. Trước danh từ đổi thành 두. 둘이서 = hai người chúng mình.",
+          ex: "우리 둘이서 갔어요.",
+          exVi: "Hai chúng tôi đã đi.",
+        },
+        {
+          kr: "둘째",
+          en: "second (ordinal)",
+          vi: "thứ hai (thứ tự)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Thứ hai trong thứ tự. 둘째 아들 = con trai thứ hai. 둘째로 = thứ hai là...",
+          ex: "저는 둘째예요.",
+          exVi: "Tôi là con thứ hai.",
+        },
+        {
+          kr: "마리",
+          en: "head, animal (counter)",
+          vi: "...con (đơn vị đếm động vật)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Đơn vị đếm động vật. 강아지 두 마리 = hai con chó. 물고기 세 마리 = ba con cá.",
+          ex: "고양이 두 마리가 있어요.",
+          exVi: "Tôi có hai con mèo.",
+        },
+        {
+          kr: "마흔",
+          en: "40, forty",
+          vi: "bốn mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Bốn mươi — hệ thuần Hàn. Dùng đếm tuổi người. 마흔 살 = 40 tuổi.",
+          ex: "마흔 살이에요.",
+          exVi: "Tôi 40 tuổi.",
+        },
+        {
+          kr: "만",
+          en: "only; ten thousand",
+          vi: "chỉ; mười nghìn",
+          hv: "萬",
+          hvR: "vạn",
+          type: "hv",
+          explain:
+            "Hai nghĩa: (1) 萬 — mười nghìn (일만 = 10.000), (2) 만 (thuần Hàn trợ từ) — chỉ, mỗi mình (나만 = chỉ mình tôi).",
+          ex: "이 가방은 오만 원이에요.",
+          exVi: "Cái túi này 50.000 won.",
+        },
+        {
+          kr: "명",
+          en: "person (counter, formal)",
+          vi: "...người (đơn vị đếm người)",
+          hv: "名",
+          hvR: "danh",
+          type: "hv",
+          explain:
+            "Đơn vị đếm người (trung tính). 세 명 = ba người. Kính ngữ là 분. 몇 명 = mấy người.",
+          ex: "학생이 몇 명이에요?",
+          exVi: "Có bao nhiêu học sinh?",
+        },
+        {
+          kr: "몇",
+          en: "how many, a few",
+          vi: "mấy, bao nhiêu",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Dùng để hỏi số lượng không xác định. 몇 명 = bao nhiêu người. 몇 시 = mấy giờ. 몇 살 = bao nhiêu tuổi.",
+          ex: "몇 살이에요?",
+          exVi: "Bạn bao nhiêu tuổi?",
+        },
+        {
+          kr: "미터",
+          en: "meter",
+          vi: "mét (đơn vị)",
+          hv: null,
+          hvR: "từ tiếng Anh 'meter'",
+          type: "loan",
+          explain:
+            "Đơn vị đo độ dài mét. 100미터 = 100 mét. 킬로미터(km), 센티미터(cm) là các đơn vị liên quan.",
+          ex: "100미터를 12초에 달렸어요.",
+          exVi: "Tôi chạy 100 mét trong 12 giây.",
+        },
+        {
+          kr: "백",
+          en: "100, one hundred",
+          vi: "một trăm",
+          hv: "百",
+          hvR: "bách",
+          type: "hv",
+          explain:
+            "Một trăm — hệ Hán Hàn. 백(100), 천(1.000), 만(10.000). 이백 = 200, 삼백 = 300,...",
+          ex: "백 명이 왔어요.",
+          exVi: "Một trăm người đã đến.",
+        },
+        {
+          kr: "번",
+          en: "time(s), turn (counter)",
+          vi: "...lần (đơn vị)",
+          hv: "番",
+          hvR: "phiên",
+          type: "hv",
+          explain:
+            "Đơn vị đếm số lần. 한 번 = một lần, 두 번 = hai lần. 번호(số thứ tự) cũng từ 番.",
+          ex: "한 번만 더 해 주세요.",
+          exVi: "Làm thêm một lần nữa thôi.",
+        },
+        {
+          kr: "번호",
+          en: "number, ID number",
+          vi: "số, số thứ tự",
+          hv: "番號",
+          hvR: "phiên hiệu",
+          type: "hv",
+          explain:
+            "Số thứ tự hoặc mã số. 전화번호 = số điện thoại. 번호표 = thẻ số thứ tự.",
+          ex: "전화번호가 뭐예요?",
+          exVi: "Số điện thoại của bạn là gì?",
+        },
+        {
+          kr: "분",
+          en: "minute(s); person (honorific counter)",
+          vi: "...người (kính ngữ); ...phút",
+          hv: "分/分",
+          hvR: "phân (phút) / phân (người)",
+          type: "hv",
+          explain:
+            "Hai nghĩa: (1) phút (삼십 분 = 30 phút), (2) đơn vị đếm người kính trọng (두 분 = hai vị/hai người).",
+          ex: "30분 후에 만나요.",
+          exVi: "Gặp nhau sau 30 phút nhé.",
+        },
+        {
+          kr: "사",
+          en: "4, four (Sino-Korean)",
+          vi: "số bốn (Hán Hàn)",
+          hv: "四",
+          hvR: "tứ",
+          type: "hv",
+          explain:
+            "Số 4 hệ Hán Hàn. 사 월(tháng 4), 사십(40), 사층(tầng 4). Lưu ý: số 4 bị kiêng kỵ ở Hàn.",
+          ex: "사 층으로 올라가세요.",
+          exVi: "Hãy lên tầng 4.",
+        },
+        {
+          kr: "사십",
+          en: "40, forty (Sino-Korean)",
+          vi: "bốn mươi (Hán Hàn)",
+          hv: "四十",
+          hvR: "tứ thập",
+          type: "hv",
+          explain:
+            "Bốn mươi — hệ Hán Hàn. 사(4) + 십(10). Dùng với số thứ tự, năm, điểm số,...",
+          ex: "사십 점을 받았어요.",
+          exVi: "Tôi nhận được 40 điểm.",
+        },
+        {
+          kr: "삼",
+          en: "3, three (Sino-Korean)",
+          vi: "ba (số Hán Hàn)",
+          hv: "三",
+          hvR: "tam",
+          type: "hv",
+          explain:
+            "Số 3 hệ Hán Hàn. 삼 월(tháng 3), 삼십(30), 삼층(tầng 3), 삼겹살(ba chỉ).",
+          ex: "삼 층에 올라가요.",
+          exVi: "Lên tầng 3 đi.",
+        },
+        {
+          kr: "삼십",
+          en: "30, thirty (Sino-Korean)",
+          vi: "ba mươi (Hán Hàn)",
+          hv: "三十",
+          hvR: "tam thập",
+          type: "hv",
+          explain:
+            "Ba mươi — hệ Hán Hàn. 삼(3) + 십(10). Dùng với phút, điểm, tuổi (trong văn phong chính thức).",
+          ex: "삼십 분 기다렸어요.",
+          exVi: "Tôi đã chờ 30 phút.",
+        },
+        {
+          kr: "서른",
+          en: "30, thirty (native Korean)",
+          vi: "ba mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Ba mươi — hệ thuần Hàn. Dùng đếm tuổi người. 서른 살 = 30 tuổi.",
+          ex: "서른 살이 됐어요.",
+          exVi: "Tôi đã bước sang tuổi 30.",
+        },
+        {
+          kr: "센티미터",
+          en: "centimeter",
+          vi: "xen-ti-mét (đơn vị)",
+          hv: null,
+          hvR: "từ tiếng Anh 'centimeter'",
+          type: "loan",
+          explain:
+            "Đơn vị đo độ dài xen-ti-mét. 170센티미터 = 170cm. Thường nói tắt là 센티.",
+          ex: "키가 170센티미터예요.",
+          exVi: "Chiều cao của tôi là 170cm.",
+        },
+        {
+          kr: "셋",
+          en: "3, three (native Korean)",
+          vi: "ba (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 3 thuần Hàn — dùng khi đứng một mình. Trước danh từ đổi thành 세. 셋이서 = ba người chúng tôi.",
+          ex: "우리 셋이서 먹었어요.",
+          exVi: "Ba chúng tôi đã ăn.",
+        },
+        {
+          kr: "셋째",
+          en: "third (ordinal)",
+          vi: "thứ ba (thứ tự)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Thứ ba trong thứ tự. 셋째 줄 = hàng thứ ba. 셋째 날 = ngày thứ ba.",
+          ex: "셋째로 도착했어요.",
+          exVi: "Tôi đến nơi thứ ba.",
+        },
+        {
+          kr: "쉰",
+          en: "50, fifty (native Korean)",
+          vi: "năm mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain: "Năm mươi — hệ thuần Hàn. Dùng đếm tuổi. 쉰 살 = 50 tuổi.",
+          ex: "아버지가 쉰 살이에요.",
+          exVi: "Bố tôi 50 tuổi.",
+        },
+        {
+          kr: "스물",
+          en: "20, twenty (native Korean)",
+          vi: "hai mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Hai mươi — hệ thuần Hàn. Trước danh từ đổi thành 스무. 스무 살 = 20 tuổi.",
+          ex: "스물 살에 대학에 갔어요.",
+          exVi: "Năm 20 tuổi tôi vào đại học.",
+        },
+        {
+          kr: "십",
+          en: "10, ten (Sino-Korean)",
+          vi: "mười (Hán Hàn)",
+          hv: "十",
+          hvR: "thập",
+          type: "hv",
+          explain:
+            "Mười — hệ Hán Hàn. 십(10), 이십(20), 삼십(30),... 십 분(10 phút), 십 월(tháng 10).",
+          ex: "십 분만 기다려 주세요.",
+          exVi: "Xin chờ 10 phút thôi.",
+        },
+        {
+          kr: "아홉",
+          en: "9, nine (native Korean)",
+          vi: "chín (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 9 thuần Hàn. 아홉 시 = 9 giờ. 아홉 살 = 9 tuổi. 아홉 개 = chín cái.",
+          ex: "아홉 시에 일어나요.",
+          exVi: "Tôi thức dậy lúc 9 giờ.",
+        },
+        {
+          kr: "아흔",
+          en: "90, ninety (native Korean)",
+          vi: "chín mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Chín mươi — hệ thuần Hàn. Dùng đếm tuổi người cao tuổi. 아흔 살 = 90 tuổi.",
+          ex: "증조할머니가 아흔 살이에요.",
+          exVi: "Cụ ngoại tôi 90 tuổi.",
+        },
+        {
+          kr: "엔",
+          en: "yen (Japanese currency)",
+          vi: "yên (tiền Nhật)",
+          hv: null,
+          hvR: "phiên âm tiếng Nhật '円'",
+          type: "loan",
+          explain:
+            "Đơn vị tiền tệ Nhật Bản. Hán tự là 円 (viên). 100엔 = 100 yên.",
+          ex: "1000엔을 달러로 바꿔요.",
+          exVi: "Tôi đổi 1000 yên sang đô la.",
+        },
+        {
+          kr: "여덟",
+          en: "8, eight (native Korean)",
+          vi: "tám (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 8 thuần Hàn. 여덟 시 = 8 giờ. 여덟 살 = 8 tuổi. Trước danh từ đổi thành 여덟.",
+          ex: "여덟 시에 자요.",
+          exVi: "Tôi đi ngủ lúc 8 giờ.",
+        },
+        {
+          kr: "여든",
+          en: "80, eighty (native Korean)",
+          vi: "tám mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Tám mươi — hệ thuần Hàn. Dùng đếm tuổi người cao tuổi. 여든 살 = 80 tuổi.",
+          ex: "할아버지가 여든 살이에요.",
+          exVi: "Ông tôi 80 tuổi.",
+        },
+        {
+          kr: "여섯",
+          en: "6, six (native Korean)",
+          vi: "sáu (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 6 thuần Hàn. 여섯 시 = 6 giờ. 여섯 살 = 6 tuổi. 여섯 개 = sáu cái.",
+          ex: "여섯 시에 일어나요.",
+          exVi: "Tôi thức dậy lúc 6 giờ.",
+        },
+        {
+          kr: "열",
+          en: "10, ten (native Korean)",
+          vi: "mười (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Mười — hệ thuần Hàn. 열 시 = 10 giờ. 열 살 = 10 tuổi. 열하나(11), 열둘(12),...",
+          ex: "열 살에 학교에 갔어요.",
+          exVi: "Tôi đi học năm 10 tuổi.",
+        },
+        {
+          kr: "영",
+          en: "zero; spirit",
+          vi: "tinh thần; số không (0)",
+          hv: "零/靈",
+          hvR: "linh / linh",
+          type: "hv",
+          explain:
+            "Hai nghĩa: (1) 零 — số 0 (영 점 = điểm không), (2) 靈 — tinh thần, linh hồn. Số 0 còn đọc là 공.",
+          ex: "영 도예요.",
+          exVi: "Nhiệt độ 0 độ.",
+        },
+        {
+          kr: "예순",
+          en: "60, sixty (native Korean)",
+          vi: "sáu mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Sáu mươi — hệ thuần Hàn. Dùng đếm tuổi. 예순 살 = 60 tuổi. 환갑 = lễ mừng thọ 60 tuổi.",
+          ex: "예순 살에 은퇴했어요.",
+          exVi: "Ông ấy nghỉ hưu ở tuổi 60.",
+        },
+        {
+          kr: "오",
+          en: "5, five (Sino-Korean)",
+          vi: "số năm (Hán Hàn)",
+          hv: "五",
+          hvR: "ngũ",
+          type: "hv",
+          explain:
+            "Số 5 hệ Hán Hàn. 오 월(tháng 5), 오십(50), 오층(tầng 5), 오전/오후(sáng/chiều).",
+          ex: "오층에 사무실이 있어요.",
+          exVi: "Văn phòng ở tầng 5.",
+        },
+        {
+          kr: "오십",
+          en: "50, fifty (Sino-Korean)",
+          vi: "năm mươi (Hán Hàn)",
+          hv: "五十",
+          hvR: "ngũ thập",
+          type: "hv",
+          explain:
+            "Năm mươi — hệ Hán Hàn. 오(5) + 십(10). Dùng trong văn phong chính thức, điểm số,...",
+          ex: "오십 퍼센트 할인이에요.",
+          exVi: "Giảm giá 50 phần trăm.",
+        },
+        {
+          kr: "원",
+          en: "won (Korean currency)",
+          vi: "won (đơn vị tiền Hàn)",
+          hv: "圓/元",
+          hvR: "viên / nguyên",
+          type: "hv",
+          explain:
+            "Đơn vị tiền tệ Hàn Quốc. 1달러 ≈ 1300원. 만 원 = 10.000 won (tờ tiền phổ biến nhất).",
+          ex: "이거 얼마예요? — 오천 원이에요.",
+          exVi: "Cái này bao nhiêu? — 5.000 won.",
+        },
+        {
+          kr: "육",
+          en: "6, six (Sino-Korean)",
+          vi: "sáu (Hán Hàn)",
+          hv: "六",
+          hvR: "lục",
+          type: "hv",
+          explain:
+            "Số 6 hệ Hán Hàn. 육 월(tháng 6 — nhưng đọc là 유월), 육십(60), 육층(tầng 6).",
+          ex: "육층에 살아요.",
+          exVi: "Tôi sống ở tầng 6.",
+        },
+        {
+          kr: "육십",
+          en: "60, sixty (Sino-Korean)",
+          vi: "sáu mươi (Hán Hàn)",
+          hv: "六十",
+          hvR: "lục thập",
+          type: "hv",
+          explain: "Sáu mươi — hệ Hán Hàn. 육(6) + 십(10).",
+          ex: "육십 점을 받았어요.",
+          exVi: "Tôi nhận được 60 điểm.",
+        },
+        {
+          kr: "이십",
+          en: "20, twenty (Sino-Korean)",
+          vi: "hai mươi (Hán Hàn)",
+          hv: "二十",
+          hvR: "nhị thập",
+          type: "hv",
+          explain:
+            "Hai mươi — hệ Hán Hàn. 이(2) + 십(10). 이십 분(20 phút), 이십 세기(thế kỷ 20).",
+          ex: "이십 분 후에 출발해요.",
+          exVi: "Hai mươi phút nữa sẽ khởi hành.",
+        },
+        {
+          kr: "인",
+          en: "person (counter, formal writing)",
+          vi: "...người",
+          hv: "人",
+          hvR: "nhân",
+          type: "hv",
+          explain:
+            "Đơn vị đếm người trong văn viết trang trọng. 5인 가족 = gia đình 5 người. 1인분 = một suất.",
+          ex: "2인분 주세요.",
+          exVi: "Cho tôi hai suất.",
+        },
+        {
+          kr: "일곱",
+          en: "7, seven (native Korean)",
+          vi: "bảy (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 7 thuần Hàn. 일곱 시 = 7 giờ. 일곱 살 = 7 tuổi. 일곱 개 = bảy cái.",
+          ex: "일곱 시에 일어나요.",
+          exVi: "Tôi thức dậy lúc 7 giờ.",
+        },
+        {
+          kr: "일흔",
+          en: "70, seventy (native Korean)",
+          vi: "bảy mươi (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain: "Bảy mươi — hệ thuần Hàn. Dùng đếm tuổi. 일흔 살 = 70 tuổi.",
+          ex: "할머니가 일흔 살이에요.",
+          exVi: "Bà tôi 70 tuổi.",
+        },
+        {
+          kr: "잔",
+          en: "glass, cup (counter)",
+          vi: "cái ly; ...ly (đơn vị)",
+          hv: "盞",
+          hvR: "trản",
+          type: "hv",
+          explain:
+            "Đơn vị đếm đồ uống trong cốc/ly. 커피 한 잔 = một tách cà phê. 물 두 잔 = hai ly nước.",
+          ex: "커피 한 잔 할래요?",
+          exVi: "Uống một tách cà phê nhé?",
+        },
+        {
+          kr: "장",
+          en: "sheet (counter); chapter",
+          vi: "...tờ (đơn vị); ...chương",
+          hv: "張/章",
+          hvR: "trương / chương",
+          type: "hv",
+          explain:
+            "Hai nghĩa: (1) 張 — tờ (종이 한 장 = một tờ giấy), (2) 章 — chương (1장, 2장 = chương 1, 2).",
+          ex: "종이 두 장 주세요.",
+          exVi: "Cho tôi hai tờ giấy.",
+        },
+        {
+          kr: "점",
+          en: "point, dot, score",
+          vi: "điểm; nốt chấm",
+          hv: "點",
+          hvR: "điểm",
+          type: "hv",
+          explain:
+            "Điểm số hoặc dấu chấm. 100점 = 100 điểm. 소수점 = dấu thập phân. 점수(điểm số).",
+          ex: "100점을 받았어요!",
+          exVi: "Tôi được 100 điểm!",
+        },
+        {
+          kr: "정도",
+          en: "degree, about, approximately",
+          vi: "mức độ, khoảng",
+          hv: "程度",
+          hvR: "trình độ",
+          type: "hv",
+          explain:
+            "Khoảng, mức độ. 30분 정도 = khoảng 30 phút. 이 정도면 = như thế này thì đủ rồi.",
+          ex: "30분 정도 걸려요.",
+          exVi: "Mất khoảng 30 phút.",
+        },
+        {
+          kr: "줄",
+          en: "line, row, string",
+          vi: "dây; hàng",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Hàng, dòng, hoặc sợi dây. 줄을 서다 = xếp hàng. 김밥 한 줄 = một cuộn kimbap.",
+          ex: "줄을 서 주세요.",
+          exVi: "Xin hãy xếp hàng.",
+        },
+        {
+          kr: "짜리",
+          en: "worth, denomination",
+          vi: "mệnh giá (đồng won)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Hậu tố chỉ mệnh giá. 천 원짜리 = tờ 1.000 won. 오십 원짜리 동전 = đồng xu 50 won.",
+          ex: "천 원짜리 있어요?",
+          exVi: "Bạn có tờ 1.000 won không?",
+        },
+        {
+          kr: "쪽",
+          en: "side, page, direction",
+          vi: "phía, trang (sách)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Hai nghĩa: (1) phía, hướng (왼쪽 = bên trái), (2) trang sách (10쪽 = trang 10). 페이지 và 쪽 tương đương.",
+          ex: "10쪽을 펴세요.",
+          exVi: "Mở trang 10 ra.",
+        },
+        {
+          kr: "천",
+          en: "1,000, one thousand",
+          vi: "một nghìn",
+          hv: "千",
+          hvR: "thiên",
+          type: "hv",
+          explain:
+            "Một nghìn — hệ Hán Hàn. 천(1.000), 만(10.000), 십만(100.000), 백만(1.000.000).",
+          ex: "천 원 주세요.",
+          exVi: "Cho tôi 1.000 won.",
+        },
+        {
+          kr: "첫",
+          en: "first (before nouns)",
+          vi: "đầu tiên (trước danh từ)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Dùng trước danh từ chỉ điều đầu tiên. 첫날 = ngày đầu tiên. 첫사랑 = mối tình đầu.",
+          ex: "오늘이 첫날이에요.",
+          exVi: "Hôm nay là ngày đầu tiên.",
+        },
+        {
+          kr: "첫째",
+          en: "first (ordinal)",
+          vi: "thứ nhất (thứ tự)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Thứ nhất trong thứ tự. 첫째 아이 = đứa con cả. 첫째로 = thứ nhất là...",
+          ex: "첫째가 의사예요.",
+          exVi: "Con cả là bác sĩ.",
+        },
+        {
+          kr: "초",
+          en: "second(s) (time)",
+          vi: "...giây (đơn vị thời gian)",
+          hv: "秒",
+          hvR: "miểu",
+          type: "hv",
+          explain:
+            "Đơn vị thời gian giây. 10초 = 10 giây. 분(phút), 초(giây), 시간(giờ).",
+          ex: "10초 안에 해야 해요.",
+          exVi: "Phải làm trong vòng 10 giây.",
+        },
+        {
+          kr: "층",
+          en: "floor, story (counter)",
+          vi: "...tầng (đơn vị)",
+          hv: "層",
+          hvR: "tầng",
+          type: "hv",
+          explain:
+            "Tầng lầu. 1층 = tầng 1. 지하층 = tầng hầm. 몇 층이에요? = ở tầng mấy?",
+          ex: "몇 층에 살아요?",
+          exVi: "Bạn sống ở tầng mấy?",
+        },
+        {
+          kr: "칠",
+          en: "7, seven (Sino-Korean)",
+          vi: "bảy (Hán Hàn)",
+          hv: "七",
+          hvR: "thất",
+          type: "hv",
+          explain: "Số 7 hệ Hán Hàn. 칠 월(tháng 7), 칠십(70), 칠층(tầng 7).",
+          ex: "칠 월에 여행 가요.",
+          exVi: "Tôi đi du lịch vào tháng 7.",
+        },
+        {
+          kr: "칠십",
+          en: "70, seventy (Sino-Korean)",
+          vi: "bảy mươi (Hán Hàn)",
+          hv: "七十",
+          hvR: "thất thập",
+          type: "hv",
+          explain: "Bảy mươi — hệ Hán Hàn. 칠(7) + 십(10).",
+          ex: "칠십 퍼센트가 찬성했어요.",
+          exVi: "70 phần trăm đã đồng ý.",
+        },
+        {
+          kr: "크기",
+          en: "size, dimensions",
+          vi: "kích thước, cỡ",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Kích thước, độ lớn. 크기가 어때요? = Kích thước thế nào? 크기가 맞다 = vừa kích thước.",
+          ex: "크기가 맞아요?",
+          exVi: "Kích thước có vừa không?",
+        },
+        {
+          kr: "킬로그램",
+          en: "kilogram",
+          vi: "ki-lô-gam (đơn vị)",
+          hv: null,
+          hvR: "từ tiếng Anh 'kilogram'",
+          type: "loan",
+          explain:
+            "Đơn vị khối lượng ki-lô-gam. 1킬로그램 = 1kg. Thường nói tắt là 킬로.",
+          ex: "쌀 10킬로그램 사요.",
+          exVi: "Tôi mua 10 kg gạo.",
+        },
+        {
+          kr: "킬로미터",
+          en: "kilometer",
+          vi: "ki-lô-mét (đơn vị)",
+          hv: null,
+          hvR: "từ tiếng Anh 'kilometer'",
+          type: "loan",
+          explain:
+            "Đơn vị đo độ dài ki-lô-mét. 서울까지 100킬로미터예요 = Seoul cách 100km.",
+          ex: "여기서 10킬로미터예요.",
+          exVi: "Từ đây 10 ki-lô-mét.",
+        },
+        {
+          kr: "통",
+          en: "barrel, bundle (counter)",
+          vi: "thùng; ...gói (đơn vị)",
+          hv: "桶",
+          hvR: "thùng",
+          type: "hv",
+          explain:
+            "Đơn vị đếm cho vật đựng hoặc gói. 라면 한 통 = một gói mì. 쓰레기통 = thùng rác.",
+          ex: "라면 두 통 주세요.",
+          exVi: "Cho tôi hai gói mì.",
+        },
+        {
+          kr: "팔",
+          en: "8, eight (Sino-Korean)",
+          vi: "tám (Hán Hàn)",
+          hv: "八",
+          hvR: "bát",
+          type: "hv",
+          explain: "Số 8 hệ Hán Hàn. 팔 월(tháng 8), 팔십(80), 팔층(tầng 8).",
+          ex: "팔 월에 광복절이에요.",
+          exVi: "Tháng 8 có Ngày Giải phóng.",
+        },
+        {
+          kr: "팔십",
+          en: "80, eighty (Sino-Korean)",
+          vi: "tám mươi (Hán Hàn)",
+          hv: "八十",
+          hvR: "bát thập",
+          type: "hv",
+          explain: "Tám mươi — hệ Hán Hàn. 팔(8) + 십(10).",
+          ex: "팔십 년대 노래를 좋아해요.",
+          exVi: "Tôi thích nhạc thập niên 80.",
+        },
+        {
+          kr: "퍼센트",
+          en: "percent",
+          vi: "phần trăm (%)",
+          hv: null,
+          hvR: "từ tiếng Anh 'percent'",
+          type: "loan",
+          explain:
+            "Phần trăm. 50퍼센트 = 50%. 할인율이 삼십 퍼센트예요 = tỷ lệ giảm giá 30%.",
+          ex: "오십 퍼센트 할인이에요.",
+          exVi: "Giảm giá 50 phần trăm.",
+        },
+        {
+          kr: "페이지",
+          en: "page",
+          vi: "trang (sách/tài liệu)",
+          hv: null,
+          hvR: "từ tiếng Anh 'page'",
+          type: "loan",
+          explain:
+            "Trang sách hoặc tài liệu. 10페이지 = trang 10. Tương đương với 쪽 (thuần Hàn).",
+          ex: "10페이지를 펴세요.",
+          exVi: "Mở trang 10 ra.",
+        },
+        {
+          kr: "편",
+          en: "side; episode (counter)",
+          vi: "phía; tập (phim)",
+          hv: "便/篇",
+          hvR: "tiện / thiên",
+          type: "hv",
+          explain:
+            "Hai nghĩa: (1) 便 — phía, bên (우리 편 = phe chúng ta), (2) 篇 — tập phim (1편, 2편 = tập 1, 2).",
+          ex: "1편이 제일 재미있어요.",
+          exVi: "Tập 1 thú vị nhất.",
+        },
+        {
+          kr: "하나",
+          en: "1, one (native Korean)",
+          vi: "một (thuần Hàn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Số 1 thuần Hàn — dùng khi đứng một mình. Trước danh từ đổi thành 한. 하나씩 = từng cái một.",
+          ex: "하나만 주세요.",
+          exVi: "Cho tôi một cái thôi.",
+        },
+        {
+          kr: "한",
+          en: "one (before nouns)",
+          vi: "một (trước danh từ)",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Dạng của 하나 dùng trước danh từ. 한 명(một người), 한 개(một cái), 한 시(1 giờ).",
+          ex: "한 개에 얼마예요?",
+          exVi: "Một cái bao nhiêu tiền?",
+        },
+        {
+          kr: "한번",
+          en: "once, one time",
+          vi: "một lần",
+          hv: null,
+          hvR: "thuần Hàn",
+          type: "pure",
+          explain:
+            "Một lần. 한번 해 보세요 = hãy thử một lần. 한번쯤 = ít nhất một lần. 한번만 = chỉ một lần thôi.",
+          ex: "한번 해 보세요!",
+          exVi: "Hãy thử một lần xem!",
+        },
+        {
+          kr: "호",
+          en: "number (ordinal label)",
+          vi: "số ...(thứ tự)",
+          hv: "號",
+          hvR: "hiệu",
+          type: "hv",
+          explain:
+            "Số thứ tự của phòng, xe buýt, cỡ,... 202호 = phòng 202. 2호선 = tuyến số 2. 대호 = cỡ lớn.",
+          ex: "202호에 살아요.",
+          exVi: "Tôi sống ở phòng 202.",
+        },
+      ];
 
-<script>
-// type: 'hv' = Hán Hàn, 'pure' = Thuần Hàn, 'loan' = Vay mượn
-const vocab = [
-  { kr:"구", en:"9, nine", vi:"số 9", hv:"九", hvR:"cửu", type:"hv",
-    explain:"Số 9 theo hệ Hán Hàn. Dùng với: 구 층(tầng 9), 구 월(tháng 9), 구십(90).",
-    ex:"구 층에 살아요.", exVi:"Tôi sống ở tầng 9." },
-  { kr:"구십", en:"90, ninety", vi:"90 (chín mươi)", hv:"九十", hvR:"cửu thập", type:"hv",
-    explain:"Chín mươi — hệ Hán Hàn. 구(9) + 십(10). Dùng khi đếm số thứ tự, tháng, năm,...",
-    ex:"할아버지가 구십 살이에요.", exVi:"Ông tôi 90 tuổi." },
-  { kr:"권", en:"volume, copy (books)", vi:"...quyển (sách)", hv:"卷", hvR:"quyển", type:"hv",
-    explain:"Đơn vị đếm sách, tạp chí. 책 두 권 = hai quyển sách. 한 권에 얼마예요? = một quyển bao nhiêu?",
-    ex:"책을 세 권 샀어요.", exVi:"Tôi đã mua ba quyển sách." },
-  { kr:"그램", en:"gram", vi:"gam (đơn vị)", hv:null, hvR:"từ tiếng Anh 'gram'", type:"loan",
-    explain:"Đơn vị khối lượng gam. 100그램 = 100 gam. 킬로그램(kg) = ki-lô-gam.",
-    ex:"고기 200그램 주세요.", exVi:"Cho tôi 200 gam thịt." },
-  { kr:"넷", en:"4, four", vi:"bốn (số đếm thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 4 thuần Hàn. Dùng với đơn vị đếm thuần Hàn: 넷이서 = bốn người (chúng tôi). Trước danh từ đổi thành 네.",
-    ex:"우리 넷이서 갔어요.", exVi:"Bốn chúng tôi đã đi." },
-  { kr:"넷째", en:"fourth (ordinal)", vi:"thứ tư (thứ tự)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Thứ tư trong thứ tự. 넷(4) + 째(hậu tố thứ tự). 넷째 딸 = con gái thứ tư.",
-    ex:"넷째로 도착했어요.", exVi:"Tôi đến nơi thứ tư." },
-  { kr:"다섯", en:"5, five", vi:"năm (số đếm thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 5 thuần Hàn. 다섯 명 = năm người. 다섯 살 = 5 tuổi. Trước danh từ giữ nguyên.",
-    ex:"사과 다섯 개 주세요.", exVi:"Cho tôi năm quả táo." },
-  { kr:"달러", en:"dollar", vi:"đô la", hv:null, hvR:"từ tiếng Anh 'dollar'", type:"loan",
-    explain:"Đô la Mỹ. 달러(dollar). 100달러 = 100 đô la. 환율 = tỷ giá hối đoái.",
-    ex:"100달러를 원으로 바꿨어요.", exVi:"Tôi đã đổi 100 đô la sang won." },
-  { kr:"대", en:"versus; large size", vi:"đối (so sánh); lớn, cỡ lớn", hv:"對/大", hvR:"đối / đại", type:"hv",
-    explain:"Hai nghĩa: (1) 對 — đối lập, so sánh (한국 대 일본 = Hàn Quốc vs Nhật Bản), (2) 大 — cỡ lớn (대자 = size L).",
-    ex:"한국 대 일본 경기예요.", exVi:"Đây là trận đấu Hàn Quốc vs Nhật Bản." },
-  { kr:"동전", en:"coin", vi:"đồng xu, tiền xu", hv:"銅錢", hvR:"đồng tiền", type:"hv",
-    explain:"Tiền xu. 동(銅, đồng) + 전(錢, tiền). 동전을 모으다 = gom tiền xu. 동전 지갑 = ví đựng xu.",
-    ex:"동전이 많이 있어요.", exVi:"Tôi có nhiều tiền xu." },
-  { kr:"두", en:"two (before nouns)", vi:"hai (từ Hán Hàn)", hv:null, hvR:"thuần Hàn (dạng trước danh từ)", type:"pure",
-    explain:"Dạng rút gọn của 둘 dùng trước danh từ. 두 명(hai người), 두 개(hai cái), 두 시(2 giờ).",
-    ex:"두 시에 만나요.", exVi:"Gặp nhau lúc 2 giờ nhé." },
-  { kr:"둘", en:"2, two", vi:"hai (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 2 thuần Hàn — dùng khi đứng một mình. Trước danh từ đổi thành 두. 둘이서 = hai người chúng mình.",
-    ex:"우리 둘이서 갔어요.", exVi:"Hai chúng tôi đã đi." },
-  { kr:"둘째", en:"second (ordinal)", vi:"thứ hai (thứ tự)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Thứ hai trong thứ tự. 둘째 아들 = con trai thứ hai. 둘째로 = thứ hai là...",
-    ex:"저는 둘째예요.", exVi:"Tôi là con thứ hai." },
-  { kr:"마리", en:"head, animal (counter)", vi:"...con (đơn vị đếm động vật)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Đơn vị đếm động vật. 강아지 두 마리 = hai con chó. 물고기 세 마리 = ba con cá.",
-    ex:"고양이 두 마리가 있어요.", exVi:"Tôi có hai con mèo." },
-  { kr:"마흔", en:"40, forty", vi:"bốn mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Bốn mươi — hệ thuần Hàn. Dùng đếm tuổi người. 마흔 살 = 40 tuổi.",
-    ex:"마흔 살이에요.", exVi:"Tôi 40 tuổi." },
-  { kr:"만", en:"only; ten thousand", vi:"chỉ; mười nghìn", hv:"萬", hvR:"vạn", type:"hv",
-    explain:"Hai nghĩa: (1) 萬 — mười nghìn (일만 = 10.000), (2) 만 (thuần Hàn trợ từ) — chỉ, mỗi mình (나만 = chỉ mình tôi).",
-    ex:"이 가방은 오만 원이에요.", exVi:"Cái túi này 50.000 won." },
-  { kr:"명", en:"person (counter, formal)", vi:"...người (đơn vị đếm người)", hv:"名", hvR:"danh", type:"hv",
-    explain:"Đơn vị đếm người (trung tính). 세 명 = ba người. Kính ngữ là 분. 몇 명 = mấy người.",
-    ex:"학생이 몇 명이에요?", exVi:"Có bao nhiêu học sinh?" },
-  { kr:"몇", en:"how many, a few", vi:"mấy, bao nhiêu", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Dùng để hỏi số lượng không xác định. 몇 명 = bao nhiêu người. 몇 시 = mấy giờ. 몇 살 = bao nhiêu tuổi.",
-    ex:"몇 살이에요?", exVi:"Bạn bao nhiêu tuổi?" },
-  { kr:"미터", en:"meter", vi:"mét (đơn vị)", hv:null, hvR:"từ tiếng Anh 'meter'", type:"loan",
-    explain:"Đơn vị đo độ dài mét. 100미터 = 100 mét. 킬로미터(km), 센티미터(cm) là các đơn vị liên quan.",
-    ex:"100미터를 12초에 달렸어요.", exVi:"Tôi chạy 100 mét trong 12 giây." },
-  { kr:"백", en:"100, one hundred", vi:"một trăm", hv:"百", hvR:"bách", type:"hv",
-    explain:"Một trăm — hệ Hán Hàn. 백(100), 천(1.000), 만(10.000). 이백 = 200, 삼백 = 300,...",
-    ex:"백 명이 왔어요.", exVi:"Một trăm người đã đến." },
-  { kr:"번", en:"time(s), turn (counter)", vi:"...lần (đơn vị)", hv:"番", hvR:"phiên", type:"hv",
-    explain:"Đơn vị đếm số lần. 한 번 = một lần, 두 번 = hai lần. 번호(số thứ tự) cũng từ 番.",
-    ex:"한 번만 더 해 주세요.", exVi:"Làm thêm một lần nữa thôi." },
-  { kr:"번호", en:"number, ID number", vi:"số, số thứ tự", hv:"番號", hvR:"phiên hiệu", type:"hv",
-    explain:"Số thứ tự hoặc mã số. 전화번호 = số điện thoại. 번호표 = thẻ số thứ tự.",
-    ex:"전화번호가 뭐예요?", exVi:"Số điện thoại của bạn là gì?" },
-  { kr:"분", en:"minute(s); person (honorific counter)", vi:"...người (kính ngữ); ...phút", hv:"分/分", hvR:"phân (phút) / phân (người)", type:"hv",
-    explain:"Hai nghĩa: (1) phút (삼십 분 = 30 phút), (2) đơn vị đếm người kính trọng (두 분 = hai vị/hai người).",
-    ex:"30분 후에 만나요.", exVi:"Gặp nhau sau 30 phút nhé." },
-  { kr:"사", en:"4, four (Sino-Korean)", vi:"số bốn (Hán Hàn)", hv:"四", hvR:"tứ", type:"hv",
-    explain:"Số 4 hệ Hán Hàn. 사 월(tháng 4), 사십(40), 사층(tầng 4). Lưu ý: số 4 bị kiêng kỵ ở Hàn.",
-    ex:"사 층으로 올라가세요.", exVi:"Hãy lên tầng 4." },
-  { kr:"사십", en:"40, forty (Sino-Korean)", vi:"bốn mươi (Hán Hàn)", hv:"四十", hvR:"tứ thập", type:"hv",
-    explain:"Bốn mươi — hệ Hán Hàn. 사(4) + 십(10). Dùng với số thứ tự, năm, điểm số,...",
-    ex:"사십 점을 받았어요.", exVi:"Tôi nhận được 40 điểm." },
-  { kr:"삼", en:"3, three (Sino-Korean)", vi:"ba (số Hán Hàn)", hv:"三", hvR:"tam", type:"hv",
-    explain:"Số 3 hệ Hán Hàn. 삼 월(tháng 3), 삼십(30), 삼층(tầng 3), 삼겹살(ba chỉ).",
-    ex:"삼 층에 올라가요.", exVi:"Lên tầng 3 đi." },
-  { kr:"삼십", en:"30, thirty (Sino-Korean)", vi:"ba mươi (Hán Hàn)", hv:"三十", hvR:"tam thập", type:"hv",
-    explain:"Ba mươi — hệ Hán Hàn. 삼(3) + 십(10). Dùng với phút, điểm, tuổi (trong văn phong chính thức).",
-    ex:"삼십 분 기다렸어요.", exVi:"Tôi đã chờ 30 phút." },
-  { kr:"서른", en:"30, thirty (native Korean)", vi:"ba mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Ba mươi — hệ thuần Hàn. Dùng đếm tuổi người. 서른 살 = 30 tuổi.",
-    ex:"서른 살이 됐어요.", exVi:"Tôi đã bước sang tuổi 30." },
-  { kr:"센티미터", en:"centimeter", vi:"xen-ti-mét (đơn vị)", hv:null, hvR:"từ tiếng Anh 'centimeter'", type:"loan",
-    explain:"Đơn vị đo độ dài xen-ti-mét. 170센티미터 = 170cm. Thường nói tắt là 센티.",
-    ex:"키가 170센티미터예요.", exVi:"Chiều cao của tôi là 170cm." },
-  { kr:"셋", en:"3, three (native Korean)", vi:"ba (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 3 thuần Hàn — dùng khi đứng một mình. Trước danh từ đổi thành 세. 셋이서 = ba người chúng tôi.",
-    ex:"우리 셋이서 먹었어요.", exVi:"Ba chúng tôi đã ăn." },
-  { kr:"셋째", en:"third (ordinal)", vi:"thứ ba (thứ tự)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Thứ ba trong thứ tự. 셋째 줄 = hàng thứ ba. 셋째 날 = ngày thứ ba.",
-    ex:"셋째로 도착했어요.", exVi:"Tôi đến nơi thứ ba." },
-  { kr:"쉰", en:"50, fifty (native Korean)", vi:"năm mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Năm mươi — hệ thuần Hàn. Dùng đếm tuổi. 쉰 살 = 50 tuổi.",
-    ex:"아버지가 쉰 살이에요.", exVi:"Bố tôi 50 tuổi." },
-  { kr:"스물", en:"20, twenty (native Korean)", vi:"hai mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Hai mươi — hệ thuần Hàn. Trước danh từ đổi thành 스무. 스무 살 = 20 tuổi.",
-    ex:"스물 살에 대학에 갔어요.", exVi:"Năm 20 tuổi tôi vào đại học." },
-  { kr:"십", en:"10, ten (Sino-Korean)", vi:"mười (Hán Hàn)", hv:"十", hvR:"thập", type:"hv",
-    explain:"Mười — hệ Hán Hàn. 십(10), 이십(20), 삼십(30),... 십 분(10 phút), 십 월(tháng 10).",
-    ex:"십 분만 기다려 주세요.", exVi:"Xin chờ 10 phút thôi." },
-  { kr:"아홉", en:"9, nine (native Korean)", vi:"chín (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 9 thuần Hàn. 아홉 시 = 9 giờ. 아홉 살 = 9 tuổi. 아홉 개 = chín cái.",
-    ex:"아홉 시에 일어나요.", exVi:"Tôi thức dậy lúc 9 giờ." },
-  { kr:"아흔", en:"90, ninety (native Korean)", vi:"chín mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Chín mươi — hệ thuần Hàn. Dùng đếm tuổi người cao tuổi. 아흔 살 = 90 tuổi.",
-    ex:"증조할머니가 아흔 살이에요.", exVi:"Cụ ngoại tôi 90 tuổi." },
-  { kr:"엔", en:"yen (Japanese currency)", vi:"yên (tiền Nhật)", hv:null, hvR:"phiên âm tiếng Nhật '円'", type:"loan",
-    explain:"Đơn vị tiền tệ Nhật Bản. Hán tự là 円 (viên). 100엔 = 100 yên.",
-    ex:"1000엔을 달러로 바꿔요.", exVi:"Tôi đổi 1000 yên sang đô la." },
-  { kr:"여덟", en:"8, eight (native Korean)", vi:"tám (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 8 thuần Hàn. 여덟 시 = 8 giờ. 여덟 살 = 8 tuổi. Trước danh từ đổi thành 여덟.",
-    ex:"여덟 시에 자요.", exVi:"Tôi đi ngủ lúc 8 giờ." },
-  { kr:"여든", en:"80, eighty (native Korean)", vi:"tám mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Tám mươi — hệ thuần Hàn. Dùng đếm tuổi người cao tuổi. 여든 살 = 80 tuổi.",
-    ex:"할아버지가 여든 살이에요.", exVi:"Ông tôi 80 tuổi." },
-  { kr:"여섯", en:"6, six (native Korean)", vi:"sáu (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 6 thuần Hàn. 여섯 시 = 6 giờ. 여섯 살 = 6 tuổi. 여섯 개 = sáu cái.",
-    ex:"여섯 시에 일어나요.", exVi:"Tôi thức dậy lúc 6 giờ." },
-  { kr:"열", en:"10, ten (native Korean)", vi:"mười (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Mười — hệ thuần Hàn. 열 시 = 10 giờ. 열 살 = 10 tuổi. 열하나(11), 열둘(12),...",
-    ex:"열 살에 학교에 갔어요.", exVi:"Tôi đi học năm 10 tuổi." },
-  { kr:"영", en:"zero; spirit", vi:"tinh thần; số không (0)", hv:"零/靈", hvR:"linh / linh", type:"hv",
-    explain:"Hai nghĩa: (1) 零 — số 0 (영 점 = điểm không), (2) 靈 — tinh thần, linh hồn. Số 0 còn đọc là 공.",
-    ex:"영 도예요.", exVi:"Nhiệt độ 0 độ." },
-  { kr:"예순", en:"60, sixty (native Korean)", vi:"sáu mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Sáu mươi — hệ thuần Hàn. Dùng đếm tuổi. 예순 살 = 60 tuổi. 환갑 = lễ mừng thọ 60 tuổi.",
-    ex:"예순 살에 은퇴했어요.", exVi:"Ông ấy nghỉ hưu ở tuổi 60." },
-  { kr:"오", en:"5, five (Sino-Korean)", vi:"số năm (Hán Hàn)", hv:"五", hvR:"ngũ", type:"hv",
-    explain:"Số 5 hệ Hán Hàn. 오 월(tháng 5), 오십(50), 오층(tầng 5), 오전/오후(sáng/chiều).",
-    ex:"오층에 사무실이 있어요.", exVi:"Văn phòng ở tầng 5." },
-  { kr:"오십", en:"50, fifty (Sino-Korean)", vi:"năm mươi (Hán Hàn)", hv:"五十", hvR:"ngũ thập", type:"hv",
-    explain:"Năm mươi — hệ Hán Hàn. 오(5) + 십(10). Dùng trong văn phong chính thức, điểm số,...",
-    ex:"오십 퍼센트 할인이에요.", exVi:"Giảm giá 50 phần trăm." },
-  { kr:"원", en:"won (Korean currency)", vi:"won (đơn vị tiền Hàn)", hv:"圓/元", hvR:"viên / nguyên", type:"hv",
-    explain:"Đơn vị tiền tệ Hàn Quốc. 1달러 ≈ 1300원. 만 원 = 10.000 won (tờ tiền phổ biến nhất).",
-    ex:"이거 얼마예요? — 오천 원이에요.", exVi:"Cái này bao nhiêu? — 5.000 won." },
-  { kr:"육", en:"6, six (Sino-Korean)", vi:"sáu (Hán Hàn)", hv:"六", hvR:"lục", type:"hv",
-    explain:"Số 6 hệ Hán Hàn. 육 월(tháng 6 — nhưng đọc là 유월), 육십(60), 육층(tầng 6).",
-    ex:"육층에 살아요.", exVi:"Tôi sống ở tầng 6." },
-  { kr:"육십", en:"60, sixty (Sino-Korean)", vi:"sáu mươi (Hán Hàn)", hv:"六十", hvR:"lục thập", type:"hv",
-    explain:"Sáu mươi — hệ Hán Hàn. 육(6) + 십(10).",
-    ex:"육십 점을 받았어요.", exVi:"Tôi nhận được 60 điểm." },
-  { kr:"이십", en:"20, twenty (Sino-Korean)", vi:"hai mươi (Hán Hàn)", hv:"二十", hvR:"nhị thập", type:"hv",
-    explain:"Hai mươi — hệ Hán Hàn. 이(2) + 십(10). 이십 분(20 phút), 이십 세기(thế kỷ 20).",
-    ex:"이십 분 후에 출발해요.", exVi:"Hai mươi phút nữa sẽ khởi hành." },
-  { kr:"인", en:"person (counter, formal writing)", vi:"...người", hv:"人", hvR:"nhân", type:"hv",
-    explain:"Đơn vị đếm người trong văn viết trang trọng. 5인 가족 = gia đình 5 người. 1인분 = một suất.",
-    ex:"2인분 주세요.", exVi:"Cho tôi hai suất." },
-  { kr:"일곱", en:"7, seven (native Korean)", vi:"bảy (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 7 thuần Hàn. 일곱 시 = 7 giờ. 일곱 살 = 7 tuổi. 일곱 개 = bảy cái.",
-    ex:"일곱 시에 일어나요.", exVi:"Tôi thức dậy lúc 7 giờ." },
-  { kr:"일흔", en:"70, seventy (native Korean)", vi:"bảy mươi (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Bảy mươi — hệ thuần Hàn. Dùng đếm tuổi. 일흔 살 = 70 tuổi.",
-    ex:"할머니가 일흔 살이에요.", exVi:"Bà tôi 70 tuổi." },
-  { kr:"잔", en:"glass, cup (counter)", vi:"cái ly; ...ly (đơn vị)", hv:"盞", hvR:"trản", type:"hv",
-    explain:"Đơn vị đếm đồ uống trong cốc/ly. 커피 한 잔 = một tách cà phê. 물 두 잔 = hai ly nước.",
-    ex:"커피 한 잔 할래요?", exVi:"Uống một tách cà phê nhé?" },
-  { kr:"장", en:"sheet (counter); chapter", vi:"...tờ (đơn vị); ...chương", hv:"張/章", hvR:"trương / chương", type:"hv",
-    explain:"Hai nghĩa: (1) 張 — tờ (종이 한 장 = một tờ giấy), (2) 章 — chương (1장, 2장 = chương 1, 2).",
-    ex:"종이 두 장 주세요.", exVi:"Cho tôi hai tờ giấy." },
-  { kr:"점", en:"point, dot, score", vi:"điểm; nốt chấm", hv:"點", hvR:"điểm", type:"hv",
-    explain:"Điểm số hoặc dấu chấm. 100점 = 100 điểm. 소수점 = dấu thập phân. 점수(điểm số).",
-    ex:"100점을 받았어요!", exVi:"Tôi được 100 điểm!" },
-  { kr:"정도", en:"degree, about, approximately", vi:"mức độ, khoảng", hv:"程度", hvR:"trình độ", type:"hv",
-    explain:"Khoảng, mức độ. 30분 정도 = khoảng 30 phút. 이 정도면 = như thế này thì đủ rồi.",
-    ex:"30분 정도 걸려요.", exVi:"Mất khoảng 30 phút." },
-  { kr:"줄", en:"line, row, string", vi:"dây; hàng", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Hàng, dòng, hoặc sợi dây. 줄을 서다 = xếp hàng. 김밥 한 줄 = một cuộn kimbap.",
-    ex:"줄을 서 주세요.", exVi:"Xin hãy xếp hàng." },
-  { kr:"짜리", en:"worth, denomination", vi:"mệnh giá (đồng won)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Hậu tố chỉ mệnh giá. 천 원짜리 = tờ 1.000 won. 오십 원짜리 동전 = đồng xu 50 won.",
-    ex:"천 원짜리 있어요?", exVi:"Bạn có tờ 1.000 won không?" },
-  { kr:"쪽", en:"side, page, direction", vi:"phía, trang (sách)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Hai nghĩa: (1) phía, hướng (왼쪽 = bên trái), (2) trang sách (10쪽 = trang 10). 페이지 và 쪽 tương đương.",
-    ex:"10쪽을 펴세요.", exVi:"Mở trang 10 ra." },
-  { kr:"천", en:"1,000, one thousand", vi:"một nghìn", hv:"千", hvR:"thiên", type:"hv",
-    explain:"Một nghìn — hệ Hán Hàn. 천(1.000), 만(10.000), 십만(100.000), 백만(1.000.000).",
-    ex:"천 원 주세요.", exVi:"Cho tôi 1.000 won." },
-  { kr:"첫", en:"first (before nouns)", vi:"đầu tiên (trước danh từ)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Dùng trước danh từ chỉ điều đầu tiên. 첫날 = ngày đầu tiên. 첫사랑 = mối tình đầu.",
-    ex:"오늘이 첫날이에요.", exVi:"Hôm nay là ngày đầu tiên." },
-  { kr:"첫째", en:"first (ordinal)", vi:"thứ nhất (thứ tự)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Thứ nhất trong thứ tự. 첫째 아이 = đứa con cả. 첫째로 = thứ nhất là...",
-    ex:"첫째가 의사예요.", exVi:"Con cả là bác sĩ." },
-  { kr:"초", en:"second(s) (time)", vi:"...giây (đơn vị thời gian)", hv:"秒", hvR:"miểu", type:"hv",
-    explain:"Đơn vị thời gian giây. 10초 = 10 giây. 분(phút), 초(giây), 시간(giờ).",
-    ex:"10초 안에 해야 해요.", exVi:"Phải làm trong vòng 10 giây." },
-  { kr:"층", en:"floor, story (counter)", vi:"...tầng (đơn vị)", hv:"層", hvR:"tầng", type:"hv",
-    explain:"Tầng lầu. 1층 = tầng 1. 지하층 = tầng hầm. 몇 층이에요? = ở tầng mấy?",
-    ex:"몇 층에 살아요?", exVi:"Bạn sống ở tầng mấy?" },
-  { kr:"칠", en:"7, seven (Sino-Korean)", vi:"bảy (Hán Hàn)", hv:"七", hvR:"thất", type:"hv",
-    explain:"Số 7 hệ Hán Hàn. 칠 월(tháng 7), 칠십(70), 칠층(tầng 7).",
-    ex:"칠 월에 여행 가요.", exVi:"Tôi đi du lịch vào tháng 7." },
-  { kr:"칠십", en:"70, seventy (Sino-Korean)", vi:"bảy mươi (Hán Hàn)", hv:"七十", hvR:"thất thập", type:"hv",
-    explain:"Bảy mươi — hệ Hán Hàn. 칠(7) + 십(10).",
-    ex:"칠십 퍼센트가 찬성했어요.", exVi:"70 phần trăm đã đồng ý." },
-  { kr:"크기", en:"size, dimensions", vi:"kích thước, cỡ", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Kích thước, độ lớn. 크기가 어때요? = Kích thước thế nào? 크기가 맞다 = vừa kích thước.",
-    ex:"크기가 맞아요?", exVi:"Kích thước có vừa không?" },
-  { kr:"킬로그램", en:"kilogram", vi:"ki-lô-gam (đơn vị)", hv:null, hvR:"từ tiếng Anh 'kilogram'", type:"loan",
-    explain:"Đơn vị khối lượng ki-lô-gam. 1킬로그램 = 1kg. Thường nói tắt là 킬로.",
-    ex:"쌀 10킬로그램 사요.", exVi:"Tôi mua 10 kg gạo." },
-  { kr:"킬로미터", en:"kilometer", vi:"ki-lô-mét (đơn vị)", hv:null, hvR:"từ tiếng Anh 'kilometer'", type:"loan",
-    explain:"Đơn vị đo độ dài ki-lô-mét. 서울까지 100킬로미터예요 = Seoul cách 100km.",
-    ex:"여기서 10킬로미터예요.", exVi:"Từ đây 10 ki-lô-mét." },
-  { kr:"통", en:"barrel, bundle (counter)", vi:"thùng; ...gói (đơn vị)", hv:"桶", hvR:"thùng", type:"hv",
-    explain:"Đơn vị đếm cho vật đựng hoặc gói. 라면 한 통 = một gói mì. 쓰레기통 = thùng rác.",
-    ex:"라면 두 통 주세요.", exVi:"Cho tôi hai gói mì." },
-  { kr:"팔", en:"8, eight (Sino-Korean)", vi:"tám (Hán Hàn)", hv:"八", hvR:"bát", type:"hv",
-    explain:"Số 8 hệ Hán Hàn. 팔 월(tháng 8), 팔십(80), 팔층(tầng 8).",
-    ex:"팔 월에 광복절이에요.", exVi:"Tháng 8 có Ngày Giải phóng." },
-  { kr:"팔십", en:"80, eighty (Sino-Korean)", vi:"tám mươi (Hán Hàn)", hv:"八十", hvR:"bát thập", type:"hv",
-    explain:"Tám mươi — hệ Hán Hàn. 팔(8) + 십(10).",
-    ex:"팔십 년대 노래를 좋아해요.", exVi:"Tôi thích nhạc thập niên 80." },
-  { kr:"퍼센트", en:"percent", vi:"phần trăm (%)", hv:null, hvR:"từ tiếng Anh 'percent'", type:"loan",
-    explain:"Phần trăm. 50퍼센트 = 50%. 할인율이 삼십 퍼센트예요 = tỷ lệ giảm giá 30%.",
-    ex:"오십 퍼센트 할인이에요.", exVi:"Giảm giá 50 phần trăm." },
-  { kr:"페이지", en:"page", vi:"trang (sách/tài liệu)", hv:null, hvR:"từ tiếng Anh 'page'", type:"loan",
-    explain:"Trang sách hoặc tài liệu. 10페이지 = trang 10. Tương đương với 쪽 (thuần Hàn).",
-    ex:"10페이지를 펴세요.", exVi:"Mở trang 10 ra." },
-  { kr:"편", en:"side; episode (counter)", vi:"phía; tập (phim)", hv:"便/篇", hvR:"tiện / thiên", type:"hv",
-    explain:"Hai nghĩa: (1) 便 — phía, bên (우리 편 = phe chúng ta), (2) 篇 — tập phim (1편, 2편 = tập 1, 2).",
-    ex:"1편이 제일 재미있어요.", exVi:"Tập 1 thú vị nhất." },
-  { kr:"하나", en:"1, one (native Korean)", vi:"một (thuần Hàn)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Số 1 thuần Hàn — dùng khi đứng một mình. Trước danh từ đổi thành 한. 하나씩 = từng cái một.",
-    ex:"하나만 주세요.", exVi:"Cho tôi một cái thôi." },
-  { kr:"한", en:"one (before nouns)", vi:"một (trước danh từ)", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Dạng của 하나 dùng trước danh từ. 한 명(một người), 한 개(một cái), 한 시(1 giờ).",
-    ex:"한 개에 얼마예요?", exVi:"Một cái bao nhiêu tiền?" },
-  { kr:"한번", en:"once, one time", vi:"một lần", hv:null, hvR:"thuần Hàn", type:"pure",
-    explain:"Một lần. 한번 해 보세요 = hãy thử một lần. 한번쯤 = ít nhất một lần. 한번만 = chỉ một lần thôi.",
-    ex:"한번 해 보세요!", exVi:"Hãy thử một lần xem!" },
-  { kr:"호", en:"number (ordinal label)", vi:"số ...(thứ tự)", hv:"號", hvR:"hiệu", type:"hv",
-    explain:"Số thứ tự của phòng, xe buýt, cỡ,... 202호 = phòng 202. 2호선 = tuyến số 2. 대호 = cỡ lớn.",
-    ex:"202호에 살아요.", exVi:"Tôi sống ở phòng 202." },
-];
+      // map type to filter key
+      const typeMap = { hv: "hv", pure: "pure", loan: "loan" };
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-// map type to filter key
-const typeMap = { hv:'hv', pure:'pure', loan:'loan' };
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    let tagClass = item.type === 'pure' ? 'pure' : item.type === 'loan' ? 'loan' : '';
-    let tagLabel = item.type === 'hv'
-      ? `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span>`
-      : item.type === 'pure'
-        ? `<span class="hv-tag pure">Thuần Hàn</span>`
-        : `<span class="hv-tag loan">Vay mượn</span>`;
-    const hvCell = `${tagLabel}<span class="hv-reading">${item.hvR}</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let tagClass =
+            item.type === "pure" ? "pure" : item.type === "loan" ? "loan" : "";
+          let tagLabel =
+            item.type === "hv"
+              ? `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span>`
+              : item.type === "pure"
+                ? `<span class="hv-tag pure">Thuần Hàn</span>`
+                : `<span class="hv-tag loan">Vay mượn</span>`;
+          const hvCell = `${tagLabel}<span class="hv-reading">${item.hvR}</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -430,40 +1427,50 @@ function renderTable(data) {
         <span class="example-kr">${item.ex}</span>
         <span class="example-vi">${item.exVi}</span>
       </td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || (item.hv && item.hv.includes(q))
-      || item.hvR.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" || item.type === currentFilter;
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            item.hvR.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
