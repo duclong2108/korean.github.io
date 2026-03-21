@@ -1,359 +1,986 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Thời gian (Nâng cao)</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f2f6fa;
-    --card: #ffffff;
-    --accent: #1a4a6a;
-    --text: #081828;
-    --sub: #5a7a9a;
-    --border: #c4d4e8;
-    --tag-past: #fdf0e0;
-    --tag-present: #e0f0fa;
-    --tag-future: #e8f8e8;
-    --tag-duration: #f0e8fa;
-    --tag-period: #fce8f0;
-    --highlight: #eaf4ff;
-    --row-alt: #f6fafd;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Thời gian (Nâng cao)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f2f6fa;
+        --card: #ffffff;
+        --accent: #1a4a6a;
+        --text: #081828;
+        --sub: #5a7a9a;
+        --border: #c4d4e8;
+        --tag-past: #fdf0e0;
+        --tag-present: #e0f0fa;
+        --tag-future: #e8f8e8;
+        --tag-duration: #f0e8fa;
+        --tag-period: #fce8f0;
+        --highlight: #eaf4ff;
+        --row-alt: #f6fafd;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f2f6fa;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '시간';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #7a9aba; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #f2f6fa;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "시간";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #7a9aba;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 11px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f2f6fa; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f2f6fa;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 140px; }
-  th:nth-child(3), td:nth-child(3) { width: 170px; }
-  th:nth-child(4), td:nth-child(4) { width: 210px; }
-  th:nth-child(5), td:nth-child(5) { width: 120px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 280px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 140px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 170px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 12px 16px; font-size: 13.5px; vertical-align: middle; line-height: 1.5; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .tag { display: inline-flex; align-items: center; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; white-space: nowrap; }
-  .tag-past     { background: var(--tag-past);     color: #6a3a00; }
-  .tag-present  { background: var(--tag-present);  color: #0a3a60; }
-  .tag-future   { background: var(--tag-future);   color: #0a4a20; }
-  .tag-duration { background: var(--tag-duration); color: #4a0a6a; }
-  .tag-period   { background: var(--tag-period);   color: #7a0a40; }
-  .note { font-size: 12px; color: var(--sub); font-style: italic; }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-past {
+        background: var(--tag-past);
+        color: #6a3a00;
+      }
+      .tag-present {
+        background: var(--tag-present);
+        color: #0a3a60;
+      }
+      .tag-future {
+        background: var(--tag-future);
+        color: #0a4a20;
+      }
+      .tag-duration {
+        background: var(--tag-duration);
+        color: #4a0a6a;
+      }
+      .tag-period {
+        background: var(--tag-period);
+        color: #7a0a40;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
 
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>시간 (심화) — Thời gian (Nâng cao)</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Thời gian nâng cao · Chủ đề TOPIK II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>시간 (심화) — Thời gian (Nâng cao)</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Thời gian nâng cao · Chủ đề TOPIK II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="past">Quá khứ</button>
+      <button class="filter-btn" data-filter="present">Hiện tại</button>
+      <button class="filter-btn" data-filter="future">Tương lai</button>
+      <button class="filter-btn" data-filter="duration">Khoảng TG</button>
+      <button class="filter-btn" data-filter="period">Thời kỳ/Kỷ</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="past">Quá khứ</button>
-  <button class="filter-btn" data-filter="present">Hiện tại</button>
-  <button class="filter-btn" data-filter="future">Tương lai</button>
-  <button class="filter-btn" data-filter="duration">Khoảng TG</button>
-  <button class="filter-btn" data-filter="period">Thời kỳ/Kỷ</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú & Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Phân loại</th><th>Ghi chú & Cách dùng</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Thời gian (Nâng cao) TOPIK II
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Thời gian (Nâng cao) TOPIK II</div>
+    <script>
+      // type: 'past'=Quá khứ, 'present'=Hiện tại/Gần đây, 'future'=Tương lai, 'duration'=Khoảng thời gian, 'period'=Thời kỳ/Giai đoạn
+      const vocab = [
+        {
+          kr: "기념일",
+          en: "anniversary, memorial day",
+          vi: "ngày kỷ niệm",
+          type: "present",
+          note: "기념(記念) + 일(日). 결혼기념일(kỷ niệm ngày cưới). 기념일을 챙기다(nhớ ngày kỷ niệm). 매년 기념해요.",
+        },
+        {
+          kr: "년대",
+          en: "decade, era (e.g. 1990s)",
+          vi: "thập niên, thời đại",
+          type: "period",
+          note: "년대(年代). 90년대(thập niên 90). 년대별로(theo từng thập niên). 어느 년대에 태어났어요?",
+        },
+        {
+          kr: "다음날",
+          en: "the next day, the following day",
+          vi: "ngày hôm sau",
+          type: "future",
+          note: "다음(tiếp theo) + 날(ngày). 다음날 일어났어요(ngày hôm sau thức dậy). 이튿날과 유사.",
+        },
+        {
+          kr: "단기간",
+          en: "short period, short term",
+          vi: "ngắn hạn",
+          type: "duration",
+          note: "단기(短期) + 간(間). 단기간에 끝내다(hoàn thành trong thời gian ngắn). ↔ 장기간(dài hạn).",
+        },
+        {
+          kr: "달밤",
+          en: "moonlit night",
+          vi: "đêm trăng",
+          type: "present",
+          note: "달(mặt trăng/tháng) + 밤(đêm). 달밤에 산책하다(đi dạo dưới trăng). 달빛(ánh trăng)과 관련.",
+        },
+        {
+          kr: "당분간",
+          en: "for a while, for the time being",
+          vi: "trong một thời gian",
+          type: "duration",
+          note: "당분간(當分間). 당분간 기다려 주세요(xin chờ trong một thời gian). 잠시와 유사하나 더 긴 기간.",
+        },
+        {
+          kr: "동시",
+          en: "simultaneously, at the same time",
+          vi: "đồng thời",
+          type: "present",
+          note: "동시(同時). 동시에(đồng thời, cùng lúc). 두 가지를 동시에 하다(làm hai việc cùng lúc).",
+        },
+        {
+          kr: "매년",
+          en: "every year, annually",
+          vi: "hàng năm, mỗi năm",
+          type: "duration",
+          note: "매(每, mỗi) + 년(年). 매년 여름에 여행을 가요(mỗi năm tôi đi du lịch vào mùa hè). 해마다와 유사.",
+        },
+        {
+          kr: "매달",
+          en: "every month, monthly",
+          vi: "hàng tháng, mỗi tháng",
+          type: "duration",
+          note: "매(每) + 달(月). 매달 월급을 받아요(mỗi tháng nhận lương). 매월과 유사. 규칙적 반복 강조.",
+        },
+        {
+          kr: "무렵",
+          en: "around (the time), about (that time)",
+          vi: "vào khoảng thời điểm",
+          type: "present",
+          note: "N무렵. 저녁 무렵(vào khoảng buổi tối). 봄 무렵(vào khoảng mùa xuân). 때쯤과 유사.",
+        },
+        {
+          kr: "밤새",
+          en: "all night long, throughout the night",
+          vi: "cả đêm, suốt đêm",
+          type: "duration",
+          note: "밤(đêm) + 새(từ đầu đến cuối). 밤새 공부했어요(học suốt đêm). 밤새도록(suốt cả đêm).",
+        },
+        {
+          kr: "방금",
+          en: "just now, a moment ago",
+          vi: "vừa xong, vừa mới",
+          type: "past",
+          note: "방금(方今). 방금 왔어요(vừa mới đến). 방금 전에(ngay vừa rồi). 아까보다 더 가까운 과거.",
+        },
+        {
+          kr: "보름",
+          en: "the 15th day, half a month, full moon",
+          vi: "rằm, ngày 15 âm lịch",
+          type: "period",
+          note: "음력 15일(rằm âm lịch). 보름달(trăng rằm). 보름이 지났어요(đã qua rằm rồi). 보름치(lượng nửa tháng).",
+        },
+        {
+          kr: "새해",
+          en: "new year",
+          vi: "năm mới",
+          type: "future",
+          note: "새(mới) + 해(năm). 새해 복 많이 받으세요(Chúc mừng năm mới). 새해 첫날(ngày đầu năm mới).",
+        },
+        {
+          kr: "세기",
+          en: "century",
+          vi: "thế kỷ",
+          type: "period",
+          note: "세기(世紀). 21세기(thế kỷ 21). 세기의 발명(phát minh của thế kỷ). 세기말(cuối thế kỷ).",
+        },
+        {
+          kr: "세월",
+          en: "time, years (passing)",
+          vi: "năm tháng, thời gian",
+          type: "duration",
+          note: "세월(歲月). 세월이 흘러가다(năm tháng trôi qua). 세월이 약이다(thời gian là liều thuốc). 시간보다 詩的.",
+        },
+        {
+          kr: "순간",
+          en: "moment, instant",
+          vi: "khoảnh khắc, giây phút",
+          type: "duration",
+          note: "순간(瞬間). 그 순간(khoảnh khắc đó). 순간적으로(trong chớp mắt). 한순간에(trong một khoảnh khắc).",
+        },
+        {
+          kr: "시대",
+          en: "era, age, period",
+          vi: "thời đại, kỷ nguyên",
+          type: "period",
+          note: "시대(時代). 조선 시대(thời Joseon). 현대 시대(thời hiện đại). 시대가 변했어요(thời đại đã thay đổi).",
+        },
+        {
+          kr: "아침저녁",
+          en: "morning and evening, all day",
+          vi: "sáng tối, buổi sáng và tối",
+          type: "duration",
+          note: "아침 + 저녁. 아침저녁으로 연락해요(liên lạc cả sáng lẫn tối). 아침저녁이 다르다(sáng tối khác nhau).",
+        },
+        {
+          kr: "앞날",
+          en: "future, days ahead",
+          vi: "tương lai, ngày sắp tới",
+          type: "future",
+          note: "앞(phía trước) + 날(ngày). 앞날이 창창하다(tương lai tươi sáng). 앞날을 모르다(không biết tương lai).",
+        },
+        {
+          kr: "야간",
+          en: "nighttime, night shift",
+          vi: "ban đêm, ca đêm",
+          type: "present",
+          note: "야간(夜間). 야간 근무(ca đêm). 야간 버스(xe buýt ban đêm). 야간 학교(trường học ban đêm).",
+        },
+        {
+          kr: "언젠가",
+          en: "someday, one day",
+          vi: "một ngày nào đó",
+          type: "future",
+          note: "언제(khi nào) + 가(hậu tố bất định). 언젠가 만나요(hẹn gặp ngày nào đó). 막연한 미래를 나타냄.",
+        },
+        {
+          kr: "엊그제",
+          en: "a few days ago, just the other day",
+          vi: "mấy ngày trước",
+          type: "past",
+          note: "엊(hôm trước) + 그제(hôm kia). 엊그제 같은데 벌써 1년이 됐어요(vừa mới hôm nào mà đã 1 năm).",
+        },
+        {
+          kr: "여름날",
+          en: "summer day",
+          vi: "ngày hè",
+          type: "present",
+          note: "여름(mùa hè) + 날(ngày). 더운 여름날(ngày hè nóng bức). 여름날의 추억(kỷ niệm ngày hè).",
+        },
+        {
+          kr: "연도",
+          en: "year (in documents)",
+          vi: "năm trong văn bản",
+          type: "period",
+          note: "연도(年度). 출생 연도(năm sinh). 회계 연도(năm tài chính). 2024년도(năm 2024). 공식 문서에서 사용.",
+        },
+        {
+          kr: "연말",
+          en: "end of year, year-end",
+          vi: "cuối năm",
+          type: "present",
+          note: "연(年) + 말(末, cuối). 연말 파티(tiệc cuối năm). 연말에 바빠요(cuối năm bận rộn). ↔ 연초(đầu năm).",
+        },
+        {
+          kr: "연말연시",
+          en: "year-end and new year period",
+          vi: "dịp cuối năm đầu năm",
+          type: "present",
+          note: "연말(cuối năm) + 연시(年始, đầu năm). 연말연시에 고향에 가요(dịp cuối năm đầu năm về quê).",
+        },
+        {
+          kr: "연속",
+          en: "continuity, series, in a row",
+          vi: "liên tục, tiếp nối",
+          type: "duration",
+          note: "연속(連續). 3일 연속(3 ngày liên tiếp). 연속으로 이기다(thắng liên tiếp). 연속 드라마(phim dài tập).",
+        },
+        {
+          kr: "열흘",
+          en: "ten days",
+          vi: "mười ngày",
+          type: "duration",
+          note: "열(mười) + 흘(ngày). 순우리말 수사계. 열흘이 지났어요(mười ngày đã trôi qua). 열흘 후(sau mười ngày).",
+        },
+        {
+          kr: "예전",
+          en: "old days, formerly, in the past",
+          vi: "ngày xưa, trước đây",
+          type: "past",
+          note: "예전(이전+옛날). 예전에는 달랐어요(ngày xưa thì khác). 예전 친구(bạn cũ). 옛날보다는 가까운 과거.",
+        },
+        {
+          kr: "옛",
+          en: "old, ancient, former (before noun)",
+          vi: "xưa, cổ (trước danh từ)",
+          type: "past",
+          note: "관형사. 옛날(ngày xưa). 옛 친구(bạn cũ). 옛 생각(kỷ niệm xưa). 항상 명사 앞에 붙어 사용.",
+        },
+        {
+          kr: "오늘날",
+          en: "nowadays, today (the modern age)",
+          vi: "ngày nay, thời nay",
+          type: "present",
+          note: "오늘(hôm nay) + 날(ngày/thời đại). 오늘날의 기술(công nghệ ngày nay). 현재와 유사하나 더 광범위.",
+        },
+        {
+          kr: "오랜",
+          en: "long-standing, longtime (before noun)",
+          vi: "lâu, dài lâu (trước danh từ)",
+          type: "duration",
+          note: "관형사. 오랜 친구(bạn lâu năm). 오랜 시간(thời gian dài). 오래된과 유사하나 더 서정적 느낌.",
+        },
+        {
+          kr: "요새",
+          en: "recently, these days (very casual)",
+          vi: "gần đây, dạo này",
+          type: "present",
+          note: "요즘의 구어체. 요새 어때요?(dạo này thế nào?). 요새 바빠요(dạo này bận). 요즘과 거의 동의.",
+        },
+        {
+          kr: "월말",
+          en: "end of month",
+          vi: "cuối tháng",
+          type: "present",
+          note: "월(月) + 말(末). 월말에 정산해요(cuối tháng thanh toán). ↔ 월초(đầu tháng). 월말 결산(quyết toán cuối tháng).",
+        },
+        {
+          kr: "음력",
+          en: "lunar calendar",
+          vi: "âm lịch",
+          type: "period",
+          note: "음력(陰曆). 음력 설날(Tết Nguyên Đán âm lịch). 음력 생일(sinh nhật âm lịch). ↔ 양력(dương lịch).",
+        },
+        {
+          kr: "이따",
+          en: "later, a little later (casual)",
+          vi: "lát nữa (thân mật)",
+          type: "future",
+          note: "이따가의 준말. 이따 봐요(lát nữa gặp nhé). 이따 전화할게요(lát nữa gọi nhé). 구어체 대화에서.",
+        },
+        {
+          kr: "이때",
+          en: "at this time, at this point",
+          vi: "lúc này, thời điểm này",
+          type: "present",
+          note: "이(이/그/저) + 때. 이때가 기회예요(đây là cơ hội). 바로 이때(chính lúc này). 특정 시점 강조.",
+        },
+        {
+          kr: "이전",
+          en: "before, previously, prior",
+          vi: "trước đây, trước",
+          type: "past",
+          note: "이전(以前). 이전에는(trước đây thì). 이전 직장(nơi làm việc trước). ↔ 이후(sau đó).",
+        },
+        {
+          kr: "이후",
+          en: "after, afterward, since then",
+          vi: "sau đó, về sau",
+          type: "future",
+          note: "이후(以後). 이후로는(từ sau đó). 졸업 이후(sau khi tốt nghiệp). ↔ 이전(trước đó).",
+        },
+        {
+          kr: "일생",
+          en: "one's whole life, lifetime",
+          vi: "suốt đời, cả đời",
+          type: "duration",
+          note: "일생(一生). 일생을 바치다(cống hiến cả đời). 일생의 목표(mục tiêu cả đời). 평생과 동의.",
+        },
+        {
+          kr: "일시",
+          en: "temporary, for a time",
+          vi: "tạm thời",
+          type: "duration",
+          note: "일시(一時). 일시적(tạm thời). 일시 정지(tạm dừng). 일시적으로 어렵다(tạm thời khó khăn).",
+        },
+        {
+          kr: "임시",
+          en: "temporary, provisional",
+          vi: "tạm thời",
+          type: "duration",
+          note: "임시(臨時). 임시 방편(biện pháp tạm thời). 임시 직원(nhân viên tạm thời). 일시와 유사하나 더 계획적.",
+        },
+        {
+          kr: "장래",
+          en: "future, prospects",
+          vi: "tương lai, tiền đồ",
+          type: "future",
+          note: "장래(將來). 장래가 밝다(tương lai tươi sáng). 장래 희망(ước mơ tương lai). 미래보다 개인적 뉘앙스.",
+        },
+        {
+          kr: "재작년",
+          en: "the year before last, two years ago",
+          vi: "năm kia",
+          type: "past",
+          note: "재(再, lại) + 작년(năm ngoái). 재작년에 한국에 갔어요(năm kia tôi đã đến Hàn Quốc). ↔ 내후년(năm kia tới).",
+        },
+        {
+          kr: "전날",
+          en: "the day before, the previous day",
+          vi: "ngày hôm trước",
+          type: "past",
+          note: "전(前) + 날(ngày). 시험 전날(ngày trước khi thi). 결혼식 전날(ngày trước ngày cưới).",
+        },
+        {
+          kr: "젊음",
+          en: "youth, youthfulness",
+          vi: "sự trẻ trung, tuổi trẻ",
+          type: "period",
+          note: "젊다 → 젊음(명사). 젊음을 즐기다(tận hưởng tuổi trẻ). 젊음은 한번뿐이에요(tuổi trẻ chỉ có một lần).",
+        },
+        {
+          kr: "제때",
+          en: "at the right time, on time",
+          vi: "đúng lúc, đúng thời điểm",
+          type: "present",
+          note: "제(정해진) + 때. 제때 먹어요(ăn đúng bữa). 제때 해야 해요(phải làm đúng lúc). 시간을 지키는 뉘앙스.",
+        },
+        {
+          kr: "제시간",
+          en: "on time, at the scheduled time",
+          vi: "đúng giờ",
+          type: "present",
+          note: "제(정해진) + 시간. 제시간에 왔어요(đến đúng giờ). 제시간에 마치다(kết thúc đúng giờ). 시간 엄수.",
+        },
+        {
+          kr: "주년",
+          en: "anniversary (years)",
+          vi: "kỷ niệm ...năm",
+          type: "period",
+          note: "주년(週年). 10주년(kỷ niệm 10 năm). 100주년(kỷ niệm 100 năm). 기념일보다 더 공식적인 느낌.",
+        },
+        {
+          kr: "지난해",
+          en: "last year",
+          vi: "năm ngoái",
+          type: "past",
+          note: "지난(vừa qua) + 해(năm). 작년과 동의. 지난해에 여행을 갔어요(năm ngoái tôi đi du lịch). 더 문어체.",
+        },
+        {
+          kr: "직후",
+          en: "immediately after, right after",
+          vi: "ngay sau đó",
+          type: "present",
+          note: "직(直, ngay) + 후(後, sau). 졸업 직후(ngay sau khi tốt nghiệp). 사고 직후(ngay sau tai nạn).",
+        },
+        {
+          kr: "첫날",
+          en: "the first day",
+          vi: "ngày đầu tiên",
+          type: "present",
+          note: "첫(đầu tiên) + 날(ngày). 첫날부터 열심히 해요(từ ngày đầu tiên đã chăm chỉ). 학교 첫날(ngày đầu đi học).",
+        },
+        {
+          kr: "초기",
+          en: "early stage, beginning period",
+          vi: "giai đoạn đầu, buổi đầu",
+          type: "period",
+          note: "초기(初期). 초기 단계(giai đoạn đầu). 회사 초기(buổi đầu của công ty). ↔ 말기(giai đoạn cuối).",
+        },
+        {
+          kr: "최근",
+          en: "recently, lately",
+          vi: "gần đây, mới đây",
+          type: "present",
+          note: "최근(最近). 최근에 어떻게 지냈어요?(dạo gần đây bạn thế nào?). 최근 동향(xu hướng gần đây).",
+        },
+        {
+          kr: "최신",
+          en: "latest, most recent",
+          vi: "mới nhất, hiện đại nhất",
+          type: "present",
+          note: "최신(最新). 최신 정보(thông tin mới nhất). 최신 스마트폰(điện thoại thông minh mới nhất).",
+        },
+        {
+          kr: "최종",
+          en: "final, last, ultimate",
+          vi: "cuối cùng, sau cùng",
+          type: "present",
+          note: "최종(最終). 최종 결정(quyết định cuối cùng). 최종 결과(kết quả cuối cùng). ↔ 최초(đầu tiên).",
+        },
+        {
+          kr: "최초",
+          en: "the very first, the earliest",
+          vi: "đầu tiên, lần đầu",
+          type: "past",
+          note: "최초(最初). 최초의 발명(phát minh đầu tiên). 세계 최초(đầu tiên trên thế giới). ↔ 최종(cuối cùng).",
+        },
+        {
+          kr: "최후",
+          en: "the last, the final (emphatic)",
+          vi: "cuối cùng (nhấn mạnh)",
+          type: "future",
+          note: "최후(最後). 최후의 순간(khoảnh khắc cuối cùng). 최후 통첩(tối hậu thư). 최종보다 더 극적 뉘앙스.",
+        },
+        {
+          kr: "평생",
+          en: "all one's life, lifetime",
+          vi: "cả đời, suốt đời",
+          type: "duration",
+          note: "평생(平生). 평생 후회 없이 살다(sống cả đời không hối tiếc). 평생 교육(giáo dục suốt đời). 일생과 동의.",
+        },
+        {
+          kr: "평소",
+          en: "ordinary days, usual times",
+          vi: "ngày thường, lúc bình thường",
+          type: "present",
+          note: "평소(平素). 평소에는(bình thường thì). 평소와 다르다(khác với ngày thường). 평소 습관(thói quen hàng ngày).",
+        },
+        {
+          kr: "하루하루",
+          en: "day by day, each day",
+          vi: "ngày qua ngày",
+          type: "duration",
+          note: "하루(một ngày) 반복. 하루하루 열심히 살아요(sống chăm chỉ ngày qua ngày). 하루하루가 소중해요.",
+        },
+        {
+          kr: "하룻밤",
+          en: "one night, overnight",
+          vi: "một đêm",
+          type: "duration",
+          note: "하루(một ngày) + ㅅ + 밤(đêm). 하룻밤 사이에(trong một đêm). 하룻밤 묵다(ngủ một đêm).",
+        },
+        {
+          kr: "한낮",
+          en: "midday, high noon",
+          vi: "giữa trưa, ban ngày",
+          type: "present",
+          note: "한(đỉnh điểm) + 낮(ban ngày). 한낮의 더위(cái nóng giữa trưa). 한낮에 나가다(ra ngoài lúc giữa trưa).",
+        },
+        {
+          kr: "한동안",
+          en: "for a while, for some time",
+          vi: "một thời gian",
+          type: "duration",
+          note: "한(một, đỉnh điểm) + 동안(trong suốt). 한동안 못 봤어요(một thời gian không gặp). 꽤 긴 시간 강조.",
+        },
+        {
+          kr: "한순간",
+          en: "one moment, in an instant",
+          vi: "một khoảnh khắc",
+          type: "duration",
+          note: "한(một) + 순간(khoảnh khắc). 한순간에 변했어요(thay đổi chỉ trong một khoảnh khắc). 극적 변화 강조.",
+        },
+        {
+          kr: "한참",
+          en: "for a long while, for quite some time",
+          vi: "một lúc lâu, khá lâu",
+          type: "duration",
+          note: "한참 기다렸어요(đã chờ khá lâu). 한참 후에(sau một lúc lâu). 잠깐보다 훨씬 긴 시간 느낌.",
+        },
+        {
+          kr: "한창",
+          en: "at the peak, in full swing, in the prime",
+          vi: "đang lúc cao điểm",
+          type: "present",
+          note: "한창이다 = đang lúc cao điểm. 한창 바쁠 때(lúc đang bận rộn nhất). 꽃이 한창이에요(hoa đang nở rộ).",
+        },
+        {
+          kr: "해마다",
+          en: "every year, year after year",
+          vi: "hàng năm, mỗi năm",
+          type: "duration",
+          note: "해(năm) + 마다(mỗi). 매년과 동의. 해마다 성장해요(mỗi năm lại lớn hơn). 자연스러운 구어체.",
+        },
+        {
+          kr: "현대",
+          en: "modern times, the present age",
+          vi: "hiện đại",
+          type: "present",
+          note: "현대(現代). 현대 사회(xã hội hiện đại). 현대인(người hiện đại). 현대적(mang tính hiện đại).",
+        },
+        {
+          kr: "후반",
+          en: "second half, latter part",
+          vi: "nửa sau, giai đoạn sau",
+          type: "period",
+          note: "후반(後半). 20대 후반(cuối tuổi 20). 경기 후반(hiệp hai trận đấu). ↔ 전반(nửa đầu).",
+        },
+        {
+          kr: "휴가철",
+          en: "holiday season, vacation period",
+          vi: "mùa nghỉ lễ",
+          type: "period",
+          note: "휴가(kỳ nghỉ) + 철(mùa). 여름 휴가철(mùa nghỉ hè). 휴가철에 여행지가 붐빈다(mùa nghỉ điểm du lịch đông đúc).",
+        },
+      ];
 
-<script>
-// type: 'past'=Quá khứ, 'present'=Hiện tại/Gần đây, 'future'=Tương lai, 'duration'=Khoảng thời gian, 'period'=Thời kỳ/Giai đoạn
-const vocab = [
-  { kr:"기념일", en:"anniversary, memorial day", vi:"ngày kỷ niệm", type:"present",
-    note:"기념(記念) + 일(日). 결혼기념일(kỷ niệm ngày cưới). 기념일을 챙기다(nhớ ngày kỷ niệm). 매년 기념해요." },
-  { kr:"년대", en:"decade, era (e.g. 1990s)", vi:"thập niên, thời đại", type:"period",
-    note:"년대(年代). 90년대(thập niên 90). 년대별로(theo từng thập niên). 어느 년대에 태어났어요?" },
-  { kr:"다음날", en:"the next day, the following day", vi:"ngày hôm sau", type:"future",
-    note:"다음(tiếp theo) + 날(ngày). 다음날 일어났어요(ngày hôm sau thức dậy). 이튿날과 유사." },
-  { kr:"단기간", en:"short period, short term", vi:"ngắn hạn", type:"duration",
-    note:"단기(短期) + 간(間). 단기간에 끝내다(hoàn thành trong thời gian ngắn). ↔ 장기간(dài hạn)." },
-  { kr:"달밤", en:"moonlit night", vi:"đêm trăng", type:"present",
-    note:"달(mặt trăng/tháng) + 밤(đêm). 달밤에 산책하다(đi dạo dưới trăng). 달빛(ánh trăng)과 관련." },
-  { kr:"당분간", en:"for a while, for the time being", vi:"trong một thời gian", type:"duration",
-    note:"당분간(當分間). 당분간 기다려 주세요(xin chờ trong một thời gian). 잠시와 유사하나 더 긴 기간." },
-  { kr:"동시", en:"simultaneously, at the same time", vi:"đồng thời", type:"present",
-    note:"동시(同時). 동시에(đồng thời, cùng lúc). 두 가지를 동시에 하다(làm hai việc cùng lúc)." },
-  { kr:"매년", en:"every year, annually", vi:"hàng năm, mỗi năm", type:"duration",
-    note:"매(每, mỗi) + 년(年). 매년 여름에 여행을 가요(mỗi năm tôi đi du lịch vào mùa hè). 해마다와 유사." },
-  { kr:"매달", en:"every month, monthly", vi:"hàng tháng, mỗi tháng", type:"duration",
-    note:"매(每) + 달(月). 매달 월급을 받아요(mỗi tháng nhận lương). 매월과 유사. 규칙적 반복 강조." },
-  { kr:"무렵", en:"around (the time), about (that time)", vi:"vào khoảng thời điểm", type:"present",
-    note:"N무렵. 저녁 무렵(vào khoảng buổi tối). 봄 무렵(vào khoảng mùa xuân). 때쯤과 유사." },
-  { kr:"밤새", en:"all night long, throughout the night", vi:"cả đêm, suốt đêm", type:"duration",
-    note:"밤(đêm) + 새(từ đầu đến cuối). 밤새 공부했어요(học suốt đêm). 밤새도록(suốt cả đêm)." },
-  { kr:"방금", en:"just now, a moment ago", vi:"vừa xong, vừa mới", type:"past",
-    note:"방금(方今). 방금 왔어요(vừa mới đến). 방금 전에(ngay vừa rồi). 아까보다 더 가까운 과거." },
-  { kr:"보름", en:"the 15th day, half a month, full moon", vi:"rằm, ngày 15 âm lịch", type:"period",
-    note:"음력 15일(rằm âm lịch). 보름달(trăng rằm). 보름이 지났어요(đã qua rằm rồi). 보름치(lượng nửa tháng)." },
-  { kr:"새해", en:"new year", vi:"năm mới", type:"future",
-    note:"새(mới) + 해(năm). 새해 복 많이 받으세요(Chúc mừng năm mới). 새해 첫날(ngày đầu năm mới)." },
-  { kr:"세기", en:"century", vi:"thế kỷ", type:"period",
-    note:"세기(世紀). 21세기(thế kỷ 21). 세기의 발명(phát minh của thế kỷ). 세기말(cuối thế kỷ)." },
-  { kr:"세월", en:"time, years (passing)", vi:"năm tháng, thời gian", type:"duration",
-    note:"세월(歲月). 세월이 흘러가다(năm tháng trôi qua). 세월이 약이다(thời gian là liều thuốc). 시간보다 詩的." },
-  { kr:"순간", en:"moment, instant", vi:"khoảnh khắc, giây phút", type:"duration",
-    note:"순간(瞬間). 그 순간(khoảnh khắc đó). 순간적으로(trong chớp mắt). 한순간에(trong một khoảnh khắc)." },
-  { kr:"시대", en:"era, age, period", vi:"thời đại, kỷ nguyên", type:"period",
-    note:"시대(時代). 조선 시대(thời Joseon). 현대 시대(thời hiện đại). 시대가 변했어요(thời đại đã thay đổi)." },
-  { kr:"아침저녁", en:"morning and evening, all day", vi:"sáng tối, buổi sáng và tối", type:"duration",
-    note:"아침 + 저녁. 아침저녁으로 연락해요(liên lạc cả sáng lẫn tối). 아침저녁이 다르다(sáng tối khác nhau)." },
-  { kr:"앞날", en:"future, days ahead", vi:"tương lai, ngày sắp tới", type:"future",
-    note:"앞(phía trước) + 날(ngày). 앞날이 창창하다(tương lai tươi sáng). 앞날을 모르다(không biết tương lai)." },
-  { kr:"야간", en:"nighttime, night shift", vi:"ban đêm, ca đêm", type:"present",
-    note:"야간(夜間). 야간 근무(ca đêm). 야간 버스(xe buýt ban đêm). 야간 학교(trường học ban đêm)." },
-  { kr:"언젠가", en:"someday, one day", vi:"một ngày nào đó", type:"future",
-    note:"언제(khi nào) + 가(hậu tố bất định). 언젠가 만나요(hẹn gặp ngày nào đó). 막연한 미래를 나타냄." },
-  { kr:"엊그제", en:"a few days ago, just the other day", vi:"mấy ngày trước", type:"past",
-    note:"엊(hôm trước) + 그제(hôm kia). 엊그제 같은데 벌써 1년이 됐어요(vừa mới hôm nào mà đã 1 năm)." },
-  { kr:"여름날", en:"summer day", vi:"ngày hè", type:"present",
-    note:"여름(mùa hè) + 날(ngày). 더운 여름날(ngày hè nóng bức). 여름날의 추억(kỷ niệm ngày hè)." },
-  { kr:"연도", en:"year (in documents)", vi:"năm trong văn bản", type:"period",
-    note:"연도(年度). 출생 연도(năm sinh). 회계 연도(năm tài chính). 2024년도(năm 2024). 공식 문서에서 사용." },
-  { kr:"연말", en:"end of year, year-end", vi:"cuối năm", type:"present",
-    note:"연(年) + 말(末, cuối). 연말 파티(tiệc cuối năm). 연말에 바빠요(cuối năm bận rộn). ↔ 연초(đầu năm)." },
-  { kr:"연말연시", en:"year-end and new year period", vi:"dịp cuối năm đầu năm", type:"present",
-    note:"연말(cuối năm) + 연시(年始, đầu năm). 연말연시에 고향에 가요(dịp cuối năm đầu năm về quê)." },
-  { kr:"연속", en:"continuity, series, in a row", vi:"liên tục, tiếp nối", type:"duration",
-    note:"연속(連續). 3일 연속(3 ngày liên tiếp). 연속으로 이기다(thắng liên tiếp). 연속 드라마(phim dài tập)." },
-  { kr:"열흘", en:"ten days", vi:"mười ngày", type:"duration",
-    note:"열(mười) + 흘(ngày). 순우리말 수사계. 열흘이 지났어요(mười ngày đã trôi qua). 열흘 후(sau mười ngày)." },
-  { kr:"예전", en:"old days, formerly, in the past", vi:"ngày xưa, trước đây", type:"past",
-    note:"예전(이전+옛날). 예전에는 달랐어요(ngày xưa thì khác). 예전 친구(bạn cũ). 옛날보다는 가까운 과거." },
-  { kr:"옛", en:"old, ancient, former (before noun)", vi:"xưa, cổ (trước danh từ)", type:"past",
-    note:"관형사. 옛날(ngày xưa). 옛 친구(bạn cũ). 옛 생각(kỷ niệm xưa). 항상 명사 앞에 붙어 사용." },
-  { kr:"오늘날", en:"nowadays, today (the modern age)", vi:"ngày nay, thời nay", type:"present",
-    note:"오늘(hôm nay) + 날(ngày/thời đại). 오늘날의 기술(công nghệ ngày nay). 현재와 유사하나 더 광범위." },
-  { kr:"오랜", en:"long-standing, longtime (before noun)", vi:"lâu, dài lâu (trước danh từ)", type:"duration",
-    note:"관형사. 오랜 친구(bạn lâu năm). 오랜 시간(thời gian dài). 오래된과 유사하나 더 서정적 느낌." },
-  { kr:"요새", en:"recently, these days (very casual)", vi:"gần đây, dạo này", type:"present",
-    note:"요즘의 구어체. 요새 어때요?(dạo này thế nào?). 요새 바빠요(dạo này bận). 요즘과 거의 동의." },
-  { kr:"월말", en:"end of month", vi:"cuối tháng", type:"present",
-    note:"월(月) + 말(末). 월말에 정산해요(cuối tháng thanh toán). ↔ 월초(đầu tháng). 월말 결산(quyết toán cuối tháng)." },
-  { kr:"음력", en:"lunar calendar", vi:"âm lịch", type:"period",
-    note:"음력(陰曆). 음력 설날(Tết Nguyên Đán âm lịch). 음력 생일(sinh nhật âm lịch). ↔ 양력(dương lịch)." },
-  { kr:"이따", en:"later, a little later (casual)", vi:"lát nữa (thân mật)", type:"future",
-    note:"이따가의 준말. 이따 봐요(lát nữa gặp nhé). 이따 전화할게요(lát nữa gọi nhé). 구어체 대화에서." },
-  { kr:"이때", en:"at this time, at this point", vi:"lúc này, thời điểm này", type:"present",
-    note:"이(이/그/저) + 때. 이때가 기회예요(đây là cơ hội). 바로 이때(chính lúc này). 특정 시점 강조." },
-  { kr:"이전", en:"before, previously, prior", vi:"trước đây, trước", type:"past",
-    note:"이전(以前). 이전에는(trước đây thì). 이전 직장(nơi làm việc trước). ↔ 이후(sau đó)." },
-  { kr:"이후", en:"after, afterward, since then", vi:"sau đó, về sau", type:"future",
-    note:"이후(以後). 이후로는(từ sau đó). 졸업 이후(sau khi tốt nghiệp). ↔ 이전(trước đó)." },
-  { kr:"일생", en:"one's whole life, lifetime", vi:"suốt đời, cả đời", type:"duration",
-    note:"일생(一生). 일생을 바치다(cống hiến cả đời). 일생의 목표(mục tiêu cả đời). 평생과 동의." },
-  { kr:"일시", en:"temporary, for a time", vi:"tạm thời", type:"duration",
-    note:"일시(一時). 일시적(tạm thời). 일시 정지(tạm dừng). 일시적으로 어렵다(tạm thời khó khăn)." },
-  { kr:"임시", en:"temporary, provisional", vi:"tạm thời", type:"duration",
-    note:"임시(臨時). 임시 방편(biện pháp tạm thời). 임시 직원(nhân viên tạm thời). 일시와 유사하나 더 계획적." },
-  { kr:"장래", en:"future, prospects", vi:"tương lai, tiền đồ", type:"future",
-    note:"장래(將來). 장래가 밝다(tương lai tươi sáng). 장래 희망(ước mơ tương lai). 미래보다 개인적 뉘앙스." },
-  { kr:"재작년", en:"the year before last, two years ago", vi:"năm kia", type:"past",
-    note:"재(再, lại) + 작년(năm ngoái). 재작년에 한국에 갔어요(năm kia tôi đã đến Hàn Quốc). ↔ 내후년(năm kia tới)." },
-  { kr:"전날", en:"the day before, the previous day", vi:"ngày hôm trước", type:"past",
-    note:"전(前) + 날(ngày). 시험 전날(ngày trước khi thi). 결혼식 전날(ngày trước ngày cưới)." },
-  { kr:"젊음", en:"youth, youthfulness", vi:"sự trẻ trung, tuổi trẻ", type:"period",
-    note:"젊다 → 젊음(명사). 젊음을 즐기다(tận hưởng tuổi trẻ). 젊음은 한번뿐이에요(tuổi trẻ chỉ có một lần)." },
-  { kr:"제때", en:"at the right time, on time", vi:"đúng lúc, đúng thời điểm", type:"present",
-    note:"제(정해진) + 때. 제때 먹어요(ăn đúng bữa). 제때 해야 해요(phải làm đúng lúc). 시간을 지키는 뉘앙스." },
-  { kr:"제시간", en:"on time, at the scheduled time", vi:"đúng giờ", type:"present",
-    note:"제(정해진) + 시간. 제시간에 왔어요(đến đúng giờ). 제시간에 마치다(kết thúc đúng giờ). 시간 엄수." },
-  { kr:"주년", en:"anniversary (years)", vi:"kỷ niệm ...năm", type:"period",
-    note:"주년(週年). 10주년(kỷ niệm 10 năm). 100주년(kỷ niệm 100 năm). 기념일보다 더 공식적인 느낌." },
-  { kr:"지난해", en:"last year", vi:"năm ngoái", type:"past",
-    note:"지난(vừa qua) + 해(năm). 작년과 동의. 지난해에 여행을 갔어요(năm ngoái tôi đi du lịch). 더 문어체." },
-  { kr:"직후", en:"immediately after, right after", vi:"ngay sau đó", type:"present",
-    note:"직(直, ngay) + 후(後, sau). 졸업 직후(ngay sau khi tốt nghiệp). 사고 직후(ngay sau tai nạn)." },
-  { kr:"첫날", en:"the first day", vi:"ngày đầu tiên", type:"present",
-    note:"첫(đầu tiên) + 날(ngày). 첫날부터 열심히 해요(từ ngày đầu tiên đã chăm chỉ). 학교 첫날(ngày đầu đi học)." },
-  { kr:"초기", en:"early stage, beginning period", vi:"giai đoạn đầu, buổi đầu", type:"period",
-    note:"초기(初期). 초기 단계(giai đoạn đầu). 회사 초기(buổi đầu của công ty). ↔ 말기(giai đoạn cuối)." },
-  { kr:"최근", en:"recently, lately", vi:"gần đây, mới đây", type:"present",
-    note:"최근(最近). 최근에 어떻게 지냈어요?(dạo gần đây bạn thế nào?). 최근 동향(xu hướng gần đây)." },
-  { kr:"최신", en:"latest, most recent", vi:"mới nhất, hiện đại nhất", type:"present",
-    note:"최신(最新). 최신 정보(thông tin mới nhất). 최신 스마트폰(điện thoại thông minh mới nhất)." },
-  { kr:"최종", en:"final, last, ultimate", vi:"cuối cùng, sau cùng", type:"present",
-    note:"최종(最終). 최종 결정(quyết định cuối cùng). 최종 결과(kết quả cuối cùng). ↔ 최초(đầu tiên)." },
-  { kr:"최초", en:"the very first, the earliest", vi:"đầu tiên, lần đầu", type:"past",
-    note:"최초(最初). 최초의 발명(phát minh đầu tiên). 세계 최초(đầu tiên trên thế giới). ↔ 최종(cuối cùng)." },
-  { kr:"최후", en:"the last, the final (emphatic)", vi:"cuối cùng (nhấn mạnh)", type:"future",
-    note:"최후(最後). 최후의 순간(khoảnh khắc cuối cùng). 최후 통첩(tối hậu thư). 최종보다 더 극적 뉘앙스." },
-  { kr:"평생", en:"all one's life, lifetime", vi:"cả đời, suốt đời", type:"duration",
-    note:"평생(平生). 평생 후회 없이 살다(sống cả đời không hối tiếc). 평생 교육(giáo dục suốt đời). 일생과 동의." },
-  { kr:"평소", en:"ordinary days, usual times", vi:"ngày thường, lúc bình thường", type:"present",
-    note:"평소(平素). 평소에는(bình thường thì). 평소와 다르다(khác với ngày thường). 평소 습관(thói quen hàng ngày)." },
-  { kr:"하루하루", en:"day by day, each day", vi:"ngày qua ngày", type:"duration",
-    note:"하루(một ngày) 반복. 하루하루 열심히 살아요(sống chăm chỉ ngày qua ngày). 하루하루가 소중해요." },
-  { kr:"하룻밤", en:"one night, overnight", vi:"một đêm", type:"duration",
-    note:"하루(một ngày) + ㅅ + 밤(đêm). 하룻밤 사이에(trong một đêm). 하룻밤 묵다(ngủ một đêm)." },
-  { kr:"한낮", en:"midday, high noon", vi:"giữa trưa, ban ngày", type:"present",
-    note:"한(đỉnh điểm) + 낮(ban ngày). 한낮의 더위(cái nóng giữa trưa). 한낮에 나가다(ra ngoài lúc giữa trưa)." },
-  { kr:"한동안", en:"for a while, for some time", vi:"một thời gian", type:"duration",
-    note:"한(một, đỉnh điểm) + 동안(trong suốt). 한동안 못 봤어요(một thời gian không gặp). 꽤 긴 시간 강조." },
-  { kr:"한순간", en:"one moment, in an instant", vi:"một khoảnh khắc", type:"duration",
-    note:"한(một) + 순간(khoảnh khắc). 한순간에 변했어요(thay đổi chỉ trong một khoảnh khắc). 극적 변화 강조." },
-  { kr:"한참", en:"for a long while, for quite some time", vi:"một lúc lâu, khá lâu", type:"duration",
-    note:"한참 기다렸어요(đã chờ khá lâu). 한참 후에(sau một lúc lâu). 잠깐보다 훨씬 긴 시간 느낌." },
-  { kr:"한창", en:"at the peak, in full swing, in the prime", vi:"đang lúc cao điểm", type:"present",
-    note:"한창이다 = đang lúc cao điểm. 한창 바쁠 때(lúc đang bận rộn nhất). 꽃이 한창이에요(hoa đang nở rộ)." },
-  { kr:"해마다", en:"every year, year after year", vi:"hàng năm, mỗi năm", type:"duration",
-    note:"해(năm) + 마다(mỗi). 매년과 동의. 해마다 성장해요(mỗi năm lại lớn hơn). 자연스러운 구어체." },
-  { kr:"현대", en:"modern times, the present age", vi:"hiện đại", type:"present",
-    note:"현대(現代). 현대 사회(xã hội hiện đại). 현대인(người hiện đại). 현대적(mang tính hiện đại)." },
-  { kr:"후반", en:"second half, latter part", vi:"nửa sau, giai đoạn sau", type:"period",
-    note:"후반(後半). 20대 후반(cuối tuổi 20). 경기 후반(hiệp hai trận đấu). ↔ 전반(nửa đầu)." },
-  { kr:"휴가철", en:"holiday season, vacation period", vi:"mùa nghỉ lễ", type:"period",
-    note:"휴가(kỳ nghỉ) + 철(mùa). 여름 휴가철(mùa nghỉ hè). 휴가철에 여행지가 붐빈다(mùa nghỉ điểm du lịch đông đúc)." },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    let tagHtml;
-    if      (item.type === 'past')     tagHtml = `<span class="tag tag-past">Quá khứ</span>`;
-    else if (item.type === 'present')  tagHtml = `<span class="tag tag-present">Hiện tại</span>`;
-    else if (item.type === 'future')   tagHtml = `<span class="tag tag-future">Tương lai</span>`;
-    else if (item.type === 'duration') tagHtml = `<span class="tag tag-duration">Khoảng TG</span>`;
-    else                               tagHtml = `<span class="tag tag-period">Thời kỳ</span>`;
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let tagHtml;
+          if (item.type === "past")
+            tagHtml = `<span class="tag tag-past">Quá khứ</span>`;
+          else if (item.type === "present")
+            tagHtml = `<span class="tag tag-present">Hiện tại</span>`;
+          else if (item.type === "future")
+            tagHtml = `<span class="tag tag-future">Tương lai</span>`;
+          else if (item.type === "duration")
+            tagHtml = `<span class="tag tag-duration">Khoảng TG</span>`;
+          else tagHtml = `<span class="tag tag-period">Thời kỳ</span>`;
 
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${tagHtml}</td>
       <td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || item.note.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" || item.type === currentFilter;
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
