@@ -1,302 +1,1596 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Cảm xúc & Tâm lý</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #fdf0f4;
-    --card: #fff;
-    --accent: #8a1a4a;
-    --text: #280818;
-    --sub: #9a5070;
-    --border: #ecc8d4;
-    --tag-pos: #e0f8e8;
-    --tag-neg: #fce8e8;
-    --tag-neutral: #e8f0fa;
-    --tag-social: #fef0d8;
-    --tag-mind: #f0e8fa;
-    --highlight: #fff0f5;
-    --row-alt: #fdf8fa;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Be Vietnam Pro',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
-  .header { background:var(--text); color:#fdf0f4; padding:36px 40px 28px; position:relative; overflow:hidden; }
-  .header::before { content:'감정'; position:absolute; right:40px; top:50%; transform:translateY(-50%); font-family:'Noto Serif KR',serif; font-size:120px; color:rgba(255,255,255,.05); font-weight:600; letter-spacing:-4px; user-select:none; }
-  .header h1 { font-family:'Noto Serif KR',serif; font-size:28px; font-weight:600; letter-spacing:1px; margin-bottom:6px; }
-  .header p { font-size:13px; font-weight:300; color:#b07090; letter-spacing:.5px; }
-  .count-badge { display:inline-block; background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:10px; letter-spacing:.5px; }
-  .controls { padding:20px 40px; background:var(--card); border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-  .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--sub); }
-  #searchInput { width:100%; padding:10px 12px 10px 38px; border:1.5px solid var(--border); border-radius:8px; font-family:'Be Vietnam Pro',sans-serif; font-size:14px; background:var(--bg); color:var(--text); outline:none; transition:border-color .2s; }
-  #searchInput:focus { border-color:var(--accent); }
-  #searchInput::placeholder { color:var(--sub); }
-  .filter-btn { padding:7px 12px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); font-family:'Be Vietnam Pro',sans-serif; font-size:11px; font-weight:500; color:var(--sub); cursor:pointer; transition:all .2s; white-space:nowrap; }
-  .filter-btn:hover,.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .result-count { font-size:12px; color:var(--sub); white-space:nowrap; }
-  .table-wrap { padding:24px 40px 60px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); }
-  thead { background:var(--text); color:#fdf0f4; }
-  th { padding:14px 16px; text-align:left; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
-  th:nth-child(1),td:nth-child(1) { width:60px; text-align:center; }
-  th:nth-child(2),td:nth-child(2) { width:145px; }
-  th:nth-child(3),td:nth-child(3) { width:185px; }
-  th:nth-child(4),td:nth-child(4) { width:210px; }
-  th:nth-child(5),td:nth-child(5) { width:120px; }
-  th:nth-child(6),td:nth-child(6) { min-width:280px; }
-  tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
-  tbody tr:nth-child(even) { background:var(--row-alt); }
-  tbody tr:hover { background:var(--highlight); }
-  td { padding:12px 16px; font-size:13.5px; vertical-align:middle; line-height:1.5; }
-  td:nth-child(1) { font-size:11px; color:var(--sub); font-weight:600; }
-  .korean-word { font-family:'Noto Serif KR',serif; font-size:18px; font-weight:600; color:var(--accent); display:block; line-height:1.3; }
-  .tag { display:inline-flex; align-items:center; border-radius:4px; padding:2px 8px; font-size:11px; font-weight:500; white-space:nowrap; }
-  .tag-pos     { background:var(--tag-pos);     color:#0a4a20; }
-  .tag-neg     { background:var(--tag-neg);     color:#7a0a10; }
-  .tag-neutral { background:var(--tag-neutral); color:#0a2a60; }
-  .tag-social  { background:var(--tag-social);  color:#5a3000; }
-  .tag-mind    { background:var(--tag-mind);    color:#4a0a6a; }
-  .note { font-size:12px; color:var(--sub); font-style:italic; }
-  .no-results { text-align:center; padding:60px; color:var(--sub); font-size:15px; display:none; }
-  .footer { text-align:center; padding:20px; font-size:11px; color:var(--sub); border-top:1px solid var(--border); }
-  @media(max-width:768px){.header{padding:24px 20px}.header::before{display:none}.controls{padding:16px 20px}.table-wrap{padding:16px 20px 40px}th,td{padding:10px 12px}.korean-word{font-size:15px}}
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>감정 & 심리 — Cảm xúc & Tâm lý</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Cảm xúc & Tâm lý · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="pos">Tích cực</button>
-  <button class="filter-btn" data-filter="neg">Tiêu cực</button>
-  <button class="filter-btn" data-filter="neutral">Trung tính</button>
-  <button class="filter-btn" data-filter="social">Ứng xử xã hội</button>
-  <button class="filter-btn" data-filter="mind">Tư duy & Ý chí</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Cảm xúc &amp; Tâm lý</div>
-<script>
-const vocab=[
-  {kr:"갈등",en:"conflict, inner conflict",vi:"mâu thuẫn, xung đột",type:"neg",note:"갈등(葛藤). 갈등을 겪다(trải qua mâu thuẫn). 내면의 갈등(mâu thuẫn nội tâm). 갈등을 해결하다(giải quyết mâu thuẫn)."},
-  {kr:"감정",en:"emotion, feeling",vi:"cảm xúc, tình cảm",type:"neutral",note:"감정(感情). 감정을 표현하다(bày tỏ cảm xúc). 감정이 풍부하다(cảm xúc phong phú). 감정을 조절하다."},
-  {kr:"감탄",en:"admiration, exclamation",vi:"sự ngưỡng mộ, thán phục",type:"pos",note:"감탄(感歎). 감탄하다=thán phục. 감탄사(thán từ). 정말 감탄스러워요(thật sự thán phục quá)."},
-  {kr:"개성",en:"individuality, personality",vi:"tính cá nhân, cá tính",type:"neutral",note:"개성(個性). 개성이 강하다(cá tính mạnh). 개성을 살리다(phát huy cá tính). 개성 있는 스타일."},
-  {kr:"거절",en:"rejection, refusal",vi:"sự từ chối",type:"neg",note:"거절(拒絶). 거절하다=từ chối. 부탁을 거절하다(từ chối lời nhờ). 거절당하다(bị từ chối). 정중히 거절하다."},
-  {kr:"거짓",en:"lie, falsehood",vi:"sự dối trá, điều giả dối",type:"neg",note:"거짓(虛僞). 거짓말(lời nói dối). 거짓을 말하다(nói dối). ↔ 진실(sự thật). 거짓으로 속이다(lừa dối)."},
-  {kr:"걱정거리",en:"source of worry",vi:"mối lo, điều lo lắng",type:"neg",note:"걱정(lo lắng)+거리(điều). 걱정거리가 많다(nhiều mối lo). 걱정거리를 털어놓다(giải bày mối lo)."},
-  {kr:"겁",en:"fear, cowardice",vi:"sự sợ hãi",type:"neg",note:"겁이 나다(cảm thấy sợ). 겁이 많다(nhát gan). 겁쟁이(kẻ nhát gan). 겁을 먹다(bị sợ)."},
-  {kr:"격려",en:"encouragement",vi:"sự khích lệ, động viên",type:"pos",note:"격려(激勵). 격려하다=khích lệ. 격려의 말(lời động viên). 격려를 받다(nhận được khích lệ). 응원과 유사."},
-  {kr:"결심",en:"decision, resolution",vi:"quyết tâm, quyết định",type:"mind",note:"결심(決心). 결심하다=quyết tâm. 굳은 결심(quyết tâm vững chắc). 결심을 바꾸다(thay đổi quyết định)."},
-  {kr:"겸손",en:"humility, modesty",vi:"sự khiêm tốn",type:"pos",note:"겸손(謙遜). 겸손하다=khiêm tốn. 겸손한 태도(thái độ khiêm tốn). 겸손이 덕이다(khiêm tốn là đức hạnh)."},
-  {kr:"고마움",en:"gratitude, thankfulness",vi:"lòng biết ơn",type:"pos",note:"고맙다→고마움. 고마움을 표현하다(bày tỏ lòng biết ơn). 고마움을 느끼다(cảm thấy biết ơn)."},
-  {kr:"고민",en:"worry, concern, trouble",vi:"lo lắng, băn khoăn",type:"neg",note:"고민(苦悶). 고민하다=băn khoăn. 고민이 많다(nhiều nỗi lo). 고민을 털어놓다(giải bày nỗi lo). 고민 상담."},
-  {kr:"고백",en:"confession; love confession",vi:"lời thú nhận, lời tỏ tình",type:"social",note:"고백(告白). 두 가지: 사랑 고백(tỏ tình), 잘못 고백(thú nhận lỗi). 고백하다=thú nhận/tỏ tình."},
-  {kr:"고생",en:"hardship, suffering",vi:"vất vả, khổ cực",type:"neg",note:"고생(苦生). 고생하다=vất vả. 고생이 많다(vất vả nhiều). 고생 끝에 낙이 온다(hết khổ đến sướng)."},
-  {kr:"고집",en:"stubbornness, persistence",vi:"sự bướng bỉnh, cố chấp",type:"neg",note:"고집(固執). 고집이 세다(bướng bỉnh). 고집을 부리다(cố chấp). 고집을 꺾다(bỏ sự cứng đầu)."},
-  {kr:"고통",en:"pain, agony, suffering",vi:"nỗi đau, sự đau khổ",type:"neg",note:"고통(苦痛). 고통을 겪다(chịu đựng đau khổ). 고통스럽다(đau khổ). 고통을 이겨내다(vượt qua đau khổ)."},
-  {kr:"곤란",en:"difficulty, embarrassment",vi:"khó khăn, tình huống khó xử",type:"neg",note:"곤란(困難). 곤란하다=khó xử. 곤란한 상황(tình huống khó xử). 곤란을 겪다(gặp khó khăn)."},
-  {kr:"공포",en:"fear, terror, horror",vi:"nỗi sợ hãi, kinh hoàng",type:"neg",note:"공포(恐怖). 공포를 느끼다(cảm thấy kinh hoàng). 공포 영화(phim kinh dị). 공포심(tâm lý sợ hãi)."},
-  {kr:"괴로움",en:"agony, distress",vi:"nỗi đau khổ, khổ sở",type:"neg",note:"괴롭다→괴로움. 괴로움을 참다(chịu đựng nỗi khổ). 마음의 괴로움(nỗi khổ tâm hồn). 고통과 유사."},
-  {kr:"구두쇠",en:"miser, stingy person",vi:"người keo kiệt, bủn xỉn",type:"neg",note:"구두쇠. 구두쇠처럼 굴다(hành xử như người keo kiệt). 짠돌이와 유사. 돈을 안 쓰는 사람."},
-  {kr:"궁금증",en:"curiosity, question",vi:"sự tò mò",type:"neutral",note:"궁금하다→궁금증. 궁금증을 풀다(giải tỏa tò mò). 궁금증이 생기다(nảy sinh tò mò). 호기심과 유사."},
-  {kr:"기대",en:"expectation, anticipation",vi:"kỳ vọng, mong đợi",type:"pos",note:"기대(期待). 기대하다=kỳ vọng. 기대에 부응하다(đáp ứng kỳ vọng). 기대를 저버리다(phụ kỳ vọng)."},
-  {kr:"기쁨",en:"joy, happiness",vi:"niềm vui, hạnh phúc",type:"pos",note:"기쁘다→기쁨. 기쁨을 느끼다(cảm nhận niềm vui). 기쁨을 나누다(chia sẻ niềm vui). ↔ 슬픔(nỗi buồn)."},
-  {kr:"기억",en:"memory, recollection",vi:"ký ức, sự ghi nhớ",type:"neutral",note:"기억(記憶). 기억하다=nhớ. 기억력(trí nhớ). 기억이 나다(nhớ ra). 추억과 유사하나 더 일반적."},
-  {kr:"긴장감",en:"sense of tension, nervousness",vi:"cảm giác hồi hộp",type:"neg",note:"긴장(緊張)+감(感). 긴장감을 느끼다(cảm thấy hồi hộp). 긴장감이 돌다(không khí căng thẳng)."},
-  {kr:"노력",en:"effort, endeavor",vi:"nỗ lực, cố gắng",type:"mind",note:"노력(努力). 노력하다=nỗ lực. 노력이 필요하다(cần nỗ lực). 노력 없이는 성공 없다(không nỗ lực không thành công)."},
-  {kr:"농담",en:"joke, jest",vi:"câu đùa, trò đùa",type:"social",note:"농담(弄談). 농담하다=đùa. 농담으로 하는 말(nói đùa). 농담이에요(tôi nói đùa thôi). 진담 ↔ 농담."},
-  {kr:"눈치",en:"social awareness, tact",vi:"sự nhạy cảm, tinh ý",type:"neutral",note:"눈치가 빠르다(nhạy bén). 눈치가 없다(không tinh ý). 눈치를 보다(quan sát để đọc tình huống). 한국 특유의 개념."},
-  {kr:"다행",en:"fortunate, relief",vi:"may mắn, may",type:"pos",note:"다행(多幸). 다행이다=may mắn quá. 다행히(may mà). 다행이에요(may quá). 불행 ↔ 다행."},
-  {kr:"대접",en:"hospitality, treating someone",vi:"tiếp đãi, đãi khách",type:"social",note:"대접(待接). 대접하다=tiếp đãi. 손님을 대접하다(tiếp đón khách). 대접을 받다(được tiếp đãi)."},
-  {kr:"덕",en:"virtue; thanks to",vi:"ơn, nhờ (ai đó)",type:"pos",note:"덕(德). 덕분에(nhờ vào). 선생님 덕분에(nhờ thầy). 덕을 베풀다(ban ơn). 덕이 있다(có đức hạnh)."},
-  {kr:"도전",en:"challenge",vi:"thách thức, thử thách",type:"mind",note:"도전(挑戰). 도전하다=thử thách. 도전 정신(tinh thần thách thức). 새로운 도전(thử thách mới). 도전을 받아들이다."},
-  {kr:"두려움",en:"fear, dread",vi:"nỗi sợ hãi",type:"neg",note:"두렵다→두려움. 두려움을 극복하다(vượt qua nỗi sợ). 두려움이 앞서다(nỗi sợ đến trước). 공포와 유사."},
-  {kr:"드림",en:"dream (in compound words)",vi:"mơ ước (từ ghép)",type:"pos",note:"드리다/꿈에서 파생. 코리안 드림(Korean Dream). 드림을 이루다(thực hiện mơ ước). 꿈과 유사."},
-  {kr:"마음씨",en:"heart, disposition",vi:"tấm lòng, lòng tốt",type:"pos",note:"마음(tâm)+씨(hạt/tính chất). 마음씨가 좋다(lòng tốt). 착한 마음씨(tấm lòng tốt). 마음씨가 고운 사람."},
-  {kr:"만족",en:"satisfaction",vi:"sự thỏa mãn, hài lòng",type:"pos",note:"만족(滿足). 만족하다=thỏa mãn. 만족스럽다(hài lòng). 만족감(cảm giác hài lòng). ↔ 불만(không hài lòng)."},
-  {kr:"만족감",en:"feeling of satisfaction",vi:"cảm giác thỏa mãn",type:"pos",note:"만족(hài lòng)+감(感). 만족감을 느끼다(cảm thấy thỏa mãn). 만족감이 크다(độ hài lòng cao)."},
-  {kr:"말다툼",en:"quarrel, argument",vi:"cãi vã, tranh cãi",type:"neg",note:"말(lời)+다툼(tranh cãi). 말다툼을 하다(cãi vã). 사소한 말다툼(cãi vã nhỏ nhặt). 싸움과 유사하나 언어적."},
-  {kr:"말투",en:"way of speaking, tone",vi:"cách nói chuyện",type:"neutral",note:"말(lời)+투(cách). 말투가 거칠다/부드럽다(giọng thô/nhẹ nhàng). 말투를 조심하다(chú ý cách nói)."},
-  {kr:"맞이",en:"greeting, welcoming",vi:"chào đón, đón tiếp",type:"social",note:"맞이하다=đón tiếp. 새해를 맞이하다(đón chào năm mới). 손님을 맞이하다(đón khách). 환영과 유사."},
-  {kr:"매력",en:"charm, attraction",vi:"sức hút, sức quyến rũ",type:"pos",note:"매력(魅力). 매력이 있다(có sức hút). 매력적인 사람(người hấp dẫn). 매력을 느끼다(cảm thấy bị thu hút)."},
-  {kr:"명랑",en:"cheerfulness",vi:"vui vẻ, sảng khoái",type:"pos",note:"명랑(明朗). 명랑하다=vui vẻ, sảng khoái. 명랑한 성격(tính cách vui vẻ). 명랑하게 웃다(cười tươi tắn)."},
-  {kr:"모험심",en:"adventurous spirit",vi:"tinh thần phiêu lưu",type:"mind",note:"모험(冒險)+심(心). 모험심이 강하다(tinh thần phiêu lưu mạnh). 모험심을 키우다(phát triển tinh thần phiêu lưu)."},
-  {kr:"무관심",en:"indifference",vi:"sự thờ ơ",type:"neg",note:"무관심(無關心). 무관심하다=thờ ơ. 무관심한 태도(thái độ thờ ơ). 관심 ↔ 무관심."},
-  {kr:"무소식",en:"no news",vi:"không có tin tức",type:"neutral",note:"무소식(無消息). 무소식이 희소식(không tin tức là tin tốt). 무소식이 걱정된다(lo vì không có tin)."},
-  {kr:"무시",en:"disregard, ignoring",vi:"sự coi thường, bỏ qua",type:"neg",note:"무시(無視). 무시하다=coi thường. 무시를 당하다(bị coi thường). 무시하지 마세요(đừng coi thường)."},
-  {kr:"미소",en:"smile",vi:"nụ cười",type:"pos",note:"미소(微笑). 미소를 짓다(mỉm cười). 따뜻한 미소(nụ cười ấm áp). 미소가 아름답다(nụ cười đẹp). 웃음보다 부드러움."},
-  {kr:"믿음",en:"trust, faith, belief",vi:"niềm tin",type:"pos",note:"믿다→믿음. 믿음을 쌓다(xây dựng niềm tin). 믿음이 중요하다(niềm tin quan trọng). 신뢰와 유사."},
-  {kr:"바보",en:"fool, idiot",vi:"người ngốc, đần độn",type:"neg",note:"바보. 바보같이 굴다(hành xử ngốc nghếch). 바보 같은 짓(hành động ngớ ngẩn). 바보스럽다(ngây thơ)."},
-  {kr:"반성",en:"self-reflection, repentance",vi:"tự phê bình, suy ngẫm lại",type:"mind",note:"반성(反省). 반성하다=phản tỉnh. 잘못을 반성하다(tự nhận xét lại lỗi lầm). 반성문(bài viết kiểm điểm)."},
-  {kr:"방해",en:"interference, interruption",vi:"sự cản trở, làm phiền",type:"neg",note:"방해(妨害). 방해하다=cản trở. 방해가 되다(gây trở ngại). 방해를 받다(bị làm phiền). 집중을 방해하다."},
-  {kr:"배려",en:"consideration, thoughtfulness",vi:"sự quan tâm, ân cần",type:"pos",note:"배려(配慮). 배려하다=quan tâm. 타인을 배려하다(quan tâm người khác). 배려심(tấm lòng quan tâm)."},
-  {kr:"버릇",en:"habit, manner",vi:"thói quen, tật",type:"neutral",note:"버릇. 나쁜 버릇(thói quen xấu). 버릇이 없다(vô lễ). 버릇을 고치다(sửa thói quen). 습관과 유사."},
-  {kr:"변명",en:"excuse, justification",vi:"lý do biện hộ, bào chữa",type:"neg",note:"변명(辨明). 변명하다=biện hộ. 변명을 늘어놓다(đưa ra lý do bào chữa). 핑계와 유사. 변명은 하지 마세요."},
-  {kr:"별일",en:"unusual matter, big deal",vi:"việc đặc biệt, chuyện lạ",type:"neutral",note:"별(別)+일(일). 별일 없어요(không có gì đặc biệt). 별일이네요(chuyện lạ đấy). 무슨 별일이에요?"},
-  {kr:"보람",en:"sense of meaning, reward",vi:"cảm giác có ý nghĩa, xứng đáng",type:"pos",note:"보람을 느끼다(cảm thấy có ý nghĩa). 보람 있는 일(công việc có ý nghĩa). 보람차다(thỏa mãn với kết quả)."},
-  {kr:"복",en:"fortune, blessing",vi:"may mắn, hạnh phúc",type:"pos",note:"복(福). 복을 빌다(cầu phúc). 복이 많다(nhiều phúc). 복이 굴러들어오다(phúc tự đến). 행운과 유사."},
-  {kr:"부담",en:"burden, pressure",vi:"gánh nặng, áp lực",type:"neg",note:"부담(負擔). 부담을 느끼다(cảm thấy áp lực). 부담스럽다(nặng nề). 부담을 줄이다(giảm áp lực)."},
-  {kr:"부주의",en:"carelessness, negligence",vi:"sự bất cẩn, thiếu chú ý",type:"neg",note:"부주의(不注意). 부주의로 인한 사고(tai nạn do bất cẩn). 부주의하다=bất cẩn. ↔ 주의(chú ý)."},
-  {kr:"불만",en:"dissatisfaction, complaint",vi:"sự không hài lòng",type:"neg",note:"불만(不滿). 불만을 표현하다(bày tỏ sự không hài lòng). 불만이 있다(có điều không hài lòng). ↔ 만족."},
-  {kr:"불안",en:"anxiety, unease",vi:"lo lắng, bất an",type:"neg",note:"불안(不安). 불안하다=lo lắng. 불안감(cảm giác bất an). 불안해하다(cảm thấy bất an). ↔ 안심(yên tâm)."},
-  {kr:"불안감",en:"feeling of anxiety",vi:"cảm giác lo lắng",type:"neg",note:"불안(bất an)+감(感). 불안감이 커지다(cảm giác bất an tăng). 불안감을 해소하다(giải tỏa bất an)."},
-  {kr:"불친절",en:"unkindness",vi:"thiếu thân thiện",type:"neg",note:"불(不)+친절(親切). 불친절하다=thiếu thân thiện. 불친절한 서비스(dịch vụ không thân thiện). ↔ 친절(tử tế)."},
-  {kr:"불편",en:"inconvenience, discomfort",vi:"sự bất tiện",type:"neg",note:"불편(不便). 불편하다=bất tiện. 불편함을 느끼다(cảm thấy bất tiện). 불편을 드려서 죄송합니다."},
-  {kr:"불평",en:"complaint, grumbling",vi:"lời phàn nàn",type:"neg",note:"불평(不平). 불평하다=phàn nàn. 불평을 늘어놓다(liên tục phàn nàn). 불만과 유사하나 더 언어적."},
-  {kr:"불행",en:"misfortune, unhappiness",vi:"bất hạnh, rủi ro",type:"neg",note:"불행(不幸). 불행하다=bất hạnh. 불행한 사건(sự kiện bất hạnh). ↔ 행복(hạnh phúc). 불행히도(thật không may)."},
-  {kr:"사고방식",en:"way of thinking, mindset",vi:"lối suy nghĩ, tư duy",type:"mind",note:"사고(思考)+방식(方式). 사고방식을 바꾸다(thay đổi lối tư duy). 긍정적 사고방식(tư duy tích cực)."},
-  {kr:"사정",en:"circumstances, personal situation",vi:"hoàn cảnh, tình huống",type:"neutral",note:"사정(事情). 사정이 있다(có hoàn cảnh riêng). 사정을 봐주다(châm chước hoàn cảnh). 사정이 어렵다."},
-  {kr:"삶",en:"life, existence",vi:"cuộc sống, cuộc đời",type:"neutral",note:"살다→삶. 삶의 의미(ý nghĩa cuộc sống). 삶을 살다(sống cuộc đời). 삶이 힘들다(cuộc sống vất vả)."},
-  {kr:"상상",en:"imagination, fantasy",vi:"trí tưởng tượng",type:"mind",note:"상상(想像). 상상하다=tưởng tượng. 상상도 못했다(không thể tưởng tượng). 상상력(sức tưởng tượng)."},
-  {kr:"상상력",en:"power of imagination",vi:"sức tưởng tượng",type:"mind",note:"상상(tưởng tượng)+력(力). 상상력이 풍부하다(tưởng tượng phong phú). 상상력을 키우다(phát triển tưởng tượng)."},
-  {kr:"설득",en:"persuasion",vi:"sự thuyết phục",type:"social",note:"설득(說得). 설득하다=thuyết phục. 설득력이 있다(có sức thuyết phục). 설득에 성공하다(thuyết phục thành công)."},
-  {kr:"성실",en:"sincerity, diligence",vi:"chăm chỉ, siêng năng",type:"pos",note:"성실(誠實). 성실하다=siêng năng. 성실한 사람(người chăm chỉ). 성실히 일하다(làm việc siêng năng)."},
-  {kr:"소감",en:"thoughts, impressions",vi:"cảm tưởng, suy nghĩ",type:"neutral",note:"소감(所感). 소감을 말하다(phát biểu cảm tưởng). 수상 소감(cảm tưởng nhận giải). 소감을 나누다."},
-  {kr:"소망",en:"hope, wish",vi:"hy vọng, mong muốn",type:"pos",note:"소망(所望). 소망하다=mong muốn. 간절한 소망(ước mong thiết tha). 소망을 이루다(thực hiện mong muốn)."},
-  {kr:"소원",en:"wish, desire",vi:"điều ước",type:"pos",note:"소원(所願). 소원을 빌다(cầu nguyện điều ước). 첫 번째 소원(điều ước đầu tiên). 소원이 이루어지다(ước mong thành hiện thực)."},
-  {kr:"수고",en:"effort, trouble, hard work",vi:"vất vả, cực nhọc",type:"neutral",note:"수고(受苦). 수고하셨어요(đã vất vả rồi—lời cảm ơn). 수고를 들이다(bỏ công sức). 수고가 많다(vất vả nhiều)."},
-  {kr:"슬픔",en:"sorrow, sadness",vi:"nỗi buồn, đau buồn",type:"neg",note:"슬프다→슬픔. 슬픔을 느끼다(cảm nhận nỗi buồn). 슬픔을 달래다(vơi bớt nỗi buồn). ↔ 기쁨(niềm vui)."},
-  {kr:"실망",en:"disappointment",vi:"sự thất vọng",type:"neg",note:"실망(失望). 실망하다=thất vọng. 실망시키다(làm thất vọng). 실망이 크다(thất vọng nhiều). ↔ 기대(kỳ vọng)."},
-  {kr:"실패",en:"failure",vi:"thất bại",type:"neg",note:"실패(失敗). 실패하다=thất bại. 실패를 두려워하다(sợ thất bại). 실패에서 배우다(học từ thất bại). ↔ 성공."},
-  {kr:"싫증",en:"boredom, being sick of",vi:"chán, nhàm",type:"neg",note:"싫증이 나다(cảm thấy chán). 싫증을 내다(tỏ ra chán). 금방 싫증난다(nhanh chán). 물리다와 유사."},
-  {kr:"싸움",en:"fight, quarrel",vi:"cuộc chiến, cãi vã",type:"neg",note:"싸우다→싸움. 싸움을 걸다(khơi mào cãi vã). 싸움을 말리다(can ngăn). 말다툼보다 심한 갈등."},
-  {kr:"아쉬움",en:"regret, longing",vi:"sự tiếc nuối",type:"neg",note:"아쉽다→아쉬움. 아쉬움이 남다(còn tiếc nuối). 아쉬움을 달래다(vơi bớt tiếc nuối). 후회보다 가벼운 감정."},
-  {kr:"악몽",en:"nightmare",vi:"ác mộng",type:"neg",note:"악몽(惡夢). 악몽을 꾸다(có ác mộng). 악몽에서 깨다(tỉnh dậy từ ác mộng). 악몽 같은 일(việc như ác mộng)."},
-  {kr:"안심",en:"relief, peace of mind",vi:"sự yên tâm, nhẹ nhõm",type:"pos",note:"안심(安心). 안심하다=yên tâm. 안심이 된다(cảm thấy nhẹ nhõm). 안심시키다(làm ai yên tâm). ↔ 불안."},
-  {kr:"애정",en:"affection, love",vi:"tình yêu, tình cảm",type:"pos",note:"애정(愛情). 애정이 깊다(tình cảm sâu sắc). 애정을 쏟다(dành tình cảm). 애정 표현(biểu hiện tình cảm)."},
-  {kr:"양보",en:"concession, yielding",vi:"nhường, sự nhượng bộ",type:"social",note:"양보(讓步). 양보하다=nhường. 자리를 양보하다(nhường chỗ). 양보는 미덕(nhường nhịn là đức hạnh)."},
-  {kr:"어려움",en:"difficulty, hardship",vi:"khó khăn, gian nan",type:"neg",note:"어렵다→어려움. 어려움을 극복하다(vượt qua khó khăn). 어려움에 처하다(rơi vào khó khăn)."},
-  {kr:"엉망",en:"mess, chaos",vi:"lung tung, lộn xộn",type:"neg",note:"엉망이 되다(trở nên lộn xộn). 엉망진창(hỗn độn hoàn toàn). 집이 엉망이에요(nhà cửa lộn xộn)."},
-  {kr:"여유",en:"spare time, composure, ease",vi:"thong thả, dư dả",type:"pos",note:"여유(餘裕). 여유가 있다(có thời gian dư/thong thả). 마음의 여유(sự thong thả tâm hồn). 여유롭다."},
-  {kr:"예의",en:"manners, courtesy",vi:"phép lịch sự, lễ nghĩa",type:"social",note:"예의(禮儀). 예의가 바르다(có phép tắc). 예의를 지키다(giữ lịch sự). 예의 없다(vô lễ). 예절과 유사."},
-  {kr:"예절",en:"etiquette, manners",vi:"lễ phép, cách xử sự",type:"social",note:"예절(禮節). 예절을 배우다(học lễ phép). 기본 예절(phép tắc cơ bản). 예의와 유사하나 더 구체적."},
-  {kr:"오해",en:"misunderstanding",vi:"hiểu lầm, nhầm lẫn",type:"neg",note:"오해(誤解). 오해하다=hiểu lầm. 오해가 생기다(nảy sinh hiểu lầm). 오해를 풀다(giải tỏa hiểu lầm)."},
-  {kr:"외로움",en:"loneliness",vi:"sự cô đơn",type:"neg",note:"외롭다→외로움. 외로움을 느끼다(cảm thấy cô đơn). 외로움을 달래다(vơi bớt cô đơn). 고독과 유사."},
-  {kr:"욕",en:"abusive language, curse",vi:"lời chửi mắng, lời thô tục",type:"neg",note:"욕(辱). 욕을 하다(chửi mắng). 욕설(lời chửi). 욕을 먹다(bị chửi). 욕쟁이(người hay chửi)."},
-  {kr:"욕심",en:"greed, desire",vi:"tham lam, lòng tham",type:"neg",note:"욕심(慾心). 욕심이 많다(tham lam). 욕심을 부리다(tỏ ra tham lam). 욕심쟁이(người tham lam). ↔ 겸손."},
-  {kr:"욕심쟁이",en:"greedy person",vi:"người tham lam",type:"neg",note:"욕심(lòng tham)+쟁이(người). 욕심쟁이처럼 굴다(hành xử như người tham lam). 구두쇠와 다름(tham ≠ keo kiệt)."},
-  {kr:"용기",en:"courage, bravery",vi:"lòng dũng cảm, can đảm",type:"pos",note:"용기(勇氣). 용기를 내다(lấy can đảm). 용기 있는 행동(hành động dũng cảm). 용기를 북돋우다(cổ vũ can đảm)."},
-  {kr:"용서",en:"forgiveness, pardon",vi:"sự tha thứ",type:"pos",note:"용서(容恕). 용서하다=tha thứ. 용서를 구하다(xin tha thứ). 용서가 어렵다(khó tha thứ). 용서와 화해."},
-  {kr:"우연",en:"coincidence, chance",vi:"sự ngẫu nhiên",type:"neutral",note:"우연(偶然). 우연히(tình cờ). 우연한 만남(cuộc gặp gỡ tình cờ). ↔ 필연(tất nhiên). 우연치 않게(không tình cờ)."},
-  {kr:"운",en:"luck, fortune",vi:"may mắn, vận",type:"neutral",note:"운(運). 운이 좋다/나쁘다(may mắn/xui xẻo). 운을 믿다(tin vào may mắn). 운명과 유사하나 더 즉각적."},
-  {kr:"운명",en:"fate, destiny",vi:"số phận, vận mệnh",type:"neutral",note:"운명(運命). 운명적인 만남(cuộc gặp định mệnh). 운명을 받아들이다(chấp nhận số phận). 운명론(thuyết định mệnh)."},
-  {kr:"울보",en:"crybaby",vi:"người hay khóc",type:"neg",note:"울다(khóc)+보(người). 울보처럼 울다(khóc như người hay khóc). 어린아이에게 자주 사용."},
-  {kr:"울음",en:"cry, weeping",vi:"tiếng khóc",type:"neg",note:"울다→울음. 울음을 터뜨리다(bật khóc). 울음소리(tiếng khóc). 눈물과 울음(nước mắt và tiếng khóc)."},
-  {kr:"웃음",en:"laughter, smile",vi:"tiếng cười",type:"pos",note:"웃다→웃음. 웃음소리(tiếng cười). 웃음을 잃지 마세요(đừng đánh mất nụ cười). 웃음치료(liệu pháp tiếng cười)."},
-  {kr:"위로",en:"consolation, comfort",vi:"an ủi, vỗ về",type:"pos",note:"위로(慰勞). 위로하다=an ủi. 위로의 말(lời an ủi). 위로가 되다(là nguồn an ủi). 위로를 받다(nhận an ủi)."},
-  {kr:"유머",en:"humor",vi:"hài hước, hóm hỉnh",type:"pos",note:"humor에서. 유머가 있다(hài hước). 유머 감각(cảm giác hài hước). 유머러스하다(hài hước). 분위기를 띄워요."},
-  {kr:"은혜",en:"grace, favor, indebtedness",vi:"ân huệ, ân tình",type:"pos",note:"은혜(恩惠). 은혜를 갚다(trả ân). 은혜를 입다(nhận ơn). 선생님의 은혜(ân tình thầy cô). 깊은 은혜."},
-  {kr:"의문",en:"question, doubt",vi:"nghi vấn, câu hỏi",type:"neutral",note:"의문(疑問). 의문이 생기다(nảy sinh nghi vấn). 의문을 제기하다(đặt câu hỏi). 의문을 풀다(giải tỏa nghi vấn)."},
-  {kr:"의심",en:"doubt, suspicion",vi:"sự nghi ngờ",type:"neg",note:"의심(疑心). 의심하다=nghi ngờ. 의심이 들다(nảy sinh nghi ngờ). 의심 없이(không nghi ngờ). ↔ 믿음."},
-  {kr:"의욕",en:"motivation, drive",vi:"động lực, ý chí",type:"mind",note:"의욕(意慾). 의욕이 생기다(có động lực). 의욕이 넘치다(tràn đầy động lực). 의욕을 잃다(mất động lực)."},
-  {kr:"의지",en:"will, willpower",vi:"ý chí, nghị lực",type:"mind",note:"의지(意志). 의지가 강하다(ý chí mạnh). 의지를 불태우다(đốt cháy ý chí). 의지력(sức mạnh ý chí)."},
-  {kr:"이해심",en:"understanding, compassion",vi:"sự thông cảm, hiểu biết",type:"pos",note:"이해(理解)+심(心). 이해심이 많다(nhiều thông cảm). 이해심 있는 사람(người thông cảm). 배려와 유사."},
-  {kr:"인간성",en:"humanity, human nature",vi:"tính người, nhân tính",type:"neutral",note:"인간(人間)+성(性). 인간성이 좋다(nhân tính tốt). 인간성을 잃다(đánh mất nhân tính). 인격과 유사."},
-  {kr:"인생",en:"life, one's life",vi:"cuộc đời",type:"neutral",note:"인생(人生). 인생의 의미(ý nghĩa cuộc đời). 인생을 살다(sống cuộc đời). 인생 경험(kinh nghiệm đời người)."},
-  {kr:"자랑",en:"pride, boasting",vi:"khoe khoang, tự hào",type:"social",note:"자랑하다=khoe khoang/tự hào. 자랑스럽다(tự hào). 자녀 자랑(khoe con cái). 지나친 자랑은 금물."},
-  {kr:"자신감",en:"confidence, self-confidence",vi:"sự tự tin",type:"pos",note:"자신(自身)+감(感). 자신감이 있다(tự tin). 자신감을 키우다(xây dựng sự tự tin). 자신감 있게 말하다."},
-  {kr:"자존심",en:"self-esteem, pride",vi:"lòng tự trọng, tự ái",type:"neutral",note:"자존심(自尊心). 자존심이 강하다(lòng tự trọng cao). 자존심이 상하다(bị tổn thương lòng tự trọng)."},
-  {kr:"잔소리",en:"nagging, lecturing",vi:"lời nói lải nhải, chì chiết",type:"neg",note:"잔소리(잔+소리). 잔소리를 하다(lải nhải). 잔소리가 심하다(lải nhải nhiều). 잔소리꾼(người hay lải nhải)."},
-  {kr:"장난",en:"prank, mischief",vi:"trò nghịch ngợm",type:"neutral",note:"장난(裝難). 장난을 치다(trêu nghịch). 장난이 심하다(nghịch quá). 장난꾸러기(đứa trẻ tinh nghịch)."},
-  {kr:"재주",en:"talent, skill, knack",vi:"tài năng, năng khiếu",type:"pos",note:"재주(才主). 재주가 있다(có tài năng). 재주를 부리다(phô tài). 재주껏 하다(làm theo khả năng)."},
-  {kr:"적성",en:"aptitude, natural talent",vi:"năng khiếu, thiên hướng",type:"neutral",note:"적성(適性). 적성에 맞다(phù hợp thiên hướng). 적성을 찾다(tìm thiên hướng). 적성검사(kiểm tra thiên hướng)."},
-  {kr:"적응",en:"adaptation, adjustment",vi:"thích nghi, thích ứng",type:"neutral",note:"적응(適應). 적응하다=thích nghi. 새 환경에 적응하다(thích nghi môi trường mới). 적응력(khả năng thích nghi)."},
-  {kr:"정",en:"affection, attachment",vi:"tình cảm, sự gắn bó",type:"pos",note:"정(情). 정이 들다(trở nên gắn bó). 정이 많다(giàu tình cảm). 한국 특유의 감정 개념. 정을 나누다."},
-  {kr:"정성",en:"sincerity, devotion",vi:"tấm lòng thành, chân thành",type:"pos",note:"정성(精誠). 정성을 다하다(dành hết tấm lòng). 정성이 담겨 있다(chứa đựng tâm huyết). 정성껏."},
-  {kr:"정신",en:"mind, spirit, consciousness",vi:"tinh thần, ý thức",type:"neutral",note:"정신(精神). 정신이 없다(không còn tinh thần). 정신 건강(sức khỏe tinh thần). 정신을 차리다(lấy lại tinh thần)."},
-  {kr:"조심",en:"caution, care",vi:"sự cẩn thận",type:"mind",note:"조심(操心). 조심하다=cẩn thận. 조심성이 있다(thận trọng). 차 조심(cẩn thận xe cộ). 주의와 유사."},
-  {kr:"존경",en:"respect, admiration",vi:"sự kính trọng",type:"pos",note:"존경(尊敬). 존경하다=kính trọng. 존경받다(được kính trọng). 존경스럽다(đáng kính). 존경의 표시."},
-  {kr:"주의",en:"attention, caution",vi:"sự chú ý, thận trọng",type:"mind",note:"주의(注意). 주의하다=chú ý. 주의를 기울이다(chú ý). 주의 사항(lưu ý). 주의를 끌다(thu hút sự chú ý)."},
-  {kr:"즐거움",en:"pleasure, joy",vi:"niềm vui, sự thích thú",type:"pos",note:"즐겁다→즐거움. 즐거움을 느끼다(cảm nhận niềm vui). 삶의 즐거움(niềm vui cuộc sống). 기쁨과 유사."},
-  {kr:"진실",en:"truth, fact",vi:"sự thật",type:"neutral",note:"진실(眞實). 진실을 말하다(nói sự thật). 진실이 밝혀지다(sự thật được làm rõ). ↔ 거짓(dối trá). 진실하다(chân thật)."},
-  {kr:"진심",en:"sincerity, genuine feeling",vi:"chân thành, thành tâm",type:"pos",note:"진심(眞心). 진심으로(thành tâm). 진심 어린 말(lời chân thành). 진심을 다하다(dốc hết tấm lòng)."},
-  {kr:"질투",en:"jealousy, envy",vi:"ghen tị",type:"neg",note:"질투(嫉妬). 질투하다=ghen tị. 질투심(lòng ghen tị). 질투가 나다(cảm thấy ghen). 시기와 유사."},
-  {kr:"집중",en:"concentration, focus",vi:"sự tập trung",type:"mind",note:"집중(集中). 집중하다=tập trung. 집중력(khả năng tập trung). 집중이 안 된다(không thể tập trung)."},
-  {kr:"집중력",en:"concentration ability",vi:"khả năng tập trung",type:"mind",note:"집중(tập trung)+력(力). 집중력이 높다/낮다(khả năng tập trung cao/thấp). 집중력을 기르다(rèn luyện tập trung)."},
-  {kr:"짜증",en:"irritation, frustration",vi:"sự bực bội, khó chịu",type:"neg",note:"짜증이 나다(cảm thấy bực bội). 짜증을 내다(bộc lộ sự bực bội). 짜증 나요(bực mình quá). 짜증스럽다."},
-  {kr:"착각",en:"illusion, mistaken belief",vi:"ảo tưởng, nhầm lẫn",type:"neg",note:"착각(錯覺). 착각하다=nhầm lẫn. 착각에 빠지다(rơi vào ảo tưởng). 오해와 유사하나 더 주관적."},
-  {kr:"찬성",en:"agreement, approval",vi:"đồng ý, ủng hộ",type:"pos",note:"찬성(贊成). 찬성하다=đồng ý. 찬성 의견(ý kiến đồng ý). ↔ 반대(phản đối). 찬성표(phiếu đồng ý)."},
-  {kr:"창피",en:"shame, embarrassment",vi:"xấu hổ, nhục",type:"neg",note:"창피(猖披). 창피하다=xấu hổ. 창피를 당하다(bị mắc cỡ). 창피스럽다(đáng xấu hổ). 부끄럽다와 유사."},
-  {kr:"첫인상",en:"first impression",vi:"ấn tượng đầu tiên",type:"neutral",note:"첫(đầu tiên)+인상(印象). 첫인상이 좋다/나쁘다(ấn tượng đầu tốt/xấu). 첫인상이 중요해요."},
-  {kr:"최선",en:"best effort, one's best",vi:"tốt nhất, nỗ lực hết mình",type:"mind",note:"최선(最善). 최선을 다하다(nỗ lực hết mình). 최선을 다했어요(đã cố hết sức rồi). 최선의 선택(lựa chọn tốt nhất)."},
-  {kr:"충격",en:"shock, impact",vi:"cú sốc, tác động mạnh",type:"neg",note:"충격(衝擊). 충격을 받다(bị sốc). 충격적인 소식(tin tức gây sốc). 문화 충격(văn hóa sốc). 충격이 크다."},
-  {kr:"충고",en:"advice, counsel",vi:"lời khuyên, lời khuyên bảo",type:"social",note:"충고(忠告). 충고하다=khuyên. 충고를 받아들이다(tiếp thu lời khuyên). 충고를 무시하다(bỏ qua lời khuyên)."},
-  {kr:"칭찬",en:"compliment, praise",vi:"lời khen ngợi",type:"pos",note:"칭찬(稱讚). 칭찬하다=khen ngợi. 칭찬을 받다(nhận lời khen). 칭찬은 고래도 춤추게 한다(khen ngợi ai cũng làm vui)."},
-  {kr:"큰소리",en:"loud voice; boasting",vi:"tiếng to, tiếng lớn",type:"social",note:"두 가지: (1) 큰 소리(tiếng to — 큰소리로 말하다=nói to), (2) 큰소리치다(khoe khoang, nổ). 주의 필요."},
-  {kr:"큰일",en:"important matter, big trouble",vi:"việc lớn, chuyện quan trọng",type:"neutral",note:"큰(lớn)+일(việc). 큰일이 났다(có chuyện lớn rồi). 큰일을 해내다(hoàn thành việc lớn). 큰일 났어요!"},
-  {kr:"태도",en:"attitude, manner",vi:"thái độ",type:"neutral",note:"태도(態度). 태도가 좋다/나쁘다(thái độ tốt/xấu). 태도를 바꾸다(thay đổi thái độ). 긍정적 태도(thái độ tích cực)."},
-  {kr:"포기",en:"giving up, abandonment",vi:"từ bỏ, bỏ cuộc",type:"neg",note:"포기(抛棄). 포기하다=từ bỏ. 포기하지 마세요(đừng bỏ cuộc). 포기는 배추 셀 때만(đùa vui: 포기 = đầu cải thảo)."},
-  {kr:"핑계",en:"excuse, pretext",vi:"lý do bào chữa, cớ",type:"neg",note:"핑계(憑藉). 핑계를 대다(đưa ra lý do bào chữa). 핑계 없다(không có lý do). 변명과 유사. 핑계쟁이."},
-  {kr:"한숨",en:"sigh",vi:"tiếng thở dài",type:"neg",note:"한숨을 쉬다(thở dài). 한숨이 나다(buột miệng thở dài). 한숨을 내쉬다(thở ra dài). 걱정이나 피로할 때."},
-  {kr:"행동",en:"action, behavior",vi:"hành động, hành vi",type:"neutral",note:"행동(行動). 행동하다=hành động. 책임 있는 행동(hành động có trách nhiệm). 행동이 말보다 중요해요."},
-  {kr:"행운",en:"good luck, fortune",vi:"may mắn, hạnh vận",type:"pos",note:"행운(幸運). 행운을 빌다(chúc may mắn). 행운아(người may mắn). 행운이 따르다(may mắn đến). 행운의 숫자."},
-  {kr:"허락",en:"permission, approval",vi:"sự cho phép, chấp thuận",type:"social",note:"허락(許諾). 허락하다=cho phép. 허락을 받다(được cho phép). 허락 없이(không có phép). 허락을 구하다."},
-  {kr:"현실",en:"reality, actuality",vi:"thực tế, hiện thực",type:"neutral",note:"현실(現實). 현실적이다(thực tế). 현실을 직시하다(đối mặt thực tế). 꿈과 현실(mơ và thực tế)."},
-  {kr:"형편",en:"circumstances, financial situation",vi:"hoàn cảnh, tình hình",type:"neutral",note:"형편(形便). 형편이 어렵다(hoàn cảnh khó khăn). 형편을 봐주다(xem xét hoàn cảnh). 형편없다(tệ hại)."},
-  {kr:"호감",en:"favorable impression",vi:"thiện cảm, ấn tượng tốt",type:"pos",note:"호감(好感). 호감을 갖다(có thiện cảm). 호감을 주다(tạo thiện cảm). ↔ 반감(ác cảm). 첫 호감."},
-  {kr:"호기심",en:"curiosity",vi:"sự tò mò",type:"neutral",note:"호기심(好奇心). 호기심이 많다(rất tò mò). 호기심을 갖다(có tò mò). 궁금증과 유사하나 더 적극적."},
-  {kr:"화해",en:"reconciliation, making up",vi:"hòa giải",type:"pos",note:"화해(和解). 화해하다=hòa giải. 화해를 청하다(xin hòa giải). 화해의 악수(cái bắt tay hòa giải). 갈등 해결."},
-  {kr:"후회",en:"regret",vi:"hối hận, tiếc nuối",type:"neg",note:"후회(後悔). 후회하다=hối hận. 후회가 남다(còn hối hận). 후회 없이 살다(sống không hối tiếc). 아쉬움보다 강한 감정."},
-  {kr:"흥미",en:"interest, fascination",vi:"sự thú vị, hứng thú",type:"pos",note:"흥미(興味). 흥미가 있다(có hứng thú). 흥미를 느끼다(cảm thấy thú vị). 흥미롭다(thú vị). 관심과 유사."},
-  {kr:"흥분",en:"excitement, agitation",vi:"sự hưng phấn, kích thích",type:"neutral",note:"흥분(興奮). 흥분하다=hưng phấn. 너무 흥분하지 마세요(đừng quá hưng phấn). 흥분 상태(trạng thái hưng phấn)."},
-  {kr:"희망",en:"hope",vi:"hy vọng",type:"pos",note:"희망(希望). 희망을 갖다(có hy vọng). 희망을 잃지 마세요(đừng mất hy vọng). 희망적이다(đầy hy vọng). 소망과 유사."},
-];
-let currentFilter='all';
-function renderTable(data){
-  const tbody=document.getElementById('vocabBody');
-  tbody.innerHTML='';
-  data.forEach((item,i)=>{
-    let t;
-    if(item.type==='pos')     t=`<span class="tag tag-pos">Tích cực</span>`;
-    else if(item.type==='neg')     t=`<span class="tag tag-neg">Tiêu cực</span>`;
-    else if(item.type==='neutral') t=`<span class="tag tag-neutral">Trung tính</span>`;
-    else if(item.type==='social')  t=`<span class="tag tag-social">Ứng xử XH</span>`;
-    else                           t=`<span class="tag tag-mind">Tư duy &amp; Ý chí</span>`;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent=`${data.length} / ${vocab.length} từ`;
-}
-function filterAndSearch(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const result=vocab.filter(item=>{
-    const mf=currentFilter==='all'||item.type===currentFilter;
-    const ms=!q||item.kr.includes(q)||item.en.toLowerCase().includes(q)||item.vi.toLowerCase().includes(q)||item.note.toLowerCase().includes(q);
-    return mf&&ms;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display=result.length===0?'block':'none';
-  document.getElementById('vocabTable').style.display=result.length===0?'none':'';
-}
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter=btn.dataset.filter;
-    filterAndSearch();
-  });
-});
-document.getElementById('searchInput').addEventListener('input',filterAndSearch);
-document.getElementById('totalCount').textContent=vocab.length+' từ';
-renderTable(vocab);
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Cảm xúc & Tâm lý</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fdf0f4;
+        --card: #fff;
+        --accent: #8a1a4a;
+        --text: #280818;
+        --sub: #9a5070;
+        --border: #ecc8d4;
+        --tag-pos: #e0f8e8;
+        --tag-neg: #fce8e8;
+        --tag-neutral: #e8f0fa;
+        --tag-social: #fef0d8;
+        --tag-mind: #f0e8fa;
+        --highlight: #fff0f5;
+        --row-alt: #fdf8fa;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--text);
+        color: #fdf0f4;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "감정";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #b07090;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #fdf0f4;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 145px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 185px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-pos {
+        background: var(--tag-pos);
+        color: #0a4a20;
+      }
+      .tag-neg {
+        background: var(--tag-neg);
+        color: #7a0a10;
+      }
+      .tag-neutral {
+        background: var(--tag-neutral);
+        color: #0a2a60;
+      }
+      .tag-social {
+        background: var(--tag-social);
+        color: #5a3000;
+      }
+      .tag-mind {
+        background: var(--tag-mind);
+        color: #4a0a6a;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>감정 & 심리 — Cảm xúc & Tâm lý</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Cảm xúc & Tâm lý · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="pos">Tích cực</button>
+      <button class="filter-btn" data-filter="neg">Tiêu cực</button>
+      <button class="filter-btn" data-filter="neutral">Trung tính</button>
+      <button class="filter-btn" data-filter="social">Ứng xử xã hội</button>
+      <button class="filter-btn" data-filter="mind">Tư duy & Ý chí</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú &amp; Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Cảm xúc &amp; Tâm lý
+    </div>
+    <script>
+      const vocab = [
+        {
+          kr: "갈등",
+          en: "conflict, inner conflict",
+          vi: "mâu thuẫn, xung đột",
+          type: "neg",
+          note: "갈등(葛藤). 갈등을 겪다(trải qua mâu thuẫn). 내면의 갈등(mâu thuẫn nội tâm). 갈등을 해결하다(giải quyết mâu thuẫn).",
+        },
+        {
+          kr: "감정",
+          en: "emotion, feeling",
+          vi: "cảm xúc, tình cảm",
+          type: "neutral",
+          note: "감정(感情). 감정을 표현하다(bày tỏ cảm xúc). 감정이 풍부하다(cảm xúc phong phú). 감정을 조절하다.",
+        },
+        {
+          kr: "감탄",
+          en: "admiration, exclamation",
+          vi: "sự ngưỡng mộ, thán phục",
+          type: "pos",
+          note: "감탄(感歎). 감탄하다=thán phục. 감탄사(thán từ). 정말 감탄스러워요(thật sự thán phục quá).",
+        },
+        {
+          kr: "개성",
+          en: "individuality, personality",
+          vi: "tính cá nhân, cá tính",
+          type: "neutral",
+          note: "개성(個性). 개성이 강하다(cá tính mạnh). 개성을 살리다(phát huy cá tính). 개성 있는 스타일.",
+        },
+        {
+          kr: "거절",
+          en: "rejection, refusal",
+          vi: "sự từ chối",
+          type: "neg",
+          note: "거절(拒絶). 거절하다=từ chối. 부탁을 거절하다(từ chối lời nhờ). 거절당하다(bị từ chối). 정중히 거절하다.",
+        },
+        {
+          kr: "거짓",
+          en: "lie, falsehood",
+          vi: "sự dối trá, điều giả dối",
+          type: "neg",
+          note: "거짓(虛僞). 거짓말(lời nói dối). 거짓을 말하다(nói dối). ↔ 진실(sự thật). 거짓으로 속이다(lừa dối).",
+        },
+        {
+          kr: "걱정거리",
+          en: "source of worry",
+          vi: "mối lo, điều lo lắng",
+          type: "neg",
+          note: "걱정(lo lắng)+거리(điều). 걱정거리가 많다(nhiều mối lo). 걱정거리를 털어놓다(giải bày mối lo).",
+        },
+        {
+          kr: "겁",
+          en: "fear, cowardice",
+          vi: "sự sợ hãi",
+          type: "neg",
+          note: "겁이 나다(cảm thấy sợ). 겁이 많다(nhát gan). 겁쟁이(kẻ nhát gan). 겁을 먹다(bị sợ).",
+        },
+        {
+          kr: "격려",
+          en: "encouragement",
+          vi: "sự khích lệ, động viên",
+          type: "pos",
+          note: "격려(激勵). 격려하다=khích lệ. 격려의 말(lời động viên). 격려를 받다(nhận được khích lệ). 응원과 유사.",
+        },
+        {
+          kr: "결심",
+          en: "decision, resolution",
+          vi: "quyết tâm, quyết định",
+          type: "mind",
+          note: "결심(決心). 결심하다=quyết tâm. 굳은 결심(quyết tâm vững chắc). 결심을 바꾸다(thay đổi quyết định).",
+        },
+        {
+          kr: "겸손",
+          en: "humility, modesty",
+          vi: "sự khiêm tốn",
+          type: "pos",
+          note: "겸손(謙遜). 겸손하다=khiêm tốn. 겸손한 태도(thái độ khiêm tốn). 겸손이 덕이다(khiêm tốn là đức hạnh).",
+        },
+        {
+          kr: "고마움",
+          en: "gratitude, thankfulness",
+          vi: "lòng biết ơn",
+          type: "pos",
+          note: "고맙다→고마움. 고마움을 표현하다(bày tỏ lòng biết ơn). 고마움을 느끼다(cảm thấy biết ơn).",
+        },
+        {
+          kr: "고민",
+          en: "worry, concern, trouble",
+          vi: "lo lắng, băn khoăn",
+          type: "neg",
+          note: "고민(苦悶). 고민하다=băn khoăn. 고민이 많다(nhiều nỗi lo). 고민을 털어놓다(giải bày nỗi lo). 고민 상담.",
+        },
+        {
+          kr: "고백",
+          en: "confession; love confession",
+          vi: "lời thú nhận, lời tỏ tình",
+          type: "social",
+          note: "고백(告白). 두 가지: 사랑 고백(tỏ tình), 잘못 고백(thú nhận lỗi). 고백하다=thú nhận/tỏ tình.",
+        },
+        {
+          kr: "고생",
+          en: "hardship, suffering",
+          vi: "vất vả, khổ cực",
+          type: "neg",
+          note: "고생(苦生). 고생하다=vất vả. 고생이 많다(vất vả nhiều). 고생 끝에 낙이 온다(hết khổ đến sướng).",
+        },
+        {
+          kr: "고집",
+          en: "stubbornness, persistence",
+          vi: "sự bướng bỉnh, cố chấp",
+          type: "neg",
+          note: "고집(固執). 고집이 세다(bướng bỉnh). 고집을 부리다(cố chấp). 고집을 꺾다(bỏ sự cứng đầu).",
+        },
+        {
+          kr: "고통",
+          en: "pain, agony, suffering",
+          vi: "nỗi đau, sự đau khổ",
+          type: "neg",
+          note: "고통(苦痛). 고통을 겪다(chịu đựng đau khổ). 고통스럽다(đau khổ). 고통을 이겨내다(vượt qua đau khổ).",
+        },
+        {
+          kr: "곤란",
+          en: "difficulty, embarrassment",
+          vi: "khó khăn, tình huống khó xử",
+          type: "neg",
+          note: "곤란(困難). 곤란하다=khó xử. 곤란한 상황(tình huống khó xử). 곤란을 겪다(gặp khó khăn).",
+        },
+        {
+          kr: "공포",
+          en: "fear, terror, horror",
+          vi: "nỗi sợ hãi, kinh hoàng",
+          type: "neg",
+          note: "공포(恐怖). 공포를 느끼다(cảm thấy kinh hoàng). 공포 영화(phim kinh dị). 공포심(tâm lý sợ hãi).",
+        },
+        {
+          kr: "괴로움",
+          en: "agony, distress",
+          vi: "nỗi đau khổ, khổ sở",
+          type: "neg",
+          note: "괴롭다→괴로움. 괴로움을 참다(chịu đựng nỗi khổ). 마음의 괴로움(nỗi khổ tâm hồn). 고통과 유사.",
+        },
+        {
+          kr: "구두쇠",
+          en: "miser, stingy person",
+          vi: "người keo kiệt, bủn xỉn",
+          type: "neg",
+          note: "구두쇠. 구두쇠처럼 굴다(hành xử như người keo kiệt). 짠돌이와 유사. 돈을 안 쓰는 사람.",
+        },
+        {
+          kr: "궁금증",
+          en: "curiosity, question",
+          vi: "sự tò mò",
+          type: "neutral",
+          note: "궁금하다→궁금증. 궁금증을 풀다(giải tỏa tò mò). 궁금증이 생기다(nảy sinh tò mò). 호기심과 유사.",
+        },
+        {
+          kr: "기대",
+          en: "expectation, anticipation",
+          vi: "kỳ vọng, mong đợi",
+          type: "pos",
+          note: "기대(期待). 기대하다=kỳ vọng. 기대에 부응하다(đáp ứng kỳ vọng). 기대를 저버리다(phụ kỳ vọng).",
+        },
+        {
+          kr: "기쁨",
+          en: "joy, happiness",
+          vi: "niềm vui, hạnh phúc",
+          type: "pos",
+          note: "기쁘다→기쁨. 기쁨을 느끼다(cảm nhận niềm vui). 기쁨을 나누다(chia sẻ niềm vui). ↔ 슬픔(nỗi buồn).",
+        },
+        {
+          kr: "기억",
+          en: "memory, recollection",
+          vi: "ký ức, sự ghi nhớ",
+          type: "neutral",
+          note: "기억(記憶). 기억하다=nhớ. 기억력(trí nhớ). 기억이 나다(nhớ ra). 추억과 유사하나 더 일반적.",
+        },
+        {
+          kr: "긴장감",
+          en: "sense of tension, nervousness",
+          vi: "cảm giác hồi hộp",
+          type: "neg",
+          note: "긴장(緊張)+감(感). 긴장감을 느끼다(cảm thấy hồi hộp). 긴장감이 돌다(không khí căng thẳng).",
+        },
+        {
+          kr: "노력",
+          en: "effort, endeavor",
+          vi: "nỗ lực, cố gắng",
+          type: "mind",
+          note: "노력(努力). 노력하다=nỗ lực. 노력이 필요하다(cần nỗ lực). 노력 없이는 성공 없다(không nỗ lực không thành công).",
+        },
+        {
+          kr: "농담",
+          en: "joke, jest",
+          vi: "câu đùa, trò đùa",
+          type: "social",
+          note: "농담(弄談). 농담하다=đùa. 농담으로 하는 말(nói đùa). 농담이에요(tôi nói đùa thôi). 진담 ↔ 농담.",
+        },
+        {
+          kr: "눈치",
+          en: "social awareness, tact",
+          vi: "sự nhạy cảm, tinh ý",
+          type: "neutral",
+          note: "눈치가 빠르다(nhạy bén). 눈치가 없다(không tinh ý). 눈치를 보다(quan sát để đọc tình huống). 한국 특유의 개념.",
+        },
+        {
+          kr: "다행",
+          en: "fortunate, relief",
+          vi: "may mắn, may",
+          type: "pos",
+          note: "다행(多幸). 다행이다=may mắn quá. 다행히(may mà). 다행이에요(may quá). 불행 ↔ 다행.",
+        },
+        {
+          kr: "대접",
+          en: "hospitality, treating someone",
+          vi: "tiếp đãi, đãi khách",
+          type: "social",
+          note: "대접(待接). 대접하다=tiếp đãi. 손님을 대접하다(tiếp đón khách). 대접을 받다(được tiếp đãi).",
+        },
+        {
+          kr: "덕",
+          en: "virtue; thanks to",
+          vi: "ơn, nhờ (ai đó)",
+          type: "pos",
+          note: "덕(德). 덕분에(nhờ vào). 선생님 덕분에(nhờ thầy). 덕을 베풀다(ban ơn). 덕이 있다(có đức hạnh).",
+        },
+        {
+          kr: "도전",
+          en: "challenge",
+          vi: "thách thức, thử thách",
+          type: "mind",
+          note: "도전(挑戰). 도전하다=thử thách. 도전 정신(tinh thần thách thức). 새로운 도전(thử thách mới). 도전을 받아들이다.",
+        },
+        {
+          kr: "두려움",
+          en: "fear, dread",
+          vi: "nỗi sợ hãi",
+          type: "neg",
+          note: "두렵다→두려움. 두려움을 극복하다(vượt qua nỗi sợ). 두려움이 앞서다(nỗi sợ đến trước). 공포와 유사.",
+        },
+        {
+          kr: "드림",
+          en: "dream (in compound words)",
+          vi: "mơ ước (từ ghép)",
+          type: "pos",
+          note: "드리다/꿈에서 파생. 코리안 드림(Korean Dream). 드림을 이루다(thực hiện mơ ước). 꿈과 유사.",
+        },
+        {
+          kr: "마음씨",
+          en: "heart, disposition",
+          vi: "tấm lòng, lòng tốt",
+          type: "pos",
+          note: "마음(tâm)+씨(hạt/tính chất). 마음씨가 좋다(lòng tốt). 착한 마음씨(tấm lòng tốt). 마음씨가 고운 사람.",
+        },
+        {
+          kr: "만족",
+          en: "satisfaction",
+          vi: "sự thỏa mãn, hài lòng",
+          type: "pos",
+          note: "만족(滿足). 만족하다=thỏa mãn. 만족스럽다(hài lòng). 만족감(cảm giác hài lòng). ↔ 불만(không hài lòng).",
+        },
+        {
+          kr: "만족감",
+          en: "feeling of satisfaction",
+          vi: "cảm giác thỏa mãn",
+          type: "pos",
+          note: "만족(hài lòng)+감(感). 만족감을 느끼다(cảm thấy thỏa mãn). 만족감이 크다(độ hài lòng cao).",
+        },
+        {
+          kr: "말다툼",
+          en: "quarrel, argument",
+          vi: "cãi vã, tranh cãi",
+          type: "neg",
+          note: "말(lời)+다툼(tranh cãi). 말다툼을 하다(cãi vã). 사소한 말다툼(cãi vã nhỏ nhặt). 싸움과 유사하나 언어적.",
+        },
+        {
+          kr: "말투",
+          en: "way of speaking, tone",
+          vi: "cách nói chuyện",
+          type: "neutral",
+          note: "말(lời)+투(cách). 말투가 거칠다/부드럽다(giọng thô/nhẹ nhàng). 말투를 조심하다(chú ý cách nói).",
+        },
+        {
+          kr: "맞이",
+          en: "greeting, welcoming",
+          vi: "chào đón, đón tiếp",
+          type: "social",
+          note: "맞이하다=đón tiếp. 새해를 맞이하다(đón chào năm mới). 손님을 맞이하다(đón khách). 환영과 유사.",
+        },
+        {
+          kr: "매력",
+          en: "charm, attraction",
+          vi: "sức hút, sức quyến rũ",
+          type: "pos",
+          note: "매력(魅力). 매력이 있다(có sức hút). 매력적인 사람(người hấp dẫn). 매력을 느끼다(cảm thấy bị thu hút).",
+        },
+        {
+          kr: "명랑",
+          en: "cheerfulness",
+          vi: "vui vẻ, sảng khoái",
+          type: "pos",
+          note: "명랑(明朗). 명랑하다=vui vẻ, sảng khoái. 명랑한 성격(tính cách vui vẻ). 명랑하게 웃다(cười tươi tắn).",
+        },
+        {
+          kr: "모험심",
+          en: "adventurous spirit",
+          vi: "tinh thần phiêu lưu",
+          type: "mind",
+          note: "모험(冒險)+심(心). 모험심이 강하다(tinh thần phiêu lưu mạnh). 모험심을 키우다(phát triển tinh thần phiêu lưu).",
+        },
+        {
+          kr: "무관심",
+          en: "indifference",
+          vi: "sự thờ ơ",
+          type: "neg",
+          note: "무관심(無關心). 무관심하다=thờ ơ. 무관심한 태도(thái độ thờ ơ). 관심 ↔ 무관심.",
+        },
+        {
+          kr: "무소식",
+          en: "no news",
+          vi: "không có tin tức",
+          type: "neutral",
+          note: "무소식(無消息). 무소식이 희소식(không tin tức là tin tốt). 무소식이 걱정된다(lo vì không có tin).",
+        },
+        {
+          kr: "무시",
+          en: "disregard, ignoring",
+          vi: "sự coi thường, bỏ qua",
+          type: "neg",
+          note: "무시(無視). 무시하다=coi thường. 무시를 당하다(bị coi thường). 무시하지 마세요(đừng coi thường).",
+        },
+        {
+          kr: "미소",
+          en: "smile",
+          vi: "nụ cười",
+          type: "pos",
+          note: "미소(微笑). 미소를 짓다(mỉm cười). 따뜻한 미소(nụ cười ấm áp). 미소가 아름답다(nụ cười đẹp). 웃음보다 부드러움.",
+        },
+        {
+          kr: "믿음",
+          en: "trust, faith, belief",
+          vi: "niềm tin",
+          type: "pos",
+          note: "믿다→믿음. 믿음을 쌓다(xây dựng niềm tin). 믿음이 중요하다(niềm tin quan trọng). 신뢰와 유사.",
+        },
+        {
+          kr: "바보",
+          en: "fool, idiot",
+          vi: "người ngốc, đần độn",
+          type: "neg",
+          note: "바보. 바보같이 굴다(hành xử ngốc nghếch). 바보 같은 짓(hành động ngớ ngẩn). 바보스럽다(ngây thơ).",
+        },
+        {
+          kr: "반성",
+          en: "self-reflection, repentance",
+          vi: "tự phê bình, suy ngẫm lại",
+          type: "mind",
+          note: "반성(反省). 반성하다=phản tỉnh. 잘못을 반성하다(tự nhận xét lại lỗi lầm). 반성문(bài viết kiểm điểm).",
+        },
+        {
+          kr: "방해",
+          en: "interference, interruption",
+          vi: "sự cản trở, làm phiền",
+          type: "neg",
+          note: "방해(妨害). 방해하다=cản trở. 방해가 되다(gây trở ngại). 방해를 받다(bị làm phiền). 집중을 방해하다.",
+        },
+        {
+          kr: "배려",
+          en: "consideration, thoughtfulness",
+          vi: "sự quan tâm, ân cần",
+          type: "pos",
+          note: "배려(配慮). 배려하다=quan tâm. 타인을 배려하다(quan tâm người khác). 배려심(tấm lòng quan tâm).",
+        },
+        {
+          kr: "버릇",
+          en: "habit, manner",
+          vi: "thói quen, tật",
+          type: "neutral",
+          note: "버릇. 나쁜 버릇(thói quen xấu). 버릇이 없다(vô lễ). 버릇을 고치다(sửa thói quen). 습관과 유사.",
+        },
+        {
+          kr: "변명",
+          en: "excuse, justification",
+          vi: "lý do biện hộ, bào chữa",
+          type: "neg",
+          note: "변명(辨明). 변명하다=biện hộ. 변명을 늘어놓다(đưa ra lý do bào chữa). 핑계와 유사. 변명은 하지 마세요.",
+        },
+        {
+          kr: "별일",
+          en: "unusual matter, big deal",
+          vi: "việc đặc biệt, chuyện lạ",
+          type: "neutral",
+          note: "별(別)+일(일). 별일 없어요(không có gì đặc biệt). 별일이네요(chuyện lạ đấy). 무슨 별일이에요?",
+        },
+        {
+          kr: "보람",
+          en: "sense of meaning, reward",
+          vi: "cảm giác có ý nghĩa, xứng đáng",
+          type: "pos",
+          note: "보람을 느끼다(cảm thấy có ý nghĩa). 보람 있는 일(công việc có ý nghĩa). 보람차다(thỏa mãn với kết quả).",
+        },
+        {
+          kr: "복",
+          en: "fortune, blessing",
+          vi: "may mắn, hạnh phúc",
+          type: "pos",
+          note: "복(福). 복을 빌다(cầu phúc). 복이 많다(nhiều phúc). 복이 굴러들어오다(phúc tự đến). 행운과 유사.",
+        },
+        {
+          kr: "부담",
+          en: "burden, pressure",
+          vi: "gánh nặng, áp lực",
+          type: "neg",
+          note: "부담(負擔). 부담을 느끼다(cảm thấy áp lực). 부담스럽다(nặng nề). 부담을 줄이다(giảm áp lực).",
+        },
+        {
+          kr: "부주의",
+          en: "carelessness, negligence",
+          vi: "sự bất cẩn, thiếu chú ý",
+          type: "neg",
+          note: "부주의(不注意). 부주의로 인한 사고(tai nạn do bất cẩn). 부주의하다=bất cẩn. ↔ 주의(chú ý).",
+        },
+        {
+          kr: "불만",
+          en: "dissatisfaction, complaint",
+          vi: "sự không hài lòng",
+          type: "neg",
+          note: "불만(不滿). 불만을 표현하다(bày tỏ sự không hài lòng). 불만이 있다(có điều không hài lòng). ↔ 만족.",
+        },
+        {
+          kr: "불안",
+          en: "anxiety, unease",
+          vi: "lo lắng, bất an",
+          type: "neg",
+          note: "불안(不安). 불안하다=lo lắng. 불안감(cảm giác bất an). 불안해하다(cảm thấy bất an). ↔ 안심(yên tâm).",
+        },
+        {
+          kr: "불안감",
+          en: "feeling of anxiety",
+          vi: "cảm giác lo lắng",
+          type: "neg",
+          note: "불안(bất an)+감(感). 불안감이 커지다(cảm giác bất an tăng). 불안감을 해소하다(giải tỏa bất an).",
+        },
+        {
+          kr: "불친절",
+          en: "unkindness",
+          vi: "thiếu thân thiện",
+          type: "neg",
+          note: "불(不)+친절(親切). 불친절하다=thiếu thân thiện. 불친절한 서비스(dịch vụ không thân thiện). ↔ 친절(tử tế).",
+        },
+        {
+          kr: "불편",
+          en: "inconvenience, discomfort",
+          vi: "sự bất tiện",
+          type: "neg",
+          note: "불편(不便). 불편하다=bất tiện. 불편함을 느끼다(cảm thấy bất tiện). 불편을 드려서 죄송합니다.",
+        },
+        {
+          kr: "불평",
+          en: "complaint, grumbling",
+          vi: "lời phàn nàn",
+          type: "neg",
+          note: "불평(不平). 불평하다=phàn nàn. 불평을 늘어놓다(liên tục phàn nàn). 불만과 유사하나 더 언어적.",
+        },
+        {
+          kr: "불행",
+          en: "misfortune, unhappiness",
+          vi: "bất hạnh, rủi ro",
+          type: "neg",
+          note: "불행(不幸). 불행하다=bất hạnh. 불행한 사건(sự kiện bất hạnh). ↔ 행복(hạnh phúc). 불행히도(thật không may).",
+        },
+        {
+          kr: "사고방식",
+          en: "way of thinking, mindset",
+          vi: "lối suy nghĩ, tư duy",
+          type: "mind",
+          note: "사고(思考)+방식(方式). 사고방식을 바꾸다(thay đổi lối tư duy). 긍정적 사고방식(tư duy tích cực).",
+        },
+        {
+          kr: "사정",
+          en: "circumstances, personal situation",
+          vi: "hoàn cảnh, tình huống",
+          type: "neutral",
+          note: "사정(事情). 사정이 있다(có hoàn cảnh riêng). 사정을 봐주다(châm chước hoàn cảnh). 사정이 어렵다.",
+        },
+        {
+          kr: "삶",
+          en: "life, existence",
+          vi: "cuộc sống, cuộc đời",
+          type: "neutral",
+          note: "살다→삶. 삶의 의미(ý nghĩa cuộc sống). 삶을 살다(sống cuộc đời). 삶이 힘들다(cuộc sống vất vả).",
+        },
+        {
+          kr: "상상",
+          en: "imagination, fantasy",
+          vi: "trí tưởng tượng",
+          type: "mind",
+          note: "상상(想像). 상상하다=tưởng tượng. 상상도 못했다(không thể tưởng tượng). 상상력(sức tưởng tượng).",
+        },
+        {
+          kr: "상상력",
+          en: "power of imagination",
+          vi: "sức tưởng tượng",
+          type: "mind",
+          note: "상상(tưởng tượng)+력(力). 상상력이 풍부하다(tưởng tượng phong phú). 상상력을 키우다(phát triển tưởng tượng).",
+        },
+        {
+          kr: "설득",
+          en: "persuasion",
+          vi: "sự thuyết phục",
+          type: "social",
+          note: "설득(說得). 설득하다=thuyết phục. 설득력이 있다(có sức thuyết phục). 설득에 성공하다(thuyết phục thành công).",
+        },
+        {
+          kr: "성실",
+          en: "sincerity, diligence",
+          vi: "chăm chỉ, siêng năng",
+          type: "pos",
+          note: "성실(誠實). 성실하다=siêng năng. 성실한 사람(người chăm chỉ). 성실히 일하다(làm việc siêng năng).",
+        },
+        {
+          kr: "소감",
+          en: "thoughts, impressions",
+          vi: "cảm tưởng, suy nghĩ",
+          type: "neutral",
+          note: "소감(所感). 소감을 말하다(phát biểu cảm tưởng). 수상 소감(cảm tưởng nhận giải). 소감을 나누다.",
+        },
+        {
+          kr: "소망",
+          en: "hope, wish",
+          vi: "hy vọng, mong muốn",
+          type: "pos",
+          note: "소망(所望). 소망하다=mong muốn. 간절한 소망(ước mong thiết tha). 소망을 이루다(thực hiện mong muốn).",
+        },
+        {
+          kr: "소원",
+          en: "wish, desire",
+          vi: "điều ước",
+          type: "pos",
+          note: "소원(所願). 소원을 빌다(cầu nguyện điều ước). 첫 번째 소원(điều ước đầu tiên). 소원이 이루어지다(ước mong thành hiện thực).",
+        },
+        {
+          kr: "수고",
+          en: "effort, trouble, hard work",
+          vi: "vất vả, cực nhọc",
+          type: "neutral",
+          note: "수고(受苦). 수고하셨어요(đã vất vả rồi—lời cảm ơn). 수고를 들이다(bỏ công sức). 수고가 많다(vất vả nhiều).",
+        },
+        {
+          kr: "슬픔",
+          en: "sorrow, sadness",
+          vi: "nỗi buồn, đau buồn",
+          type: "neg",
+          note: "슬프다→슬픔. 슬픔을 느끼다(cảm nhận nỗi buồn). 슬픔을 달래다(vơi bớt nỗi buồn). ↔ 기쁨(niềm vui).",
+        },
+        {
+          kr: "실망",
+          en: "disappointment",
+          vi: "sự thất vọng",
+          type: "neg",
+          note: "실망(失望). 실망하다=thất vọng. 실망시키다(làm thất vọng). 실망이 크다(thất vọng nhiều). ↔ 기대(kỳ vọng).",
+        },
+        {
+          kr: "실패",
+          en: "failure",
+          vi: "thất bại",
+          type: "neg",
+          note: "실패(失敗). 실패하다=thất bại. 실패를 두려워하다(sợ thất bại). 실패에서 배우다(học từ thất bại). ↔ 성공.",
+        },
+        {
+          kr: "싫증",
+          en: "boredom, being sick of",
+          vi: "chán, nhàm",
+          type: "neg",
+          note: "싫증이 나다(cảm thấy chán). 싫증을 내다(tỏ ra chán). 금방 싫증난다(nhanh chán). 물리다와 유사.",
+        },
+        {
+          kr: "싸움",
+          en: "fight, quarrel",
+          vi: "cuộc chiến, cãi vã",
+          type: "neg",
+          note: "싸우다→싸움. 싸움을 걸다(khơi mào cãi vã). 싸움을 말리다(can ngăn). 말다툼보다 심한 갈등.",
+        },
+        {
+          kr: "아쉬움",
+          en: "regret, longing",
+          vi: "sự tiếc nuối",
+          type: "neg",
+          note: "아쉽다→아쉬움. 아쉬움이 남다(còn tiếc nuối). 아쉬움을 달래다(vơi bớt tiếc nuối). 후회보다 가벼운 감정.",
+        },
+        {
+          kr: "악몽",
+          en: "nightmare",
+          vi: "ác mộng",
+          type: "neg",
+          note: "악몽(惡夢). 악몽을 꾸다(có ác mộng). 악몽에서 깨다(tỉnh dậy từ ác mộng). 악몽 같은 일(việc như ác mộng).",
+        },
+        {
+          kr: "안심",
+          en: "relief, peace of mind",
+          vi: "sự yên tâm, nhẹ nhõm",
+          type: "pos",
+          note: "안심(安心). 안심하다=yên tâm. 안심이 된다(cảm thấy nhẹ nhõm). 안심시키다(làm ai yên tâm). ↔ 불안.",
+        },
+        {
+          kr: "애정",
+          en: "affection, love",
+          vi: "tình yêu, tình cảm",
+          type: "pos",
+          note: "애정(愛情). 애정이 깊다(tình cảm sâu sắc). 애정을 쏟다(dành tình cảm). 애정 표현(biểu hiện tình cảm).",
+        },
+        {
+          kr: "양보",
+          en: "concession, yielding",
+          vi: "nhường, sự nhượng bộ",
+          type: "social",
+          note: "양보(讓步). 양보하다=nhường. 자리를 양보하다(nhường chỗ). 양보는 미덕(nhường nhịn là đức hạnh).",
+        },
+        {
+          kr: "어려움",
+          en: "difficulty, hardship",
+          vi: "khó khăn, gian nan",
+          type: "neg",
+          note: "어렵다→어려움. 어려움을 극복하다(vượt qua khó khăn). 어려움에 처하다(rơi vào khó khăn).",
+        },
+        {
+          kr: "엉망",
+          en: "mess, chaos",
+          vi: "lung tung, lộn xộn",
+          type: "neg",
+          note: "엉망이 되다(trở nên lộn xộn). 엉망진창(hỗn độn hoàn toàn). 집이 엉망이에요(nhà cửa lộn xộn).",
+        },
+        {
+          kr: "여유",
+          en: "spare time, composure, ease",
+          vi: "thong thả, dư dả",
+          type: "pos",
+          note: "여유(餘裕). 여유가 있다(có thời gian dư/thong thả). 마음의 여유(sự thong thả tâm hồn). 여유롭다.",
+        },
+        {
+          kr: "예의",
+          en: "manners, courtesy",
+          vi: "phép lịch sự, lễ nghĩa",
+          type: "social",
+          note: "예의(禮儀). 예의가 바르다(có phép tắc). 예의를 지키다(giữ lịch sự). 예의 없다(vô lễ). 예절과 유사.",
+        },
+        {
+          kr: "예절",
+          en: "etiquette, manners",
+          vi: "lễ phép, cách xử sự",
+          type: "social",
+          note: "예절(禮節). 예절을 배우다(học lễ phép). 기본 예절(phép tắc cơ bản). 예의와 유사하나 더 구체적.",
+        },
+        {
+          kr: "오해",
+          en: "misunderstanding",
+          vi: "hiểu lầm, nhầm lẫn",
+          type: "neg",
+          note: "오해(誤解). 오해하다=hiểu lầm. 오해가 생기다(nảy sinh hiểu lầm). 오해를 풀다(giải tỏa hiểu lầm).",
+        },
+        {
+          kr: "외로움",
+          en: "loneliness",
+          vi: "sự cô đơn",
+          type: "neg",
+          note: "외롭다→외로움. 외로움을 느끼다(cảm thấy cô đơn). 외로움을 달래다(vơi bớt cô đơn). 고독과 유사.",
+        },
+        {
+          kr: "욕",
+          en: "abusive language, curse",
+          vi: "lời chửi mắng, lời thô tục",
+          type: "neg",
+          note: "욕(辱). 욕을 하다(chửi mắng). 욕설(lời chửi). 욕을 먹다(bị chửi). 욕쟁이(người hay chửi).",
+        },
+        {
+          kr: "욕심",
+          en: "greed, desire",
+          vi: "tham lam, lòng tham",
+          type: "neg",
+          note: "욕심(慾心). 욕심이 많다(tham lam). 욕심을 부리다(tỏ ra tham lam). 욕심쟁이(người tham lam). ↔ 겸손.",
+        },
+        {
+          kr: "욕심쟁이",
+          en: "greedy person",
+          vi: "người tham lam",
+          type: "neg",
+          note: "욕심(lòng tham)+쟁이(người). 욕심쟁이처럼 굴다(hành xử như người tham lam). 구두쇠와 다름(tham ≠ keo kiệt).",
+        },
+        {
+          kr: "용기",
+          en: "courage, bravery",
+          vi: "lòng dũng cảm, can đảm",
+          type: "pos",
+          note: "용기(勇氣). 용기를 내다(lấy can đảm). 용기 있는 행동(hành động dũng cảm). 용기를 북돋우다(cổ vũ can đảm).",
+        },
+        {
+          kr: "용서",
+          en: "forgiveness, pardon",
+          vi: "sự tha thứ",
+          type: "pos",
+          note: "용서(容恕). 용서하다=tha thứ. 용서를 구하다(xin tha thứ). 용서가 어렵다(khó tha thứ). 용서와 화해.",
+        },
+        {
+          kr: "우연",
+          en: "coincidence, chance",
+          vi: "sự ngẫu nhiên",
+          type: "neutral",
+          note: "우연(偶然). 우연히(tình cờ). 우연한 만남(cuộc gặp gỡ tình cờ). ↔ 필연(tất nhiên). 우연치 않게(không tình cờ).",
+        },
+        {
+          kr: "운",
+          en: "luck, fortune",
+          vi: "may mắn, vận",
+          type: "neutral",
+          note: "운(運). 운이 좋다/나쁘다(may mắn/xui xẻo). 운을 믿다(tin vào may mắn). 운명과 유사하나 더 즉각적.",
+        },
+        {
+          kr: "운명",
+          en: "fate, destiny",
+          vi: "số phận, vận mệnh",
+          type: "neutral",
+          note: "운명(運命). 운명적인 만남(cuộc gặp định mệnh). 운명을 받아들이다(chấp nhận số phận). 운명론(thuyết định mệnh).",
+        },
+        {
+          kr: "울보",
+          en: "crybaby",
+          vi: "người hay khóc",
+          type: "neg",
+          note: "울다(khóc)+보(người). 울보처럼 울다(khóc như người hay khóc). 어린아이에게 자주 사용.",
+        },
+        {
+          kr: "울음",
+          en: "cry, weeping",
+          vi: "tiếng khóc",
+          type: "neg",
+          note: "울다→울음. 울음을 터뜨리다(bật khóc). 울음소리(tiếng khóc). 눈물과 울음(nước mắt và tiếng khóc).",
+        },
+        {
+          kr: "웃음",
+          en: "laughter, smile",
+          vi: "tiếng cười",
+          type: "pos",
+          note: "웃다→웃음. 웃음소리(tiếng cười). 웃음을 잃지 마세요(đừng đánh mất nụ cười). 웃음치료(liệu pháp tiếng cười).",
+        },
+        {
+          kr: "위로",
+          en: "consolation, comfort",
+          vi: "an ủi, vỗ về",
+          type: "pos",
+          note: "위로(慰勞). 위로하다=an ủi. 위로의 말(lời an ủi). 위로가 되다(là nguồn an ủi). 위로를 받다(nhận an ủi).",
+        },
+        {
+          kr: "유머",
+          en: "humor",
+          vi: "hài hước, hóm hỉnh",
+          type: "pos",
+          note: "humor에서. 유머가 있다(hài hước). 유머 감각(cảm giác hài hước). 유머러스하다(hài hước). 분위기를 띄워요.",
+        },
+        {
+          kr: "은혜",
+          en: "grace, favor, indebtedness",
+          vi: "ân huệ, ân tình",
+          type: "pos",
+          note: "은혜(恩惠). 은혜를 갚다(trả ân). 은혜를 입다(nhận ơn). 선생님의 은혜(ân tình thầy cô). 깊은 은혜.",
+        },
+        {
+          kr: "의문",
+          en: "question, doubt",
+          vi: "nghi vấn, câu hỏi",
+          type: "neutral",
+          note: "의문(疑問). 의문이 생기다(nảy sinh nghi vấn). 의문을 제기하다(đặt câu hỏi). 의문을 풀다(giải tỏa nghi vấn).",
+        },
+        {
+          kr: "의심",
+          en: "doubt, suspicion",
+          vi: "sự nghi ngờ",
+          type: "neg",
+          note: "의심(疑心). 의심하다=nghi ngờ. 의심이 들다(nảy sinh nghi ngờ). 의심 없이(không nghi ngờ). ↔ 믿음.",
+        },
+        {
+          kr: "의욕",
+          en: "motivation, drive",
+          vi: "động lực, ý chí",
+          type: "mind",
+          note: "의욕(意慾). 의욕이 생기다(có động lực). 의욕이 넘치다(tràn đầy động lực). 의욕을 잃다(mất động lực).",
+        },
+        {
+          kr: "의지",
+          en: "will, willpower",
+          vi: "ý chí, nghị lực",
+          type: "mind",
+          note: "의지(意志). 의지가 강하다(ý chí mạnh). 의지를 불태우다(đốt cháy ý chí). 의지력(sức mạnh ý chí).",
+        },
+        {
+          kr: "이해심",
+          en: "understanding, compassion",
+          vi: "sự thông cảm, hiểu biết",
+          type: "pos",
+          note: "이해(理解)+심(心). 이해심이 많다(nhiều thông cảm). 이해심 있는 사람(người thông cảm). 배려와 유사.",
+        },
+        {
+          kr: "인간성",
+          en: "humanity, human nature",
+          vi: "tính người, nhân tính",
+          type: "neutral",
+          note: "인간(人間)+성(性). 인간성이 좋다(nhân tính tốt). 인간성을 잃다(đánh mất nhân tính). 인격과 유사.",
+        },
+        {
+          kr: "인생",
+          en: "life, one's life",
+          vi: "cuộc đời",
+          type: "neutral",
+          note: "인생(人生). 인생의 의미(ý nghĩa cuộc đời). 인생을 살다(sống cuộc đời). 인생 경험(kinh nghiệm đời người).",
+        },
+        {
+          kr: "자랑",
+          en: "pride, boasting",
+          vi: "khoe khoang, tự hào",
+          type: "social",
+          note: "자랑하다=khoe khoang/tự hào. 자랑스럽다(tự hào). 자녀 자랑(khoe con cái). 지나친 자랑은 금물.",
+        },
+        {
+          kr: "자신감",
+          en: "confidence, self-confidence",
+          vi: "sự tự tin",
+          type: "pos",
+          note: "자신(自身)+감(感). 자신감이 있다(tự tin). 자신감을 키우다(xây dựng sự tự tin). 자신감 있게 말하다.",
+        },
+        {
+          kr: "자존심",
+          en: "self-esteem, pride",
+          vi: "lòng tự trọng, tự ái",
+          type: "neutral",
+          note: "자존심(自尊心). 자존심이 강하다(lòng tự trọng cao). 자존심이 상하다(bị tổn thương lòng tự trọng).",
+        },
+        {
+          kr: "잔소리",
+          en: "nagging, lecturing",
+          vi: "lời nói lải nhải, chì chiết",
+          type: "neg",
+          note: "잔소리(잔+소리). 잔소리를 하다(lải nhải). 잔소리가 심하다(lải nhải nhiều). 잔소리꾼(người hay lải nhải).",
+        },
+        {
+          kr: "장난",
+          en: "prank, mischief",
+          vi: "trò nghịch ngợm",
+          type: "neutral",
+          note: "장난(裝難). 장난을 치다(trêu nghịch). 장난이 심하다(nghịch quá). 장난꾸러기(đứa trẻ tinh nghịch).",
+        },
+        {
+          kr: "재주",
+          en: "talent, skill, knack",
+          vi: "tài năng, năng khiếu",
+          type: "pos",
+          note: "재주(才主). 재주가 있다(có tài năng). 재주를 부리다(phô tài). 재주껏 하다(làm theo khả năng).",
+        },
+        {
+          kr: "적성",
+          en: "aptitude, natural talent",
+          vi: "năng khiếu, thiên hướng",
+          type: "neutral",
+          note: "적성(適性). 적성에 맞다(phù hợp thiên hướng). 적성을 찾다(tìm thiên hướng). 적성검사(kiểm tra thiên hướng).",
+        },
+        {
+          kr: "적응",
+          en: "adaptation, adjustment",
+          vi: "thích nghi, thích ứng",
+          type: "neutral",
+          note: "적응(適應). 적응하다=thích nghi. 새 환경에 적응하다(thích nghi môi trường mới). 적응력(khả năng thích nghi).",
+        },
+        {
+          kr: "정",
+          en: "affection, attachment",
+          vi: "tình cảm, sự gắn bó",
+          type: "pos",
+          note: "정(情). 정이 들다(trở nên gắn bó). 정이 많다(giàu tình cảm). 한국 특유의 감정 개념. 정을 나누다.",
+        },
+        {
+          kr: "정성",
+          en: "sincerity, devotion",
+          vi: "tấm lòng thành, chân thành",
+          type: "pos",
+          note: "정성(精誠). 정성을 다하다(dành hết tấm lòng). 정성이 담겨 있다(chứa đựng tâm huyết). 정성껏.",
+        },
+        {
+          kr: "정신",
+          en: "mind, spirit, consciousness",
+          vi: "tinh thần, ý thức",
+          type: "neutral",
+          note: "정신(精神). 정신이 없다(không còn tinh thần). 정신 건강(sức khỏe tinh thần). 정신을 차리다(lấy lại tinh thần).",
+        },
+        {
+          kr: "조심",
+          en: "caution, care",
+          vi: "sự cẩn thận",
+          type: "mind",
+          note: "조심(操心). 조심하다=cẩn thận. 조심성이 있다(thận trọng). 차 조심(cẩn thận xe cộ). 주의와 유사.",
+        },
+        {
+          kr: "존경",
+          en: "respect, admiration",
+          vi: "sự kính trọng",
+          type: "pos",
+          note: "존경(尊敬). 존경하다=kính trọng. 존경받다(được kính trọng). 존경스럽다(đáng kính). 존경의 표시.",
+        },
+        {
+          kr: "주의",
+          en: "attention, caution",
+          vi: "sự chú ý, thận trọng",
+          type: "mind",
+          note: "주의(注意). 주의하다=chú ý. 주의를 기울이다(chú ý). 주의 사항(lưu ý). 주의를 끌다(thu hút sự chú ý).",
+        },
+        {
+          kr: "즐거움",
+          en: "pleasure, joy",
+          vi: "niềm vui, sự thích thú",
+          type: "pos",
+          note: "즐겁다→즐거움. 즐거움을 느끼다(cảm nhận niềm vui). 삶의 즐거움(niềm vui cuộc sống). 기쁨과 유사.",
+        },
+        {
+          kr: "진실",
+          en: "truth, fact",
+          vi: "sự thật",
+          type: "neutral",
+          note: "진실(眞實). 진실을 말하다(nói sự thật). 진실이 밝혀지다(sự thật được làm rõ). ↔ 거짓(dối trá). 진실하다(chân thật).",
+        },
+        {
+          kr: "진심",
+          en: "sincerity, genuine feeling",
+          vi: "chân thành, thành tâm",
+          type: "pos",
+          note: "진심(眞心). 진심으로(thành tâm). 진심 어린 말(lời chân thành). 진심을 다하다(dốc hết tấm lòng).",
+        },
+        {
+          kr: "질투",
+          en: "jealousy, envy",
+          vi: "ghen tị",
+          type: "neg",
+          note: "질투(嫉妬). 질투하다=ghen tị. 질투심(lòng ghen tị). 질투가 나다(cảm thấy ghen). 시기와 유사.",
+        },
+        {
+          kr: "집중",
+          en: "concentration, focus",
+          vi: "sự tập trung",
+          type: "mind",
+          note: "집중(集中). 집중하다=tập trung. 집중력(khả năng tập trung). 집중이 안 된다(không thể tập trung).",
+        },
+        {
+          kr: "집중력",
+          en: "concentration ability",
+          vi: "khả năng tập trung",
+          type: "mind",
+          note: "집중(tập trung)+력(力). 집중력이 높다/낮다(khả năng tập trung cao/thấp). 집중력을 기르다(rèn luyện tập trung).",
+        },
+        {
+          kr: "짜증",
+          en: "irritation, frustration",
+          vi: "sự bực bội, khó chịu",
+          type: "neg",
+          note: "짜증이 나다(cảm thấy bực bội). 짜증을 내다(bộc lộ sự bực bội). 짜증 나요(bực mình quá). 짜증스럽다.",
+        },
+        {
+          kr: "착각",
+          en: "illusion, mistaken belief",
+          vi: "ảo tưởng, nhầm lẫn",
+          type: "neg",
+          note: "착각(錯覺). 착각하다=nhầm lẫn. 착각에 빠지다(rơi vào ảo tưởng). 오해와 유사하나 더 주관적.",
+        },
+        {
+          kr: "찬성",
+          en: "agreement, approval",
+          vi: "đồng ý, ủng hộ",
+          type: "pos",
+          note: "찬성(贊成). 찬성하다=đồng ý. 찬성 의견(ý kiến đồng ý). ↔ 반대(phản đối). 찬성표(phiếu đồng ý).",
+        },
+        {
+          kr: "창피",
+          en: "shame, embarrassment",
+          vi: "xấu hổ, nhục",
+          type: "neg",
+          note: "창피(猖披). 창피하다=xấu hổ. 창피를 당하다(bị mắc cỡ). 창피스럽다(đáng xấu hổ). 부끄럽다와 유사.",
+        },
+        {
+          kr: "첫인상",
+          en: "first impression",
+          vi: "ấn tượng đầu tiên",
+          type: "neutral",
+          note: "첫(đầu tiên)+인상(印象). 첫인상이 좋다/나쁘다(ấn tượng đầu tốt/xấu). 첫인상이 중요해요.",
+        },
+        {
+          kr: "최선",
+          en: "best effort, one's best",
+          vi: "tốt nhất, nỗ lực hết mình",
+          type: "mind",
+          note: "최선(最善). 최선을 다하다(nỗ lực hết mình). 최선을 다했어요(đã cố hết sức rồi). 최선의 선택(lựa chọn tốt nhất).",
+        },
+        {
+          kr: "충격",
+          en: "shock, impact",
+          vi: "cú sốc, tác động mạnh",
+          type: "neg",
+          note: "충격(衝擊). 충격을 받다(bị sốc). 충격적인 소식(tin tức gây sốc). 문화 충격(văn hóa sốc). 충격이 크다.",
+        },
+        {
+          kr: "충고",
+          en: "advice, counsel",
+          vi: "lời khuyên, lời khuyên bảo",
+          type: "social",
+          note: "충고(忠告). 충고하다=khuyên. 충고를 받아들이다(tiếp thu lời khuyên). 충고를 무시하다(bỏ qua lời khuyên).",
+        },
+        {
+          kr: "칭찬",
+          en: "compliment, praise",
+          vi: "lời khen ngợi",
+          type: "pos",
+          note: "칭찬(稱讚). 칭찬하다=khen ngợi. 칭찬을 받다(nhận lời khen). 칭찬은 고래도 춤추게 한다(khen ngợi ai cũng làm vui).",
+        },
+        {
+          kr: "큰소리",
+          en: "loud voice; boasting",
+          vi: "tiếng to, tiếng lớn",
+          type: "social",
+          note: "두 가지: (1) 큰 소리(tiếng to — 큰소리로 말하다=nói to), (2) 큰소리치다(khoe khoang, nổ). 주의 필요.",
+        },
+        {
+          kr: "큰일",
+          en: "important matter, big trouble",
+          vi: "việc lớn, chuyện quan trọng",
+          type: "neutral",
+          note: "큰(lớn)+일(việc). 큰일이 났다(có chuyện lớn rồi). 큰일을 해내다(hoàn thành việc lớn). 큰일 났어요!",
+        },
+        {
+          kr: "태도",
+          en: "attitude, manner",
+          vi: "thái độ",
+          type: "neutral",
+          note: "태도(態度). 태도가 좋다/나쁘다(thái độ tốt/xấu). 태도를 바꾸다(thay đổi thái độ). 긍정적 태도(thái độ tích cực).",
+        },
+        {
+          kr: "포기",
+          en: "giving up, abandonment",
+          vi: "từ bỏ, bỏ cuộc",
+          type: "neg",
+          note: "포기(抛棄). 포기하다=từ bỏ. 포기하지 마세요(đừng bỏ cuộc). 포기는 배추 셀 때만(đùa vui: 포기 = đầu cải thảo).",
+        },
+        {
+          kr: "핑계",
+          en: "excuse, pretext",
+          vi: "lý do bào chữa, cớ",
+          type: "neg",
+          note: "핑계(憑藉). 핑계를 대다(đưa ra lý do bào chữa). 핑계 없다(không có lý do). 변명과 유사. 핑계쟁이.",
+        },
+        {
+          kr: "한숨",
+          en: "sigh",
+          vi: "tiếng thở dài",
+          type: "neg",
+          note: "한숨을 쉬다(thở dài). 한숨이 나다(buột miệng thở dài). 한숨을 내쉬다(thở ra dài). 걱정이나 피로할 때.",
+        },
+        {
+          kr: "행동",
+          en: "action, behavior",
+          vi: "hành động, hành vi",
+          type: "neutral",
+          note: "행동(行動). 행동하다=hành động. 책임 있는 행동(hành động có trách nhiệm). 행동이 말보다 중요해요.",
+        },
+        {
+          kr: "행운",
+          en: "good luck, fortune",
+          vi: "may mắn, hạnh vận",
+          type: "pos",
+          note: "행운(幸運). 행운을 빌다(chúc may mắn). 행운아(người may mắn). 행운이 따르다(may mắn đến). 행운의 숫자.",
+        },
+        {
+          kr: "허락",
+          en: "permission, approval",
+          vi: "sự cho phép, chấp thuận",
+          type: "social",
+          note: "허락(許諾). 허락하다=cho phép. 허락을 받다(được cho phép). 허락 없이(không có phép). 허락을 구하다.",
+        },
+        {
+          kr: "현실",
+          en: "reality, actuality",
+          vi: "thực tế, hiện thực",
+          type: "neutral",
+          note: "현실(現實). 현실적이다(thực tế). 현실을 직시하다(đối mặt thực tế). 꿈과 현실(mơ và thực tế).",
+        },
+        {
+          kr: "형편",
+          en: "circumstances, financial situation",
+          vi: "hoàn cảnh, tình hình",
+          type: "neutral",
+          note: "형편(形便). 형편이 어렵다(hoàn cảnh khó khăn). 형편을 봐주다(xem xét hoàn cảnh). 형편없다(tệ hại).",
+        },
+        {
+          kr: "호감",
+          en: "favorable impression",
+          vi: "thiện cảm, ấn tượng tốt",
+          type: "pos",
+          note: "호감(好感). 호감을 갖다(có thiện cảm). 호감을 주다(tạo thiện cảm). ↔ 반감(ác cảm). 첫 호감.",
+        },
+        {
+          kr: "호기심",
+          en: "curiosity",
+          vi: "sự tò mò",
+          type: "neutral",
+          note: "호기심(好奇心). 호기심이 많다(rất tò mò). 호기심을 갖다(có tò mò). 궁금증과 유사하나 더 적극적.",
+        },
+        {
+          kr: "화해",
+          en: "reconciliation, making up",
+          vi: "hòa giải",
+          type: "pos",
+          note: "화해(和解). 화해하다=hòa giải. 화해를 청하다(xin hòa giải). 화해의 악수(cái bắt tay hòa giải). 갈등 해결.",
+        },
+        {
+          kr: "후회",
+          en: "regret",
+          vi: "hối hận, tiếc nuối",
+          type: "neg",
+          note: "후회(後悔). 후회하다=hối hận. 후회가 남다(còn hối hận). 후회 없이 살다(sống không hối tiếc). 아쉬움보다 강한 감정.",
+        },
+        {
+          kr: "흥미",
+          en: "interest, fascination",
+          vi: "sự thú vị, hứng thú",
+          type: "pos",
+          note: "흥미(興味). 흥미가 있다(có hứng thú). 흥미를 느끼다(cảm thấy thú vị). 흥미롭다(thú vị). 관심과 유사.",
+        },
+        {
+          kr: "흥분",
+          en: "excitement, agitation",
+          vi: "sự hưng phấn, kích thích",
+          type: "neutral",
+          note: "흥분(興奮). 흥분하다=hưng phấn. 너무 흥분하지 마세요(đừng quá hưng phấn). 흥분 상태(trạng thái hưng phấn).",
+        },
+        {
+          kr: "희망",
+          en: "hope",
+          vi: "hy vọng",
+          type: "pos",
+          note: "희망(希望). 희망을 갖다(có hy vọng). 희망을 잃지 마세요(đừng mất hy vọng). 희망적이다(đầy hy vọng). 소망과 유사.",
+        },
+      ];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let t;
+          if (item.type === "pos")
+            t = `<span class="tag tag-pos">Tích cực</span>`;
+          else if (item.type === "neg")
+            t = `<span class="tag tag-neg">Tiêu cực</span>`;
+          else if (item.type === "neutral")
+            t = `<span class="tag tag-neutral">Trung tính</span>`;
+          else if (item.type === "social")
+            t = `<span class="tag tag-social">Ứng xử XH</span>`;
+          else t = `<span class="tag tag-mind">Tư duy &amp; Ý chí</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${i + 1}</td><td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const mf = currentFilter === "all" || item.type === currentFilter;
+          const ms =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return mf && ms;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
