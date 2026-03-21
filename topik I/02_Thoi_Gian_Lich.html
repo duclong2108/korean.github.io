@@ -1,661 +1,1868 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Thời gian & Mùa</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f4f7fa;
-    --card: #ffffff;
-    --accent: #1a5c96;
-    --accent2: #a8c8e8;
-    --text: #0e1e2c;
-    --sub: #5a7a96;
-    --border: #d0dce8;
-    --tag-hv: #ddeeff;
-    --tag-pure: #e4f4e8;
-    --highlight: #eef5ff;
-    --row-alt: #f8fbff;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Thời gian & Mùa</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f7fa;
+        --card: #ffffff;
+        --accent: #1a5c96;
+        --accent2: #a8c8e8;
+        --text: #0e1e2c;
+        --sub: #5a7a96;
+        --border: #d0dce8;
+        --tag-hv: #ddeeff;
+        --tag-pure: #e4f4e8;
+        --highlight: #eef5ff;
+        --row-alt: #f8fbff;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f4f7fa;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '시간';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-  .header p {
-    font-size: 13px;
-    font-weight: 300;
-    color: #8aafc8;
-    letter-spacing: 0.5px;
-  }
-  .count-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-top: 10px;
-    letter-spacing: 0.5px;
-  }
+      .header {
+        background: var(--text);
+        color: #f4f7fa;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "시간";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #8aafc8;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap {
-    position: relative;
-    flex: 1;
-    min-width: 200px;
-  }
-  .search-wrap svg {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--sub);
-  }
-  #searchInput {
-    width: 100%;
-    padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 14px;
-    background: var(--bg);
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 8px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg);
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--sub);
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
-  .result-count {
-    font-size: 12px;
-    color: var(--sub);
-    white-space: nowrap;
-  }
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap {
-    padding: 24px 40px 60px;
-    overflow-x: auto;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--card);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  }
-  thead { background: var(--text); color: #f4f7fa; }
-  th {
-    padding: 14px 16px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 120px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 180px; }
-  th:nth-child(5), td:nth-child(5) { width: 150px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f4f7fa;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 120px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 180px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 150px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      }
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      }
 
-  tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-  }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td {
-    padding: 13px 16px;
-    font-size: 13.5px;
-    vertical-align: top;
-    line-height: 1.55;
-  }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--accent);
-    display: block;
-    line-height: 1.3;
-  }
-  .hv-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: var(--tag-hv);
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 12px;
-    color: #1a4c7a;
-    font-weight: 500;
-  }
-  .hv-tag.pure {
-    background: var(--tag-pure);
-    color: #2a6640;
-  }
-  .hv-hanja { font-weight: 600; font-size: 13px; }
-  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
-  .example-kr {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 13.5px;
-    color: var(--text);
-    display: block;
-  }
-  .example-vi {
-    font-size: 12px;
-    color: var(--sub);
-    font-style: italic;
-    display: block;
-    margin-top: 2px;
-  }
-  .explain { font-size: 13px; color: #2a4a6a; line-height: 1.6; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #1a4c7a;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #2a6640;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #2a4a6a;
+        line-height: 1.6;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; }
-    .header::before { display: none; }
-    .controls { padding: 16px 20px; }
-    .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; }
-    .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>시간 & 계절 — Thời gian & Mùa</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Thời gian · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>시간 & 계절 — Thời gian & Mùa</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Thời gian · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+      <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Hán Việt</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Tiếng Hàn</th>
-        <th>Tiếng Anh</th>
-        <th>Tiếng Việt</th>
-        <th>Hán Việt</th>
-        <th>Giải thích</th>
-        <th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Thời gian & Mùa
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Thời gian & Mùa</div>
+    <script>
+      const vocab = [
+        {
+          kr: "가을",
+          en: "autumn, fall",
+          vi: "mùa thu",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Mùa thu — một trong bốn mùa, thời tiết mát mẻ, lá vàng rụng. Người Hàn rất yêu mùa thu.",
+          ex: "가을이 제일 좋아요.",
+          exVi: "Tôi thích mùa thu nhất.",
+        },
+        {
+          kr: "간",
+          en: "while, during",
+          vi: "trong khi, trong lúc",
+          hv: "間",
+          hvR: "gian",
+          pure: false,
+          explain:
+            "Khoảng thời gian nhất định. Thường đứng sau danh từ thời gian: 그동안, 오랫동안.",
+          ex: "밥 먹는 간에 뭐 해요?",
+          exVi: "Trong lúc ăn cơm bạn làm gì?",
+        },
+        {
+          kr: "겨울",
+          en: "winter",
+          vi: "mùa đông",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Mùa đông — thời tiết lạnh giá, có tuyết rơi ở nhiều vùng Hàn Quốc.",
+          ex: "겨울에 눈이 와요.",
+          exVi: "Mùa đông có tuyết rơi.",
+        },
+        {
+          kr: "겨울방학",
+          en: "winter vacation",
+          vi: "kỳ nghỉ đông",
+          hv: "方學",
+          hvR: "phương học (방학)",
+          pure: false,
+          explain:
+            "Kỳ nghỉ học mùa đông, thường vào tháng 12–2. 방학 = kỳ nghỉ học.",
+          ex: "겨울방학에 여행 가고 싶어요.",
+          exVi: "Tôi muốn đi du lịch vào kỳ nghỉ đông.",
+        },
+        {
+          kr: "계절",
+          en: "season",
+          vi: "mùa",
+          hv: "季節",
+          hvR: "quý tiết",
+          pure: false,
+          explain:
+            "Mùa trong năm. Hàn Quốc có đủ 4 mùa rõ rệt: xuân, hạ, thu, đông.",
+          ex: "한국은 사계절이 있어요.",
+          exVi: "Hàn Quốc có bốn mùa.",
+        },
+        {
+          kr: "공휴일",
+          en: "public holiday",
+          vi: "ngày lễ quốc gia",
+          hv: "公休日",
+          hvR: "công hưu nhật",
+          pure: false,
+          explain:
+            "Ngày nghỉ lễ chính thức do nhà nước quy định. Khác với 명절 (lễ truyền thống).",
+          ex: "내일은 공휴일이에요.",
+          exVi: "Ngày mai là ngày lễ quốc gia.",
+        },
+        {
+          kr: "과거",
+          en: "past",
+          vi: "quá khứ",
+          hv: "過去",
+          hvR: "quá khứ",
+          pure: false,
+          explain:
+            "Thời gian đã qua. Đối lập với 현재 (hiện tại) và 미래 (tương lai).",
+          ex: "과거는 바꿀 수 없어요.",
+          exVi: "Quá khứ không thể thay đổi được.",
+        },
+        {
+          kr: "구월",
+          en: "September",
+          vi: "tháng Chín",
+          hv: "九月",
+          hvR: "cửu nguyệt",
+          pure: false,
+          explain:
+            "Tháng 9. Tên tháng trong tiếng Hàn đều là số + 월: 일월(1)...십이월(12).",
+          ex: "구월에 추석이 있어요.",
+          exVi: "Tháng 9 có Tết Chuseok.",
+        },
+        {
+          kr: "그날",
+          en: "that day",
+          vi: "ngày đó, hôm đó",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Ngày cụ thể đã được đề cập trước đó trong câu chuyện.",
+          ex: "그날 날씨가 정말 좋았어요.",
+          exVi: "Hôm đó thời tiết thật đẹp.",
+        },
+        {
+          kr: "그동안",
+          en: "meantime, meanwhile",
+          vi: "trong thời gian đó",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Suốt khoảng thời gian vừa rồi hoặc trong thời gian đó. Dùng khi hỏi thăm sau thời gian xa cách.",
+          ex: "그동안 잘 지냈어요?",
+          exVi: "Dạo này bạn có khỏe không?",
+        },
+        {
+          kr: "그때",
+          en: "then, at that time",
+          vi: "lúc đó, khi đó",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Thời điểm cụ thể đã được đề cập. Dùng khi kể chuyện về quá khứ.",
+          ex: "그때는 학생이었어요.",
+          exVi: "Hồi đó tôi là học sinh.",
+        },
+        {
+          kr: "그저께",
+          en: "day before yesterday",
+          vi: "hôm kia",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ngày hôm kia — hai ngày trước hôm nay. Ít dùng hơn 어제 và 오늘.",
+          ex: "그저께 영화를 봤어요.",
+          exVi: "Hôm kia tôi đã xem phim.",
+        },
+        {
+          kr: "금방",
+          en: "soon, a little while ago",
+          vi: "vừa mới, ngay bây giờ",
+          hv: "今方",
+          hvR: "kim phương",
+          pure: false,
+          explain:
+            "Vừa mới xong hoặc sẽ xong ngay. Tùy ngữ cảnh có thể là 'vừa rồi' hoặc 'sắp ngay'.",
+          ex: "금방 올게요.",
+          exVi: "Tôi sẽ về ngay thôi.",
+        },
+        {
+          kr: "금요일",
+          en: "Friday",
+          vi: "thứ Sáu",
+          hv: "金曜日",
+          hvR: "kim diệu nhật",
+          pure: false,
+          explain:
+            "Thứ Sáu. 금(金, kim loại vàng) + 요일. Thứ trong tuần Hàn lấy theo Ngũ Hành + Mặt Trời/Mặt Trăng.",
+          ex: "금요일에 만나요.",
+          exVi: "Thứ Sáu gặp nhau nhé.",
+        },
+        {
+          kr: "기간",
+          en: "term, period",
+          vi: "thời gian, kỳ hạn",
+          hv: "期間",
+          hvR: "kỳ gian",
+          pure: false,
+          explain: "Khoảng thời gian có điểm đầu và điểm cuối xác định.",
+          ex: "기간이 얼마나 돼요?",
+          exVi: "Thời gian là bao lâu?",
+        },
+        {
+          kr: "끝",
+          en: "end",
+          vi: "sự kết thúc, cuối",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Điểm kết thúc, phần cuối. Đối lập với 시작 (bắt đầu). Cũng dùng làm động từ: 끝나다.",
+          ex: "영화가 끝났어요.",
+          exVi: "Phim đã kết thúc rồi.",
+        },
+        {
+          kr: "나중",
+          en: "later, after",
+          vi: "sau này, lần sau",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Sau này, về sau. 나중에 = sau nhé, hẹn gặp sau.",
+          ex: "나중에 연락할게요.",
+          exVi: "Để sau tôi sẽ liên lạc nhé.",
+        },
+        {
+          kr: "나흘",
+          en: "four days",
+          vi: "bốn ngày",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Bốn ngày. Cách đếm ngày thuần Hàn: 하루(1), 이틀(2), 사흘(3), 나흘(4).",
+          ex: "나흘 후에 돌아와요.",
+          exVi: "Bốn ngày nữa sẽ trở về.",
+        },
+        {
+          kr: "날",
+          en: "day",
+          vi: "ngày",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Một ngày, ngày cụ thể. Dùng trong hợp từ: 그날, 생일날, 오늘날,...",
+          ex: "오늘은 좋은 날이에요.",
+          exVi: "Hôm nay là một ngày đẹp.",
+        },
+        {
+          kr: "날짜",
+          en: "date",
+          vi: "ngày (ngày tháng)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ngày tháng cụ thể trong lịch. Dùng khi hỏi hôm nay là ngày mấy.",
+          ex: "오늘 날짜가 뭐예요?",
+          exVi: "Hôm nay là ngày mấy?",
+        },
+        {
+          kr: "낮",
+          en: "daytime, noon",
+          vi: "ban ngày, buổi trưa",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Khoảng thời gian ban ngày, đặc biệt là buổi trưa. Đối lập với 밤 (đêm).",
+          ex: "낮에 공원에 갔어요.",
+          exVi: "Ban ngày tôi đã đến công viên.",
+        },
+        {
+          kr: "내년",
+          en: "next year",
+          vi: "năm sau, năm tới",
+          hv: "來年",
+          hvR: "lai niên",
+          pure: false,
+          explain: "Năm tiếp theo sau năm nay. 내(來, tới) + 년(年, năm).",
+          ex: "내년에 한국에 갈 거예요.",
+          exVi: "Năm sau tôi sẽ đến Hàn Quốc.",
+        },
+        {
+          kr: "내일",
+          en: "tomorrow",
+          vi: "ngày mai",
+          hv: "來日",
+          hvR: "lai nhật",
+          pure: false,
+          explain:
+            "Ngày tiếp theo sau hôm nay. Cặp đôi với 어제 (hôm qua) và 오늘 (hôm nay).",
+          ex: "내일 뭐 해요?",
+          exVi: "Ngày mai bạn làm gì?",
+        },
+        {
+          kr: "년",
+          en: "year",
+          vi: "năm (đơn vị thời gian)",
+          hv: "年",
+          hvR: "niên",
+          pure: false,
+          explain:
+            "Đơn vị năm. Dùng khi đếm hoặc chỉ năm: 2024년, 3년 (3 năm).",
+          ex: "3년 동안 공부했어요.",
+          exVi: "Tôi đã học trong 3 năm.",
+        },
+        {
+          kr: "늦잠",
+          en: "sleeping in late",
+          vi: "ngủ nướng",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Ngủ quá giờ, dậy muộn hơn bình thường. 늦(muộn) + 잠(ngủ).",
+          ex: "오늘 늦잠을 잤어요.",
+          exVi: "Hôm nay tôi đã ngủ nướng.",
+        },
+        {
+          kr: "다음",
+          en: "next, after",
+          vi: "tiếp theo, sau đó",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Tiếp theo, cái/lần kế tiếp. Kết hợp: 다음달, 다음주, 다음해.",
+          ex: "다음 주에 시험이 있어요.",
+          exVi: "Tuần sau có bài thi.",
+        },
+        {
+          kr: "다음달",
+          en: "next month",
+          vi: "tháng sau",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Tháng tiếp theo sau tháng này. 다음(tiếp) + 달(tháng).",
+          ex: "다음달에 이사해요.",
+          exVi: "Tháng sau tôi chuyển nhà.",
+        },
+        {
+          kr: "다음주",
+          en: "next week",
+          vi: "tuần sau",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Tuần tiếp theo. 다음(tiếp) + 주(tuần).",
+          ex: "다음주에 만나요.",
+          exVi: "Tuần sau gặp nhau nhé.",
+        },
+        {
+          kr: "다음해",
+          en: "next year, following year",
+          vi: "năm sau (tiếp theo)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Năm tiếp theo. Giống nghĩa 내년 nhưng mang sắc thái kể chuyện hơn.",
+          ex: "다음해에 졸업해요.",
+          exVi: "Năm sau tôi tốt nghiệp.",
+        },
+        {
+          kr: "달",
+          en: "month, moon",
+          vi: "tháng; mặt trăng",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Có hai nghĩa: tháng trong năm và mặt trăng. Ngữ cảnh quyết định nghĩa.",
+          ex: "이번 달에 생일이 있어요.",
+          exVi: "Tháng này có sinh nhật.",
+        },
+        {
+          kr: "달력",
+          en: "calendar",
+          vi: "lịch (tháng)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Tờ lịch treo tường hoặc lịch để bàn. 달(tháng) + 력(lịch).",
+          ex: "달력을 봐요.",
+          exVi: "Tôi xem lịch.",
+        },
+        {
+          kr: "동안",
+          en: "during, between",
+          vi: "trong suốt, trong khi",
+          hv: "同安",
+          hvR: "đồng an (dùng như thuần Hàn)",
+          pure: true,
+          explain: "Khoảng thời gian liên tục. 3년 동안 = trong suốt 3 năm.",
+          ex: "방학 동안 여행했어요.",
+          exVi: "Tôi đã đi du lịch trong kỳ nghỉ.",
+        },
+        {
+          kr: "때",
+          en: "time, moment",
+          vi: "lúc, khi, thời điểm",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Thời điểm, thời gian cụ thể. 어릴 때 = hồi còn nhỏ. Rất phổ biến trong văn nói.",
+          ex: "어릴 때 뭐 좋아했어요?",
+          exVi: "Hồi nhỏ bạn thích gì?",
+        },
+        {
+          kr: "마지막",
+          en: "last, final",
+          vi: "cuối cùng, lần cuối",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Điều/lần cuối cùng trong một chuỗi. Đối lập với 처음 (đầu tiên).",
+          ex: "마지막으로 한 번 더 해요.",
+          exVi: "Lần cuối cùng thử thêm một lần nữa nhé.",
+        },
+        {
+          kr: "매일",
+          en: "everyday",
+          vi: "mỗi ngày, hàng ngày",
+          hv: "每日",
+          hvR: "mỗi nhật",
+          pure: false,
+          explain: "Hàng ngày, ngày nào cũng vậy. 매(每, mỗi) + 일(日, ngày).",
+          ex: "매일 운동해요.",
+          exVi: "Tôi tập thể dục mỗi ngày.",
+        },
+        {
+          kr: "매주",
+          en: "every week",
+          vi: "mỗi tuần, hàng tuần",
+          hv: "每週",
+          hvR: "mỗi chu",
+          pure: false,
+          explain: "Hàng tuần, tuần nào cũng vậy. 매(每) + 주(週, tuần).",
+          ex: "매주 월요일에 회의해요.",
+          exVi: "Mỗi tuần họp vào thứ Hai.",
+        },
+        {
+          kr: "며칠",
+          en: "a few days / what date",
+          vi: "mấy ngày; ngày mấy",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Hai nghĩa: (1) mấy ngày, (2) ngày mấy (khi hỏi). Phân biệt qua ngữ cảnh.",
+          ex: "오늘이 며칠이에요?",
+          exVi: "Hôm nay là ngày mấy?",
+        },
+        {
+          kr: "명절",
+          en: "traditional holidays",
+          vi: "ngày lễ truyền thống, Tết",
+          hv: "名節",
+          hvR: "danh tiết",
+          pure: false,
+          explain:
+            "Ngày lễ truyền thống lớn như 설날 (Tết Nguyên Đán) và 추석 (Tết Trung Thu Hàn).",
+          ex: "명절에 고향에 가요.",
+          exVi: "Ngày Tết tôi về quê.",
+        },
+        {
+          kr: "모레",
+          en: "day after tomorrow",
+          vi: "ngày kia (ngày mốt)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ngày mốt — hai ngày sau hôm nay. Chuỗi: 어제 - 오늘 - 내일 - 모레.",
+          ex: "모레 시험이에요.",
+          exVi: "Ngày mốt thi rồi.",
+        },
+        {
+          kr: "목요일",
+          en: "Thursday",
+          vi: "thứ Năm",
+          hv: "木曜日",
+          hvR: "mộc diệu nhật",
+          pure: false,
+          explain:
+            "Thứ Năm. 목(木, gỗ/cây) + 요일. Theo hệ Ngũ Hành: 월화수목금토일.",
+          ex: "목요일에 한국어 수업이 있어요.",
+          exVi: "Thứ Năm có lớp tiếng Hàn.",
+        },
+        {
+          kr: "미래",
+          en: "future",
+          vi: "tương lai",
+          hv: "未來",
+          hvR: "vị lai",
+          pure: false,
+          explain:
+            "Thời gian phía trước, chưa xảy ra. Đối lập với 과거(quá khứ) và 현재(hiện tại).",
+          ex: "미래가 기대돼요.",
+          exVi: "Tôi mong chờ tương lai.",
+        },
+        {
+          kr: "반년",
+          en: "half a year",
+          vi: "nửa năm",
+          hv: "半年",
+          hvR: "bán niên",
+          pure: false,
+          explain: "Sáu tháng, nửa năm. 반(半, nửa) + 년(年, năm).",
+          ex: "반년 후에 봐요.",
+          exVi: "Nửa năm nữa gặp lại nhé.",
+        },
+        {
+          kr: "반달",
+          en: "half-moon",
+          vi: "trăng lưỡi liềm",
+          hv: "半",
+          hvR: "bán (nửa) + thuần Hàn 달",
+          pure: true,
+          explain:
+            "Trăng hình bán nguyệt — trăng lưỡi liềm. 반(nửa) + 달(mặt trăng).",
+          ex: "반달이 예뻐요.",
+          exVi: "Trăng lưỡi liềm đẹp quá.",
+        },
+        {
+          kr: "밤",
+          en: "night",
+          vi: "đêm, ban đêm",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Ban đêm, sau khi mặt trời lặn. Đối lập với 낮 (ban ngày).",
+          ex: "밤에 별이 많아요.",
+          exVi: "Ban đêm có nhiều sao.",
+        },
+        {
+          kr: "방학",
+          en: "vacation (school)",
+          vi: "kỳ nghỉ học",
+          hv: "放學",
+          hvR: "phóng học",
+          pure: false,
+          explain:
+            "Kỳ nghỉ dành cho học sinh, sinh viên. Có 여름방학 (hè) và 겨울방학 (đông).",
+          ex: "방학이 언제예요?",
+          exVi: "Kỳ nghỉ khi nào vậy?",
+        },
+        {
+          kr: "봄",
+          en: "spring",
+          vi: "mùa xuân",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Mùa xuân — hoa anh đào (벚꽃) nở rộ là biểu tượng mùa xuân Hàn Quốc.",
+          ex: "봄에 꽃이 펴요.",
+          exVi: "Mùa xuân hoa nở.",
+        },
+        {
+          kr: "사계절",
+          en: "four seasons",
+          vi: "bốn mùa trong năm",
+          hv: "四季節",
+          hvR: "tứ quý tiết",
+          pure: false,
+          explain:
+            "Bốn mùa: 봄(xuân), 여름(hạ), 가을(thu), 겨울(đông). Hàn Quốc nổi tiếng có đủ bốn mùa.",
+          ex: "한국은 사계절이 뚜렷해요.",
+          exVi: "Hàn Quốc có bốn mùa rõ rệt.",
+        },
+        {
+          kr: "사월",
+          en: "April",
+          vi: "tháng Tư",
+          hv: "四月",
+          hvR: "tứ nguyệt",
+          pure: false,
+          explain: "Tháng 4. Mùa xuân đẹp nhất ở Hàn, hoa anh đào nở rộ.",
+          ex: "사월에 벚꽃이 피어요.",
+          exVi: "Tháng 4 hoa anh đào nở.",
+        },
+        {
+          kr: "사이",
+          en: "between, while",
+          vi: "khoảng giữa; trong lúc",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Khoảng giữa hai điểm (không gian hoặc thời gian). Cũng dùng để chỉ mối quan hệ.",
+          ex: "우리 사이가 좋아요.",
+          exVi: "Mối quan hệ của chúng ta rất tốt.",
+        },
+        {
+          kr: "사흘",
+          en: "3 days",
+          vi: "ba ngày",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ba ngày. Một phần hệ đếm ngày thuần Hàn: 하루, 이틀, 사흘, 나흘.",
+          ex: "사흘 동안 여행했어요.",
+          exVi: "Tôi đã du lịch trong ba ngày.",
+        },
+        {
+          kr: "삼월",
+          en: "March",
+          vi: "tháng Ba",
+          hv: "三月",
+          hvR: "tam nguyệt",
+          pure: false,
+          explain:
+            "Tháng 3. Bắt đầu năm học mới ở Hàn Quốc (không phải tháng 9 như Việt Nam).",
+          ex: "삼월에 학교가 시작해요.",
+          exVi: "Tháng 3 bắt đầu năm học.",
+        },
+        {
+          kr: "새벽",
+          en: "dawn, early morning",
+          vi: "rạng sáng, lúc bình minh",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Khoảng 1–5 giờ sáng, trước khi mặt trời mọc. Sớm hơn cả 아침.",
+          ex: "새벽에 일어났어요.",
+          exVi: "Tôi thức dậy lúc rạng sáng.",
+        },
+        {
+          kr: "생신",
+          en: "birthday (honorific)",
+          vi: "sinh nhật (kính ngữ)",
+          hv: "生辰",
+          hvR: "sinh thần",
+          pure: false,
+          explain:
+            "Cách nói sinh nhật kính trọng, dùng với người lớn tuổi hơn. Thông thường dùng 생일.",
+          ex: "할머니 생신이에요.",
+          exVi: "Hôm nay là sinh nhật bà.",
+        },
+        {
+          kr: "생일",
+          en: "birthday",
+          vi: "sinh nhật",
+          hv: "生日",
+          hvR: "sinh nhật",
+          pure: false,
+          explain:
+            "Ngày sinh nhật. 생일 축하해요 = Chúc mừng sinh nhật. Rất phổ biến trong giao tiếp.",
+          ex: "생일 축하해요!",
+          exVi: "Chúc mừng sinh nhật!",
+        },
+        {
+          kr: "설날",
+          en: "Lunar New Year",
+          vi: "Tết Nguyên Đán Hàn Quốc",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Tết Nguyên Đán theo lịch âm của Hàn Quốc. Mọi người mặc 한복, ăn 떡국, bái lạy tổ tiên.",
+          ex: "설날에 가족이 모여요.",
+          exVi: "Ngày Tết cả gia đình tụ họp.",
+        },
+        {
+          kr: "수요일",
+          en: "Wednesday",
+          vi: "thứ Tư",
+          hv: "水曜日",
+          hvR: "thủy diệu nhật",
+          pure: false,
+          explain: "Thứ Tư. 수(水, nước) + 요일. Đứng giữa tuần.",
+          ex: "수요일에 약속이 있어요.",
+          exVi: "Thứ Tư tôi có hẹn.",
+        },
+        {
+          kr: "시",
+          en: "hour, o'clock",
+          vi: "giờ; thành phố",
+          hv: "時",
+          hvR: "thời",
+          pure: false,
+          explain:
+            "Đơn vị giờ trong ngày. 세 시 = 3 giờ. Cũng có nghĩa là thành phố (市) tùy ngữ cảnh.",
+          ex: "지금 몇 시예요?",
+          exVi: "Bây giờ là mấy giờ?",
+        },
+        {
+          kr: "시간",
+          en: "time, hour",
+          vi: "thời gian, giờ",
+          hv: "時間",
+          hvR: "thời gian",
+          pure: false,
+          explain:
+            "Thời gian nói chung hoặc đơn vị giờ. 시간이 없어요 = Tôi không có thời gian.",
+          ex: "시간이 있어요?",
+          exVi: "Bạn có thời gian không?",
+        },
+        {
+          kr: "시간표",
+          en: "schedule, timetable",
+          vi: "thời khóa biểu, lịch học",
+          hv: "時間表",
+          hvR: "thời gian biểu",
+          pure: false,
+          explain:
+            "Bảng thời khóa biểu, lịch học hoặc lịch tàu xe. 시간(thời gian) + 표(bảng).",
+          ex: "시간표를 확인했어요?",
+          exVi: "Bạn đã kiểm tra thời khóa biểu chưa?",
+        },
+        {
+          kr: "시계",
+          en: "clock, watch",
+          vi: "đồng hồ (đeo tay/treo tường)",
+          hv: "時計",
+          hvR: "thời kế",
+          pure: false,
+          explain:
+            "Đồng hồ nói chung. 손목시계 = đồng hồ đeo tay, 벽시계 = đồng hồ treo tường.",
+          ex: "시계가 없어서 시간을 몰라요.",
+          exVi: "Tôi không có đồng hồ nên không biết giờ.",
+        },
+        {
+          kr: "시월",
+          en: "October",
+          vi: "tháng Mười",
+          hv: "十月",
+          hvR: "thập nguyệt",
+          pure: false,
+          explain: "Tháng 10. Lưu ý: phát âm là 시월 (không phải 십월).",
+          ex: "시월에 단풍이 예뻐요.",
+          exVi: "Tháng 10 lá đỏ rất đẹp.",
+        },
+        {
+          kr: "시작",
+          en: "start, beginning",
+          vi: "sự bắt đầu",
+          hv: "始作",
+          hvR: "thủy tác",
+          pure: false,
+          explain:
+            "Sự bắt đầu, khởi đầu. 시작하다 = bắt đầu. Đối lập với 끝 (kết thúc).",
+          ex: "시작이 반이에요.",
+          exVi: "Bắt đầu là đã được một nửa rồi.",
+        },
+        {
+          kr: "십이월",
+          en: "December",
+          vi: "tháng Mười Hai",
+          hv: "十二月",
+          hvR: "thập nhị nguyệt",
+          pure: false,
+          explain:
+            "Tháng 12, tháng cuối năm. Giáng sinh (크리스마스) và năm mới đón tại đây.",
+          ex: "십이월에 크리스마스가 있어요.",
+          exVi: "Tháng 12 có Giáng sinh.",
+        },
+        {
+          kr: "십일월",
+          en: "November",
+          vi: "tháng Mười Một",
+          hv: "十一月",
+          hvR: "thập nhất nguyệt",
+          pure: false,
+          explain: "Tháng 11. Thời tiết bắt đầu lạnh, chuẩn bị cho mùa đông.",
+          ex: "십일월에 날씨가 추워져요.",
+          exVi: "Tháng 11 thời tiết bắt đầu lạnh.",
+        },
+        {
+          kr: "아까",
+          en: "earlier, a while ago",
+          vi: "lúc nãy, lúc vừa rồi",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Một lúc trước đó, không lâu. Chỉ quá khứ gần, trong vòng vài phút đến vài giờ.",
+          ex: "아까 뭐 먹었어요?",
+          exVi: "Lúc nãy bạn ăn gì vậy?",
+        },
+        {
+          kr: "아침",
+          en: "morning, breakfast",
+          vi: "buổi sáng; bữa sáng",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Buổi sáng hoặc bữa ăn sáng. 아침을 먹다 = ăn sáng.",
+          ex: "아침을 먹었어요?",
+          exVi: "Bạn đã ăn sáng chưa?",
+        },
+        {
+          kr: "어저께",
+          en: "yesterday",
+          vi: "hôm qua",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Hôm qua — dạng cũ/chính thức hơn của 어제. Trong văn nói thường dùng 어제 hơn.",
+          ex: "어저께 비가 왔어요.",
+          exVi: "Hôm qua trời mưa.",
+        },
+        {
+          kr: "어제",
+          en: "yesterday",
+          vi: "hôm qua",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Hôm qua — ngày trước hôm nay. Dùng phổ biến nhất trong giao tiếp.",
+          ex: "어제 뭐 했어요?",
+          exVi: "Hôm qua bạn làm gì?",
+        },
+        {
+          kr: "어젯밤",
+          en: "last night",
+          vi: "tối qua, đêm qua",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Đêm qua. 어제(hôm qua) + 밤(đêm). Dấu ㅅ xen vào giữa là âm liên kết.",
+          ex: "어젯밤에 잘 잤어요?",
+          exVi: "Tối qua bạn ngủ ngon không?",
+        },
+        {
+          kr: "여름",
+          en: "summer",
+          vi: "mùa hè",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Mùa hè — nóng và mưa nhiều (장마, mùa mưa). Hay đi biển và núi.",
+          ex: "여름에 바다에 가요.",
+          exVi: "Mùa hè tôi đi biển.",
+        },
+        {
+          kr: "연휴",
+          en: "consecutive holidays",
+          vi: "kỳ nghỉ liên tiếp",
+          hv: "連休",
+          hvR: "liên hưu",
+          pure: false,
+          explain:
+            "Nhiều ngày nghỉ liên tiếp, thường dịp lễ lớn. Mọi người hay đi du lịch.",
+          ex: "연휴에 어디 가요?",
+          exVi: "Kỳ nghỉ dài bạn đi đâu?",
+        },
+        {
+          kr: "옛날",
+          en: "a long time ago, olden days",
+          vi: "ngày xưa, thuở trước",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Thời xa xưa, ngày xưa. 옛날이야기 = chuyện ngày xưa, cổ tích.",
+          ex: "옛날에 왕이 있었어요.",
+          exVi: "Ngày xưa có một vị vua.",
+        },
+        {
+          kr: "오늘",
+          en: "today",
+          vi: "hôm nay",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Ngày hôm nay. Từ cơ bản nhất về thời gian trong tiếng Hàn.",
+          ex: "오늘 날씨가 좋아요.",
+          exVi: "Hôm nay thời tiết đẹp.",
+        },
+        {
+          kr: "오래간만",
+          en: "after a long time",
+          vi: "lâu rồi mới gặp",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Sau một thời gian dài. Dạng đầy đủ của 오랜만. Dùng khi gặp lại người quen lâu.",
+          ex: "오래간만이에요!",
+          exVi: "Lâu rồi mới gặp nhau nhỉ!",
+        },
+        {
+          kr: "오랜만",
+          en: "after a long time",
+          vi: "lâu rồi (thân mật)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Dạng rút gọn thân mật của 오래간만. Dùng phổ biến hơn trong giao tiếp hàng ngày.",
+          ex: "오랜만이에요, 잘 지냈어요?",
+          exVi: "Lâu rồi mới gặp, bạn khỏe không?",
+        },
+        {
+          kr: "오랜만에",
+          en: "after a long time",
+          vi: "sau thời gian dài",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Dạng có trợ từ 에, dùng khi muốn diễn đạt 'sau một thời gian dài thì...'.",
+          ex: "오랜만에 친구를 만났어요.",
+          exVi: "Sau một thời gian dài tôi đã gặp bạn.",
+        },
+        {
+          kr: "오랫동안",
+          en: "for a long time",
+          vi: "trong suốt thời gian dài",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Trong một khoảng thời gian rất dài. Nhấn mạnh tính liên tục, kéo dài.",
+          ex: "오랫동안 기다렸어요.",
+          exVi: "Tôi đã chờ trong suốt thời gian dài.",
+        },
+        {
+          kr: "오월",
+          en: "May",
+          vi: "tháng Năm",
+          hv: "五月",
+          hvR: "ngũ nguyệt",
+          pure: false,
+          explain:
+            "Tháng 5. Có Ngày Thiếu nhi (어린이날 5/5) và Ngày của mẹ (어버이날 5/8).",
+          ex: "오월에 어린이날이 있어요.",
+          exVi: "Tháng 5 có Ngày Thiếu nhi.",
+        },
+        {
+          kr: "오전",
+          en: "morning, a.m.",
+          vi: "buổi sáng (trước trưa)",
+          hv: "午前",
+          hvR: "ngọ tiền",
+          pure: false,
+          explain: "Buổi sáng, trước 12 giờ trưa. 오전 10시 = 10 giờ sáng.",
+          ex: "오전에 회의가 있어요.",
+          exVi: "Buổi sáng có cuộc họp.",
+        },
+        {
+          kr: "오후",
+          en: "afternoon, p.m.",
+          vi: "buổi chiều (sau trưa)",
+          hv: "午後",
+          hvR: "ngọ hậu",
+          pure: false,
+          explain: "Buổi chiều, sau 12 giờ trưa. 오후 3시 = 3 giờ chiều.",
+          ex: "오후에 커피 마셔요.",
+          exVi: "Buổi chiều tôi uống cà phê.",
+        },
+        {
+          kr: "올해",
+          en: "this year",
+          vi: "năm nay",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Năm hiện tại. 올(이+을, năm này) + 해(mặt trời/năm). Đối lập với 작년 và 내년.",
+          ex: "올해 목표가 뭐예요?",
+          exVi: "Mục tiêu năm nay của bạn là gì?",
+        },
+        {
+          kr: "요일",
+          en: "day of the week",
+          vi: "ngày trong tuần",
+          hv: "曜日",
+          hvR: "diệu nhật",
+          pure: false,
+          explain: "Ngày trong tuần. 무슨 요일이에요? = Hôm nay là thứ mấy?",
+          ex: "오늘 무슨 요일이에요?",
+          exVi: "Hôm nay là thứ mấy?",
+        },
+        {
+          kr: "요즘",
+          en: "nowadays, these days",
+          vi: "dạo này, gần đây",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Khoảng thời gian gần đây, dạo này. Dùng khi hỏi thăm tình hình gần đây.",
+          ex: "요즘 어때요?",
+          exVi: "Dạo này bạn thế nào?",
+        },
+        {
+          kr: "월",
+          en: "month",
+          vi: "tháng (đơn vị)",
+          hv: "月",
+          hvR: "nguyệt",
+          pure: false,
+          explain:
+            "Đơn vị tháng. 몇 월 = tháng mấy. Kết hợp với số: 일월, 이월,..., 십이월.",
+          ex: "몇 월이에요?",
+          exVi: "Bây giờ là tháng mấy?",
+        },
+        {
+          kr: "월요일",
+          en: "Monday",
+          vi: "thứ Hai",
+          hv: "月曜日",
+          hvR: "nguyệt diệu nhật",
+          pure: false,
+          explain:
+            "Thứ Hai. 월(月, mặt trăng) + 요일. Đầu tuần làm việc ở Hàn Quốc.",
+          ex: "월요일이 싫어요.",
+          exVi: "Tôi ghét thứ Hai.",
+        },
+        {
+          kr: "유월",
+          en: "June",
+          vi: "tháng Sáu",
+          hv: "六月",
+          hvR: "lục nguyệt",
+          pure: false,
+          explain:
+            "Tháng 6. Lưu ý: đọc là 유월, không phải 육월 (để dễ phát âm).",
+          ex: "유월에 장마가 시작돼요.",
+          exVi: "Tháng 6 bắt đầu mùa mưa.",
+        },
+        {
+          kr: "이따가",
+          en: "later (soon)",
+          vi: "lát nữa",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Lát nữa, một chút nữa — trong ngày hôm nay. Gần hơn so với 나중에.",
+          ex: "이따가 전화할게요.",
+          exVi: "Lát nữa tôi sẽ gọi điện.",
+        },
+        {
+          kr: "이번",
+          en: "this time",
+          vi: "lần này, kỳ này",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Lần này, kỳ này. 이번 주 = tuần này, 이번 달 = tháng này.",
+          ex: "이번 주말에 뭐 해요?",
+          exVi: "Cuối tuần này bạn làm gì?",
+        },
+        {
+          kr: "이월",
+          en: "February",
+          vi: "tháng Hai",
+          hv: "二月",
+          hvR: "nhị nguyệt",
+          pure: false,
+          explain:
+            "Tháng 2. Có Valentine (발렌타인데이) và thường là tháng nghỉ đông ngắn.",
+          ex: "이월에 졸업식이 있어요.",
+          exVi: "Tháng 2 có lễ tốt nghiệp.",
+        },
+        {
+          kr: "이제",
+          en: "now, from now",
+          vi: "bây giờ, lúc này",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Bây giờ, từ giờ trở đi — có hàm ý chuyển đổi hoặc thay đổi. Khác 지금 ở sắc thái.",
+          ex: "이제 갈게요.",
+          exVi: "Bây giờ tôi đi đây.",
+        },
+        {
+          kr: "이틀",
+          en: "two days",
+          vi: "hai ngày",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Hai ngày. Hệ đếm thuần Hàn: 하루(1), 이틀(2), 사흘(3), 나흘(4).",
+          ex: "이틀 동안 비가 왔어요.",
+          exVi: "Trời mưa trong hai ngày.",
+        },
+        {
+          kr: "일요일",
+          en: "Sunday",
+          vi: "Chủ nhật",
+          hv: "日曜日",
+          hvR: "nhật diệu nhật",
+          pure: false,
+          explain:
+            "Chủ nhật. 일(日, mặt trời) + 요일. Ngày nghỉ cuối tuần chính.",
+          ex: "일요일에 교회에 가요.",
+          exVi: "Chủ nhật tôi đi nhà thờ.",
+        },
+        {
+          kr: "일월",
+          en: "January",
+          vi: "tháng Một",
+          hv: "一月",
+          hvR: "nhất nguyệt",
+          pure: false,
+          explain:
+            "Tháng 1, tháng đầu năm dương lịch. Người Hàn đón năm mới cả dương lẫn âm lịch.",
+          ex: "일월 일일은 새해예요.",
+          exVi: "Ngày 1 tháng 1 là năm mới.",
+        },
+        {
+          kr: "일주일",
+          en: "one week",
+          vi: "một tuần lễ",
+          hv: "一週日",
+          hvR: "nhất chu nhật",
+          pure: false,
+          explain:
+            "Bảy ngày, một tuần đầy đủ. 일주일에 한 번 = mỗi tuần một lần.",
+          ex: "일주일 후에 만나요.",
+          exVi: "Một tuần nữa gặp lại nhé.",
+        },
+        {
+          kr: "작년",
+          en: "last year",
+          vi: "năm ngoái",
+          hv: "昨年",
+          hvR: "tạc niên",
+          pure: false,
+          explain:
+            "Năm ngoái, năm vừa qua. Đối lập với 내년 (năm sau) và 올해 (năm nay).",
+          ex: "작년에 한국에 갔어요.",
+          exVi: "Năm ngoái tôi đã đến Hàn Quốc.",
+        },
+        {
+          kr: "잠깐",
+          en: "for a while, briefly",
+          vi: "một lúc, một chốc",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Một khoảng thời gian ngắn. 잠깐만요 = Xin chờ một chút. Rất hay dùng.",
+          ex: "잠깐만 기다려요.",
+          exVi: "Chờ một chút nhé.",
+        },
+        {
+          kr: "잠시",
+          en: "for a moment",
+          vi: "một lát",
+          hv: "暫時",
+          hvR: "tạm thời",
+          pure: false,
+          explain:
+            "Khoảng thời gian ngắn, tương tự 잠깐 nhưng hơi trang trọng hơn.",
+          ex: "잠시 후에 시작해요.",
+          exVi: "Một lát nữa sẽ bắt đầu.",
+        },
+        {
+          kr: "저녁",
+          en: "evening, dinner",
+          vi: "buổi tối; bữa tối",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Buổi tối hoặc bữa ăn tối. 저녁을 먹다 = ăn tối.",
+          ex: "저녁 같이 먹어요.",
+          exVi: "Cùng ăn tối nhé.",
+        },
+        {
+          kr: "점심",
+          en: "lunch",
+          vi: "bữa trưa",
+          hv: "點心",
+          hvR: "điểm tâm",
+          pure: false,
+          explain:
+            "Bữa ăn trưa. 점심시간 = giờ ăn trưa. Thường ăn vào 12 giờ trưa.",
+          ex: "점심 먹었어요?",
+          exVi: "Bạn ăn trưa chưa?",
+        },
+        {
+          kr: "점심시간",
+          en: "lunchtime",
+          vi: "giờ ăn trưa",
+          hv: "點心時間",
+          hvR: "điểm tâm thời gian",
+          pure: false,
+          explain:
+            "Giờ nghỉ ăn trưa. Thường từ 12 giờ đến 1 giờ trong các công ty và trường học.",
+          ex: "점심시간이 얼마나 돼요?",
+          exVi: "Giờ ăn trưa bao lâu vậy?",
+        },
+        {
+          kr: "종일",
+          en: "all day",
+          vi: "suốt ngày, cả ngày",
+          hv: "終日",
+          hvR: "chung nhật",
+          pure: false,
+          explain: "Suốt cả ngày từ sáng đến tối. 하루 종일 = suốt cả ngày.",
+          ex: "하루 종일 공부했어요.",
+          exVi: "Tôi đã học suốt cả ngày.",
+        },
+        {
+          kr: "주",
+          en: "week",
+          vi: "tuần lễ",
+          hv: "週",
+          hvR: "chu",
+          pure: false,
+          explain:
+            "Đơn vị tuần. 이번 주 = tuần này, 다음 주 = tuần sau, 지난 주 = tuần trước.",
+          ex: "이번 주 바빠요.",
+          exVi: "Tuần này tôi bận.",
+        },
+        {
+          kr: "주말",
+          en: "weekend",
+          vi: "cuối tuần",
+          hv: "週末",
+          hvR: "chu mạt",
+          pure: false,
+          explain:
+            "Cuối tuần — thứ Bảy và Chủ nhật. 주말에 뭐 해요? = Cuối tuần bạn làm gì?",
+          ex: "주말에 뭐 해요?",
+          exVi: "Cuối tuần bạn làm gì?",
+        },
+        {
+          kr: "지금",
+          en: "now, right now",
+          vi: "bây giờ, ngay lúc này",
+          hv: "只今",
+          hvR: "chỉ kim",
+          pure: false,
+          explain:
+            "Ngay lúc này, thời điểm hiện tại. 지금 = now (cụ thể, ngay lúc này).",
+          ex: "지금 어디에 있어요?",
+          exVi: "Bây giờ bạn đang ở đâu?",
+        },
+        {
+          kr: "지난달",
+          en: "last month",
+          vi: "tháng trước",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Tháng trước, tháng vừa qua. 지난(vừa qua) + 달(tháng).",
+          ex: "지난달에 이사했어요.",
+          exVi: "Tháng trước tôi đã chuyển nhà.",
+        },
+        {
+          kr: "지난번",
+          en: "last time",
+          vi: "lần trước",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Lần trước, lần vừa rồi. 지난(vừa qua) + 번(lần).",
+          ex: "지난번에 뭐 얘기했어요?",
+          exVi: "Lần trước chúng ta đã nói chuyện gì vậy?",
+        },
+        {
+          kr: "지난주",
+          en: "last week",
+          vi: "tuần trước",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain: "Tuần vừa qua. 지난(vừa qua) + 주(tuần).",
+          ex: "지난주에 뭐 했어요?",
+          exVi: "Tuần trước bạn làm gì?",
+        },
+        {
+          kr: "처음",
+          en: "first, for the first time",
+          vi: "đầu tiên, lần đầu",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Lần đầu tiên, khởi đầu. 처음 만났어요 = Lần đầu gặp nhau. Đối lập với 마지막.",
+          ex: "처음 만나서 반갑습니다.",
+          exVi: "Rất vui được gặp bạn lần đầu.",
+        },
+        {
+          kr: "철",
+          en: "season, period",
+          vi: "mùa, thời kỳ",
+          hv: null,
+          hvR: "thuần Hàn (có thêm nghĩa 鐵=sắt)",
+          pure: true,
+          explain:
+            "Mùa hoặc thời kỳ nhất định trong năm. 제철 음식 = thức ăn theo mùa.",
+          ex: "지금은 딸기 철이에요.",
+          exVi: "Bây giờ là mùa dâu tây.",
+        },
+        {
+          kr: "추석",
+          en: "Chuseok (Korean Thanksgiving)",
+          vi: "Chuseok (Tết Trung Thu Hàn)",
+          hv: "秋夕",
+          hvR: "thu tịch",
+          pure: false,
+          explain:
+            "Tết Trung Thu Hàn Quốc, ngày 15/8 âm lịch. Mọi người về quê, ăn 송편, bái lạy tổ tiên.",
+          ex: "추석에 고향에 가요.",
+          exVi: "Tết Chuseok tôi về quê.",
+        },
+        {
+          kr: "칠월",
+          en: "July",
+          vi: "tháng Bảy",
+          hv: "七月",
+          hvR: "thất nguyệt",
+          pure: false,
+          explain:
+            "Tháng 7. Mùa hè đỉnh điểm, mùa mưa (장마) thường kéo dài đến đây.",
+          ex: "칠월에 휴가를 가요.",
+          exVi: "Tháng 7 tôi đi nghỉ phép.",
+        },
+        {
+          kr: "크리스마스",
+          en: "Christmas",
+          vi: "Giáng sinh",
+          hv: null,
+          hvR: "từ tiếng Anh 'Christmas'",
+          pure: true,
+          explain:
+            "Giáng sinh ngày 25/12. Ở Hàn, đây là ngày đôi lứa hẹn hò hơn là ngày gia đình.",
+          ex: "크리스마스에 뭐 해요?",
+          exVi: "Giáng sinh bạn làm gì?",
+        },
+        {
+          kr: "토요일",
+          en: "Saturday",
+          vi: "thứ Bảy",
+          hv: "土曜日",
+          hvR: "thổ diệu nhật",
+          pure: false,
+          explain: "Thứ Bảy. 토(土, đất) + 요일. Đầu cuối tuần, ngày nghỉ.",
+          ex: "토요일에 등산 가요.",
+          exVi: "Thứ Bảy tôi đi leo núi.",
+        },
+        {
+          kr: "팔월",
+          en: "August",
+          vi: "tháng Tám",
+          hv: "八月",
+          hvR: "bát nguyệt",
+          pure: false,
+          explain:
+            "Tháng 8. Ngày Giải phóng Quốc gia Hàn Quốc (광복절) là 15/8 dương lịch.",
+          ex: "팔월에 광복절이 있어요.",
+          exVi: "Tháng 8 có Ngày Giải phóng.",
+        },
+        {
+          kr: "평일",
+          en: "weekday",
+          vi: "ngày trong tuần (không phải nghỉ)",
+          hv: "平日",
+          hvR: "bình nhật",
+          pure: false,
+          explain:
+            "Ngày thường, thứ Hai đến thứ Sáu. Đối lập với 주말 (cuối tuần).",
+          ex: "평일에는 일해요.",
+          exVi: "Ngày thường tôi đi làm.",
+        },
+        {
+          kr: "하루",
+          en: "one day, all day",
+          vi: "một ngày",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Một ngày. 하루 종일 = suốt cả ngày. Đầu chuỗi đếm ngày thuần Hàn.",
+          ex: "하루가 너무 짧아요.",
+          exVi: "Một ngày sao mà ngắn quá.",
+        },
+        {
+          kr: "해",
+          en: "year, sun",
+          vi: "năm; mặt trời",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Hai nghĩa: (1) năm trong đời (새해 = năm mới), (2) mặt trời. Ngữ cảnh phân biệt.",
+          ex: "새해 복 많이 받으세요!",
+          exVi: "Chúc mừng năm mới!",
+        },
+        {
+          kr: "현재",
+          en: "present, current",
+          vi: "hiện tại",
+          hv: "現在",
+          hvR: "hiện tại",
+          pure: false,
+          explain:
+            "Thời điểm hiện tại. Trang trọng hơn 지금. Hay dùng trong văn viết, báo chí.",
+          ex: "현재 어디에 살아요?",
+          exVi: "Hiện tại bạn đang sống ở đâu?",
+        },
+        {
+          kr: "화요일",
+          en: "Tuesday",
+          vi: "thứ Ba",
+          hv: "火曜日",
+          hvR: "hỏa diệu nhật",
+          pure: false,
+          explain:
+            "Thứ Ba. 화(火, lửa) + 요일. Theo hệ Ngũ Hành trong tên các ngày Hàn.",
+          ex: "화요일에 수업이 있어요.",
+          exVi: "Thứ Ba có buổi học.",
+        },
+        {
+          kr: "후",
+          en: "after",
+          vi: "sau, sau khi",
+          hv: "後",
+          hvR: "hậu",
+          pure: false,
+          explain:
+            "Sau, sau khi. 3일 후 = sau 3 ngày. Thường đứng sau danh từ hoặc động từ.",
+          ex: "밥 먹은 후에 산책해요.",
+          exVi: "Sau khi ăn cơm tôi đi dạo.",
+        },
+        {
+          kr: "휴가",
+          en: "vacation, leave",
+          vi: "kỳ nghỉ, ngày nghỉ phép",
+          hv: "休暇",
+          hvR: "hưu hạ",
+          pure: false,
+          explain:
+            "Kỳ nghỉ phép của người đi làm. Khác 방학 (dành cho học sinh).",
+          ex: "휴가를 냈어요.",
+          exVi: "Tôi đã xin nghỉ phép.",
+        },
+        {
+          kr: "휴일",
+          en: "holiday, day off",
+          vi: "ngày nghỉ, ngày lễ",
+          hv: "休日",
+          hvR: "hưu nhật",
+          pure: false,
+          explain:
+            "Ngày nghỉ nói chung. 공휴일(lễ quốc gia), 주말(cuối tuần) đều là 휴일.",
+          ex: "내일은 휴일이에요.",
+          exVi: "Ngày mai là ngày nghỉ.",
+        },
+      ];
 
-<script>
-const vocab = [
-  { kr:"가을", en:"autumn, fall", vi:"mùa thu", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Mùa thu — một trong bốn mùa, thời tiết mát mẻ, lá vàng rụng. Người Hàn rất yêu mùa thu.",
-    ex:"가을이 제일 좋아요.", exVi:"Tôi thích mùa thu nhất." },
-  { kr:"간", en:"while, during", vi:"trong khi, trong lúc", hv:"間", hvR:"gian", pure:false,
-    explain:"Khoảng thời gian nhất định. Thường đứng sau danh từ thời gian: 그동안, 오랫동안.",
-    ex:"밥 먹는 간에 뭐 해요?", exVi:"Trong lúc ăn cơm bạn làm gì?" },
-  { kr:"겨울", en:"winter", vi:"mùa đông", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Mùa đông — thời tiết lạnh giá, có tuyết rơi ở nhiều vùng Hàn Quốc.",
-    ex:"겨울에 눈이 와요.", exVi:"Mùa đông có tuyết rơi." },
-  { kr:"겨울방학", en:"winter vacation", vi:"kỳ nghỉ đông", hv:"方學", hvR:"phương học (방학)", pure:false,
-    explain:"Kỳ nghỉ học mùa đông, thường vào tháng 12–2. 방학 = kỳ nghỉ học.",
-    ex:"겨울방학에 여행 가고 싶어요.", exVi:"Tôi muốn đi du lịch vào kỳ nghỉ đông." },
-  { kr:"계절", en:"season", vi:"mùa", hv:"季節", hvR:"quý tiết", pure:false,
-    explain:"Mùa trong năm. Hàn Quốc có đủ 4 mùa rõ rệt: xuân, hạ, thu, đông.",
-    ex:"한국은 사계절이 있어요.", exVi:"Hàn Quốc có bốn mùa." },
-  { kr:"공휴일", en:"public holiday", vi:"ngày lễ quốc gia", hv:"公休日", hvR:"công hưu nhật", pure:false,
-    explain:"Ngày nghỉ lễ chính thức do nhà nước quy định. Khác với 명절 (lễ truyền thống).",
-    ex:"내일은 공휴일이에요.", exVi:"Ngày mai là ngày lễ quốc gia." },
-  { kr:"과거", en:"past", vi:"quá khứ", hv:"過去", hvR:"quá khứ", pure:false,
-    explain:"Thời gian đã qua. Đối lập với 현재 (hiện tại) và 미래 (tương lai).",
-    ex:"과거는 바꿀 수 없어요.", exVi:"Quá khứ không thể thay đổi được." },
-  { kr:"구월", en:"September", vi:"tháng Chín", hv:"九月", hvR:"cửu nguyệt", pure:false,
-    explain:"Tháng 9. Tên tháng trong tiếng Hàn đều là số + 월: 일월(1)...십이월(12).",
-    ex:"구월에 추석이 있어요.", exVi:"Tháng 9 có Tết Chuseok." },
-  { kr:"그날", en:"that day", vi:"ngày đó, hôm đó", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngày cụ thể đã được đề cập trước đó trong câu chuyện.",
-    ex:"그날 날씨가 정말 좋았어요.", exVi:"Hôm đó thời tiết thật đẹp." },
-  { kr:"그동안", en:"meantime, meanwhile", vi:"trong thời gian đó", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Suốt khoảng thời gian vừa rồi hoặc trong thời gian đó. Dùng khi hỏi thăm sau thời gian xa cách.",
-    ex:"그동안 잘 지냈어요?", exVi:"Dạo này bạn có khỏe không?" },
-  { kr:"그때", en:"then, at that time", vi:"lúc đó, khi đó", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Thời điểm cụ thể đã được đề cập. Dùng khi kể chuyện về quá khứ.",
-    ex:"그때는 학생이었어요.", exVi:"Hồi đó tôi là học sinh." },
-  { kr:"그저께", en:"day before yesterday", vi:"hôm kia", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngày hôm kia — hai ngày trước hôm nay. Ít dùng hơn 어제 và 오늘.",
-    ex:"그저께 영화를 봤어요.", exVi:"Hôm kia tôi đã xem phim." },
-  { kr:"금방", en:"soon, a little while ago", vi:"vừa mới, ngay bây giờ", hv:"今方", hvR:"kim phương", pure:false,
-    explain:"Vừa mới xong hoặc sẽ xong ngay. Tùy ngữ cảnh có thể là 'vừa rồi' hoặc 'sắp ngay'.",
-    ex:"금방 올게요.", exVi:"Tôi sẽ về ngay thôi." },
-  { kr:"금요일", en:"Friday", vi:"thứ Sáu", hv:"金曜日", hvR:"kim diệu nhật", pure:false,
-    explain:"Thứ Sáu. 금(金, kim loại vàng) + 요일. Thứ trong tuần Hàn lấy theo Ngũ Hành + Mặt Trời/Mặt Trăng.",
-    ex:"금요일에 만나요.", exVi:"Thứ Sáu gặp nhau nhé." },
-  { kr:"기간", en:"term, period", vi:"thời gian, kỳ hạn", hv:"期間", hvR:"kỳ gian", pure:false,
-    explain:"Khoảng thời gian có điểm đầu và điểm cuối xác định.",
-    ex:"기간이 얼마나 돼요?", exVi:"Thời gian là bao lâu?" },
-  { kr:"끝", en:"end", vi:"sự kết thúc, cuối", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Điểm kết thúc, phần cuối. Đối lập với 시작 (bắt đầu). Cũng dùng làm động từ: 끝나다.",
-    ex:"영화가 끝났어요.", exVi:"Phim đã kết thúc rồi." },
-  { kr:"나중", en:"later, after", vi:"sau này, lần sau", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Sau này, về sau. 나중에 = sau nhé, hẹn gặp sau.",
-    ex:"나중에 연락할게요.", exVi:"Để sau tôi sẽ liên lạc nhé." },
-  { kr:"나흘", en:"four days", vi:"bốn ngày", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Bốn ngày. Cách đếm ngày thuần Hàn: 하루(1), 이틀(2), 사흘(3), 나흘(4).",
-    ex:"나흘 후에 돌아와요.", exVi:"Bốn ngày nữa sẽ trở về." },
-  { kr:"날", en:"day", vi:"ngày", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Một ngày, ngày cụ thể. Dùng trong hợp từ: 그날, 생일날, 오늘날,...",
-    ex:"오늘은 좋은 날이에요.", exVi:"Hôm nay là một ngày đẹp." },
-  { kr:"날짜", en:"date", vi:"ngày (ngày tháng)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngày tháng cụ thể trong lịch. Dùng khi hỏi hôm nay là ngày mấy.",
-    ex:"오늘 날짜가 뭐예요?", exVi:"Hôm nay là ngày mấy?" },
-  { kr:"낮", en:"daytime, noon", vi:"ban ngày, buổi trưa", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Khoảng thời gian ban ngày, đặc biệt là buổi trưa. Đối lập với 밤 (đêm).",
-    ex:"낮에 공원에 갔어요.", exVi:"Ban ngày tôi đã đến công viên." },
-  { kr:"내년", en:"next year", vi:"năm sau, năm tới", hv:"來年", hvR:"lai niên", pure:false,
-    explain:"Năm tiếp theo sau năm nay. 내(來, tới) + 년(年, năm).",
-    ex:"내년에 한국에 갈 거예요.", exVi:"Năm sau tôi sẽ đến Hàn Quốc." },
-  { kr:"내일", en:"tomorrow", vi:"ngày mai", hv:"來日", hvR:"lai nhật", pure:false,
-    explain:"Ngày tiếp theo sau hôm nay. Cặp đôi với 어제 (hôm qua) và 오늘 (hôm nay).",
-    ex:"내일 뭐 해요?", exVi:"Ngày mai bạn làm gì?" },
-  { kr:"년", en:"year", vi:"năm (đơn vị thời gian)", hv:"年", hvR:"niên", pure:false,
-    explain:"Đơn vị năm. Dùng khi đếm hoặc chỉ năm: 2024년, 3년 (3 năm).",
-    ex:"3년 동안 공부했어요.", exVi:"Tôi đã học trong 3 năm." },
-  { kr:"늦잠", en:"sleeping in late", vi:"ngủ nướng", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngủ quá giờ, dậy muộn hơn bình thường. 늦(muộn) + 잠(ngủ).",
-    ex:"오늘 늦잠을 잤어요.", exVi:"Hôm nay tôi đã ngủ nướng." },
-  { kr:"다음", en:"next, after", vi:"tiếp theo, sau đó", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tiếp theo, cái/lần kế tiếp. Kết hợp: 다음달, 다음주, 다음해.",
-    ex:"다음 주에 시험이 있어요.", exVi:"Tuần sau có bài thi." },
-  { kr:"다음달", en:"next month", vi:"tháng sau", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tháng tiếp theo sau tháng này. 다음(tiếp) + 달(tháng).",
-    ex:"다음달에 이사해요.", exVi:"Tháng sau tôi chuyển nhà." },
-  { kr:"다음주", en:"next week", vi:"tuần sau", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tuần tiếp theo. 다음(tiếp) + 주(tuần).",
-    ex:"다음주에 만나요.", exVi:"Tuần sau gặp nhau nhé." },
-  { kr:"다음해", en:"next year, following year", vi:"năm sau (tiếp theo)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Năm tiếp theo. Giống nghĩa 내년 nhưng mang sắc thái kể chuyện hơn.",
-    ex:"다음해에 졸업해요.", exVi:"Năm sau tôi tốt nghiệp." },
-  { kr:"달", en:"month, moon", vi:"tháng; mặt trăng", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Có hai nghĩa: tháng trong năm và mặt trăng. Ngữ cảnh quyết định nghĩa.",
-    ex:"이번 달에 생일이 있어요.", exVi:"Tháng này có sinh nhật." },
-  { kr:"달력", en:"calendar", vi:"lịch (tháng)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tờ lịch treo tường hoặc lịch để bàn. 달(tháng) + 력(lịch).",
-    ex:"달력을 봐요.", exVi:"Tôi xem lịch." },
-  { kr:"동안", en:"during, between", vi:"trong suốt, trong khi", hv:"同安", hvR:"đồng an (dùng như thuần Hàn)", pure:true,
-    explain:"Khoảng thời gian liên tục. 3년 동안 = trong suốt 3 năm.",
-    ex:"방학 동안 여행했어요.", exVi:"Tôi đã đi du lịch trong kỳ nghỉ." },
-  { kr:"때", en:"time, moment", vi:"lúc, khi, thời điểm", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Thời điểm, thời gian cụ thể. 어릴 때 = hồi còn nhỏ. Rất phổ biến trong văn nói.",
-    ex:"어릴 때 뭐 좋아했어요?", exVi:"Hồi nhỏ bạn thích gì?" },
-  { kr:"마지막", en:"last, final", vi:"cuối cùng, lần cuối", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Điều/lần cuối cùng trong một chuỗi. Đối lập với 처음 (đầu tiên).",
-    ex:"마지막으로 한 번 더 해요.", exVi:"Lần cuối cùng thử thêm một lần nữa nhé." },
-  { kr:"매일", en:"everyday", vi:"mỗi ngày, hàng ngày", hv:"每日", hvR:"mỗi nhật", pure:false,
-    explain:"Hàng ngày, ngày nào cũng vậy. 매(每, mỗi) + 일(日, ngày).",
-    ex:"매일 운동해요.", exVi:"Tôi tập thể dục mỗi ngày." },
-  { kr:"매주", en:"every week", vi:"mỗi tuần, hàng tuần", hv:"每週", hvR:"mỗi chu", pure:false,
-    explain:"Hàng tuần, tuần nào cũng vậy. 매(每) + 주(週, tuần).",
-    ex:"매주 월요일에 회의해요.", exVi:"Mỗi tuần họp vào thứ Hai." },
-  { kr:"며칠", en:"a few days / what date", vi:"mấy ngày; ngày mấy", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Hai nghĩa: (1) mấy ngày, (2) ngày mấy (khi hỏi). Phân biệt qua ngữ cảnh.",
-    ex:"오늘이 며칠이에요?", exVi:"Hôm nay là ngày mấy?" },
-  { kr:"명절", en:"traditional holidays", vi:"ngày lễ truyền thống, Tết", hv:"名節", hvR:"danh tiết", pure:false,
-    explain:"Ngày lễ truyền thống lớn như 설날 (Tết Nguyên Đán) và 추석 (Tết Trung Thu Hàn).",
-    ex:"명절에 고향에 가요.", exVi:"Ngày Tết tôi về quê." },
-  { kr:"모레", en:"day after tomorrow", vi:"ngày kia (ngày mốt)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngày mốt — hai ngày sau hôm nay. Chuỗi: 어제 - 오늘 - 내일 - 모레.",
-    ex:"모레 시험이에요.", exVi:"Ngày mốt thi rồi." },
-  { kr:"목요일", en:"Thursday", vi:"thứ Năm", hv:"木曜日", hvR:"mộc diệu nhật", pure:false,
-    explain:"Thứ Năm. 목(木, gỗ/cây) + 요일. Theo hệ Ngũ Hành: 월화수목금토일.",
-    ex:"목요일에 한국어 수업이 있어요.", exVi:"Thứ Năm có lớp tiếng Hàn." },
-  { kr:"미래", en:"future", vi:"tương lai", hv:"未來", hvR:"vị lai", pure:false,
-    explain:"Thời gian phía trước, chưa xảy ra. Đối lập với 과거(quá khứ) và 현재(hiện tại).",
-    ex:"미래가 기대돼요.", exVi:"Tôi mong chờ tương lai." },
-  { kr:"반년", en:"half a year", vi:"nửa năm", hv:"半年", hvR:"bán niên", pure:false,
-    explain:"Sáu tháng, nửa năm. 반(半, nửa) + 년(年, năm).",
-    ex:"반년 후에 봐요.", exVi:"Nửa năm nữa gặp lại nhé." },
-  { kr:"반달", en:"half-moon", vi:"trăng lưỡi liềm", hv:"半", hvR:"bán (nửa) + thuần Hàn 달", pure:true,
-    explain:"Trăng hình bán nguyệt — trăng lưỡi liềm. 반(nửa) + 달(mặt trăng).",
-    ex:"반달이 예뻐요.", exVi:"Trăng lưỡi liềm đẹp quá." },
-  { kr:"밤", en:"night", vi:"đêm, ban đêm", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ban đêm, sau khi mặt trời lặn. Đối lập với 낮 (ban ngày).",
-    ex:"밤에 별이 많아요.", exVi:"Ban đêm có nhiều sao." },
-  { kr:"방학", en:"vacation (school)", vi:"kỳ nghỉ học", hv:"放學", hvR:"phóng học", pure:false,
-    explain:"Kỳ nghỉ dành cho học sinh, sinh viên. Có 여름방학 (hè) và 겨울방학 (đông).",
-    ex:"방학이 언제예요?", exVi:"Kỳ nghỉ khi nào vậy?" },
-  { kr:"봄", en:"spring", vi:"mùa xuân", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Mùa xuân — hoa anh đào (벚꽃) nở rộ là biểu tượng mùa xuân Hàn Quốc.",
-    ex:"봄에 꽃이 펴요.", exVi:"Mùa xuân hoa nở." },
-  { kr:"사계절", en:"four seasons", vi:"bốn mùa trong năm", hv:"四季節", hvR:"tứ quý tiết", pure:false,
-    explain:"Bốn mùa: 봄(xuân), 여름(hạ), 가을(thu), 겨울(đông). Hàn Quốc nổi tiếng có đủ bốn mùa.",
-    ex:"한국은 사계절이 뚜렷해요.", exVi:"Hàn Quốc có bốn mùa rõ rệt." },
-  { kr:"사월", en:"April", vi:"tháng Tư", hv:"四月", hvR:"tứ nguyệt", pure:false,
-    explain:"Tháng 4. Mùa xuân đẹp nhất ở Hàn, hoa anh đào nở rộ.",
-    ex:"사월에 벚꽃이 피어요.", exVi:"Tháng 4 hoa anh đào nở." },
-  { kr:"사이", en:"between, while", vi:"khoảng giữa; trong lúc", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Khoảng giữa hai điểm (không gian hoặc thời gian). Cũng dùng để chỉ mối quan hệ.",
-    ex:"우리 사이가 좋아요.", exVi:"Mối quan hệ của chúng ta rất tốt." },
-  { kr:"사흘", en:"3 days", vi:"ba ngày", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ba ngày. Một phần hệ đếm ngày thuần Hàn: 하루, 이틀, 사흘, 나흘.",
-    ex:"사흘 동안 여행했어요.", exVi:"Tôi đã du lịch trong ba ngày." },
-  { kr:"삼월", en:"March", vi:"tháng Ba", hv:"三月", hvR:"tam nguyệt", pure:false,
-    explain:"Tháng 3. Bắt đầu năm học mới ở Hàn Quốc (không phải tháng 9 như Việt Nam).",
-    ex:"삼월에 학교가 시작해요.", exVi:"Tháng 3 bắt đầu năm học." },
-  { kr:"새벽", en:"dawn, early morning", vi:"rạng sáng, lúc bình minh", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Khoảng 1–5 giờ sáng, trước khi mặt trời mọc. Sớm hơn cả 아침.",
-    ex:"새벽에 일어났어요.", exVi:"Tôi thức dậy lúc rạng sáng." },
-  { kr:"생신", en:"birthday (honorific)", vi:"sinh nhật (kính ngữ)", hv:"生辰", hvR:"sinh thần", pure:false,
-    explain:"Cách nói sinh nhật kính trọng, dùng với người lớn tuổi hơn. Thông thường dùng 생일.",
-    ex:"할머니 생신이에요.", exVi:"Hôm nay là sinh nhật bà." },
-  { kr:"생일", en:"birthday", vi:"sinh nhật", hv:"生日", hvR:"sinh nhật", pure:false,
-    explain:"Ngày sinh nhật. 생일 축하해요 = Chúc mừng sinh nhật. Rất phổ biến trong giao tiếp.",
-    ex:"생일 축하해요!", exVi:"Chúc mừng sinh nhật!" },
-  { kr:"설날", en:"Lunar New Year", vi:"Tết Nguyên Đán Hàn Quốc", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tết Nguyên Đán theo lịch âm của Hàn Quốc. Mọi người mặc 한복, ăn 떡국, bái lạy tổ tiên.",
-    ex:"설날에 가족이 모여요.", exVi:"Ngày Tết cả gia đình tụ họp." },
-  { kr:"수요일", en:"Wednesday", vi:"thứ Tư", hv:"水曜日", hvR:"thủy diệu nhật", pure:false,
-    explain:"Thứ Tư. 수(水, nước) + 요일. Đứng giữa tuần.",
-    ex:"수요일에 약속이 있어요.", exVi:"Thứ Tư tôi có hẹn." },
-  { kr:"시", en:"hour, o'clock", vi:"giờ; thành phố", hv:"時", hvR:"thời", pure:false,
-    explain:"Đơn vị giờ trong ngày. 세 시 = 3 giờ. Cũng có nghĩa là thành phố (市) tùy ngữ cảnh.",
-    ex:"지금 몇 시예요?", exVi:"Bây giờ là mấy giờ?" },
-  { kr:"시간", en:"time, hour", vi:"thời gian, giờ", hv:"時間", hvR:"thời gian", pure:false,
-    explain:"Thời gian nói chung hoặc đơn vị giờ. 시간이 없어요 = Tôi không có thời gian.",
-    ex:"시간이 있어요?", exVi:"Bạn có thời gian không?" },
-  { kr:"시간표", en:"schedule, timetable", vi:"thời khóa biểu, lịch học", hv:"時間表", hvR:"thời gian biểu", pure:false,
-    explain:"Bảng thời khóa biểu, lịch học hoặc lịch tàu xe. 시간(thời gian) + 표(bảng).",
-    ex:"시간표를 확인했어요?", exVi:"Bạn đã kiểm tra thời khóa biểu chưa?" },
-  { kr:"시계", en:"clock, watch", vi:"đồng hồ (đeo tay/treo tường)", hv:"時計", hvR:"thời kế", pure:false,
-    explain:"Đồng hồ nói chung. 손목시계 = đồng hồ đeo tay, 벽시계 = đồng hồ treo tường.",
-    ex:"시계가 없어서 시간을 몰라요.", exVi:"Tôi không có đồng hồ nên không biết giờ." },
-  { kr:"시월", en:"October", vi:"tháng Mười", hv:"十月", hvR:"thập nguyệt", pure:false,
-    explain:"Tháng 10. Lưu ý: phát âm là 시월 (không phải 십월).",
-    ex:"시월에 단풍이 예뻐요.", exVi:"Tháng 10 lá đỏ rất đẹp." },
-  { kr:"시작", en:"start, beginning", vi:"sự bắt đầu", hv:"始作", hvR:"thủy tác", pure:false,
-    explain:"Sự bắt đầu, khởi đầu. 시작하다 = bắt đầu. Đối lập với 끝 (kết thúc).",
-    ex:"시작이 반이에요.", exVi:"Bắt đầu là đã được một nửa rồi." },
-  { kr:"십이월", en:"December", vi:"tháng Mười Hai", hv:"十二月", hvR:"thập nhị nguyệt", pure:false,
-    explain:"Tháng 12, tháng cuối năm. Giáng sinh (크리스마스) và năm mới đón tại đây.",
-    ex:"십이월에 크리스마스가 있어요.", exVi:"Tháng 12 có Giáng sinh." },
-  { kr:"십일월", en:"November", vi:"tháng Mười Một", hv:"十一月", hvR:"thập nhất nguyệt", pure:false,
-    explain:"Tháng 11. Thời tiết bắt đầu lạnh, chuẩn bị cho mùa đông.",
-    ex:"십일월에 날씨가 추워져요.", exVi:"Tháng 11 thời tiết bắt đầu lạnh." },
-  { kr:"아까", en:"earlier, a while ago", vi:"lúc nãy, lúc vừa rồi", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Một lúc trước đó, không lâu. Chỉ quá khứ gần, trong vòng vài phút đến vài giờ.",
-    ex:"아까 뭐 먹었어요?", exVi:"Lúc nãy bạn ăn gì vậy?" },
-  { kr:"아침", en:"morning, breakfast", vi:"buổi sáng; bữa sáng", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Buổi sáng hoặc bữa ăn sáng. 아침을 먹다 = ăn sáng.",
-    ex:"아침을 먹었어요?", exVi:"Bạn đã ăn sáng chưa?" },
-  { kr:"어저께", en:"yesterday", vi:"hôm qua", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Hôm qua — dạng cũ/chính thức hơn của 어제. Trong văn nói thường dùng 어제 hơn.",
-    ex:"어저께 비가 왔어요.", exVi:"Hôm qua trời mưa." },
-  { kr:"어제", en:"yesterday", vi:"hôm qua", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Hôm qua — ngày trước hôm nay. Dùng phổ biến nhất trong giao tiếp.",
-    ex:"어제 뭐 했어요?", exVi:"Hôm qua bạn làm gì?" },
-  { kr:"어젯밤", en:"last night", vi:"tối qua, đêm qua", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Đêm qua. 어제(hôm qua) + 밤(đêm). Dấu ㅅ xen vào giữa là âm liên kết.",
-    ex:"어젯밤에 잘 잤어요?", exVi:"Tối qua bạn ngủ ngon không?" },
-  { kr:"여름", en:"summer", vi:"mùa hè", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Mùa hè — nóng và mưa nhiều (장마, mùa mưa). Hay đi biển và núi.",
-    ex:"여름에 바다에 가요.", exVi:"Mùa hè tôi đi biển." },
-  { kr:"연휴", en:"consecutive holidays", vi:"kỳ nghỉ liên tiếp", hv:"連休", hvR:"liên hưu", pure:false,
-    explain:"Nhiều ngày nghỉ liên tiếp, thường dịp lễ lớn. Mọi người hay đi du lịch.",
-    ex:"연휴에 어디 가요?", exVi:"Kỳ nghỉ dài bạn đi đâu?" },
-  { kr:"옛날", en:"a long time ago, olden days", vi:"ngày xưa, thuở trước", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Thời xa xưa, ngày xưa. 옛날이야기 = chuyện ngày xưa, cổ tích.",
-    ex:"옛날에 왕이 있었어요.", exVi:"Ngày xưa có một vị vua." },
-  { kr:"오늘", en:"today", vi:"hôm nay", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngày hôm nay. Từ cơ bản nhất về thời gian trong tiếng Hàn.",
-    ex:"오늘 날씨가 좋아요.", exVi:"Hôm nay thời tiết đẹp." },
-  { kr:"오래간만", en:"after a long time", vi:"lâu rồi mới gặp", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Sau một thời gian dài. Dạng đầy đủ của 오랜만. Dùng khi gặp lại người quen lâu.",
-    ex:"오래간만이에요!", exVi:"Lâu rồi mới gặp nhau nhỉ!" },
-  { kr:"오랜만", en:"after a long time", vi:"lâu rồi (thân mật)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Dạng rút gọn thân mật của 오래간만. Dùng phổ biến hơn trong giao tiếp hàng ngày.",
-    ex:"오랜만이에요, 잘 지냈어요?", exVi:"Lâu rồi mới gặp, bạn khỏe không?" },
-  { kr:"오랜만에", en:"after a long time", vi:"sau thời gian dài", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Dạng có trợ từ 에, dùng khi muốn diễn đạt 'sau một thời gian dài thì...'.",
-    ex:"오랜만에 친구를 만났어요.", exVi:"Sau một thời gian dài tôi đã gặp bạn." },
-  { kr:"오랫동안", en:"for a long time", vi:"trong suốt thời gian dài", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Trong một khoảng thời gian rất dài. Nhấn mạnh tính liên tục, kéo dài.",
-    ex:"오랫동안 기다렸어요.", exVi:"Tôi đã chờ trong suốt thời gian dài." },
-  { kr:"오월", en:"May", vi:"tháng Năm", hv:"五月", hvR:"ngũ nguyệt", pure:false,
-    explain:"Tháng 5. Có Ngày Thiếu nhi (어린이날 5/5) và Ngày của mẹ (어버이날 5/8).",
-    ex:"오월에 어린이날이 있어요.", exVi:"Tháng 5 có Ngày Thiếu nhi." },
-  { kr:"오전", en:"morning, a.m.", vi:"buổi sáng (trước trưa)", hv:"午前", hvR:"ngọ tiền", pure:false,
-    explain:"Buổi sáng, trước 12 giờ trưa. 오전 10시 = 10 giờ sáng.",
-    ex:"오전에 회의가 있어요.", exVi:"Buổi sáng có cuộc họp." },
-  { kr:"오후", en:"afternoon, p.m.", vi:"buổi chiều (sau trưa)", hv:"午後", hvR:"ngọ hậu", pure:false,
-    explain:"Buổi chiều, sau 12 giờ trưa. 오후 3시 = 3 giờ chiều.",
-    ex:"오후에 커피 마셔요.", exVi:"Buổi chiều tôi uống cà phê." },
-  { kr:"올해", en:"this year", vi:"năm nay", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Năm hiện tại. 올(이+을, năm này) + 해(mặt trời/năm). Đối lập với 작년 và 내년.",
-    ex:"올해 목표가 뭐예요?", exVi:"Mục tiêu năm nay của bạn là gì?" },
-  { kr:"요일", en:"day of the week", vi:"ngày trong tuần", hv:"曜日", hvR:"diệu nhật", pure:false,
-    explain:"Ngày trong tuần. 무슨 요일이에요? = Hôm nay là thứ mấy?",
-    ex:"오늘 무슨 요일이에요?", exVi:"Hôm nay là thứ mấy?" },
-  { kr:"요즘", en:"nowadays, these days", vi:"dạo này, gần đây", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Khoảng thời gian gần đây, dạo này. Dùng khi hỏi thăm tình hình gần đây.",
-    ex:"요즘 어때요?", exVi:"Dạo này bạn thế nào?" },
-  { kr:"월", en:"month", vi:"tháng (đơn vị)", hv:"月", hvR:"nguyệt", pure:false,
-    explain:"Đơn vị tháng. 몇 월 = tháng mấy. Kết hợp với số: 일월, 이월,..., 십이월.",
-    ex:"몇 월이에요?", exVi:"Bây giờ là tháng mấy?" },
-  { kr:"월요일", en:"Monday", vi:"thứ Hai", hv:"月曜日", hvR:"nguyệt diệu nhật", pure:false,
-    explain:"Thứ Hai. 월(月, mặt trăng) + 요일. Đầu tuần làm việc ở Hàn Quốc.",
-    ex:"월요일이 싫어요.", exVi:"Tôi ghét thứ Hai." },
-  { kr:"유월", en:"June", vi:"tháng Sáu", hv:"六月", hvR:"lục nguyệt", pure:false,
-    explain:"Tháng 6. Lưu ý: đọc là 유월, không phải 육월 (để dễ phát âm).",
-    ex:"유월에 장마가 시작돼요.", exVi:"Tháng 6 bắt đầu mùa mưa." },
-  { kr:"이따가", en:"later (soon)", vi:"lát nữa", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Lát nữa, một chút nữa — trong ngày hôm nay. Gần hơn so với 나중에.",
-    ex:"이따가 전화할게요.", exVi:"Lát nữa tôi sẽ gọi điện." },
-  { kr:"이번", en:"this time", vi:"lần này, kỳ này", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Lần này, kỳ này. 이번 주 = tuần này, 이번 달 = tháng này.",
-    ex:"이번 주말에 뭐 해요?", exVi:"Cuối tuần này bạn làm gì?" },
-  { kr:"이월", en:"February", vi:"tháng Hai", hv:"二月", hvR:"nhị nguyệt", pure:false,
-    explain:"Tháng 2. Có Valentine (발렌타인데이) và thường là tháng nghỉ đông ngắn.",
-    ex:"이월에 졸업식이 있어요.", exVi:"Tháng 2 có lễ tốt nghiệp." },
-  { kr:"이제", en:"now, from now", vi:"bây giờ, lúc này", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Bây giờ, từ giờ trở đi — có hàm ý chuyển đổi hoặc thay đổi. Khác 지금 ở sắc thái.",
-    ex:"이제 갈게요.", exVi:"Bây giờ tôi đi đây." },
-  { kr:"이틀", en:"two days", vi:"hai ngày", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Hai ngày. Hệ đếm thuần Hàn: 하루(1), 이틀(2), 사흘(3), 나흘(4).",
-    ex:"이틀 동안 비가 왔어요.", exVi:"Trời mưa trong hai ngày." },
-  { kr:"일요일", en:"Sunday", vi:"Chủ nhật", hv:"日曜日", hvR:"nhật diệu nhật", pure:false,
-    explain:"Chủ nhật. 일(日, mặt trời) + 요일. Ngày nghỉ cuối tuần chính.",
-    ex:"일요일에 교회에 가요.", exVi:"Chủ nhật tôi đi nhà thờ." },
-  { kr:"일월", en:"January", vi:"tháng Một", hv:"一月", hvR:"nhất nguyệt", pure:false,
-    explain:"Tháng 1, tháng đầu năm dương lịch. Người Hàn đón năm mới cả dương lẫn âm lịch.",
-    ex:"일월 일일은 새해예요.", exVi:"Ngày 1 tháng 1 là năm mới." },
-  { kr:"일주일", en:"one week", vi:"một tuần lễ", hv:"一週日", hvR:"nhất chu nhật", pure:false,
-    explain:"Bảy ngày, một tuần đầy đủ. 일주일에 한 번 = mỗi tuần một lần.",
-    ex:"일주일 후에 만나요.", exVi:"Một tuần nữa gặp lại nhé." },
-  { kr:"작년", en:"last year", vi:"năm ngoái", hv:"昨年", hvR:"tạc niên", pure:false,
-    explain:"Năm ngoái, năm vừa qua. Đối lập với 내년 (năm sau) và 올해 (năm nay).",
-    ex:"작년에 한국에 갔어요.", exVi:"Năm ngoái tôi đã đến Hàn Quốc." },
-  { kr:"잠깐", en:"for a while, briefly", vi:"một lúc, một chốc", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Một khoảng thời gian ngắn. 잠깐만요 = Xin chờ một chút. Rất hay dùng.",
-    ex:"잠깐만 기다려요.", exVi:"Chờ một chút nhé." },
-  { kr:"잠시", en:"for a moment", vi:"một lát", hv:"暫時", hvR:"tạm thời", pure:false,
-    explain:"Khoảng thời gian ngắn, tương tự 잠깐 nhưng hơi trang trọng hơn.",
-    ex:"잠시 후에 시작해요.", exVi:"Một lát nữa sẽ bắt đầu." },
-  { kr:"저녁", en:"evening, dinner", vi:"buổi tối; bữa tối", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Buổi tối hoặc bữa ăn tối. 저녁을 먹다 = ăn tối.",
-    ex:"저녁 같이 먹어요.", exVi:"Cùng ăn tối nhé." },
-  { kr:"점심", en:"lunch", vi:"bữa trưa", hv:"點心", hvR:"điểm tâm", pure:false,
-    explain:"Bữa ăn trưa. 점심시간 = giờ ăn trưa. Thường ăn vào 12 giờ trưa.",
-    ex:"점심 먹었어요?", exVi:"Bạn ăn trưa chưa?" },
-  { kr:"점심시간", en:"lunchtime", vi:"giờ ăn trưa", hv:"點心時間", hvR:"điểm tâm thời gian", pure:false,
-    explain:"Giờ nghỉ ăn trưa. Thường từ 12 giờ đến 1 giờ trong các công ty và trường học.",
-    ex:"점심시간이 얼마나 돼요?", exVi:"Giờ ăn trưa bao lâu vậy?" },
-  { kr:"종일", en:"all day", vi:"suốt ngày, cả ngày", hv:"終日", hvR:"chung nhật", pure:false,
-    explain:"Suốt cả ngày từ sáng đến tối. 하루 종일 = suốt cả ngày.",
-    ex:"하루 종일 공부했어요.", exVi:"Tôi đã học suốt cả ngày." },
-  { kr:"주", en:"week", vi:"tuần lễ", hv:"週", hvR:"chu", pure:false,
-    explain:"Đơn vị tuần. 이번 주 = tuần này, 다음 주 = tuần sau, 지난 주 = tuần trước.",
-    ex:"이번 주 바빠요.", exVi:"Tuần này tôi bận." },
-  { kr:"주말", en:"weekend", vi:"cuối tuần", hv:"週末", hvR:"chu mạt", pure:false,
-    explain:"Cuối tuần — thứ Bảy và Chủ nhật. 주말에 뭐 해요? = Cuối tuần bạn làm gì?",
-    ex:"주말에 뭐 해요?", exVi:"Cuối tuần bạn làm gì?" },
-  { kr:"지금", en:"now, right now", vi:"bây giờ, ngay lúc này", hv:"只今", hvR:"chỉ kim", pure:false,
-    explain:"Ngay lúc này, thời điểm hiện tại. 지금 = now (cụ thể, ngay lúc này).",
-    ex:"지금 어디에 있어요?", exVi:"Bây giờ bạn đang ở đâu?" },
-  { kr:"지난달", en:"last month", vi:"tháng trước", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tháng trước, tháng vừa qua. 지난(vừa qua) + 달(tháng).",
-    ex:"지난달에 이사했어요.", exVi:"Tháng trước tôi đã chuyển nhà." },
-  { kr:"지난번", en:"last time", vi:"lần trước", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Lần trước, lần vừa rồi. 지난(vừa qua) + 번(lần).",
-    ex:"지난번에 뭐 얘기했어요?", exVi:"Lần trước chúng ta đã nói chuyện gì vậy?" },
-  { kr:"지난주", en:"last week", vi:"tuần trước", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tuần vừa qua. 지난(vừa qua) + 주(tuần).",
-    ex:"지난주에 뭐 했어요?", exVi:"Tuần trước bạn làm gì?" },
-  { kr:"처음", en:"first, for the first time", vi:"đầu tiên, lần đầu", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Lần đầu tiên, khởi đầu. 처음 만났어요 = Lần đầu gặp nhau. Đối lập với 마지막.",
-    ex:"처음 만나서 반갑습니다.", exVi:"Rất vui được gặp bạn lần đầu." },
-  { kr:"철", en:"season, period", vi:"mùa, thời kỳ", hv:null, hvR:"thuần Hàn (có thêm nghĩa 鐵=sắt)", pure:true,
-    explain:"Mùa hoặc thời kỳ nhất định trong năm. 제철 음식 = thức ăn theo mùa.",
-    ex:"지금은 딸기 철이에요.", exVi:"Bây giờ là mùa dâu tây." },
-  { kr:"추석", en:"Chuseok (Korean Thanksgiving)", vi:"Chuseok (Tết Trung Thu Hàn)", hv:"秋夕", hvR:"thu tịch", pure:false,
-    explain:"Tết Trung Thu Hàn Quốc, ngày 15/8 âm lịch. Mọi người về quê, ăn 송편, bái lạy tổ tiên.",
-    ex:"추석에 고향에 가요.", exVi:"Tết Chuseok tôi về quê." },
-  { kr:"칠월", en:"July", vi:"tháng Bảy", hv:"七月", hvR:"thất nguyệt", pure:false,
-    explain:"Tháng 7. Mùa hè đỉnh điểm, mùa mưa (장마) thường kéo dài đến đây.",
-    ex:"칠월에 휴가를 가요.", exVi:"Tháng 7 tôi đi nghỉ phép." },
-  { kr:"크리스마스", en:"Christmas", vi:"Giáng sinh", hv:null, hvR:"từ tiếng Anh 'Christmas'", pure:true,
-    explain:"Giáng sinh ngày 25/12. Ở Hàn, đây là ngày đôi lứa hẹn hò hơn là ngày gia đình.",
-    ex:"크리스마스에 뭐 해요?", exVi:"Giáng sinh bạn làm gì?" },
-  { kr:"토요일", en:"Saturday", vi:"thứ Bảy", hv:"土曜日", hvR:"thổ diệu nhật", pure:false,
-    explain:"Thứ Bảy. 토(土, đất) + 요일. Đầu cuối tuần, ngày nghỉ.",
-    ex:"토요일에 등산 가요.", exVi:"Thứ Bảy tôi đi leo núi." },
-  { kr:"팔월", en:"August", vi:"tháng Tám", hv:"八月", hvR:"bát nguyệt", pure:false,
-    explain:"Tháng 8. Ngày Giải phóng Quốc gia Hàn Quốc (광복절) là 15/8 dương lịch.",
-    ex:"팔월에 광복절이 있어요.", exVi:"Tháng 8 có Ngày Giải phóng." },
-  { kr:"평일", en:"weekday", vi:"ngày trong tuần (không phải nghỉ)", hv:"平日", hvR:"bình nhật", pure:false,
-    explain:"Ngày thường, thứ Hai đến thứ Sáu. Đối lập với 주말 (cuối tuần).",
-    ex:"평일에는 일해요.", exVi:"Ngày thường tôi đi làm." },
-  { kr:"하루", en:"one day, all day", vi:"một ngày", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Một ngày. 하루 종일 = suốt cả ngày. Đầu chuỗi đếm ngày thuần Hàn.",
-    ex:"하루가 너무 짧아요.", exVi:"Một ngày sao mà ngắn quá." },
-  { kr:"해", en:"year, sun", vi:"năm; mặt trời", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Hai nghĩa: (1) năm trong đời (새해 = năm mới), (2) mặt trời. Ngữ cảnh phân biệt.",
-    ex:"새해 복 많이 받으세요!", exVi:"Chúc mừng năm mới!" },
-  { kr:"현재", en:"present, current", vi:"hiện tại", hv:"現在", hvR:"hiện tại", pure:false,
-    explain:"Thời điểm hiện tại. Trang trọng hơn 지금. Hay dùng trong văn viết, báo chí.",
-    ex:"현재 어디에 살아요?", exVi:"Hiện tại bạn đang sống ở đâu?" },
-  { kr:"화요일", en:"Tuesday", vi:"thứ Ba", hv:"火曜日", hvR:"hỏa diệu nhật", pure:false,
-    explain:"Thứ Ba. 화(火, lửa) + 요일. Theo hệ Ngũ Hành trong tên các ngày Hàn.",
-    ex:"화요일에 수업이 있어요.", exVi:"Thứ Ba có buổi học." },
-  { kr:"후", en:"after", vi:"sau, sau khi", hv:"後", hvR:"hậu", pure:false,
-    explain:"Sau, sau khi. 3일 후 = sau 3 ngày. Thường đứng sau danh từ hoặc động từ.",
-    ex:"밥 먹은 후에 산책해요.", exVi:"Sau khi ăn cơm tôi đi dạo." },
-  { kr:"휴가", en:"vacation, leave", vi:"kỳ nghỉ, ngày nghỉ phép", hv:"休暇", hvR:"hưu hạ", pure:false,
-    explain:"Kỳ nghỉ phép của người đi làm. Khác 방학 (dành cho học sinh).",
-    ex:"휴가를 냈어요.", exVi:"Tôi đã xin nghỉ phép." },
-  { kr:"휴일", en:"holiday, day off", vi:"ngày nghỉ, ngày lễ", hv:"休日", hvR:"hưu nhật", pure:false,
-    explain:"Ngày nghỉ nói chung. 공휴일(lễ quốc gia), 주말(cuối tuần) đều là 휴일.",
-    ex:"내일은 휴일이에요.", exVi:"Ngày mai là ngày nghỉ." },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    const hvCell = item.pure
-      ? `<span class="hv-tag pure">Thuần Hàn</span><span class="hv-reading">${item.hvR}</span>`
-      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          const hvCell = item.pure
+            ? `<span class="hv-tag pure">Thuần Hàn</span><span class="hv-reading">${item.hvR}</span>`
+            : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -664,42 +1871,52 @@ function renderTable(data) {
         <span class="example-kr">${item.ex}</span>
         <span class="example-vi">${item.exVi}</span>
       </td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all'
-      || (currentFilter === 'hv' && !item.pure)
-      || (currentFilter === 'pure' && item.pure);
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || (item.hv && item.hv.includes(q))
-      || item.hvR.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" ||
+            (currentFilter === "hv" && !item.pure) ||
+            (currentFilter === "pure" && item.pure);
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            item.hvR.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
