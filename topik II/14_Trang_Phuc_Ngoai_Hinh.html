@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ vựng Tiếng Hàn – Thời trang & Ngoại hình</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f2f8;
+    --card: #fff;
+    --accent: #7a1a7a;
+    --text: #220822;
+    --sub: #9a50a0;
+    --border: #e0c8e4;
+    --tag-cloth: #f4e0f8;
+    --tag-appear: #e8f0fa;
+    --tag-hair: #fef0d8;
+    --tag-access: #e8f8e8;
+    --tag-care: #fce8ec;
+    --highlight: #fdf0ff;
+    --row-alt: #fdf8fd;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Be Vietnam Pro',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+  .header { background:var(--text); color:#f8f2f8; padding:36px 40px 28px; position:relative; overflow:hidden; }
+  .header::before { content:'패션'; position:absolute; right:40px; top:50%; transform:translateY(-50%); font-family:'Noto Serif KR',serif; font-size:120px; color:rgba(255,255,255,.05); font-weight:600; letter-spacing:-4px; user-select:none; }
+  .header h1 { font-family:'Noto Serif KR',serif; font-size:28px; font-weight:600; letter-spacing:1px; margin-bottom:6px; }
+  .header p { font-size:13px; font-weight:300; color:#b080b8; letter-spacing:.5px; }
+  .count-badge { display:inline-block; background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:10px; letter-spacing:.5px; }
+  .controls { padding:20px 40px; background:var(--card); border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
+  .search-wrap { position:relative; flex:1; min-width:200px; }
+  .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--sub); }
+  #searchInput { width:100%; padding:10px 12px 10px 38px; border:1.5px solid var(--border); border-radius:8px; font-family:'Be Vietnam Pro',sans-serif; font-size:14px; background:var(--bg); color:var(--text); outline:none; transition:border-color .2s; }
+  #searchInput:focus { border-color:var(--accent); }
+  #searchInput::placeholder { color:var(--sub); }
+  .filter-btn { padding:7px 12px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); font-family:'Be Vietnam Pro',sans-serif; font-size:11px; font-weight:500; color:var(--sub); cursor:pointer; transition:all .2s; white-space:nowrap; }
+  .filter-btn:hover,.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .result-count { font-size:12px; color:var(--sub); white-space:nowrap; }
+  .table-wrap { padding:24px 40px 60px; overflow-x:auto; }
+  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  thead { background:var(--text); color:#f8f2f8; }
+  th { padding:14px 16px; text-align:left; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+  th:nth-child(1),td:nth-child(1) { width:60px; text-align:center; }
+  th:nth-child(2),td:nth-child(2) { width:160px; }
+  th:nth-child(3),td:nth-child(3) { width:185px; }
+  th:nth-child(4),td:nth-child(4) { width:210px; }
+  th:nth-child(5),td:nth-child(5) { width:120px; }
+  th:nth-child(6),td:nth-child(6) { min-width:280px; }
+  tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
+  tbody tr:nth-child(even) { background:var(--row-alt); }
+  tbody tr:hover { background:var(--highlight); }
+  td { padding:12px 16px; font-size:13.5px; vertical-align:middle; line-height:1.5; }
+  td:nth-child(1) { font-size:11px; color:var(--sub); font-weight:600; }
+  .kr-cell { display:flex; align-items:center; gap:8px; }
+  .korean-word { font-family:'Noto Serif KR',serif; font-size:18px; font-weight:600; color:var(--accent); line-height:1.3; }
+  .btn-speak { background:none; border:1.5px solid var(--border); border-radius:6px; padding:3px 7px; cursor:pointer; font-size:14px; color:var(--sub); transition:all 0.2s; line-height:1; flex-shrink:0; }
+  .btn-speak:hover { background:var(--accent); color:white; border-color:var(--accent); }
+  .btn-speak.speaking { background:var(--accent); color:white; border-color:var(--accent); }
+  .tag { display:inline-flex; align-items:center; border-radius:4px; padding:2px 8px; font-size:11px; font-weight:500; white-space:nowrap; }
+  .tag-cloth  { background:var(--tag-cloth);  color:#5a005a; }
+  .tag-appear { background:var(--tag-appear); color:#0a2a60; }
+  .tag-hair   { background:var(--tag-hair);   color:#5a3000; }
+  .tag-access { background:var(--tag-access); color:#0a4a20; }
+  .tag-care   { background:var(--tag-care);   color:#7a0a20; }
+  .note { font-size:12px; color:var(--sub); font-style:italic; }
+  .no-results { text-align:center; padding:60px; color:var(--sub); font-size:15px; display:none; }
+  .footer { text-align:center; padding:20px; font-size:11px; color:var(--sub); border-top:1px solid var(--border); }
+  @media(max-width:768px){.header{padding:24px 20px}.header::before{display:none}.controls{padding:16px 20px}.table-wrap{padding:16px 20px 40px}th,td{padding:10px 12px}.korean-word{font-size:15px}}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>패션 & 외모 — Thời trang &amp; Ngoại hình</h1>
+  <p>Từ vựng Tiếng Hàn chủ đề Thời trang &amp; Ngoại hình · Chủ đề TOPIK II &nbsp;|&nbsp; 🔊 Nhấn để nghe phát âm</p>
+  <span class="count-badge" id="totalCount"></span>
+</div>
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
+  </div>
+  <button class="filter-btn active" data-filter="all">Tất cả</button>
+  <button class="filter-btn" data-filter="cloth">Quần áo</button>
+  <button class="filter-btn" data-filter="appear">Ngoại hình</button>
+  <button class="filter-btn" data-filter="hair">Tóc &amp; Kiểu tóc</button>
+  <button class="filter-btn" data-filter="access">Phụ kiện</button>
+  <button class="filter-btn" data-filter="care">Chăm sóc &amp; Giặt giũ</button>
+  <span class="result-count" id="resultCount"></span>
+</div>
+<div class="table-wrap">
+  <table id="vocabTable">
+    <thead><tr><th>#</th><th>Tiếng Hàn 🔊</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
+    <tbody id="vocabBody"></tbody>
+  </table>
+  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
+</div>
+<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Thời trang &amp; Ngoại hình &nbsp;|&nbsp; 🔊 Web Speech API (Korean TTS)</div>
+
+<script>
+// ── TTS ──────────────────────────────────────────────
+speechSynthesis.onvoiceschanged = () => {};   // kích hoạt load voices sớm
+
+function speakKorean(text, btn) {
+  window.speechSynthesis.cancel();
+  const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith('ko'));
+  if (!voices.length) { alert('Thiết bị chưa có giọng đọc tiếng Hàn.'); return; }
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.voice = voices[0];
+  utt.lang  = 'ko-KR';
+  utt.rate  = 0.85;
+  btn.classList.add('speaking');
+  utt.onend = () => btn.classList.remove('speaking');
+  speechSynthesis.speak(utt);
+}
+
+// ── DATA ─────────────────────────────────────────────
+const vocab = [
+  {kr:"겉모습",en:"outward appearance",vi:"vẻ bề ngoài",type:"appear",note:"겉(bên ngoài)+모습(dáng vẻ). 겉모습으로 판단하지 마세요(đừng đánh giá qua vẻ bề ngoài). 내면 vs 겉모습."},
+  {kr:"고무신",en:"rubber shoes (traditional)",vi:"giày cao su",type:"access",note:"고무(cao su)+신(giày). 한국 전통 신발. 고무신을 신다(mang giày cao su). 옛날 어른들이 많이 신었어요."},
+  {kr:"곱슬머리",en:"naturally curly hair",vi:"tóc xoăn tự nhiên",type:"hair",note:"곱슬(xoăn)+머리(tóc). 곱슬머리예요(tóc xoăn tự nhiên). ↔ 생머리(tóc thẳng). 파마와 다름(khác với uốn perm)."},
+  {kr:"귀걸이",en:"earrings",vi:"bông tai",type:"access",note:"귀(tai)+걸이(móc treo). 귀걸이를 하다(đeo bông tai). 금 귀걸이(bông tai vàng). 피어싱 귀걸이(bông tai xỏ khuyên)."},
+  {kr:"남성복",en:"men's clothing",vi:"quần áo nam",type:"cloth",note:"남성(男性)+복(服). 남성복 브랜드(thương hiệu quần áo nam). 남성복 코너(khu quần áo nam). ↔ 여성복(quần áo nữ)."},
+  {kr:"내복",en:"thermal underwear, long johns",vi:"áo ấm mặc trong",type:"cloth",note:"내(內,trong)+복(服). 추운 겨울에 입어요(mặc vào mùa đông lạnh). 내복을 입다(mặc áo lót giữ ấm). 방한 내복."},
+  {kr:"단발머리",en:"bob cut hairstyle",vi:"kiểu tóc ngắn (phụ nữ)",type:"hair",note:"단발(短髮)+머리. 단발머리를 하다(cắt tóc ngắn bob). 단발 컷(kiểu bob). 귀 아래 길이가 특징."},
+  {kr:"마네킹",en:"mannequin",vi:"ma-nơ-canh",type:"appear",note:"mannequin에서. 옷 가게 마네킹(ma-nơ-canh cửa hàng quần áo). 마네킹처럼 서있다(đứng như ma-nơ-canh)."},
+  {kr:"명품",en:"luxury goods, designer brand",vi:"hàng hiệu, đồ cao cấp",type:"cloth",note:"명품(名品). 명품 가방(túi hàng hiệu). 명품 브랜드(thương hiệu cao cấp). 명품족(người thích hàng hiệu)."},
+  {kr:"모델",en:"model; model (thing)",vi:"mô hình; người mẫu",type:"appear",note:"model에서. 두 가지: (1) 패션 모델(người mẫu thời trang), (2) 모델 하우스(nhà mẫu). 모델 포즈(tạo dáng)."},
+  {kr:"모습",en:"appearance, figure, look",vi:"dáng vẻ, hình dáng",type:"appear",note:"모습. 아름다운 모습(dáng vẻ đẹp). 모습을 드러내다(xuất hiện). 뒷모습(dáng từ sau). 앞모습(dáng từ trước)."},
+  {kr:"무늬",en:"pattern, design",vi:"hoa văn, họa tiết",type:"cloth",note:"무늬가 있다/없다(có/không có họa tiết). 꽃무늬(hoa văn hoa). 줄무늬(kẻ sọc). 체크무늬(kẻ ô vuông)."},
+  {kr:"미인",en:"beauty, beautiful woman",vi:"người đẹp, mỹ nhân",type:"appear",note:"미인(美人). 미인 대회(cuộc thi hoa hậu). 천하 미인(mỹ nhân thiên hạ). 미인이다(là người đẹp)."},
+  {kr:"벨트",en:"belt",vi:"thắt lưng, dây đai",type:"access",note:"belt에서. 벨트를 매다(thắt dây lưng). 가죽 벨트(thắt lưng da). 허리띠와 유사. 바지에 매요."},
+  {kr:"분홍색",en:"pink color",vi:"màu hồng",type:"appear",note:"분홍(粉紅)+색(色). 분홍색 옷(quần áo màu hồng). 연분홍(hồng nhạt). 진분홍(hồng đậm). 핑크와 동의어."},
+  {kr:"색상",en:"color, hue",vi:"màu sắc",type:"cloth",note:"색상(色相). 색상이 다양하다(màu sắc đa dạng). 색상을 고르다(chọn màu). 색상 배합(phối màu). 색깔과 유사."},
+  {kr:"생김새",en:"appearance, looks",vi:"ngoại hình, diện mạo",type:"appear",note:"생기다→생김새. 생김새가 좋다(ngoại hình tốt). 생김새로 판단하다(phán xét theo ngoại hình). 외모와 유사."},
+  {kr:"생머리",en:"straight (natural) hair",vi:"tóc thẳng",type:"hair",note:"생(生,tự nhiên)+머리. 생머리예요(tóc thẳng tự nhiên). ↔ 곱슬머리(tóc xoăn). 파마 안 한 머리."},
+  {kr:"선글라스",en:"sunglasses",vi:"kính mát",type:"access",note:"sunglasses에서. 선글라스를 쓰다(đeo kính mát). 자외선 차단(chống tia UV). 선글라스 패션(thời trang kính mát)."},
+  {kr:"세련",en:"sophistication, refinement",vi:"sự tinh tế, sành điệu",type:"appear",note:"세련(洗練). 세련되다=tinh tế, sành điệu. 세련된 스타일(phong cách tinh tế). 세련미(vẻ sang trọng)."},
+  {kr:"세탁물",en:"laundry (items to wash)",vi:"đồ giặt",type:"care",note:"세탁(洗濯)+물(物). 세탁물을 모으다(gom đồ giặt). 세탁물을 말리다(phơi đồ giặt). 세탁기에 넣다(cho vào máy giặt)."},
+  {kr:"셔츠",en:"shirt",vi:"áo sơ mi",type:"cloth",note:"shirt에서. 셔츠를 입다(mặc sơ mi). 남방 셔츠(sơ mi cổ bẻ). 줄무늬 셔츠(sơ mi kẻ sọc). 와이셔츠(áo sơ mi trắng)."},
+  {kr:"소매",en:"sleeve",vi:"tay áo",type:"cloth",note:"소매(袖). 소매를 걷다(xắn tay áo lên). 긴소매(tay dài). 반소매(tay ngắn). 소매 길이(độ dài tay áo)."},
+  {kr:"속옷",en:"underwear, lingerie",vi:"quần áo lót",type:"cloth",note:"속(trong)+옷(quần áo). 속옷을 입다(mặc đồ lót). 속옷 브랜드(thương hiệu đồ lót). 내복과 구별(khác với áo giữ ấm)."},
+  {kr:"쇼핑백",en:"shopping bag",vi:"túi mua sắm",type:"access",note:"shopping+bag에서. 쇼핑백을 들다(cầm túi mua sắm). 명품 쇼핑백(túi của hàng hiệu). 환경 쇼핑백(túi thân thiện môi trường)."},
+  {kr:"수선",en:"clothing repair, alteration",vi:"sửa quần áo",type:"care",note:"수선(修繕). 수선하다=sửa quần áo. 옷을 수선하다(sửa quần áo). 수선집(tiệm sửa quần áo). 길이 수선(sửa độ dài)."},
+  {kr:"숙녀복",en:"ladies' clothing, women's wear",vi:"quần áo phụ nữ",type:"cloth",note:"숙녀(淑女,phụ nữ lịch sự)+복(服). 숙녀복 매장(khu quần áo phụ nữ). 여성복보다 더 격식적 표현."},
+  {kr:"스타일",en:"style",vi:"phong cách, kiểu dáng",type:"appear",note:"style에서. 스타일이 좋다(phong cách tốt). 스타일을 살리다(phát huy phong cách). 헤어스타일(kiểu tóc)."},
+  {kr:"슬리퍼",en:"slippers",vi:"dép đi trong nhà",type:"access",note:"slipper에서. 슬리퍼를 신다(đi dép). 실내 슬리퍼(dép trong nhà). 욕실 슬리퍼(dép phòng tắm). 편해요."},
+  {kr:"실",en:"thread, yarn",vi:"sợi chỉ, sợi len",type:"cloth",note:"실(絲). 바늘과 실(kim và chỉ). 실로 꿰매다(khâu bằng chỉ). 실을 잇다(nối chỉ). 털실(sợi len)."},
+  {kr:"실크",en:"silk",vi:"lụa, tơ lụa",type:"cloth",note:"silk에서. 실크 소재(chất liệu lụa). 실크 블라우스(áo blouse lụa). 부드럽고 고급스러워요(mềm mịn và sang trọng)."},
+  {kr:"앞머리",en:"bangs, fringe",vi:"tóc mái trước",type:"hair",note:"앞(trước)+머리(tóc). 앞머리를 자르다(cắt tóc mái). 앞머리가 길다(tóc mái dài). 앞머리를 내리다(thả tóc mái xuống)."},
+  {kr:"얼룩",en:"stain, spot, blot",vi:"vết bẩn, vết ố",type:"care",note:"얼룩이 지다(bị dính vết bẩn). 얼룩을 지우다(tẩy vết bẩn). 커피 얼룩(vết cà phê). 얼룩 제거제(chất tẩy vết bẩn)."},
+  {kr:"여성복",en:"women's clothing",vi:"quần áo phụ nữ",type:"cloth",note:"여성(女性)+복(服). 여성복 코너(khu quần áo nữ). 여성복 브랜드(thương hiệu quần áo nữ). ↔ 남성복."},
+  {kr:"염색",en:"dyeing (hair or fabric)",vi:"nhuộm tóc, vải",type:"hair",note:"염색(染色). 염색하다=nhuộm. 머리를 염색하다(nhuộm tóc). 옷을 염색하다(nhuộm vải). 염색약(thuốc nhuộm)."},
+  {kr:"옷차림",en:"outfit, way of dressing",vi:"cách ăn mặc, trang phục",type:"cloth",note:"옷(quần áo)+차림(cách mặc). 옷차림이 단정하다(ăn mặc gọn gàng). 격식 있는 옷차림(trang phục lịch sự)."},
+  {kr:"외모",en:"appearance, looks",vi:"ngoại hình, vẻ bề ngoài",type:"appear",note:"외모(外貌). 외모를 가꾸다(chăm chút ngoại hình). 외모 지상주의(chủ nghĩa đề cao ngoại hình). 외모보다 내면."},
+  {kr:"웨딩드레스",en:"wedding dress",vi:"váy cưới",type:"cloth",note:"wedding dress에서. 웨딩드레스를 입다(mặc váy cưới). 웨딩드레스 피팅(thử váy cưới). 한복 웨딩도 있어요."},
+  {kr:"유니폼",en:"uniform",vi:"đồng phục",type:"cloth",note:"uniform에서. 학교 유니폼(đồng phục trường). 스포츠 유니폼(đồng phục thể thao). 유니폼을 입다(mặc đồng phục)."},
+  {kr:"의류",en:"clothing, garments",vi:"quần áo, hàng may mặc",type:"cloth",note:"의류(衣類). 의류 매장(cửa hàng quần áo). 의류 브랜드(thương hiệu may mặc). 의류 업계(ngành may mặc)."},
+  {kr:"의상",en:"costume, attire",vi:"trang phục, trang phục biểu diễn",type:"cloth",note:"의상(衣裳). 무대 의상(trang phục sân khấu). 의상 디자이너(nhà thiết kế trang phục). 전통 의상(trang phục truyền thống)."},
+  {kr:"잠옷",en:"pajamas, sleepwear",vi:"đồ ngủ, bộ pyjama",type:"cloth",note:"잠(ngủ)+옷(quần áo). 잠옷을 입다(mặc đồ ngủ). 귀여운 잠옷(đồ ngủ dễ thương). 잠옷 파티(pajama party)."},
+  {kr:"정장",en:"formal wear, suit",vi:"bộ vest, trang phục lịch sự",type:"cloth",note:"정장(正裝). 정장을 입다(mặc vest). 면접 정장(vest đi phỏng vấn). 정장 차림(ăn mặc chỉnh tề). ↔ 캐주얼."},
+  {kr:"줄무늬",en:"stripes, striped pattern",vi:"sọc, họa tiết sọc",type:"cloth",note:"줄(vạch)+무늬(họa tiết). 줄무늬 티셔츠(áo thun kẻ sọc). 가로/세로 줄무늬(sọc ngang/dọc). 네이비 줄무늬."},
+  {kr:"지퍼",en:"zipper",vi:"khóa kéo",type:"access",note:"zipper에서. 지퍼를 올리다/내리다(kéo/mở khóa). 지퍼가 고장나다(khóa kéo bị hỏng). 방수 지퍼(khóa chống thấm nước)."},
+  {kr:"탈의실",en:"dressing room, fitting room",vi:"phòng thay đồ",type:"cloth",note:"탈의(脫衣,thay đồ)+실(室). 탈의실에서 입어보다(thử đồ trong phòng thay). 피팅룸과 동의어. 탈의실은 어디예요?"},
+  {kr:"파마",en:"perm (permanent wave)",vi:"uốn tóc perm",type:"hair",note:"permanent에서. 파마를 하다(uốn tóc perm). 파마 머리(tóc uốn perm). 곱슬 파마(uốn xoăn). 풀다(tháo perm)."},
+  {kr:"패션쇼",en:"fashion show",vi:"trình diễn thời trang",type:"appear",note:"fashion show에서. 패션쇼를 열다(tổ chức show thời trang). 패션쇼에서 옷을 선보이다(giới thiệu thời trang). 런웨이."},
+  {kr:"핸드백",en:"handbag, purse",vi:"túi xách tay nữ",type:"access",note:"handbag에서. 핸드백을 들다(xách túi). 명품 핸드백(túi hiệu). 핸드백을 매다(đeo túi). 클러치와 구별."},
+  {kr:"향수",en:"perfume; nostalgia",vi:"nước hoa; nỗi nhớ nhà",type:"access",note:"두 가지: (1) 香水 — nước hoa (향수를 뿌리다=xịt nước hoa), (2) 鄕愁 — nỗi nhớ quê hương. 문맥 구별."},
+  {kr:"허리띠",en:"belt, waistband",vi:"thắت lưng, dây lưng",type:"access",note:"허리(eo)+띠(dây). 허리띠를 매다(thắt dây lưng). 가죽 허리띠(dây lưng da). 벨트와 동의어."},
+  {kr:"헤어스타일",en:"hairstyle",vi:"kiểu tóc",type:"hair",note:"hair+style에서. 헤어스타일을 바꾸다(thay đổi kiểu tóc). 어떤 헤어스타일이에요?(kiểu tóc nào vậy?). 헤어 디자이너."},
+];
+
+// ── RENDER & FILTER ───────────────────────────────────
+let currentFilter = 'all';
+
+function renderTable(data) {
+  const tbody = document.getElementById('vocabBody');
+  tbody.innerHTML = '';
+  data.forEach((item, i) => {
+    let t;
+    if      (item.type==='cloth')  t=`<span class="tag tag-cloth">Quần áo</span>`;
+    else if (item.type==='appear') t=`<span class="tag tag-appear">Ngoại hình</span>`;
+    else if (item.type==='hair')   t=`<span class="tag tag-hair">Tóc</span>`;
+    else if (item.type==='access') t=`<span class="tag tag-access">Phụ kiện</span>`;
+    else                           t=`<span class="tag tag-care">Chăm sóc</span>`;
+
+    const safeKr = item.kr.replace(/'/g, "\\'");
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${i+1}</td>
+      <td>
+        <div class="kr-cell">
+          <span class="korean-word">${item.kr}</span>
+          <button class="btn-speak" onclick="speakKorean('${safeKr}', this)" title="Nghe phát âm">🔊</button>
+        </div>
+      </td>
+      <td>${item.en}</td>
+      <td>${item.vi}</td>
+      <td>${t}</td>
+      <td><span class="note">${item.note}</span></td>`;
+    tbody.appendChild(tr);
+  });
+  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
+}
+
+function filterAndSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const result = vocab.filter(item => {
+    const mf = currentFilter==='all' || item.type===currentFilter;
+    const ms = !q || item.kr.includes(q) || item.en.toLowerCase().includes(q) || item.vi.toLowerCase().includes(q) || item.note.toLowerCase().includes(q);
+    return mf && ms;
+  });
+  renderTable(result);
+  document.getElementById('noResults').style.display = result.length===0 ? 'block' : 'none';
+  document.getElementById('vocabTable').style.display = result.length===0 ? 'none' : '';
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    filterAndSearch();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', filterAndSearch);
+document.getElementById('totalCount').textContent = vocab.length + ' từ';
+renderTable(vocab);
+</script>
+</body>
+</html>
