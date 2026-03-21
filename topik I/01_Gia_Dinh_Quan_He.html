@@ -1,746 +1,1240 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Gia đình & Quan hệ</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #faf7f2;
-    --card: #ffffff;
-    --accent: #c0392b;
-    --accent2: #e8c9a0;
-    --text: #2c1a0e;
-    --sub: #7a6251;
-    --border: #e8ddd0;
-    --tag-hv: #f0e6d3;
-    --tag-pure: #e8f0e8;
-    --highlight: #fff3e0;
-    --row-alt: #fdf9f5;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: 'Be Vietnam Pro', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Gia đình & Quan hệ</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #faf7f2;
+        --card: #ffffff;
+        --accent: #c0392b;
+        --accent2: #e8c9a0;
+        --text: #2c1a0e;
+        --sub: #7a6251;
+        --border: #e8ddd0;
+        --tag-hv: #f0e6d3;
+        --tag-pure: #e8f0e8;
+        --highlight: #fff3e0;
+        --row-alt: #fdf9f5;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  /* Header */
-  .header {
-    background: var(--text);
-    color: #faf7f2;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '가족';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.06);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-  .header p {
-    font-size: 13px;
-    font-weight: 300;
-    color: #c8bfb5;
-    letter-spacing: 0.5px;
-  }
-  .count-badge {
-    display: inline-block;
-    background: var(--accent);
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 20px;
-    margin-top: 10px;
-    letter-spacing: 0.5px;
-  }
+      /* Header */
+      .header {
+        background: var(--text);
+        color: #faf7f2;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "가족";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.06);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #c8bfb5;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  /* Controls */
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap {
-    position: relative;
-    flex: 1;
-    min-width: 200px;
-  }
-  .search-wrap svg {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--sub);
-  }
-  #searchInput {
-    width: 100%;
-    padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 14px;
-    background: var(--bg);
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      /* Controls */
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 8px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg);
-    font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--sub);
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    background: var(--accent);
-    color: white;
-    border-color: var(--accent);
-  }
-  .result-count {
-    font-size: 12px;
-    color: var(--sub);
-    white-space: nowrap;
-  }
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  /* Table */
-  .table-wrap {
-    padding: 24px 40px 60px;
-    overflow-x: auto;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--card);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  }
-  thead {
-    background: var(--text);
-    color: #faf7f2;
-  }
-  th {
-    padding: 14px 16px;
-    text-align: left;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  th:first-child { border-radius: 0; }
+      /* Table */
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #faf7f2;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:first-child {
+        border-radius: 0;
+      }
 
-  /* Col widths */
-  th:nth-child(1), td:nth-child(1) { width: 80px; text-align: center; } /* STT */
-  th:nth-child(2), td:nth-child(2) { width: 120px; } /* Korean */
-  th:nth-child(3), td:nth-child(3) { width: 140px; } /* English */
-  th:nth-child(4), td:nth-child(4) { width: 160px; } /* Vietnamese */
-  th:nth-child(5), td:nth-child(5) { width: 140px; } /* Hán Việt */
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; } /* Giải thích */
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; } /* Câu ví dụ */
+      /* Col widths */
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 80px;
+        text-align: center;
+      } /* STT */
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 120px;
+      } /* Korean */
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 140px;
+      } /* English */
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 160px;
+      } /* Vietnamese */
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 140px;
+      } /* Hán Việt */
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      } /* Giải thích */
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      } /* Câu ví dụ */
 
-  tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background 0.15s;
-  }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
-  tbody tr.hidden { display: none; }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      tbody tr.hidden {
+        display: none;
+      }
 
-  td {
-    padding: 13px 16px;
-    font-size: 13.5px;
-    vertical-align: top;
-    line-height: 1.55;
-  }
-  td:nth-child(1) {
-    font-size: 11px;
-    color: var(--sub);
-    font-weight: 600;
-  }
-  .korean-word {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--accent);
-    display: block;
-    line-height: 1.3;
-  }
-  .hv-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    background: var(--tag-hv);
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-size: 12px;
-    color: #7a5c2e;
-    font-weight: 500;
-  }
-  .hv-tag.pure {
-    background: var(--tag-pure);
-    color: #3a6640;
-  }
-  .hv-hanja {
-    font-weight: 600;
-    font-size: 13px;
-  }
-  .hv-reading {
-    font-size: 11px;
-    color: var(--sub);
-    margin-top: 2px;
-    display: block;
-  }
-  .example-kr {
-    font-family: 'Noto Serif KR', serif;
-    font-weight: 400;
-    font-size: 13.5px;
-    color: var(--text);
-    display: block;
-  }
-  .example-vi {
-    font-size: 12px;
-    color: var(--sub);
-    font-style: italic;
-    display: block;
-    margin-top: 2px;
-  }
-  .explain {
-    font-size: 13px;
-    color: #5a4535;
-    line-height: 1.6;
-  }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #7a5c2e;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #3a6640;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-weight: 400;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #5a4535;
+        line-height: 1.6;
+      }
 
-  /* No results */
-  .no-results {
-    text-align: center;
-    padding: 60px;
-    color: var(--sub);
-    font-size: 15px;
-    display: none;
-  }
+      /* No results */
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
 
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 11px;
-    color: var(--sub);
-    border-top: 1px solid var(--border);
-  }
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; }
-    .header::before { display: none; }
-    .controls { padding: 16px 20px; }
-    .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; }
-    .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>가족 & 관계 — Gia đình & Quan hệ</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Gia đình · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount">68 từ</span>
+    </div>
 
-<div class="header">
-  <h1>가족 & 관계 — Gia đình & Quan hệ</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Gia đình · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount">68 từ</span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+      <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Hán Việt</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Tiếng Hàn</th>
-        <th>Tiếng Anh</th>
-        <th>Tiếng Việt</th>
-        <th>Hán Việt</th>
-        <th>Giải thích</th>
-        <th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Gia đình & Quan hệ xã hội
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Gia đình & Quan hệ xã hội</div>
+    <script>
+      const vocab = [
+        {
+          kr: "가족",
+          en: "family",
+          vi: "gia đình",
+          hv: "家族",
+          hvReading: "gia tộc",
+          isPure: false,
+          explain:
+            "Chỉ tập hợp những người thân trong một nhà, có quan hệ huyết thống hoặc hôn nhân.",
+          ex: "우리 가족은 네 명이에요.",
+          exVi: "Gia đình tôi có 4 người.",
+        },
+        {
+          kr: "결혼",
+          en: "marriage",
+          vi: "hôn nhân, kết hôn",
+          hv: "結婚",
+          hvReading: "kết hôn",
+          isPure: false,
+          explain:
+            "Nghi lễ hoặc trạng thái hai người chính thức trở thành vợ chồng.",
+          ex: "결혼 준비가 힘들어요.",
+          exVi: "Chuẩn bị đám cưới rất vất vả.",
+        },
+        {
+          kr: "결혼식",
+          en: "wedding ceremony",
+          vi: "lễ cưới",
+          hv: "結婚式",
+          hvReading: "kết hôn thức",
+          isPure: false,
+          explain: "Buổi lễ tổ chức chính thức khi hai người kết hôn.",
+          ex: "내일 결혼식이 있어요.",
+          exVi: "Ngày mai có lễ cưới.",
+        },
+        {
+          kr: "결혼하다",
+          en: "get married",
+          vi: "kết hôn",
+          hv: "結婚",
+          hvReading: "kết hôn",
+          isPure: false,
+          explain: "Động từ chỉ hành động kết hôn, lập gia đình.",
+          ex: "저는 내년에 결혼할 거예요.",
+          exVi: "Tôi sẽ kết hôn vào năm tới.",
+        },
+        {
+          kr: "고모",
+          en: "paternal aunt",
+          vi: "cô (chị/em gái của bố)",
+          hv: "姑母",
+          hvReading: "cô mẫu",
+          isPure: false,
+          explain:
+            "Chị hoặc em gái của bố. Được gọi là 고모 từ phía con của anh/em trai.",
+          ex: "고모가 선물을 주셨어요.",
+          exVi: "Cô đã tặng quà cho tôi.",
+        },
+        {
+          kr: "고모부",
+          en: "paternal uncle (husband of 고모)",
+          vi: "chú (chồng của cô)",
+          hv: "姑母夫",
+          hvReading: "cô mẫu phu",
+          isPure: false,
+          explain: "Chồng của cô (chị/em gái của bố).",
+          ex: "고모부는 의사예요.",
+          exVi: "Chú (chồng cô) là bác sĩ.",
+        },
+        {
+          kr: "관계",
+          en: "relation, relationship",
+          vi: "quan hệ, mối liên hệ",
+          hv: "關係",
+          hvReading: "quan hệ",
+          isPure: false,
+          explain:
+            "Mối liên hệ, tương quan giữa người với người hoặc sự vật với nhau.",
+          ex: "우리는 좋은 관계예요.",
+          exVi: "Chúng tôi có mối quan hệ tốt.",
+        },
+        {
+          kr: "나이",
+          en: "age",
+          vi: "tuổi",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Số tuổi của một người. Dùng trong giao tiếp thông thường; kính ngữ là 연세.",
+          ex: "나이가 어떻게 되세요?",
+          exVi: "Bạn/anh/chị bao nhiêu tuổi?",
+        },
+        {
+          kr: "남녀",
+          en: "men and women",
+          vi: "nam nữ",
+          hv: "男女",
+          hvReading: "nam nữ",
+          isPure: false,
+          explain:
+            "Chỉ cả đàn ông lẫn phụ nữ. Thường dùng trong văn viết hoặc ngữ cảnh trang trọng.",
+          ex: "남녀노소 모두 좋아해요.",
+          exVi: "Nam nữ già trẻ đều thích.",
+        },
+        {
+          kr: "남동생",
+          en: "younger brother",
+          vi: "em trai",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Em trai của mình. 남(nam) + 동생(em). Phân biệt giới tính rõ ràng.",
+          ex: "남동생이 있어요?",
+          exVi: "Bạn có em trai không?",
+        },
+        {
+          kr: "남자",
+          en: "man",
+          vi: "đàn ông, nam giới",
+          hv: "男子",
+          hvReading: "nam tử",
+          isPure: false,
+          explain: "Người đàn ông; chỉ giới tính nam nói chung.",
+          ex: "저 남자는 누구예요?",
+          exVi: "Người đàn ông kia là ai vậy?",
+        },
+        {
+          kr: "남편",
+          en: "husband",
+          vi: "chồng",
+          hv: "男便",
+          hvReading: "nam tiện",
+          isPure: false,
+          explain:
+            "Người chồng trong hôn nhân. Đây là từ trung tính, dùng rộng rãi.",
+          ex: "남편이 요리를 잘해요.",
+          exVi: "Chồng tôi nấu ăn rất giỏi.",
+        },
+        {
+          kr: "누나",
+          en: "older sister (said by younger brother)",
+          vi: "chị gái (em trai gọi)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Chị gái — do em trai gọi. Em gái gọi chị là 언니.",
+          ex: "누나, 같이 가요.",
+          exVi: "Chị ơi, cùng đi đi.",
+        },
+        {
+          kr: "데이트",
+          en: "date, dating",
+          vi: "hẹn hò",
+          hv: null,
+          hvReading: "từ tiếng Anh 'date'",
+          isPure: true,
+          explain: "Đi chơi hẹn hò với người yêu. Từ vay mượn từ tiếng Anh.",
+          ex: "오늘 데이트 있어요.",
+          exVi: "Hôm nay tôi có hẹn hò.",
+        },
+        {
+          kr: "동생",
+          en: "younger sibling",
+          vi: "em (trai hoặc gái)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Em của mình, không phân biệt trai/gái. Muốn chỉ cụ thể dùng 남동생/여동생.",
+          ex: "동생이 몇 살이에요?",
+          exVi: "Em bạn bao nhiêu tuổi?",
+        },
+        {
+          kr: "딸",
+          en: "daughter",
+          vi: "con gái",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Con gái của bố mẹ. Đối lập với 아들 (con trai).",
+          ex: "딸이 정말 예뻐요.",
+          exVi: "Con gái thật xinh đẹp.",
+        },
+        {
+          kr: "부모",
+          en: "parents",
+          vi: "cha mẹ, bố mẹ",
+          hv: "父母",
+          hvReading: "phụ mẫu",
+          isPure: false,
+          explain: "Bố và mẹ gộp lại. Thường nói 부모님 để thêm kính ngữ.",
+          ex: "부모님이 보고 싶어요.",
+          exVi: "Tôi nhớ bố mẹ quá.",
+        },
+        {
+          kr: "부부",
+          en: "couple, husband and wife",
+          vi: "vợ chồng",
+          hv: "夫婦",
+          hvReading: "phu phụ",
+          isPure: false,
+          explain:
+            "Hai người đã kết hôn — vợ và chồng — được xem như một đơn vị.",
+          ex: "저 부부는 행복해 보여요.",
+          exVi: "Đôi vợ chồng đó trông hạnh phúc thật.",
+        },
+        {
+          kr: "부인",
+          en: "wife (formal), Mrs.",
+          vi: "vợ (trang trọng); bà",
+          hv: "夫人",
+          hvReading: "phu nhân",
+          isPure: false,
+          explain:
+            "Cách gọi vợ lịch sự, trang trọng. Cũng dùng để gọi phụ nữ đã có chồng.",
+          ex: "부인은 어디 계세요?",
+          exVi: "Bà xã (vợ) ông/anh đang ở đâu vậy?",
+        },
+        {
+          kr: "사촌",
+          en: "cousin",
+          vi: "anh/chị/em họ",
+          hv: "四寸",
+          hvReading: "tứ thốn",
+          isPure: false,
+          explain:
+            "Anh/chị/em họ — con của cô, chú, dì, cậu. Hệ đếm theo 'thốn' (寸) trong quan hệ họ hàng Hàn Quốc.",
+          ex: "사촌이 많아요.",
+          exVi: "Tôi có nhiều anh chị em họ.",
+        },
+        {
+          kr: "삼촌",
+          en: "paternal uncle (father's younger brother)",
+          vi: "chú (em trai của bố)",
+          hv: "三寸",
+          hvReading: "tam thốn",
+          isPure: false,
+          explain:
+            "Em trai của bố. Cách tính theo '3 thốn' trong hệ quan hệ họ hàng Hàn Quốc.",
+          ex: "삼촌은 서울에 살아요.",
+          exVi: "Chú sống ở Seoul.",
+        },
+        {
+          kr: "선물",
+          en: "gift, present",
+          vi: "quà tặng",
+          hv: "膳物",
+          hvReading: "thiện vật",
+          isPure: false,
+          explain:
+            "Đồ vật tặng cho người khác như biểu hiện tình cảm, lòng biết ơn.",
+          ex: "생일 선물을 샀어요.",
+          exVi: "Tôi đã mua quà sinh nhật.",
+        },
+        {
+          kr: "선배",
+          en: "senior, elder",
+          vi: "đàn anh/chị, tiền bối",
+          hv: "先輩",
+          hvReading: "tiên bối",
+          isPure: false,
+          explain:
+            "Người đi trước trong học tập hoặc công việc. Luôn được đối xử tôn trọng trong văn hóa Hàn.",
+          ex: "선배한테 조언을 들었어요.",
+          exVi: "Tôi đã nghe lời khuyên từ tiền bối.",
+        },
+        {
+          kr: "소개",
+          en: "introduction",
+          vi: "lời giới thiệu",
+          hv: "紹介",
+          hvReading: "thiệu giới",
+          isPure: false,
+          explain:
+            "Hành động giới thiệu bản thân hoặc người khác. 자기소개 = tự giới thiệu bản thân.",
+          ex: "자기소개를 해 주세요.",
+          exVi: "Xin hãy tự giới thiệu bản thân.",
+        },
+        {
+          kr: "아가씨",
+          en: "Miss, young lady",
+          vi: "cô (gái trẻ)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi lịch sự với phụ nữ trẻ chưa kết hôn. Ngày nay ít dùng hơn vì có thể nghe hơi cổ.",
+          ex: "저 아가씨가 누구예요?",
+          exVi: "Cô gái kia là ai vậy?",
+        },
+        {
+          kr: "아기",
+          en: "baby, toddler",
+          vi: "em bé",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Trẻ sơ sinh hoặc trẻ nhỏ dưới 2–3 tuổi.",
+          ex: "아기가 너무 귀여워요.",
+          exVi: "Em bé thật là dễ thương.",
+        },
+        {
+          kr: "아내",
+          en: "wife",
+          vi: "vợ",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Vợ — cách người chồng tự xưng vợ mình một cách lịch sự, khiêm tốn.",
+          ex: "아내가 요리를 잘해요.",
+          exVi: "Vợ tôi nấu ăn rất giỏi.",
+        },
+        {
+          kr: "아들",
+          en: "son",
+          vi: "con trai",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Con trai của bố mẹ. Đối lập với 딸 (con gái).",
+          ex: "아들이 둘 있어요.",
+          exVi: "Tôi có hai con trai.",
+        },
+        {
+          kr: "아버님",
+          en: "father (honorific)",
+          vi: "cha (kính ngữ)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi bố kính trọng. Thường dùng khi gọi bố chồng, bố vợ hoặc bố người khác.",
+          ex: "아버님, 안녕하세요.",
+          exVi: "Thưa cha/bố, xin chào.",
+        },
+        {
+          kr: "아버지",
+          en: "father",
+          vi: "cha, bố",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Bố, cha — cách gọi lịch sự và phổ biến nhất trong gia đình.",
+          ex: "아버지가 회사에 가셨어요.",
+          exVi: "Bố đã đi làm rồi.",
+        },
+        {
+          kr: "아빠",
+          en: "dad",
+          vi: "ba, bố (thân mật)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi bố thân mật, gần gũi. Thường dùng khi còn nhỏ hoặc trong gia đình.",
+          ex: "아빠, 사랑해요.",
+          exVi: "Ba ơi, con yêu ba.",
+        },
+        {
+          kr: "아이",
+          en: "child",
+          vi: "đứa trẻ",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Trẻ em nói chung. Dạng thân mật/rút gọn là 애.",
+          ex: "아이가 학교에 가요.",
+          exVi: "Đứa trẻ đi học.",
+        },
+        {
+          kr: "아저씨",
+          en: "uncle, mister",
+          vi: "chú, ông (người lớn tuổi)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi người đàn ông trung tuổi không quen biết hoặc người họ hàng thân thiết.",
+          ex: "아저씨, 이거 얼마예요?",
+          exVi: "Chú ơi, cái này bao nhiêu tiền?",
+        },
+        {
+          kr: "아주머니",
+          en: "aunt, ma'am",
+          vi: "cô (trung niên), thím",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi lịch sự với phụ nữ trung tuổi. Lịch sự hơn 아줌마.",
+          ex: "아주머니, 감사합니다.",
+          exVi: "Thưa cô/bà, cảm ơn cô/bà nhiều.",
+        },
+        {
+          kr: "아줌마",
+          en: "aunt, ma'am (informal)",
+          vi: "cô (thân mật, trung niên)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Phiên bản thân mật hơn của 아주머니. Đôi khi bị xem là hơi suồng sã nếu dùng với người lạ.",
+          ex: "아줌마, 여기요!",
+          exVi: "Cô ơi, cho tôi hỏi / gọi thêm!",
+        },
+        {
+          kr: "애",
+          en: "child (informal)",
+          vi: "đứa trẻ (thân mật)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Dạng rút gọn thân mật của 아이. Dùng trong văn nói hàng ngày.",
+          ex: "저 애가 내 동생이에요.",
+          exVi: "Đứa kia là em tôi.",
+        },
+        {
+          kr: "약속",
+          en: "appointment, promise",
+          vi: "hẹn gặp, lời hứa",
+          hv: "約束",
+          hvReading: "ước thúc",
+          isPure: false,
+          explain:
+            "Hẹn gặp với ai đó hoặc lời hứa không vi phạm. Có thể dùng cho cả hai nghĩa.",
+          ex: "내일 약속이 있어요.",
+          exVi: "Ngày mai tôi có hẹn.",
+        },
+        {
+          kr: "어른",
+          en: "adult",
+          vi: "người lớn",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Người đã trưởng thành. Trong văn hóa Hàn, người lớn luôn được kính trọng.",
+          ex: "어른을 공경해야 해요.",
+          exVi: "Phải kính trọng người lớn.",
+        },
+        {
+          kr: "어린이",
+          en: "child",
+          vi: "trẻ em",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Trẻ em từ khoảng 4–12 tuổi. Trang trọng hơn 아이. Ngày Thiếu nhi là 어린이날 (5/5).",
+          ex: "어린이날은 5월 5일이에요.",
+          exVi: "Ngày Thiếu nhi là ngày 5 tháng 5.",
+        },
+        {
+          kr: "어머니",
+          en: "mother",
+          vi: "mẹ",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Mẹ — cách gọi lịch sự và phổ biến nhất. Trang trọng hơn 엄마.",
+          ex: "어머니가 밥을 만드셨어요.",
+          exVi: "Mẹ đã nấu cơm rồi.",
+        },
+        {
+          kr: "어머님",
+          en: "mother (honorific)",
+          vi: "mẹ (kính ngữ)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi mẹ cực kỳ kính trọng. Thường dùng khi gọi mẹ chồng, mẹ vợ.",
+          ex: "어머님, 잘 계세요?",
+          exVi: "Thưa mẹ, mẹ có khỏe không?",
+        },
+        {
+          kr: "언니",
+          en: "older sister (said by younger sister)",
+          vi: "chị gái (em gái gọi)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Chị gái — do em gái gọi. Em trai gọi chị là 누나.",
+          ex: "언니, 어디 가요?",
+          exVi: "Chị ơi, chị đi đâu vậy?",
+        },
+        {
+          kr: "엄마",
+          en: "mom",
+          vi: "mẹ, má (thân mật)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi mẹ thân mật, gần gũi. Thường dùng trong gia đình hoặc khi còn nhỏ.",
+          ex: "엄마, 배고파요.",
+          exVi: "Mẹ ơi, con đói rồi.",
+        },
+        {
+          kr: "여동생",
+          en: "younger sister",
+          vi: "em gái",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Em gái của mình. 여(nữ) + 동생(em). Đối lập với 남동생.",
+          ex: "여동생이 한 명 있어요.",
+          exVi: "Tôi có một em gái.",
+        },
+        {
+          kr: "여자",
+          en: "woman",
+          vi: "phụ nữ, con gái",
+          hv: "女子",
+          hvReading: "nữ tử",
+          isPure: false,
+          explain: "Người phụ nữ; chỉ giới tính nữ nói chung.",
+          ex: "저 여자는 선생님이에요.",
+          exVi: "Người phụ nữ kia là giáo viên.",
+        },
+        {
+          kr: "연세",
+          en: "age (honorific)",
+          vi: "tuổi (kính ngữ)",
+          hv: "年歲",
+          hvReading: "niên tuế",
+          isPure: false,
+          explain:
+            "Cách nói 'tuổi' kính trọng dùng với người lớn tuổi hơn. 나이 là dạng thông thường.",
+          ex: "연세가 어떻게 되세요?",
+          exVi: "Thưa ông/bà, ông/bà bao nhiêu tuổi ạ?",
+        },
+        {
+          kr: "오빠",
+          en: "older brother (said by younger sister)",
+          vi: "anh trai (em gái gọi)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Anh trai — do em gái gọi. Em trai gọi anh là 형. Ngày nay 오빠 cũng dùng với người yêu.",
+          ex: "오빠, 같이 밥 먹어요.",
+          exVi: "Anh ơi, cùng ăn cơm đi.",
+        },
+        {
+          kr: "외삼촌",
+          en: "maternal uncle",
+          vi: "cậu (anh/em trai của mẹ)",
+          hv: "外三寸",
+          hvReading: "ngoại tam thốn",
+          isPure: false,
+          explain: "Anh hoặc em trai của mẹ. 외(外, ngoại) = bên mẹ.",
+          ex: "외삼촌이 미국에 살아요.",
+          exVi: "Cậu sống ở Mỹ.",
+        },
+        {
+          kr: "외숙모",
+          en: "maternal aunt (wife of 외삼촌)",
+          vi: "mợ (vợ của cậu)",
+          hv: "外叔母",
+          hvReading: "ngoại thúc mẫu",
+          isPure: false,
+          explain: "Vợ của cậu (anh/em trai của mẹ).",
+          ex: "외숙모가 음식을 만들어 주셨어요.",
+          exVi: "Mợ đã nấu đồ ăn cho tôi.",
+        },
+        {
+          kr: "외할머니",
+          en: "maternal grandmother",
+          vi: "bà ngoại",
+          hv: null,
+          hvReading: "외(外, ngoại) + thuần Hàn",
+          isPure: true,
+          explain: "Bà ngoại — mẹ của mẹ. 외(ngoại) chỉ bên mẹ.",
+          ex: "외할머니 댁에 갔어요.",
+          exVi: "Tôi đã đến nhà bà ngoại.",
+        },
+        {
+          kr: "외할아버지",
+          en: "maternal grandfather",
+          vi: "ông ngoại",
+          hv: null,
+          hvReading: "외(外, ngoại) + thuần Hàn",
+          isPure: true,
+          explain: "Ông ngoại — bố của mẹ. 외(ngoại) chỉ bên mẹ.",
+          ex: "외할아버지가 건강하세요.",
+          exVi: "Ông ngoại vẫn khỏe.",
+        },
+        {
+          kr: "이모",
+          en: "maternal aunt",
+          vi: "dì (chị/em gái của mẹ)",
+          hv: "姨母",
+          hvReading: "di mẫu",
+          isPure: false,
+          explain:
+            "Chị hoặc em gái của mẹ. Đối lập với 고모 (chị/em gái của bố).",
+          ex: "이모가 선물을 사 주셨어요.",
+          exVi: "Dì đã mua quà cho tôi.",
+        },
+        {
+          kr: "이모부",
+          en: "maternal uncle (husband of 이모)",
+          vi: "dượng (chồng của dì)",
+          hv: "姨母夫",
+          hvReading: "di mẫu phu",
+          isPure: false,
+          explain: "Chồng của dì (chị/em gái của mẹ).",
+          ex: "이모부는 선생님이에요.",
+          exVi: "Dượng là giáo viên.",
+        },
+        {
+          kr: "인사",
+          en: "greetings, bow",
+          vi: "lời chào hỏi",
+          hv: "人事",
+          hvReading: "nhân sự",
+          isPure: false,
+          explain:
+            "Hành động chào hỏi, cúi đầu chào. Rất quan trọng trong văn hóa Hàn Quốc.",
+          ex: "인사를 잘 해야 해요.",
+          exVi: "Phải chào hỏi đàng hoàng.",
+        },
+        {
+          kr: "작은아버지",
+          en: "uncle (father's younger brother)",
+          vi: "chú (em trai của bố)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Em trai của bố — cũng có thể gọi là 삼촌. 작은(nhỏ) + 아버지(bố).",
+          ex: "작은아버지가 결혼하셨어요.",
+          exVi: "Chú (em bố) đã kết hôn.",
+        },
+        {
+          kr: "작은어머니",
+          en: "aunt (wife of father's younger brother)",
+          vi: "thím (vợ của chú)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Vợ của chú (em trai của bố). 작은(nhỏ) + 어머니(mẹ).",
+          ex: "작은어머니가 요리를 잘하세요.",
+          exVi: "Thím nấu ăn rất ngon.",
+        },
+        {
+          kr: "잔치",
+          en: "party, feast",
+          vi: "tiệc, bữa tiệc",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Bữa tiệc mừng sự kiện vui (sinh nhật, hôn lễ, lên thọ,...). Mang tính truyền thống.",
+          ex: "생일 잔치를 했어요.",
+          exVi: "Tôi đã tổ chức tiệc sinh nhật.",
+        },
+        {
+          kr: "조카",
+          en: "nephew, niece",
+          vi: "cháu (trai/gái)",
+          hv: "族下",
+          hvReading: "tộc hạ",
+          isPure: false,
+          explain: "Cháu trai hoặc cháu gái — con của anh/chị/em mình.",
+          ex: "조카가 너무 귀여워요.",
+          exVi: "Cháu dễ thương quá.",
+        },
+        {
+          kr: "친구",
+          en: "friend",
+          vi: "bạn bè, bạn",
+          hv: "親舊",
+          hvReading: "thân cựu",
+          isPure: false,
+          explain:
+            "Người bạn thân thiết. 친(thân thiết) + 구(cũ, lâu năm) → bạn cũ thân thiết.",
+          ex: "친구를 만났어요.",
+          exVi: "Tôi đã gặp bạn.",
+        },
+        {
+          kr: "친척",
+          en: "relative",
+          vi: "họ hàng, người thân",
+          hv: "親戚",
+          hvReading: "thân thích",
+          isPure: false,
+          explain: "Người có quan hệ họ hàng, máu mủ ruột thịt.",
+          ex: "친척이 많아요.",
+          exVi: "Tôi có nhiều họ hàng.",
+        },
+        {
+          kr: "큰아버지",
+          en: "uncle (father's elder brother)",
+          vi: "bác (anh trai của bố)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Anh trai của bố. 큰(lớn) + 아버지(bố).",
+          ex: "큰아버지가 서울에 사세요.",
+          exVi: "Bác (anh của bố) sống ở Seoul.",
+        },
+        {
+          kr: "큰어머니",
+          en: "aunt (wife of father's elder brother)",
+          vi: "bác gái (vợ của bác)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Vợ của bác (anh trai của bố). 큰(lớn) + 어머니(mẹ).",
+          ex: "큰어머니가 음식을 만드셨어요.",
+          exVi: "Bác gái đã nấu đồ ăn.",
+        },
+        {
+          kr: "할머니",
+          en: "grandmother",
+          vi: "bà (nội/ngoại)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Bà nội hoặc bà ngoại. Muốn phân biệt thêm 외 (ngoại) hoặc 친 (nội) vào trước.",
+          ex: "할머니가 보고 싶어요.",
+          exVi: "Tôi nhớ bà quá.",
+        },
+        {
+          kr: "할아버지",
+          en: "grandfather",
+          vi: "ông (nội/ngoại)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Ông nội hoặc ông ngoại. Muốn phân biệt thêm 외 (ngoại) hoặc 친 (nội) vào trước.",
+          ex: "할아버지가 건강하세요.",
+          exVi: "Ông vẫn khỏe nhé.",
+        },
+        {
+          kr: "형",
+          en: "older brother (said by younger brother)",
+          vi: "anh trai (em trai gọi)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain: "Anh trai — do em trai gọi. Em gái gọi anh là 오빠.",
+          ex: "형, 같이 게임 해요.",
+          exVi: "Anh ơi, chơi game cùng đi.",
+        },
+        {
+          kr: "형님",
+          en: "older brother (honorific)",
+          vi: "anh (kính ngữ)",
+          hv: null,
+          hvReading: "thuần Hàn",
+          isPure: true,
+          explain:
+            "Cách gọi 형 trang trọng hơn. Dùng trong kinh doanh, tổ chức, hoặc khi muốn tỏ kính trọng.",
+          ex: "형님, 감사합니다.",
+          exVi: "Cảm ơn anh nhiều ạ.",
+        },
+        {
+          kr: "형제",
+          en: "siblings (brothers)",
+          vi: "anh em, anh chị em",
+          hv: "兄弟",
+          hvReading: "huynh đệ",
+          isPure: false,
+          explain:
+            "Anh và em, thường chỉ anh em trai. 형제자매 = anh chị em (cả trai lẫn gái).",
+          ex: "형제가 있어요?",
+          exVi: "Bạn có anh em không?",
+        },
+        {
+          kr: "후배",
+          en: "junior",
+          vi: "đàn em, hậu bối",
+          hv: "後輩",
+          hvReading: "hậu bối",
+          isPure: false,
+          explain:
+            "Người đi sau, ít kinh nghiệm hơn. Đối lập với 선배 (tiền bối).",
+          ex: "후배에게 잘 가르쳐 주세요.",
+          exVi: "Hãy chỉ dạy tốt cho đàn em nhé.",
+        },
+      ];
 
-<script>
-const vocab = [
-  {
-    kr: "가족", en: "family", vi: "gia đình",
-    hv: "家族", hvReading: "gia tộc", isPure: false,
-    explain: "Chỉ tập hợp những người thân trong một nhà, có quan hệ huyết thống hoặc hôn nhân.",
-    ex: "우리 가족은 네 명이에요.", exVi: "Gia đình tôi có 4 người."
-  },
-  {
-    kr: "결혼", en: "marriage", vi: "hôn nhân, kết hôn",
-    hv: "結婚", hvReading: "kết hôn", isPure: false,
-    explain: "Nghi lễ hoặc trạng thái hai người chính thức trở thành vợ chồng.",
-    ex: "결혼 준비가 힘들어요.", exVi: "Chuẩn bị đám cưới rất vất vả."
-  },
-  {
-    kr: "결혼식", en: "wedding ceremony", vi: "lễ cưới",
-    hv: "結婚式", hvReading: "kết hôn thức", isPure: false,
-    explain: "Buổi lễ tổ chức chính thức khi hai người kết hôn.",
-    ex: "내일 결혼식이 있어요.", exVi: "Ngày mai có lễ cưới."
-  },
-  {
-    kr: "결혼하다", en: "get married", vi: "kết hôn",
-    hv: "結婚", hvReading: "kết hôn", isPure: false,
-    explain: "Động từ chỉ hành động kết hôn, lập gia đình.",
-    ex: "저는 내년에 결혼할 거예요.", exVi: "Tôi sẽ kết hôn vào năm tới."
-  },
-  {
-    kr: "고모", en: "paternal aunt", vi: "cô (chị/em gái của bố)",
-    hv: "姑母", hvReading: "cô mẫu", isPure: false,
-    explain: "Chị hoặc em gái của bố. Được gọi là 고모 từ phía con của anh/em trai.",
-    ex: "고모가 선물을 주셨어요.", exVi: "Cô đã tặng quà cho tôi."
-  },
-  {
-    kr: "고모부", en: "paternal uncle (husband of 고모)", vi: "chú (chồng của cô)",
-    hv: "姑母夫", hvReading: "cô mẫu phu", isPure: false,
-    explain: "Chồng của cô (chị/em gái của bố).",
-    ex: "고모부는 의사예요.", exVi: "Chú (chồng cô) là bác sĩ."
-  },
-  {
-    kr: "관계", en: "relation, relationship", vi: "quan hệ, mối liên hệ",
-    hv: "關係", hvReading: "quan hệ", isPure: false,
-    explain: "Mối liên hệ, tương quan giữa người với người hoặc sự vật với nhau.",
-    ex: "우리는 좋은 관계예요.", exVi: "Chúng tôi có mối quan hệ tốt."
-  },
-  {
-    kr: "나이", en: "age", vi: "tuổi",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Số tuổi của một người. Dùng trong giao tiếp thông thường; kính ngữ là 연세.",
-    ex: "나이가 어떻게 되세요?", exVi: "Bạn/anh/chị bao nhiêu tuổi?"
-  },
-  {
-    kr: "남녀", en: "men and women", vi: "nam nữ",
-    hv: "男女", hvReading: "nam nữ", isPure: false,
-    explain: "Chỉ cả đàn ông lẫn phụ nữ. Thường dùng trong văn viết hoặc ngữ cảnh trang trọng.",
-    ex: "남녀노소 모두 좋아해요.", exVi: "Nam nữ già trẻ đều thích."
-  },
-  {
-    kr: "남동생", en: "younger brother", vi: "em trai",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Em trai của mình. 남(nam) + 동생(em). Phân biệt giới tính rõ ràng.",
-    ex: "남동생이 있어요?", exVi: "Bạn có em trai không?"
-  },
-  {
-    kr: "남자", en: "man", vi: "đàn ông, nam giới",
-    hv: "男子", hvReading: "nam tử", isPure: false,
-    explain: "Người đàn ông; chỉ giới tính nam nói chung.",
-    ex: "저 남자는 누구예요?", exVi: "Người đàn ông kia là ai vậy?"
-  },
-  {
-    kr: "남편", en: "husband", vi: "chồng",
-    hv: "男便", hvReading: "nam tiện", isPure: false,
-    explain: "Người chồng trong hôn nhân. Đây là từ trung tính, dùng rộng rãi.",
-    ex: "남편이 요리를 잘해요.", exVi: "Chồng tôi nấu ăn rất giỏi."
-  },
-  {
-    kr: "누나", en: "older sister (said by younger brother)", vi: "chị gái (em trai gọi)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Chị gái — do em trai gọi. Em gái gọi chị là 언니.",
-    ex: "누나, 같이 가요.", exVi: "Chị ơi, cùng đi đi."
-  },
-  {
-    kr: "데이트", en: "date, dating", vi: "hẹn hò",
-    hv: null, hvReading: "từ tiếng Anh 'date'", isPure: true,
-    explain: "Đi chơi hẹn hò với người yêu. Từ vay mượn từ tiếng Anh.",
-    ex: "오늘 데이트 있어요.", exVi: "Hôm nay tôi có hẹn hò."
-  },
-  {
-    kr: "동생", en: "younger sibling", vi: "em (trai hoặc gái)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Em của mình, không phân biệt trai/gái. Muốn chỉ cụ thể dùng 남동생/여동생.",
-    ex: "동생이 몇 살이에요?", exVi: "Em bạn bao nhiêu tuổi?"
-  },
-  {
-    kr: "딸", en: "daughter", vi: "con gái",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Con gái của bố mẹ. Đối lập với 아들 (con trai).",
-    ex: "딸이 정말 예뻐요.", exVi: "Con gái thật xinh đẹp."
-  },
-  {
-    kr: "부모", en: "parents", vi: "cha mẹ, bố mẹ",
-    hv: "父母", hvReading: "phụ mẫu", isPure: false,
-    explain: "Bố và mẹ gộp lại. Thường nói 부모님 để thêm kính ngữ.",
-    ex: "부모님이 보고 싶어요.", exVi: "Tôi nhớ bố mẹ quá."
-  },
-  {
-    kr: "부부", en: "couple, husband and wife", vi: "vợ chồng",
-    hv: "夫婦", hvReading: "phu phụ", isPure: false,
-    explain: "Hai người đã kết hôn — vợ và chồng — được xem như một đơn vị.",
-    ex: "저 부부는 행복해 보여요.", exVi: "Đôi vợ chồng đó trông hạnh phúc thật."
-  },
-  {
-    kr: "부인", en: "wife (formal), Mrs.", vi: "vợ (trang trọng); bà",
-    hv: "夫人", hvReading: "phu nhân", isPure: false,
-    explain: "Cách gọi vợ lịch sự, trang trọng. Cũng dùng để gọi phụ nữ đã có chồng.",
-    ex: "부인은 어디 계세요?", exVi: "Bà xã (vợ) ông/anh đang ở đâu vậy?"
-  },
-  {
-    kr: "사촌", en: "cousin", vi: "anh/chị/em họ",
-    hv: "四寸", hvReading: "tứ thốn", isPure: false,
-    explain: "Anh/chị/em họ — con của cô, chú, dì, cậu. Hệ đếm theo 'thốn' (寸) trong quan hệ họ hàng Hàn Quốc.",
-    ex: "사촌이 많아요.", exVi: "Tôi có nhiều anh chị em họ."
-  },
-  {
-    kr: "삼촌", en: "paternal uncle (father's younger brother)", vi: "chú (em trai của bố)",
-    hv: "三寸", hvReading: "tam thốn", isPure: false,
-    explain: "Em trai của bố. Cách tính theo '3 thốn' trong hệ quan hệ họ hàng Hàn Quốc.",
-    ex: "삼촌은 서울에 살아요.", exVi: "Chú sống ở Seoul."
-  },
-  {
-    kr: "선물", en: "gift, present", vi: "quà tặng",
-    hv: "膳物", hvReading: "thiện vật", isPure: false,
-    explain: "Đồ vật tặng cho người khác như biểu hiện tình cảm, lòng biết ơn.",
-    ex: "생일 선물을 샀어요.", exVi: "Tôi đã mua quà sinh nhật."
-  },
-  {
-    kr: "선배", en: "senior, elder", vi: "đàn anh/chị, tiền bối",
-    hv: "先輩", hvReading: "tiên bối", isPure: false,
-    explain: "Người đi trước trong học tập hoặc công việc. Luôn được đối xử tôn trọng trong văn hóa Hàn.",
-    ex: "선배한테 조언을 들었어요.", exVi: "Tôi đã nghe lời khuyên từ tiền bối."
-  },
-  {
-    kr: "소개", en: "introduction", vi: "lời giới thiệu",
-    hv: "紹介", hvReading: "thiệu giới", isPure: false,
-    explain: "Hành động giới thiệu bản thân hoặc người khác. 자기소개 = tự giới thiệu bản thân.",
-    ex: "자기소개를 해 주세요.", exVi: "Xin hãy tự giới thiệu bản thân."
-  },
-  {
-    kr: "아가씨", en: "Miss, young lady", vi: "cô (gái trẻ)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi lịch sự với phụ nữ trẻ chưa kết hôn. Ngày nay ít dùng hơn vì có thể nghe hơi cổ.",
-    ex: "저 아가씨가 누구예요?", exVi: "Cô gái kia là ai vậy?"
-  },
-  {
-    kr: "아기", en: "baby, toddler", vi: "em bé",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Trẻ sơ sinh hoặc trẻ nhỏ dưới 2–3 tuổi.",
-    ex: "아기가 너무 귀여워요.", exVi: "Em bé thật là dễ thương."
-  },
-  {
-    kr: "아내", en: "wife", vi: "vợ",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Vợ — cách người chồng tự xưng vợ mình một cách lịch sự, khiêm tốn.",
-    ex: "아내가 요리를 잘해요.", exVi: "Vợ tôi nấu ăn rất giỏi."
-  },
-  {
-    kr: "아들", en: "son", vi: "con trai",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Con trai của bố mẹ. Đối lập với 딸 (con gái).",
-    ex: "아들이 둘 있어요.", exVi: "Tôi có hai con trai."
-  },
-  {
-    kr: "아버님", en: "father (honorific)", vi: "cha (kính ngữ)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi bố kính trọng. Thường dùng khi gọi bố chồng, bố vợ hoặc bố người khác.",
-    ex: "아버님, 안녕하세요.", exVi: "Thưa cha/bố, xin chào."
-  },
-  {
-    kr: "아버지", en: "father", vi: "cha, bố",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Bố, cha — cách gọi lịch sự và phổ biến nhất trong gia đình.",
-    ex: "아버지가 회사에 가셨어요.", exVi: "Bố đã đi làm rồi."
-  },
-  {
-    kr: "아빠", en: "dad", vi: "ba, bố (thân mật)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi bố thân mật, gần gũi. Thường dùng khi còn nhỏ hoặc trong gia đình.",
-    ex: "아빠, 사랑해요.", exVi: "Ba ơi, con yêu ba."
-  },
-  {
-    kr: "아이", en: "child", vi: "đứa trẻ",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Trẻ em nói chung. Dạng thân mật/rút gọn là 애.",
-    ex: "아이가 학교에 가요.", exVi: "Đứa trẻ đi học."
-  },
-  {
-    kr: "아저씨", en: "uncle, mister", vi: "chú, ông (người lớn tuổi)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi người đàn ông trung tuổi không quen biết hoặc người họ hàng thân thiết.",
-    ex: "아저씨, 이거 얼마예요?", exVi: "Chú ơi, cái này bao nhiêu tiền?"
-  },
-  {
-    kr: "아주머니", en: "aunt, ma'am", vi: "cô (trung niên), thím",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi lịch sự với phụ nữ trung tuổi. Lịch sự hơn 아줌마.",
-    ex: "아주머니, 감사합니다.", exVi: "Thưa cô/bà, cảm ơn cô/bà nhiều."
-  },
-  {
-    kr: "아줌마", en: "aunt, ma'am (informal)", vi: "cô (thân mật, trung niên)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Phiên bản thân mật hơn của 아주머니. Đôi khi bị xem là hơi suồng sã nếu dùng với người lạ.",
-    ex: "아줌마, 여기요!", exVi: "Cô ơi, cho tôi hỏi / gọi thêm!"
-  },
-  {
-    kr: "애", en: "child (informal)", vi: "đứa trẻ (thân mật)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Dạng rút gọn thân mật của 아이. Dùng trong văn nói hàng ngày.",
-    ex: "저 애가 내 동생이에요.", exVi: "Đứa kia là em tôi."
-  },
-  {
-    kr: "약속", en: "appointment, promise", vi: "hẹn gặp, lời hứa",
-    hv: "約束", hvReading: "ước thúc", isPure: false,
-    explain: "Hẹn gặp với ai đó hoặc lời hứa không vi phạm. Có thể dùng cho cả hai nghĩa.",
-    ex: "내일 약속이 있어요.", exVi: "Ngày mai tôi có hẹn."
-  },
-  {
-    kr: "어른", en: "adult", vi: "người lớn",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Người đã trưởng thành. Trong văn hóa Hàn, người lớn luôn được kính trọng.",
-    ex: "어른을 공경해야 해요.", exVi: "Phải kính trọng người lớn."
-  },
-  {
-    kr: "어린이", en: "child", vi: "trẻ em",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Trẻ em từ khoảng 4–12 tuổi. Trang trọng hơn 아이. Ngày Thiếu nhi là 어린이날 (5/5).",
-    ex: "어린이날은 5월 5일이에요.", exVi: "Ngày Thiếu nhi là ngày 5 tháng 5."
-  },
-  {
-    kr: "어머니", en: "mother", vi: "mẹ",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Mẹ — cách gọi lịch sự và phổ biến nhất. Trang trọng hơn 엄마.",
-    ex: "어머니가 밥을 만드셨어요.", exVi: "Mẹ đã nấu cơm rồi."
-  },
-  {
-    kr: "어머님", en: "mother (honorific)", vi: "mẹ (kính ngữ)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi mẹ cực kỳ kính trọng. Thường dùng khi gọi mẹ chồng, mẹ vợ.",
-    ex: "어머님, 잘 계세요?", exVi: "Thưa mẹ, mẹ có khỏe không?"
-  },
-  {
-    kr: "언니", en: "older sister (said by younger sister)", vi: "chị gái (em gái gọi)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Chị gái — do em gái gọi. Em trai gọi chị là 누나.",
-    ex: "언니, 어디 가요?", exVi: "Chị ơi, chị đi đâu vậy?"
-  },
-  {
-    kr: "엄마", en: "mom", vi: "mẹ, má (thân mật)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi mẹ thân mật, gần gũi. Thường dùng trong gia đình hoặc khi còn nhỏ.",
-    ex: "엄마, 배고파요.", exVi: "Mẹ ơi, con đói rồi."
-  },
-  {
-    kr: "여동생", en: "younger sister", vi: "em gái",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Em gái của mình. 여(nữ) + 동생(em). Đối lập với 남동생.",
-    ex: "여동생이 한 명 있어요.", exVi: "Tôi có một em gái."
-  },
-  {
-    kr: "여자", en: "woman", vi: "phụ nữ, con gái",
-    hv: "女子", hvReading: "nữ tử", isPure: false,
-    explain: "Người phụ nữ; chỉ giới tính nữ nói chung.",
-    ex: "저 여자는 선생님이에요.", exVi: "Người phụ nữ kia là giáo viên."
-  },
-  {
-    kr: "연세", en: "age (honorific)", vi: "tuổi (kính ngữ)",
-    hv: "年歲", hvReading: "niên tuế", isPure: false,
-    explain: "Cách nói 'tuổi' kính trọng dùng với người lớn tuổi hơn. 나이 là dạng thông thường.",
-    ex: "연세가 어떻게 되세요?", exVi: "Thưa ông/bà, ông/bà bao nhiêu tuổi ạ?"
-  },
-  {
-    kr: "오빠", en: "older brother (said by younger sister)", vi: "anh trai (em gái gọi)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Anh trai — do em gái gọi. Em trai gọi anh là 형. Ngày nay 오빠 cũng dùng với người yêu.",
-    ex: "오빠, 같이 밥 먹어요.", exVi: "Anh ơi, cùng ăn cơm đi."
-  },
-  {
-    kr: "외삼촌", en: "maternal uncle", vi: "cậu (anh/em trai của mẹ)",
-    hv: "外三寸", hvReading: "ngoại tam thốn", isPure: false,
-    explain: "Anh hoặc em trai của mẹ. 외(外, ngoại) = bên mẹ.",
-    ex: "외삼촌이 미국에 살아요.", exVi: "Cậu sống ở Mỹ."
-  },
-  {
-    kr: "외숙모", en: "maternal aunt (wife of 외삼촌)", vi: "mợ (vợ của cậu)",
-    hv: "外叔母", hvReading: "ngoại thúc mẫu", isPure: false,
-    explain: "Vợ của cậu (anh/em trai của mẹ).",
-    ex: "외숙모가 음식을 만들어 주셨어요.", exVi: "Mợ đã nấu đồ ăn cho tôi."
-  },
-  {
-    kr: "외할머니", en: "maternal grandmother", vi: "bà ngoại",
-    hv: null, hvReading: "외(外, ngoại) + thuần Hàn", isPure: true,
-    explain: "Bà ngoại — mẹ của mẹ. 외(ngoại) chỉ bên mẹ.",
-    ex: "외할머니 댁에 갔어요.", exVi: "Tôi đã đến nhà bà ngoại."
-  },
-  {
-    kr: "외할아버지", en: "maternal grandfather", vi: "ông ngoại",
-    hv: null, hvReading: "외(外, ngoại) + thuần Hàn", isPure: true,
-    explain: "Ông ngoại — bố của mẹ. 외(ngoại) chỉ bên mẹ.",
-    ex: "외할아버지가 건강하세요.", exVi: "Ông ngoại vẫn khỏe."
-  },
-  {
-    kr: "이모", en: "maternal aunt", vi: "dì (chị/em gái của mẹ)",
-    hv: "姨母", hvReading: "di mẫu", isPure: false,
-    explain: "Chị hoặc em gái của mẹ. Đối lập với 고모 (chị/em gái của bố).",
-    ex: "이모가 선물을 사 주셨어요.", exVi: "Dì đã mua quà cho tôi."
-  },
-  {
-    kr: "이모부", en: "maternal uncle (husband of 이모)", vi: "dượng (chồng của dì)",
-    hv: "姨母夫", hvReading: "di mẫu phu", isPure: false,
-    explain: "Chồng của dì (chị/em gái của mẹ).",
-    ex: "이모부는 선생님이에요.", exVi: "Dượng là giáo viên."
-  },
-  {
-    kr: "인사", en: "greetings, bow", vi: "lời chào hỏi",
-    hv: "人事", hvReading: "nhân sự", isPure: false,
-    explain: "Hành động chào hỏi, cúi đầu chào. Rất quan trọng trong văn hóa Hàn Quốc.",
-    ex: "인사를 잘 해야 해요.", exVi: "Phải chào hỏi đàng hoàng."
-  },
-  {
-    kr: "작은아버지", en: "uncle (father's younger brother)", vi: "chú (em trai của bố)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Em trai của bố — cũng có thể gọi là 삼촌. 작은(nhỏ) + 아버지(bố).",
-    ex: "작은아버지가 결혼하셨어요.", exVi: "Chú (em bố) đã kết hôn."
-  },
-  {
-    kr: "작은어머니", en: "aunt (wife of father's younger brother)", vi: "thím (vợ của chú)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Vợ của chú (em trai của bố). 작은(nhỏ) + 어머니(mẹ).",
-    ex: "작은어머니가 요리를 잘하세요.", exVi: "Thím nấu ăn rất ngon."
-  },
-  {
-    kr: "잔치", en: "party, feast", vi: "tiệc, bữa tiệc",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Bữa tiệc mừng sự kiện vui (sinh nhật, hôn lễ, lên thọ,...). Mang tính truyền thống.",
-    ex: "생일 잔치를 했어요.", exVi: "Tôi đã tổ chức tiệc sinh nhật."
-  },
-  {
-    kr: "조카", en: "nephew, niece", vi: "cháu (trai/gái)",
-    hv: "族下", hvReading: "tộc hạ", isPure: false,
-    explain: "Cháu trai hoặc cháu gái — con của anh/chị/em mình.",
-    ex: "조카가 너무 귀여워요.", exVi: "Cháu dễ thương quá."
-  },
-  {
-    kr: "친구", en: "friend", vi: "bạn bè, bạn",
-    hv: "親舊", hvReading: "thân cựu", isPure: false,
-    explain: "Người bạn thân thiết. 친(thân thiết) + 구(cũ, lâu năm) → bạn cũ thân thiết.",
-    ex: "친구를 만났어요.", exVi: "Tôi đã gặp bạn."
-  },
-  {
-    kr: "친척", en: "relative", vi: "họ hàng, người thân",
-    hv: "親戚", hvReading: "thân thích", isPure: false,
-    explain: "Người có quan hệ họ hàng, máu mủ ruột thịt.",
-    ex: "친척이 많아요.", exVi: "Tôi có nhiều họ hàng."
-  },
-  {
-    kr: "큰아버지", en: "uncle (father's elder brother)", vi: "bác (anh trai của bố)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Anh trai của bố. 큰(lớn) + 아버지(bố).",
-    ex: "큰아버지가 서울에 사세요.", exVi: "Bác (anh của bố) sống ở Seoul."
-  },
-  {
-    kr: "큰어머니", en: "aunt (wife of father's elder brother)", vi: "bác gái (vợ của bác)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Vợ của bác (anh trai của bố). 큰(lớn) + 어머니(mẹ).",
-    ex: "큰어머니가 음식을 만드셨어요.", exVi: "Bác gái đã nấu đồ ăn."
-  },
-  {
-    kr: "할머니", en: "grandmother", vi: "bà (nội/ngoại)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Bà nội hoặc bà ngoại. Muốn phân biệt thêm 외 (ngoại) hoặc 친 (nội) vào trước.",
-    ex: "할머니가 보고 싶어요.", exVi: "Tôi nhớ bà quá."
-  },
-  {
-    kr: "할아버지", en: "grandfather", vi: "ông (nội/ngoại)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Ông nội hoặc ông ngoại. Muốn phân biệt thêm 외 (ngoại) hoặc 친 (nội) vào trước.",
-    ex: "할아버지가 건강하세요.", exVi: "Ông vẫn khỏe nhé."
-  },
-  {
-    kr: "형", en: "older brother (said by younger brother)", vi: "anh trai (em trai gọi)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Anh trai — do em trai gọi. Em gái gọi anh là 오빠.",
-    ex: "형, 같이 게임 해요.", exVi: "Anh ơi, chơi game cùng đi."
-  },
-  {
-    kr: "형님", en: "older brother (honorific)", vi: "anh (kính ngữ)",
-    hv: null, hvReading: "thuần Hàn", isPure: true,
-    explain: "Cách gọi 형 trang trọng hơn. Dùng trong kinh doanh, tổ chức, hoặc khi muốn tỏ kính trọng.",
-    ex: "형님, 감사합니다.", exVi: "Cảm ơn anh nhiều ạ."
-  },
-  {
-    kr: "형제", en: "siblings (brothers)", vi: "anh em, anh chị em",
-    hv: "兄弟", hvReading: "huynh đệ", isPure: false,
-    explain: "Anh và em, thường chỉ anh em trai. 형제자매 = anh chị em (cả trai lẫn gái).",
-    ex: "형제가 있어요?", exVi: "Bạn có anh em không?"
-  },
-  {
-    kr: "후배", en: "junior", vi: "đàn em, hậu bối",
-    hv: "後輩", hvReading: "hậu bối", isPure: false,
-    explain: "Người đi sau, ít kinh nghiệm hơn. Đối lập với 선배 (tiền bối).",
-    ex: "후배에게 잘 가르쳐 주세요.", exVi: "Hãy chỉ dạy tốt cho đàn em nhé."
-  }
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    const tr = document.createElement('tr');
-    const hvCell = item.isPure
-      ? `<span class="hv-tag pure">Thuần Hàn</span>${item.hv ? `<span class="hv-reading">${item.hvReading}</span>` : ''}`
-      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvReading}</span>`;
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          const tr = document.createElement("tr");
+          const hvCell = item.isPure
+            ? `<span class="hv-tag pure">Thuần Hàn</span>${item.hv ? `<span class="hv-reading">${item.hvReading}</span>` : ""}`
+            : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvReading}</span>`;
 
-    tr.innerHTML = `
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -750,47 +1244,55 @@ function renderTable(data) {
         <span class="example-vi">${item.exVi}</span>
       </td>
     `;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  let result = vocab.filter(item => {
-    const matchFilter =
-      currentFilter === 'all' ||
-      (currentFilter === 'hv' && !item.isPure) ||
-      (currentFilter === 'pure' && item.isPure);
-    const matchSearch =
-      !q ||
-      item.kr.includes(q) ||
-      item.en.toLowerCase().includes(q) ||
-      item.vi.toLowerCase().includes(q) ||
-      (item.hv && item.hv.includes(q)) ||
-      (item.hvReading && item.hvReading.toLowerCase().includes(q));
-    return matchFilter && matchSearch;
-  });
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        let result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" ||
+            (currentFilter === "hv" && !item.isPure) ||
+            (currentFilter === "pure" && item.isPure);
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            (item.hvReading && item.hvReading.toLowerCase().includes(q));
+          return matchFilter && matchSearch;
+        });
 
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-// Filter buttons
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      // Filter buttons
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-document.getElementById('resultCount').textContent = `${vocab.length} / ${vocab.length} từ`;
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      document.getElementById("resultCount").textContent =
+        `${vocab.length} / ${vocab.length} từ`;
+    </script>
+  </body>
 </html>
