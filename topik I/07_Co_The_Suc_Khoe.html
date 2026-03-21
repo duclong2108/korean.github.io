@@ -1,362 +1,1215 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Sức khỏe & Cơ thể</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f7f2f2;
-    --card: #ffffff;
-    --accent: #8a1a1a;
-    --text: #2a0a0a;
-    --sub: #8a5a5a;
-    --border: #e8d0d0;
-    --tag-hv: #faecec;
-    --tag-pure: #eef4e8;
-    --highlight: #fff0f0;
-    --row-alt: #fdf8f8;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Sức khỏe & Cơ thể</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f7f2f2;
+        --card: #ffffff;
+        --accent: #8a1a1a;
+        --text: #2a0a0a;
+        --sub: #8a5a5a;
+        --border: #e8d0d0;
+        --tag-hv: #faecec;
+        --tag-pure: #eef4e8;
+        --highlight: #fff0f0;
+        --row-alt: #fdf8f8;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f7f2f2;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '건강';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #b08080; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #f7f2f2;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "건강";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #b08080;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f7f2f2; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f7f2f2;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 130px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 185px; }
-  th:nth-child(5), td:nth-child(5) { width: 155px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 130px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 185px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 155px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      }
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #6a1010; font-weight: 500; }
-  .hv-tag.pure { background: var(--tag-pure); color: #2a6030; }
-  .hv-hanja { font-weight: 600; font-size: 13px; }
-  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
-  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
-  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
-  .explain { font-size: 13px; color: #4a1a1a; line-height: 1.6; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #6a1010;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #2a6030;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #4a1a1a;
+        line-height: 1.6;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>건강 & 신체 — Sức khỏe & Cơ thể</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Sức khỏe · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>건강 & 신체 — Sức khỏe & Cơ thể</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Sức khỏe · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+      <button class="filter-btn" data-filter="pure">
+        Thuần Hàn / Vay mượn
+      </button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn / Vay mượn</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Hán Việt</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Sức khỏe & Cơ thể
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Sức khỏe & Cơ thể</div>
+    <script>
+      const vocab = [
+        {
+          kr: "가슴",
+          en: "chest, breast",
+          vi: "ngực",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ngực, lồng ngực. 가슴이 아프다 = đau ngực (cả nghĩa thể chất lẫn cảm xúc). 가슴이 두근거리다 = tim đập hồi hộp.",
+          ex: "가슴이 두근거려요.",
+          exVi: "Tim tôi đang đập hồi hộp.",
+        },
+        {
+          kr: "감기",
+          en: "cold, flu",
+          vi: "cảm lạnh, cảm cúm",
+          hv: "感氣",
+          hvR: "cảm khí",
+          pure: false,
+          explain:
+            "Cảm lạnh, cảm cúm. 감기에 걸리다 = bị cảm. 감기가 낫다 = hết cảm. Rất phổ biến mùa đông.",
+          ex: "감기에 걸렸어요.",
+          exVi: "Tôi bị cảm rồi.",
+        },
+        {
+          kr: "감기약",
+          en: "cold medicine",
+          vi: "thuốc cảm",
+          hv: "感氣藥",
+          hvR: "cảm khí dược",
+          pure: false,
+          explain:
+            "Thuốc trị cảm cúm. 감기약을 먹다 = uống thuốc cảm. 감기(cảm) + 약(thuốc).",
+          ex: "감기약을 먹었어요.",
+          exVi: "Tôi đã uống thuốc cảm.",
+        },
+        {
+          kr: "건강",
+          en: "health",
+          vi: "sức khỏe",
+          hv: "健康",
+          hvR: "kiện khang",
+          pure: false,
+          explain:
+            "Sức khỏe. 건강하다 = khỏe mạnh. 건강을 지키다 = giữ gìn sức khỏe. Câu chúc phổ biến: 건강하세요!",
+          ex: "건강이 제일 중요해요.",
+          exVi: "Sức khỏe là quan trọng nhất.",
+        },
+        {
+          kr: "귀",
+          en: "ear",
+          vi: "tai",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Cái tai. 귀가 아프다 = đau tai. 귀를 기울이다 = lắng nghe (nghĩa bóng). 귀걸이 = bông tai.",
+          ex: "귀가 아파요.",
+          exVi: "Tôi bị đau tai.",
+        },
+        {
+          kr: "금연",
+          en: "no smoking, quit smoking",
+          vi: "cấm hút thuốc",
+          hv: "禁煙",
+          hvR: "cấm yên",
+          pure: false,
+          explain:
+            "Cấm hút thuốc hoặc bỏ thuốc. 금연 구역 = khu vực cấm hút thuốc. 금연하다 = bỏ thuốc lá.",
+          ex: "여기는 금연 구역이에요.",
+          exVi: "Đây là khu vực cấm hút thuốc.",
+        },
+        {
+          kr: "금주",
+          en: "abstinence from alcohol",
+          vi: "cai rượu, kiêng rượu",
+          hv: "禁酒",
+          hvR: "cấm tửu",
+          pure: false,
+          explain:
+            "Kiêng rượu, cai rượu. 금주하다 = kiêng uống rượu. 금(禁, cấm) + 주(酒, rượu).",
+          ex: "건강을 위해 금주하고 있어요.",
+          exVi: "Tôi đang kiêng rượu vì sức khỏe.",
+        },
+        {
+          kr: "기침",
+          en: "cough",
+          vi: "ho (bệnh)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ho. 기침하다 = ho. 기침이 나다 = bị ho. 기침이 심하다 = ho nặng.",
+          ex: "기침이 많이 나요.",
+          exVi: "Tôi ho nhiều lắm.",
+        },
+        {
+          kr: "내과",
+          en: "internal medicine",
+          vi: "khoa nội, bác sĩ nội",
+          hv: "內科",
+          hvR: "nội khoa",
+          pure: false,
+          explain:
+            "Khoa nội — chuyên về bệnh bên trong cơ thể. 내과에 가다 = đến khám nội khoa.",
+          ex: "내과에 가서 진찰받았어요.",
+          exVi: "Tôi đã đến khoa nội khám bệnh.",
+        },
+        {
+          kr: "눈",
+          en: "eye; snow",
+          vi: "mắt; tuyết",
+          hv: null,
+          hvR: "thuần Hàn (2 nghĩa)",
+          pure: true,
+          explain:
+            "Hai nghĩa hoàn toàn khác nhau: (1) mắt — 눈이 아프다(đau mắt), (2) tuyết — 눈이 오다(tuyết rơi). Ngữ cảnh phân biệt.",
+          ex: "눈이 빨개요.",
+          exVi: "Mắt tôi đỏ rồi.",
+        },
+        {
+          kr: "눈물",
+          en: "tear, teardrop",
+          vi: "nước mắt",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Nước mắt. 눈물이 나다 = chảy nước mắt, rơi lệ. 눈물을 흘리다 = khóc, rơi nước mắt.",
+          ex: "눈물이 나요.",
+          exVi: "Tôi chảy nước mắt rồi.",
+        },
+        {
+          kr: "다리",
+          en: "leg; bridge",
+          vi: "chân; cầu",
+          hv: null,
+          hvR: "thuần Hàn (2 nghĩa)",
+          pure: true,
+          explain:
+            "Hai nghĩa: (1) chân người/động vật — 다리가 아프다(đau chân), (2) cây cầu — 한강 다리(cầu sông Hàn).",
+          ex: "다리가 아파요.",
+          exVi: "Tôi bị đau chân.",
+        },
+        {
+          kr: "다이어트",
+          en: "diet, dieting",
+          vi: "ăn kiêng, chế độ ăn",
+          hv: null,
+          hvR: "từ tiếng Anh 'diet'",
+          pure: true,
+          explain:
+            "Ăn kiêng, giảm cân. 다이어트하다 = ăn kiêng. Rất phổ biến trong văn hóa Hàn, đặc biệt với giới trẻ.",
+          ex: "다이어트 중이에요.",
+          exVi: "Tôi đang ăn kiêng.",
+        },
+        {
+          kr: "다치다",
+          en: "to get hurt, injured",
+          vi: "bị thương, bị đau",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Bị thương do tai nạn hoặc va chạm. 다치지 마세요 = cẩn thận đừng để bị thương.",
+          ex: "넘어져서 다쳤어요.",
+          exVi: "Tôi bị té và bị thương.",
+        },
+        {
+          kr: "담배",
+          en: "cigarette, tobacco",
+          vi: "thuốc lá",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Thuốc lá. 담배를 피우다 = hút thuốc. 담배를 끊다 = bỏ thuốc lá.",
+          ex: "담배를 끊었어요.",
+          exVi: "Tôi đã bỏ thuốc lá rồi.",
+        },
+        {
+          kr: "등",
+          en: "back (body); etc.",
+          vi: "lưng (cơ thể); v.v.",
+          hv: "等",
+          hvR: "đẳng (v.v.) / thuần Hàn (lưng)",
+          pure: true,
+          explain:
+            "Hai nghĩa: (1) lưng — 등이 아프다(đau lưng), (2) 等 = v.v., và những thứ khác (사과, 바나나 등 = táo, chuối, v.v.).",
+          ex: "등이 많이 아파요.",
+          exVi: "Lưng tôi đau nhiều lắm.",
+        },
+        {
+          kr: "땀",
+          en: "sweat, perspiration",
+          vi: "mồ hôi",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Mồ hôi. 땀을 흘리다 = đổ mồ hôi. 땀이 나다 = ra mồ hôi. 식은땀 = mồ hôi lạnh.",
+          ex: "운동하면 땀이 나요.",
+          exVi: "Tập thể dục thì ra mồ hôi.",
+        },
+        {
+          kr: "로션",
+          en: "lotion, moisturizer",
+          vi: "kem dưỡng da, lotion",
+          hv: null,
+          hvR: "từ tiếng Anh 'lotion'",
+          pure: true,
+          explain:
+            "Kem dưỡng ẩm da. Từ vay mượn tiếng Anh. Hàn Quốc nổi tiếng về skincare và lotion dưỡng da.",
+          ex: "세수 후에 로션을 발라요.",
+          exVi: "Sau khi rửa mặt tôi thoa kem dưỡng.",
+        },
+        {
+          kr: "머리",
+          en: "head; hair",
+          vi: "đầu; tóc",
+          hv: null,
+          hvR: "thuần Hàn (2 nghĩa)",
+          pure: true,
+          explain:
+            "Hai nghĩa: (1) cái đầu — 머리가 아프다(đau đầu), (2) mái tóc — 머리를 자르다(cắt tóc). Ngữ cảnh phân biệt.",
+          ex: "머리가 아파요.",
+          exVi: "Tôi bị đau đầu.",
+        },
+        {
+          kr: "면도",
+          en: "shaving",
+          vi: "cạo râu, dao cạo râu",
+          hv: "面刀",
+          hvR: "diện đao",
+          pure: false,
+          explain:
+            "Cạo râu. 면도하다 = cạo râu. 면도기 = máy cạo râu. 면도칼 = dao cạo.",
+          ex: "매일 아침 면도해요.",
+          exVi: "Mỗi sáng tôi cạo râu.",
+        },
+        {
+          kr: "목",
+          en: "neck, throat",
+          vi: "cổ (cổ họng)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Cổ hoặc cổ họng. 목이 아프다 = đau cổ họng. 목도리 = khăn quàng cổ.",
+          ex: "목이 아프고 열이 나요.",
+          exVi: "Tôi đau cổ họng và sốt.",
+        },
+        {
+          kr: "목소리",
+          en: "voice",
+          vi: "giọng nói, tiếng nói",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Giọng nói. 목소리가 크다/작다 = giọng to/nhỏ. 목소리가 좋다 = giọng hay.",
+          ex: "목소리가 정말 좋아요.",
+          exVi: "Giọng nói của bạn thật hay.",
+        },
+        {
+          kr: "목욕",
+          en: "bath, bathing",
+          vi: "tắm, việc tắm rửa",
+          hv: "沐浴",
+          hvR: "mộc dục",
+          pure: false,
+          explain:
+            "Việc tắm. 목욕하다 = tắm. 목욕탕 = nhà tắm công cộng. 목욕실 = phòng tắm.",
+          ex: "목욕하고 나면 개운해요.",
+          exVi: "Tắm xong thấy sảng khoái lắm.",
+        },
+        {
+          kr: "몸",
+          en: "body",
+          vi: "cơ thể, thân thể",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Cơ thể con người. 몸이 아프다 = cơ thể đau/bị bệnh. 몸을 관리하다 = chăm sóc sức khỏe.",
+          ex: "몸이 안 좋아요.",
+          exVi: "Tôi không được khỏe.",
+        },
+        {
+          kr: "몸살",
+          en: "body ache from fatigue",
+          vi: "đau mình (vì mệt mỏi)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Đau nhức toàn thân do mệt mỏi. 몸살이 나다 = bị đau mình. Thường kèm theo sốt nhẹ.",
+          ex: "몸살이 나서 쉬고 있어요.",
+          exVi: "Tôi đang nghỉ vì bị đau mình.",
+        },
+        {
+          kr: "무릎",
+          en: "knee",
+          vi: "đầu gối",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Đầu gối. 무릎이 아프다 = đau đầu gối. 무릎을 꿇다 = quỳ gối.",
+          ex: "무릎이 아파서 못 걸어요.",
+          exVi: "Tôi đau đầu gối nên không đi được.",
+        },
+        {
+          kr: "발",
+          en: "foot, feet",
+          vi: "bàn chân, chân",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Bàn chân. 발이 아프다 = đau chân. 발을 씻다 = rửa chân. 발가락 = ngón chân.",
+          ex: "발이 아파요.",
+          exVi: "Tôi đau chân.",
+        },
+        {
+          kr: "발가락",
+          en: "toe(s)",
+          vi: "ngón chân",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ngón chân. 발(bàn chân) + 가락(ngón). 발가락이 다섯 개 = có năm ngón chân.",
+          ex: "발가락을 다쳤어요.",
+          exVi: "Tôi bị thương ở ngón chân.",
+        },
+        {
+          kr: "배탈",
+          en: "stomachache, upset stomach",
+          vi: "đau bụng (do ăn)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Đau bụng do ăn uống không hợp. 배탈이 나다 = bị đau bụng. 배(bụng) + 탈(rối loạn).",
+          ex: "배탈이 났어요.",
+          exVi: "Tôi bị đau bụng rồi.",
+        },
+        {
+          kr: "병",
+          en: "illness; bottle (counter)",
+          vi: "bệnh tật; ...chai (đơn vị)",
+          hv: "病/甁",
+          hvR: "bệnh / bình",
+          pure: false,
+          explain:
+            "Hai nghĩa: (1) 病 — bệnh tật (병이 나다 = phát bệnh), (2) 甁 — cái chai (물 한 병 = một chai nước).",
+          ex: "무슨 병이에요?",
+          exVi: "Bạn mắc bệnh gì vậy?",
+        },
+        {
+          kr: "병원",
+          en: "hospital, clinic",
+          vi: "bệnh viện",
+          hv: "病院",
+          hvR: "bệnh viện",
+          pure: false,
+          explain:
+            "Bệnh viện hoặc phòng khám. 병원에 가다 = đi bệnh viện. 병원에 입원하다 = nhập viện.",
+          ex: "병원에 가야 해요.",
+          exVi: "Tôi phải đi bệnh viện.",
+        },
+        {
+          kr: "비누",
+          en: "soap",
+          vi: "xà phòng, xà bông",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Xà phòng bánh. 비누로 손을 씻다 = rửa tay bằng xà phòng. 비누 거품 = bọt xà phòng.",
+          ex: "비누로 손을 씻어요.",
+          exVi: "Tôi rửa tay bằng xà phòng.",
+        },
+        {
+          kr: "살",
+          en: "flesh; years old (counter)",
+          vi: "thịt; ...tuổi (đơn vị tuổi)",
+          hv: null,
+          hvR: "thuần Hàn (2 nghĩa)",
+          pure: true,
+          explain:
+            "Hai nghĩa: (1) thịt/da thịt cơ thể — 살이 찌다(béo lên), (2) đơn vị tuổi — 스무 살(20 tuổi).",
+          ex: "살이 많이 쪘어요.",
+          exVi: "Tôi đã tăng cân nhiều rồi.",
+        },
+        {
+          kr: "상처",
+          en: "wound, scratch, scar",
+          vi: "vết thương, vết xước",
+          hv: "傷處",
+          hvR: "thương xứ",
+          pure: false,
+          explain:
+            "Vết thương trên da hoặc tổn thương cảm xúc. 상처가 생기다 = bị thương. 상처를 치료하다 = chữa vết thương.",
+          ex: "상처에 약을 발랐어요.",
+          exVi: "Tôi đã bôi thuốc lên vết thương.",
+        },
+        {
+          kr: "샴푸",
+          en: "shampoo",
+          vi: "dầu gội đầu",
+          hv: null,
+          hvR: "từ tiếng Anh 'shampoo'",
+          pure: true,
+          explain:
+            "Dầu gội đầu. Từ vay mượn tiếng Anh. 샴푸로 머리를 감다 = gội đầu bằng dầu gội.",
+          ex: "샴푸로 머리를 감았어요.",
+          exVi: "Tôi đã gội đầu bằng dầu gội.",
+        },
+        {
+          kr: "소리",
+          en: "sound, noise, voice",
+          vi: "âm thanh, tiếng động",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Âm thanh, tiếng. 소리가 크다 = âm thanh to. 소리를 지르다 = la hét. 무슨 소리예요? = Tiếng gì vậy?",
+          ex: "무슨 소리예요?",
+          exVi: "Đó là tiếng gì vậy?",
+        },
+        {
+          kr: "소화제",
+          en: "digestive medicine",
+          vi: "thuốc tiêu hóa",
+          hv: "消化劑",
+          hvR: "tiêu hóa tễ",
+          pure: false,
+          explain:
+            "Thuốc hỗ trợ tiêu hóa. 소화(消化, tiêu hóa) + 제(劑, thuốc/chất). 소화가 안 돼서 소화제를 먹다.",
+          ex: "소화가 안 돼서 소화제를 먹었어요.",
+          exVi: "Tôi bị khó tiêu nên đã uống thuốc tiêu hóa.",
+        },
+        {
+          kr: "손",
+          en: "hand",
+          vi: "bàn tay, tay",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Bàn tay. 손을 씻다 = rửa tay. 손을 잡다 = nắm tay. 손가락 = ngón tay.",
+          ex: "손을 자주 씻어요.",
+          exVi: "Tôi thường xuyên rửa tay.",
+        },
+        {
+          kr: "손가락",
+          en: "finger(s)",
+          vi: "ngón tay",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Ngón tay. 손(tay) + 가락(ngón). 손가락이 다섯 개 = có năm ngón tay. 약손가락 = ngón đeo nhẫn.",
+          ex: "손가락을 다쳤어요.",
+          exVi: "Tôi bị thương ở ngón tay.",
+        },
+        {
+          kr: "수건",
+          en: "towel, washcloth",
+          vi: "khăn tắm, khăn mặt",
+          hv: "手巾",
+          hvR: "thủ cân",
+          pure: false,
+          explain:
+            "Khăn lau. 수건으로 닦다 = lau bằng khăn. 수(手, tay) + 건(巾, vải). 목욕 수건 = khăn tắm.",
+          ex: "수건으로 손을 닦아요.",
+          exVi: "Tôi lau tay bằng khăn.",
+        },
+        {
+          kr: "수술하다",
+          en: "to perform/have surgery",
+          vi: "phẫu thuật",
+          hv: "手術",
+          hvR: "thủ thuật",
+          pure: false,
+          explain:
+            "Mổ, phẫu thuật. 수술을 받다 = được phẫu thuật. 수술이 잘 됐다 = phẫu thuật thành công.",
+          ex: "내일 수술해요.",
+          exVi: "Ngày mai tôi phẫu thuật.",
+        },
+        {
+          kr: "안경",
+          en: "glasses, spectacles",
+          vi: "kính mắt, mắt kính",
+          hv: "眼鏡",
+          hvR: "nhãn kính",
+          pure: false,
+          explain:
+            "Kính mắt. 안경을 쓰다 = đeo kính. 안경을 벗다 = tháo kính. 선글라스 = kính mát.",
+          ex: "안경을 쓰기 시작했어요.",
+          exVi: "Tôi đã bắt đầu đeo kính.",
+        },
+        {
+          kr: "약",
+          en: "medicine; about/approximately",
+          vi: "khoảng; thuốc",
+          hv: "藥/約",
+          hvR: "dược / ước",
+          pure: false,
+          explain:
+            "Hai nghĩa: (1) 藥 — thuốc (약을 먹다 = uống thuốc), (2) 約 — khoảng (약 30분 = khoảng 30 phút).",
+          ex: "약을 먹었어요?",
+          exVi: "Bạn đã uống thuốc chưa?",
+        },
+        {
+          kr: "약국",
+          en: "pharmacy, drugstore",
+          vi: "hiệu thuốc, nhà thuốc",
+          hv: "藥局",
+          hvR: "dược cục",
+          pure: false,
+          explain:
+            "Nhà thuốc. 약국에 가다 = đến nhà thuốc. Ở Hàn, nhiều loại thuốc cần toa bác sĩ.",
+          ex: "약국에서 약을 샀어요.",
+          exVi: "Tôi đã mua thuốc ở nhà thuốc.",
+        },
+        {
+          kr: "어깨",
+          en: "shoulder",
+          vi: "vai (cơ thể)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Vai. 어깨가 아프다 = đau vai. 어깨를 주무르다 = xoa bóp vai. 어깨동무 = khoác vai nhau.",
+          ex: "어깨가 뭉쳤어요.",
+          exVi: "Vai tôi bị căng cơ rồi.",
+        },
+        {
+          kr: "얼굴",
+          en: "face",
+          vi: "khuôn mặt, mặt",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Khuôn mặt. 얼굴이 예쁘다 = mặt đẹp. 얼굴을 씻다 = rửa mặt. 얼굴빛 = sắc mặt.",
+          ex: "얼굴이 빨개요.",
+          exVi: "Mặt bạn đỏ lắm.",
+        },
+        {
+          kr: "입",
+          en: "mouth",
+          vi: "miệng",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Miệng. 입을 열다 = mở miệng. 입맛 = khẩu vị. 입술 = môi. 입냄새 = hơi thở có mùi.",
+          ex: "입이 아파요.",
+          exVi: "Miệng tôi đau.",
+        },
+        {
+          kr: "입원하다",
+          en: "to be hospitalized",
+          vi: "nhập viện",
+          hv: "入院",
+          hvR: "nhập viện",
+          pure: false,
+          explain:
+            "Nhập viện điều trị nội trú. 입원하다 = nhập viện. 퇴원하다 = xuất viện.",
+          ex: "사고로 입원했어요.",
+          exVi: "Tôi đã nhập viện do tai nạn.",
+        },
+        {
+          kr: "잠",
+          en: "sleep, slumber",
+          vi: "giấc ngủ",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Giấc ngủ. 잠을 자다 = ngủ. 잠이 오다 = buồn ngủ. 잠을 못 자다 = không ngủ được.",
+          ex: "잠이 안 와요.",
+          exVi: "Tôi không ngủ được.",
+        },
+        {
+          kr: "주사",
+          en: "injection, shot",
+          vi: "mũi tiêm",
+          hv: "注射",
+          hvR: "chú xạ",
+          pure: false,
+          explain:
+            "Mũi tiêm. 주사를 맞다 = bị tiêm. 주사기 = ống tiêm. 예방 주사 = tiêm phòng.",
+          ex: "주사 맞는 게 무서워요.",
+          exVi: "Tôi sợ tiêm.",
+        },
+        {
+          kr: "증세",
+          en: "symptom, condition",
+          vi: "triệu chứng (bệnh)",
+          hv: "症勢",
+          hvR: "chứng thế",
+          pure: false,
+          explain:
+            "Triệu chứng bệnh. 증세가 어때요? = Triệu chứng thế nào? 증세가 심하다 = triệu chứng nặng.",
+          ex: "증세가 어떻게 되세요?",
+          exVi: "Triệu chứng của bạn như thế nào?",
+        },
+        {
+          kr: "치과",
+          en: "dentistry, dental clinic",
+          vi: "nha khoa, phòng nha",
+          hv: "齒科",
+          hvR: "xỉ khoa",
+          pure: false,
+          explain:
+            "Phòng khám nha khoa. 치과에 가다 = đi nha sĩ. 치과 의사 = nha sĩ.",
+          ex: "치과에 가야 해요.",
+          exVi: "Tôi phải đi nha sĩ.",
+        },
+        {
+          kr: "치약",
+          en: "toothpaste",
+          vi: "kem đánh răng",
+          hv: "齒藥",
+          hvR: "xỉ dược",
+          pure: false,
+          explain:
+            "Kem đánh răng. 치(齒, răng) + 약(藥, thuốc). 치약으로 이를 닦다 = đánh răng bằng kem.",
+          ex: "치약이 다 떨어졌어요.",
+          exVi: "Kem đánh răng hết rồi.",
+        },
+        {
+          kr: "칫솔",
+          en: "toothbrush",
+          vi: "bàn chải đánh răng",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Bàn chải đánh răng. 치(齒, răng) + 솔(bàn chải). 칫솔로 이를 닦다 = đánh răng bằng bàn chải.",
+          ex: "칫솔을 새로 샀어요.",
+          exVi: "Tôi đã mua bàn chải đánh răng mới.",
+        },
+        {
+          kr: "코",
+          en: "nose",
+          vi: "mũi (cơ thể)",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Cái mũi. 코가 막히다 = nghẹt mũi. 코를 풀다 = xì mũi. 코피 = chảy máu cam.",
+          ex: "코가 막혀서 답답해요.",
+          exVi: "Nghẹt mũi khó chịu quá.",
+        },
+        {
+          kr: "코피",
+          en: "nosebleed",
+          vi: "chảy máu cam",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Chảy máu cam. 코(mũi) + 피(máu). 코피가 나다 = bị chảy máu cam.",
+          ex: "갑자기 코피가 났어요.",
+          exVi: "Tôi đột nhiên bị chảy máu cam.",
+        },
+        {
+          kr: "콧물",
+          en: "nasal discharge, runny nose",
+          vi: "nước mũi",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Nước mũi. 코(mũi) + ㅅ + 물(nước). 콧물이 나다 = chảy nước mũi. 콧물을 닦다 = lau nước mũi.",
+          ex: "감기에 걸려서 콧물이 나요.",
+          exVi: "Tôi bị cảm nên chảy nước mũi.",
+        },
+        {
+          kr: "키",
+          en: "height; key",
+          vi: "chiều cao; chìa khóa",
+          hv: null,
+          hvR: "thuần Hàn (2 nghĩa)",
+          pure: true,
+          explain:
+            "Hai nghĩa: (1) chiều cao cơ thể — 키가 크다(cao), 키가 작다(thấp), (2) chìa khóa (ít dùng, thường dùng 열쇠).",
+          ex: "키가 얼마예요?",
+          exVi: "Bạn cao bao nhiêu?",
+        },
+        {
+          kr: "타월",
+          en: "towel",
+          vi: "khăn (tắm/mặt)",
+          hv: null,
+          hvR: "từ tiếng Anh 'towel'",
+          pure: true,
+          explain:
+            "Khăn lau. Từ vay mượn tiếng Anh. Tương tự 수건 nhưng mang sắc thái hiện đại hơn.",
+          ex: "목욕 후에 타월로 몸을 닦아요.",
+          exVi: "Sau khi tắm tôi lau người bằng khăn.",
+        },
+        {
+          kr: "피",
+          en: "blood",
+          vi: "máu",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Máu. 피가 나다 = chảy máu. 피를 흘리다 = đổ máu. 헌혈하다 = hiến máu.",
+          ex: "피가 나요.",
+          exVi: "Chảy máu rồi.",
+        },
+        {
+          kr: "허리",
+          en: "waist, lower back",
+          vi: "eo, thắt lưng",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Eo hoặc vùng thắt lưng. 허리가 아프다 = đau lưng/eo. 허리를 펴다 = thẳng lưng.",
+          ex: "허리가 너무 아파요.",
+          exVi: "Lưng tôi đau quá.",
+        },
+        {
+          kr: "화장품",
+          en: "cosmetics, makeup",
+          vi: "mỹ phẩm",
+          hv: "化粧品",
+          hvR: "hóa trang phẩm",
+          pure: false,
+          explain:
+            "Mỹ phẩm, đồ trang điểm. 화장품을 바르다 = thoa mỹ phẩm. Hàn Quốc là cường quốc mỹ phẩm thế giới (K-beauty).",
+          ex: "한국 화장품이 유명해요.",
+          exVi: "Mỹ phẩm Hàn Quốc rất nổi tiếng.",
+        },
+        {
+          kr: "환자",
+          en: "patient",
+          vi: "bệnh nhân",
+          hv: "患者",
+          hvR: "hoạn giả",
+          pure: false,
+          explain:
+            "Bệnh nhân. 환자를 치료하다 = điều trị bệnh nhân. 외래 환자 = bệnh nhân ngoại trú.",
+          ex: "환자가 많아요.",
+          exVi: "Có nhiều bệnh nhân.",
+        },
+        {
+          kr: "휴지",
+          en: "tissue, toilet paper",
+          vi: "giấy vệ sinh",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Giấy vệ sinh hoặc khăn giấy. 휴지를 뽑다 = rút giấy. 휴지통 = thùng rác (thùng đựng giấy).",
+          ex: "휴지가 없어요.",
+          exVi: "Hết giấy vệ sinh rồi.",
+        },
+        {
+          kr: "힘",
+          en: "strength, power, energy",
+          vi: "sức mạnh, lực",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Sức mạnh, năng lượng. 힘이 세다 = mạnh. 힘이 없다 = không có sức. 힘내요! = Cố lên!/Cố gắng nhé!",
+          ex: "힘내세요!",
+          exVi: "Cố lên nhé!",
+        },
+      ];
 
-<script>
-const vocab = [
-  { kr:"가슴", en:"chest, breast", vi:"ngực", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngực, lồng ngực. 가슴이 아프다 = đau ngực (cả nghĩa thể chất lẫn cảm xúc). 가슴이 두근거리다 = tim đập hồi hộp.",
-    ex:"가슴이 두근거려요.", exVi:"Tim tôi đang đập hồi hộp." },
-  { kr:"감기", en:"cold, flu", vi:"cảm lạnh, cảm cúm", hv:"感氣", hvR:"cảm khí", pure:false,
-    explain:"Cảm lạnh, cảm cúm. 감기에 걸리다 = bị cảm. 감기가 낫다 = hết cảm. Rất phổ biến mùa đông.",
-    ex:"감기에 걸렸어요.", exVi:"Tôi bị cảm rồi." },
-  { kr:"감기약", en:"cold medicine", vi:"thuốc cảm", hv:"感氣藥", hvR:"cảm khí dược", pure:false,
-    explain:"Thuốc trị cảm cúm. 감기약을 먹다 = uống thuốc cảm. 감기(cảm) + 약(thuốc).",
-    ex:"감기약을 먹었어요.", exVi:"Tôi đã uống thuốc cảm." },
-  { kr:"건강", en:"health", vi:"sức khỏe", hv:"健康", hvR:"kiện khang", pure:false,
-    explain:"Sức khỏe. 건강하다 = khỏe mạnh. 건강을 지키다 = giữ gìn sức khỏe. Câu chúc phổ biến: 건강하세요!",
-    ex:"건강이 제일 중요해요.", exVi:"Sức khỏe là quan trọng nhất." },
-  { kr:"귀", en:"ear", vi:"tai", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Cái tai. 귀가 아프다 = đau tai. 귀를 기울이다 = lắng nghe (nghĩa bóng). 귀걸이 = bông tai.",
-    ex:"귀가 아파요.", exVi:"Tôi bị đau tai." },
-  { kr:"금연", en:"no smoking, quit smoking", vi:"cấm hút thuốc", hv:"禁煙", hvR:"cấm yên", pure:false,
-    explain:"Cấm hút thuốc hoặc bỏ thuốc. 금연 구역 = khu vực cấm hút thuốc. 금연하다 = bỏ thuốc lá.",
-    ex:"여기는 금연 구역이에요.", exVi:"Đây là khu vực cấm hút thuốc." },
-  { kr:"금주", en:"abstinence from alcohol", vi:"cai rượu, kiêng rượu", hv:"禁酒", hvR:"cấm tửu", pure:false,
-    explain:"Kiêng rượu, cai rượu. 금주하다 = kiêng uống rượu. 금(禁, cấm) + 주(酒, rượu).",
-    ex:"건강을 위해 금주하고 있어요.", exVi:"Tôi đang kiêng rượu vì sức khỏe." },
-  { kr:"기침", en:"cough", vi:"ho (bệnh)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ho. 기침하다 = ho. 기침이 나다 = bị ho. 기침이 심하다 = ho nặng.",
-    ex:"기침이 많이 나요.", exVi:"Tôi ho nhiều lắm." },
-  { kr:"내과", en:"internal medicine", vi:"khoa nội, bác sĩ nội", hv:"內科", hvR:"nội khoa", pure:false,
-    explain:"Khoa nội — chuyên về bệnh bên trong cơ thể. 내과에 가다 = đến khám nội khoa.",
-    ex:"내과에 가서 진찰받았어요.", exVi:"Tôi đã đến khoa nội khám bệnh." },
-  { kr:"눈", en:"eye; snow", vi:"mắt; tuyết", hv:null, hvR:"thuần Hàn (2 nghĩa)", pure:true,
-    explain:"Hai nghĩa hoàn toàn khác nhau: (1) mắt — 눈이 아프다(đau mắt), (2) tuyết — 눈이 오다(tuyết rơi). Ngữ cảnh phân biệt.",
-    ex:"눈이 빨개요.", exVi:"Mắt tôi đỏ rồi." },
-  { kr:"눈물", en:"tear, teardrop", vi:"nước mắt", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Nước mắt. 눈물이 나다 = chảy nước mắt, rơi lệ. 눈물을 흘리다 = khóc, rơi nước mắt.",
-    ex:"눈물이 나요.", exVi:"Tôi chảy nước mắt rồi." },
-  { kr:"다리", en:"leg; bridge", vi:"chân; cầu", hv:null, hvR:"thuần Hàn (2 nghĩa)", pure:true,
-    explain:"Hai nghĩa: (1) chân người/động vật — 다리가 아프다(đau chân), (2) cây cầu — 한강 다리(cầu sông Hàn).",
-    ex:"다리가 아파요.", exVi:"Tôi bị đau chân." },
-  { kr:"다이어트", en:"diet, dieting", vi:"ăn kiêng, chế độ ăn", hv:null, hvR:"từ tiếng Anh 'diet'", pure:true,
-    explain:"Ăn kiêng, giảm cân. 다이어트하다 = ăn kiêng. Rất phổ biến trong văn hóa Hàn, đặc biệt với giới trẻ.",
-    ex:"다이어트 중이에요.", exVi:"Tôi đang ăn kiêng." },
-  { kr:"다치다", en:"to get hurt, injured", vi:"bị thương, bị đau", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Bị thương do tai nạn hoặc va chạm. 다치지 마세요 = cẩn thận đừng để bị thương.",
-    ex:"넘어져서 다쳤어요.", exVi:"Tôi bị té và bị thương." },
-  { kr:"담배", en:"cigarette, tobacco", vi:"thuốc lá", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Thuốc lá. 담배를 피우다 = hút thuốc. 담배를 끊다 = bỏ thuốc lá.",
-    ex:"담배를 끊었어요.", exVi:"Tôi đã bỏ thuốc lá rồi." },
-  { kr:"등", en:"back (body); etc.", vi:"lưng (cơ thể); v.v.", hv:"等", hvR:"đẳng (v.v.) / thuần Hàn (lưng)", pure:true,
-    explain:"Hai nghĩa: (1) lưng — 등이 아프다(đau lưng), (2) 等 = v.v., và những thứ khác (사과, 바나나 등 = táo, chuối, v.v.).",
-    ex:"등이 많이 아파요.", exVi:"Lưng tôi đau nhiều lắm." },
-  { kr:"땀", en:"sweat, perspiration", vi:"mồ hôi", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Mồ hôi. 땀을 흘리다 = đổ mồ hôi. 땀이 나다 = ra mồ hôi. 식은땀 = mồ hôi lạnh.",
-    ex:"운동하면 땀이 나요.", exVi:"Tập thể dục thì ra mồ hôi." },
-  { kr:"로션", en:"lotion, moisturizer", vi:"kem dưỡng da, lotion", hv:null, hvR:"từ tiếng Anh 'lotion'", pure:true,
-    explain:"Kem dưỡng ẩm da. Từ vay mượn tiếng Anh. Hàn Quốc nổi tiếng về skincare và lotion dưỡng da.",
-    ex:"세수 후에 로션을 발라요.", exVi:"Sau khi rửa mặt tôi thoa kem dưỡng." },
-  { kr:"머리", en:"head; hair", vi:"đầu; tóc", hv:null, hvR:"thuần Hàn (2 nghĩa)", pure:true,
-    explain:"Hai nghĩa: (1) cái đầu — 머리가 아프다(đau đầu), (2) mái tóc — 머리를 자르다(cắt tóc). Ngữ cảnh phân biệt.",
-    ex:"머리가 아파요.", exVi:"Tôi bị đau đầu." },
-  { kr:"면도", en:"shaving", vi:"cạo râu, dao cạo râu", hv:"面刀", hvR:"diện đao", pure:false,
-    explain:"Cạo râu. 면도하다 = cạo râu. 면도기 = máy cạo râu. 면도칼 = dao cạo.",
-    ex:"매일 아침 면도해요.", exVi:"Mỗi sáng tôi cạo râu." },
-  { kr:"목", en:"neck, throat", vi:"cổ (cổ họng)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Cổ hoặc cổ họng. 목이 아프다 = đau cổ họng. 목도리 = khăn quàng cổ.",
-    ex:"목이 아프고 열이 나요.", exVi:"Tôi đau cổ họng và sốt." },
-  { kr:"목소리", en:"voice", vi:"giọng nói, tiếng nói", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Giọng nói. 목소리가 크다/작다 = giọng to/nhỏ. 목소리가 좋다 = giọng hay.",
-    ex:"목소리가 정말 좋아요.", exVi:"Giọng nói của bạn thật hay." },
-  { kr:"목욕", en:"bath, bathing", vi:"tắm, việc tắm rửa", hv:"沐浴", hvR:"mộc dục", pure:false,
-    explain:"Việc tắm. 목욕하다 = tắm. 목욕탕 = nhà tắm công cộng. 목욕실 = phòng tắm.",
-    ex:"목욕하고 나면 개운해요.", exVi:"Tắm xong thấy sảng khoái lắm." },
-  { kr:"몸", en:"body", vi:"cơ thể, thân thể", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Cơ thể con người. 몸이 아프다 = cơ thể đau/bị bệnh. 몸을 관리하다 = chăm sóc sức khỏe.",
-    ex:"몸이 안 좋아요.", exVi:"Tôi không được khỏe." },
-  { kr:"몸살", en:"body ache from fatigue", vi:"đau mình (vì mệt mỏi)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Đau nhức toàn thân do mệt mỏi. 몸살이 나다 = bị đau mình. Thường kèm theo sốt nhẹ.",
-    ex:"몸살이 나서 쉬고 있어요.", exVi:"Tôi đang nghỉ vì bị đau mình." },
-  { kr:"무릎", en:"knee", vi:"đầu gối", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Đầu gối. 무릎이 아프다 = đau đầu gối. 무릎을 꿇다 = quỳ gối.",
-    ex:"무릎이 아파서 못 걸어요.", exVi:"Tôi đau đầu gối nên không đi được." },
-  { kr:"발", en:"foot, feet", vi:"bàn chân, chân", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Bàn chân. 발이 아프다 = đau chân. 발을 씻다 = rửa chân. 발가락 = ngón chân.",
-    ex:"발이 아파요.", exVi:"Tôi đau chân." },
-  { kr:"발가락", en:"toe(s)", vi:"ngón chân", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngón chân. 발(bàn chân) + 가락(ngón). 발가락이 다섯 개 = có năm ngón chân.",
-    ex:"발가락을 다쳤어요.", exVi:"Tôi bị thương ở ngón chân." },
-  { kr:"배탈", en:"stomachache, upset stomach", vi:"đau bụng (do ăn)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Đau bụng do ăn uống không hợp. 배탈이 나다 = bị đau bụng. 배(bụng) + 탈(rối loạn).",
-    ex:"배탈이 났어요.", exVi:"Tôi bị đau bụng rồi." },
-  { kr:"병", en:"illness; bottle (counter)", vi:"bệnh tật; ...chai (đơn vị)", hv:"病/甁", hvR:"bệnh / bình", pure:false,
-    explain:"Hai nghĩa: (1) 病 — bệnh tật (병이 나다 = phát bệnh), (2) 甁 — cái chai (물 한 병 = một chai nước).",
-    ex:"무슨 병이에요?", exVi:"Bạn mắc bệnh gì vậy?" },
-  { kr:"병원", en:"hospital, clinic", vi:"bệnh viện", hv:"病院", hvR:"bệnh viện", pure:false,
-    explain:"Bệnh viện hoặc phòng khám. 병원에 가다 = đi bệnh viện. 병원에 입원하다 = nhập viện.",
-    ex:"병원에 가야 해요.", exVi:"Tôi phải đi bệnh viện." },
-  { kr:"비누", en:"soap", vi:"xà phòng, xà bông", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Xà phòng bánh. 비누로 손을 씻다 = rửa tay bằng xà phòng. 비누 거품 = bọt xà phòng.",
-    ex:"비누로 손을 씻어요.", exVi:"Tôi rửa tay bằng xà phòng." },
-  { kr:"살", en:"flesh; years old (counter)", vi:"thịt; ...tuổi (đơn vị tuổi)", hv:null, hvR:"thuần Hàn (2 nghĩa)", pure:true,
-    explain:"Hai nghĩa: (1) thịt/da thịt cơ thể — 살이 찌다(béo lên), (2) đơn vị tuổi — 스무 살(20 tuổi).",
-    ex:"살이 많이 쪘어요.", exVi:"Tôi đã tăng cân nhiều rồi." },
-  { kr:"상처", en:"wound, scratch, scar", vi:"vết thương, vết xước", hv:"傷處", hvR:"thương xứ", pure:false,
-    explain:"Vết thương trên da hoặc tổn thương cảm xúc. 상처가 생기다 = bị thương. 상처를 치료하다 = chữa vết thương.",
-    ex:"상처에 약을 발랐어요.", exVi:"Tôi đã bôi thuốc lên vết thương." },
-  { kr:"샴푸", en:"shampoo", vi:"dầu gội đầu", hv:null, hvR:"từ tiếng Anh 'shampoo'", pure:true,
-    explain:"Dầu gội đầu. Từ vay mượn tiếng Anh. 샴푸로 머리를 감다 = gội đầu bằng dầu gội.",
-    ex:"샴푸로 머리를 감았어요.", exVi:"Tôi đã gội đầu bằng dầu gội." },
-  { kr:"소리", en:"sound, noise, voice", vi:"âm thanh, tiếng động", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Âm thanh, tiếng. 소리가 크다 = âm thanh to. 소리를 지르다 = la hét. 무슨 소리예요? = Tiếng gì vậy?",
-    ex:"무슨 소리예요?", exVi:"Đó là tiếng gì vậy?" },
-  { kr:"소화제", en:"digestive medicine", vi:"thuốc tiêu hóa", hv:"消化劑", hvR:"tiêu hóa tễ", pure:false,
-    explain:"Thuốc hỗ trợ tiêu hóa. 소화(消化, tiêu hóa) + 제(劑, thuốc/chất). 소화가 안 돼서 소화제를 먹다.",
-    ex:"소화가 안 돼서 소화제를 먹었어요.", exVi:"Tôi bị khó tiêu nên đã uống thuốc tiêu hóa." },
-  { kr:"손", en:"hand", vi:"bàn tay, tay", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Bàn tay. 손을 씻다 = rửa tay. 손을 잡다 = nắm tay. 손가락 = ngón tay.",
-    ex:"손을 자주 씻어요.", exVi:"Tôi thường xuyên rửa tay." },
-  { kr:"손가락", en:"finger(s)", vi:"ngón tay", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Ngón tay. 손(tay) + 가락(ngón). 손가락이 다섯 개 = có năm ngón tay. 약손가락 = ngón đeo nhẫn.",
-    ex:"손가락을 다쳤어요.", exVi:"Tôi bị thương ở ngón tay." },
-  { kr:"수건", en:"towel, washcloth", vi:"khăn tắm, khăn mặt", hv:"手巾", hvR:"thủ cân", pure:false,
-    explain:"Khăn lau. 수건으로 닦다 = lau bằng khăn. 수(手, tay) + 건(巾, vải). 목욕 수건 = khăn tắm.",
-    ex:"수건으로 손을 닦아요.", exVi:"Tôi lau tay bằng khăn." },
-  { kr:"수술하다", en:"to perform/have surgery", vi:"phẫu thuật", hv:"手術", hvR:"thủ thuật", pure:false,
-    explain:"Mổ, phẫu thuật. 수술을 받다 = được phẫu thuật. 수술이 잘 됐다 = phẫu thuật thành công.",
-    ex:"내일 수술해요.", exVi:"Ngày mai tôi phẫu thuật." },
-  { kr:"안경", en:"glasses, spectacles", vi:"kính mắt, mắt kính", hv:"眼鏡", hvR:"nhãn kính", pure:false,
-    explain:"Kính mắt. 안경을 쓰다 = đeo kính. 안경을 벗다 = tháo kính. 선글라스 = kính mát.",
-    ex:"안경을 쓰기 시작했어요.", exVi:"Tôi đã bắt đầu đeo kính." },
-  { kr:"약", en:"medicine; about/approximately", vi:"khoảng; thuốc", hv:"藥/約", hvR:"dược / ước", pure:false,
-    explain:"Hai nghĩa: (1) 藥 — thuốc (약을 먹다 = uống thuốc), (2) 約 — khoảng (약 30분 = khoảng 30 phút).",
-    ex:"약을 먹었어요?", exVi:"Bạn đã uống thuốc chưa?" },
-  { kr:"약국", en:"pharmacy, drugstore", vi:"hiệu thuốc, nhà thuốc", hv:"藥局", hvR:"dược cục", pure:false,
-    explain:"Nhà thuốc. 약국에 가다 = đến nhà thuốc. Ở Hàn, nhiều loại thuốc cần toa bác sĩ.",
-    ex:"약국에서 약을 샀어요.", exVi:"Tôi đã mua thuốc ở nhà thuốc." },
-  { kr:"어깨", en:"shoulder", vi:"vai (cơ thể)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Vai. 어깨가 아프다 = đau vai. 어깨를 주무르다 = xoa bóp vai. 어깨동무 = khoác vai nhau.",
-    ex:"어깨가 뭉쳤어요.", exVi:"Vai tôi bị căng cơ rồi." },
-  { kr:"얼굴", en:"face", vi:"khuôn mặt, mặt", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Khuôn mặt. 얼굴이 예쁘다 = mặt đẹp. 얼굴을 씻다 = rửa mặt. 얼굴빛 = sắc mặt.",
-    ex:"얼굴이 빨개요.", exVi:"Mặt bạn đỏ lắm." },
-  { kr:"입", en:"mouth", vi:"miệng", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Miệng. 입을 열다 = mở miệng. 입맛 = khẩu vị. 입술 = môi. 입냄새 = hơi thở có mùi.",
-    ex:"입이 아파요.", exVi:"Miệng tôi đau." },
-  { kr:"입원하다", en:"to be hospitalized", vi:"nhập viện", hv:"入院", hvR:"nhập viện", pure:false,
-    explain:"Nhập viện điều trị nội trú. 입원하다 = nhập viện. 퇴원하다 = xuất viện.",
-    ex:"사고로 입원했어요.", exVi:"Tôi đã nhập viện do tai nạn." },
-  { kr:"잠", en:"sleep, slumber", vi:"giấc ngủ", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Giấc ngủ. 잠을 자다 = ngủ. 잠이 오다 = buồn ngủ. 잠을 못 자다 = không ngủ được.",
-    ex:"잠이 안 와요.", exVi:"Tôi không ngủ được." },
-  { kr:"주사", en:"injection, shot", vi:"mũi tiêm", hv:"注射", hvR:"chú xạ", pure:false,
-    explain:"Mũi tiêm. 주사를 맞다 = bị tiêm. 주사기 = ống tiêm. 예방 주사 = tiêm phòng.",
-    ex:"주사 맞는 게 무서워요.", exVi:"Tôi sợ tiêm." },
-  { kr:"증세", en:"symptom, condition", vi:"triệu chứng (bệnh)", hv:"症勢", hvR:"chứng thế", pure:false,
-    explain:"Triệu chứng bệnh. 증세가 어때요? = Triệu chứng thế nào? 증세가 심하다 = triệu chứng nặng.",
-    ex:"증세가 어떻게 되세요?", exVi:"Triệu chứng của bạn như thế nào?" },
-  { kr:"치과", en:"dentistry, dental clinic", vi:"nha khoa, phòng nha", hv:"齒科", hvR:"xỉ khoa", pure:false,
-    explain:"Phòng khám nha khoa. 치과에 가다 = đi nha sĩ. 치과 의사 = nha sĩ.",
-    ex:"치과에 가야 해요.", exVi:"Tôi phải đi nha sĩ." },
-  { kr:"치약", en:"toothpaste", vi:"kem đánh răng", hv:"齒藥", hvR:"xỉ dược", pure:false,
-    explain:"Kem đánh răng. 치(齒, răng) + 약(藥, thuốc). 치약으로 이를 닦다 = đánh răng bằng kem.",
-    ex:"치약이 다 떨어졌어요.", exVi:"Kem đánh răng hết rồi." },
-  { kr:"칫솔", en:"toothbrush", vi:"bàn chải đánh răng", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Bàn chải đánh răng. 치(齒, răng) + 솔(bàn chải). 칫솔로 이를 닦다 = đánh răng bằng bàn chải.",
-    ex:"칫솔을 새로 샀어요.", exVi:"Tôi đã mua bàn chải đánh răng mới." },
-  { kr:"코", en:"nose", vi:"mũi (cơ thể)", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Cái mũi. 코가 막히다 = nghẹt mũi. 코를 풀다 = xì mũi. 코피 = chảy máu cam.",
-    ex:"코가 막혀서 답답해요.", exVi:"Nghẹt mũi khó chịu quá." },
-  { kr:"코피", en:"nosebleed", vi:"chảy máu cam", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Chảy máu cam. 코(mũi) + 피(máu). 코피가 나다 = bị chảy máu cam.",
-    ex:"갑자기 코피가 났어요.", exVi:"Tôi đột nhiên bị chảy máu cam." },
-  { kr:"콧물", en:"nasal discharge, runny nose", vi:"nước mũi", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Nước mũi. 코(mũi) + ㅅ + 물(nước). 콧물이 나다 = chảy nước mũi. 콧물을 닦다 = lau nước mũi.",
-    ex:"감기에 걸려서 콧물이 나요.", exVi:"Tôi bị cảm nên chảy nước mũi." },
-  { kr:"키", en:"height; key", vi:"chiều cao; chìa khóa", hv:null, hvR:"thuần Hàn (2 nghĩa)", pure:true,
-    explain:"Hai nghĩa: (1) chiều cao cơ thể — 키가 크다(cao), 키가 작다(thấp), (2) chìa khóa (ít dùng, thường dùng 열쇠).",
-    ex:"키가 얼마예요?", exVi:"Bạn cao bao nhiêu?" },
-  { kr:"타월", en:"towel", vi:"khăn (tắm/mặt)", hv:null, hvR:"từ tiếng Anh 'towel'", pure:true,
-    explain:"Khăn lau. Từ vay mượn tiếng Anh. Tương tự 수건 nhưng mang sắc thái hiện đại hơn.",
-    ex:"목욕 후에 타월로 몸을 닦아요.", exVi:"Sau khi tắm tôi lau người bằng khăn." },
-  { kr:"피", en:"blood", vi:"máu", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Máu. 피가 나다 = chảy máu. 피를 흘리다 = đổ máu. 헌혈하다 = hiến máu.",
-    ex:"피가 나요.", exVi:"Chảy máu rồi." },
-  { kr:"허리", en:"waist, lower back", vi:"eo, thắt lưng", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Eo hoặc vùng thắt lưng. 허리가 아프다 = đau lưng/eo. 허리를 펴다 = thẳng lưng.",
-    ex:"허리가 너무 아파요.", exVi:"Lưng tôi đau quá." },
-  { kr:"화장품", en:"cosmetics, makeup", vi:"mỹ phẩm", hv:"化粧品", hvR:"hóa trang phẩm", pure:false,
-    explain:"Mỹ phẩm, đồ trang điểm. 화장품을 바르다 = thoa mỹ phẩm. Hàn Quốc là cường quốc mỹ phẩm thế giới (K-beauty).",
-    ex:"한국 화장품이 유명해요.", exVi:"Mỹ phẩm Hàn Quốc rất nổi tiếng." },
-  { kr:"환자", en:"patient", vi:"bệnh nhân", hv:"患者", hvR:"hoạn giả", pure:false,
-    explain:"Bệnh nhân. 환자를 치료하다 = điều trị bệnh nhân. 외래 환자 = bệnh nhân ngoại trú.",
-    ex:"환자가 많아요.", exVi:"Có nhiều bệnh nhân." },
-  { kr:"휴지", en:"tissue, toilet paper", vi:"giấy vệ sinh", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Giấy vệ sinh hoặc khăn giấy. 휴지를 뽑다 = rút giấy. 휴지통 = thùng rác (thùng đựng giấy).",
-    ex:"휴지가 없어요.", exVi:"Hết giấy vệ sinh rồi." },
-  { kr:"힘", en:"strength, power, energy", vi:"sức mạnh, lực", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Sức mạnh, năng lượng. 힘이 세다 = mạnh. 힘이 없다 = không có sức. 힘내요! = Cố lên!/Cố gắng nhé!",
-    ex:"힘내세요!", exVi:"Cố lên nhé!" },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    const hvCell = item.pure
-      ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
-      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          const hvCell = item.pure
+            ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
+            : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -365,42 +1218,52 @@ function renderTable(data) {
         <span class="example-kr">${item.ex}</span>
         <span class="example-vi">${item.exVi}</span>
       </td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all'
-      || (currentFilter === 'hv' && !item.pure)
-      || (currentFilter === 'pure' && item.pure);
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || (item.hv && item.hv.includes(q))
-      || item.hvR.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" ||
+            (currentFilter === "hv" && !item.pure) ||
+            (currentFilter === "pure" && item.pure);
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            item.hvR.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
