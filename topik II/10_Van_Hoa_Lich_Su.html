@@ -1,200 +1,888 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Văn hóa & Truyền thống</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #fdf6ee;
-    --card: #fff;
-    --accent: #7a3a00;
-    --text: #2a1200;
-    --sub: #9a7050;
-    --border: #ecd8c0;
-    --tag-trad: #fde8cc;
-    --tag-relig: #e8eef8;
-    --tag-holiday: #e8f8e8;
-    --tag-art: #f8e8f8;
-    --tag-history: #fce8e8;
-    --highlight: #fff8f0;
-    --row-alt: #fdfaf6;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Be Vietnam Pro',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
-  .header { background:var(--text); color:#fdf6ee; padding:36px 40px 28px; position:relative; overflow:hidden; }
-  .header::before { content:'문화'; position:absolute; right:40px; top:50%; transform:translateY(-50%); font-family:'Noto Serif KR',serif; font-size:120px; color:rgba(255,255,255,.05); font-weight:600; letter-spacing:-4px; user-select:none; }
-  .header h1 { font-family:'Noto Serif KR',serif; font-size:28px; font-weight:600; letter-spacing:1px; margin-bottom:6px; }
-  .header p { font-size:13px; font-weight:300; color:#b09070; letter-spacing:.5px; }
-  .count-badge { display:inline-block; background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:10px; letter-spacing:.5px; }
-  .controls { padding:20px 40px; background:var(--card); border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-  .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--sub); }
-  #searchInput { width:100%; padding:10px 12px 10px 38px; border:1.5px solid var(--border); border-radius:8px; font-family:'Be Vietnam Pro',sans-serif; font-size:14px; background:var(--bg); color:var(--text); outline:none; transition:border-color .2s; }
-  #searchInput:focus { border-color:var(--accent); }
-  #searchInput::placeholder { color:var(--sub); }
-  .filter-btn { padding:7px 12px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); font-family:'Be Vietnam Pro',sans-serif; font-size:11px; font-weight:500; color:var(--sub); cursor:pointer; transition:all .2s; white-space:nowrap; }
-  .filter-btn:hover,.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .result-count { font-size:12px; color:var(--sub); white-space:nowrap; }
-  .table-wrap { padding:24px 40px 60px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); }
-  thead { background:var(--text); color:#fdf6ee; }
-  th { padding:14px 16px; text-align:left; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
-  th:nth-child(1),td:nth-child(1) { width:60px; text-align:center; }
-  th:nth-child(2),td:nth-child(2) { width:145px; }
-  th:nth-child(3),td:nth-child(3) { width:185px; }
-  th:nth-child(4),td:nth-child(4) { width:210px; }
-  th:nth-child(5),td:nth-child(5) { width:120px; }
-  th:nth-child(6),td:nth-child(6) { min-width:280px; }
-  tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
-  tbody tr:nth-child(even) { background:var(--row-alt); }
-  tbody tr:hover { background:var(--highlight); }
-  td { padding:12px 16px; font-size:13.5px; vertical-align:middle; line-height:1.5; }
-  td:nth-child(1) { font-size:11px; color:var(--sub); font-weight:600; }
-  .korean-word { font-family:'Noto Serif KR',serif; font-size:18px; font-weight:600; color:var(--accent); display:block; line-height:1.3; }
-  .tag { display:inline-flex; align-items:center; border-radius:4px; padding:2px 8px; font-size:11px; font-weight:500; white-space:nowrap; }
-  .tag-trad    { background:var(--tag-trad);    color:#6a2a00; }
-  .tag-relig   { background:var(--tag-relig);   color:#0a1a60; }
-  .tag-holiday { background:var(--tag-holiday); color:#0a4a10; }
-  .tag-art     { background:var(--tag-art);     color:#5a0a5a; }
-  .tag-history { background:var(--tag-history); color:#7a0a0a; }
-  .note { font-size:12px; color:var(--sub); font-style:italic; }
-  .no-results { text-align:center; padding:60px; color:var(--sub); font-size:15px; display:none; }
-  .footer { text-align:center; padding:20px; font-size:11px; color:var(--sub); border-top:1px solid var(--border); }
-  @media(max-width:768px){.header{padding:24px 20px}.header::before{display:none}.controls{padding:16px 20px}.table-wrap{padding:16px 20px 40px}th,td{padding:10px 12px}.korean-word{font-size:15px}}
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>문화 & 전통 — Văn hóa & Truyền thống Hàn Quốc</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Văn hóa & Truyền thống · Chủ đề TOPIK II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="trad">Phong tục & Truyền thống</button>
-  <button class="filter-btn" data-filter="relig">Tôn giáo & Tín ngưỡng</button>
-  <button class="filter-btn" data-filter="holiday">Ngày lễ & Sự kiện</button>
-  <button class="filter-btn" data-filter="art">Nghệ thuật & Âm nhạc</button>
-  <button class="filter-btn" data-filter="history">Lịch sử & Di sản</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Văn hóa &amp; Truyền thống</div>
-<script>
-const vocab=[
-  {kr:"고궁",en:"traditional Korean palace",vi:"cung điện cổ Hàn Quốc",type:"history",note:"고(古,cổ)+궁(宮,cung). 경복궁, 창덕궁 등이 고궁. 고궁 방문(thăm cung điện cổ). 고궁 야경(cung điện về đêm)."},
-  {kr:"공주",en:"princess",vi:"công chúa",type:"history",note:"공주(公主). 왕의 딸. 공주님(công chúa nương). 신데렐라 공주(công chúa Cinderella). 충청도 공주시도 있음."},
-  {kr:"국악",en:"traditional Korean music",vi:"nhạc truyền thống Hàn Quốc",type:"art",note:"국악(國樂). 판소리, 가야금, 해금 등이 국악. 국악을 배우다(học nhạc truyền thống). 국악 공연(biểu diễn nhạc dân tộc)."},
-  {kr:"귀신",en:"ghost, spirit",vi:"ma, quỷ",type:"relig",note:"귀신(鬼神). 귀신이 나타나다(ma hiện ra). 귀신 이야기(truyện ma). 귀신을 무서워하다(sợ ma). 도깨비와 유사."},
-  {kr:"기념",en:"commemoration, memorial",vi:"kỷ niệm",type:"holiday",note:"기념(記念). 기념하다=kỷ niệm. 기념일(ngày kỷ niệm). 기념품(quà lưu niệm). 기념 행사(sự kiện kỷ niệm)."},
-  {kr:"기도",en:"prayer",vi:"lời cầu nguyện",type:"relig",note:"기도(祈禱). 기도하다=cầu nguyện. 기도를 드리다(dâng lời cầu nguyện). 새벽 기도(cầu nguyện sáng sớm). 소원을 빌다와 유사."},
-  {kr:"김장",en:"kimchi-making in winter",vi:"muối kimchi truyền thống mùa đông",type:"trad",note:"김장(沈藏). 김장을 담그다(muối kimchi mùa đông). 김장철(mùa muối kimchi — tháng 11~12). 온 가족이 함께 해요."},
-  {kr:"돌잔치",en:"first birthday celebration",vi:"lễ đầy thôi nôi",type:"trad",note:"돌(tròn 1 tuổi)+잔치(tiệc). 돌잔치를 열다(tổ chức tiệc đầy thôi nôi). 돌잡이(trẻ chọn đồ vật tiên tri tương lai)."},
-  {kr:"동서양",en:"East and West",vi:"đông tây, đông phương và tây phương",type:"history",note:"동(東,đông)+서(西,tây)+양(洋,phương). 동서양 문화 차이(khác biệt văn hóa Đông-Tây). 동서양을 아우르다."},
-  {kr:"동양화",en:"Oriental painting",vi:"tranh phương Đông",type:"art",note:"동양(東洋)+화(畫). 수묵화 등 동양식 그림. 동양화를 그리다(vẽ tranh phương Đông). ↔ 서양화(tranh Tây phương)."},
-  {kr:"동화",en:"fairy tale, children's story",vi:"truyện cổ tích",type:"art",note:"동화(童話). 동화를 읽다(đọc truyện cổ tích). 동화 속 주인공(nhân vật truyện cổ tích). 그림 형제 동화(truyện anh em Grimm)."},
-  {kr:"뒷이야기",en:"behind story, sequel",vi:"câu chuyện đằng sau",type:"art",note:"뒤(sau)+이야기(câu chuyện). 영화 뒷이야기(câu chuyện hậu trường phim). 사건 뒷이야기(câu chuyện đằng sau vụ việc)."},
-  {kr:"띠",en:"zodiac sign, belt",vi:"đai, cung (hoàng đạo)",type:"trad",note:"두 가지: (1) 띠(12지신 — cung hoàng đạo âm lịch: 쥐띠=chuột, 소띠=trâu,...), (2) 띠(dây đai). 무슨 띠예요?"},
-  {kr:"목사",en:"pastor, minister",vi:"mục sư",type:"relig",note:"목사(牧師). 교회에서 설교하는 분. 목사님(thưa mục sư). 개신교 목사(mục sư Tin lành). 신부(cha đạo) vs 목사."},
-  {kr:"무덤",en:"tomb, grave",vi:"ngôi mộ",type:"history",note:"무덤. 무덤을 쓰다(lập mộ). 무덤에 절을 하다(lạy ở mộ). 고분(古墳,lăng mộ cổ). 성묘(thăm mộ dịp Chuseok)."},
-  {kr:"문명",en:"civilization",vi:"văn minh",type:"history",note:"문명(文明). 고대 문명(văn minh cổ đại). 문명이 발달하다(văn minh phát triển). 한국 문명(văn minh Hàn Quốc)."},
-  {kr:"문화생활",en:"cultural life, enjoying culture",vi:"cuộc sống văn hóa",type:"trad",note:"문화(文化)+생활(生活). 문화생활을 즐기다(tận hưởng cuộc sống văn hóa). 공연, 전시회 등을 즐기는 생활."},
-  {kr:"문화유산",en:"cultural heritage",vi:"di sản văn hóa",type:"history",note:"문화(文化)+유산(遺産). 세계 문화유산(di sản văn hóa thế giới). 유네스코 문화유산(di sản UNESCO). 한글도 문화유산."},
-  {kr:"민속",en:"folklore, folk customs",vi:"dân gian, phong tục",type:"trad",note:"민속(民俗). 민속 문화(văn hóa dân gian). 민속촌(làng dân gian). 한국 민속(phong tục dân gian Hàn Quốc)."},
-  {kr:"민속놀이",en:"folk game, traditional game",vi:"trò chơi dân gian",type:"trad",note:"민속(dân gian)+놀이(trò chơi). 윷놀이, 제기차기, 널뛰기 등이 민속놀이. 명절에 많이 해요."},
-  {kr:"민요",en:"folk song",vi:"dân ca",type:"art",note:"민요(民謠). 아리랑이 대표적 민요. 민요를 부르다(hát dân ca). 각 지방의 민요(dân ca từng địa phương)."},
-  {kr:"배경",en:"background, setting",vi:"bối cảnh, hậu cảnh",type:"art",note:"배경(背景). 이야기의 배경(bối cảnh câu chuyện). 역사적 배경(bối cảnh lịch sử). 배경 음악(nhạc nền)."},
-  {kr:"보물",en:"treasure, national treasure",vi:"kho báu, bảo vật",type:"history",note:"보물(寶物). 국보와 보물(quốc bảo và bảo vật). 보물을 발견하다(tìm thấy kho báu). 보물 1호(bảo vật số 1)."},
-  {kr:"복날",en:"dog days of summer (eating health foods)",vi:"ngày ăn đồ bổ dưỡng mùa hè",type:"trad",note:"복(伏)+날(日). 초복, 중복, 말복(tam phục). 복날에 삼계탕, 보양식을 먹어요. 더운 여름 건강 관리 풍습."},
-  {kr:"부채",en:"folding fan",vi:"quạt cầm tay",type:"trad",note:"부채(扇). 합죽선(quạt nan truyền thống). 부채질하다(quạt). 단오에 부채를 선물하는 풍습. 부채춤(múa quạt)."},
-  {kr:"불교",en:"Buddhism",vi:"Phật giáo",type:"relig",note:"불교(佛敎). 불교 신자(tín đồ Phật giáo). 절(chùa). 불교 문화(văn hóa Phật giáo). 한국 3대 종교 중 하나."},
-  {kr:"삼일절",en:"March 1st Independence Movement Day",vi:"Ngày phong trào độc lập 1/3",type:"holiday",note:"삼일절(三一節). 1919년 3월 1일 독립 운동. 공휴일. 태극기를 달아요. 3·1 운동 기념일."},
-  {kr:"상징",en:"symbol",vi:"biểu tượng",type:"trad",note:"상징(象徵). 상징하다=biểu tượng. 태극기는 한국의 상징(cờ Taegeuk là biểu tượng của Hàn Quốc). 상징적 의미."},
-  {kr:"성당",en:"Catholic church, cathedral",vi:"nhà thờ Công giáo",type:"relig",note:"성당(聖堂). 천주교 성당(nhà thờ Công giáo). 성당에 가다(đến nhà thờ). 신부님이 미사를 집전하다."},
-  {kr:"세배",en:"New Year's bow",vi:"cúi chào Tết",type:"trad",note:"세배(歲拜). 설날에 어른께 세배를 드리다(cúi chào người lớn dịp Tết). 세뱃돈을 받다(nhận tiền mừng tuổi)."},
-  {kr:"세뱃돈",en:"New Year's money, lucky money",vi:"tiền mừng tuổi",type:"trad",note:"세배(cúi chào Tết)+돈(tiền). 설날에 어른이 아이에게 줘요. 세뱃돈을 받다(nhận tiền mừng tuổi). 베트남 lì xì와 유사."},
-  {kr:"스님",en:"Buddhist monk",vi:"nhà sư, thầy tu",type:"relig",note:"스님. 스님을 존칭. 절에 계신 분. 스님께 절을 하다(lạy nhà sư). 스님 공양(cúng dường nhà sư)."},
-  {kr:"아리랑",en:"Arirang (Korean folk song)",vi:"Arirang (bài hát truyền thống)",type:"art",note:"한국의 대표적 민요. UNESCO 무형 문화유산. 아리랑을 부르다(hát Arirang). 수많은 지방 버전이 있어요."},
-  {kr:"양반",en:"Yangban (Joseon nobility)",vi:"quý tộc, Yangban (tầng lớp quý tộc)",type:"history",note:"양반(兩班). 조선 시대 지배 계층. 양반 문화(văn hóa quý tộc Yangban). 상민 ↔ 양반(thường dân ↔ quý tộc)."},
-  {kr:"어린이날",en:"Children's Day (May 5th)",vi:"Ngày thiếu nhi",type:"holiday",note:"어린이(trẻ em)+날(日). 5월 5일. 공휴일. 어린이날 선물(quà ngày thiếu nhi). 놀이공원이 북적여요."},
-  {kr:"어버이날",en:"Parents' Day (May 8th)",vi:"Ngày của cha mẹ",type:"holiday",note:"어버이(cha mẹ)+날(日). 5월 8일. 카네이션을 달아드려요. 어버이날 노래(bài hát ngày của cha mẹ). 감사 표현."},
-  {kr:"옛말",en:"old saying, proverb, old speech",vi:"câu chuyện cũ, thành ngữ xưa",type:"trad",note:"옛(xưa)+말(lời/ngôn ngữ). 옛말에 이르기를...(theo câu nói xưa...). 속담과 유사. 옛말이 맞다(lời xưa đúng)."},
-  {kr:"온돌",en:"Ondol (Korean floor heating)",vi:"Ondol (hệ thống sưởi sàn)",type:"trad",note:"온돌(溫突). 바닥을 덥히는 한국 전통 난방 시스템. 온돌 위에서 자다(ngủ trên sàn Ondol). 한옥의 특징."},
-  {kr:"온돌방",en:"room with Ondol floor heating",vi:"phòng có sàn sưởi Ondol",type:"trad",note:"온돌(Ondol)+방(房). 온돌방에서 자다(ngủ ở phòng Ondol). 따뜻한 온돌방(phòng Ondol ấm áp)."},
-  {kr:"왕",en:"king",vi:"vua, quốc vương",type:"history",note:"왕(王). 조선의 왕(vua triều Joseon). 왕이 되다(trở thành vua). 임금님과 동의어. 왕조(vương triều)."},
-  {kr:"왕비",en:"queen, royal consort",vi:"hoàng hậu, vương phi",type:"history",note:"왕비(王妃). 왕의 아내. 조선 왕비(vương phi triều Joseon). 왕비 간택(tuyển chọn vương phi)."},
-  {kr:"용",en:"dragon",vi:"rồng",type:"trad",note:"용(龍). 한국 전통 용(rồng truyền thống Hàn). 용꿈(giấc mơ thấy rồng — điềm tốt). 이무기(rồng chưa thành). 12지 중 하나."},
-  {kr:"유적지",en:"historic site, ruins",vi:"di tích lịch sử",type:"history",note:"유적(遺跡)+지(地). 문화 유적지(di tích văn hóa). 유적지를 방문하다(thăm di tích). 경주 유적지(di tích Gyeongju)."},
-  {kr:"윷놀이",en:"Yut Nori (traditional board game)",vi:"Yut Nori (trò chơi truyền thống)",type:"trad",note:"윷(đồng xu/thanh gỗ ném)+놀이(trò chơi). 명절 전통 놀이. 도·개·걸·윷·모 5단계. 팀을 이뤄 경쟁해요."},
-  {kr:"장례식",en:"funeral ceremony",vi:"đám tang, lễ tang",type:"trad",note:"장례(葬禮)+식(式). 장례식을 치르다(tiến hành đám tang). 장례식장(nhà tang lễ). 3일장(tang 3 ngày—truyền thống)."},
-  {kr:"전통",en:"tradition",vi:"truyền thống",type:"trad",note:"전통(傳統). 전통을 지키다(giữ gìn truyền thống). 전통 문화(văn hóa truyền thống). 전통적(mang tính truyền thống)."},
-  {kr:"전통문화",en:"traditional culture",vi:"văn hóa truyền thống",type:"trad",note:"전통(truyền thống)+문화(文化). 전통문화를 계승하다(kế thừa văn hóa truyền thống). 전통문화 체험(trải nghiệm văn hóa truyền thống)."},
-  {kr:"제사",en:"ancestral rites, memorial service",vi:"cúng giỗ, lễ tổ tiên",type:"trad",note:"제사(祭祀). 제사를 지내다(thực hiện lễ cúng giỗ). 차례(차례, lễ cúng ngày Tết/Chuseok)와 유사. 조상에게 드리는 의례."},
-  {kr:"조상",en:"ancestor, forebear",vi:"tổ tiên",type:"trad",note:"조상(祖上). 조상을 모시다(phụng thờ tổ tiên). 조상 대대로(đời đời từ tổ tiên). 제사를 통해 조상을 기려요."},
-  {kr:"종교",en:"religion",vi:"tôn giáo",type:"relig",note:"종교(宗敎). 종교를 믿다(tin theo tôn giáo). 한국의 종교(tôn giáo ở Hàn Quốc). 불교, 기독교, 천주교가 3대 종교."},
-  {kr:"지옥",en:"hell, underworld",vi:"địa ngục",type:"relig",note:"지옥(地獄). 지옥에 가다(xuống địa ngục). 지옥 같다(như địa ngục — thành ngữ). ↔ 천국(thiên đường)."},
-  {kr:"천국",en:"heaven, paradise",vi:"thiên đường",type:"relig",note:"천국(天國). 천국에 가다(lên thiên đường). 천국 같다(như thiên đường — thành ngữ). ↔ 지옥(địa ngục)."},
-  {kr:"천사",en:"angel",vi:"thiên thần",type:"relig",note:"천사(天使). 천사 같다(như thiên thần). 수호 천사(thiên thần bảo hộ). 아기 천사(thiên thần nhỏ). 기독교 개념."},
-  {kr:"탈",en:"mask",vi:"mặt nạ",type:"art",note:"탈(假面). 탈을 쓰다(đeo mặt nạ). 탈춤(múa mặt nạ). 안동 하회탈(mặt nạ Hahoe ở Andong). 탈을 벗다(bỏ mặt nạ — nghĩa bóng: thể hiện thật)."},
-  {kr:"탈춤",en:"Korean mask dance",vi:"múa mặt nạ truyền thống Hàn",type:"art",note:"탈(mặt nạ)+춤(múa). 안동 하회별신굿 탈춤이 유명. 유네스코 무형 문화유산. 사회 풍자적 내용."},
-  {kr:"한글날",en:"Hangul Day (October 9th)",vi:"Ngày chữ Hangul",type:"holiday",note:"한글(Hangul)+날(日). 10월 9일. 세종대왕이 창제한 한글을 기념하는 날. 공휴일. 1443년 창제."},
-  {kr:"한옥",en:"Hanok (traditional Korean house)",vi:"Hanok nhà truyền thống Hàn",type:"trad",note:"한(韓)+옥(屋,nhà). 기와지붕, 온돌, 마당이 특징. 한옥마을(làng Hanok). 북촌 한옥마을이 유명."},
-  {kr:"한지",en:"Hanji (traditional Korean paper)",vi:"giấy Hanji truyền thống",type:"art",note:"한(韓)+지(紙). 닥나무로 만든 전통 종이. 한지 공예(thủ công mỹ nghệ giấy Hanji). 내구성이 강해요."},
-  {kr:"현대식",en:"modern style",vi:"phong cách hiện đại",type:"trad",note:"현대(現代)+식(式). 현대식 건물(tòa nhà phong cách hiện đại). 현대식으로 개조하다(cải tạo theo phong cách hiện đại). ↔ 전통식."},
-  {kr:"현모양처",en:"wise mother and good wife",vi:"người mẹ hiền vợ đảm",type:"trad",note:"현모(賢母)+양처(良妻). 전통적 여성상. 현모양처를 강요하다는 비판도 있음. 현대에는 논쟁적 개념."},
-  {kr:"회갑",en:"60th birthday celebration",vi:"lễ thọ 60 tuổi",type:"trad",note:"회갑(回甲). 환갑이라고도 함. 60번째 생일을 성대하게 축하. 현재는 칠순(70세) 잔치가 더 일반적."},
-];
-let currentFilter='all';
-function renderTable(data){
-  const tbody=document.getElementById('vocabBody');
-  tbody.innerHTML='';
-  data.forEach((item,i)=>{
-    let t;
-    if(item.type==='trad')    t=`<span class="tag tag-trad">Phong tục</span>`;
-    else if(item.type==='relig')   t=`<span class="tag tag-relig">Tôn giáo</span>`;
-    else if(item.type==='holiday') t=`<span class="tag tag-holiday">Ngày lễ</span>`;
-    else if(item.type==='art')     t=`<span class="tag tag-art">Nghệ thuật</span>`;
-    else                           t=`<span class="tag tag-history">Lịch sử</span>`;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent=`${data.length} / ${vocab.length} từ`;
-}
-function filterAndSearch(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const result=vocab.filter(item=>{
-    const mf=currentFilter==='all'||item.type===currentFilter;
-    const ms=!q||item.kr.includes(q)||item.en.toLowerCase().includes(q)||item.vi.toLowerCase().includes(q)||item.note.toLowerCase().includes(q);
-    return mf&&ms;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display=result.length===0?'block':'none';
-  document.getElementById('vocabTable').style.display=result.length===0?'none':'';
-}
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter=btn.dataset.filter;
-    filterAndSearch();
-  });
-});
-document.getElementById('searchInput').addEventListener('input',filterAndSearch);
-document.getElementById('totalCount').textContent=vocab.length+' từ';
-renderTable(vocab);
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Văn hóa & Truyền thống</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #fdf6ee;
+        --card: #fff;
+        --accent: #7a3a00;
+        --text: #2a1200;
+        --sub: #9a7050;
+        --border: #ecd8c0;
+        --tag-trad: #fde8cc;
+        --tag-relig: #e8eef8;
+        --tag-holiday: #e8f8e8;
+        --tag-art: #f8e8f8;
+        --tag-history: #fce8e8;
+        --highlight: #fff8f0;
+        --row-alt: #fdfaf6;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--text);
+        color: #fdf6ee;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "문화";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #b09070;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #fdf6ee;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 145px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 185px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-trad {
+        background: var(--tag-trad);
+        color: #6a2a00;
+      }
+      .tag-relig {
+        background: var(--tag-relig);
+        color: #0a1a60;
+      }
+      .tag-holiday {
+        background: var(--tag-holiday);
+        color: #0a4a10;
+      }
+      .tag-art {
+        background: var(--tag-art);
+        color: #5a0a5a;
+      }
+      .tag-history {
+        background: var(--tag-history);
+        color: #7a0a0a;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>문화 & 전통 — Văn hóa & Truyền thống Hàn Quốc</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Văn hóa & Truyền thống · Chủ đề TOPIK II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="trad">
+        Phong tục & Truyền thống
+      </button>
+      <button class="filter-btn" data-filter="relig">
+        Tôn giáo & Tín ngưỡng
+      </button>
+      <button class="filter-btn" data-filter="holiday">
+        Ngày lễ & Sự kiện
+      </button>
+      <button class="filter-btn" data-filter="art">Nghệ thuật & Âm nhạc</button>
+      <button class="filter-btn" data-filter="history">Lịch sử & Di sản</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú &amp; Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Văn hóa &amp; Truyền thống
+    </div>
+    <script>
+      const vocab = [
+        {
+          kr: "고궁",
+          en: "traditional Korean palace",
+          vi: "cung điện cổ Hàn Quốc",
+          type: "history",
+          note: "고(古,cổ)+궁(宮,cung). 경복궁, 창덕궁 등이 고궁. 고궁 방문(thăm cung điện cổ). 고궁 야경(cung điện về đêm).",
+        },
+        {
+          kr: "공주",
+          en: "princess",
+          vi: "công chúa",
+          type: "history",
+          note: "공주(公主). 왕의 딸. 공주님(công chúa nương). 신데렐라 공주(công chúa Cinderella). 충청도 공주시도 있음.",
+        },
+        {
+          kr: "국악",
+          en: "traditional Korean music",
+          vi: "nhạc truyền thống Hàn Quốc",
+          type: "art",
+          note: "국악(國樂). 판소리, 가야금, 해금 등이 국악. 국악을 배우다(học nhạc truyền thống). 국악 공연(biểu diễn nhạc dân tộc).",
+        },
+        {
+          kr: "귀신",
+          en: "ghost, spirit",
+          vi: "ma, quỷ",
+          type: "relig",
+          note: "귀신(鬼神). 귀신이 나타나다(ma hiện ra). 귀신 이야기(truyện ma). 귀신을 무서워하다(sợ ma). 도깨비와 유사.",
+        },
+        {
+          kr: "기념",
+          en: "commemoration, memorial",
+          vi: "kỷ niệm",
+          type: "holiday",
+          note: "기념(記念). 기념하다=kỷ niệm. 기념일(ngày kỷ niệm). 기념품(quà lưu niệm). 기념 행사(sự kiện kỷ niệm).",
+        },
+        {
+          kr: "기도",
+          en: "prayer",
+          vi: "lời cầu nguyện",
+          type: "relig",
+          note: "기도(祈禱). 기도하다=cầu nguyện. 기도를 드리다(dâng lời cầu nguyện). 새벽 기도(cầu nguyện sáng sớm). 소원을 빌다와 유사.",
+        },
+        {
+          kr: "김장",
+          en: "kimchi-making in winter",
+          vi: "muối kimchi truyền thống mùa đông",
+          type: "trad",
+          note: "김장(沈藏). 김장을 담그다(muối kimchi mùa đông). 김장철(mùa muối kimchi — tháng 11~12). 온 가족이 함께 해요.",
+        },
+        {
+          kr: "돌잔치",
+          en: "first birthday celebration",
+          vi: "lễ đầy thôi nôi",
+          type: "trad",
+          note: "돌(tròn 1 tuổi)+잔치(tiệc). 돌잔치를 열다(tổ chức tiệc đầy thôi nôi). 돌잡이(trẻ chọn đồ vật tiên tri tương lai).",
+        },
+        {
+          kr: "동서양",
+          en: "East and West",
+          vi: "đông tây, đông phương và tây phương",
+          type: "history",
+          note: "동(東,đông)+서(西,tây)+양(洋,phương). 동서양 문화 차이(khác biệt văn hóa Đông-Tây). 동서양을 아우르다.",
+        },
+        {
+          kr: "동양화",
+          en: "Oriental painting",
+          vi: "tranh phương Đông",
+          type: "art",
+          note: "동양(東洋)+화(畫). 수묵화 등 동양식 그림. 동양화를 그리다(vẽ tranh phương Đông). ↔ 서양화(tranh Tây phương).",
+        },
+        {
+          kr: "동화",
+          en: "fairy tale, children's story",
+          vi: "truyện cổ tích",
+          type: "art",
+          note: "동화(童話). 동화를 읽다(đọc truyện cổ tích). 동화 속 주인공(nhân vật truyện cổ tích). 그림 형제 동화(truyện anh em Grimm).",
+        },
+        {
+          kr: "뒷이야기",
+          en: "behind story, sequel",
+          vi: "câu chuyện đằng sau",
+          type: "art",
+          note: "뒤(sau)+이야기(câu chuyện). 영화 뒷이야기(câu chuyện hậu trường phim). 사건 뒷이야기(câu chuyện đằng sau vụ việc).",
+        },
+        {
+          kr: "띠",
+          en: "zodiac sign, belt",
+          vi: "đai, cung (hoàng đạo)",
+          type: "trad",
+          note: "두 가지: (1) 띠(12지신 — cung hoàng đạo âm lịch: 쥐띠=chuột, 소띠=trâu,...), (2) 띠(dây đai). 무슨 띠예요?",
+        },
+        {
+          kr: "목사",
+          en: "pastor, minister",
+          vi: "mục sư",
+          type: "relig",
+          note: "목사(牧師). 교회에서 설교하는 분. 목사님(thưa mục sư). 개신교 목사(mục sư Tin lành). 신부(cha đạo) vs 목사.",
+        },
+        {
+          kr: "무덤",
+          en: "tomb, grave",
+          vi: "ngôi mộ",
+          type: "history",
+          note: "무덤. 무덤을 쓰다(lập mộ). 무덤에 절을 하다(lạy ở mộ). 고분(古墳,lăng mộ cổ). 성묘(thăm mộ dịp Chuseok).",
+        },
+        {
+          kr: "문명",
+          en: "civilization",
+          vi: "văn minh",
+          type: "history",
+          note: "문명(文明). 고대 문명(văn minh cổ đại). 문명이 발달하다(văn minh phát triển). 한국 문명(văn minh Hàn Quốc).",
+        },
+        {
+          kr: "문화생활",
+          en: "cultural life, enjoying culture",
+          vi: "cuộc sống văn hóa",
+          type: "trad",
+          note: "문화(文化)+생활(生活). 문화생활을 즐기다(tận hưởng cuộc sống văn hóa). 공연, 전시회 등을 즐기는 생활.",
+        },
+        {
+          kr: "문화유산",
+          en: "cultural heritage",
+          vi: "di sản văn hóa",
+          type: "history",
+          note: "문화(文化)+유산(遺産). 세계 문화유산(di sản văn hóa thế giới). 유네스코 문화유산(di sản UNESCO). 한글도 문화유산.",
+        },
+        {
+          kr: "민속",
+          en: "folklore, folk customs",
+          vi: "dân gian, phong tục",
+          type: "trad",
+          note: "민속(民俗). 민속 문화(văn hóa dân gian). 민속촌(làng dân gian). 한국 민속(phong tục dân gian Hàn Quốc).",
+        },
+        {
+          kr: "민속놀이",
+          en: "folk game, traditional game",
+          vi: "trò chơi dân gian",
+          type: "trad",
+          note: "민속(dân gian)+놀이(trò chơi). 윷놀이, 제기차기, 널뛰기 등이 민속놀이. 명절에 많이 해요.",
+        },
+        {
+          kr: "민요",
+          en: "folk song",
+          vi: "dân ca",
+          type: "art",
+          note: "민요(民謠). 아리랑이 대표적 민요. 민요를 부르다(hát dân ca). 각 지방의 민요(dân ca từng địa phương).",
+        },
+        {
+          kr: "배경",
+          en: "background, setting",
+          vi: "bối cảnh, hậu cảnh",
+          type: "art",
+          note: "배경(背景). 이야기의 배경(bối cảnh câu chuyện). 역사적 배경(bối cảnh lịch sử). 배경 음악(nhạc nền).",
+        },
+        {
+          kr: "보물",
+          en: "treasure, national treasure",
+          vi: "kho báu, bảo vật",
+          type: "history",
+          note: "보물(寶物). 국보와 보물(quốc bảo và bảo vật). 보물을 발견하다(tìm thấy kho báu). 보물 1호(bảo vật số 1).",
+        },
+        {
+          kr: "복날",
+          en: "dog days of summer (eating health foods)",
+          vi: "ngày ăn đồ bổ dưỡng mùa hè",
+          type: "trad",
+          note: "복(伏)+날(日). 초복, 중복, 말복(tam phục). 복날에 삼계탕, 보양식을 먹어요. 더운 여름 건강 관리 풍습.",
+        },
+        {
+          kr: "부채",
+          en: "folding fan",
+          vi: "quạt cầm tay",
+          type: "trad",
+          note: "부채(扇). 합죽선(quạt nan truyền thống). 부채질하다(quạt). 단오에 부채를 선물하는 풍습. 부채춤(múa quạt).",
+        },
+        {
+          kr: "불교",
+          en: "Buddhism",
+          vi: "Phật giáo",
+          type: "relig",
+          note: "불교(佛敎). 불교 신자(tín đồ Phật giáo). 절(chùa). 불교 문화(văn hóa Phật giáo). 한국 3대 종교 중 하나.",
+        },
+        {
+          kr: "삼일절",
+          en: "March 1st Independence Movement Day",
+          vi: "Ngày phong trào độc lập 1/3",
+          type: "holiday",
+          note: "삼일절(三一節). 1919년 3월 1일 독립 운동. 공휴일. 태극기를 달아요. 3·1 운동 기념일.",
+        },
+        {
+          kr: "상징",
+          en: "symbol",
+          vi: "biểu tượng",
+          type: "trad",
+          note: "상징(象徵). 상징하다=biểu tượng. 태극기는 한국의 상징(cờ Taegeuk là biểu tượng của Hàn Quốc). 상징적 의미.",
+        },
+        {
+          kr: "성당",
+          en: "Catholic church, cathedral",
+          vi: "nhà thờ Công giáo",
+          type: "relig",
+          note: "성당(聖堂). 천주교 성당(nhà thờ Công giáo). 성당에 가다(đến nhà thờ). 신부님이 미사를 집전하다.",
+        },
+        {
+          kr: "세배",
+          en: "New Year's bow",
+          vi: "cúi chào Tết",
+          type: "trad",
+          note: "세배(歲拜). 설날에 어른께 세배를 드리다(cúi chào người lớn dịp Tết). 세뱃돈을 받다(nhận tiền mừng tuổi).",
+        },
+        {
+          kr: "세뱃돈",
+          en: "New Year's money, lucky money",
+          vi: "tiền mừng tuổi",
+          type: "trad",
+          note: "세배(cúi chào Tết)+돈(tiền). 설날에 어른이 아이에게 줘요. 세뱃돈을 받다(nhận tiền mừng tuổi). 베트남 lì xì와 유사.",
+        },
+        {
+          kr: "스님",
+          en: "Buddhist monk",
+          vi: "nhà sư, thầy tu",
+          type: "relig",
+          note: "스님. 스님을 존칭. 절에 계신 분. 스님께 절을 하다(lạy nhà sư). 스님 공양(cúng dường nhà sư).",
+        },
+        {
+          kr: "아리랑",
+          en: "Arirang (Korean folk song)",
+          vi: "Arirang (bài hát truyền thống)",
+          type: "art",
+          note: "한국의 대표적 민요. UNESCO 무형 문화유산. 아리랑을 부르다(hát Arirang). 수많은 지방 버전이 있어요.",
+        },
+        {
+          kr: "양반",
+          en: "Yangban (Joseon nobility)",
+          vi: "quý tộc, Yangban (tầng lớp quý tộc)",
+          type: "history",
+          note: "양반(兩班). 조선 시대 지배 계층. 양반 문화(văn hóa quý tộc Yangban). 상민 ↔ 양반(thường dân ↔ quý tộc).",
+        },
+        {
+          kr: "어린이날",
+          en: "Children's Day (May 5th)",
+          vi: "Ngày thiếu nhi",
+          type: "holiday",
+          note: "어린이(trẻ em)+날(日). 5월 5일. 공휴일. 어린이날 선물(quà ngày thiếu nhi). 놀이공원이 북적여요.",
+        },
+        {
+          kr: "어버이날",
+          en: "Parents' Day (May 8th)",
+          vi: "Ngày của cha mẹ",
+          type: "holiday",
+          note: "어버이(cha mẹ)+날(日). 5월 8일. 카네이션을 달아드려요. 어버이날 노래(bài hát ngày của cha mẹ). 감사 표현.",
+        },
+        {
+          kr: "옛말",
+          en: "old saying, proverb, old speech",
+          vi: "câu chuyện cũ, thành ngữ xưa",
+          type: "trad",
+          note: "옛(xưa)+말(lời/ngôn ngữ). 옛말에 이르기를...(theo câu nói xưa...). 속담과 유사. 옛말이 맞다(lời xưa đúng).",
+        },
+        {
+          kr: "온돌",
+          en: "Ondol (Korean floor heating)",
+          vi: "Ondol (hệ thống sưởi sàn)",
+          type: "trad",
+          note: "온돌(溫突). 바닥을 덥히는 한국 전통 난방 시스템. 온돌 위에서 자다(ngủ trên sàn Ondol). 한옥의 특징.",
+        },
+        {
+          kr: "온돌방",
+          en: "room with Ondol floor heating",
+          vi: "phòng có sàn sưởi Ondol",
+          type: "trad",
+          note: "온돌(Ondol)+방(房). 온돌방에서 자다(ngủ ở phòng Ondol). 따뜻한 온돌방(phòng Ondol ấm áp).",
+        },
+        {
+          kr: "왕",
+          en: "king",
+          vi: "vua, quốc vương",
+          type: "history",
+          note: "왕(王). 조선의 왕(vua triều Joseon). 왕이 되다(trở thành vua). 임금님과 동의어. 왕조(vương triều).",
+        },
+        {
+          kr: "왕비",
+          en: "queen, royal consort",
+          vi: "hoàng hậu, vương phi",
+          type: "history",
+          note: "왕비(王妃). 왕의 아내. 조선 왕비(vương phi triều Joseon). 왕비 간택(tuyển chọn vương phi).",
+        },
+        {
+          kr: "용",
+          en: "dragon",
+          vi: "rồng",
+          type: "trad",
+          note: "용(龍). 한국 전통 용(rồng truyền thống Hàn). 용꿈(giấc mơ thấy rồng — điềm tốt). 이무기(rồng chưa thành). 12지 중 하나.",
+        },
+        {
+          kr: "유적지",
+          en: "historic site, ruins",
+          vi: "di tích lịch sử",
+          type: "history",
+          note: "유적(遺跡)+지(地). 문화 유적지(di tích văn hóa). 유적지를 방문하다(thăm di tích). 경주 유적지(di tích Gyeongju).",
+        },
+        {
+          kr: "윷놀이",
+          en: "Yut Nori (traditional board game)",
+          vi: "Yut Nori (trò chơi truyền thống)",
+          type: "trad",
+          note: "윷(đồng xu/thanh gỗ ném)+놀이(trò chơi). 명절 전통 놀이. 도·개·걸·윷·모 5단계. 팀을 이뤄 경쟁해요.",
+        },
+        {
+          kr: "장례식",
+          en: "funeral ceremony",
+          vi: "đám tang, lễ tang",
+          type: "trad",
+          note: "장례(葬禮)+식(式). 장례식을 치르다(tiến hành đám tang). 장례식장(nhà tang lễ). 3일장(tang 3 ngày—truyền thống).",
+        },
+        {
+          kr: "전통",
+          en: "tradition",
+          vi: "truyền thống",
+          type: "trad",
+          note: "전통(傳統). 전통을 지키다(giữ gìn truyền thống). 전통 문화(văn hóa truyền thống). 전통적(mang tính truyền thống).",
+        },
+        {
+          kr: "전통문화",
+          en: "traditional culture",
+          vi: "văn hóa truyền thống",
+          type: "trad",
+          note: "전통(truyền thống)+문화(文化). 전통문화를 계승하다(kế thừa văn hóa truyền thống). 전통문화 체험(trải nghiệm văn hóa truyền thống).",
+        },
+        {
+          kr: "제사",
+          en: "ancestral rites, memorial service",
+          vi: "cúng giỗ, lễ tổ tiên",
+          type: "trad",
+          note: "제사(祭祀). 제사를 지내다(thực hiện lễ cúng giỗ). 차례(차례, lễ cúng ngày Tết/Chuseok)와 유사. 조상에게 드리는 의례.",
+        },
+        {
+          kr: "조상",
+          en: "ancestor, forebear",
+          vi: "tổ tiên",
+          type: "trad",
+          note: "조상(祖上). 조상을 모시다(phụng thờ tổ tiên). 조상 대대로(đời đời từ tổ tiên). 제사를 통해 조상을 기려요.",
+        },
+        {
+          kr: "종교",
+          en: "religion",
+          vi: "tôn giáo",
+          type: "relig",
+          note: "종교(宗敎). 종교를 믿다(tin theo tôn giáo). 한국의 종교(tôn giáo ở Hàn Quốc). 불교, 기독교, 천주교가 3대 종교.",
+        },
+        {
+          kr: "지옥",
+          en: "hell, underworld",
+          vi: "địa ngục",
+          type: "relig",
+          note: "지옥(地獄). 지옥에 가다(xuống địa ngục). 지옥 같다(như địa ngục — thành ngữ). ↔ 천국(thiên đường).",
+        },
+        {
+          kr: "천국",
+          en: "heaven, paradise",
+          vi: "thiên đường",
+          type: "relig",
+          note: "천국(天國). 천국에 가다(lên thiên đường). 천국 같다(như thiên đường — thành ngữ). ↔ 지옥(địa ngục).",
+        },
+        {
+          kr: "천사",
+          en: "angel",
+          vi: "thiên thần",
+          type: "relig",
+          note: "천사(天使). 천사 같다(như thiên thần). 수호 천사(thiên thần bảo hộ). 아기 천사(thiên thần nhỏ). 기독교 개념.",
+        },
+        {
+          kr: "탈",
+          en: "mask",
+          vi: "mặt nạ",
+          type: "art",
+          note: "탈(假面). 탈을 쓰다(đeo mặt nạ). 탈춤(múa mặt nạ). 안동 하회탈(mặt nạ Hahoe ở Andong). 탈을 벗다(bỏ mặt nạ — nghĩa bóng: thể hiện thật).",
+        },
+        {
+          kr: "탈춤",
+          en: "Korean mask dance",
+          vi: "múa mặt nạ truyền thống Hàn",
+          type: "art",
+          note: "탈(mặt nạ)+춤(múa). 안동 하회별신굿 탈춤이 유명. 유네스코 무형 문화유산. 사회 풍자적 내용.",
+        },
+        {
+          kr: "한글날",
+          en: "Hangul Day (October 9th)",
+          vi: "Ngày chữ Hangul",
+          type: "holiday",
+          note: "한글(Hangul)+날(日). 10월 9일. 세종대왕이 창제한 한글을 기념하는 날. 공휴일. 1443년 창제.",
+        },
+        {
+          kr: "한옥",
+          en: "Hanok (traditional Korean house)",
+          vi: "Hanok nhà truyền thống Hàn",
+          type: "trad",
+          note: "한(韓)+옥(屋,nhà). 기와지붕, 온돌, 마당이 특징. 한옥마을(làng Hanok). 북촌 한옥마을이 유명.",
+        },
+        {
+          kr: "한지",
+          en: "Hanji (traditional Korean paper)",
+          vi: "giấy Hanji truyền thống",
+          type: "art",
+          note: "한(韓)+지(紙). 닥나무로 만든 전통 종이. 한지 공예(thủ công mỹ nghệ giấy Hanji). 내구성이 강해요.",
+        },
+        {
+          kr: "현대식",
+          en: "modern style",
+          vi: "phong cách hiện đại",
+          type: "trad",
+          note: "현대(現代)+식(式). 현대식 건물(tòa nhà phong cách hiện đại). 현대식으로 개조하다(cải tạo theo phong cách hiện đại). ↔ 전통식.",
+        },
+        {
+          kr: "현모양처",
+          en: "wise mother and good wife",
+          vi: "người mẹ hiền vợ đảm",
+          type: "trad",
+          note: "현모(賢母)+양처(良妻). 전통적 여성상. 현모양처를 강요하다는 비판도 있음. 현대에는 논쟁적 개념.",
+        },
+        {
+          kr: "회갑",
+          en: "60th birthday celebration",
+          vi: "lễ thọ 60 tuổi",
+          type: "trad",
+          note: "회갑(回甲). 환갑이라고도 함. 60번째 생일을 성대하게 축하. 현재는 칠순(70세) 잔치가 더 일반적.",
+        },
+      ];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let t;
+          if (item.type === "trad")
+            t = `<span class="tag tag-trad">Phong tục</span>`;
+          else if (item.type === "relig")
+            t = `<span class="tag tag-relig">Tôn giáo</span>`;
+          else if (item.type === "holiday")
+            t = `<span class="tag tag-holiday">Ngày lễ</span>`;
+          else if (item.type === "art")
+            t = `<span class="tag tag-art">Nghệ thuật</span>`;
+          else t = `<span class="tag tag-history">Lịch sử</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${i + 1}</td><td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const mf = currentFilter === "all" || item.type === currentFilter;
+          const ms =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return mf && ms;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
