@@ -1293,6 +1293,7 @@
       renderTable(vocab);
       document.getElementById("resultCount").textContent =
         `${vocab.length} / ${vocab.length} từ`;
+      speechSynthesis.onvoiceschanged = () => {};
     </script>
   </body>
 </html>
