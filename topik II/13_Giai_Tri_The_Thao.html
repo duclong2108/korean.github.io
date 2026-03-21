@@ -1,246 +1,1208 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Giải trí & Thể thao (Nâng cao)</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f3f8f0;
-    --card: #fff;
-    --accent: #2a6a20;
-    --text: #0c200a;
-    --sub: #5a8a50;
-    --border: #c8dcc4;
-    --tag-perf: #e8f8e0;
-    --tag-sport: #e0f0fa;
-    --tag-event: #fef0d8;
-    --tag-art: #f8e8f8;
-    --tag-leisure: #fce8e8;
-    --highlight: #eefaea;
-    --row-alt: #f7fdf5;
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family:'Be Vietnam Pro',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
-  .header { background:var(--text); color:#f3f8f0; padding:36px 40px 28px; position:relative; overflow:hidden; }
-  .header::before { content:'취미'; position:absolute; right:40px; top:50%; transform:translateY(-50%); font-family:'Noto Serif KR',serif; font-size:120px; color:rgba(255,255,255,.05); font-weight:600; letter-spacing:-4px; user-select:none; }
-  .header h1 { font-family:'Noto Serif KR',serif; font-size:28px; font-weight:600; letter-spacing:1px; margin-bottom:6px; }
-  .header p { font-size:13px; font-weight:300; color:#80aa78; letter-spacing:.5px; }
-  .count-badge { display:inline-block; background:var(--accent); color:#fff; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:10px; letter-spacing:.5px; }
-  .controls { padding:20px 40px; background:var(--card); border-bottom:1px solid var(--border); display:flex; gap:10px; align-items:center; flex-wrap:wrap; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,.06); }
-  .search-wrap { position:relative; flex:1; min-width:200px; }
-  .search-wrap svg { position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--sub); }
-  #searchInput { width:100%; padding:10px 12px 10px 38px; border:1.5px solid var(--border); border-radius:8px; font-family:'Be Vietnam Pro',sans-serif; font-size:14px; background:var(--bg); color:var(--text); outline:none; transition:border-color .2s; }
-  #searchInput:focus { border-color:var(--accent); }
-  #searchInput::placeholder { color:var(--sub); }
-  .filter-btn { padding:7px 12px; border:1.5px solid var(--border); border-radius:8px; background:var(--bg); font-family:'Be Vietnam Pro',sans-serif; font-size:11px; font-weight:500; color:var(--sub); cursor:pointer; transition:all .2s; white-space:nowrap; }
-  .filter-btn:hover,.filter-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
-  .result-count { font-size:12px; color:var(--sub); white-space:nowrap; }
-  .table-wrap { padding:24px 40px 60px; overflow-x:auto; }
-  table { width:100%; border-collapse:collapse; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); }
-  thead { background:var(--text); color:#f3f8f0; }
-  th { padding:14px 16px; text-align:left; font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
-  th:nth-child(1),td:nth-child(1) { width:60px; text-align:center; }
-  th:nth-child(2),td:nth-child(2) { width:145px; }
-  th:nth-child(3),td:nth-child(3) { width:185px; }
-  th:nth-child(4),td:nth-child(4) { width:210px; }
-  th:nth-child(5),td:nth-child(5) { width:120px; }
-  th:nth-child(6),td:nth-child(6) { min-width:280px; }
-  tbody tr { border-bottom:1px solid var(--border); transition:background .15s; }
-  tbody tr:nth-child(even) { background:var(--row-alt); }
-  tbody tr:hover { background:var(--highlight); }
-  td { padding:12px 16px; font-size:13.5px; vertical-align:middle; line-height:1.5; }
-  td:nth-child(1) { font-size:11px; color:var(--sub); font-weight:600; }
-  .korean-word { font-family:'Noto Serif KR',serif; font-size:18px; font-weight:600; color:var(--accent); display:block; line-height:1.3; }
-  .tag { display:inline-flex; align-items:center; border-radius:4px; padding:2px 8px; font-size:11px; font-weight:500; white-space:nowrap; }
-  .tag-perf    { background:var(--tag-perf);    color:#1a5000; }
-  .tag-sport   { background:var(--tag-sport);   color:#0a2a60; }
-  .tag-event   { background:var(--tag-event);   color:#5a3000; }
-  .tag-art     { background:var(--tag-art);     color:#5a0a5a; }
-  .tag-leisure { background:var(--tag-leisure); color:#7a0a10; }
-  .note { font-size:12px; color:var(--sub); font-style:italic; }
-  .no-results { text-align:center; padding:60px; color:var(--sub); font-size:15px; display:none; }
-  .footer { text-align:center; padding:20px; font-size:11px; color:var(--sub); border-top:1px solid var(--border); }
-  @media(max-width:768px){.header{padding:24px 20px}.header::before{display:none}.controls{padding:16px 20px}.table-wrap{padding:16px 20px 40px}th,td{padding:10px 12px}.korean-word{font-size:15px}}
-</style>
-</head>
-<body>
-<div class="header">
-  <h1>취미 & 오락 (심화) — Giải trí &amp; Thể thao (Nâng cao)</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Sở thích & Giải trí · Chủ đề TOPIK II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="perf">Biểu diễn &amp; Nghệ thuật</button>
-  <button class="filter-btn" data-filter="sport">Thể thao</button>
-  <button class="filter-btn" data-filter="event">Sự kiện</button>
-  <button class="filter-btn" data-filter="art">Âm nhạc &amp; Phim</button>
-  <button class="filter-btn" data-filter="leisure">Giải trí &amp; Nghỉ ngơi</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead><tr><th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th><th>Phân loại</th><th>Ghi chú &amp; Cách dùng</th></tr></thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Giải trí &amp; Thể thao (Nâng cao)</div>
-<script>
-const vocab=[
-  {kr:"감독",en:"director; coach",vi:"đạo diễn, huấn luyện viên",type:"perf",note:"감독(監督). 두 가지: 영화 감독(đạo diễn phim), 스포츠 감독(huấn luyện viên). 감독을 맡다(đảm nhận vai trò đạo diễn)."},
-  {kr:"감상",en:"appreciation, viewing",vi:"thưởng thức, cảm thụ",type:"art",note:"감상(鑑賞). 감상하다=thưởng thức. 음악 감상(thưởng thức âm nhạc). 감상문(bài cảm nhận). 감상을 나누다."},
-  {kr:"개막식",en:"opening ceremony",vi:"lễ khai mạc",type:"event",note:"개막(開幕)+식(式). 올림픽 개막식(lễ khai mạc Olympic). 개막식을 열다(tổ chức lễ khai mạc). ↔ 폐막식(lễ bế mạc)."},
-  {kr:"개최",en:"hosting, holding (an event)",vi:"tổ chức sự kiện",type:"event",note:"개최(開催). 개최하다=tổ chức. 대회를 개최하다(tổ chức giải đấu). 올림픽 개최지(nơi tổ chức Olympic)."},
-  {kr:"결말",en:"ending, conclusion (of story)",vi:"kết thúc câu chuyện",type:"perf",note:"결말(結末). 결말이 좋다/나쁘다(kết cục tốt/xấu). 해피 엔딩(happy ending). 결말을 예측하다."},
-  {kr:"결승전",en:"final match, championship round",vi:"trận chung kết",type:"sport",note:"결승(決勝)+전(戰). 결승전에 진출하다(lọt vào trận chung kết). 결승전을 치르다(thi trận chung kết)."},
-  {kr:"공연장",en:"performance venue, theater",vi:"sân khấu biểu diễn",type:"perf",note:"공연(公演)+장(場). 공연장에 가다(đến sân khấu). 야외 공연장(sân khấu ngoài trời). 공연장을 예약하다."},
-  {kr:"관객",en:"audience, spectators",vi:"khán giả",type:"perf",note:"관객(觀客). 관객이 많다(nhiều khán giả). 관객의 반응(phản ứng khán giả). 관객석(khu vực khán giả)."},
-  {kr:"관람",en:"viewing, watching (event/show)",vi:"xem, thưởng lãm",type:"perf",note:"관람(觀覽). 관람하다=xem/thưởng lãm. 공연을 관람하다(xem biểu diễn). 관람료(phí xem). 관람객(khán giả)."},
-  {kr:"관람객",en:"visitor, audience",vi:"khán giả, người xem",type:"perf",note:"관람(xem)+객(客). 관람객이 몰리다(khán giả đổ về). 박물관 관람객(khách thăm bảo tàng)."},
-  {kr:"그네",en:"swing",vi:"cái đu, xích đu",type:"leisure",note:"그네를 타다(chơi đu). 그네가 있는 공원(công viên có đu). 널뛰기, 그네는 전통 놀이기도 해요."},
-  {kr:"금메달",en:"gold medal",vi:"huy chương vàng",type:"sport",note:"금(金)+메달. 금메달을 따다(giành huy chương vàng). 은메달(huy chương bạc), 동메달(đồng). 올림픽 금메달."},
-  {kr:"기록",en:"record, achievement",vi:"kỷ lục, ghi chép",type:"sport",note:"기록(記錄). 기록을 세우다(lập kỷ lục). 세계 기록(kỷ lục thế giới). 기록을 경신하다(phá kỷ lục)."},
-  {kr:"꼴찌",en:"last place",vi:"người/vị trí cuối",type:"sport",note:"꼴찌를 하다(về cuối). 꼴찌에서 벗어나다(thoát khỏi vị trí cuối). ↔ 일등(đứng đầu). 꼴찌도 괜찮아요."},
-  {kr:"나들이",en:"outing, short trip",vi:"đi chơi, dạo chơi ngoài trời",type:"leisure",note:"나들이를 가다(đi dạo chơi). 봄 나들이(đi dạo mùa xuân). 가족 나들이(đi chơi gia đình). 소풍과 유사."},
-  {kr:"낙서",en:"doodle, graffiti, scribble",vi:"vẽ linh tinh, vẽ bậy",type:"leisure",note:"낙서(落書). 낙서하다=vẽ bậy. 벽에 낙서하다(vẽ lên tường). 낙서 금지(cấm vẽ bậy). 창의적 낙서도 있어요."},
-  {kr:"놀이",en:"play, game, amusement",vi:"trò chơi, vui chơi",type:"leisure",note:"놀이(놀다→놀이). 놀이를 즐기다(thích trò chơi). 민속놀이(trò chơi dân gian). 놀이터(sân chơi). 놀이 문화."},
-  {kr:"달리기",en:"running race",vi:"chạy bộ, môn chạy",type:"sport",note:"달리다→달리기. 달리기 경주(chạy đua). 단거리 달리기(chạy ngắn). 달리기를 즐기다(thích chạy bộ)."},
-  {kr:"댄스",en:"dance",vi:"khiêu vũ, nhảy múa",type:"perf",note:"dance에서. 댄스를 배우다(học khiêu vũ). K-pop 댄스(nhảy K-pop). 댄스 학원(trung tâm dạy nhảy). 댄서(vũ công)."},
-  {kr:"동호회",en:"hobby club, interest group",vi:"câu lạc bộ sở thích",type:"leisure",note:"동호(同好,cùng sở thích)+회(會). 독서 동호회(CLB đọc sách). 동호회에 가입하다(tham gia CLB sở thích)."},
-  {kr:"뒤풀이",en:"after-party, post-event gathering",vi:"tiệc sau sự kiện, hậu trường",type:"event",note:"뒤(sau)+풀이. 공연 뒤풀이(tiệc sau buổi diễn). 뒤풀이를 하다(tổ chức tiệc sau sự kiện). 회식과 유사."},
-  {kr:"레포츠",en:"leisure sports",vi:"thể thao giải trí",type:"sport",note:"leisure+sports에서. 레포츠를 즐기다(thích thể thao giải trí). 번지점프, 스카이다이빙 등이 레포츠."},
-  {kr:"로또",en:"lottery (Lotto)",vi:"xổ số lotto",type:"leisure",note:"lotto에서. 로또를 사다(mua xổ số lotto). 로또에 당첨되다(trúng lotto). 1등 당첨(trúng giải nhất)."},
-  {kr:"리듬",en:"rhythm",vi:"nhịp điệu",type:"art",note:"rhythm에서. 리듬에 맞추다(theo nhịp điệu). 리듬감이 있다(có nhịp điệu). 리듬 체조(thể dục nhịp điệu)."},
-  {kr:"마라톤",en:"marathon",vi:"chạy marathon",type:"sport",note:"marathon에서. 마라톤을 완주하다(hoàn thành marathon). 풀코스 마라톤(full marathon). 마라톤 대회(giải marathon)."},
-  {kr:"마술",en:"magic, conjuring",vi:"ảo thuật",type:"perf",note:"마술(魔術). 마술을 부리다(thực hiện ảo thuật). 마술사(ảo thuật gia). 마술 공연(biểu diễn ảo thuật)."},
-  {kr:"멜로디",en:"melody",vi:"giai điệu",type:"art",note:"melody에서. 아름다운 멜로디(giai điệu đẹp). 멜로디를 따라 부르다(hát theo giai điệu). 멜로디가 귀에 익다(giai điệu quen tai)."},
-  {kr:"무대",en:"stage, platform",vi:"sân khấu",type:"perf",note:"무대(舞臺). 무대에 오르다(lên sân khấu). 무대 공포증(sợ sân khấu). 무대 뒤(hậu trường). 무대 인사(chào sân khấu)."},
-  {kr:"뮤지컬",en:"musical (theater)",vi:"nhạc kịch, musical",type:"perf",note:"musical에서. 뮤지컬을 보다(xem nhạc kịch). 브로드웨이 뮤지컬(nhạc kịch Broadway). 배우와 음악이 결합."},
-  {kr:"바느질",en:"sewing, needlework",vi:"may vá, khâu vá",type:"leisure",note:"바느질하다=may vá. 바느질을 배우다(học may vá). 손 바느질(may tay). 바느질 도구(đồ may vá)."},
-  {kr:"바둑",en:"Go (board game)",vi:"cờ vây",type:"leisure",note:"바둑(圍棋). 바둑을 두다(chơi cờ vây). 바둑판(bàn cờ vây). 바둑 기사(kỳ thủ cờ vây). 알파고와 이세돌이 유명."},
-  {kr:"발레",en:"ballet",vi:"múa ba-lê",type:"perf",note:"ballet에서. 발레를 배우다(học ba-lê). 발레리나(diễn viên ba-lê nữ). 발레 공연(biểu diễn ba-lê). 클래식 발레."},
-  {kr:"방청객",en:"studio audience, live audience",vi:"khán giả tại chỗ",type:"perf",note:"방청(傍聽)+객(客). TV 스튜디오 방청객(khán giả trường quay TV). 방청권을 얻다(có vé khán giả trực tiếp)."},
-  {kr:"복권",en:"lottery ticket",vi:"xổ số",type:"leisure",note:"복권(福券). 복권을 사다(mua vé xổ số). 복권에 당첨되다(trúng xổ số). 로또와 유사. 긁는 복권(vé cào)."},
-  {kr:"볼거리",en:"things worth seeing, highlights",vi:"điều thú vị để xem",type:"event",note:"볼(xem)+거리(thứ). 볼거리가 많다(nhiều điều thú vị). 이번 공연은 볼거리가 풍부해요(biểu diễn lần này rất hấp dẫn)."},
-  {kr:"볼링",en:"bowling",vi:"bowling",type:"sport",note:"bowling에서. 볼링을 치다(chơi bowling). 스트라이크(strike). 볼링장(sân bowling). 친구와 볼링 즐겨요."},
-  {kr:"볼링장",en:"bowling alley",vi:"sân bowling",type:"sport",note:"볼링(bowling)+장(場). 볼링장에 가다(đến sân bowling). 볼링장을 예약하다(đặt sân bowling)."},
-  {kr:"불꽃놀이",en:"fireworks",vi:"pháo hoa",type:"event",note:"불꽃(lửa/hoa lửa)+놀이. 불꽃놀이를 보다(xem pháo hoa). 여름 축제 불꽃놀이(pháo hoa lễ hội mùa hè). 한강 불꽃축제."},
-  {kr:"사진첩",en:"photo album",vi:"album ảnh",type:"leisure",note:"사진(ảnh)+첩(帖,quyển). 사진첩을 만들다(làm album ảnh). 추억 사진첩(album kỷ niệm). 사진첩을 넘기다(lật album)."},
-  {kr:"사회자",en:"MC, emcee, host",vi:"người dẫn chương trình",type:"perf",note:"사회(司會)+자(者). 사회자가 진행하다(MC dẫn chương trình). 방송 사회자(MC đài truyền hình). 진행자와 유사."},
-  {kr:"상",en:"prize, award",vi:"giải thưởng, phần thưởng",type:"event",note:"상(賞). 상을 받다(nhận giải thưởng). 대상(giải lớn nhất). 금상, 은상, 동상(vàng, bạc, đồng). 상을 타다."},
-  {kr:"상금",en:"prize money, cash reward",vi:"tiền thưởng",type:"event",note:"상(giải thưởng)+금(金). 상금을 받다(nhận tiền thưởng). 상금이 크다(tiền thưởng lớn). 상금으로 1억 원(100 triệu won)."},
-  {kr:"소극장",en:"small theater, black box theater",vi:"nhà hát nhỏ",type:"perf",note:"소(小)+극장(劇場). 소극장 공연(biểu diễn nhà hát nhỏ). 독립영화 소극장(rạp phim nhỏ độc lập). 친밀감이 있어요."},
-  {kr:"쇼",en:"show, performance",vi:"chương trình biểu diễn",type:"perf",note:"show에서. 쇼를 보다(xem chương trình). 토크 쇼(talk show). 버라이어티 쇼(variety show). 쇼에 출연하다."},
-  {kr:"수집",en:"collection, collecting",vi:"sưu tập, thu thập",type:"leisure",note:"수집(蒐集). 수집하다=sưu tập. 우표 수집(sưu tập tem). 수집가(người sưu tầm). 수집품(bộ sưu tập)."},
-  {kr:"술자리",en:"drinking occasion, drinking party",vi:"bữa nhậu, tiệc rượu",type:"leisure",note:"술(rượu)+자리(chỗ). 술자리를 갖다(tổ chức bữa nhậu). 회식과 유사하나 더 비공식적. 술자리 분위기."},
-  {kr:"승리",en:"victory, win",vi:"chiến thắng",type:"sport",note:"승리(勝利). 승리하다=chiến thắng. 승리를 거두다(giành chiến thắng). ↔ 패배(thất bại). 승리의 기쁨(niềm vui chiến thắng)."},
-  {kr:"시합",en:"match, competition, game",vi:"trận đấu, cuộc thi",type:"sport",note:"시합(試合). 시합을 하다(thi đấu). 시합에서 이기다/지다(thắng/thua trận). 친선 시합(trận giao hữu)."},
-  {kr:"씨름",en:"Ssireum (Korean wrestling)",vi:"vật Hàn Quốc (Ssireum)",type:"sport",note:"씨름. 한국 전통 스포츠. 씨름 대회(giải đấu Ssireum). 샅바를 잡고 싸움. 천하장사(vô địch Ssireum)."},
-  {kr:"앨범",en:"album (photo or music)",vi:"album ảnh/nhạc",type:"art",note:"album에서. 사진 앨범(album ảnh). 음악 앨범(album nhạc). 앨범을 발매하다(phát hành album). 정규 앨범(album chính thức)."},
-  {kr:"야경",en:"night view, night scenery",vi:"cảnh đêm, phong cảnh đêm",type:"leisure",note:"야경(夜景). 야경을 감상하다(thưởng thức cảnh đêm). 서울 야경(cảnh đêm Seoul). 야경이 아름답다(cảnh đêm đẹp)."},
-  {kr:"야유회",en:"company outing, picnic",vi:"dã ngoại công ty",type:"event",note:"야유회(野遊會). 회사 야유회(dã ngoại công ty). 야유회를 가다(đi dã ngoại). 봄, 가을에 많이 해요."},
-  {kr:"여가",en:"leisure, free time",vi:"thời gian rảnh, giải trí",type:"leisure",note:"여가(餘暇). 여가 시간(thời gian rảnh). 여가 활동(hoạt động giải trí). 여가를 즐기다(tận hưởng thời gian rảnh)."},
-  {kr:"연극",en:"play, theater",vi:"kịch, vở kịch",type:"perf",note:"연극(演劇). 연극을 보다(xem kịch). 연극 배우(diễn viên kịch). 연극 공연(biểu diễn kịch). 뮤지컬과 다름(không có nhạc)."},
-  {kr:"연기",en:"acting; smoke; delay",vi:"trì hoãn; khói; diễn xuất",type:"perf",note:"세 가지: (1) 演技 — diễn xuất(연기를 잘한다=diễn hay), (2) 延期 — trì hoãn(연기하다=hoãn), (3) 煙氣 — khói."},
-  {kr:"연속극",en:"serial drama, soap opera",vi:"phim truyền hình dài kỳ",type:"art",note:"연속(連續)+극(劇). 한국 연속극(phim bộ Hàn Quốc). 연속극을 보다(xem phim bộ). 드라마와 유사."},
-  {kr:"연주",en:"musical performance",vi:"biểu diễn nhạc cụ",type:"art",note:"연주(演奏). 연주하다=biểu diễn nhạc cụ. 피아노를 연주하다(chơi piano). 연주 실력(kỹ năng biểu diễn)."},
-  {kr:"연주회",en:"recital, concert",vi:"buổi hòa nhạc",type:"art",note:"연주(biểu diễn)+회(會). 피아노 연주회(buổi hòa nhạc piano). 연주회를 열다(tổ chức buổi hòa nhạc). 음악회와 유사."},
-  {kr:"영화감독",en:"film director",vi:"đạo diễn phim",type:"art",note:"영화(電影)+감독(監督). 영화감독이 되다(trở thành đạo diễn phim). 유명 영화감독(đạo diễn nổi tiếng). 봉준호, 박찬욱."},
-  {kr:"영화제",en:"film festival",vi:"liên hoan phim",type:"event",note:"영화(film)+제(祭). 부산 국제 영화제(LHP quốc tế Busan). 영화제에 참가하다(tham dự LHP). 황금종려상(Cành Cọ Vàng)."},
-  {kr:"예술",en:"art",vi:"nghệ thuật",type:"art",note:"예술(藝術). 예술 작품(tác phẩm nghệ thuật). 예술가(nghệ sĩ). 예술을 즐기다(thưởng thức nghệ thuật). 예술적 감각."},
-  {kr:"오락",en:"entertainment, amusement",vi:"giải trí, trò vui",type:"leisure",note:"오락(娛樂). 오락 시설(cơ sở giải trí). 오락 프로그램(chương trình giải trí). 오락을 즐기다(tận hưởng giải trí)."},
-  {kr:"오페라",en:"opera",vi:"opera, nhạc kịch",type:"perf",note:"opera에서. 오페라를 감상하다(thưởng thức opera). 오페라 극장(nhà hát opera). 성악과 연극이 결합된 예술."},
-  {kr:"올림픽",en:"Olympics",vi:"Olympic",type:"sport",note:"Olympic에서. 올림픽에 출전하다(tham dự Olympic). 동계/하계 올림픽(mùa đông/mùa hè). 2024 파리 올림픽."},
-  {kr:"요가",en:"yoga",vi:"yoga",type:"sport",note:"yoga에서. 요가를 하다(tập yoga). 요가 수업(lớp yoga). 요가 매트(thảm yoga). 건강에 좋아요."},
-  {kr:"우승",en:"winning championship",vi:"chiến thắng, giành chức vô địch",type:"sport",note:"우승(優勝). 우승하다=giành chức vô địch. 우승 트로피(cúp vô địch). 우승을 차지하다(giành danh hiệu vô địch)."},
-  {kr:"음악회",en:"music concert",vi:"buổi hòa nhạc",type:"art",note:"음악(音樂)+회(會). 음악회를 열다(tổ chức buổi hòa nhạc). 클래식 음악회(hòa nhạc cổ điển). 연주회와 유사."},
-  {kr:"응원",en:"cheering, support",vi:"cổ vũ, ủng hộ",type:"sport",note:"응원(應援). 응원하다=cổ vũ. 응원단(đội cổ vũ). 응원 문화(văn hóa cổ vũ). 응원을 보내다(gửi lời cổ vũ)."},
-  {kr:"일등",en:"first place, top rank",vi:"hạng nhất, đứng đầu",type:"sport",note:"일(一)+등(等). 일등을 하다(đứng đầu). 일등상(giải nhất). ↔ 꼴찌(vị trí cuối). 일등이 되다(trở thành người đứng đầu)."},
-  {kr:"입장권",en:"admission ticket",vi:"vé vào cửa",type:"event",note:"입장(入場)+권(券). 입장권을 구매하다(mua vé vào cửa). 무료 입장권(vé miễn phí). 온라인 입장권 예매(đặt vé online)."},
-  {kr:"입장료",en:"admission fee, entry fee",vi:"phí vào cổng",type:"event",note:"입장(入場)+료(料). 입장료를 내다(trả phí vào cổng). 무료 입장(vào cửa miễn phí). 입장료가 비싸다(phí vào cổng đắt)."},
-  {kr:"작곡",en:"music composition",vi:"sáng tác âm nhạc",type:"art",note:"작곡(作曲). 작곡하다=sáng tác nhạc. 작곡가(nhà soạn nhạc). 작곡 실력(tài năng soạn nhạc). 작사와 작곡."},
-  {kr:"작사",en:"writing lyrics",vi:"viết lời bài hát",type:"art",note:"작사(作詞). 작사하다=viết lời bài hát. 작사가(người viết lời). 작사와 작곡(viết lời và soạn nhạc)."},
-  {kr:"작품",en:"work, piece, creation",vi:"tác phẩm",type:"art",note:"작품(作品). 예술 작품(tác phẩm nghệ thuật). 대표 작품(tác phẩm tiêu biểu). 작품을 감상하다(thưởng thức tác phẩm)."},
-  {kr:"장난감",en:"toy",vi:"đồ chơi",type:"leisure",note:"장난(nghịch)+감(cụ). 장난감을 가지고 놀다(chơi với đồ chơi). 장난감 가게(cửa hàng đồ chơi). 어린이 장난감."},
-  {kr:"재즈",en:"jazz",vi:"nhạc jazz",type:"art",note:"jazz에서. 재즈를 듣다(nghe nhạc jazz). 재즈 공연(biểu diễn jazz). 재즈 바(bar nhạc jazz). 즉흥 연주가 특징."},
-  {kr:"전반전",en:"first half (of a game)",vi:"hiệp một (thể thao)",type:"sport",note:"전반(前半)+전(戰). 전반전이 끝났어요(hiệp một kết thúc rồi). ↔ 후반전(hiệp hai). 전반전 스코어."},
-  {kr:"전시",en:"exhibition, display",vi:"triển lãm",type:"event",note:"전시(展示). 전시하다=triển lãm. 전시 작품(tác phẩm triển lãm). 사진 전시(triển lãm ảnh). 전시회를 열다."},
-  {kr:"전시회",en:"exhibition, gallery show",vi:"buổi triển lãm",type:"event",note:"전시(展示)+회(會). 전시회를 보다(đi xem triển lãm). 미술 전시회(triển lãm mỹ thuật). 전시회를 개최하다."},
-  {kr:"조깅",en:"jogging",vi:"chạy bộ nhẹ",type:"sport",note:"jogging에서. 조깅을 하다(đi chạy bộ). 아침 조깅(chạy bộ buổi sáng). 조깅 코스(đường chạy bộ). 건강 관리에 좋아요."},
-  {kr:"주인공",en:"main character, protagonist",vi:"nhân vật chính",type:"perf",note:"주인공(主人公). 영화 주인공(nhân vật chính phim). 이야기의 주인공(nhân vật chính câu chuyện). 주인공이 되다."},
-  {kr:"지휘자",en:"conductor (music)",vi:"người chỉ huy, nhạc trưởng",type:"art",note:"지휘(指揮)+자(者). 오케스트라 지휘자(nhạc trưởng dàn nhạc). 지휘봉(gậy chỉ huy). 지휘자의 역할."},
-  {kr:"진행자",en:"host, presenter, MC",vi:"người dẫn chương trình",type:"perf",note:"진행(進行)+자(者). TV 프로그램 진행자(người dẫn chương trình TV). 사회자와 유사. 진행을 맡다."},
-  {kr:"참가",en:"participation, joining",vi:"sự tham gia",type:"event",note:"참가(參加). 참가하다=tham gia. 대회에 참가하다(tham gia giải đấu). 참가비(phí tham gia). 참가자(người tham gia)."},
-  {kr:"체육관",en:"gymnasium, sports hall",vi:"phòng thể dục, nhà thi đấu",type:"sport",note:"체육(體育)+관(館). 체육관에서 운동하다(tập thể dục ở nhà thi đấu). 학교 체육관(nhà thể chất trường). 헬스클럽과 구별."},
-  {kr:"체조",en:"gymnastics",vi:"thể dục dụng cụ",type:"sport",note:"체조(體操). 체조 선수(vận động viên thể dục dụng cụ). 리듬 체조(thể dục nhịp điệu). 체조를 하다(tập thể dục)."},
-  {kr:"체험",en:"experience, hands-on activity",vi:"trải nghiệm",type:"leisure",note:"체험(體驗). 체험하다=trải nghiệm. 문화 체험(trải nghiệm văn hóa). 체험 학습(học trải nghiệm). 직접 체험이 중요해요."},
-  {kr:"촬영장",en:"filming set, studio",vi:"phim trường, nơi quay phim",type:"art",note:"촬영(拍攝)+장(場). 촬영장을 방문하다(thăm trường quay). 드라마 촬영장(trường quay phim bộ). 오픈 세트장."},
-  {kr:"촬영지",en:"filming location",vi:"địa điểm quay phim",type:"art",note:"촬영(quay phim)+지(地). 유명 드라마 촬영지(địa điểm quay phim bộ nổi tiếng). 촬영지를 찾아가다(đến địa điểm quay phim)."},
-  {kr:"추첨",en:"drawing lots, raffle",vi:"bốc thăm, rút thăm",type:"event",note:"추첨(抽籤). 추첨을 하다(bốc thăm). 추첨으로 선발하다(chọn bằng bốc thăm). 경품 추첨(bốc thăm giải thưởng)."},
-  {kr:"캠프",en:"camp, camping",vi:"trại hè, cắm trại",type:"leisure",note:"camp에서. 캠프를 가다(đi cắm trại). 여름 캠프(trại hè). 캠핑과 유사. 텐트를 치다(dựng lều)."},
-  {kr:"코미디",en:"comedy",vi:"hài kịch, phim hài",type:"perf",note:"comedy에서. 코미디를 보다(xem hài kịch). 코미디 영화(phim hài). 코미디언(diễn viên hài). 웃음을 줘요."},
-  {kr:"코미디언",en:"comedian",vi:"diễn viên hài",type:"perf",note:"comedian에서. 코미디언이 되다(trở thành diễn viên hài). 유명 코미디언(diễn viên hài nổi tiếng). 개그맨과 유사."},
-  {kr:"콘서트",en:"concert",vi:"buổi hòa nhạc, concert",type:"art",note:"concert에서. 콘서트에 가다(đi xem concert). K-pop 콘서트(concert K-pop). 콘서트 티켓(vé concert)."},
-  {kr:"퀴즈",en:"quiz",vi:"câu đố, quiz",type:"leisure",note:"quiz에서. 퀴즈를 풀다(giải câu đố). 퀴즈 쇼(quiz show). 퀴즈 대회(cuộc thi đố vui). 퀴즈왕(vua quiz)."},
-  {kr:"클래식",en:"classical music; classic",vi:"cổ điển, nhạc cổ điển",type:"art",note:"classic에서. 클래식 음악(nhạc cổ điển). 클래식 공연(biểu diễn nhạc cổ điển). 클래식 영화(phim kinh điển)."},
-  {kr:"텐트",en:"tent",vi:"lều cắm trại",type:"leisure",note:"tent에서. 텐트를 치다(dựng lều). 텐트에서 자다(ngủ trong lều). 캠핑 텐트(lều cắm trại). 텐트를 접다(gấp lều)."},
-  {kr:"팬",en:"fan, supporter",vi:"fan, người hâm mộ",type:"perf",note:"fan에서. 팬이 되다(trở thành fan). 열성 팬(fan cuồng nhiệt). 팬덤(fandom). K-pop 팬(fan K-pop)."},
-  {kr:"풍선",en:"balloon",vi:"bóng bay",type:"leisure",note:"풍선(風船). 풍선을 불다(thổi bóng). 풍선을 날리다(thả bóng bay). 색깔 풍선(bóng màu sắc). 파티 장식에 사용."},
-  {kr:"피서",en:"summer retreat, escaping summer heat",vi:"nghỉ mát mùa hè",type:"leisure",note:"피서(避暑). 피서를 가다(đi nghỉ mát). 피서지(nơi nghỉ mát). 여름 피서 시즌(mùa nghỉ mát hè)."},
-  {kr:"피아니스트",en:"pianist",vi:"nghệ sĩ piano",type:"art",note:"pianist에서. 피아니스트가 연주하다(nghệ sĩ piano biểu diễn). 유명 피아니스트(nghệ sĩ piano nổi tiếng). 콘서트 피아니스트."},
-  {kr:"해수욕",en:"sea bathing, swimming at the beach",vi:"tắm biển",type:"leisure",note:"해수(海水)+욕(浴). 해수욕을 하다(tắm biển). 해수욕장(bãi biển). 여름 해수욕(tắm biển mùa hè). 물놀이와 유사."},
-  {kr:"행사장",en:"event venue, event hall",vi:"địa điểm tổ chức sự kiện",type:"event",note:"행사(行事)+장(場). 행사장에 가다(đến địa điểm sự kiện). 행사장을 꾸미다(trang trí địa điểm). 야외 행사장."},
-  {kr:"헬스클럽",en:"health club, fitness gym",vi:"câu lạc bộ thể dục",type:"sport",note:"health club에서. 헬스클럽에 가다(đến phòng gym). 헬스클럽 등록(đăng ký phòng gym). 헬스장과 유사."},
-  {kr:"회식",en:"group dinner, company dining",vi:"ăn uống tập thể công ty",type:"leisure",note:"회식(會食). 회식을 하다(ăn uống tập thể). 부서 회식(ăn tập thể theo phòng ban). 회식 자리(bữa ăn tập thể)."},
-  {kr:"후반전",en:"second half (of a game)",vi:"hiệp hai thể thao",type:"sport",note:"후반(後半)+전(戰). 후반전이 시작됐어요(hiệp hai bắt đầu rồi). ↔ 전반전(hiệp một). 후반전 역전(lật ngược hiệp hai)."},
-  {kr:"휴양지",en:"resort, holiday destination",vi:"khu nghỉ dưỡng",type:"leisure",note:"휴양(休養)+지(地). 휴양지에서 쉬다(nghỉ ngơi ở khu nghỉ dưỡng). 인기 휴양지(khu nghỉ dưỡng nổi tiếng). 여름 휴양지."},
-];
-let currentFilter='all';
-function renderTable(data){
-  const tbody=document.getElementById('vocabBody');
-  tbody.innerHTML='';
-  data.forEach((item,i)=>{
-    let t;
-    if(item.type==='perf')    t=`<span class="tag tag-perf">Biểu diễn</span>`;
-    else if(item.type==='sport')   t=`<span class="tag tag-sport">Thể thao</span>`;
-    else if(item.type==='event')   t=`<span class="tag tag-event">Sự kiện</span>`;
-    else if(item.type==='art')     t=`<span class="tag tag-art">Âm nhạc &amp; Phim</span>`;
-    else                           t=`<span class="tag tag-leisure">Giải trí</span>`;
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td>${i+1}</td><td><span class="korean-word">${item.kr}</span></td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent=`${data.length} / ${vocab.length} từ`;
-}
-function filterAndSearch(){
-  const q=document.getElementById('searchInput').value.toLowerCase();
-  const result=vocab.filter(item=>{
-    const mf=currentFilter==='all'||item.type===currentFilter;
-    const ms=!q||item.kr.includes(q)||item.en.toLowerCase().includes(q)||item.vi.toLowerCase().includes(q)||item.note.toLowerCase().includes(q);
-    return mf&&ms;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display=result.length===0?'block':'none';
-  document.getElementById('vocabTable').style.display=result.length===0?'none':'';
-}
-document.querySelectorAll('.filter-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter=btn.dataset.filter;
-    filterAndSearch();
-  });
-});
-document.getElementById('searchInput').addEventListener('input',filterAndSearch);
-document.getElementById('totalCount').textContent=vocab.length+' từ';
-renderTable(vocab);
-</script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Giải trí & Thể thao (Nâng cao)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f3f8f0;
+        --card: #fff;
+        --accent: #2a6a20;
+        --text: #0c200a;
+        --sub: #5a8a50;
+        --border: #c8dcc4;
+        --tag-perf: #e8f8e0;
+        --tag-sport: #e0f0fa;
+        --tag-event: #fef0d8;
+        --tag-art: #f8e8f8;
+        --tag-leisure: #fce8e8;
+        --highlight: #eefaea;
+        --row-alt: #f7fdf5;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
+      .header {
+        background: var(--text);
+        color: #f3f8f0;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "취미";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #80aa78;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .filter-btn {
+        padding: 7px 12px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f3f8f0;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 145px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 185px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 210px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 120px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 280px;
+      }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
+      td {
+        padding: 12px 16px;
+        font-size: 13.5px;
+        vertical-align: middle;
+        line-height: 1.5;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .tag-perf {
+        background: var(--tag-perf);
+        color: #1a5000;
+      }
+      .tag-sport {
+        background: var(--tag-sport);
+        color: #0a2a60;
+      }
+      .tag-event {
+        background: var(--tag-event);
+        color: #5a3000;
+      }
+      .tag-art {
+        background: var(--tag-art);
+        color: #5a0a5a;
+      }
+      .tag-leisure {
+        background: var(--tag-leisure);
+        color: #7a0a10;
+      }
+      .note {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>취미 & 오락 (심화) — Giải trí &amp; Thể thao (Nâng cao)</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Sở thích & Giải trí · Chủ đề TOPIK II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="perf">
+        Biểu diễn &amp; Nghệ thuật
+      </button>
+      <button class="filter-btn" data-filter="sport">Thể thao</button>
+      <button class="filter-btn" data-filter="event">Sự kiện</button>
+      <button class="filter-btn" data-filter="art">Âm nhạc &amp; Phim</button>
+      <button class="filter-btn" data-filter="leisure">
+        Giải trí &amp; Nghỉ ngơi
+      </button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Phân loại</th>
+            <th>Ghi chú &amp; Cách dùng</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Giải trí &amp; Thể thao (Nâng cao)
+    </div>
+    <script>
+      const vocab = [
+        {
+          kr: "감독",
+          en: "director; coach",
+          vi: "đạo diễn, huấn luyện viên",
+          type: "perf",
+          note: "감독(監督). 두 가지: 영화 감독(đạo diễn phim), 스포츠 감독(huấn luyện viên). 감독을 맡다(đảm nhận vai trò đạo diễn).",
+        },
+        {
+          kr: "감상",
+          en: "appreciation, viewing",
+          vi: "thưởng thức, cảm thụ",
+          type: "art",
+          note: "감상(鑑賞). 감상하다=thưởng thức. 음악 감상(thưởng thức âm nhạc). 감상문(bài cảm nhận). 감상을 나누다.",
+        },
+        {
+          kr: "개막식",
+          en: "opening ceremony",
+          vi: "lễ khai mạc",
+          type: "event",
+          note: "개막(開幕)+식(式). 올림픽 개막식(lễ khai mạc Olympic). 개막식을 열다(tổ chức lễ khai mạc). ↔ 폐막식(lễ bế mạc).",
+        },
+        {
+          kr: "개최",
+          en: "hosting, holding (an event)",
+          vi: "tổ chức sự kiện",
+          type: "event",
+          note: "개최(開催). 개최하다=tổ chức. 대회를 개최하다(tổ chức giải đấu). 올림픽 개최지(nơi tổ chức Olympic).",
+        },
+        {
+          kr: "결말",
+          en: "ending, conclusion (of story)",
+          vi: "kết thúc câu chuyện",
+          type: "perf",
+          note: "결말(結末). 결말이 좋다/나쁘다(kết cục tốt/xấu). 해피 엔딩(happy ending). 결말을 예측하다.",
+        },
+        {
+          kr: "결승전",
+          en: "final match, championship round",
+          vi: "trận chung kết",
+          type: "sport",
+          note: "결승(決勝)+전(戰). 결승전에 진출하다(lọt vào trận chung kết). 결승전을 치르다(thi trận chung kết).",
+        },
+        {
+          kr: "공연장",
+          en: "performance venue, theater",
+          vi: "sân khấu biểu diễn",
+          type: "perf",
+          note: "공연(公演)+장(場). 공연장에 가다(đến sân khấu). 야외 공연장(sân khấu ngoài trời). 공연장을 예약하다.",
+        },
+        {
+          kr: "관객",
+          en: "audience, spectators",
+          vi: "khán giả",
+          type: "perf",
+          note: "관객(觀客). 관객이 많다(nhiều khán giả). 관객의 반응(phản ứng khán giả). 관객석(khu vực khán giả).",
+        },
+        {
+          kr: "관람",
+          en: "viewing, watching (event/show)",
+          vi: "xem, thưởng lãm",
+          type: "perf",
+          note: "관람(觀覽). 관람하다=xem/thưởng lãm. 공연을 관람하다(xem biểu diễn). 관람료(phí xem). 관람객(khán giả).",
+        },
+        {
+          kr: "관람객",
+          en: "visitor, audience",
+          vi: "khán giả, người xem",
+          type: "perf",
+          note: "관람(xem)+객(客). 관람객이 몰리다(khán giả đổ về). 박물관 관람객(khách thăm bảo tàng).",
+        },
+        {
+          kr: "그네",
+          en: "swing",
+          vi: "cái đu, xích đu",
+          type: "leisure",
+          note: "그네를 타다(chơi đu). 그네가 있는 공원(công viên có đu). 널뛰기, 그네는 전통 놀이기도 해요.",
+        },
+        {
+          kr: "금메달",
+          en: "gold medal",
+          vi: "huy chương vàng",
+          type: "sport",
+          note: "금(金)+메달. 금메달을 따다(giành huy chương vàng). 은메달(huy chương bạc), 동메달(đồng). 올림픽 금메달.",
+        },
+        {
+          kr: "기록",
+          en: "record, achievement",
+          vi: "kỷ lục, ghi chép",
+          type: "sport",
+          note: "기록(記錄). 기록을 세우다(lập kỷ lục). 세계 기록(kỷ lục thế giới). 기록을 경신하다(phá kỷ lục).",
+        },
+        {
+          kr: "꼴찌",
+          en: "last place",
+          vi: "người/vị trí cuối",
+          type: "sport",
+          note: "꼴찌를 하다(về cuối). 꼴찌에서 벗어나다(thoát khỏi vị trí cuối). ↔ 일등(đứng đầu). 꼴찌도 괜찮아요.",
+        },
+        {
+          kr: "나들이",
+          en: "outing, short trip",
+          vi: "đi chơi, dạo chơi ngoài trời",
+          type: "leisure",
+          note: "나들이를 가다(đi dạo chơi). 봄 나들이(đi dạo mùa xuân). 가족 나들이(đi chơi gia đình). 소풍과 유사.",
+        },
+        {
+          kr: "낙서",
+          en: "doodle, graffiti, scribble",
+          vi: "vẽ linh tinh, vẽ bậy",
+          type: "leisure",
+          note: "낙서(落書). 낙서하다=vẽ bậy. 벽에 낙서하다(vẽ lên tường). 낙서 금지(cấm vẽ bậy). 창의적 낙서도 있어요.",
+        },
+        {
+          kr: "놀이",
+          en: "play, game, amusement",
+          vi: "trò chơi, vui chơi",
+          type: "leisure",
+          note: "놀이(놀다→놀이). 놀이를 즐기다(thích trò chơi). 민속놀이(trò chơi dân gian). 놀이터(sân chơi). 놀이 문화.",
+        },
+        {
+          kr: "달리기",
+          en: "running race",
+          vi: "chạy bộ, môn chạy",
+          type: "sport",
+          note: "달리다→달리기. 달리기 경주(chạy đua). 단거리 달리기(chạy ngắn). 달리기를 즐기다(thích chạy bộ).",
+        },
+        {
+          kr: "댄스",
+          en: "dance",
+          vi: "khiêu vũ, nhảy múa",
+          type: "perf",
+          note: "dance에서. 댄스를 배우다(học khiêu vũ). K-pop 댄스(nhảy K-pop). 댄스 학원(trung tâm dạy nhảy). 댄서(vũ công).",
+        },
+        {
+          kr: "동호회",
+          en: "hobby club, interest group",
+          vi: "câu lạc bộ sở thích",
+          type: "leisure",
+          note: "동호(同好,cùng sở thích)+회(會). 독서 동호회(CLB đọc sách). 동호회에 가입하다(tham gia CLB sở thích).",
+        },
+        {
+          kr: "뒤풀이",
+          en: "after-party, post-event gathering",
+          vi: "tiệc sau sự kiện, hậu trường",
+          type: "event",
+          note: "뒤(sau)+풀이. 공연 뒤풀이(tiệc sau buổi diễn). 뒤풀이를 하다(tổ chức tiệc sau sự kiện). 회식과 유사.",
+        },
+        {
+          kr: "레포츠",
+          en: "leisure sports",
+          vi: "thể thao giải trí",
+          type: "sport",
+          note: "leisure+sports에서. 레포츠를 즐기다(thích thể thao giải trí). 번지점프, 스카이다이빙 등이 레포츠.",
+        },
+        {
+          kr: "로또",
+          en: "lottery (Lotto)",
+          vi: "xổ số lotto",
+          type: "leisure",
+          note: "lotto에서. 로또를 사다(mua xổ số lotto). 로또에 당첨되다(trúng lotto). 1등 당첨(trúng giải nhất).",
+        },
+        {
+          kr: "리듬",
+          en: "rhythm",
+          vi: "nhịp điệu",
+          type: "art",
+          note: "rhythm에서. 리듬에 맞추다(theo nhịp điệu). 리듬감이 있다(có nhịp điệu). 리듬 체조(thể dục nhịp điệu).",
+        },
+        {
+          kr: "마라톤",
+          en: "marathon",
+          vi: "chạy marathon",
+          type: "sport",
+          note: "marathon에서. 마라톤을 완주하다(hoàn thành marathon). 풀코스 마라톤(full marathon). 마라톤 대회(giải marathon).",
+        },
+        {
+          kr: "마술",
+          en: "magic, conjuring",
+          vi: "ảo thuật",
+          type: "perf",
+          note: "마술(魔術). 마술을 부리다(thực hiện ảo thuật). 마술사(ảo thuật gia). 마술 공연(biểu diễn ảo thuật).",
+        },
+        {
+          kr: "멜로디",
+          en: "melody",
+          vi: "giai điệu",
+          type: "art",
+          note: "melody에서. 아름다운 멜로디(giai điệu đẹp). 멜로디를 따라 부르다(hát theo giai điệu). 멜로디가 귀에 익다(giai điệu quen tai).",
+        },
+        {
+          kr: "무대",
+          en: "stage, platform",
+          vi: "sân khấu",
+          type: "perf",
+          note: "무대(舞臺). 무대에 오르다(lên sân khấu). 무대 공포증(sợ sân khấu). 무대 뒤(hậu trường). 무대 인사(chào sân khấu).",
+        },
+        {
+          kr: "뮤지컬",
+          en: "musical (theater)",
+          vi: "nhạc kịch, musical",
+          type: "perf",
+          note: "musical에서. 뮤지컬을 보다(xem nhạc kịch). 브로드웨이 뮤지컬(nhạc kịch Broadway). 배우와 음악이 결합.",
+        },
+        {
+          kr: "바느질",
+          en: "sewing, needlework",
+          vi: "may vá, khâu vá",
+          type: "leisure",
+          note: "바느질하다=may vá. 바느질을 배우다(học may vá). 손 바느질(may tay). 바느질 도구(đồ may vá).",
+        },
+        {
+          kr: "바둑",
+          en: "Go (board game)",
+          vi: "cờ vây",
+          type: "leisure",
+          note: "바둑(圍棋). 바둑을 두다(chơi cờ vây). 바둑판(bàn cờ vây). 바둑 기사(kỳ thủ cờ vây). 알파고와 이세돌이 유명.",
+        },
+        {
+          kr: "발레",
+          en: "ballet",
+          vi: "múa ba-lê",
+          type: "perf",
+          note: "ballet에서. 발레를 배우다(học ba-lê). 발레리나(diễn viên ba-lê nữ). 발레 공연(biểu diễn ba-lê). 클래식 발레.",
+        },
+        {
+          kr: "방청객",
+          en: "studio audience, live audience",
+          vi: "khán giả tại chỗ",
+          type: "perf",
+          note: "방청(傍聽)+객(客). TV 스튜디오 방청객(khán giả trường quay TV). 방청권을 얻다(có vé khán giả trực tiếp).",
+        },
+        {
+          kr: "복권",
+          en: "lottery ticket",
+          vi: "xổ số",
+          type: "leisure",
+          note: "복권(福券). 복권을 사다(mua vé xổ số). 복권에 당첨되다(trúng xổ số). 로또와 유사. 긁는 복권(vé cào).",
+        },
+        {
+          kr: "볼거리",
+          en: "things worth seeing, highlights",
+          vi: "điều thú vị để xem",
+          type: "event",
+          note: "볼(xem)+거리(thứ). 볼거리가 많다(nhiều điều thú vị). 이번 공연은 볼거리가 풍부해요(biểu diễn lần này rất hấp dẫn).",
+        },
+        {
+          kr: "볼링",
+          en: "bowling",
+          vi: "bowling",
+          type: "sport",
+          note: "bowling에서. 볼링을 치다(chơi bowling). 스트라이크(strike). 볼링장(sân bowling). 친구와 볼링 즐겨요.",
+        },
+        {
+          kr: "볼링장",
+          en: "bowling alley",
+          vi: "sân bowling",
+          type: "sport",
+          note: "볼링(bowling)+장(場). 볼링장에 가다(đến sân bowling). 볼링장을 예약하다(đặt sân bowling).",
+        },
+        {
+          kr: "불꽃놀이",
+          en: "fireworks",
+          vi: "pháo hoa",
+          type: "event",
+          note: "불꽃(lửa/hoa lửa)+놀이. 불꽃놀이를 보다(xem pháo hoa). 여름 축제 불꽃놀이(pháo hoa lễ hội mùa hè). 한강 불꽃축제.",
+        },
+        {
+          kr: "사진첩",
+          en: "photo album",
+          vi: "album ảnh",
+          type: "leisure",
+          note: "사진(ảnh)+첩(帖,quyển). 사진첩을 만들다(làm album ảnh). 추억 사진첩(album kỷ niệm). 사진첩을 넘기다(lật album).",
+        },
+        {
+          kr: "사회자",
+          en: "MC, emcee, host",
+          vi: "người dẫn chương trình",
+          type: "perf",
+          note: "사회(司會)+자(者). 사회자가 진행하다(MC dẫn chương trình). 방송 사회자(MC đài truyền hình). 진행자와 유사.",
+        },
+        {
+          kr: "상",
+          en: "prize, award",
+          vi: "giải thưởng, phần thưởng",
+          type: "event",
+          note: "상(賞). 상을 받다(nhận giải thưởng). 대상(giải lớn nhất). 금상, 은상, 동상(vàng, bạc, đồng). 상을 타다.",
+        },
+        {
+          kr: "상금",
+          en: "prize money, cash reward",
+          vi: "tiền thưởng",
+          type: "event",
+          note: "상(giải thưởng)+금(金). 상금을 받다(nhận tiền thưởng). 상금이 크다(tiền thưởng lớn). 상금으로 1억 원(100 triệu won).",
+        },
+        {
+          kr: "소극장",
+          en: "small theater, black box theater",
+          vi: "nhà hát nhỏ",
+          type: "perf",
+          note: "소(小)+극장(劇場). 소극장 공연(biểu diễn nhà hát nhỏ). 독립영화 소극장(rạp phim nhỏ độc lập). 친밀감이 있어요.",
+        },
+        {
+          kr: "쇼",
+          en: "show, performance",
+          vi: "chương trình biểu diễn",
+          type: "perf",
+          note: "show에서. 쇼를 보다(xem chương trình). 토크 쇼(talk show). 버라이어티 쇼(variety show). 쇼에 출연하다.",
+        },
+        {
+          kr: "수집",
+          en: "collection, collecting",
+          vi: "sưu tập, thu thập",
+          type: "leisure",
+          note: "수집(蒐集). 수집하다=sưu tập. 우표 수집(sưu tập tem). 수집가(người sưu tầm). 수집품(bộ sưu tập).",
+        },
+        {
+          kr: "술자리",
+          en: "drinking occasion, drinking party",
+          vi: "bữa nhậu, tiệc rượu",
+          type: "leisure",
+          note: "술(rượu)+자리(chỗ). 술자리를 갖다(tổ chức bữa nhậu). 회식과 유사하나 더 비공식적. 술자리 분위기.",
+        },
+        {
+          kr: "승리",
+          en: "victory, win",
+          vi: "chiến thắng",
+          type: "sport",
+          note: "승리(勝利). 승리하다=chiến thắng. 승리를 거두다(giành chiến thắng). ↔ 패배(thất bại). 승리의 기쁨(niềm vui chiến thắng).",
+        },
+        {
+          kr: "시합",
+          en: "match, competition, game",
+          vi: "trận đấu, cuộc thi",
+          type: "sport",
+          note: "시합(試合). 시합을 하다(thi đấu). 시합에서 이기다/지다(thắng/thua trận). 친선 시합(trận giao hữu).",
+        },
+        {
+          kr: "씨름",
+          en: "Ssireum (Korean wrestling)",
+          vi: "vật Hàn Quốc (Ssireum)",
+          type: "sport",
+          note: "씨름. 한국 전통 스포츠. 씨름 대회(giải đấu Ssireum). 샅바를 잡고 싸움. 천하장사(vô địch Ssireum).",
+        },
+        {
+          kr: "앨범",
+          en: "album (photo or music)",
+          vi: "album ảnh/nhạc",
+          type: "art",
+          note: "album에서. 사진 앨범(album ảnh). 음악 앨범(album nhạc). 앨범을 발매하다(phát hành album). 정규 앨범(album chính thức).",
+        },
+        {
+          kr: "야경",
+          en: "night view, night scenery",
+          vi: "cảnh đêm, phong cảnh đêm",
+          type: "leisure",
+          note: "야경(夜景). 야경을 감상하다(thưởng thức cảnh đêm). 서울 야경(cảnh đêm Seoul). 야경이 아름답다(cảnh đêm đẹp).",
+        },
+        {
+          kr: "야유회",
+          en: "company outing, picnic",
+          vi: "dã ngoại công ty",
+          type: "event",
+          note: "야유회(野遊會). 회사 야유회(dã ngoại công ty). 야유회를 가다(đi dã ngoại). 봄, 가을에 많이 해요.",
+        },
+        {
+          kr: "여가",
+          en: "leisure, free time",
+          vi: "thời gian rảnh, giải trí",
+          type: "leisure",
+          note: "여가(餘暇). 여가 시간(thời gian rảnh). 여가 활동(hoạt động giải trí). 여가를 즐기다(tận hưởng thời gian rảnh).",
+        },
+        {
+          kr: "연극",
+          en: "play, theater",
+          vi: "kịch, vở kịch",
+          type: "perf",
+          note: "연극(演劇). 연극을 보다(xem kịch). 연극 배우(diễn viên kịch). 연극 공연(biểu diễn kịch). 뮤지컬과 다름(không có nhạc).",
+        },
+        {
+          kr: "연기",
+          en: "acting; smoke; delay",
+          vi: "trì hoãn; khói; diễn xuất",
+          type: "perf",
+          note: "세 가지: (1) 演技 — diễn xuất(연기를 잘한다=diễn hay), (2) 延期 — trì hoãn(연기하다=hoãn), (3) 煙氣 — khói.",
+        },
+        {
+          kr: "연속극",
+          en: "serial drama, soap opera",
+          vi: "phim truyền hình dài kỳ",
+          type: "art",
+          note: "연속(連續)+극(劇). 한국 연속극(phim bộ Hàn Quốc). 연속극을 보다(xem phim bộ). 드라마와 유사.",
+        },
+        {
+          kr: "연주",
+          en: "musical performance",
+          vi: "biểu diễn nhạc cụ",
+          type: "art",
+          note: "연주(演奏). 연주하다=biểu diễn nhạc cụ. 피아노를 연주하다(chơi piano). 연주 실력(kỹ năng biểu diễn).",
+        },
+        {
+          kr: "연주회",
+          en: "recital, concert",
+          vi: "buổi hòa nhạc",
+          type: "art",
+          note: "연주(biểu diễn)+회(會). 피아노 연주회(buổi hòa nhạc piano). 연주회를 열다(tổ chức buổi hòa nhạc). 음악회와 유사.",
+        },
+        {
+          kr: "영화감독",
+          en: "film director",
+          vi: "đạo diễn phim",
+          type: "art",
+          note: "영화(電影)+감독(監督). 영화감독이 되다(trở thành đạo diễn phim). 유명 영화감독(đạo diễn nổi tiếng). 봉준호, 박찬욱.",
+        },
+        {
+          kr: "영화제",
+          en: "film festival",
+          vi: "liên hoan phim",
+          type: "event",
+          note: "영화(film)+제(祭). 부산 국제 영화제(LHP quốc tế Busan). 영화제에 참가하다(tham dự LHP). 황금종려상(Cành Cọ Vàng).",
+        },
+        {
+          kr: "예술",
+          en: "art",
+          vi: "nghệ thuật",
+          type: "art",
+          note: "예술(藝術). 예술 작품(tác phẩm nghệ thuật). 예술가(nghệ sĩ). 예술을 즐기다(thưởng thức nghệ thuật). 예술적 감각.",
+        },
+        {
+          kr: "오락",
+          en: "entertainment, amusement",
+          vi: "giải trí, trò vui",
+          type: "leisure",
+          note: "오락(娛樂). 오락 시설(cơ sở giải trí). 오락 프로그램(chương trình giải trí). 오락을 즐기다(tận hưởng giải trí).",
+        },
+        {
+          kr: "오페라",
+          en: "opera",
+          vi: "opera, nhạc kịch",
+          type: "perf",
+          note: "opera에서. 오페라를 감상하다(thưởng thức opera). 오페라 극장(nhà hát opera). 성악과 연극이 결합된 예술.",
+        },
+        {
+          kr: "올림픽",
+          en: "Olympics",
+          vi: "Olympic",
+          type: "sport",
+          note: "Olympic에서. 올림픽에 출전하다(tham dự Olympic). 동계/하계 올림픽(mùa đông/mùa hè). 2024 파리 올림픽.",
+        },
+        {
+          kr: "요가",
+          en: "yoga",
+          vi: "yoga",
+          type: "sport",
+          note: "yoga에서. 요가를 하다(tập yoga). 요가 수업(lớp yoga). 요가 매트(thảm yoga). 건강에 좋아요.",
+        },
+        {
+          kr: "우승",
+          en: "winning championship",
+          vi: "chiến thắng, giành chức vô địch",
+          type: "sport",
+          note: "우승(優勝). 우승하다=giành chức vô địch. 우승 트로피(cúp vô địch). 우승을 차지하다(giành danh hiệu vô địch).",
+        },
+        {
+          kr: "음악회",
+          en: "music concert",
+          vi: "buổi hòa nhạc",
+          type: "art",
+          note: "음악(音樂)+회(會). 음악회를 열다(tổ chức buổi hòa nhạc). 클래식 음악회(hòa nhạc cổ điển). 연주회와 유사.",
+        },
+        {
+          kr: "응원",
+          en: "cheering, support",
+          vi: "cổ vũ, ủng hộ",
+          type: "sport",
+          note: "응원(應援). 응원하다=cổ vũ. 응원단(đội cổ vũ). 응원 문화(văn hóa cổ vũ). 응원을 보내다(gửi lời cổ vũ).",
+        },
+        {
+          kr: "일등",
+          en: "first place, top rank",
+          vi: "hạng nhất, đứng đầu",
+          type: "sport",
+          note: "일(一)+등(等). 일등을 하다(đứng đầu). 일등상(giải nhất). ↔ 꼴찌(vị trí cuối). 일등이 되다(trở thành người đứng đầu).",
+        },
+        {
+          kr: "입장권",
+          en: "admission ticket",
+          vi: "vé vào cửa",
+          type: "event",
+          note: "입장(入場)+권(券). 입장권을 구매하다(mua vé vào cửa). 무료 입장권(vé miễn phí). 온라인 입장권 예매(đặt vé online).",
+        },
+        {
+          kr: "입장료",
+          en: "admission fee, entry fee",
+          vi: "phí vào cổng",
+          type: "event",
+          note: "입장(入場)+료(料). 입장료를 내다(trả phí vào cổng). 무료 입장(vào cửa miễn phí). 입장료가 비싸다(phí vào cổng đắt).",
+        },
+        {
+          kr: "작곡",
+          en: "music composition",
+          vi: "sáng tác âm nhạc",
+          type: "art",
+          note: "작곡(作曲). 작곡하다=sáng tác nhạc. 작곡가(nhà soạn nhạc). 작곡 실력(tài năng soạn nhạc). 작사와 작곡.",
+        },
+        {
+          kr: "작사",
+          en: "writing lyrics",
+          vi: "viết lời bài hát",
+          type: "art",
+          note: "작사(作詞). 작사하다=viết lời bài hát. 작사가(người viết lời). 작사와 작곡(viết lời và soạn nhạc).",
+        },
+        {
+          kr: "작품",
+          en: "work, piece, creation",
+          vi: "tác phẩm",
+          type: "art",
+          note: "작품(作品). 예술 작품(tác phẩm nghệ thuật). 대표 작품(tác phẩm tiêu biểu). 작품을 감상하다(thưởng thức tác phẩm).",
+        },
+        {
+          kr: "장난감",
+          en: "toy",
+          vi: "đồ chơi",
+          type: "leisure",
+          note: "장난(nghịch)+감(cụ). 장난감을 가지고 놀다(chơi với đồ chơi). 장난감 가게(cửa hàng đồ chơi). 어린이 장난감.",
+        },
+        {
+          kr: "재즈",
+          en: "jazz",
+          vi: "nhạc jazz",
+          type: "art",
+          note: "jazz에서. 재즈를 듣다(nghe nhạc jazz). 재즈 공연(biểu diễn jazz). 재즈 바(bar nhạc jazz). 즉흥 연주가 특징.",
+        },
+        {
+          kr: "전반전",
+          en: "first half (of a game)",
+          vi: "hiệp một (thể thao)",
+          type: "sport",
+          note: "전반(前半)+전(戰). 전반전이 끝났어요(hiệp một kết thúc rồi). ↔ 후반전(hiệp hai). 전반전 스코어.",
+        },
+        {
+          kr: "전시",
+          en: "exhibition, display",
+          vi: "triển lãm",
+          type: "event",
+          note: "전시(展示). 전시하다=triển lãm. 전시 작품(tác phẩm triển lãm). 사진 전시(triển lãm ảnh). 전시회를 열다.",
+        },
+        {
+          kr: "전시회",
+          en: "exhibition, gallery show",
+          vi: "buổi triển lãm",
+          type: "event",
+          note: "전시(展示)+회(會). 전시회를 보다(đi xem triển lãm). 미술 전시회(triển lãm mỹ thuật). 전시회를 개최하다.",
+        },
+        {
+          kr: "조깅",
+          en: "jogging",
+          vi: "chạy bộ nhẹ",
+          type: "sport",
+          note: "jogging에서. 조깅을 하다(đi chạy bộ). 아침 조깅(chạy bộ buổi sáng). 조깅 코스(đường chạy bộ). 건강 관리에 좋아요.",
+        },
+        {
+          kr: "주인공",
+          en: "main character, protagonist",
+          vi: "nhân vật chính",
+          type: "perf",
+          note: "주인공(主人公). 영화 주인공(nhân vật chính phim). 이야기의 주인공(nhân vật chính câu chuyện). 주인공이 되다.",
+        },
+        {
+          kr: "지휘자",
+          en: "conductor (music)",
+          vi: "người chỉ huy, nhạc trưởng",
+          type: "art",
+          note: "지휘(指揮)+자(者). 오케스트라 지휘자(nhạc trưởng dàn nhạc). 지휘봉(gậy chỉ huy). 지휘자의 역할.",
+        },
+        {
+          kr: "진행자",
+          en: "host, presenter, MC",
+          vi: "người dẫn chương trình",
+          type: "perf",
+          note: "진행(進行)+자(者). TV 프로그램 진행자(người dẫn chương trình TV). 사회자와 유사. 진행을 맡다.",
+        },
+        {
+          kr: "참가",
+          en: "participation, joining",
+          vi: "sự tham gia",
+          type: "event",
+          note: "참가(參加). 참가하다=tham gia. 대회에 참가하다(tham gia giải đấu). 참가비(phí tham gia). 참가자(người tham gia).",
+        },
+        {
+          kr: "체육관",
+          en: "gymnasium, sports hall",
+          vi: "phòng thể dục, nhà thi đấu",
+          type: "sport",
+          note: "체육(體育)+관(館). 체육관에서 운동하다(tập thể dục ở nhà thi đấu). 학교 체육관(nhà thể chất trường). 헬스클럽과 구별.",
+        },
+        {
+          kr: "체조",
+          en: "gymnastics",
+          vi: "thể dục dụng cụ",
+          type: "sport",
+          note: "체조(體操). 체조 선수(vận động viên thể dục dụng cụ). 리듬 체조(thể dục nhịp điệu). 체조를 하다(tập thể dục).",
+        },
+        {
+          kr: "체험",
+          en: "experience, hands-on activity",
+          vi: "trải nghiệm",
+          type: "leisure",
+          note: "체험(體驗). 체험하다=trải nghiệm. 문화 체험(trải nghiệm văn hóa). 체험 학습(học trải nghiệm). 직접 체험이 중요해요.",
+        },
+        {
+          kr: "촬영장",
+          en: "filming set, studio",
+          vi: "phim trường, nơi quay phim",
+          type: "art",
+          note: "촬영(拍攝)+장(場). 촬영장을 방문하다(thăm trường quay). 드라마 촬영장(trường quay phim bộ). 오픈 세트장.",
+        },
+        {
+          kr: "촬영지",
+          en: "filming location",
+          vi: "địa điểm quay phim",
+          type: "art",
+          note: "촬영(quay phim)+지(地). 유명 드라마 촬영지(địa điểm quay phim bộ nổi tiếng). 촬영지를 찾아가다(đến địa điểm quay phim).",
+        },
+        {
+          kr: "추첨",
+          en: "drawing lots, raffle",
+          vi: "bốc thăm, rút thăm",
+          type: "event",
+          note: "추첨(抽籤). 추첨을 하다(bốc thăm). 추첨으로 선발하다(chọn bằng bốc thăm). 경품 추첨(bốc thăm giải thưởng).",
+        },
+        {
+          kr: "캠프",
+          en: "camp, camping",
+          vi: "trại hè, cắm trại",
+          type: "leisure",
+          note: "camp에서. 캠프를 가다(đi cắm trại). 여름 캠프(trại hè). 캠핑과 유사. 텐트를 치다(dựng lều).",
+        },
+        {
+          kr: "코미디",
+          en: "comedy",
+          vi: "hài kịch, phim hài",
+          type: "perf",
+          note: "comedy에서. 코미디를 보다(xem hài kịch). 코미디 영화(phim hài). 코미디언(diễn viên hài). 웃음을 줘요.",
+        },
+        {
+          kr: "코미디언",
+          en: "comedian",
+          vi: "diễn viên hài",
+          type: "perf",
+          note: "comedian에서. 코미디언이 되다(trở thành diễn viên hài). 유명 코미디언(diễn viên hài nổi tiếng). 개그맨과 유사.",
+        },
+        {
+          kr: "콘서트",
+          en: "concert",
+          vi: "buổi hòa nhạc, concert",
+          type: "art",
+          note: "concert에서. 콘서트에 가다(đi xem concert). K-pop 콘서트(concert K-pop). 콘서트 티켓(vé concert).",
+        },
+        {
+          kr: "퀴즈",
+          en: "quiz",
+          vi: "câu đố, quiz",
+          type: "leisure",
+          note: "quiz에서. 퀴즈를 풀다(giải câu đố). 퀴즈 쇼(quiz show). 퀴즈 대회(cuộc thi đố vui). 퀴즈왕(vua quiz).",
+        },
+        {
+          kr: "클래식",
+          en: "classical music; classic",
+          vi: "cổ điển, nhạc cổ điển",
+          type: "art",
+          note: "classic에서. 클래식 음악(nhạc cổ điển). 클래식 공연(biểu diễn nhạc cổ điển). 클래식 영화(phim kinh điển).",
+        },
+        {
+          kr: "텐트",
+          en: "tent",
+          vi: "lều cắm trại",
+          type: "leisure",
+          note: "tent에서. 텐트를 치다(dựng lều). 텐트에서 자다(ngủ trong lều). 캠핑 텐트(lều cắm trại). 텐트를 접다(gấp lều).",
+        },
+        {
+          kr: "팬",
+          en: "fan, supporter",
+          vi: "fan, người hâm mộ",
+          type: "perf",
+          note: "fan에서. 팬이 되다(trở thành fan). 열성 팬(fan cuồng nhiệt). 팬덤(fandom). K-pop 팬(fan K-pop).",
+        },
+        {
+          kr: "풍선",
+          en: "balloon",
+          vi: "bóng bay",
+          type: "leisure",
+          note: "풍선(風船). 풍선을 불다(thổi bóng). 풍선을 날리다(thả bóng bay). 색깔 풍선(bóng màu sắc). 파티 장식에 사용.",
+        },
+        {
+          kr: "피서",
+          en: "summer retreat, escaping summer heat",
+          vi: "nghỉ mát mùa hè",
+          type: "leisure",
+          note: "피서(避暑). 피서를 가다(đi nghỉ mát). 피서지(nơi nghỉ mát). 여름 피서 시즌(mùa nghỉ mát hè).",
+        },
+        {
+          kr: "피아니스트",
+          en: "pianist",
+          vi: "nghệ sĩ piano",
+          type: "art",
+          note: "pianist에서. 피아니스트가 연주하다(nghệ sĩ piano biểu diễn). 유명 피아니스트(nghệ sĩ piano nổi tiếng). 콘서트 피아니스트.",
+        },
+        {
+          kr: "해수욕",
+          en: "sea bathing, swimming at the beach",
+          vi: "tắm biển",
+          type: "leisure",
+          note: "해수(海水)+욕(浴). 해수욕을 하다(tắm biển). 해수욕장(bãi biển). 여름 해수욕(tắm biển mùa hè). 물놀이와 유사.",
+        },
+        {
+          kr: "행사장",
+          en: "event venue, event hall",
+          vi: "địa điểm tổ chức sự kiện",
+          type: "event",
+          note: "행사(行事)+장(場). 행사장에 가다(đến địa điểm sự kiện). 행사장을 꾸미다(trang trí địa điểm). 야외 행사장.",
+        },
+        {
+          kr: "헬스클럽",
+          en: "health club, fitness gym",
+          vi: "câu lạc bộ thể dục",
+          type: "sport",
+          note: "health club에서. 헬스클럽에 가다(đến phòng gym). 헬스클럽 등록(đăng ký phòng gym). 헬스장과 유사.",
+        },
+        {
+          kr: "회식",
+          en: "group dinner, company dining",
+          vi: "ăn uống tập thể công ty",
+          type: "leisure",
+          note: "회식(會食). 회식을 하다(ăn uống tập thể). 부서 회식(ăn tập thể theo phòng ban). 회식 자리(bữa ăn tập thể).",
+        },
+        {
+          kr: "후반전",
+          en: "second half (of a game)",
+          vi: "hiệp hai thể thao",
+          type: "sport",
+          note: "후반(後半)+전(戰). 후반전이 시작됐어요(hiệp hai bắt đầu rồi). ↔ 전반전(hiệp một). 후반전 역전(lật ngược hiệp hai).",
+        },
+        {
+          kr: "휴양지",
+          en: "resort, holiday destination",
+          vi: "khu nghỉ dưỡng",
+          type: "leisure",
+          note: "휴양(休養)+지(地). 휴양지에서 쉬다(nghỉ ngơi ở khu nghỉ dưỡng). 인기 휴양지(khu nghỉ dưỡng nổi tiếng). 여름 휴양지.",
+        },
+      ];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let t;
+          if (item.type === "perf")
+            t = `<span class="tag tag-perf">Biểu diễn</span>`;
+          else if (item.type === "sport")
+            t = `<span class="tag tag-sport">Thể thao</span>`;
+          else if (item.type === "event")
+            t = `<span class="tag tag-event">Sự kiện</span>`;
+          else if (item.type === "art")
+            t = `<span class="tag tag-art">Âm nhạc &amp; Phim</span>`;
+          else t = `<span class="tag tag-leisure">Giải trí</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `<td>${i + 1}</td><td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td><td>${item.en}</td><td>${item.vi}</td><td>${t}</td><td><span class="note">${item.note}</span></td>`;
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const mf = currentFilter === "all" || item.type === currentFilter;
+          const ms =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            item.note.toLowerCase().includes(q);
+          return mf && ms;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
