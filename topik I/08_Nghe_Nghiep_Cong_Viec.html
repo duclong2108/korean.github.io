@@ -1,401 +1,1370 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Nghề nghiệp & Công việc</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f2f5f8;
-    --card: #ffffff;
-    --accent: #1a4a6a;
-    --text: #0a1e2e;
-    --sub: #5a7a8a;
-    --border: #c8d8e4;
-    --tag-hv: #dceaf4;
-    --tag-pure: #e8f4ee;
-    --highlight: #eef5fa;
-    --row-alt: #f7fafc;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Nghề nghiệp & Công việc</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f2f5f8;
+        --card: #ffffff;
+        --accent: #1a4a6a;
+        --text: #0a1e2e;
+        --sub: #5a7a8a;
+        --border: #c8d8e4;
+        --tag-hv: #dceaf4;
+        --tag-pure: #e8f4ee;
+        --highlight: #eef5fa;
+        --row-alt: #f7fafc;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f2f5f8;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '직업';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #7a9aaa; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #f2f5f8;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "직업";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #7a9aaa;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f2f5f8; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f2f5f8;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 130px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 185px; }
-  th:nth-child(5), td:nth-child(5) { width: 155px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 130px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 185px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 155px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      }
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #0a3050; font-weight: 500; }
-  .hv-tag.pure { background: var(--tag-pure); color: #1a5030; }
-  .hv-hanja { font-weight: 600; font-size: 13px; }
-  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
-  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
-  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
-  .explain { font-size: 13px; color: #0e2a40; line-height: 1.6; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #0a3050;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #1a5030;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #0e2a40;
+        line-height: 1.6;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>직업 & 경제 — Nghề nghiệp & Kinh tế</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Công việc & Tiền bạc · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>직업 & 경제 — Nghề nghiệp & Kinh tế</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Công việc & Tiền bạc · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
+      <button class="filter-btn" data-filter="pure">
+        Thuần Hàn / Vay mượn
+      </button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Có Hán Việt</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn / Vay mượn</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Hán Việt</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Nghề nghiệp & Kinh tế
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Nghề nghiệp & Kinh tế</div>
+    <script>
+      const vocab = [
+        {
+          kr: "가격",
+          en: "price",
+          vi: "giá cả",
+          hv: "價格",
+          hvR: "giá cách",
+          pure: false,
+          explain:
+            "Giá cả của hàng hóa. 가격이 비싸다/싸다 = giá đắt/rẻ. 가격을 흥정하다 = trả giá.",
+          ex: "가격이 얼마예요?",
+          exVi: "Giá bao nhiêu vậy?",
+        },
+        {
+          kr: "가수",
+          en: "singer",
+          vi: "ca sĩ",
+          hv: "歌手",
+          hvR: "ca thủ",
+          pure: false,
+          explain:
+            "Ca sĩ. 가(歌, bài hát) + 수(手, người thực hiện). K-pop đã làm 가수 trở thành nghề được ngưỡng mộ.",
+          ex: "가수가 되고 싶어요.",
+          exVi: "Tôi muốn trở thành ca sĩ.",
+        },
+        {
+          kr: "간호사",
+          en: "nurse",
+          vi: "y tá",
+          hv: "看護師",
+          hvR: "khán hộ sư",
+          pure: false,
+          explain:
+            "Y tá, điều dưỡng viên. 간호(看護, chăm sóc) + 사(師, người có nghề). 간호사가 친절해요 = y tá rất tốt bụng.",
+          ex: "간호사가 주사를 놨어요.",
+          exVi: "Y tá đã tiêm thuốc cho tôi.",
+        },
+        {
+          kr: "값",
+          en: "price, value",
+          vi: "giá, giá trị",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Giá cả hoặc giá trị. Tương tự 가격 nhưng thuần Hàn và thân mật hơn. 값이 싸다 = giá rẻ.",
+          ex: "값이 너무 비싸요.",
+          exVi: "Giá đắt quá.",
+        },
+        {
+          kr: "경찰",
+          en: "police",
+          vi: "cảnh sát",
+          hv: "警察",
+          hvR: "cảnh sát",
+          pure: false,
+          explain:
+            "Cảnh sát — lực lượng. 경찰을 부르다 = gọi cảnh sát. 경찰서 = đồn cảnh sát.",
+          ex: "경찰을 불러야 해요.",
+          exVi: "Phải gọi cảnh sát thôi.",
+        },
+        {
+          kr: "경찰관",
+          en: "police officer",
+          vi: "sĩ quan cảnh sát",
+          hv: "警察官",
+          hvR: "cảnh sát quan",
+          pure: false,
+          explain:
+            "Cảnh sát viên — cá nhân. 경찰(cảnh sát) + 관(官, quan chức). Cụ thể hơn 경찰.",
+          ex: "경찰관이 도와줬어요.",
+          exVi: "Cảnh sát viên đã giúp tôi.",
+        },
+        {
+          kr: "경험",
+          en: "experience",
+          vi: "kinh nghiệm",
+          hv: "經驗",
+          hvR: "kinh nghiệm",
+          pure: false,
+          explain:
+            "Kinh nghiệm tích lũy qua thực tiễn. 경험이 있다/없다 = có/không có kinh nghiệm.",
+          ex: "경험이 많아요.",
+          exVi: "Tôi có nhiều kinh nghiệm.",
+        },
+        {
+          kr: "계획",
+          en: "plan",
+          vi: "kế hoạch",
+          hv: "計劃",
+          hvR: "kế hoạch",
+          pure: false,
+          explain:
+            "Kế hoạch, dự định. 계획을 세우다 = lên kế hoạch. 계획대로 = theo kế hoạch.",
+          ex: "무슨 계획이 있어요?",
+          exVi: "Bạn có kế hoạch gì không?",
+        },
+        {
+          kr: "공무원",
+          en: "public official, civil servant",
+          vi: "công chức nhà nước",
+          hv: "公務員",
+          hvR: "công vụ viên",
+          pure: false,
+          explain:
+            "Công chức nhà nước. Rất được coi trọng ở Hàn Quốc vì sự ổn định lâu dài. 공무원 시험 = thi công chức.",
+          ex: "공무원이 되고 싶어요.",
+          exVi: "Tôi muốn trở thành công chức.",
+        },
+        {
+          kr: "공짜",
+          en: "free (of charge)",
+          vi: "miễn phí, đồ miễn phí",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Miễn phí, không mất tiền. 공짜로 받다 = nhận miễn phí. 공짜 좋아하다 = thích đồ miễn phí.",
+          ex: "공짜로 받았어요.",
+          exVi: "Tôi đã nhận miễn phí.",
+        },
+        {
+          kr: "교수",
+          en: "professor",
+          vi: "giáo sư",
+          hv: "敎授",
+          hvR: "giáo thụ",
+          pure: false,
+          explain:
+            "Giáo sư đại học. 교수님 = thưa giáo sư (kính ngữ). 교수가 되다 = trở thành giáo sư.",
+          ex: "교수님 강의가 재미있어요.",
+          exVi: "Bài giảng của giáo sư thú vị lắm.",
+        },
+        {
+          kr: "군인",
+          en: "soldier, military personnel",
+          vi: "quân nhân, lính",
+          hv: "軍人",
+          hvR: "quân nhân",
+          pure: false,
+          explain:
+            "Quân nhân. Nam giới Hàn Quốc bắt buộc phải thực hiện nghĩa vụ quân sự khoảng 18–21 tháng.",
+          ex: "오빠가 군인이에요.",
+          exVi: "Anh tôi là quân nhân.",
+        },
+        {
+          kr: "기사",
+          en: "article; driver; engineer",
+          vi: "bài báo; tài xế; kỹ sư",
+          hv: "記事/技士/騎士",
+          hvR: "ký sự / kỹ sĩ / kỵ sĩ",
+          pure: false,
+          explain:
+            "Ba nghĩa: (1) 記事 — bài báo, (2) 技士 — kỹ sư/tài xế lành nghề, (3) 騎士 — hiệp sĩ. Ngữ cảnh quyết định.",
+          ex: "신문 기사를 읽었어요.",
+          exVi: "Tôi đã đọc bài báo trên báo.",
+        },
+        {
+          kr: "기자",
+          en: "reporter, journalist",
+          vi: "phóng viên, nhà báo",
+          hv: "記者",
+          hvR: "ký giả",
+          pure: false,
+          explain:
+            "Phóng viên, nhà báo. 기자 회견 = họp báo. 신문 기자 = phóng viên báo in.",
+          ex: "기자가 인터뷰를 했어요.",
+          exVi: "Phóng viên đã phỏng vấn.",
+        },
+        {
+          kr: "능력",
+          en: "ability, capability",
+          vi: "năng lực, khả năng",
+          hv: "能力",
+          hvR: "năng lực",
+          pure: false,
+          explain:
+            "Năng lực, khả năng. 능력이 있다 = có năng lực. 업무 능력 = năng lực công việc.",
+          ex: "능력이 뛰어나요.",
+          exVi: "Năng lực của bạn xuất sắc.",
+        },
+        {
+          kr: "돈",
+          en: "money",
+          vi: "tiền",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Tiền. 돈이 있다/없다 = có/không có tiền. 돈을 벌다 = kiếm tiền. 돈을 쓰다 = tiêu tiền.",
+          ex: "돈이 없어요.",
+          exVi: "Tôi không có tiền.",
+        },
+        {
+          kr: "목적",
+          en: "purpose, goal",
+          vi: "mục đích",
+          hv: "目的",
+          hvR: "mục đích",
+          pure: false,
+          explain:
+            "Mục đích, mục tiêu. 목적이 뭐예요? = Mục đích là gì? 목적을 이루다 = đạt mục đích.",
+          ex: "여행의 목적이 뭐예요?",
+          exVi: "Mục đích chuyến đi của bạn là gì?",
+        },
+        {
+          kr: "무료",
+          en: "free of charge",
+          vi: "miễn phí",
+          hv: "無料",
+          hvR: "vô liệu",
+          pure: false,
+          explain:
+            "Miễn phí — cách nói trang trọng hơn 공짜. 무료 입장 = vào cổng miễn phí. 무료 서비스 = dịch vụ miễn phí.",
+          ex: "입장이 무료예요.",
+          exVi: "Vào cổng miễn phí.",
+        },
+        {
+          kr: "무역",
+          en: "trade, commerce",
+          vi: "thương mại, buôn bán",
+          hv: "貿易",
+          hvR: "mậu dịch",
+          pure: false,
+          explain:
+            "Thương mại quốc tế. 무역회사 = công ty thương mại. 무역을 하다 = kinh doanh thương mại.",
+          ex: "무역 회사에서 일해요.",
+          exVi: "Tôi làm ở công ty thương mại.",
+        },
+        {
+          kr: "물건",
+          en: "thing, item, goods",
+          vi: "đồ vật, hàng hóa",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Đồ vật, hàng hóa. 물건을 사다 = mua đồ. 물건을 팔다 = bán đồ. 물건을 잃어버리다 = làm mất đồ.",
+          ex: "물건을 잃어버렸어요.",
+          exVi: "Tôi bị mất đồ rồi.",
+        },
+        {
+          kr: "발전",
+          en: "development, progress",
+          vi: "sự phát triển",
+          hv: "發展",
+          hvR: "phát triển",
+          pure: false,
+          explain:
+            "Sự phát triển, tiến bộ. 경제 발전 = phát triển kinh tế. 발전하다 = phát triển.",
+          ex: "한국은 빠르게 발전했어요.",
+          exVi: "Hàn Quốc đã phát triển rất nhanh.",
+        },
+        {
+          kr: "배달",
+          en: "delivery",
+          vi: "giao hàng, vận chuyển",
+          hv: "配達",
+          hvR: "phối đạt",
+          pure: false,
+          explain:
+            "Giao hàng tận nơi. 배달하다 = giao hàng. 배달 음식 = đồ ăn giao tận nhà. Rất phổ biến ở Hàn.",
+          ex: "배달 시켰어요.",
+          exVi: "Tôi đã đặt giao hàng.",
+        },
+        {
+          kr: "배우",
+          en: "actor, actress",
+          vi: "diễn viên",
+          hv: "俳優",
+          hvR: "bội ưu",
+          pure: false,
+          explain:
+            "Diễn viên phim hoặc kịch. 배우가 되다 = trở thành diễn viên. K-drama đã giúp nhiều 배우 nổi tiếng toàn cầu.",
+          ex: "좋아하는 배우가 있어요?",
+          exVi: "Bạn có diễn viên yêu thích không?",
+        },
+        {
+          kr: "변호사",
+          en: "lawyer, attorney",
+          vi: "luật sư",
+          hv: "辯護士",
+          hvR: "biện hộ sĩ",
+          pure: false,
+          explain:
+            "Luật sư. 변호사를 선임하다 = thuê luật sư. 변호사가 되다 = trở thành luật sư.",
+          ex: "변호사에게 상담했어요.",
+          exVi: "Tôi đã tư vấn với luật sư.",
+        },
+        {
+          kr: "부동산",
+          en: "real estate",
+          vi: "bất động sản",
+          hv: "不動産",
+          hvR: "bất động sản",
+          pure: false,
+          explain:
+            "Bất động sản. 부동산 가격 = giá bất động sản. 부동산 중개소 = văn phòng môi giới BĐS.",
+          ex: "부동산 값이 너무 비싸요.",
+          exVi: "Giá bất động sản quá đắt.",
+        },
+        {
+          kr: "부업",
+          en: "side job, side business",
+          vi: "nghề phụ, công việc thêm",
+          hv: "副業",
+          hvR: "phó nghiệp",
+          pure: false,
+          explain:
+            "Công việc làm thêm ngoài việc chính. 부업을 하다 = làm thêm nghề phụ. 부(副, phụ) + 업(業, nghề).",
+          ex: "부업으로 번역을 해요.",
+          exVi: "Tôi làm dịch thuật như nghề phụ.",
+        },
+        {
+          kr: "부장",
+          en: "department head, director",
+          vi: "trưởng phòng, giám đốc bộ phận",
+          hv: "部長",
+          hvR: "bộ trưởng",
+          pure: false,
+          explain:
+            "Trưởng bộ phận, trưởng phòng. 영업부장 = trưởng phòng kinh doanh. Chức vụ trung cấp trong công ty Hàn.",
+          ex: "부장님이 회의를 소집했어요.",
+          exVi: "Trưởng phòng đã triệu tập cuộc họp.",
+        },
+        {
+          kr: "사무실",
+          en: "office",
+          vi: "văn phòng, phòng làm việc",
+          hv: "事務室",
+          hvR: "sự vụ thất",
+          pure: false,
+          explain:
+            "Văn phòng làm việc. 사무실에 출근하다 = đến văn phòng làm việc. 사무용품 = đồ dùng văn phòng.",
+          ex: "사무실이 몇 층이에요?",
+          exVi: "Văn phòng ở tầng mấy?",
+        },
+        {
+          kr: "사업가",
+          en: "entrepreneur, businessman",
+          vi: "doanh nhân",
+          hv: "事業家",
+          hvR: "sự nghiệp gia",
+          pure: false,
+          explain:
+            "Doanh nhân, người kinh doanh. 성공한 사업가 = doanh nhân thành đạt. 사업(kinh doanh) + 가(người).",
+          ex: "그는 성공한 사업가예요.",
+          exVi: "Anh ấy là doanh nhân thành đạt.",
+        },
+        {
+          kr: "사원",
+          en: "employee; temple/shrine",
+          vi: "đền thờ; nhân viên",
+          hv: "社員/寺院",
+          hvR: "xã viên / tự viện",
+          pure: false,
+          explain:
+            "Hai nghĩa: (1) 社員 — nhân viên công ty (회사 사원), (2) 寺院 — đền thờ, chùa chiền. Ngữ cảnh phân biệt.",
+          ex: "우리 회사 사원이에요.",
+          exVi: "Đây là nhân viên công ty chúng tôi.",
+        },
+        {
+          kr: "사장",
+          en: "CEO, president (of company)",
+          vi: "giám đốc, tổng giám đốc",
+          hv: "社長",
+          hvR: "xã trưởng",
+          pure: false,
+          explain:
+            "Giám đốc, chủ tịch công ty. 사장님 = thưa giám đốc (kính ngữ). 사(社, công ty) + 장(長, trưởng).",
+          ex: "사장님이 오셨어요.",
+          exVi: "Giám đốc đã đến rồi.",
+        },
+        {
+          kr: "상품",
+          en: "product, merchandise",
+          vi: "sản phẩm, hàng hóa",
+          hv: "商品",
+          hvR: "thương phẩm",
+          pure: false,
+          explain:
+            "Hàng hóa, sản phẩm để bán. 상품을 진열하다 = trưng bày sản phẩm. 신상품 = sản phẩm mới.",
+          ex: "이 상품이 인기 있어요.",
+          exVi: "Sản phẩm này rất được ưa chuộng.",
+        },
+        {
+          kr: "생활",
+          en: "life, living, lifestyle",
+          vi: "cuộc sống, sinh hoạt",
+          hv: "生活",
+          hvR: "sinh hoạt",
+          pure: false,
+          explain:
+            "Cuộc sống, sinh hoạt hàng ngày. 생활비 = chi phí sinh hoạt. 생활 습관 = thói quen sinh hoạt.",
+          ex: "한국 생활이 어때요?",
+          exVi: "Cuộc sống ở Hàn Quốc thế nào?",
+        },
+        {
+          kr: "서류",
+          en: "document, paperwork",
+          vi: "tài liệu, hồ sơ",
+          hv: "書類",
+          hvR: "thư loại",
+          pure: false,
+          explain:
+            "Hồ sơ, tài liệu giấy tờ. 서류를 제출하다 = nộp hồ sơ. 서류 작업 = làm giấy tờ.",
+          ex: "서류를 준비했어요.",
+          exVi: "Tôi đã chuẩn bị hồ sơ.",
+        },
+        {
+          kr: "서비스",
+          en: "service",
+          vi: "dịch vụ",
+          hv: null,
+          hvR: "từ tiếng Anh 'service'",
+          pure: true,
+          explain:
+            "Dịch vụ. Từ vay mượn tiếng Anh. Ở Hàn, 서비스 còn có nghĩa là 'tặng kèm miễn phí' trong nhà hàng.",
+          ex: "서비스가 정말 좋아요.",
+          exVi: "Dịch vụ thật tốt.",
+        },
+        {
+          kr: "선생님",
+          en: "teacher",
+          vi: "giáo viên, thầy/cô giáo",
+          hv: "先生님",
+          hvR: "tiên sinh",
+          pure: false,
+          explain:
+            "Giáo viên, thầy/cô. 선생님 = danh xưng kính trọng. Cũng dùng để gọi bất kỳ người lớn tuổi đáng kính.",
+          ex: "선생님, 질문 있어요.",
+          exVi: "Thưa thầy/cô, em có câu hỏi.",
+        },
+        {
+          kr: "세일하다",
+          en: "to have a sale",
+          vi: "giảm giá, khuyến mãi",
+          hv: null,
+          hvR: "từ tiếng Anh 'sale'",
+          pure: true,
+          explain:
+            "Giảm giá. 세일 중이에요 = đang giảm giá. 세일 기간 = thời gian khuyến mãi.",
+          ex: "지금 세일하고 있어요.",
+          exVi: "Bây giờ đang giảm giá.",
+        },
+        {
+          kr: "소설가",
+          en: "novelist, fiction writer",
+          vi: "nhà văn, tiểu thuyết gia",
+          hv: "小說家",
+          hvR: "tiểu thuyết gia",
+          pure: false,
+          explain:
+            "Nhà văn viết tiểu thuyết. 소설(tiểu thuyết) + 가(家, người làm nghề đó).",
+          ex: "유명한 소설가예요.",
+          exVi: "Đây là nhà văn nổi tiếng.",
+        },
+        {
+          kr: "손님",
+          en: "customer, guest",
+          vi: "khách hàng, khách",
+          hv: null,
+          hvR: "thuần Hàn",
+          pure: true,
+          explain:
+            "Khách hàng hoặc khách viếng thăm. 손님이 오다 = có khách đến. 손님을 맞이하다 = đón khách.",
+          ex: "손님, 어서 오세요!",
+          exVi: "Kính chào quý khách!",
+        },
+        {
+          kr: "신청서",
+          en: "application form",
+          vi: "đơn xin, phiếu đăng ký",
+          hv: "申請書",
+          hvR: "thân thỉnh thư",
+          pure: false,
+          explain:
+            "Đơn đăng ký, phiếu xin. 신청서를 쓰다/제출하다 = viết/nộp đơn. 입학 신청서 = đơn xin nhập học.",
+          ex: "신청서를 작성해 주세요.",
+          exVi: "Hãy điền vào đơn đăng ký.",
+        },
+        {
+          kr: "약사",
+          en: "pharmacist",
+          vi: "dược sĩ",
+          hv: "藥師",
+          hvR: "dược sư",
+          pure: false,
+          explain:
+            "Dược sĩ. 약(藥, thuốc) + 사(師, người hành nghề). 약사에게 물어보다 = hỏi dược sĩ.",
+          ex: "약사에게 물어봤어요.",
+          exVi: "Tôi đã hỏi dược sĩ.",
+        },
+        {
+          kr: "양식",
+          en: "form; western-style food",
+          vi: "mẫu đơn; ẩm thực phương Tây",
+          hv: "樣式/洋食",
+          hvR: "dạng thức / tây thực",
+          pure: false,
+          explain:
+            "Hai nghĩa: (1) 樣式 — mẫu đơn, biểu mẫu (양식을 작성하다), (2) 洋食 — ẩm thực phương Tây (양식 레스토랑).",
+          ex: "양식을 작성해 주세요.",
+          exVi: "Hãy điền vào mẫu đơn.",
+        },
+        {
+          kr: "여행사",
+          en: "travel agency",
+          vi: "công ty du lịch",
+          hv: "旅行社",
+          hvR: "lữ hành xã",
+          pure: false,
+          explain:
+            "Công ty lữ hành. 여행사를 통해 예약하다 = đặt vé qua công ty du lịch.",
+          ex: "여행사에서 패키지를 샀어요.",
+          exVi: "Tôi đã mua gói tour ở công ty du lịch.",
+        },
+        {
+          kr: "예약",
+          en: "reservation, booking",
+          vi: "đặt chỗ trước, đặt bàn",
+          hv: "豫約",
+          hvR: "dự ước",
+          pure: false,
+          explain:
+            "Đặt chỗ trước. 예약하다 = đặt chỗ. 예약을 취소하다 = hủy đặt chỗ. 예약이 꽉 찼다 = hết chỗ.",
+          ex: "식당을 예약했어요.",
+          exVi: "Tôi đã đặt bàn ở nhà hàng.",
+        },
+        {
+          kr: "요금",
+          en: "fee, fare, charge",
+          vi: "lệ phí, giá vé",
+          hv: "料金",
+          hvR: "liệu kim",
+          pure: false,
+          explain:
+            "Phí, giá dịch vụ. 교통 요금 = giá vé giao thông. 요금을 내다 = trả phí.",
+          ex: "요금이 얼마예요?",
+          exVi: "Phí là bao nhiêu?",
+        },
+        {
+          kr: "월급",
+          en: "monthly salary",
+          vi: "lương tháng",
+          hv: "月給",
+          hvR: "nguyệt cấp",
+          pure: false,
+          explain:
+            "Lương tháng. 월급을 받다 = nhận lương. 월급날 = ngày lãnh lương. 월급이 오르다 = tăng lương.",
+          ex: "월급이 올랐어요.",
+          exVi: "Lương của tôi đã tăng rồi.",
+        },
+        {
+          kr: "월세",
+          en: "monthly rent",
+          vi: "tiền thuê nhà tháng",
+          hv: "月貰",
+          hvR: "nguyệt thế",
+          pure: false,
+          explain:
+            "Tiền thuê nhà hàng tháng. 월세를 내다 = trả tiền thuê. 월세 방 = phòng trọ thuê tháng.",
+          ex: "월세가 너무 비싸요.",
+          exVi: "Tiền thuê nhà đắt quá.",
+        },
+        {
+          kr: "은행",
+          en: "bank",
+          vi: "ngân hàng",
+          hv: "銀行",
+          hvR: "ngân hàng",
+          pure: false,
+          explain:
+            "Ngân hàng. 은행에 가다 = đến ngân hàng. 은행 계좌 = tài khoản ngân hàng.",
+          ex: "은행에서 돈을 찾았어요.",
+          exVi: "Tôi đã rút tiền ở ngân hàng.",
+        },
+        {
+          kr: "은행원",
+          en: "bank clerk, banker",
+          vi: "nhân viên ngân hàng",
+          hv: "銀行員",
+          hvR: "ngân hàng viên",
+          pure: false,
+          explain: "Nhân viên ngân hàng. 은행(ngân hàng) + 원(員, nhân viên).",
+          ex: "은행원이 친절하게 안내해 줬어요.",
+          exVi: "Nhân viên ngân hàng đã hướng dẫn tôi rất tận tình.",
+        },
+        {
+          kr: "음악가",
+          en: "musician",
+          vi: "nhạc sĩ",
+          hv: "音樂家",
+          hvR: "âm nhạc gia",
+          pure: false,
+          explain:
+            "Nhạc sĩ, nghệ sĩ âm nhạc. 음악(âm nhạc) + 가(家, người hành nghề). Rộng hơn 작곡가 (nhạc sĩ sáng tác).",
+          ex: "유명한 음악가가 공연해요.",
+          exVi: "Nhạc sĩ nổi tiếng đang biểu diễn.",
+        },
+        {
+          kr: "의사",
+          en: "doctor, physician",
+          vi: "bác sĩ",
+          hv: "醫師",
+          hvR: "y sư",
+          pure: false,
+          explain:
+            "Bác sĩ. 의사에게 가다 = đến gặp bác sĩ. 의사가 되다 = trở thành bác sĩ.",
+          ex: "의사 선생님, 아파요.",
+          exVi: "Thưa bác sĩ, tôi bị đau.",
+        },
+        {
+          kr: "이용",
+          en: "usage, use",
+          vi: "việc sử dụng, dùng",
+          hv: "利用",
+          hvR: "lợi dụng",
+          pure: false,
+          explain:
+            "Sử dụng dịch vụ hoặc tiện ích. 이용하다 = sử dụng. 이용 가능하다 = có thể sử dụng.",
+          ex: "카드를 이용할 수 있어요?",
+          exVi: "Có thể dùng thẻ được không?",
+        },
+        {
+          kr: "일",
+          en: "work; day; number 1",
+          vi: "công việc; số 1; ngày",
+          hv: "一/日",
+          hvR: "nhất / nhật",
+          pure: true,
+          explain:
+            "Ba nghĩa: (1) công việc (일하다=làm việc), (2) số 1 (일, 이, 삼...), (3) ngày (일월 일일=ngày 1 tháng 1).",
+          ex: "일이 많아요.",
+          exVi: "Tôi có nhiều việc.",
+        },
+        {
+          kr: "일상생활",
+          en: "everyday life",
+          vi: "cuộc sống hàng ngày",
+          hv: "日常生活",
+          hvR: "nhật thường sinh hoạt",
+          pure: false,
+          explain:
+            "Cuộc sống thường ngày. 일상생활에서 = trong cuộc sống hàng ngày. 일상(nhật thường) + 생활(sinh hoạt).",
+          ex: "일상생활에서 한국어를 써요.",
+          exVi: "Tôi dùng tiếng Hàn trong cuộc sống hàng ngày.",
+        },
+        {
+          kr: "자동차회사",
+          en: "car company, automobile company",
+          vi: "công ty xe hơi",
+          hv: "自動車會社",
+          hvR: "tự động xa hội xã",
+          pure: false,
+          explain:
+            "Công ty sản xuất ô tô. 현대자동차회사 = Hyundai Motor Company.",
+          ex: "자동차회사에 취직했어요.",
+          exVi: "Tôi đã xin được vào công ty xe hơi.",
+        },
+        {
+          kr: "자료",
+          en: "data, material, resource",
+          vi: "tài liệu, dữ liệu",
+          hv: "資料",
+          hvR: "tư liệu",
+          pure: false,
+          explain:
+            "Tài liệu tham khảo, dữ liệu. 자료를 수집하다 = thu thập tài liệu. 자료를 찾다 = tìm tài liệu.",
+          ex: "자료를 찾고 있어요.",
+          exVi: "Tôi đang tìm tài liệu.",
+        },
+        {
+          kr: "재료",
+          en: "ingredient, material",
+          vi: "nguyên liệu, vật liệu",
+          hv: "材料",
+          hvR: "tài liệu",
+          pure: false,
+          explain:
+            "Nguyên liệu thô để làm ra thứ gì. 요리 재료 = nguyên liệu nấu ăn. 건축 재료 = vật liệu xây dựng.",
+          ex: "재료를 준비했어요.",
+          exVi: "Tôi đã chuẩn bị nguyên liệu.",
+        },
+        {
+          kr: "점원",
+          en: "store clerk, sales staff",
+          vi: "nhân viên bán hàng",
+          hv: "店員",
+          hvR: "điếm viên",
+          pure: false,
+          explain:
+            "Nhân viên bán hàng tại cửa hàng. 점(店, cửa hàng) + 원(員, nhân viên).",
+          ex: "점원에게 물어봤어요.",
+          exVi: "Tôi đã hỏi nhân viên bán hàng.",
+        },
+        {
+          kr: "종업원",
+          en: "employee, staff (restaurant/service)",
+          vi: "nhân viên phục vụ",
+          hv: "從業員",
+          hvR: "tòng nghiệp viên",
+          pure: false,
+          explain:
+            "Nhân viên phục vụ tại nhà hàng hoặc cơ sở dịch vụ. Rộng hơn 점원.",
+          ex: "종업원을 불렀어요.",
+          exVi: "Tôi đã gọi nhân viên phục vụ.",
+        },
+        {
+          kr: "주부",
+          en: "housewife, homemaker",
+          vi: "nội trợ",
+          hv: "主婦",
+          hvR: "chủ phụ",
+          pure: false,
+          explain:
+            "Người nội trợ, thường là phụ nữ ở nhà quản lý việc gia đình. 주부 생활 = cuộc sống nội trợ.",
+          ex: "저는 주부예요.",
+          exVi: "Tôi là người nội trợ.",
+        },
+        {
+          kr: "주인",
+          en: "owner, host",
+          vi: "chủ nhân, chủ sở hữu",
+          hv: "主人",
+          hvR: "chủ nhân",
+          pure: false,
+          explain:
+            "Chủ nhân, người sở hữu. 가게 주인 = chủ cửa hàng. 주인이 없다 = không có chủ.",
+          ex: "가게 주인이 친절해요.",
+          exVi: "Chủ cửa hàng rất tốt bụng.",
+        },
+        {
+          kr: "준비",
+          en: "preparation",
+          vi: "sự chuẩn bị",
+          hv: "準備",
+          hvR: "chuẩn bị",
+          pure: false,
+          explain:
+            "Sự chuẩn bị. 준비하다 = chuẩn bị. 준비가 됐다 = đã sẵn sàng. 준비물 = đồ cần chuẩn bị.",
+          ex: "준비가 됐어요?",
+          exVi: "Bạn đã sẵn sàng chưa?",
+        },
+        {
+          kr: "중요",
+          en: "importance, important",
+          vi: "tầm quan trọng",
+          hv: "重要",
+          hvR: "trọng yếu",
+          pure: false,
+          explain:
+            "Quan trọng. 중요하다 = quan trọng. 중요한 것 = điều quan trọng. 가장 중요한 = quan trọng nhất.",
+          ex: "건강이 제일 중요해요.",
+          exVi: "Sức khỏe là quan trọng nhất.",
+        },
+        {
+          kr: "직업",
+          en: "job, occupation, profession",
+          vi: "nghề nghiệp",
+          hv: "職業",
+          hvR: "chức nghiệp",
+          pure: false,
+          explain:
+            "Nghề nghiệp, công việc. 직업이 뭐예요? = Nghề của bạn là gì? 직업을 바꾸다 = đổi nghề.",
+          ex: "직업이 뭐예요?",
+          exVi: "Nghề nghiệp của bạn là gì?",
+        },
+        {
+          kr: "직원",
+          en: "employee, staff member",
+          vi: "nhân viên",
+          hv: "職員",
+          hvR: "chức viên",
+          pure: false,
+          explain:
+            "Nhân viên trong tổ chức/công ty. 회사 직원 = nhân viên công ty. 직원을 채용하다 = tuyển nhân viên.",
+          ex: "직원이 몇 명이에요?",
+          exVi: "Có bao nhiêu nhân viên?",
+        },
+        {
+          kr: "직장",
+          en: "workplace, job",
+          vi: "nơi làm việc",
+          hv: "職場",
+          hvR: "chức trường",
+          pure: false,
+          explain:
+            "Nơi làm việc, cơ quan. 직장을 구하다 = tìm việc làm. 직장 동료 = đồng nghiệp.",
+          ex: "직장을 구하고 있어요.",
+          exVi: "Tôi đang tìm việc làm.",
+        },
+        {
+          kr: "질",
+          en: "quality",
+          vi: "chất lượng",
+          hv: "質",
+          hvR: "chất",
+          pure: false,
+          explain:
+            "Chất lượng. 질이 좋다/나쁘다 = chất lượng tốt/kém. 삶의 질 = chất lượng cuộc sống.",
+          ex: "이 제품은 질이 좋아요.",
+          exVi: "Sản phẩm này chất lượng tốt.",
+        },
+        {
+          kr: "책임",
+          en: "responsibility, duty",
+          vi: "trách nhiệm",
+          hv: "責任",
+          hvR: "trách nhiệm",
+          pure: false,
+          explain:
+            "Trách nhiệm. 책임을 지다 = chịu trách nhiệm. 책임감 = tinh thần trách nhiệm.",
+          ex: "책임을 져야 해요.",
+          exVi: "Bạn phải chịu trách nhiệm.",
+        },
+        {
+          kr: "출장",
+          en: "business trip",
+          vi: "chuyến công tác",
+          hv: "出張",
+          hvR: "xuất trương",
+          pure: false,
+          explain:
+            "Chuyến đi công tác. 출장을 가다 = đi công tác. 출장비 = chi phí công tác.",
+          ex: "내일 출장 가요.",
+          exVi: "Ngày mai tôi đi công tác.",
+        },
+        {
+          kr: "통장",
+          en: "bankbook, passbook",
+          vi: "sổ ngân hàng",
+          hv: "通帳",
+          hvR: "thông trướng",
+          pure: false,
+          explain:
+            "Sổ tiết kiệm/tài khoản ngân hàng. 통장을 만들다 = mở tài khoản ngân hàng. 통장 잔액 = số dư.",
+          ex: "통장을 만들고 싶어요.",
+          exVi: "Tôi muốn mở tài khoản ngân hàng.",
+        },
+        {
+          kr: "포장",
+          en: "packaging, wrapping",
+          vi: "đóng gói, bao bì",
+          hv: "包裝",
+          hvR: "bao trang",
+          pure: false,
+          explain:
+            "Đóng gói, bao bì. 포장하다 = đóng gói. 포장지 = giấy gói. 포장 주문 = đặt mang về (takeout).",
+          ex: "포장해 주세요.",
+          exVi: "Gói mang về cho tôi với.",
+        },
+        {
+          kr: "필요",
+          en: "necessity, need",
+          vi: "sự cần thiết",
+          hv: "必要",
+          hvR: "tất yếu",
+          pure: false,
+          explain:
+            "Sự cần thiết. 필요하다 = cần thiết. 필요 없다 = không cần. 필요한 것 = thứ cần thiết.",
+          ex: "도움이 필요해요.",
+          exVi: "Tôi cần giúp đỡ.",
+        },
+        {
+          kr: "할인",
+          en: "discount, sale",
+          vi: "giảm giá, chiết khấu",
+          hv: "割引",
+          hvR: "cát dẫn",
+          pure: false,
+          explain:
+            "Giảm giá, chiết khấu. 할인하다 = giảm giá. 할인 쿠폰 = phiếu giảm giá. 50% 할인 = giảm 50%.",
+          ex: "할인이 돼요?",
+          exVi: "Có được giảm giá không?",
+        },
+        {
+          kr: "현금",
+          en: "cash",
+          vi: "tiền mặt",
+          hv: "現金",
+          hvR: "hiện kim",
+          pure: false,
+          explain:
+            "Tiền mặt. 현금으로 내다 = trả tiền mặt. 현금이 없다 = không có tiền mặt. Đối lập với 카드(thẻ).",
+          ex: "현금으로 낼게요.",
+          exVi: "Tôi sẽ trả tiền mặt.",
+        },
+        {
+          kr: "화가",
+          en: "artist, painter",
+          vi: "họa sĩ",
+          hv: "畫家",
+          hvR: "họa gia",
+          pure: false,
+          explain:
+            "Họa sĩ. 화(畫, tranh vẽ) + 가(家, người hành nghề). 유명한 화가 = họa sĩ nổi tiếng.",
+          ex: "그림을 잘 그리는 화가예요.",
+          exVi: "Đây là họa sĩ vẽ rất giỏi.",
+        },
+        {
+          kr: "회사",
+          en: "company, corporation",
+          vi: "công ty",
+          hv: "會社",
+          hvR: "hội xã",
+          pure: false,
+          explain:
+            "Công ty. 회사에 다니다 = đi làm ở công ty. 대기업 = tập đoàn lớn. 중소기업 = doanh nghiệp vừa và nhỏ.",
+          ex: "어느 회사에 다녀요?",
+          exVi: "Bạn làm ở công ty nào?",
+        },
+        {
+          kr: "회사원",
+          en: "office worker, company employee",
+          vi: "nhân viên công ty",
+          hv: "會社員",
+          hvR: "hội xã viên",
+          pure: false,
+          explain:
+            "Nhân viên văn phòng công ty. 평범한 회사원 = nhân viên công ty bình thường.",
+          ex: "저는 평범한 회사원이에요.",
+          exVi: "Tôi là nhân viên công ty bình thường.",
+        },
+        {
+          kr: "회의",
+          en: "meeting, conference",
+          vi: "cuộc họp, hội nghị",
+          hv: "會議",
+          hvR: "hội nghị",
+          pure: false,
+          explain:
+            "Cuộc họp. 회의를 하다 = tổ chức họp. 회의실 = phòng họp. 화상 회의 = họp trực tuyến.",
+          ex: "지금 회의 중이에요.",
+          exVi: "Bây giờ đang họp.",
+        },
+      ];
 
-<script>
-const vocab = [
-  { kr:"가격", en:"price", vi:"giá cả", hv:"價格", hvR:"giá cách", pure:false,
-    explain:"Giá cả của hàng hóa. 가격이 비싸다/싸다 = giá đắt/rẻ. 가격을 흥정하다 = trả giá.",
-    ex:"가격이 얼마예요?", exVi:"Giá bao nhiêu vậy?" },
-  { kr:"가수", en:"singer", vi:"ca sĩ", hv:"歌手", hvR:"ca thủ", pure:false,
-    explain:"Ca sĩ. 가(歌, bài hát) + 수(手, người thực hiện). K-pop đã làm 가수 trở thành nghề được ngưỡng mộ.",
-    ex:"가수가 되고 싶어요.", exVi:"Tôi muốn trở thành ca sĩ." },
-  { kr:"간호사", en:"nurse", vi:"y tá", hv:"看護師", hvR:"khán hộ sư", pure:false,
-    explain:"Y tá, điều dưỡng viên. 간호(看護, chăm sóc) + 사(師, người có nghề). 간호사가 친절해요 = y tá rất tốt bụng.",
-    ex:"간호사가 주사를 놨어요.", exVi:"Y tá đã tiêm thuốc cho tôi." },
-  { kr:"값", en:"price, value", vi:"giá, giá trị", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Giá cả hoặc giá trị. Tương tự 가격 nhưng thuần Hàn và thân mật hơn. 값이 싸다 = giá rẻ.",
-    ex:"값이 너무 비싸요.", exVi:"Giá đắt quá." },
-  { kr:"경찰", en:"police", vi:"cảnh sát", hv:"警察", hvR:"cảnh sát", pure:false,
-    explain:"Cảnh sát — lực lượng. 경찰을 부르다 = gọi cảnh sát. 경찰서 = đồn cảnh sát.",
-    ex:"경찰을 불러야 해요.", exVi:"Phải gọi cảnh sát thôi." },
-  { kr:"경찰관", en:"police officer", vi:"sĩ quan cảnh sát", hv:"警察官", hvR:"cảnh sát quan", pure:false,
-    explain:"Cảnh sát viên — cá nhân. 경찰(cảnh sát) + 관(官, quan chức). Cụ thể hơn 경찰.",
-    ex:"경찰관이 도와줬어요.", exVi:"Cảnh sát viên đã giúp tôi." },
-  { kr:"경험", en:"experience", vi:"kinh nghiệm", hv:"經驗", hvR:"kinh nghiệm", pure:false,
-    explain:"Kinh nghiệm tích lũy qua thực tiễn. 경험이 있다/없다 = có/không có kinh nghiệm.",
-    ex:"경험이 많아요.", exVi:"Tôi có nhiều kinh nghiệm." },
-  { kr:"계획", en:"plan", vi:"kế hoạch", hv:"計劃", hvR:"kế hoạch", pure:false,
-    explain:"Kế hoạch, dự định. 계획을 세우다 = lên kế hoạch. 계획대로 = theo kế hoạch.",
-    ex:"무슨 계획이 있어요?", exVi:"Bạn có kế hoạch gì không?" },
-  { kr:"공무원", en:"public official, civil servant", vi:"công chức nhà nước", hv:"公務員", hvR:"công vụ viên", pure:false,
-    explain:"Công chức nhà nước. Rất được coi trọng ở Hàn Quốc vì sự ổn định lâu dài. 공무원 시험 = thi công chức.",
-    ex:"공무원이 되고 싶어요.", exVi:"Tôi muốn trở thành công chức." },
-  { kr:"공짜", en:"free (of charge)", vi:"miễn phí, đồ miễn phí", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Miễn phí, không mất tiền. 공짜로 받다 = nhận miễn phí. 공짜 좋아하다 = thích đồ miễn phí.",
-    ex:"공짜로 받았어요.", exVi:"Tôi đã nhận miễn phí." },
-  { kr:"교수", en:"professor", vi:"giáo sư", hv:"敎授", hvR:"giáo thụ", pure:false,
-    explain:"Giáo sư đại học. 교수님 = thưa giáo sư (kính ngữ). 교수가 되다 = trở thành giáo sư.",
-    ex:"교수님 강의가 재미있어요.", exVi:"Bài giảng của giáo sư thú vị lắm." },
-  { kr:"군인", en:"soldier, military personnel", vi:"quân nhân, lính", hv:"軍人", hvR:"quân nhân", pure:false,
-    explain:"Quân nhân. Nam giới Hàn Quốc bắt buộc phải thực hiện nghĩa vụ quân sự khoảng 18–21 tháng.",
-    ex:"오빠가 군인이에요.", exVi:"Anh tôi là quân nhân." },
-  { kr:"기사", en:"article; driver; engineer", vi:"bài báo; tài xế; kỹ sư", hv:"記事/技士/騎士", hvR:"ký sự / kỹ sĩ / kỵ sĩ", pure:false,
-    explain:"Ba nghĩa: (1) 記事 — bài báo, (2) 技士 — kỹ sư/tài xế lành nghề, (3) 騎士 — hiệp sĩ. Ngữ cảnh quyết định.",
-    ex:"신문 기사를 읽었어요.", exVi:"Tôi đã đọc bài báo trên báo." },
-  { kr:"기자", en:"reporter, journalist", vi:"phóng viên, nhà báo", hv:"記者", hvR:"ký giả", pure:false,
-    explain:"Phóng viên, nhà báo. 기자 회견 = họp báo. 신문 기자 = phóng viên báo in.",
-    ex:"기자가 인터뷰를 했어요.", exVi:"Phóng viên đã phỏng vấn." },
-  { kr:"능력", en:"ability, capability", vi:"năng lực, khả năng", hv:"能力", hvR:"năng lực", pure:false,
-    explain:"Năng lực, khả năng. 능력이 있다 = có năng lực. 업무 능력 = năng lực công việc.",
-    ex:"능력이 뛰어나요.", exVi:"Năng lực của bạn xuất sắc." },
-  { kr:"돈", en:"money", vi:"tiền", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Tiền. 돈이 있다/없다 = có/không có tiền. 돈을 벌다 = kiếm tiền. 돈을 쓰다 = tiêu tiền.",
-    ex:"돈이 없어요.", exVi:"Tôi không có tiền." },
-  { kr:"목적", en:"purpose, goal", vi:"mục đích", hv:"目的", hvR:"mục đích", pure:false,
-    explain:"Mục đích, mục tiêu. 목적이 뭐예요? = Mục đích là gì? 목적을 이루다 = đạt mục đích.",
-    ex:"여행의 목적이 뭐예요?", exVi:"Mục đích chuyến đi của bạn là gì?" },
-  { kr:"무료", en:"free of charge", vi:"miễn phí", hv:"無料", hvR:"vô liệu", pure:false,
-    explain:"Miễn phí — cách nói trang trọng hơn 공짜. 무료 입장 = vào cổng miễn phí. 무료 서비스 = dịch vụ miễn phí.",
-    ex:"입장이 무료예요.", exVi:"Vào cổng miễn phí." },
-  { kr:"무역", en:"trade, commerce", vi:"thương mại, buôn bán", hv:"貿易", hvR:"mậu dịch", pure:false,
-    explain:"Thương mại quốc tế. 무역회사 = công ty thương mại. 무역을 하다 = kinh doanh thương mại.",
-    ex:"무역 회사에서 일해요.", exVi:"Tôi làm ở công ty thương mại." },
-  { kr:"물건", en:"thing, item, goods", vi:"đồ vật, hàng hóa", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Đồ vật, hàng hóa. 물건을 사다 = mua đồ. 물건을 팔다 = bán đồ. 물건을 잃어버리다 = làm mất đồ.",
-    ex:"물건을 잃어버렸어요.", exVi:"Tôi bị mất đồ rồi." },
-  { kr:"발전", en:"development, progress", vi:"sự phát triển", hv:"發展", hvR:"phát triển", pure:false,
-    explain:"Sự phát triển, tiến bộ. 경제 발전 = phát triển kinh tế. 발전하다 = phát triển.",
-    ex:"한국은 빠르게 발전했어요.", exVi:"Hàn Quốc đã phát triển rất nhanh." },
-  { kr:"배달", en:"delivery", vi:"giao hàng, vận chuyển", hv:"配達", hvR:"phối đạt", pure:false,
-    explain:"Giao hàng tận nơi. 배달하다 = giao hàng. 배달 음식 = đồ ăn giao tận nhà. Rất phổ biến ở Hàn.",
-    ex:"배달 시켰어요.", exVi:"Tôi đã đặt giao hàng." },
-  { kr:"배우", en:"actor, actress", vi:"diễn viên", hv:"俳優", hvR:"bội ưu", pure:false,
-    explain:"Diễn viên phim hoặc kịch. 배우가 되다 = trở thành diễn viên. K-drama đã giúp nhiều 배우 nổi tiếng toàn cầu.",
-    ex:"좋아하는 배우가 있어요?", exVi:"Bạn có diễn viên yêu thích không?" },
-  { kr:"변호사", en:"lawyer, attorney", vi:"luật sư", hv:"辯護士", hvR:"biện hộ sĩ", pure:false,
-    explain:"Luật sư. 변호사를 선임하다 = thuê luật sư. 변호사가 되다 = trở thành luật sư.",
-    ex:"변호사에게 상담했어요.", exVi:"Tôi đã tư vấn với luật sư." },
-  { kr:"부동산", en:"real estate", vi:"bất động sản", hv:"不動産", hvR:"bất động sản", pure:false,
-    explain:"Bất động sản. 부동산 가격 = giá bất động sản. 부동산 중개소 = văn phòng môi giới BĐS.",
-    ex:"부동산 값이 너무 비싸요.", exVi:"Giá bất động sản quá đắt." },
-  { kr:"부업", en:"side job, side business", vi:"nghề phụ, công việc thêm", hv:"副業", hvR:"phó nghiệp", pure:false,
-    explain:"Công việc làm thêm ngoài việc chính. 부업을 하다 = làm thêm nghề phụ. 부(副, phụ) + 업(業, nghề).",
-    ex:"부업으로 번역을 해요.", exVi:"Tôi làm dịch thuật như nghề phụ." },
-  { kr:"부장", en:"department head, director", vi:"trưởng phòng, giám đốc bộ phận", hv:"部長", hvR:"bộ trưởng", pure:false,
-    explain:"Trưởng bộ phận, trưởng phòng. 영업부장 = trưởng phòng kinh doanh. Chức vụ trung cấp trong công ty Hàn.",
-    ex:"부장님이 회의를 소집했어요.", exVi:"Trưởng phòng đã triệu tập cuộc họp." },
-  { kr:"사무실", en:"office", vi:"văn phòng, phòng làm việc", hv:"事務室", hvR:"sự vụ thất", pure:false,
-    explain:"Văn phòng làm việc. 사무실에 출근하다 = đến văn phòng làm việc. 사무용품 = đồ dùng văn phòng.",
-    ex:"사무실이 몇 층이에요?", exVi:"Văn phòng ở tầng mấy?" },
-  { kr:"사업가", en:"entrepreneur, businessman", vi:"doanh nhân", hv:"事業家", hvR:"sự nghiệp gia", pure:false,
-    explain:"Doanh nhân, người kinh doanh. 성공한 사업가 = doanh nhân thành đạt. 사업(kinh doanh) + 가(người).",
-    ex:"그는 성공한 사업가예요.", exVi:"Anh ấy là doanh nhân thành đạt." },
-  { kr:"사원", en:"employee; temple/shrine", vi:"đền thờ; nhân viên", hv:"社員/寺院", hvR:"xã viên / tự viện", pure:false,
-    explain:"Hai nghĩa: (1) 社員 — nhân viên công ty (회사 사원), (2) 寺院 — đền thờ, chùa chiền. Ngữ cảnh phân biệt.",
-    ex:"우리 회사 사원이에요.", exVi:"Đây là nhân viên công ty chúng tôi." },
-  { kr:"사장", en:"CEO, president (of company)", vi:"giám đốc, tổng giám đốc", hv:"社長", hvR:"xã trưởng", pure:false,
-    explain:"Giám đốc, chủ tịch công ty. 사장님 = thưa giám đốc (kính ngữ). 사(社, công ty) + 장(長, trưởng).",
-    ex:"사장님이 오셨어요.", exVi:"Giám đốc đã đến rồi." },
-  { kr:"상품", en:"product, merchandise", vi:"sản phẩm, hàng hóa", hv:"商品", hvR:"thương phẩm", pure:false,
-    explain:"Hàng hóa, sản phẩm để bán. 상품을 진열하다 = trưng bày sản phẩm. 신상품 = sản phẩm mới.",
-    ex:"이 상품이 인기 있어요.", exVi:"Sản phẩm này rất được ưa chuộng." },
-  { kr:"생활", en:"life, living, lifestyle", vi:"cuộc sống, sinh hoạt", hv:"生活", hvR:"sinh hoạt", pure:false,
-    explain:"Cuộc sống, sinh hoạt hàng ngày. 생활비 = chi phí sinh hoạt. 생활 습관 = thói quen sinh hoạt.",
-    ex:"한국 생활이 어때요?", exVi:"Cuộc sống ở Hàn Quốc thế nào?" },
-  { kr:"서류", en:"document, paperwork", vi:"tài liệu, hồ sơ", hv:"書類", hvR:"thư loại", pure:false,
-    explain:"Hồ sơ, tài liệu giấy tờ. 서류를 제출하다 = nộp hồ sơ. 서류 작업 = làm giấy tờ.",
-    ex:"서류를 준비했어요.", exVi:"Tôi đã chuẩn bị hồ sơ." },
-  { kr:"서비스", en:"service", vi:"dịch vụ", hv:null, hvR:"từ tiếng Anh 'service'", pure:true,
-    explain:"Dịch vụ. Từ vay mượn tiếng Anh. Ở Hàn, 서비스 còn có nghĩa là 'tặng kèm miễn phí' trong nhà hàng.",
-    ex:"서비스가 정말 좋아요.", exVi:"Dịch vụ thật tốt." },
-  { kr:"선생님", en:"teacher", vi:"giáo viên, thầy/cô giáo", hv:"先生님", hvR:"tiên sinh", pure:false,
-    explain:"Giáo viên, thầy/cô. 선생님 = danh xưng kính trọng. Cũng dùng để gọi bất kỳ người lớn tuổi đáng kính.",
-    ex:"선생님, 질문 있어요.", exVi:"Thưa thầy/cô, em có câu hỏi." },
-  { kr:"세일하다", en:"to have a sale", vi:"giảm giá, khuyến mãi", hv:null, hvR:"từ tiếng Anh 'sale'", pure:true,
-    explain:"Giảm giá. 세일 중이에요 = đang giảm giá. 세일 기간 = thời gian khuyến mãi.",
-    ex:"지금 세일하고 있어요.", exVi:"Bây giờ đang giảm giá." },
-  { kr:"소설가", en:"novelist, fiction writer", vi:"nhà văn, tiểu thuyết gia", hv:"小說家", hvR:"tiểu thuyết gia", pure:false,
-    explain:"Nhà văn viết tiểu thuyết. 소설(tiểu thuyết) + 가(家, người làm nghề đó).",
-    ex:"유명한 소설가예요.", exVi:"Đây là nhà văn nổi tiếng." },
-  { kr:"손님", en:"customer, guest", vi:"khách hàng, khách", hv:null, hvR:"thuần Hàn", pure:true,
-    explain:"Khách hàng hoặc khách viếng thăm. 손님이 오다 = có khách đến. 손님을 맞이하다 = đón khách.",
-    ex:"손님, 어서 오세요!", exVi:"Kính chào quý khách!" },
-  { kr:"신청서", en:"application form", vi:"đơn xin, phiếu đăng ký", hv:"申請書", hvR:"thân thỉnh thư", pure:false,
-    explain:"Đơn đăng ký, phiếu xin. 신청서를 쓰다/제출하다 = viết/nộp đơn. 입학 신청서 = đơn xin nhập học.",
-    ex:"신청서를 작성해 주세요.", exVi:"Hãy điền vào đơn đăng ký." },
-  { kr:"약사", en:"pharmacist", vi:"dược sĩ", hv:"藥師", hvR:"dược sư", pure:false,
-    explain:"Dược sĩ. 약(藥, thuốc) + 사(師, người hành nghề). 약사에게 물어보다 = hỏi dược sĩ.",
-    ex:"약사에게 물어봤어요.", exVi:"Tôi đã hỏi dược sĩ." },
-  { kr:"양식", en:"form; western-style food", vi:"mẫu đơn; ẩm thực phương Tây", hv:"樣式/洋食", hvR:"dạng thức / tây thực", pure:false,
-    explain:"Hai nghĩa: (1) 樣式 — mẫu đơn, biểu mẫu (양식을 작성하다), (2) 洋食 — ẩm thực phương Tây (양식 레스토랑).",
-    ex:"양식을 작성해 주세요.", exVi:"Hãy điền vào mẫu đơn." },
-  { kr:"여행사", en:"travel agency", vi:"công ty du lịch", hv:"旅行社", hvR:"lữ hành xã", pure:false,
-    explain:"Công ty lữ hành. 여행사를 통해 예약하다 = đặt vé qua công ty du lịch.",
-    ex:"여행사에서 패키지를 샀어요.", exVi:"Tôi đã mua gói tour ở công ty du lịch." },
-  { kr:"예약", en:"reservation, booking", vi:"đặt chỗ trước, đặt bàn", hv:"豫約", hvR:"dự ước", pure:false,
-    explain:"Đặt chỗ trước. 예약하다 = đặt chỗ. 예약을 취소하다 = hủy đặt chỗ. 예약이 꽉 찼다 = hết chỗ.",
-    ex:"식당을 예약했어요.", exVi:"Tôi đã đặt bàn ở nhà hàng." },
-  { kr:"요금", en:"fee, fare, charge", vi:"lệ phí, giá vé", hv:"料金", hvR:"liệu kim", pure:false,
-    explain:"Phí, giá dịch vụ. 교통 요금 = giá vé giao thông. 요금을 내다 = trả phí.",
-    ex:"요금이 얼마예요?", exVi:"Phí là bao nhiêu?" },
-  { kr:"월급", en:"monthly salary", vi:"lương tháng", hv:"月給", hvR:"nguyệt cấp", pure:false,
-    explain:"Lương tháng. 월급을 받다 = nhận lương. 월급날 = ngày lãnh lương. 월급이 오르다 = tăng lương.",
-    ex:"월급이 올랐어요.", exVi:"Lương của tôi đã tăng rồi." },
-  { kr:"월세", en:"monthly rent", vi:"tiền thuê nhà tháng", hv:"月貰", hvR:"nguyệt thế", pure:false,
-    explain:"Tiền thuê nhà hàng tháng. 월세를 내다 = trả tiền thuê. 월세 방 = phòng trọ thuê tháng.",
-    ex:"월세가 너무 비싸요.", exVi:"Tiền thuê nhà đắt quá." },
-  { kr:"은행", en:"bank", vi:"ngân hàng", hv:"銀行", hvR:"ngân hàng", pure:false,
-    explain:"Ngân hàng. 은행에 가다 = đến ngân hàng. 은행 계좌 = tài khoản ngân hàng.",
-    ex:"은행에서 돈을 찾았어요.", exVi:"Tôi đã rút tiền ở ngân hàng." },
-  { kr:"은행원", en:"bank clerk, banker", vi:"nhân viên ngân hàng", hv:"銀行員", hvR:"ngân hàng viên", pure:false,
-    explain:"Nhân viên ngân hàng. 은행(ngân hàng) + 원(員, nhân viên).",
-    ex:"은행원이 친절하게 안내해 줬어요.", exVi:"Nhân viên ngân hàng đã hướng dẫn tôi rất tận tình." },
-  { kr:"음악가", en:"musician", vi:"nhạc sĩ", hv:"音樂家", hvR:"âm nhạc gia", pure:false,
-    explain:"Nhạc sĩ, nghệ sĩ âm nhạc. 음악(âm nhạc) + 가(家, người hành nghề). Rộng hơn 작곡가 (nhạc sĩ sáng tác).",
-    ex:"유명한 음악가가 공연해요.", exVi:"Nhạc sĩ nổi tiếng đang biểu diễn." },
-  { kr:"의사", en:"doctor, physician", vi:"bác sĩ", hv:"醫師", hvR:"y sư", pure:false,
-    explain:"Bác sĩ. 의사에게 가다 = đến gặp bác sĩ. 의사가 되다 = trở thành bác sĩ.",
-    ex:"의사 선생님, 아파요.", exVi:"Thưa bác sĩ, tôi bị đau." },
-  { kr:"이용", en:"usage, use", vi:"việc sử dụng, dùng", hv:"利用", hvR:"lợi dụng", pure:false,
-    explain:"Sử dụng dịch vụ hoặc tiện ích. 이용하다 = sử dụng. 이용 가능하다 = có thể sử dụng.",
-    ex:"카드를 이용할 수 있어요?", exVi:"Có thể dùng thẻ được không?" },
-  { kr:"일", en:"work; day; number 1", vi:"công việc; số 1; ngày", hv:"一/日", hvR:"nhất / nhật", pure:true,
-    explain:"Ba nghĩa: (1) công việc (일하다=làm việc), (2) số 1 (일, 이, 삼...), (3) ngày (일월 일일=ngày 1 tháng 1).",
-    ex:"일이 많아요.", exVi:"Tôi có nhiều việc." },
-  { kr:"일상생활", en:"everyday life", vi:"cuộc sống hàng ngày", hv:"日常生活", hvR:"nhật thường sinh hoạt", pure:false,
-    explain:"Cuộc sống thường ngày. 일상생활에서 = trong cuộc sống hàng ngày. 일상(nhật thường) + 생활(sinh hoạt).",
-    ex:"일상생활에서 한국어를 써요.", exVi:"Tôi dùng tiếng Hàn trong cuộc sống hàng ngày." },
-  { kr:"자동차회사", en:"car company, automobile company", vi:"công ty xe hơi", hv:"自動車會社", hvR:"tự động xa hội xã", pure:false,
-    explain:"Công ty sản xuất ô tô. 현대자동차회사 = Hyundai Motor Company.",
-    ex:"자동차회사에 취직했어요.", exVi:"Tôi đã xin được vào công ty xe hơi." },
-  { kr:"자료", en:"data, material, resource", vi:"tài liệu, dữ liệu", hv:"資料", hvR:"tư liệu", pure:false,
-    explain:"Tài liệu tham khảo, dữ liệu. 자료를 수집하다 = thu thập tài liệu. 자료를 찾다 = tìm tài liệu.",
-    ex:"자료를 찾고 있어요.", exVi:"Tôi đang tìm tài liệu." },
-  { kr:"재료", en:"ingredient, material", vi:"nguyên liệu, vật liệu", hv:"材料", hvR:"tài liệu", pure:false,
-    explain:"Nguyên liệu thô để làm ra thứ gì. 요리 재료 = nguyên liệu nấu ăn. 건축 재료 = vật liệu xây dựng.",
-    ex:"재료를 준비했어요.", exVi:"Tôi đã chuẩn bị nguyên liệu." },
-  { kr:"점원", en:"store clerk, sales staff", vi:"nhân viên bán hàng", hv:"店員", hvR:"điếm viên", pure:false,
-    explain:"Nhân viên bán hàng tại cửa hàng. 점(店, cửa hàng) + 원(員, nhân viên).",
-    ex:"점원에게 물어봤어요.", exVi:"Tôi đã hỏi nhân viên bán hàng." },
-  { kr:"종업원", en:"employee, staff (restaurant/service)", vi:"nhân viên phục vụ", hv:"從業員", hvR:"tòng nghiệp viên", pure:false,
-    explain:"Nhân viên phục vụ tại nhà hàng hoặc cơ sở dịch vụ. Rộng hơn 점원.",
-    ex:"종업원을 불렀어요.", exVi:"Tôi đã gọi nhân viên phục vụ." },
-  { kr:"주부", en:"housewife, homemaker", vi:"nội trợ", hv:"主婦", hvR:"chủ phụ", pure:false,
-    explain:"Người nội trợ, thường là phụ nữ ở nhà quản lý việc gia đình. 주부 생활 = cuộc sống nội trợ.",
-    ex:"저는 주부예요.", exVi:"Tôi là người nội trợ." },
-  { kr:"주인", en:"owner, host", vi:"chủ nhân, chủ sở hữu", hv:"主人", hvR:"chủ nhân", pure:false,
-    explain:"Chủ nhân, người sở hữu. 가게 주인 = chủ cửa hàng. 주인이 없다 = không có chủ.",
-    ex:"가게 주인이 친절해요.", exVi:"Chủ cửa hàng rất tốt bụng." },
-  { kr:"준비", en:"preparation", vi:"sự chuẩn bị", hv:"準備", hvR:"chuẩn bị", pure:false,
-    explain:"Sự chuẩn bị. 준비하다 = chuẩn bị. 준비가 됐다 = đã sẵn sàng. 준비물 = đồ cần chuẩn bị.",
-    ex:"준비가 됐어요?", exVi:"Bạn đã sẵn sàng chưa?" },
-  { kr:"중요", en:"importance, important", vi:"tầm quan trọng", hv:"重要", hvR:"trọng yếu", pure:false,
-    explain:"Quan trọng. 중요하다 = quan trọng. 중요한 것 = điều quan trọng. 가장 중요한 = quan trọng nhất.",
-    ex:"건강이 제일 중요해요.", exVi:"Sức khỏe là quan trọng nhất." },
-  { kr:"직업", en:"job, occupation, profession", vi:"nghề nghiệp", hv:"職業", hvR:"chức nghiệp", pure:false,
-    explain:"Nghề nghiệp, công việc. 직업이 뭐예요? = Nghề của bạn là gì? 직업을 바꾸다 = đổi nghề.",
-    ex:"직업이 뭐예요?", exVi:"Nghề nghiệp của bạn là gì?" },
-  { kr:"직원", en:"employee, staff member", vi:"nhân viên", hv:"職員", hvR:"chức viên", pure:false,
-    explain:"Nhân viên trong tổ chức/công ty. 회사 직원 = nhân viên công ty. 직원을 채용하다 = tuyển nhân viên.",
-    ex:"직원이 몇 명이에요?", exVi:"Có bao nhiêu nhân viên?" },
-  { kr:"직장", en:"workplace, job", vi:"nơi làm việc", hv:"職場", hvR:"chức trường", pure:false,
-    explain:"Nơi làm việc, cơ quan. 직장을 구하다 = tìm việc làm. 직장 동료 = đồng nghiệp.",
-    ex:"직장을 구하고 있어요.", exVi:"Tôi đang tìm việc làm." },
-  { kr:"질", en:"quality", vi:"chất lượng", hv:"質", hvR:"chất", pure:false,
-    explain:"Chất lượng. 질이 좋다/나쁘다 = chất lượng tốt/kém. 삶의 질 = chất lượng cuộc sống.",
-    ex:"이 제품은 질이 좋아요.", exVi:"Sản phẩm này chất lượng tốt." },
-  { kr:"책임", en:"responsibility, duty", vi:"trách nhiệm", hv:"責任", hvR:"trách nhiệm", pure:false,
-    explain:"Trách nhiệm. 책임을 지다 = chịu trách nhiệm. 책임감 = tinh thần trách nhiệm.",
-    ex:"책임을 져야 해요.", exVi:"Bạn phải chịu trách nhiệm." },
-  { kr:"출장", en:"business trip", vi:"chuyến công tác", hv:"出張", hvR:"xuất trương", pure:false,
-    explain:"Chuyến đi công tác. 출장을 가다 = đi công tác. 출장비 = chi phí công tác.",
-    ex:"내일 출장 가요.", exVi:"Ngày mai tôi đi công tác." },
-  { kr:"통장", en:"bankbook, passbook", vi:"sổ ngân hàng", hv:"通帳", hvR:"thông trướng", pure:false,
-    explain:"Sổ tiết kiệm/tài khoản ngân hàng. 통장을 만들다 = mở tài khoản ngân hàng. 통장 잔액 = số dư.",
-    ex:"통장을 만들고 싶어요.", exVi:"Tôi muốn mở tài khoản ngân hàng." },
-  { kr:"포장", en:"packaging, wrapping", vi:"đóng gói, bao bì", hv:"包裝", hvR:"bao trang", pure:false,
-    explain:"Đóng gói, bao bì. 포장하다 = đóng gói. 포장지 = giấy gói. 포장 주문 = đặt mang về (takeout).",
-    ex:"포장해 주세요.", exVi:"Gói mang về cho tôi với." },
-  { kr:"필요", en:"necessity, need", vi:"sự cần thiết", hv:"必要", hvR:"tất yếu", pure:false,
-    explain:"Sự cần thiết. 필요하다 = cần thiết. 필요 없다 = không cần. 필요한 것 = thứ cần thiết.",
-    ex:"도움이 필요해요.", exVi:"Tôi cần giúp đỡ." },
-  { kr:"할인", en:"discount, sale", vi:"giảm giá, chiết khấu", hv:"割引", hvR:"cát dẫn", pure:false,
-    explain:"Giảm giá, chiết khấu. 할인하다 = giảm giá. 할인 쿠폰 = phiếu giảm giá. 50% 할인 = giảm 50%.",
-    ex:"할인이 돼요?", exVi:"Có được giảm giá không?" },
-  { kr:"현금", en:"cash", vi:"tiền mặt", hv:"現金", hvR:"hiện kim", pure:false,
-    explain:"Tiền mặt. 현금으로 내다 = trả tiền mặt. 현금이 없다 = không có tiền mặt. Đối lập với 카드(thẻ).",
-    ex:"현금으로 낼게요.", exVi:"Tôi sẽ trả tiền mặt." },
-  { kr:"화가", en:"artist, painter", vi:"họa sĩ", hv:"畫家", hvR:"họa gia", pure:false,
-    explain:"Họa sĩ. 화(畫, tranh vẽ) + 가(家, người hành nghề). 유명한 화가 = họa sĩ nổi tiếng.",
-    ex:"그림을 잘 그리는 화가예요.", exVi:"Đây là họa sĩ vẽ rất giỏi." },
-  { kr:"회사", en:"company, corporation", vi:"công ty", hv:"會社", hvR:"hội xã", pure:false,
-    explain:"Công ty. 회사에 다니다 = đi làm ở công ty. 대기업 = tập đoàn lớn. 중소기업 = doanh nghiệp vừa và nhỏ.",
-    ex:"어느 회사에 다녀요?", exVi:"Bạn làm ở công ty nào?" },
-  { kr:"회사원", en:"office worker, company employee", vi:"nhân viên công ty", hv:"會社員", hvR:"hội xã viên", pure:false,
-    explain:"Nhân viên văn phòng công ty. 평범한 회사원 = nhân viên công ty bình thường.",
-    ex:"저는 평범한 회사원이에요.", exVi:"Tôi là nhân viên công ty bình thường." },
-  { kr:"회의", en:"meeting, conference", vi:"cuộc họp, hội nghị", hv:"會議", hvR:"hội nghị", pure:false,
-    explain:"Cuộc họp. 회의를 하다 = tổ chức họp. 회의실 = phòng họp. 화상 회의 = họp trực tuyến.",
-    ex:"지금 회의 중이에요.", exVi:"Bây giờ đang họp." },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    const hvCell = item.pure
-      ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
-      : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          const hvCell = item.pure
+            ? `<span class="hv-tag pure">Thuần Hàn / Vay mượn</span><span class="hv-reading">${item.hvR}</span>`
+            : `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -404,42 +1373,52 @@ function renderTable(data) {
         <span class="example-kr">${item.ex}</span>
         <span class="example-vi">${item.exVi}</span>
       </td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all'
-      || (currentFilter === 'hv' && !item.pure)
-      || (currentFilter === 'pure' && item.pure);
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || (item.hv && item.hv.includes(q))
-      || item.hvR.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" ||
+            (currentFilter === "hv" && !item.pure) ||
+            (currentFilter === "pure" && item.pure);
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            item.hvR.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
