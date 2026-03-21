@@ -1,284 +1,611 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Màu sắc</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f8f8f8;
-    --card: #ffffff;
-    --accent: #444;
-    --text: #1a1a1a;
-    --sub: #777;
-    --border: #e0e0e0;
-    --tag-hv: #f0eaf8;
-    --tag-pure: #eaf4f0;
-    --highlight: #f4f4f4;
-    --row-alt: #fafafa;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Màu sắc</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f8f8f8;
+        --card: #ffffff;
+        --accent: #444;
+        --text: #1a1a1a;
+        --sub: #777;
+        --border: #e0e0e0;
+        --tag-hv: #f0eaf8;
+        --tag-pure: #eaf4f0;
+        --highlight: #f4f4f4;
+        --row-alt: #fafafa;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f8f8f8;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '색깔';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #aaa; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: #555; color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #f8f8f8;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "색깔";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #aaa;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: #555;
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  /* Color palette preview */
-  .palette {
-    display: flex;
-    gap: 0;
-    height: 6px;
-    margin-top: 16px;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .palette span { flex: 1; }
+      /* Color palette preview */
+      .palette {
+        display: flex;
+        gap: 0;
+        height: 6px;
+        margin-top: 16px;
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .palette span {
+        flex: 1;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: #888; }
-  #searchInput::placeholder { color: var(--sub); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: #888;
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  /* Card grid for colors */
-  .grid-wrap { padding: 28px 40px 60px; }
-  .color-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-  }
+      /* Card grid for colors */
+      .grid-wrap {
+        padding: 28px 40px 60px;
+      }
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
 
-  .color-card {
-    background: var(--card);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .color-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
-  .color-card.hidden { display: none; }
+      .color-card {
+        background: var(--card);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .color-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      }
+      .color-card.hidden {
+        display: none;
+      }
 
-  .swatch {
-    height: 90px;
-    width: 100%;
-    position: relative;
-  }
-  .swatch-label {
-    position: absolute;
-    bottom: 8px; left: 12px;
-    font-family: 'Noto Serif KR', serif;
-    font-size: 22px;
-    font-weight: 600;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
-  }
+      .swatch {
+        height: 90px;
+        width: 100%;
+        position: relative;
+      }
+      .swatch-label {
+        position: absolute;
+        bottom: 8px;
+        left: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-  .card-body { padding: 14px 16px 16px; }
-  .card-en { font-size: 13px; color: var(--sub); margin-bottom: 3px; }
-  .card-vi { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+      .card-body {
+        padding: 14px 16px 16px;
+      }
+      .card-en {
+        font-size: 13px;
+        color: var(--sub);
+        margin-bottom: 3px;
+      }
+      .card-vi {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 8px;
+      }
 
-  .card-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-  .tag { display: inline-flex; align-items: center; gap: 3px; border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 500; }
-  .tag-hv { background: var(--tag-hv); color: #5a3090; }
-  .tag-hanja { font-weight: 700; font-size: 12px; }
-  .tag-pure { background: var(--tag-pure); color: #1a6040; }
-  .tag-reading { font-size: 11px; color: var(--sub); }
+      .card-meta {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 500;
+      }
+      .tag-hv {
+        background: var(--tag-hv);
+        color: #5a3090;
+      }
+      .tag-hanja {
+        font-weight: 700;
+        font-size: 12px;
+      }
+      .tag-pure {
+        background: var(--tag-pure);
+        color: #1a6040;
+      }
+      .tag-reading {
+        font-size: 11px;
+        color: var(--sub);
+      }
 
-  .card-explain { font-size: 12.5px; color: #555; line-height: 1.55; margin-bottom: 8px; }
-  .card-example { background: #f6f6f6; border-radius: 8px; padding: 8px 10px; }
-  .ex-kr { font-family: 'Noto Serif KR', serif; font-size: 13px; color: var(--text); display: block; }
-  .ex-vi { font-size: 11.5px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
+      .card-explain {
+        font-size: 12.5px;
+        color: #555;
+        line-height: 1.55;
+        margin-bottom: 8px;
+      }
+      .card-example {
+        background: #f6f6f6;
+        border-radius: 8px;
+        padding: 8px 10px;
+      }
+      .ex-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13px;
+        color: var(--text);
+        display: block;
+      }
+      .ex-vi {
+        font-size: 11.5px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
 
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .grid-wrap { padding: 16px 20px 40px; }
-    .color-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .grid-wrap {
+          padding: 16px 20px 40px;
+        }
+        .color-grid {
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+          gap: 12px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>색깔 — Màu sắc</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Màu sắc · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+      <div class="palette">
+        <span style="background: #8b4513"></span>
+        <span style="background: #222"></span>
+        <span style="background: #ffd700"></span>
+        <span style="background: #4caf50"></span>
+        <span style="background: #e53935"></span>
+        <span style="background: #ff8c00"></span>
+        <span style="background: #2196f3"></span>
+        <span style="background: #87ceeb"></span>
+        <span style="background: #fff; border: 1px solid #ccc"></span>
+        <span style="background: #9e9e9e"></span>
+      </div>
+    </div>
 
-<div class="header">
-  <h1>색깔 — Màu sắc</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Màu sắc · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-  <div class="palette">
-    <span style="background:#8B4513"></span>
-    <span style="background:#222"></span>
-    <span style="background:#FFD700"></span>
-    <span style="background:#4CAF50"></span>
-    <span style="background:#e53935"></span>
-    <span style="background:#FF8C00"></span>
-    <span style="background:#2196F3"></span>
-    <span style="background:#87CEEB"></span>
-    <span style="background:#fff;border:1px solid #ccc"></span>
-    <span style="background:#9E9E9E"></span>
-  </div>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="grid-wrap">
+      <div class="color-grid" id="colorGrid"></div>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy màu nào phù hợp.
+      </div>
+    </div>
 
-<div class="grid-wrap">
-  <div class="color-grid" id="colorGrid"></div>
-  <div class="no-results" id="noResults">😕 Không tìm thấy màu nào phù hợp.</div>
-</div>
+    <div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Màu sắc</div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Màu sắc</div>
+    <script>
+      const colors = [
+        {
+          kr: "색",
+          en: "color",
+          vi: "màu, màu sắc",
+          swatch: "linear-gradient(135deg,#e53935,#2196F3,#FFD700,#4CAF50)",
+          swatchText: "#fff",
+          hv: "色",
+          hvR: "sắc",
+          pure: false,
+          explain:
+            "Màu sắc nói chung. 무슨 색이에요? = Màu gì vậy? 색이 예쁘다 = màu đẹp. Thường kết hợp: 빨간색, 파란색,...",
+          ex: "무슨 색을 좋아해요?",
+          exVi: "Bạn thích màu gì?",
+        },
+        {
+          kr: "색깔",
+          en: "color, hue",
+          vi: "màu sắc",
+          swatch: "linear-gradient(135deg,#FF8C00,#9C27B0,#00BCD4,#e53935)",
+          swatchText: "#fff",
+          hv: "色",
+          hvR: "색(sắc) + 깔(thuần Hàn)",
+          pure: false,
+          explain:
+            "Màu sắc — thân mật hơn 색 một chút. 색깔이 다양해요 = màu sắc đa dạng. Dùng tự do trong văn nói.",
+          ex: "색깔이 정말 다양해요.",
+          exVi: "Màu sắc thật đa dạng.",
+        },
+        {
+          kr: "빨간색",
+          en: "red",
+          vi: "màu đỏ",
+          swatch: "#e53935",
+          swatchText: "#fff",
+          hv: null,
+          hvR: "thuần Hàn (빨갛다)",
+          pure: true,
+          explain:
+            "Màu đỏ. 빨갛다 = đỏ (tính từ). 빨간색 = danh từ màu đỏ. 신호등의 빨간불 = đèn đỏ giao thông.",
+          ex: "빨간색 옷이 예뻐요.",
+          exVi: "Bộ quần áo màu đỏ đẹp quá.",
+        },
+        {
+          kr: "주황색",
+          en: "orange",
+          vi: "màu cam",
+          swatch: "#FF8C00",
+          swatchText: "#fff",
+          hv: "朱黃色",
+          hvR: "chu hoàng sắc",
+          pure: false,
+          explain:
+            "Màu cam. 주(朱, đỏ sẫm) + 황(黃, vàng) + 색(色). Màu giữa đỏ và vàng.",
+          ex: "주황색 당근이에요.",
+          exVi: "Đây là cà rốt màu cam.",
+        },
+        {
+          kr: "노란색",
+          en: "yellow",
+          vi: "màu vàng",
+          swatch: "#FFD700",
+          swatchText: "#333",
+          hv: null,
+          hvR: "thuần Hàn (노랗다)",
+          pure: true,
+          explain:
+            "Màu vàng. 노랗다 = vàng (tính từ). 노란색 바나나 = chuối màu vàng. 노란 꽃 = hoa màu vàng.",
+          ex: "노란색 꽃이 피었어요.",
+          exVi: "Hoa màu vàng đã nở.",
+        },
+        {
+          kr: "녹색",
+          en: "green",
+          vi: "màu xanh lá cây",
+          swatch: "#388E3C",
+          swatchText: "#fff",
+          hv: "綠色",
+          hvR: "lục sắc",
+          pure: false,
+          explain:
+            "Màu xanh lá — cách nói Hán Hàn, trang trọng hơn 초록색. 신호등의 녹색 불 = đèn xanh giao thông.",
+          ex: "신호등이 녹색이에요.",
+          exVi: "Đèn giao thông màu xanh rồi.",
+        },
+        {
+          kr: "초록색",
+          en: "green",
+          vi: "màu xanh lá",
+          swatch: "#4CAF50",
+          swatchText: "#fff",
+          hv: null,
+          hvR: "thuần Hàn (초록)",
+          pure: true,
+          explain:
+            "Màu xanh lá — cách nói thuần Hàn thân mật hơn 녹색. 초록색 나뭇잎 = lá cây xanh. Dùng phổ biến hơn trong hội thoại.",
+          ex: "초록색 나뭇잎이 예뻐요.",
+          exVi: "Lá cây xanh thật đẹp.",
+        },
+        {
+          kr: "파란색",
+          en: "blue",
+          vi: "màu xanh da trời",
+          swatch: "#1E88E5",
+          swatchText: "#fff",
+          hv: null,
+          hvR: "thuần Hàn (파랗다)",
+          pure: true,
+          explain:
+            "Màu xanh dương. 파랗다 = xanh (tính từ). 파란 하늘 = bầu trời xanh. Dùng cho cả xanh biển lẫn xanh da trời.",
+          ex: "파란 하늘이 아름다워요.",
+          exVi: "Bầu trời xanh thật đẹp.",
+        },
+        {
+          kr: "하늘색",
+          en: "sky blue, light blue",
+          vi: "màu xanh da trời (nhạt)",
+          swatch: "#87CEEB",
+          swatchText: "#333",
+          hv: null,
+          hvR: "하늘(bầu trời) + 색(màu)",
+          pure: true,
+          explain:
+            "Màu xanh nhạt như bầu trời. 하늘(bầu trời) + 색(màu). Nhạt hơn 파란색. 하늘색 셔츠 = áo xanh nhạt.",
+          ex: "하늘색 셔츠를 샀어요.",
+          exVi: "Tôi đã mua áo sơ mi màu xanh nhạt.",
+        },
+        {
+          kr: "하얀색",
+          en: "white",
+          vi: "màu trắng",
+          swatch: "#f0f0f0",
+          swatchText: "#333",
+          hv: null,
+          hvR: "thuần Hàn (하얗다)",
+          pure: true,
+          explain:
+            "Màu trắng — cách nói thuần Hàn thân mật. 하얗다 = trắng (tính từ). 하얀 눈 = tuyết trắng.",
+          ex: "하얀 눈이 내려요.",
+          exVi: "Tuyết trắng đang rơi.",
+        },
+        {
+          kr: "흰색",
+          en: "white",
+          vi: "màu trắng",
+          swatch: "#ffffff",
+          swatchText: "#333",
+          hv: null,
+          hvR: "thuần Hàn (희다)",
+          pure: true,
+          explain:
+            "Màu trắng — cách nói thuần Hàn chính thống. 희다 = trắng. 흰색과 하얀색 dùng lẫn nhau, 흰색 trang trọng hơn.",
+          ex: "흰색 옷을 자주 입어요.",
+          exVi: "Tôi thường mặc quần áo màu trắng.",
+        },
+        {
+          kr: "회색",
+          en: "grey, gray",
+          vi: "màu xám",
+          swatch: "#9E9E9E",
+          swatchText: "#fff",
+          hv: "灰色",
+          hvR: "hôi sắc",
+          pure: false,
+          explain:
+            "Màu xám. 회(灰, tro) + 색(色). 회색 하늘 = bầu trời xám xịt. 회색 지대 = vùng xám (nghĩa bóng).",
+          ex: "오늘 하늘이 회색이에요.",
+          exVi: "Hôm nay bầu trời màu xám.",
+        },
+        {
+          kr: "갈색",
+          en: "brown",
+          vi: "màu nâu",
+          swatch: "#795548",
+          swatchText: "#fff",
+          hv: "褐色",
+          hvR: "hạt sắc",
+          pure: false,
+          explain:
+            "Màu nâu. 갈(褐, màu nâu sẫm) + 색(色). 갈색 머리 = tóc nâu. 갈색 곰 = gấu nâu.",
+          ex: "갈색 머리가 예뻐요.",
+          exVi: "Tóc màu nâu trông đẹp quá.",
+        },
+        {
+          kr: "검은색",
+          en: "black",
+          vi: "màu đen",
+          swatch: "#212121",
+          swatchText: "#fff",
+          hv: null,
+          hvR: "thuần Hàn (검다)",
+          pure: true,
+          explain:
+            "Màu đen — cách nói trang trọng/trung tính. 검다 = đen. 검은색 고양이 = mèo đen.",
+          ex: "검은색 옷을 입었어요.",
+          exVi: "Tôi đã mặc quần áo màu đen.",
+        },
+        {
+          kr: "까만색",
+          en: "black (deep/vivid)",
+          vi: "màu đen",
+          swatch: "#000000",
+          swatchText: "#fff",
+          hv: null,
+          hvR: "thuần Hàn (까맣다)",
+          pure: true,
+          explain:
+            "Màu đen — nhấn mạnh độ đen đậm, sâu hơn 검은색. 까맣다 = đen thẫm. 까만 밤 = đêm đen tối.",
+          ex: "까만 밤하늘에 별이 빛나요.",
+          exVi: "Những ngôi sao lấp lánh trên bầu trời đêm đen.",
+        },
+      ];
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      speechSynthesis.onvoiceschanged = () => {};
+      function renderGrid(data) {
+        const grid = document.getElementById("colorGrid");
+        grid.innerHTML = "";
+        data.forEach((item) => {
+          const hvCell = item.pure
+            ? `<span class="tag tag-pure">Thuần Hàn</span>`
+            : `<span class="tag tag-hv"><span class="tag-hanja">${item.hv}</span></span>`;
 
-<script>
-const colors = [
-  {
-    kr:"색", en:"color", vi:"màu, màu sắc",
-    swatch:"linear-gradient(135deg,#e53935,#2196F3,#FFD700,#4CAF50)",
-    swatchText:"#fff", hv:"色", hvR:"sắc", pure:false,
-    explain:"Màu sắc nói chung. 무슨 색이에요? = Màu gì vậy? 색이 예쁘다 = màu đẹp. Thường kết hợp: 빨간색, 파란색,...",
-    ex:"무슨 색을 좋아해요?", exVi:"Bạn thích màu gì?"
-  },
-  {
-    kr:"색깔", en:"color, hue", vi:"màu sắc",
-    swatch:"linear-gradient(135deg,#FF8C00,#9C27B0,#00BCD4,#e53935)",
-    swatchText:"#fff", hv:"色", hvR:"색(sắc) + 깔(thuần Hàn)", pure:false,
-    explain:"Màu sắc — thân mật hơn 색 một chút. 색깔이 다양해요 = màu sắc đa dạng. Dùng tự do trong văn nói.",
-    ex:"색깔이 정말 다양해요.", exVi:"Màu sắc thật đa dạng."
-  },
-  {
-    kr:"빨간색", en:"red", vi:"màu đỏ",
-    swatch:"#e53935", swatchText:"#fff", hv:null, hvR:"thuần Hàn (빨갛다)", pure:true,
-    explain:"Màu đỏ. 빨갛다 = đỏ (tính từ). 빨간색 = danh từ màu đỏ. 신호등의 빨간불 = đèn đỏ giao thông.",
-    ex:"빨간색 옷이 예뻐요.", exVi:"Bộ quần áo màu đỏ đẹp quá."
-  },
-  {
-    kr:"주황색", en:"orange", vi:"màu cam",
-    swatch:"#FF8C00", swatchText:"#fff", hv:"朱黃色", hvR:"chu hoàng sắc", pure:false,
-    explain:"Màu cam. 주(朱, đỏ sẫm) + 황(黃, vàng) + 색(色). Màu giữa đỏ và vàng.",
-    ex:"주황색 당근이에요.", exVi:"Đây là cà rốt màu cam."
-  },
-  {
-    kr:"노란색", en:"yellow", vi:"màu vàng",
-    swatch:"#FFD700", swatchText:"#333", hv:null, hvR:"thuần Hàn (노랗다)", pure:true,
-    explain:"Màu vàng. 노랗다 = vàng (tính từ). 노란색 바나나 = chuối màu vàng. 노란 꽃 = hoa màu vàng.",
-    ex:"노란색 꽃이 피었어요.", exVi:"Hoa màu vàng đã nở."
-  },
-  {
-    kr:"녹색", en:"green", vi:"màu xanh lá cây",
-    swatch:"#388E3C", swatchText:"#fff", hv:"綠色", hvR:"lục sắc", pure:false,
-    explain:"Màu xanh lá — cách nói Hán Hàn, trang trọng hơn 초록색. 신호등의 녹색 불 = đèn xanh giao thông.",
-    ex:"신호등이 녹색이에요.", exVi:"Đèn giao thông màu xanh rồi."
-  },
-  {
-    kr:"초록색", en:"green", vi:"màu xanh lá",
-    swatch:"#4CAF50", swatchText:"#fff", hv:null, hvR:"thuần Hàn (초록)", pure:true,
-    explain:"Màu xanh lá — cách nói thuần Hàn thân mật hơn 녹색. 초록색 나뭇잎 = lá cây xanh. Dùng phổ biến hơn trong hội thoại.",
-    ex:"초록색 나뭇잎이 예뻐요.", exVi:"Lá cây xanh thật đẹp."
-  },
-  {
-    kr:"파란색", en:"blue", vi:"màu xanh da trời",
-    swatch:"#1E88E5", swatchText:"#fff", hv:null, hvR:"thuần Hàn (파랗다)", pure:true,
-    explain:"Màu xanh dương. 파랗다 = xanh (tính từ). 파란 하늘 = bầu trời xanh. Dùng cho cả xanh biển lẫn xanh da trời.",
-    ex:"파란 하늘이 아름다워요.", exVi:"Bầu trời xanh thật đẹp."
-  },
-  {
-    kr:"하늘색", en:"sky blue, light blue", vi:"màu xanh da trời (nhạt)",
-    swatch:"#87CEEB", swatchText:"#333", hv:null, hvR:"하늘(bầu trời) + 색(màu)", pure:true,
-    explain:"Màu xanh nhạt như bầu trời. 하늘(bầu trời) + 색(màu). Nhạt hơn 파란색. 하늘색 셔츠 = áo xanh nhạt.",
-    ex:"하늘색 셔츠를 샀어요.", exVi:"Tôi đã mua áo sơ mi màu xanh nhạt."
-  },
-  {
-    kr:"하얀색", en:"white", vi:"màu trắng",
-    swatch:"#f0f0f0", swatchText:"#333", hv:null, hvR:"thuần Hàn (하얗다)", pure:true,
-    explain:"Màu trắng — cách nói thuần Hàn thân mật. 하얗다 = trắng (tính từ). 하얀 눈 = tuyết trắng.",
-    ex:"하얀 눈이 내려요.", exVi:"Tuyết trắng đang rơi."
-  },
-  {
-    kr:"흰색", en:"white", vi:"màu trắng",
-    swatch:"#ffffff", swatchText:"#333", hv:null, hvR:"thuần Hàn (희다)", pure:true,
-    explain:"Màu trắng — cách nói thuần Hàn chính thống. 희다 = trắng. 흰색과 하얀색 dùng lẫn nhau, 흰색 trang trọng hơn.",
-    ex:"흰색 옷을 자주 입어요.", exVi:"Tôi thường mặc quần áo màu trắng."
-  },
-  {
-    kr:"회색", en:"grey, gray", vi:"màu xám",
-    swatch:"#9E9E9E", swatchText:"#fff", hv:"灰色", hvR:"hôi sắc", pure:false,
-    explain:"Màu xám. 회(灰, tro) + 색(色). 회색 하늘 = bầu trời xám xịt. 회색 지대 = vùng xám (nghĩa bóng).",
-    ex:"오늘 하늘이 회색이에요.", exVi:"Hôm nay bầu trời màu xám."
-  },
-  {
-    kr:"갈색", en:"brown", vi:"màu nâu",
-    swatch:"#795548", swatchText:"#fff", hv:"褐色", hvR:"hạt sắc", pure:false,
-    explain:"Màu nâu. 갈(褐, màu nâu sẫm) + 색(色). 갈색 머리 = tóc nâu. 갈색 곰 = gấu nâu.",
-    ex:"갈색 머리가 예뻐요.", exVi:"Tóc màu nâu trông đẹp quá."
-  },
-  {
-    kr:"검은색", en:"black", vi:"màu đen",
-    swatch:"#212121", swatchText:"#fff", hv:null, hvR:"thuần Hàn (검다)", pure:true,
-    explain:"Màu đen — cách nói trang trọng/trung tính. 검다 = đen. 검은색 고양이 = mèo đen.",
-    ex:"검은색 옷을 입었어요.", exVi:"Tôi đã mặc quần áo màu đen."
-  },
-  {
-    kr:"까만색", en:"black (deep/vivid)", vi:"màu đen",
-    swatch:"#000000", swatchText:"#fff", hv:null, hvR:"thuần Hàn (까맣다)", pure:true,
-    explain:"Màu đen — nhấn mạnh độ đen đậm, sâu hơn 검은색. 까맣다 = đen thẫm. 까만 밤 = đêm đen tối.",
-    ex:"까만 밤하늘에 별이 빛나요.", exVi:"Những ngôi sao lấp lánh trên bầu trời đêm đen."
-  },
-];
-
-function renderGrid(data) {
-  const grid = document.getElementById('colorGrid');
-  grid.innerHTML = '';
-  data.forEach(item => {
-    const hvCell = item.pure
-      ? `<span class="tag tag-pure">Thuần Hàn</span>`
-      : `<span class="tag tag-hv"><span class="tag-hanja">${item.hv}</span></span>`;
-
-    const div = document.createElement('div');
-    div.className = 'color-card';
-    div.innerHTML = `
+          const div = document.createElement("div");
+          div.className = "color-card";
+          div.innerHTML = `
       <div class="swatch" style="background:${item.swatch}">
-        <span class="swatch-label" style="color:${item.swatchText}">${item.kr}</span>
+        <span class="swatch-label" style="color:${item.swatchText}">
+  ${item.kr}
+  <button class="btn-speak" 
+    style="color:${item.swatchText};border-color:rgba(255,255,255,0.4)"
+    onclick="speakKorean('${item.kr}', this)">🔊</button>
+</span>
       </div>
       <div class="card-body">
         <div class="card-en">${item.en}</div>
@@ -293,23 +620,33 @@ function renderGrid(data) {
           <span class="ex-vi">${item.exVi}</span>
         </div>
       </div>`;
-    grid.appendChild(div);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${colors.length} màu`;
-}
+          grid.appendChild(div);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${colors.length} màu`;
+      }
 
-document.getElementById('searchInput').addEventListener('input', function() {
-  const q = this.value.toLowerCase();
-  const result = colors.filter(item =>
-    !q || item.kr.includes(q) || item.en.toLowerCase().includes(q) || item.vi.toLowerCase().includes(q)
-  );
-  renderGrid(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('colorGrid').style.display = result.length === 0 ? 'none' : '';
-});
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", function () {
+          const q = this.value.toLowerCase();
+          const result = colors.filter(
+            (item) =>
+              !q ||
+              item.kr.includes(q) ||
+              item.en.toLowerCase().includes(q) ||
+              item.vi.toLowerCase().includes(q),
+          );
+          renderGrid(result);
+          document.getElementById("noResults").style.display =
+            result.length === 0 ? "block" : "none";
+          document.getElementById("colorGrid").style.display =
+            result.length === 0 ? "none" : "";
+        });
 
-document.getElementById('totalCount').textContent = colors.length + ' màu';
-renderGrid(colors);
-</script>
-</body>
+      document.getElementById("totalCount").textContent =
+        colors.length + " màu";
+      renderGrid(colors);
+    </script>
+  </body>
 </html>
