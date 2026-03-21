@@ -1,301 +1,948 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng Tiếng Hàn – Truyền thông & Liên lạc</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #f0f4fa;
-    --card: #ffffff;
-    --accent: #1a3a7a;
-    --text: #0a1428;
-    --sub: #5a6a8a;
-    --border: #c8d4e8;
-    --tag-hv: #dce8f8;
-    --tag-pure: #e4f4e4;
-    --tag-loan: #f4edf8;
-    --highlight: #eaf0ff;
-    --row-alt: #f6f9fd;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Be Vietnam Pro', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Từ vựng Tiếng Hàn – Truyền thông & Liên lạc</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f0f4fa;
+        --card: #ffffff;
+        --accent: #1a3a7a;
+        --text: #0a1428;
+        --sub: #5a6a8a;
+        --border: #c8d4e8;
+        --tag-hv: #dce8f8;
+        --tag-pure: #e4f4e4;
+        --tag-loan: #f4edf8;
+        --highlight: #eaf0ff;
+        --row-alt: #f6f9fd;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Be Vietnam Pro", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+      }
 
-  .header {
-    background: var(--text);
-    color: #f0f4fa;
-    padding: 36px 40px 28px;
-    position: relative;
-    overflow: hidden;
-  }
-  .header::before {
-    content: '통신';
-    position: absolute;
-    right: 40px; top: 50%;
-    transform: translateY(-50%);
-    font-family: 'Noto Serif KR', serif;
-    font-size: 120px;
-    color: rgba(255,255,255,0.05);
-    font-weight: 600;
-    letter-spacing: -4px;
-    user-select: none;
-  }
-  .header h1 { font-family: 'Noto Serif KR', serif; font-size: 28px; font-weight: 600; letter-spacing: 1px; margin-bottom: 6px; }
-  .header p { font-size: 13px; font-weight: 300; color: #7a9aba; letter-spacing: 0.5px; }
-  .count-badge { display: inline-block; background: var(--accent); color: white; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; margin-top: 10px; letter-spacing: 0.5px; }
+      .header {
+        background: var(--text);
+        color: #f0f4fa;
+        padding: 36px 40px 28px;
+        position: relative;
+        overflow: hidden;
+      }
+      .header::before {
+        content: "통신";
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-family: "Noto Serif KR", serif;
+        font-size: 120px;
+        color: rgba(255, 255, 255, 0.05);
+        font-weight: 600;
+        letter-spacing: -4px;
+        user-select: none;
+      }
+      .header h1 {
+        font-family: "Noto Serif KR", serif;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .header p {
+        font-size: 13px;
+        font-weight: 300;
+        color: #7a9aba;
+        letter-spacing: 0.5px;
+      }
+      .count-badge {
+        display: inline-block;
+        background: var(--accent);
+        color: white;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 10px;
+        border-radius: 20px;
+        margin-top: 10px;
+        letter-spacing: 0.5px;
+      }
 
-  .controls {
-    padding: 20px 40px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
-    position: sticky; top: 0; z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-  .search-wrap { position: relative; flex: 1; min-width: 200px; }
-  .search-wrap svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--sub); }
-  #searchInput {
-    width: 100%; padding: 10px 12px 10px 38px;
-    border: 1.5px solid var(--border); border-radius: 8px;
-    font-family: 'Be Vietnam Pro', sans-serif; font-size: 14px;
-    background: var(--bg); color: var(--text); outline: none; transition: border-color 0.2s;
-  }
-  #searchInput:focus { border-color: var(--accent); }
-  #searchInput::placeholder { color: var(--sub); }
+      .controls {
+        padding: 20px 40px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .search-wrap {
+        position: relative;
+        flex: 1;
+        min-width: 200px;
+      }
+      .search-wrap svg {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--sub);
+      }
+      #searchInput {
+        width: 100%;
+        padding: 10px 12px 10px 38px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 14px;
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      #searchInput:focus {
+        border-color: var(--accent);
+      }
+      #searchInput::placeholder {
+        color: var(--sub);
+      }
 
-  .filter-btn {
-    padding: 8px 16px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--bg); font-family: 'Be Vietnam Pro', sans-serif;
-    font-size: 12px; font-weight: 500; color: var(--sub); cursor: pointer; transition: all 0.2s; white-space: nowrap;
-  }
-  .filter-btn:hover, .filter-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
-  .result-count { font-size: 12px; color: var(--sub); white-space: nowrap; }
+      .filter-btn {
+        padding: 8px 16px;
+        border: 1.5px solid var(--border);
+        border-radius: 8px;
+        background: var(--bg);
+        font-family: "Be Vietnam Pro", sans-serif;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--sub);
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--sub);
+        white-space: nowrap;
+      }
 
-  .table-wrap { padding: 24px 40px 60px; overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
-  thead { background: var(--text); color: #f0f4fa; }
-  th { padding: 14px 16px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+      .table-wrap {
+        padding: 24px 40px 60px;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background: var(--card);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+      }
+      thead {
+        background: var(--text);
+        color: #f0f4fa;
+      }
+      th {
+        padding: 14px 16px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
 
-  th:nth-child(1), td:nth-child(1) { width: 60px; text-align: center; }
-  th:nth-child(2), td:nth-child(2) { width: 130px; }
-  th:nth-child(3), td:nth-child(3) { width: 160px; }
-  th:nth-child(4), td:nth-child(4) { width: 185px; }
-  th:nth-child(5), td:nth-child(5) { width: 155px; }
-  th:nth-child(6), td:nth-child(6) { min-width: 200px; }
-  th:nth-child(7), td:nth-child(7) { min-width: 240px; }
+      th:nth-child(1),
+      td:nth-child(1) {
+        width: 60px;
+        text-align: center;
+      }
+      th:nth-child(2),
+      td:nth-child(2) {
+        width: 130px;
+      }
+      th:nth-child(3),
+      td:nth-child(3) {
+        width: 160px;
+      }
+      th:nth-child(4),
+      td:nth-child(4) {
+        width: 185px;
+      }
+      th:nth-child(5),
+      td:nth-child(5) {
+        width: 155px;
+      }
+      th:nth-child(6),
+      td:nth-child(6) {
+        min-width: 200px;
+      }
+      th:nth-child(7),
+      td:nth-child(7) {
+        min-width: 240px;
+      }
 
-  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
-  tbody tr:nth-child(even) { background: var(--row-alt); }
-  tbody tr:hover { background: var(--highlight); }
+      tbody tr {
+        border-bottom: 1px solid var(--border);
+        transition: background 0.15s;
+      }
+      tbody tr:nth-child(even) {
+        background: var(--row-alt);
+      }
+      tbody tr:hover {
+        background: var(--highlight);
+      }
 
-  td { padding: 13px 16px; font-size: 13.5px; vertical-align: top; line-height: 1.55; }
-  td:nth-child(1) { font-size: 11px; color: var(--sub); font-weight: 600; }
+      td {
+        padding: 13px 16px;
+        font-size: 13.5px;
+        vertical-align: top;
+        line-height: 1.55;
+      }
+      td:nth-child(1) {
+        font-size: 11px;
+        color: var(--sub);
+        font-weight: 600;
+      }
 
-  .korean-word { font-family: 'Noto Serif KR', serif; font-size: 18px; font-weight: 600; color: var(--accent); display: block; line-height: 1.3; }
-  .hv-tag { display: inline-flex; align-items: center; gap: 4px; background: var(--tag-hv); border-radius: 4px; padding: 2px 8px; font-size: 12px; color: #0a2a60; font-weight: 500; }
-  .hv-tag.pure { background: var(--tag-pure); color: #1a5a20; }
-  .hv-tag.loan { background: var(--tag-loan); color: #4a1a7a; }
-  .hv-hanja { font-weight: 600; font-size: 13px; }
-  .hv-reading { font-size: 11px; color: var(--sub); margin-top: 2px; display: block; }
-  .example-kr { font-family: 'Noto Serif KR', serif; font-size: 13.5px; color: var(--text); display: block; }
-  .example-vi { font-size: 12px; color: var(--sub); font-style: italic; display: block; margin-top: 2px; }
-  .explain { font-size: 13px; color: #0e2040; line-height: 1.6; }
-  .no-results { text-align: center; padding: 60px; color: var(--sub); font-size: 15px; display: none; }
-  .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--sub); border-top: 1px solid var(--border); }
+      .korean-word {
+        font-family: "Noto Serif KR", serif;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+        display: block;
+        line-height: 1.3;
+      }
+      .hv-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        background: var(--tag-hv);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-size: 12px;
+        color: #0a2a60;
+        font-weight: 500;
+      }
+      .hv-tag.pure {
+        background: var(--tag-pure);
+        color: #1a5a20;
+      }
+      .hv-tag.loan {
+        background: var(--tag-loan);
+        color: #4a1a7a;
+      }
+      .hv-hanja {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .hv-reading {
+        font-size: 11px;
+        color: var(--sub);
+        margin-top: 2px;
+        display: block;
+      }
+      .example-kr {
+        font-family: "Noto Serif KR", serif;
+        font-size: 13.5px;
+        color: var(--text);
+        display: block;
+      }
+      .example-vi {
+        font-size: 12px;
+        color: var(--sub);
+        font-style: italic;
+        display: block;
+        margin-top: 2px;
+      }
+      .explain {
+        font-size: 13px;
+        color: #0e2040;
+        line-height: 1.6;
+      }
+      .no-results {
+        text-align: center;
+        padding: 60px;
+        color: var(--sub);
+        font-size: 15px;
+        display: none;
+      }
+      .footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 11px;
+        color: var(--sub);
+        border-top: 1px solid var(--border);
+      }
 
-  @media (max-width: 768px) {
-    .header { padding: 24px 20px; } .header::before { display: none; }
-    .controls { padding: 16px 20px; } .table-wrap { padding: 16px 20px 40px; }
-    th, td { padding: 10px 12px; } .korean-word { font-size: 15px; }
-  }
-</style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .header {
+          padding: 24px 20px;
+        }
+        .header::before {
+          display: none;
+        }
+        .controls {
+          padding: 16px 20px;
+        }
+        .table-wrap {
+          padding: 16px 20px 40px;
+        }
+        th,
+        td {
+          padding: 10px 12px;
+        }
+        .korean-word {
+          font-size: 15px;
+        }
+      }
+      .btn-speak {
+        background: none;
+        border: 1.5px solid var(--border);
+        border-radius: 6px;
+        padding: 3px 7px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--sub);
+        transition: all 0.2s;
+        line-height: 1;
+      }
+      .btn-speak:hover {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+      .btn-speak.speaking {
+        background: var(--accent);
+        color: white;
+        border-color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>통신 & 미디어 — Truyền thông & Liên lạc</h1>
+      <p>Từ vựng Tiếng Hàn chủ đề Truyền thông · Chủ đề TOPIK I & II</p>
+      <span class="count-badge" id="totalCount"></span>
+    </div>
 
-<div class="header">
-  <h1>통신 & 미디어 — Truyền thông & Liên lạc</h1>
-  <p>Từ vựng Tiếng Hàn chủ đề Truyền thông · Chủ đề TOPIK I & II</p>
-  <span class="count-badge" id="totalCount"></span>
-</div>
+    <div class="controls">
+      <div class="search-wrap">
+        <svg
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt..."
+        />
+      </div>
+      <button class="filter-btn active" data-filter="all">Tất cả</button>
+      <button class="filter-btn" data-filter="hv">Hán Việt</button>
+      <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
+      <button class="filter-btn" data-filter="loan">Vay mượn</button>
+      <span class="result-count" id="resultCount"></span>
+    </div>
 
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="Tìm kiếm: tiếng Hàn, tiếng Anh, tiếng Việt...">
-  </div>
-  <button class="filter-btn active" data-filter="all">Tất cả</button>
-  <button class="filter-btn" data-filter="hv">Hán Việt</button>
-  <button class="filter-btn" data-filter="pure">Thuần Hàn</button>
-  <button class="filter-btn" data-filter="loan">Vay mượn</button>
-  <span class="result-count" id="resultCount"></span>
-</div>
+    <div class="table-wrap">
+      <table id="vocabTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tiếng Hàn</th>
+            <th>Tiếng Anh</th>
+            <th>Tiếng Việt</th>
+            <th>Hán Việt</th>
+            <th>Giải thích</th>
+            <th>Câu ví dụ</th>
+          </tr>
+        </thead>
+        <tbody id="vocabBody"></tbody>
+      </table>
+      <div class="no-results" id="noResults">
+        😕 Không tìm thấy từ nào phù hợp.
+      </div>
+    </div>
 
-<div class="table-wrap">
-  <table id="vocabTable">
-    <thead>
-      <tr>
-        <th>#</th><th>Tiếng Hàn</th><th>Tiếng Anh</th><th>Tiếng Việt</th>
-        <th>Hán Việt</th><th>Giải thích</th><th>Câu ví dụ</th>
-      </tr>
-    </thead>
-    <tbody id="vocabBody"></tbody>
-  </table>
-  <div class="no-results" id="noResults">😕 Không tìm thấy từ nào phù hợp.</div>
-</div>
+    <div class="footer">
+      Tổng hợp từ vựng tiếng Hàn – Chủ đề Truyền thông & Liên lạc
+    </div>
 
-<div class="footer">Tổng hợp từ vựng tiếng Hàn – Chủ đề Truyền thông & Liên lạc</div>
+    <script>
+      const vocab = [
+        {
+          kr: "고장",
+          en: "breakdown, malfunction",
+          vi: "hỏng hóc, trục trặc",
+          hv: "故障",
+          hvR: "cố chướng",
+          type: "hv",
+          explain:
+            "Hỏng hóc, trục trặc máy móc. 고장나다 = bị hỏng. 고장이 나다 = xảy ra sự cố. 고장 수리 = sửa chữa.",
+          ex: "컴퓨터가 고장났어요.",
+          exVi: "Máy tính bị hỏng rồi.",
+        },
+        {
+          kr: "공중전화",
+          en: "public phone, payphone",
+          vi: "điện thoại công cộng",
+          hv: "公衆電話",
+          hvR: "công chúng điện thoại",
+          type: "hv",
+          explain:
+            "Điện thoại công cộng đặt ngoài đường. 공중(公衆, công cộng) + 전화(điện thoại). Ngày nay hiếm gặp hơn.",
+          ex: "공중전화가 어디 있어요?",
+          exVi: "Điện thoại công cộng ở đâu vậy?",
+        },
+        {
+          kr: "광고",
+          en: "advertisement, ad",
+          vi: "quảng cáo",
+          hv: "廣告",
+          hvR: "quảng cáo",
+          type: "hv",
+          explain:
+            "Quảng cáo. 광고를 보다 = xem quảng cáo. 광고를 찍다 = quay quảng cáo. TV 광고 = quảng cáo trên TV.",
+          ex: "광고가 너무 많아요.",
+          exVi: "Quảng cáo nhiều quá.",
+        },
+        {
+          kr: "뉴스",
+          en: "news",
+          vi: "tin tức",
+          hv: null,
+          hvR: "từ tiếng Anh 'news'",
+          type: "loan",
+          explain:
+            "Tin tức, bản tin. 뉴스를 보다 = xem tin tức. 뉴스에 나오다 = xuất hiện trên bản tin.",
+          ex: "매일 뉴스를 봐요.",
+          exVi: "Tôi xem tin tức mỗi ngày.",
+        },
+        {
+          kr: "답장",
+          en: "reply, response letter",
+          vi: "thư trả lời, hồi âm",
+          hv: "答狀",
+          hvR: "đáp trạng",
+          type: "hv",
+          explain:
+            "Thư hồi âm, tin nhắn trả lời. 답장을 보내다 = gửi thư trả lời. 답장이 없다 = không có hồi âm.",
+          ex: "빨리 답장해 주세요.",
+          exVi: "Hãy trả lời sớm giúp tôi nhé.",
+        },
+        {
+          kr: "디브이디",
+          en: "DVD",
+          vi: "đĩa DVD",
+          hv: null,
+          hvR: "phiên âm 'DVD'",
+          type: "loan",
+          explain:
+            "Đĩa DVD. 디브이디를 보다 = xem DVD. 디브이디 플레이어 = đầu đĩa DVD. Ngày nay đã nhường chỗ cho streaming.",
+          ex: "디브이디로 영화를 봤어요.",
+          exVi: "Tôi đã xem phim bằng DVD.",
+        },
+        {
+          kr: "라디오",
+          en: "radio",
+          vi: "đài radio",
+          hv: null,
+          hvR: "từ tiếng Anh 'radio'",
+          type: "loan",
+          explain:
+            "Đài phát thanh radio. 라디오를 듣다 = nghe radio. 라디오 방송 = chương trình phát thanh.",
+          ex: "운전하면서 라디오를 들어요.",
+          exVi: "Tôi nghe radio khi lái xe.",
+        },
+        {
+          kr: "메모",
+          en: "memo, note",
+          vi: "ghi chú, bản nhắc nhở",
+          hv: null,
+          hvR: "từ tiếng Anh 'memo'",
+          type: "loan",
+          explain:
+            "Ghi chú ngắn, bản nhắc. 메모하다 = ghi chú. 메모지 = giấy ghi chú. 메모를 남기다 = để lại ghi chú.",
+          ex: "메모해 두세요.",
+          exVi: "Hãy ghi chú lại đi.",
+        },
+        {
+          kr: "메시지",
+          en: "message",
+          vi: "tin nhắn, thông điệp",
+          hv: null,
+          hvR: "từ tiếng Anh 'message'",
+          type: "loan",
+          explain:
+            "Tin nhắn, thông điệp. 메시지를 보내다 = gửi tin nhắn. 문자 메시지 = tin nhắn SMS.",
+          ex: "메시지를 보냈어요.",
+          exVi: "Tôi đã gửi tin nhắn rồi.",
+        },
+        {
+          kr: "방송",
+          en: "broadcast, program",
+          vi: "chương trình phát sóng",
+          hv: "放送",
+          hvR: "phát tống",
+          type: "hv",
+          explain:
+            "Chương trình phát sóng trên TV hoặc radio. 방송하다 = phát sóng. 방송을 보다 = xem chương trình.",
+          ex: "방송을 보고 있어요.",
+          exVi: "Tôi đang xem chương trình phát sóng.",
+        },
+        {
+          kr: "방송국",
+          en: "broadcasting station",
+          vi: "đài phát thanh/truyền hình",
+          hv: "放送局",
+          hvR: "phát tống cục",
+          type: "hv",
+          explain:
+            "Đài phát thanh hoặc truyền hình. 방송국에 가다 = đến đài truyền hình. KBS, MBC, SBS là các đài lớn ở Hàn.",
+          ex: "방송국에서 일하고 싶어요.",
+          exVi: "Tôi muốn làm việc ở đài truyền hình.",
+        },
+        {
+          kr: "보도",
+          en: "sidewalk; news report",
+          vi: "vỉa hè; bản tin báo chí",
+          hv: "步道/報道",
+          hvR: "bộ đạo / báo đạo",
+          type: "hv",
+          explain:
+            "Hai nghĩa: (1) 步道 — vỉa hè dành cho người đi bộ, (2) 報道 — đưa tin báo chí (뉴스 보도 = bản tin thời sự).",
+          ex: "뉴스에서 보도됐어요.",
+          exVi: "Đã được đưa tin trên bản tin.",
+        },
+        {
+          kr: "봉투",
+          en: "envelope",
+          vi: "phong bì, bao thư",
+          hv: "封套",
+          hvR: "phong thảo",
+          type: "hv",
+          explain:
+            "Phong bì thư. 봉투에 넣다 = cho vào phong bì. 봉투를 봉하다 = dán phong bì. 돈 봉투 = phong bì tiền.",
+          ex: "편지를 봉투에 넣었어요.",
+          exVi: "Tôi đã cho thư vào phong bì.",
+        },
+        {
+          kr: "비디오",
+          en: "video, VHS tape",
+          vi: "video, băng hình",
+          hv: null,
+          hvR: "từ tiếng Anh 'video'",
+          type: "loan",
+          explain:
+            "Video hoặc băng VHS. 비디오를 보다 = xem video. 비디오 가게 = cửa hàng cho thuê băng (ngày xưa).",
+          ex: "비디오로 찍었어요.",
+          exVi: "Tôi đã quay video.",
+        },
+        {
+          kr: "사진기",
+          en: "camera (still)",
+          vi: "máy ảnh",
+          hv: "寫眞機",
+          hvR: "tả chân cơ",
+          type: "hv",
+          explain:
+            "Máy ảnh chụp hình. 사진(ảnh) + 기(機, máy). Cách nói truyền thống; ngày nay thường dùng 카메라 hơn.",
+          ex: "사진기를 가지고 왔어요?",
+          exVi: "Bạn có mang máy ảnh không?",
+        },
+        {
+          kr: "소식",
+          en: "news, tidings",
+          vi: "tin tức, tin tức",
+          hv: "消息",
+          hvR: "tiêu tức",
+          type: "hv",
+          explain:
+            "Tin tức về người/sự việc cụ thể. 소식을 전하다 = truyền tin. 좋은 소식 = tin vui. 소식이 없다 = không có tin tức.",
+          ex: "좋은 소식이 있어요.",
+          exVi: "Có tin vui rồi.",
+        },
+        {
+          kr: "소포",
+          en: "parcel, package",
+          vi: "bưu kiện, gói hàng",
+          hv: "小包",
+          hvR: "tiểu bao",
+          type: "hv",
+          explain:
+            "Gói bưu kiện. 소(小, nhỏ) + 포(包, gói). 소포를 보내다 = gửi bưu kiện. 소포를 받다 = nhận bưu kiện.",
+          ex: "소포가 도착했어요.",
+          exVi: "Bưu kiện đã đến rồi.",
+        },
+        {
+          kr: "시디",
+          en: "CD, compact disc",
+          vi: "đĩa CD",
+          hv: null,
+          hvR: "phiên âm 'CD'",
+          type: "loan",
+          explain:
+            "Đĩa CD. 시디를 굽다 = ghi đĩa CD. 음악 시디 = đĩa nhạc CD. Ngày nay đã ít dùng hơn.",
+          ex: "시디로 음악을 들었어요.",
+          exVi: "Tôi đã nghe nhạc bằng đĩa CD.",
+        },
+        {
+          kr: "신문",
+          en: "newspaper",
+          vi: "báo (tờ báo)",
+          hv: "新聞",
+          hvR: "tân văn",
+          type: "hv",
+          explain:
+            "Tờ báo. 신문을 읽다 = đọc báo. 신문을 구독하다 = đặt mua báo. 조선일보, 중앙일보 là tên báo lớn ở Hàn.",
+          ex: "매일 아침 신문을 읽어요.",
+          exVi: "Mỗi sáng tôi đọc báo.",
+        },
+        {
+          kr: "연락처",
+          en: "contact information",
+          vi: "thông tin liên lạc",
+          hv: "連絡處",
+          hvR: "liên lạc xứ",
+          type: "hv",
+          explain:
+            "Thông tin liên lạc (số điện thoại, email,...). 연락처를 알려주다 = cho biết thông tin liên lạc.",
+          ex: "연락처를 알려 주세요.",
+          exVi: "Hãy cho tôi biết thông tin liên lạc.",
+        },
+        {
+          kr: "엽서",
+          en: "postcard",
+          vi: "bưu thiếp",
+          hv: "葉書",
+          hvR: "diệp thư",
+          type: "hv",
+          explain:
+            "Bưu thiếp. 엽(葉, lá — hình dạng mỏng) + 서(書, thư). 여행지에서 엽서를 보내다 = gửi bưu thiếp từ nơi du lịch.",
+          ex: "여행지에서 엽서를 보냈어요.",
+          exVi: "Tôi đã gửi bưu thiếp từ nơi du lịch.",
+        },
+        {
+          kr: "영상",
+          en: "video, image, footage",
+          vi: "video; hình ảnh",
+          hv: "映像",
+          hvR: "ánh tượng",
+          type: "hv",
+          explain:
+            "Video hoặc hình ảnh trực quan. 영상을 찍다 = quay video. 영상 통화 = gọi video. 영상미 = tính thẩm mỹ hình ảnh.",
+          ex: "영상 통화 해요.",
+          exVi: "Chúng mình gọi video call nhé.",
+        },
+        {
+          kr: "우표",
+          en: "stamp (postal)",
+          vi: "con tem",
+          hv: "郵票",
+          hvR: "bưu phiếu",
+          type: "hv",
+          explain:
+            "Tem thư. 우(郵, bưu điện) + 표(票, phiếu). 우표를 붙이다 = dán tem. 우표를 모으다 = sưu tầm tem.",
+          ex: "편지에 우표를 붙였어요.",
+          exVi: "Tôi đã dán tem lên thư.",
+        },
+        {
+          kr: "이메일",
+          en: "email, e-mail",
+          vi: "thư điện tử, email",
+          hv: null,
+          hvR: "từ tiếng Anh 'e-mail'",
+          type: "loan",
+          explain:
+            "Thư điện tử. 이메일을 보내다 = gửi email. 이메일을 확인하다 = kiểm tra email. 이메일 주소 = địa chỉ email.",
+          ex: "이메일을 보냈어요.",
+          exVi: "Tôi đã gửi email rồi.",
+        },
+        {
+          kr: "인터넷",
+          en: "internet",
+          vi: "internet, mạng",
+          hv: null,
+          hvR: "từ tiếng Anh 'internet'",
+          type: "loan",
+          explain:
+            "Internet. 인터넷을 하다 = lướt internet. 인터넷 속도 = tốc độ internet. Hàn Quốc có tốc độ internet nhanh nhất thế giới.",
+          ex: "인터넷이 안 돼요.",
+          exVi: "Mạng không có rồi.",
+        },
+        {
+          kr: "잡지",
+          en: "magazine",
+          vi: "tạp chí",
+          hv: "雜誌",
+          hvR: "tạp chí",
+          type: "hv",
+          explain:
+            "Tạp chí. 잡지를 읽다 = đọc tạp chí. 패션 잡지 = tạp chí thời trang. 잡지사 = tòa soạn tạp chí.",
+          ex: "패션 잡지를 즐겨 읽어요.",
+          exVi: "Tôi thích đọc tạp chí thời trang.",
+        },
+        {
+          kr: "전화",
+          en: "telephone, phone call",
+          vi: "điện thoại",
+          hv: "電話",
+          hvR: "điện thoại",
+          type: "hv",
+          explain:
+            "Điện thoại hoặc cuộc gọi. 전화하다 = gọi điện. 전화를 받다 = nghe điện thoại. 전화를 끊다 = cúp máy.",
+          ex: "전화 주세요.",
+          exVi: "Gọi điện cho tôi nhé.",
+        },
+        {
+          kr: "전화기",
+          en: "telephone set, phone device",
+          vi: "máy điện thoại",
+          hv: "電話機",
+          hvR: "điện thoại cơ",
+          type: "hv",
+          explain:
+            "Máy điện thoại (thiết bị). 전화(điện thoại) + 기(機, máy). Phân biệt với 전화 (cuộc gọi/điện thoại nói chung).",
+          ex: "전화기가 고장났어요.",
+          exVi: "Máy điện thoại bị hỏng rồi.",
+        },
+        {
+          kr: "전화번호",
+          en: "phone number",
+          vi: "số điện thoại",
+          hv: "電話番號",
+          hvR: "điện thoại phiên hiệu",
+          type: "hv",
+          explain:
+            "Số điện thoại. 전화번호를 알려주다 = cho biết số điện thoại. 전화번호를 저장하다 = lưu số điện thoại.",
+          ex: "전화번호가 뭐예요?",
+          exVi: "Số điện thoại của bạn là gì?",
+        },
+        {
+          kr: "정보",
+          en: "information, data",
+          vi: "thông tin",
+          hv: "情報",
+          hvR: "tình báo",
+          type: "hv",
+          explain:
+            "Thông tin, dữ liệu. 정보를 찾다 = tìm thông tin. 정보를 공유하다 = chia sẻ thông tin. 개인 정보 = thông tin cá nhân.",
+          ex: "정보를 찾고 있어요.",
+          exVi: "Tôi đang tìm thông tin.",
+        },
+        {
+          kr: "주소",
+          en: "address",
+          vi: "địa chỉ",
+          hv: "住所",
+          hvR: "trú sở",
+          type: "hv",
+          explain:
+            "Địa chỉ nhà hoặc email. 주소를 알려주다 = cho biết địa chỉ. 배송 주소 = địa chỉ giao hàng.",
+          ex: "주소를 알려 주세요.",
+          exVi: "Hãy cho tôi biết địa chỉ.",
+        },
+        {
+          kr: "카드",
+          en: "card (bank/greeting)",
+          vi: "thẻ (ngân hàng); thiệp",
+          hv: null,
+          hvR: "từ tiếng Anh 'card'",
+          type: "loan",
+          explain:
+            "Thẻ ngân hàng hoặc thiệp chúc mừng. 신용카드 = thẻ tín dụng. 생일 카드 = thiệp sinh nhật.",
+          ex: "카드로 계산할게요.",
+          exVi: "Tôi sẽ thanh toán bằng thẻ.",
+        },
+        {
+          kr: "카메라",
+          en: "camera",
+          vi: "máy ảnh",
+          hv: null,
+          hvR: "từ tiếng Anh 'camera'",
+          type: "loan",
+          explain:
+            "Máy ảnh. 카메라를 들다 = cầm máy ảnh. 카메라에 찍히다 = bị máy ảnh chụp lại. Hiện đại hơn 사진기.",
+          ex: "카메라를 가져왔어요.",
+          exVi: "Tôi đã mang máy ảnh đến.",
+        },
+        {
+          kr: "컴퓨터",
+          en: "computer, PC",
+          vi: "máy tính, vi tính",
+          hv: null,
+          hvR: "từ tiếng Anh 'computer'",
+          type: "loan",
+          explain:
+            "Máy tính. 컴퓨터를 켜다/끄다 = bật/tắt máy tính. 컴퓨터로 일하다 = làm việc bằng máy tính.",
+          ex: "컴퓨터로 일해요.",
+          exVi: "Tôi làm việc bằng máy tính.",
+        },
+        {
+          kr: "텔레비전",
+          en: "television, TV",
+          vi: "ti vi, truyền hình",
+          hv: null,
+          hvR: "từ tiếng Anh 'television'",
+          type: "loan",
+          explain:
+            "Ti vi. 텔레비전을 보다 = xem ti vi. 텔레비전을 켜다/끄다 = bật/tắt ti vi. Thường gọi tắt là TV.",
+          ex: "텔레비전을 자주 봐요.",
+          exVi: "Tôi thường xem ti vi.",
+        },
+        {
+          kr: "편지",
+          en: "letter, mail",
+          vi: "bức thư",
+          hv: "便紙",
+          hvR: "tiện chỉ",
+          type: "hv",
+          explain:
+            "Bức thư tay. 편지를 쓰다 = viết thư. 편지를 보내다 = gửi thư. 편지를 받다 = nhận thư.",
+          ex: "편지를 써서 보냈어요.",
+          exVi: "Tôi đã viết và gửi thư.",
+        },
+        {
+          kr: "프로그램",
+          en: "program, show",
+          vi: "chương trình",
+          hv: null,
+          hvR: "từ tiếng Anh 'program'",
+          type: "loan",
+          explain:
+            "Chương trình TV hoặc phần mềm máy tính. TV 프로그램 = chương trình truyền hình. 컴퓨터 프로그램 = phần mềm.",
+          ex: "좋아하는 프로그램이 있어요?",
+          exVi: "Bạn có chương trình yêu thích không?",
+        },
+        {
+          kr: "프린트",
+          en: "print, printout",
+          vi: "in ấn, bản in",
+          hv: null,
+          hvR: "từ tiếng Anh 'print'",
+          type: "loan",
+          explain:
+            "In ấn hoặc bản in ra giấy. 프린트하다 = in ra. 프린터 = máy in. 프린트물 = tài liệu in.",
+          ex: "프린트해 주세요.",
+          exVi: "Hãy in ra cho tôi nhé.",
+        },
+        {
+          kr: "필름",
+          en: "film (photo roll)",
+          vi: "phim cuộn (ảnh)",
+          hv: null,
+          hvR: "từ tiếng Anh 'film'",
+          type: "loan",
+          explain:
+            "Phim cuộn chụp ảnh truyền thống. 필름 카메라 = máy ảnh dùng phim. Ngày nay ít dùng hơn do máy ảnh kỹ thuật số.",
+          ex: "필름 카메라로 찍었어요.",
+          exVi: "Tôi đã chụp bằng máy ảnh phim.",
+        },
+        {
+          kr: "핸드폰",
+          en: "cell phone, mobile phone",
+          vi: "điện thoại di động",
+          hv: null,
+          hvR: "từ tiếng Anh 'hand phone'",
+          type: "loan",
+          explain:
+            "Điện thoại di động. Từ tiếng Anh 'hand phone' (phổ biến ở châu Á). Tương đương 휴대전화, 스마트폰.",
+          ex: "핸드폰을 잃어버렸어요.",
+          exVi: "Tôi bị mất điện thoại di động rồi.",
+        },
+        {
+          kr: "홈페이지",
+          en: "homepage, website",
+          vi: "trang web, homepage",
+          hv: null,
+          hvR: "từ tiếng Anh 'homepage'",
+          type: "loan",
+          explain:
+            "Trang chủ website. 홈페이지를 만들다 = tạo trang web. 홈페이지 주소 = địa chỉ website (URL).",
+          ex: "홈페이지를 확인해 주세요.",
+          exVi: "Vui lòng kiểm tra trang web.",
+        },
+        {
+          kr: "휴대전화",
+          en: "mobile phone, cell phone",
+          vi: "điện thoại di động",
+          hv: "携帶電話",
+          hvR: "휴대(휴대) điện thoại",
+          type: "hv",
+          explain:
+            "Điện thoại di động — cách nói trang trọng hơn 핸드폰. 휴대(攜帶, mang theo) + 전화(điện thoại).",
+          ex: "휴대전화 번호가 뭐예요?",
+          exVi: "Số điện thoại di động của bạn là gì?",
+        },
+      ];
 
-<script>
-const vocab = [
-  { kr:"고장", en:"breakdown, malfunction", vi:"hỏng hóc, trục trặc", hv:"故障", hvR:"cố chướng", type:"hv",
-    explain:"Hỏng hóc, trục trặc máy móc. 고장나다 = bị hỏng. 고장이 나다 = xảy ra sự cố. 고장 수리 = sửa chữa.",
-    ex:"컴퓨터가 고장났어요.", exVi:"Máy tính bị hỏng rồi." },
-  { kr:"공중전화", en:"public phone, payphone", vi:"điện thoại công cộng", hv:"公衆電話", hvR:"công chúng điện thoại", type:"hv",
-    explain:"Điện thoại công cộng đặt ngoài đường. 공중(公衆, công cộng) + 전화(điện thoại). Ngày nay hiếm gặp hơn.",
-    ex:"공중전화가 어디 있어요?", exVi:"Điện thoại công cộng ở đâu vậy?" },
-  { kr:"광고", en:"advertisement, ad", vi:"quảng cáo", hv:"廣告", hvR:"quảng cáo", type:"hv",
-    explain:"Quảng cáo. 광고를 보다 = xem quảng cáo. 광고를 찍다 = quay quảng cáo. TV 광고 = quảng cáo trên TV.",
-    ex:"광고가 너무 많아요.", exVi:"Quảng cáo nhiều quá." },
-  { kr:"뉴스", en:"news", vi:"tin tức", hv:null, hvR:"từ tiếng Anh 'news'", type:"loan",
-    explain:"Tin tức, bản tin. 뉴스를 보다 = xem tin tức. 뉴스에 나오다 = xuất hiện trên bản tin.",
-    ex:"매일 뉴스를 봐요.", exVi:"Tôi xem tin tức mỗi ngày." },
-  { kr:"답장", en:"reply, response letter", vi:"thư trả lời, hồi âm", hv:"答狀", hvR:"đáp trạng", type:"hv",
-    explain:"Thư hồi âm, tin nhắn trả lời. 답장을 보내다 = gửi thư trả lời. 답장이 없다 = không có hồi âm.",
-    ex:"빨리 답장해 주세요.", exVi:"Hãy trả lời sớm giúp tôi nhé." },
-  { kr:"디브이디", en:"DVD", vi:"đĩa DVD", hv:null, hvR:"phiên âm 'DVD'", type:"loan",
-    explain:"Đĩa DVD. 디브이디를 보다 = xem DVD. 디브이디 플레이어 = đầu đĩa DVD. Ngày nay đã nhường chỗ cho streaming.",
-    ex:"디브이디로 영화를 봤어요.", exVi:"Tôi đã xem phim bằng DVD." },
-  { kr:"라디오", en:"radio", vi:"đài radio", hv:null, hvR:"từ tiếng Anh 'radio'", type:"loan",
-    explain:"Đài phát thanh radio. 라디오를 듣다 = nghe radio. 라디오 방송 = chương trình phát thanh.",
-    ex:"운전하면서 라디오를 들어요.", exVi:"Tôi nghe radio khi lái xe." },
-  { kr:"메모", en:"memo, note", vi:"ghi chú, bản nhắc nhở", hv:null, hvR:"từ tiếng Anh 'memo'", type:"loan",
-    explain:"Ghi chú ngắn, bản nhắc. 메모하다 = ghi chú. 메모지 = giấy ghi chú. 메모를 남기다 = để lại ghi chú.",
-    ex:"메모해 두세요.", exVi:"Hãy ghi chú lại đi." },
-  { kr:"메시지", en:"message", vi:"tin nhắn, thông điệp", hv:null, hvR:"từ tiếng Anh 'message'", type:"loan",
-    explain:"Tin nhắn, thông điệp. 메시지를 보내다 = gửi tin nhắn. 문자 메시지 = tin nhắn SMS.",
-    ex:"메시지를 보냈어요.", exVi:"Tôi đã gửi tin nhắn rồi." },
-  { kr:"방송", en:"broadcast, program", vi:"chương trình phát sóng", hv:"放送", hvR:"phát tống", type:"hv",
-    explain:"Chương trình phát sóng trên TV hoặc radio. 방송하다 = phát sóng. 방송을 보다 = xem chương trình.",
-    ex:"방송을 보고 있어요.", exVi:"Tôi đang xem chương trình phát sóng." },
-  { kr:"방송국", en:"broadcasting station", vi:"đài phát thanh/truyền hình", hv:"放送局", hvR:"phát tống cục", type:"hv",
-    explain:"Đài phát thanh hoặc truyền hình. 방송국에 가다 = đến đài truyền hình. KBS, MBC, SBS là các đài lớn ở Hàn.",
-    ex:"방송국에서 일하고 싶어요.", exVi:"Tôi muốn làm việc ở đài truyền hình." },
-  { kr:"보도", en:"sidewalk; news report", vi:"vỉa hè; bản tin báo chí", hv:"步道/報道", hvR:"bộ đạo / báo đạo", type:"hv",
-    explain:"Hai nghĩa: (1) 步道 — vỉa hè dành cho người đi bộ, (2) 報道 — đưa tin báo chí (뉴스 보도 = bản tin thời sự).",
-    ex:"뉴스에서 보도됐어요.", exVi:"Đã được đưa tin trên bản tin." },
-  { kr:"봉투", en:"envelope", vi:"phong bì, bao thư", hv:"封套", hvR:"phong thảo", type:"hv",
-    explain:"Phong bì thư. 봉투에 넣다 = cho vào phong bì. 봉투를 봉하다 = dán phong bì. 돈 봉투 = phong bì tiền.",
-    ex:"편지를 봉투에 넣었어요.", exVi:"Tôi đã cho thư vào phong bì." },
-  { kr:"비디오", en:"video, VHS tape", vi:"video, băng hình", hv:null, hvR:"từ tiếng Anh 'video'", type:"loan",
-    explain:"Video hoặc băng VHS. 비디오를 보다 = xem video. 비디오 가게 = cửa hàng cho thuê băng (ngày xưa).",
-    ex:"비디오로 찍었어요.", exVi:"Tôi đã quay video." },
-  { kr:"사진기", en:"camera (still)", vi:"máy ảnh", hv:"寫眞機", hvR:"tả chân cơ", type:"hv",
-    explain:"Máy ảnh chụp hình. 사진(ảnh) + 기(機, máy). Cách nói truyền thống; ngày nay thường dùng 카메라 hơn.",
-    ex:"사진기를 가지고 왔어요?", exVi:"Bạn có mang máy ảnh không?" },
-  { kr:"소식", en:"news, tidings", vi:"tin tức, tin tức", hv:"消息", hvR:"tiêu tức", type:"hv",
-    explain:"Tin tức về người/sự việc cụ thể. 소식을 전하다 = truyền tin. 좋은 소식 = tin vui. 소식이 없다 = không có tin tức.",
-    ex:"좋은 소식이 있어요.", exVi:"Có tin vui rồi." },
-  { kr:"소포", en:"parcel, package", vi:"bưu kiện, gói hàng", hv:"小包", hvR:"tiểu bao", type:"hv",
-    explain:"Gói bưu kiện. 소(小, nhỏ) + 포(包, gói). 소포를 보내다 = gửi bưu kiện. 소포를 받다 = nhận bưu kiện.",
-    ex:"소포가 도착했어요.", exVi:"Bưu kiện đã đến rồi." },
-  { kr:"시디", en:"CD, compact disc", vi:"đĩa CD", hv:null, hvR:"phiên âm 'CD'", type:"loan",
-    explain:"Đĩa CD. 시디를 굽다 = ghi đĩa CD. 음악 시디 = đĩa nhạc CD. Ngày nay đã ít dùng hơn.",
-    ex:"시디로 음악을 들었어요.", exVi:"Tôi đã nghe nhạc bằng đĩa CD." },
-  { kr:"신문", en:"newspaper", vi:"báo (tờ báo)", hv:"新聞", hvR:"tân văn", type:"hv",
-    explain:"Tờ báo. 신문을 읽다 = đọc báo. 신문을 구독하다 = đặt mua báo. 조선일보, 중앙일보 là tên báo lớn ở Hàn.",
-    ex:"매일 아침 신문을 읽어요.", exVi:"Mỗi sáng tôi đọc báo." },
-  { kr:"연락처", en:"contact information", vi:"thông tin liên lạc", hv:"連絡處", hvR:"liên lạc xứ", type:"hv",
-    explain:"Thông tin liên lạc (số điện thoại, email,...). 연락처를 알려주다 = cho biết thông tin liên lạc.",
-    ex:"연락처를 알려 주세요.", exVi:"Hãy cho tôi biết thông tin liên lạc." },
-  { kr:"엽서", en:"postcard", vi:"bưu thiếp", hv:"葉書", hvR:"diệp thư", type:"hv",
-    explain:"Bưu thiếp. 엽(葉, lá — hình dạng mỏng) + 서(書, thư). 여행지에서 엽서를 보내다 = gửi bưu thiếp từ nơi du lịch.",
-    ex:"여행지에서 엽서를 보냈어요.", exVi:"Tôi đã gửi bưu thiếp từ nơi du lịch." },
-  { kr:"영상", en:"video, image, footage", vi:"video; hình ảnh", hv:"映像", hvR:"ánh tượng", type:"hv",
-    explain:"Video hoặc hình ảnh trực quan. 영상을 찍다 = quay video. 영상 통화 = gọi video. 영상미 = tính thẩm mỹ hình ảnh.",
-    ex:"영상 통화 해요.", exVi:"Chúng mình gọi video call nhé." },
-  { kr:"우표", en:"stamp (postal)", vi:"con tem", hv:"郵票", hvR:"bưu phiếu", type:"hv",
-    explain:"Tem thư. 우(郵, bưu điện) + 표(票, phiếu). 우표를 붙이다 = dán tem. 우표를 모으다 = sưu tầm tem.",
-    ex:"편지에 우표를 붙였어요.", exVi:"Tôi đã dán tem lên thư." },
-  { kr:"이메일", en:"email, e-mail", vi:"thư điện tử, email", hv:null, hvR:"từ tiếng Anh 'e-mail'", type:"loan",
-    explain:"Thư điện tử. 이메일을 보내다 = gửi email. 이메일을 확인하다 = kiểm tra email. 이메일 주소 = địa chỉ email.",
-    ex:"이메일을 보냈어요.", exVi:"Tôi đã gửi email rồi." },
-  { kr:"인터넷", en:"internet", vi:"internet, mạng", hv:null, hvR:"từ tiếng Anh 'internet'", type:"loan",
-    explain:"Internet. 인터넷을 하다 = lướt internet. 인터넷 속도 = tốc độ internet. Hàn Quốc có tốc độ internet nhanh nhất thế giới.",
-    ex:"인터넷이 안 돼요.", exVi:"Mạng không có rồi." },
-  { kr:"잡지", en:"magazine", vi:"tạp chí", hv:"雜誌", hvR:"tạp chí", type:"hv",
-    explain:"Tạp chí. 잡지를 읽다 = đọc tạp chí. 패션 잡지 = tạp chí thời trang. 잡지사 = tòa soạn tạp chí.",
-    ex:"패션 잡지를 즐겨 읽어요.", exVi:"Tôi thích đọc tạp chí thời trang." },
-  { kr:"전화", en:"telephone, phone call", vi:"điện thoại", hv:"電話", hvR:"điện thoại", type:"hv",
-    explain:"Điện thoại hoặc cuộc gọi. 전화하다 = gọi điện. 전화를 받다 = nghe điện thoại. 전화를 끊다 = cúp máy.",
-    ex:"전화 주세요.", exVi:"Gọi điện cho tôi nhé." },
-  { kr:"전화기", en:"telephone set, phone device", vi:"máy điện thoại", hv:"電話機", hvR:"điện thoại cơ", type:"hv",
-    explain:"Máy điện thoại (thiết bị). 전화(điện thoại) + 기(機, máy). Phân biệt với 전화 (cuộc gọi/điện thoại nói chung).",
-    ex:"전화기가 고장났어요.", exVi:"Máy điện thoại bị hỏng rồi." },
-  { kr:"전화번호", en:"phone number", vi:"số điện thoại", hv:"電話番號", hvR:"điện thoại phiên hiệu", type:"hv",
-    explain:"Số điện thoại. 전화번호를 알려주다 = cho biết số điện thoại. 전화번호를 저장하다 = lưu số điện thoại.",
-    ex:"전화번호가 뭐예요?", exVi:"Số điện thoại của bạn là gì?" },
-  { kr:"정보", en:"information, data", vi:"thông tin", hv:"情報", hvR:"tình báo", type:"hv",
-    explain:"Thông tin, dữ liệu. 정보를 찾다 = tìm thông tin. 정보를 공유하다 = chia sẻ thông tin. 개인 정보 = thông tin cá nhân.",
-    ex:"정보를 찾고 있어요.", exVi:"Tôi đang tìm thông tin." },
-  { kr:"주소", en:"address", vi:"địa chỉ", hv:"住所", hvR:"trú sở", type:"hv",
-    explain:"Địa chỉ nhà hoặc email. 주소를 알려주다 = cho biết địa chỉ. 배송 주소 = địa chỉ giao hàng.",
-    ex:"주소를 알려 주세요.", exVi:"Hãy cho tôi biết địa chỉ." },
-  { kr:"카드", en:"card (bank/greeting)", vi:"thẻ (ngân hàng); thiệp", hv:null, hvR:"từ tiếng Anh 'card'", type:"loan",
-    explain:"Thẻ ngân hàng hoặc thiệp chúc mừng. 신용카드 = thẻ tín dụng. 생일 카드 = thiệp sinh nhật.",
-    ex:"카드로 계산할게요.", exVi:"Tôi sẽ thanh toán bằng thẻ." },
-  { kr:"카메라", en:"camera", vi:"máy ảnh", hv:null, hvR:"từ tiếng Anh 'camera'", type:"loan",
-    explain:"Máy ảnh. 카메라를 들다 = cầm máy ảnh. 카메라에 찍히다 = bị máy ảnh chụp lại. Hiện đại hơn 사진기.",
-    ex:"카메라를 가져왔어요.", exVi:"Tôi đã mang máy ảnh đến." },
-  { kr:"컴퓨터", en:"computer, PC", vi:"máy tính, vi tính", hv:null, hvR:"từ tiếng Anh 'computer'", type:"loan",
-    explain:"Máy tính. 컴퓨터를 켜다/끄다 = bật/tắt máy tính. 컴퓨터로 일하다 = làm việc bằng máy tính.",
-    ex:"컴퓨터로 일해요.", exVi:"Tôi làm việc bằng máy tính." },
-  { kr:"텔레비전", en:"television, TV", vi:"ti vi, truyền hình", hv:null, hvR:"từ tiếng Anh 'television'", type:"loan",
-    explain:"Ti vi. 텔레비전을 보다 = xem ti vi. 텔레비전을 켜다/끄다 = bật/tắt ti vi. Thường gọi tắt là TV.",
-    ex:"텔레비전을 자주 봐요.", exVi:"Tôi thường xem ti vi." },
-  { kr:"편지", en:"letter, mail", vi:"bức thư", hv:"便紙", hvR:"tiện chỉ", type:"hv",
-    explain:"Bức thư tay. 편지를 쓰다 = viết thư. 편지를 보내다 = gửi thư. 편지를 받다 = nhận thư.",
-    ex:"편지를 써서 보냈어요.", exVi:"Tôi đã viết và gửi thư." },
-  { kr:"프로그램", en:"program, show", vi:"chương trình", hv:null, hvR:"từ tiếng Anh 'program'", type:"loan",
-    explain:"Chương trình TV hoặc phần mềm máy tính. TV 프로그램 = chương trình truyền hình. 컴퓨터 프로그램 = phần mềm.",
-    ex:"좋아하는 프로그램이 있어요?", exVi:"Bạn có chương trình yêu thích không?" },
-  { kr:"프린트", en:"print, printout", vi:"in ấn, bản in", hv:null, hvR:"từ tiếng Anh 'print'", type:"loan",
-    explain:"In ấn hoặc bản in ra giấy. 프린트하다 = in ra. 프린터 = máy in. 프린트물 = tài liệu in.",
-    ex:"프린트해 주세요.", exVi:"Hãy in ra cho tôi nhé." },
-  { kr:"필름", en:"film (photo roll)", vi:"phim cuộn (ảnh)", hv:null, hvR:"từ tiếng Anh 'film'", type:"loan",
-    explain:"Phim cuộn chụp ảnh truyền thống. 필름 카메라 = máy ảnh dùng phim. Ngày nay ít dùng hơn do máy ảnh kỹ thuật số.",
-    ex:"필름 카메라로 찍었어요.", exVi:"Tôi đã chụp bằng máy ảnh phim." },
-  { kr:"핸드폰", en:"cell phone, mobile phone", vi:"điện thoại di động", hv:null, hvR:"từ tiếng Anh 'hand phone'", type:"loan",
-    explain:"Điện thoại di động. Từ tiếng Anh 'hand phone' (phổ biến ở châu Á). Tương đương 휴대전화, 스마트폰.",
-    ex:"핸드폰을 잃어버렸어요.", exVi:"Tôi bị mất điện thoại di động rồi." },
-  { kr:"홈페이지", en:"homepage, website", vi:"trang web, homepage", hv:null, hvR:"từ tiếng Anh 'homepage'", type:"loan",
-    explain:"Trang chủ website. 홈페이지를 만들다 = tạo trang web. 홈페이지 주소 = địa chỉ website (URL).",
-    ex:"홈페이지를 확인해 주세요.", exVi:"Vui lòng kiểm tra trang web." },
-  { kr:"휴대전화", en:"mobile phone, cell phone", vi:"điện thoại di động", hv:"携帶電話", hvR:"휴대(휴대) điện thoại", type:"hv",
-    explain:"Điện thoại di động — cách nói trang trọng hơn 핸드폰. 휴대(攜帶, mang theo) + 전화(điện thoại).",
-    ex:"휴대전화 번호가 뭐예요?", exVi:"Số điện thoại di động của bạn là gì?" },
-];
+      let currentFilter = "all";
+      function speakKorean(text, btn) {
+        window.speechSynthesis.cancel();
+        const voices = speechSynthesis
+          .getVoices()
+          .filter((v) => v.lang.startsWith("ko"));
+        if (!voices.length)
+          return alert("Thiết bị chưa có giọng đọc tiếng Hàn.");
 
-let currentFilter = 'all';
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.voice = voices[0];
+        utt.lang = "ko-KR";
+        utt.rate = 0.85;
 
-function renderTable(data) {
-  const tbody = document.getElementById('vocabBody');
-  tbody.innerHTML = '';
-  data.forEach((item, i) => {
-    let hvCell;
-    if (item.type === 'hv') {
-      hvCell = `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
-    } else if (item.type === 'pure') {
-      hvCell = `<span class="hv-tag pure">Thuần Hàn</span><span class="hv-reading">${item.hvR}</span>`;
-    } else {
-      hvCell = `<span class="hv-tag loan">Vay mượn</span><span class="hv-reading">${item.hvR}</span>`;
-    }
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
+        btn.classList.add("speaking");
+        utt.onend = () => btn.classList.remove("speaking");
+        speechSynthesis.speak(utt);
+      }
+      function renderTable(data) {
+        const tbody = document.getElementById("vocabBody");
+        tbody.innerHTML = "";
+        data.forEach((item, i) => {
+          let hvCell;
+          if (item.type === "hv") {
+            hvCell = `<span class="hv-tag"><span class="hv-hanja">${item.hv}</span></span><span class="hv-reading">${item.hvR}</span>`;
+          } else if (item.type === "pure") {
+            hvCell = `<span class="hv-tag pure">Thuần Hàn</span><span class="hv-reading">${item.hvR}</span>`;
+          } else {
+            hvCell = `<span class="hv-tag loan">Vay mượn</span><span class="hv-reading">${item.hvR}</span>`;
+          }
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
       <td>${i + 1}</td>
-      <td><span class="korean-word">${item.kr}</span></td>
+      <td>
+  <span class="korean-word">${item.kr}</span>
+  <button class="btn-speak" onclick="speakKorean('${item.kr}', this)">🔊</button>
+</td>
       <td>${item.en}</td>
       <td>${item.vi}</td>
       <td>${hvCell}</td>
@@ -304,40 +951,50 @@ function renderTable(data) {
         <span class="example-kr">${item.ex}</span>
         <span class="example-vi">${item.exVi}</span>
       </td>`;
-    tbody.appendChild(tr);
-  });
-  document.getElementById('resultCount').textContent = `${data.length} / ${vocab.length} từ`;
-}
+          tbody.appendChild(tr);
+        });
+        document.getElementById("resultCount").textContent =
+          `${data.length} / ${vocab.length} từ`;
+      }
 
-function filterAndSearch() {
-  const q = document.getElementById('searchInput').value.toLowerCase();
-  const result = vocab.filter(item => {
-    const matchFilter = currentFilter === 'all' || item.type === currentFilter;
-    const matchSearch = !q
-      || item.kr.includes(q)
-      || item.en.toLowerCase().includes(q)
-      || item.vi.toLowerCase().includes(q)
-      || (item.hv && item.hv.includes(q))
-      || item.hvR.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  renderTable(result);
-  document.getElementById('noResults').style.display = result.length === 0 ? 'block' : 'none';
-  document.getElementById('vocabTable').style.display = result.length === 0 ? 'none' : '';
-}
+      function filterAndSearch() {
+        const q = document.getElementById("searchInput").value.toLowerCase();
+        const result = vocab.filter((item) => {
+          const matchFilter =
+            currentFilter === "all" || item.type === currentFilter;
+          const matchSearch =
+            !q ||
+            item.kr.includes(q) ||
+            item.en.toLowerCase().includes(q) ||
+            item.vi.toLowerCase().includes(q) ||
+            (item.hv && item.hv.includes(q)) ||
+            item.hvR.toLowerCase().includes(q);
+          return matchFilter && matchSearch;
+        });
+        renderTable(result);
+        document.getElementById("noResults").style.display =
+          result.length === 0 ? "block" : "none";
+        document.getElementById("vocabTable").style.display =
+          result.length === 0 ? "none" : "";
+      }
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentFilter = btn.dataset.filter;
-    filterAndSearch();
-  });
-});
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentFilter = btn.dataset.filter;
+          filterAndSearch();
+        });
+      });
 
-document.getElementById('searchInput').addEventListener('input', filterAndSearch);
-document.getElementById('totalCount').textContent = vocab.length + ' từ';
-renderTable(vocab);
-</script>
-</body>
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", filterAndSearch);
+      document.getElementById("totalCount").textContent = vocab.length + " từ";
+      renderTable(vocab);
+      speechSynthesis.onvoiceschanged = () => {}; // kích hoạt load voices sớm
+    </script>
+  </body>
 </html>
