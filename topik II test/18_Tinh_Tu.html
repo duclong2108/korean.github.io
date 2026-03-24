@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 퀴즈 — Tính từ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #17171e;
+    --card: #1e1e28;
+    --border: #2e2e3e;
+    --accent: #c8a96e;
+    --accent2: #7c9ef5;
+    --correct: #4caf82;
+    --wrong: #e05c5c;
+    --text: #e8e4dc;
+    --muted: #7a7890;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrap { width: 100%; max-width: 640px; position: relative; z-index: 1; }
+
+  header { text-align: center; margin-bottom: 40px; }
+  header .label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700; line-height: 1.1;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  /* Stats bar */
+  .stats {
+    display: flex; gap: 8px; margin-bottom: 28px; justify-content: center;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1; text-align: center;
+  }
+  .stat span { display: block; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .stat.s-correct span { color: var(--correct); }
+  .stat.s-wrong span { color: var(--wrong); }
+
+  /* Progress */
+  .progress-track {
+    height: 3px; background: var(--border); border-radius: 99px;
+    margin-bottom: 36px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+  .mode-badge {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .question-num {
+    font-size: 11px; color: var(--muted); margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .question-word {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 10vw, 56px);
+    font-weight: 700; line-height: 1;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .question-prompt {
+    font-size: 13px; color: var(--muted); margin-bottom: 28px;
+  }
+
+  /* Options */
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opt {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) {
+    border-color: var(--accent2);
+    background: #1e1e30;
+    transform: translateY(-1px);
+  }
+  .opt.correct {
+    border-color: var(--correct);
+    background: rgba(76,175,130,0.12);
+    color: var(--correct);
+  }
+  .opt.wrong {
+    border-color: var(--wrong);
+    background: rgba(224,92,92,0.1);
+    color: var(--wrong);
+  }
+  .opt:disabled { cursor: default; }
+  .opt-letter {
+    display: inline-block; width: 20px; height: 20px;
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 10px; line-height: 20px; text-align: center;
+    margin-right: 8px; color: var(--muted);
+    transition: all 0.18s;
+  }
+  .opt.correct .opt-letter { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong .opt-letter { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+
+  /* Feedback */
+  .feedback {
+    margin-top: 18px; padding: 12px 18px; border-radius: 10px;
+    font-size: 13px; font-weight: 600;
+    display: none; align-items: center; gap: 8px;
+  }
+  .feedback.show { display: flex; }
+  .feedback.ok { background: rgba(76,175,130,0.12); color: var(--correct); border: 1px solid rgba(76,175,130,0.25); }
+  .feedback.err { background: rgba(224,92,92,0.1); color: var(--wrong); border: 1px solid rgba(224,92,92,0.2); }
+
+  /* Next button */
+  .btn-next {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; border-radius: 12px;
+    color: #0e0e12; font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; display: none;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next.show { display: block; }
+
+  /* Mode selector */
+  .modes {
+    display: flex; gap: 8px; margin-bottom: 24px; justify-content: center;
+  }
+  .mode-btn {
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    font-size: 12px; cursor: pointer;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.18s;
+  }
+  .mode-btn.active {
+    border-color: var(--accent); color: var(--accent);
+    background: rgba(200,169,110,0.08);
+  }
+
+  /* Result screen */
+  .result-screen {
+    display: none; text-align: center; padding: 48px 24px;
+  }
+  .result-screen.show { display: block; }
+  .result-emoji { font-size: 56px; margin-bottom: 16px; }
+  .result-score {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 56px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .result-msg { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .btn-restart {
+    padding: 14px 36px; border-radius: 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    color: var(--text); font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--accent); color: var(--accent); }
+
+  @keyframes pop { 0%{transform:scale(0.96);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .card { animation: pop 0.3s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">TOPIK Vocabulary</div>
+    <h1>Tính từ tổng hợp</h1>
+  </header>
+
+  <div class="modes">
+    <button class="mode-btn active" onclick="setMode('ko-vi')">한국어 → Tiếng Việt</button>
+    <button class="mode-btn" onclick="setMode('vi-ko')">Tiếng Việt → 한국어</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span id="st-total">0</span>Đã làm</div>
+    <div class="stat s-correct"><span id="st-correct">0</span>Đúng</div>
+    <div class="stat s-wrong"><span id="st-wrong">0</span>Sai</div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <div id="quiz-area">
+    <div class="card" id="card">
+      <span class="mode-badge" id="mode-badge">KO → VI</span>
+      <div class="question-num" id="q-num">Câu 1 / 20</div>
+      <div class="question-word" id="q-word">—</div>
+      <div class="question-prompt" id="q-prompt">Chọn nghĩa đúng bằng tiếng Việt</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Câu tiếp theo →</button>
+  </div>
+
+  <div class="result-screen" id="result">
+    <div class="result-emoji" id="res-emoji">🎉</div>
+    <div class="result-score" id="res-score">0/20</div>
+    <div class="result-msg" id="res-msg"></div>
+    <button class="btn-restart" onclick="restart()">Làm lại</button>
+  </div>
+</div>
+
+<script>
+const RAW = `가늘다==to be thin/mỏng mảnh, nhỏ
+가능하다==to be possible/có thể, có khả năng
+가렵다==to be itchy/ngứa
+간접적==being indirect/gián tiếp
+감동적==moving (emotionally)/cảm động, xúc động
+강하다==to be strong/mạnh mẽ, kiên cường
+개방적==being open/cởi mở, phóng khoáng
+개성적==being characteristic/có cá tính, đặc thù
+개인적==being personal/cá nhân, riêng tư
+객관적==being objective/khách quan
+갸름하다==to be slim and long/thon dài, gầy thon
+검다==black/đen (màu)
+게으르다==to be lazy/lười biếng
+결과적==being as a result/cuối cùng, kết quả là
+경제적==being economic/kinh tế, tiết kiệm
+계획적==being planned, as planned/có kế hoạch, theo kế hoạch
+고급==high grade/cao cấp, sang trọng
+고소하다==to be nutty/thơm hạt, bùi
+고유하다==unique/độc đáo, riêng biệt
+골치가 아프다==to be annoying/nhức đầu, phiền phức
+공손하다==to be polite/lịch sự, nhã nhặn
+과학적==being scientific/khoa học
+괴롭다==to be painful/đau khổ, phiền não
+굉장하다==to be great, to be wonderful/tuyệt vời, vĩ đại
+구체적==being specific/cụ thể
+굵다==to be thick/dày, to sợi
+궁금하다==to be curious/tò mò, muốn biết
+귀중하다==to be valuable/quý giá, có giá trị
+귀찮다==to be bothersome, to be tedious/phiền phức, ngại
+귀하다==to be noble, to be rare/cao quý, hiếm
+규칙적==being regular/đều đặn, theo quy tắc
+그러하다==so, as such, like that/như vậy, như thế
+그립다==to be nostalgic, to be missed/nhớ nhung, thương nhớ
+긍정적==being positive, being affirmative/tích cực, lạc quan
+기본적==being fundamental, being basic/cơ bản, nền tảng
+깊다==to be deep/sâu, sâu sắc
+까다롭다==to have a high standard/khó tính, đòi hỏi cao
+꼼꼼하다==to be meticulous/tỉ mỉ, cẩn thận
+끊임없다==to be incessant, to be unceasing/liên tục, không ngừng
+날씬하다==skinny/thon, mảnh khảnh
+낡다==to be old/cũ, cũ kỹ
+낯설다==to be unfamiliar/lạ lẫm, xa lạ
+내성적==being shy/hướng nội, nhút nhát
+너그럽다==to be generous/rộng lượng, khoan dung
+넉넉하다==to be enough, to be rich/đủ đầy, dư dả
+네모나다==to be squared/hình vuông, có góc
+놀랍다==to be amazing, to be remarkable/đáng kinh ngạc, bất ngờ
+느긋하다==to be lazy, to be laid back/thư thái, thong thả
+느끼하다==to be greasy/béo ngậy, ngấy
+다양하다==to be varied/đa dạng, phong phú
+다정하다==to be compassionate, to be kind/tình cảm, ân cần
+단단하다==to be solid, to be hard, to be strong/cứng, vững chắc
+단순하다==to be simple/đơn giản
+단정하다==to be neat, to be organized/gọn gàng, ngăn nắp
+달콤하다==to be sweet/ngọt ngào
+담백하다==to be pure, to be innocent/thanh đạm, nhẹ nhàng
+답답하다==to be stuffy, to be suffocating/ngột ngạt, bức bối
+당연하다==to be natural, to be justifiable/đương nhiên, tất nhiên
+대단하다==to be great/tuyệt vời, phi thường
+대표적==being representative, being typical/tiêu biểu, điển hình
+독특하다==to be unique/độc đáo, đặc biệt
+동일하다==being the same/đồng nhất, như nhau
+둔하다==to be dull/chậm chạp, ngốc nghếch
+둥글다==to be round/tròn, hình tròn
+드라이==dry/khô, sấy khô
+드물다==to be rare/hiếm, ít khi
+든든하다==to be reassuring, to be reliable/vững tâm, đáng tin
+딱딱하다==to be hard, to be stiff/cứng, cứng đờ
+딴==another, other/khác, khác biệt
+똑똑하다==to be clever, to be smart/thông minh, sáng dạ
+뚜렷하다==to be clear/rõ ràng, rõ rệt
+뚱뚱하다==to be fat/béo, mập
+뛰어나다==to be superior/xuất sắc, vượt trội
+매력적==being attractive/hấp dẫn, quyến rũ
+매콤하다==to be sweet and spicy/cay ngọt, cay nhẹ
+머지않다==to be not distant/không xa nữa, sắp
+멋지다==to be fantastic, to be amazing/tuyệt vời, ngầu
+명랑하다==to be cheerful, to be bright/vui vẻ, hoạt bát
+목마르다==to be thirsty/khát nước
+못생기다==to be ugly/xấu xí
+무덥다==to be hot and humid/oi bức, nóng ẩm
+문화적==being cultural/văn hóa, có tính văn hóa
+미끄럽다==to be slippery/trơn, trơn trượt
+믿음직스럽다==to be reliable/đáng tin cậy
+믿음직하다==to be trustworthy/đáng tin cậy, đáng tin
+밉다==to hate, to be annoying/đáng ghét, ghét
+버릇없다==to have bad manners/vô lễ, hỗn hào
+부끄럽다==to be shy, to be ashamed/xấu hổ, ngại
+부럽다==to be envious of/ghen tị, ước ao
+부정적==being negative/tiêu cực
+분명하다==to be distinct, to be clear/rõ ràng, chắc chắn
+불가능==impossibility/sự bất khả thi
+불가능하다==to be impossible/không thể, bất khả thi
+불쌍하다==to be pathetic/đáng thương, tội nghiệp
+불필요==unnecessary/không cần thiết
+붉다==to be red/đỏ, đỏ ửng
+비교적==being comparative/tương đối, so sánh
+뻔하다==to be obvious, to be clear/rõ ràng, hiển nhiên
+사교적==being sociable/hướng ngoại, xã giao
+사이좋다==to be in a good relationship/thân thiết, hòa thuận
+사회적==being social/xã hội, có tính xã hội
+상관없다==to have no relation/không liên quan, không sao
+상업적==being commercial/thương mại, mang tính thương mại
+상쾌하다==to feel cool and fresh/mát mẻ, sảng khoái
+새롭다==to be new/mới mẻ, mới lạ
+색다르다==to be eccentric, to be unique/độc đáo, khác biệt
+생생하다==to be fresh/sống động, tươi sáng
+서운하다==to be sorry, to be remorseful/buồn (vì ai đó), tiếc nuối
+서투르다==to be clumsy, to be unskilled/vụng về, không thành thạo
+선선하다==to be cool, to be chilly/mát mẻ (thời tiết)
+섭섭하다==to be sorry, to be regrettable/buồn, tiếc
+세계적==being global, being worldwide/toàn cầu, thế giới
+소극적==being passive/thụ động, không tích cực
+소심하다==to be timid, to be cowardly/nhút nhát, hay sợ
+소용없다==useless/vô ích, không có tác dụng
+소중하다==to be important/quý giá, quan trọng
+속상하다==to be annoying, to be regretful, to be sad/bực bội, phiền
+손쉽다==to be easy/dễ dàng, đơn giản
+솔직하다==to be honest/thẳng thắn, thành thật
+시리다==to feel a chill, to be painfully cold/lạnh buốt, đau buốt
+신기하다==to be mysterious, to be amazing/kỳ diệu, lạ kỳ
+신선하다==to be fresh/tươi, mới
+실용적==being practical/thực dụng, thiết thực
+심각하다==to be serious/nghiêm trọng, trầm trọng
+심심하다==to be bored/buồn chán, không có gì làm
+싱싱하다==to be fresh, to be lively/tươi sống, tươi ngon
+쌀쌀하다==to be chilly/lạnh hơi, se lạnh
+쑥스럽다==to be shy/ngại, xấu hổ
+쓸데없다==to be needless, to be useless/vô ích, thừa
+쓸쓸하다==to be lonely/cô đơn, lạnh lẽo
+씩씩하다==to be reliable, to be strong/dũng cảm, mạnh mẽ
+아깝다==to be regrettable, to be precious/tiếc, đáng tiếc
+아쉽다==to be unsatisfied, to be sorry/tiếc, luyến tiếc
+안타깝다==to feel sorry/thấy tiếc, thương
+약하다==to be weak/yếu, yếu đuối
+얌전하다==to be calm, to be gentle/hiền lành, ngoan ngoãn
+어떠하다==to be such a one's thoughts/thế nào (trang trọng)
+어색하다==to be awkward/ngại ngùng, vụng về
+엄격하다==to be strict/nghiêm khắc
+엄청나다==to be tremendous, to be enormous/khổng lồ, rất lớn
+엉뚱하다==to be strange, to be bizarre/kỳ quặc, lạ đời
+역사적==being historical/có tính lịch sử
+연하다==to be soft, to supple/mềm, dịu
+오래되다==to be old/cũ, lâu năm
+올바르다==to be proper, to be honest/đúng đắn, ngay thẳng
+옳다==to be correct/đúng, chính xác
+우아하다==to be graceful/thanh lịch, yêu kiều
+우울하다==to be depressed/buồn bã, u uất
+위대하다==to be great/vĩ đại
+유명==being famous/nổi tiếng
+유창하다==to be fluent/lưu loát, thành thạo
+유쾌하다==to be fun, to be cheerful/vui vẻ, sảng khoái
+의학적==being medical/về y học, y tế
+이국적==being exotic, being foreign/ngoại quốc, xa lạ
+이기적==being selfish/ích kỷ
+이러하다==such, of this kind, of this sort/như vậy, như thế này
+익숙하다==well-known, familiar/quen, thành thạo
+인간적==being human/người, có tính người
+인상적==being impressive/ấn tượng, gây ấn tượng
+일반==ordinary/bình thường, thông thường
+일반적==being ordinary/bình thường, thông thường
+일상적==being daily/hàng ngày, thường nhật
+일정하다==to be uniform, to be constant/đều đặn, nhất định
+자극적==being provocative, being stimulating/kích thích, khơi gợi
+자세하다==to be detailed, to be minute/chi tiết, tỉ mỉ
+자연적==being natural/tự nhiên
+장기적==being long term/dài hạn
+저렴하다==to be cheap/rẻ, giá rẻ
+적극적==being enthusiastic, being active/tích cực, chủ động
+적당하다==to be appropriate/thích hợp, vừa phải
+적절하다==to be suitable/phù hợp, thích đáng
+전국적==being national/toàn quốc
+전문적==being professional/chuyên nghiệp, chuyên môn
+전체적==being overall/toàn diện, tổng thể
+전통적==being traditional/truyền thống
+점잖다==to be well-mannered, to be gentle/lịch sự, đứng đắn
+정기적==being regularly/định kỳ, đều đặn
+정상==normal/bình thường; đỉnh (núi)
+정상적==being normal/bình thường
+정신없다==to be not in one's right mind/không tỉnh táo, hỗn loạn
+정신적==being mental/tinh thần, tâm lý
+정직하다==to be honest/thành thật, trung thực
+정확하다==to be accurate/chính xác, đúng
+졸리다==to be sleepy/buồn ngủ
+지겹다==to get tired, to get bored/chán ngán, nhàm
+지루하다==to be boring/nhàm chán, buồn
+지저분하다==to be messy, to be dirty/bẩn bựa, lộn xộn
+지치다==to be tired, to be exhausted/mệt mỏi, kiệt sức
+직접적==being direct/trực tiếp
+진하다==to be thick, to be dark/đậm, đặc
+짙다==to be thick, to be dark/đậm, tối
+차분하다==to be calm, to be quiet/bình tĩnh, điềm tĩnh
+충분하다==enough/đủ, đầy đủ
+캄캄하다==to be very dark, to be pitch-dark/tối mịt, tối đen
+커다랗다==to be extremely big/to lớn, khổng lồ
+특별==being special/đặc biệt
+특별하다==to be special/đặc biệt
+튼튼하다==to be durable, to be strong/bền, chắc chắn
+틀림없다==to be sure enough/chắc chắn không sai
+편안하다==to be comfortable/thoải mái, dễ chịu
+평범하다==to be ordinary, to be usual/bình thường, tầm thường
+포근하다==to be cozy/ấm áp, dễ chịu
+푸르다==to be blue/xanh (lam, lục)
+풍부하다==to be rich, to be abundant/phong phú, dồi dào
+필수==mandatory/bắt buộc, cần thiết
+한가하다==to be leisurely, to be relaxed/rảnh rỗi, thư thả
+해롭다==to be harmful/có hại, gây hại
+험하다==to be rough/gồ ghề, hiểm trở
+현대적==being modern/hiện đại
+현실적==being realistic/thực tế, thực tiễn
+화려하다==to be fancy/hào nhoáng, lộng lẫy
+화창하다==to be fine, to be clear, to be bright/quang đãng, đẹp trời
+확실하다==to be sure/chắc chắn
+환상적==being fantastic/tuyệt vời, ảo diệu
+활동적==being active/năng động, tích cực
+활발하다==to be active/năng động, hoạt bát
+황당하다==to be absurd, to be nonsensical/vô lý, ngớ ngẩn
+효과적==being effective/có hiệu quả
+효율적==being efficient/hiệu quả, tiết kiệm
+훌륭하다==to be great, to be excellent/xuất sắc, tuyệt vời
+흔하다==to be common/phổ biến, thường thấy
+희다==to be white/trắng màu`
+
+const vocab = RAW.trim().split('\n').map(line => {
+  const [ko, rest] = line.split('==');
+  const [en, vi] = rest.split('/');
+  return { ko: ko.trim(), en: en.trim(), vi: vi.trim() };
+});
+
+let TOTAL = vocab.length;
+let mode = 'ko-vi';
+let queue = [];
+let current = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && m === 'ko-vi') || (i === 1 && m === 'vi-ko'));
+  });
+  document.getElementById('mode-badge').textContent = m === 'ko-vi' ? 'KO → VI' : 'VI → KO';
+  restart();
+}
+
+function restart() {
+  TOTAL = vocab.length;
+  queue = shuffle(vocab);
+  current = 0; correctCount = 0; wrongCount = 0;
+  updateStats();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQuestion();
+}
+
+function updateStats() {
+  document.getElementById('st-total').textContent = current;
+  document.getElementById('st-correct').textContent = correctCount;
+  document.getElementById('st-wrong').textContent = wrongCount;
+  document.getElementById('prog').style.width = (current / TOTAL * 100) + '%';
+}
+
+function renderQuestion() {
+  answered = false;
+  const item = queue[current];
+  document.getElementById('q-num').textContent = `Câu ${current + 1} / ${TOTAL}`;
+
+  const isKoVi = mode === 'ko-vi';
+  document.getElementById('q-word').textContent = isKoVi ? item.ko : item.vi;
+  document.getElementById('q-prompt').textContent = isKoVi ? 'Chọn nghĩa đúng bằng tiếng Việt' : 'Chọn từ tiếng Hàn đúng';
+
+  // Pick 3 wrong answers
+  const pool = vocab.filter(v => v.ko !== item.ko);
+  const wrongs = shuffle(pool).slice(0, 3);
+  const opts = shuffle([item, ...wrongs]);
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const label = isKoVi ? opt.vi : opt.ko;
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${label}`;
+    btn.onclick = () => handleAnswer(btn, opt.ko === item.ko);
+    optEl.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('btn-next').className = 'btn-next';
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (answered) return;
+  answered = true;
+
+  const allBtns = document.querySelectorAll('.opt');
+  allBtns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correctCount++;
+    fb.className = 'feedback show ok';
+    fb.innerHTML = '✓ Chính xác!';
+  } else {
+    btn.classList.add('wrong');
+    wrongCount++;
+    // Highlight correct
+    const item = queue[current];
+    allBtns.forEach(b => {
+      const label = b.textContent.slice(1).trim();
+      const isKoVi = mode === 'ko-vi';
+      if ((isKoVi && label === item.vi) || (!isKoVi && label === item.ko)) {
+        b.classList.add('correct');
+      }
+    });
+    fb.className = 'feedback show err';
+    const answer = mode === 'ko-vi' ? queue[current].vi : queue[current].ko;
+    fb.innerHTML = `✗ Đáp án đúng: <strong>${answer}</strong>`;
+  }
+
+  current++;
+  updateStats();
+  document.getElementById('btn-next').className = 'btn-next show';
+
+  if (current >= TOTAL) {
+    document.getElementById('btn-next').textContent = 'Xem kết quả →';
+  }
+}
+
+function nextQuestion() {
+  if (current >= TOTAL) {
+    showResult();
+    return;
+  }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+  const pct = Math.round(correctCount / TOTAL * 100);
+  document.getElementById('res-score').textContent = `${correctCount}/${TOTAL}`;
+  const emojis = ['😅','😐','🙂','😊','🎉'];
+  document.getElementById('res-emoji').textContent = emojis[Math.floor(pct/25)];
+  const msgs = [
+    'Cần ôn thêm nhiều nhé!',
+    'Không tệ, cố lên!',
+    'Khá ổn đó! Luyện thêm chút nữa.',
+    'Tốt lắm! Gần thuộc rồi!',
+    '완벽해요! Giỏi lắm!'
+  ];
+  document.getElementById('res-msg').textContent = msgs[Math.floor(pct/25)] + ` (${pct}%)`;
+}
+
+restart();
+</script>
+</body>
+</html>
