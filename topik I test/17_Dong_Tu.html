@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 퀴즈 — Động từ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #17171e;
+    --card: #1e1e28;
+    --border: #2e2e3e;
+    --accent: #c8a96e;
+    --accent2: #7c9ef5;
+    --correct: #4caf82;
+    --wrong: #e05c5c;
+    --text: #e8e4dc;
+    --muted: #7a7890;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { width: 100%; max-width: 640px; position: relative; z-index: 1; }
+  header { text-align: center; margin-bottom: 40px; }
+  header .label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700; line-height: 1.1;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stats {
+    display: flex; gap: 8px; margin-bottom: 28px; justify-content: center;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1; text-align: center;
+  }
+  .stat span { display: block; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .stat.s-correct span { color: var(--correct); }
+  .stat.s-wrong span { color: var(--wrong); }
+  .progress-track {
+    height: 3px; background: var(--border); border-radius: 99px;
+    margin-bottom: 36px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+  .mode-badge {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .question-num {
+    font-size: 11px; color: var(--muted); margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .question-word {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 10vw, 56px);
+    font-weight: 700; line-height: 1;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .question-prompt {
+    font-size: 13px; color: var(--muted); margin-bottom: 28px;
+  }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opt {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) {
+    border-color: var(--accent2);
+    background: #1e1e30;
+    transform: translateY(-1px);
+  }
+  .opt.correct {
+    border-color: var(--correct);
+    background: rgba(76,175,130,0.12);
+    color: var(--correct);
+  }
+  .opt.wrong {
+    border-color: var(--wrong);
+    background: rgba(224,92,92,0.1);
+    color: var(--wrong);
+  }
+  .opt:disabled { cursor: default; }
+  .opt-letter {
+    display: inline-block; width: 20px; height: 20px;
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 10px; line-height: 20px; text-align: center;
+    margin-right: 8px; color: var(--muted);
+    transition: all 0.18s;
+  }
+  .opt.correct .opt-letter { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong .opt-letter { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+  .feedback {
+    margin-top: 18px; padding: 12px 18px; border-radius: 10px;
+    font-size: 13px; font-weight: 600;
+    display: none; align-items: center; gap: 8px;
+  }
+  .feedback.show { display: flex; }
+  .feedback.ok { background: rgba(76,175,130,0.12); color: var(--correct); border: 1px solid rgba(76,175,130,0.25); }
+  .feedback.err { background: rgba(224,92,92,0.1); color: var(--wrong); border: 1px solid rgba(224,92,92,0.2); }
+  .btn-next {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; border-radius: 12px;
+    color: #0e0e12; font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; display: none;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next.show { display: block; }
+  .modes {
+    display: flex; gap: 8px; margin-bottom: 24px; justify-content: center;
+  }
+  .mode-btn {
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    font-size: 12px; cursor: pointer;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.18s;
+  }
+  .mode-btn.active {
+    border-color: var(--accent); color: var(--accent);
+    background: rgba(200,169,110,0.08);
+  }
+  .result-screen {
+    display: none; text-align: center; padding: 48px 24px;
+  }
+  .result-screen.show { display: block; }
+  .result-emoji { font-size: 56px; margin-bottom: 16px; }
+  .result-score {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 56px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .result-msg { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .btn-restart {
+    padding: 14px 36px; border-radius: 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    color: var(--text); font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--accent); color: var(--accent); }
+  @keyframes pop { 0%{transform:scale(0.96);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .card { animation: pop 0.3s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">TOPIK Vocabulary</div>
+    <h1>Động từ</h1>
+  </header>
+
+  <div class="modes">
+    <button class="mode-btn active" onclick="setMode('ko-vi')">한국어 → Tiếng Việt</button>
+    <button class="mode-btn" onclick="setMode('vi-ko')">Tiếng Việt → 한국어</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span id="st-total">0</span>Đã làm</div>
+    <div class="stat s-correct"><span id="st-correct">0</span>Đúng</div>
+    <div class="stat s-wrong"><span id="st-wrong">0</span>Sai</div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <div id="quiz-area">
+    <div class="card" id="card">
+      <span class="mode-badge" id="mode-badge">KO → VI</span>
+      <div class="question-num" id="q-num">Câu 1 / 265</div>
+      <div class="question-word" id="q-word">—</div>
+      <div class="question-prompt" id="q-prompt">Chọn nghĩa đúng bằng tiếng Việt</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Câu tiếp theo →</button>
+  </div>
+
+  <div class="result-screen" id="result">
+    <div class="result-emoji" id="res-emoji">🎉</div>
+    <div class="result-score" id="res-score">0/265</div>
+    <div class="result-msg" id="res-msg"></div>
+    <button class="btn-restart" onclick="restart()">Làm lại</button>
+  </div>
+</div>
+
+<script>
+const RAW = `가다==go/đi
+가르치다==teach/dạy, giảng dạy
+가져가다==take away/mang đi
+가져오다==bring/mang đến, mang lại
+가지다==have/có, sở hữu
+감다==close ~ (eyes)/nhắm (mắt), gội (đầu)
+감동하다==be impressed/cảm động
+감사하다==thank, appreciate/cảm ơn, biết ơn
+갖다==have/có, giữ
+걱정하다==worry/lo lắng
+건너가다==cross (a road)/đi qua, băng qua
+건너다==cross over/băng qua, vượt qua
+걷다==walk/đi bộ
+걸다==bet, call/treo; gọi điện
+걸리다==get caught, take (time)/bị vướng; mất (thời gian)
+걸어가다==walk (go)/đi bộ đến
+걸어오다==walk (come)/đi bộ đến đây
+결정하다==decide/quyết định
+계산하다==calculate/tính toán, thanh toán
+계시다==be, exist (honorific form)/có, ở (kính ngữ)
+고르다==choose/chọn lựa
+고맙다==thank/cảm ơn, biết ơn
+고치다==fix/sửa chữa, chữa
+교체==substitute, change/thay thế, đổi chỗ
+구경하다==take a look/xem, ngắm, tham quan
+구하다==save, seek, get/tìm kiếm, cứu
+그리다==draw/vẽ
+그치다==stop, end, cease/dừng lại, chấm dứt
+기다리다==wait/chờ đợi
+기르다==cultivate, grow/nuôi, trồng
+기뻐하다==glad, delight/vui mừng
+기억하다==remember/nhớ, ghi nhớ
+깎다==cut, shave/cắt, gọt, cạo
+깨다==wake up, crack, break/thức dậy; đập vỡ
+깨지다==chip, crack, break/bị vỡ, bị nứt
+꺼내다==take out/lấy ra, rút ra
+꾸다==dream/mơ, mơ thấy
+끄다==turn off, extinguish, stop/tắt (điện), dập (lửa)
+끝나다==finish, end/kết thúc, xong
+끝내다==finish/hoàn thành, kết thúc
+끼다==put on, plug, (fog) rolls in/đeo; cắm; (sương) kéo đến
+나가다==go out, get out/đi ra, ra ngoài
+나누다==share, divide/chia sẻ, chia ra
+나다==occur, come out/xảy ra, xuất hiện
+나빠지다==spoil, deteriorate/trở nên xấu, xuống cấp
+나오다==come out, appear/ra ngoài, xuất hiện
+나타나다==appear/xuất hiện, hiện ra
+남기다==leave/để lại, còn lại
+내다==pay, put out/trả (tiền); đưa ra
+내려가다==go down/đi xuống
+내려오다==come down/xuống dưới đây
+내리다==go down/xuống (xe, cầu thang)
+넘다==exceed, more than/vượt quá, hơn
+넘어지다==fall down, fall/ngã, té
+넣다==put in/bỏ vào, cho vào
+노래하다==sing/hát
+노력하다==endeavor, strive/cố gắng, nỗ lực
+놀다==play/chơi, vui chơi
+놀라다==be surprised/ngạc nhiên, bị bất ngờ
+놓다==put/đặt, để xuống
+누르다==press down, push/ấn, nhấn
+눕다==lie down, sleep/nằm xuống
+느끼다==feel/cảm thấy, cảm nhận
+늘다==gain, increase/tăng lên, tiến bộ
+다녀오다==return, come back/đi rồi về, trở lại
+다니다==go, commute/đi lại, thường xuyên đến
+닦다==wipe, polish/lau chùi, đánh bóng
+닫다==close/đóng (cửa)
+닫히다==shut, close/bị đóng lại
+달리다==run/chạy
+닮다==resemble/giống, trông giống
+대답하다==answer, reply/trả lời, hồi đáp
+덮다==cover/đậy lại, phủ lên
+데리다==bring, take along/đưa, dẫn đi
+도와주다==help/giúp đỡ
+돌아가다==return, go back/quay lại, trở về
+돌아오다==come back, come home/trở về, về nhà
+돕다==help/giúp đỡ
+되다==become/trở thành, trở nên
+두다==put/đặt, để
+드리다==give/cho, tặng (kính ngữ)
+드시다==eat (honorific form)/ăn, dùng bữa (kính ngữ)
+듣다==listen/nghe, lắng nghe
+들다==hold, enter/cầm; vào (bên trong)
+들어가다==go in, enter/đi vào, vào bên trong
+들어오다==come in, enter/vào đây, bước vào
+따라가다==follow/đi theo, bám theo
+따라오다==come with, follow/đến theo, đi cùng
+따르다==follow/tuân theo, làm theo
+떠나다==leave/rời đi, ra đi
+떠들다==chatter, make a noise/ồn ào, làm ồn
+떨어지다==drop/rơi, rụng xuống
+뛰다==run/chạy, nhảy
+뜨다==rise, open (the eyes)/mọc lên; mở (mắt)
+마시다==drink/uống
+마치다==finish, end/kết thúc, xong việc
+막히다==be blocked, be clogged/bị kẹt, bị tắc
+만나다==meet/gặp, gặp gỡ
+만들다==make, create/làm, tạo ra
+만지다==touch/chạm, sờ
+말씀하다==talk/nói chuyện (kính ngữ)
+말하다==say, talk/nói, nói chuyện
+매다==tie/buộc, cột
+먹다==eat/ăn
+메다==shoulder, carry/khoác (vai), vác
+모르다==do not know/không biết
+모시다==take you, serve you (honorific)/đưa đi, phục vụ (kính ngữ)
+모으다==collect, gather/thu thập, tập hợp
+모이다==gather, get together/tụ tập lại, họp lại
+목욕하다==take a bath/tắm (tắm bồn)
+못하다==~ can not do/không thể, không làm được
+묻다==ask/hỏi, đặt câu hỏi
+물어보다==ask/hỏi thăm
+미안하다==sorry/xin lỗi
+밀리다==be shaved, be pushed/bị đẩy, bị dồn
+바꾸다==change/thay đổi, đổi
+바뀌다==be changed/bị thay đổi, thay đổi
+바라다==hope/hy vọng, mong muốn
+받다==receive/nhận, tiếp nhận
+배우다==learn/học, học hỏi
+버리다==abandon, throw away/bỏ đi, vứt đi
+벌다==earn, make money/kiếm (tiền), làm ra
+벗다==take off (clothes, shoes)/cởi (quần áo), tháo (giày)
+보내다==send, spend/gửi; trải qua (thời gian)
+보다==see/nhìn, xem, thấy
+보이다==show, look/cho thấy; trông như
+뵙다==meet/gặp (kính ngữ)
+부르다==call, sing/gọi; hát
+부치다==send, fry, transmit/gửi; chiên
+부탁하다==beg, ask/nhờ vả, yêu cầu
+불다==blow/thổi (gió, nhạc cụ)
+붓다==pour/đổ, rót ra
+붙다==stick, pass a test/dính; đỗ (thi)
+붙이다==attach, stick/dán, đính vào
+빌리다==borrow, lend/mượn; cho mượn
+빨다==suck, do laundry/hút; giặt (quần áo)
+빼다==remove, pull, pull out/bỏ ra, trừ đi
+사다==buy/mua
+사랑하다==love/yêu, yêu thương
+사용하다==use/sử dụng, dùng
+사인하다==sign/ký tên, ký tặng
+살다==live/sống, sinh sống
+생각되다==be considered, it seems~/có vẻ như, được nghĩ đến
+생각하다==think/suy nghĩ, nghĩ
+생기다==form, arise/xuất hiện, nảy sinh
+샤워하다==take a shower/tắm vòi hoa sen
+서다==stand/đứng
+선택하다==choose, select/lựa chọn, chọn
+설명하다==explain/giải thích
+세수하다==wash/rửa mặt
+세우다==set up, formulate/dựng lên, thành lập
+소개하다==introduce/giới thiệu
+쉬다==rest/nghỉ ngơi
+슬퍼하다==sorrow, mourn/buồn bã, đau buồn
+시작되다==begin/bắt đầu (bị động)
+시작하다==start, begin/bắt đầu
+시키다==make someone do, order/bảo ai làm gì; gọi món
+신다==put on, wear/đi (giày dép)
+신청하다==put in for, apply for/đăng ký, nộp đơn
+실례하다==be excused/xin phép, thất lễ
+싫어하다==dislike, hate/không thích, ghét
+싶다==want/muốn
+싸우다==fight/cãi nhau, đánh nhau
+쌓이다==stack up, pile up/chồng chất, tích lũy
+쓰다==write, use, wear (glasses)/viết; dùng; đeo (kính)
+쓰이다==be written, be used/được viết; được dùng
+씹다==chew, bite/nhai, cắn
+씻다==wash/rửa, tắm rửa
+아니다==no/không phải
+안내하다==guide, invite/hướng dẫn, mời
+안다==embrace, cradle/ôm, bế
+앉다==sit/ngồi
+알다==know/biết, hiểu
+알리다==inform/thông báo, cho biết
+얘기하다==talk/nói chuyện (thân mật)
+어울리다==look good on, befit/hợp, phù hợp (trang phục)
+연습하다==practice/luyện tập, rèn luyện
+열다==open/mở (cửa, hộp)
+열리다==be opened/bị mở ra
+오다==come/đến, lại
+오르다==climb/leo, leo lên
+올라가다==go up/đi lên, leo lên
+올라오다==come up/lên đây, tiến lên
+올려놓다==put on, place/đặt lên trên
+옮기다==move, transfer, translate/di chuyển; chuyển dịch
+외출하다==go out/đi ra ngoài
+운동하다==exercise/tập thể dục
+운전하다==drive/lái xe
+울다==cry/khóc
+울리다==make cry, chime/làm khóc; vang lên
+움직이다==move/di chuyển, cử động
+웃다==laugh/cười
+원하다==want, wish, desire/muốn, mong muốn
+위하다==for, in favor of/vì, vì lợi ích của
+이야기하다==talk/kể chuyện, nói chuyện
+이용하다==use/sử dụng, tận dụng
+이해하다==understand/hiểu, thấu hiểu
+인사하다==greet/chào hỏi
+인터뷰하다==interview/phỏng vấn
+일어나다==rise, stand, occur/thức dậy; xảy ra
+일어서다==get up, stand up/đứng dậy
+일하다==work/làm việc
+읽다==read/đọc (sách, báo)
+잃다==lose/mất (đồ vật)
+잃어버리다==lose/đánh mất, bị mất
+입다==put on, wear/mặc (quần áo)
+있다==have, there/có; ở, tồn tại
+잊다==forget/quên
+잊어버리다==forget/quên mất
+자다==sleep/ngủ
+자르다==cut/cắt, chặt
+잘하다==do well, good at/làm tốt, giỏi
+잠자다==sleep, go to bed/ngủ, đi ngủ
+잡다==catch, grab, hold/bắt, nắm, cầm
+잡수시다==eat (honorific)/ăn, dùng (kính ngữ cao)
+적다==be few, write down/ít; viết xuống
+전하다==tell/truyền đạt, nhắn lại
+정리하다==straighten out, organize/sắp xếp, dọn dẹp
+정하다==choose, establish/quyết định, định ra
+조사하다==investigate/điều tra, nghiên cứu
+조심하다==be careful, warn/cẩn thận, chú ý
+졸업하다==graduate/tốt nghiệp
+좋아하다==like/thích
+죄송하다==sorry/xin lỗi (trang trọng)
+주다==give/đưa, cho
+주무시다==sleep, rest/ngủ (kính ngữ)
+주문하다==order/đặt hàng, gọi món
+주차하다==park/đậu xe
+죽다==die/chết, mất
+준비하다==prepare/chuẩn bị
+줄다==shrink, decrease/giảm, thu nhỏ
+즐거워하다==have fun/vui vẻ, thích thú
+즐기다==enjoy, have fun/thưởng thức, tận hưởng
+지나다==pass by/đi qua, trôi qua
+지내다==stay, spend, live/sống, trải qua
+지다==lose/thua (trận)
+지키다==protect/bảo vệ, giữ gìn
+질문하다==ask a question/đặt câu hỏi
+짓다==build, create/xây dựng; làm (cơm)
+찍다==pierce, take (a photo), press/chụp (ảnh); đóng dấu
+차다==kick/đá (bóng)
+차리다==prepare, arrange/chuẩn bị (bàn ăn), bày ra
+찾다==find, visit/tìm; đến thăm
+찾아가다==go to visit/đến thăm
+찾아오다==come to visit/đến thăm (đến đây)
+청소하다==sweep, clean/quét dọn, lau chùi
+초대하다==invite/mời, mời dự
+촬영하다==take a picture/quay phim, chụp ảnh
+추다==dance/nhảy múa
+축하하다==celebrate/chúc mừng
+출근하다==go to work/đi làm, đến công ty
+출발하다==depart/khởi hành, xuất phát
+춤추다==dance/nhảy múa, khiêu vũ
+취소하다==cancel/hủy bỏ
+취직하다==get a job/xin được việc, có việc làm
+치료하다==treat/điều trị, chữa bệnh
+켜다==turn on (the light, the power)/bật (đèn, điện)
+타다==ride, get on/đi (xe), lên (xe)
+태어나다==be born/được sinh ra
+통하다==pass, lead/thông qua, dẫn đến
+퇴근하다==leave the office/tan làm, về nhà sau giờ làm
+틀다==turn on (the switch)/bật (công tắc, nhạc)
+팔다==sell/bán
+팔리다==sell, be sold/được bán, bán được
+펴다==spread, stretch/mở ra, trải ra
+풀다==solve/giải (bài toán), tháo ra
+피다==bloom/nở (hoa)
+피우다==smoke, bloom/hút (thuốc); làm nở
+필요하다==need/cần, cần thiết
+하다==do, say/làm, nói
+화나다==angry/tức giận, nổi giận
+화내다==get angry/nổi giận
+화장하다==makeup/trang điểm, make up
+확인하다==confirm, check/xác nhận, kiểm tra
+환영하다==welcome/chào đón, hoan nghênh`;
+
+const vocab = RAW.trim().split('\n').map(line => {
+  const [ko, rest] = line.split('==');
+  const [en, vi] = rest.split('/');
+  return { ko: ko.trim(), en: en.trim(), vi: vi.trim() };
+});
+
+let TOTAL = vocab.length;
+let mode = 'ko-vi';
+let queue = [];
+let current = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && m === 'ko-vi') || (i === 1 && m === 'vi-ko'));
+  });
+  document.getElementById('mode-badge').textContent = m === 'ko-vi' ? 'KO → VI' : 'VI → KO';
+  restart();
+}
+
+function restart() {
+  TOTAL = vocab.length;
+  queue = shuffle(vocab);
+  current = 0; correctCount = 0; wrongCount = 0;
+  updateStats();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQuestion();
+}
+
+function updateStats() {
+  document.getElementById('st-total').textContent = current;
+  document.getElementById('st-correct').textContent = correctCount;
+  document.getElementById('st-wrong').textContent = wrongCount;
+  document.getElementById('prog').style.width = (current / TOTAL * 100) + '%';
+}
+
+function renderQuestion() {
+  answered = false;
+  const item = queue[current];
+  document.getElementById('q-num').textContent = `Câu ${current + 1} / ${TOTAL}`;
+
+  const isKoVi = mode === 'ko-vi';
+  document.getElementById('q-word').textContent = isKoVi ? item.ko : item.vi;
+  document.getElementById('q-prompt').textContent = isKoVi ? 'Chọn nghĩa đúng bằng tiếng Việt' : 'Chọn từ tiếng Hàn đúng';
+
+  const pool = vocab.filter(v => v.ko !== item.ko);
+  const wrongs = shuffle(pool).slice(0, 3);
+  const opts = shuffle([item, ...wrongs]);
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const label = isKoVi ? opt.vi : opt.ko;
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${label}`;
+    btn.onclick = () => handleAnswer(btn, opt.ko === item.ko);
+    optEl.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('btn-next').className = 'btn-next';
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (answered) return;
+  answered = true;
+
+  const allBtns = document.querySelectorAll('.opt');
+  allBtns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correctCount++;
+    fb.className = 'feedback show ok';
+    fb.innerHTML = '✓ Chính xác!';
+  } else {
+    btn.classList.add('wrong');
+    wrongCount++;
+    const item = queue[current];
+    allBtns.forEach(b => {
+      const label = b.textContent.slice(1).trim();
+      const isKoVi = mode === 'ko-vi';
+      if ((isKoVi && label === item.vi) || (!isKoVi && label === item.ko)) {
+        b.classList.add('correct');
+      }
+    });
+    fb.className = 'feedback show err';
+    const answer = mode === 'ko-vi' ? queue[current].vi : queue[current].ko;
+    fb.innerHTML = `✗ Đáp án đúng: <strong>${answer}</strong>`;
+  }
+
+  current++;
+  updateStats();
+  document.getElementById('btn-next').className = 'btn-next show';
+
+  if (current >= TOTAL) {
+    document.getElementById('btn-next').textContent = 'Xem kết quả →';
+  }
+}
+
+function nextQuestion() {
+  if (current >= TOTAL) {
+    showResult();
+    return;
+  }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+  const pct = Math.round(correctCount / TOTAL * 100);
+  document.getElementById('res-score').textContent = `${correctCount}/${TOTAL}`;
+  const emojis = ['😅','😐','🙂','😊','🎉'];
+  document.getElementById('res-emoji').textContent = emojis[Math.floor(pct/25)];
+  const msgs = [
+    'Cần ôn thêm nhiều nhé!',
+    'Không tệ, cố lên!',
+    'Khá ổn đó! Luyện thêm chút nữa.',
+    'Tốt lắm! Gần thuộc rồi!',
+    '완벽해요! Giỏi lắm!'
+  ];
+  document.getElementById('res-msg').textContent = msgs[Math.floor(pct/25)] + ` (${pct}%)`;
+}
+
+restart();
+</script>
+</body>
+</html>
