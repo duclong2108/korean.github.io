@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 퀴즈 — Giáo dục</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #17171e;
+    --card: #1e1e28;
+    --border: #2e2e3e;
+    --accent: #c8a96e;
+    --accent2: #7c9ef5;
+    --correct: #4caf82;
+    --wrong: #e05c5c;
+    --text: #e8e4dc;
+    --muted: #7a7890;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { width: 100%; max-width: 640px; position: relative; z-index: 1; }
+  header { text-align: center; margin-bottom: 40px; }
+  header .label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700; line-height: 1.1;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stats {
+    display: flex; gap: 8px; margin-bottom: 28px; justify-content: center;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1; text-align: center;
+  }
+  .stat span { display: block; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .stat.s-correct span { color: var(--correct); }
+  .stat.s-wrong span { color: var(--wrong); }
+  .progress-track {
+    height: 3px; background: var(--border); border-radius: 99px;
+    margin-bottom: 36px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+  .mode-badge {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .question-num {
+    font-size: 11px; color: var(--muted); margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .question-word {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 10vw, 56px);
+    font-weight: 700; line-height: 1;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .question-prompt {
+    font-size: 13px; color: var(--muted); margin-bottom: 28px;
+  }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opt {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) {
+    border-color: var(--accent2);
+    background: #1e1e30;
+    transform: translateY(-1px);
+  }
+  .opt.correct {
+    border-color: var(--correct);
+    background: rgba(76,175,130,0.12);
+    color: var(--correct);
+  }
+  .opt.wrong {
+    border-color: var(--wrong);
+    background: rgba(224,92,92,0.1);
+    color: var(--wrong);
+  }
+  .opt:disabled { cursor: default; }
+  .opt-letter {
+    display: inline-block; width: 20px; height: 20px;
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 10px; line-height: 20px; text-align: center;
+    margin-right: 8px; color: var(--muted);
+    transition: all 0.18s;
+  }
+  .opt.correct .opt-letter { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong .opt-letter { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+  .feedback {
+    margin-top: 18px; padding: 12px 18px; border-radius: 10px;
+    font-size: 13px; font-weight: 600;
+    display: none; align-items: center; gap: 8px;
+  }
+  .feedback.show { display: flex; }
+  .feedback.ok { background: rgba(76,175,130,0.12); color: var(--correct); border: 1px solid rgba(76,175,130,0.25); }
+  .feedback.err { background: rgba(224,92,92,0.1); color: var(--wrong); border: 1px solid rgba(224,92,92,0.2); }
+  .btn-next {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; border-radius: 12px;
+    color: #0e0e12; font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; display: none;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next.show { display: block; }
+  .modes {
+    display: flex; gap: 8px; margin-bottom: 24px; justify-content: center;
+  }
+  .mode-btn {
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    font-size: 12px; cursor: pointer;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.18s;
+  }
+  .mode-btn.active {
+    border-color: var(--accent); color: var(--accent);
+    background: rgba(200,169,110,0.08);
+  }
+  .result-screen {
+    display: none; text-align: center; padding: 48px 24px;
+  }
+  .result-screen.show { display: block; }
+  .result-emoji { font-size: 56px; margin-bottom: 16px; }
+  .result-score {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 56px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .result-msg { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .btn-restart {
+    padding: 14px 36px; border-radius: 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    color: var(--text); font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--accent); color: var(--accent); }
+  @keyframes pop { 0%{transform:scale(0.96);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .card { animation: pop 0.3s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">TOPIK Vocabulary</div>
+    <h1>Giáo dục & Ngôn ngữ</h1>
+  </header>
+
+  <div class="modes">
+    <button class="mode-btn active" onclick="setMode('ko-vi')">한국어 → Tiếng Việt</button>
+    <button class="mode-btn" onclick="setMode('vi-ko')">Tiếng Việt → 한국어</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span id="st-total">0</span>Đã làm</div>
+    <div class="stat s-correct"><span id="st-correct">0</span>Đúng</div>
+    <div class="stat s-wrong"><span id="st-wrong">0</span>Sai</div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <div id="quiz-area">
+    <div class="card" id="card">
+      <span class="mode-badge" id="mode-badge">KO → VI</span>
+      <div class="question-num" id="q-num">Câu 1 / 160</div>
+      <div class="question-word" id="q-word">—</div>
+      <div class="question-prompt" id="q-prompt">Chọn nghĩa đúng bằng tiếng Việt</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Câu tiếp theo →</button>
+  </div>
+
+  <div class="result-screen" id="result">
+    <div class="result-emoji" id="res-emoji">🎉</div>
+    <div class="result-score" id="res-score">0/160</div>
+    <div class="result-msg" id="res-msg"></div>
+    <button class="btn-restart" onclick="restart()">Làm lại</button>
+  </div>
+</div>
+
+<script>
+const RAW = `강사==teacher/giảng viên, thầy dạy
+강연==lecture/bài giảng, buổi diễn thuyết
+강의==lecture/bài giảng, tiết học
+강의실==lecture hall/phòng giảng
+강조==emphasis/sự nhấn mạnh
+개강==start of course/khai giảng, bắt đầu khóa học
+결론==conclusion/kết luận
+결석==absence/vắng mặt, bỏ học
+경영학==business administration/quản trị kinh doanh
+경제학==economics/khoa học kinh tế
+과목==(class) subject/môn học
+과외==tutor lesson/học thêm, dạy thêm
+과정==process/quá trình, quy trình
+과제==task/bài tập, nhiệm vụ
+관용어==idiom/thành ngữ, thành ngữ quen dùng
+관찰==observation/quan sát
+교육==education/giáo dục
+교육학==pedagogy/khoa học giáo dục
+교재==teaching materials/tài liệu dạy học
+구별==distinction/phân biệt, sự phân biệt
+구분==classification/phân loại, chia
+구성==composition/cấu thành, cấu trúc
+국문학==(the country's) literature/văn học quốc gia
+그래프==graph/đồ thị, biểu đồ
+그림책==picture book/sách tranh
+글쓴이==author/tác giả
+글씨==letter/chữ viết tay
+글자==letter/chữ, ký tự
+기초==basic, fundamental/nền tảng, cơ sở
+기행문==travelogue, travel essay/bút ký du lịch
+기호==symbol/ký hiệu, biểu tượng
+논문==(academic) paper/luận văn, luận án
+높임말==honorifics/kính ngữ, lời nói tôn kính
+담임==homeroom teacher/giáo viên chủ nhiệm
+답==answer/câu trả lời, đáp án
+답변==answer/câu trả lời, phúc đáp
+도서==books/sách (tổng quát)
+동창==alumni/bạn cùng trường, đồng môn
+동창회==alumni association/hội đồng môn
+동화책==children's book/sách truyện thiếu nhi
+등록==register/đăng ký
+등록금==registration fee, tuition fee/học phí, lệ phí đăng ký
+만년필==fountain pen/bút mực
+만화책==cartoon book/truyện tranh
+멀티미디어실==multimedia room/phòng đa phương tiện
+명사==noun/danh từ
+모국어==native language/tiếng mẹ đẻ
+모범생==model student/học sinh gương mẫu
+모음==vowel/nguyên âm
+문구==stationery/đồ dùng văn phòng phẩm
+문법==grammar/ngữ pháp
+문학==literature/văn học
+물음==question/câu hỏi
+밑줄==underline/gạch chân
+박사==doctoral degree, Ph.D./tiến sĩ
+반대말==opposite word/từ trái nghĩa
+반말==casual talk/lời nói thân mật không kính ngữ
+반복==repeat/sự lặp lại
+발견==discovery/sự phát hiện
+발명==invention/phát minh, sáng chế
+발표자==presenter/người trình bày
+발표회==presentation/buổi phát biểu, hội thảo
+번역==translation/dịch thuật
+보기==example, sample/ví dụ, mẫu
+복습==review/ôn tập
+본론==main discussion topic/chủ đề chính, nội dung chính
+본문==the original literature/văn bản gốc, nội dung chính
+부사==adverb/trạng từ, phó từ
+불규칙==irregularity/bất quy tắc
+비교==comparison/sự so sánh
+사투리==dialect/tiếng địa phương
+상식==common knowledge/kiến thức phổ thông
+생략==omission, deletion/bỏ qua, lược bỏ
+서론==introduction/phần mở đầu, giới thiệu
+석사==master's degree/thạc sĩ
+설==theory/giả thuyết, thuyết
+성적==grades/kết quả học tập, điểm số
+성적표==grade report card/bảng điểm
+세미나==seminar/hội thảo, seminar
+소설책==novel/cuốn tiểu thuyết
+속담==proverb/tục ngữ, thành ngữ
+수료식==completion ceremony/lễ tốt nghiệp, lễ bế giảng
+수학여행==school excursion/du lịch học sinh
+시인==poet/nhà thơ
+시집==poetry collection/tập thơ; về nhà chồng
+시청각실==multimedia room/phòng nghe nhìn
+시험공부==studying for an exam/ôn thi, học thi
+식==formula, method/công thức; cách thức
+신입생==freshmen/sinh viên năm nhất
+실험==experiment/thí nghiệm, thực nghiệm
+실험실==laboratory/phòng thí nghiệm
+심리학==psychology/tâm lý học
+안내서==guidebook, handbook/sách hướng dẫn
+어학==language/ngôn ngữ học
+어학연수==language training/học tiếng nước ngoài du học ngắn hạn
+어휘==vocabulary/từ vựng
+억양==accent/ngữ điệu, thanh điệu
+언어==language/ngôn ngữ
+엠티==membership training/huấn luyện đoàn thể (MT)
+여고생==high school girl/nữ sinh THPT
+연구==research/nghiên cứu
+연구소==research institute/viện nghiên cứu
+연구실==research laboratory/phòng nghiên cứu
+연수==training/đào tạo, tập huấn
+열람실==reading room/phòng đọc tài liệu
+예습==preparation/học trước bài
+오리엔테이션==orientation/định hướng, buổi hướng dẫn
+외래어==loan word/từ ngoại lai
+요약==summary/tóm tắt, tóm lược
+우등상==honor prize/giải thưởng xuất sắc
+우리말==Korean language/tiếng Hàn (từ dân gian)
+원고==manuscript/bản thảo, bản gốc
+원리==principle/nguyên lý, nguyên tắc
+유치원==kindergarten/mẫu giáo, nhà trẻ
+유행어==buzzword/từ thịnh hành, từ mốt
+응시자==examinee/thí sinh dự thi
+의의==significance, meaning/ý nghĩa, tầm quan trọng
+의학==(field of) medicine/y học
+이해력==comprehension/khả năng hiểu
+일기장==diary/cuốn nhật ký
+입시==entrance examination/thi đầu vào
+입학시험==entrance examination/kỳ thi tuyển sinh
+자료실==archive, reference room/phòng tư liệu
+자음==consonant/phụ âm
+작가==writer/nhà văn, tác giả
+작문==essay, writing/bài luận, viết bài
+장학==scholarship/học bổng
+장학금==scholarship/tiền học bổng
+재학==enrollment/đang học, trong thời gian học
+정답==correct answer/đáp án đúng
+정치학==political science/khoa học chính trị
+제자==student, disciple/học trò, đệ tử
+조교==assistant/trợ giảng, phụ tá
+졸업식==graduation ceremony/lễ tốt nghiệp
+주제==subject, theme/chủ đề
+줄거리==story, plot/tóm tắt nội dung
+중급==intermediate/trung cấp, trung bình
+지식==knowledge/kiến thức, tri thức
+진학==entrance to higher education/lên cấp, học lên cao
+참고==reference/tham khảo
+천재==genius/thiên tài; thiên tai
+철학==philosophy/triết học
+체육==physical education/thể dục (môn học)
+초급==beginner-level/cấp độ sơ cấp
+초보자==beginner/người mới bắt đầu
+출석==attendance/có mặt, điểm danh
+캠퍼스==campus/khuôn viên trường
+토론==discussion/tranh luận, thảo luận
+통계==statistics/thống kê
+통역==interpretation/phiên dịch
+풀이==interpretation/diễn giải, giải thích
+학과==department (at university)/khoa đại học
+학력==educational background/trình độ học vấn
+학문==academic field/học thuật, học vấn
+학비==tuition fee/học phí
+학습==learning, study/học tập
+학점==grade, credit/điểm tín chỉ
+한국학==Korean studies/Hàn Quốc học
+합격자==successful candidate/người đỗ, người trúng tuyển
+형용사==adjective/tính từ
+호칭==name/danh xưng, cách gọi
+휴학==leave of absence from school/bảo lưu, nghỉ học tạm thời`;
+
+const vocab = RAW.trim().split('\n').map(line => {
+  const [ko, rest] = line.split('==');
+  const [en, vi] = rest.split('/');
+  return { ko: ko.trim(), en: en.trim(), vi: vi.trim() };
+});
+
+let TOTAL = vocab.length;
+let mode = 'ko-vi';
+let queue = [];
+let current = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && m === 'ko-vi') || (i === 1 && m === 'vi-ko'));
+  });
+  document.getElementById('mode-badge').textContent = m === 'ko-vi' ? 'KO → VI' : 'VI → KO';
+  restart();
+}
+
+function restart() {
+  TOTAL = vocab.length;
+  queue = shuffle(vocab);
+  current = 0; correctCount = 0; wrongCount = 0;
+  updateStats();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQuestion();
+}
+
+function updateStats() {
+  document.getElementById('st-total').textContent = current;
+  document.getElementById('st-correct').textContent = correctCount;
+  document.getElementById('st-wrong').textContent = wrongCount;
+  document.getElementById('prog').style.width = (current / TOTAL * 100) + '%';
+}
+
+function renderQuestion() {
+  answered = false;
+  const item = queue[current];
+  document.getElementById('q-num').textContent = `Câu ${current + 1} / ${TOTAL}`;
+
+  const isKoVi = mode === 'ko-vi';
+  document.getElementById('q-word').textContent = isKoVi ? item.ko : item.vi;
+  document.getElementById('q-prompt').textContent = isKoVi ? 'Chọn nghĩa đúng bằng tiếng Việt' : 'Chọn từ tiếng Hàn đúng';
+
+  const pool = vocab.filter(v => v.ko !== item.ko);
+  const wrongs = shuffle(pool).slice(0, 3);
+  const opts = shuffle([item, ...wrongs]);
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const label = isKoVi ? opt.vi : opt.ko;
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${label}`;
+    btn.onclick = () => handleAnswer(btn, opt.ko === item.ko);
+    optEl.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('btn-next').className = 'btn-next';
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (answered) return;
+  answered = true;
+
+  const allBtns = document.querySelectorAll('.opt');
+  allBtns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correctCount++;
+    fb.className = 'feedback show ok';
+    fb.innerHTML = '✓ Chính xác!';
+  } else {
+    btn.classList.add('wrong');
+    wrongCount++;
+    const item = queue[current];
+    allBtns.forEach(b => {
+      const label = b.textContent.slice(1).trim();
+      const isKoVi = mode === 'ko-vi';
+      if ((isKoVi && label === item.vi) || (!isKoVi && label === item.ko)) {
+        b.classList.add('correct');
+      }
+    });
+    fb.className = 'feedback show err';
+    const answer = mode === 'ko-vi' ? queue[current].vi : queue[current].ko;
+    fb.innerHTML = `✗ Đáp án đúng: <strong>${answer}</strong>`;
+  }
+
+  current++;
+  updateStats();
+  document.getElementById('btn-next').className = 'btn-next show';
+
+  if (current >= TOTAL) {
+    document.getElementById('btn-next').textContent = 'Xem kết quả →';
+  }
+}
+
+function nextQuestion() {
+  if (current >= TOTAL) {
+    showResult();
+    return;
+  }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+  const pct = Math.round(correctCount / TOTAL * 100);
+  document.getElementById('res-score').textContent = `${correctCount}/${TOTAL}`;
+  const emojis = ['😅','😐','🙂','😊','🎉'];
+  document.getElementById('res-emoji').textContent = emojis[Math.floor(pct/25)];
+  const msgs = [
+    'Cần ôn thêm nhiều nhé!',
+    'Không tệ, cố lên!',
+    'Khá ổn đó! Luyện thêm chút nữa.',
+    'Tốt lắm! Gần thuộc rồi!',
+    '완벽해요! Giỏi lắm!'
+  ];
+  document.getElementById('res-msg').textContent = msgs[Math.floor(pct/25)] + ` (${pct}%)`;
+}
+
+restart();
+</script>
+</body>
+</html>
