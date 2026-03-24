@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 퀴즈 — Trạng từ & Liên từ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #17171e;
+    --card: #1e1e28;
+    --border: #2e2e3e;
+    --accent: #c8a96e;
+    --accent2: #7c9ef5;
+    --correct: #4caf82;
+    --wrong: #e05c5c;
+    --text: #e8e4dc;
+    --muted: #7a7890;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { width: 100%; max-width: 640px; position: relative; z-index: 1; }
+  header { text-align: center; margin-bottom: 40px; }
+  header .label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700; line-height: 1.1;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stats {
+    display: flex; gap: 8px; margin-bottom: 28px; justify-content: center;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1; text-align: center;
+  }
+  .stat span { display: block; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .stat.s-correct span { color: var(--correct); }
+  .stat.s-wrong span { color: var(--wrong); }
+  .progress-track {
+    height: 3px; background: var(--border); border-radius: 99px;
+    margin-bottom: 36px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+  .mode-badge {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .question-num {
+    font-size: 11px; color: var(--muted); margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .question-word {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 10vw, 56px);
+    font-weight: 700; line-height: 1;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .question-prompt {
+    font-size: 13px; color: var(--muted); margin-bottom: 28px;
+  }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opt {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) {
+    border-color: var(--accent2);
+    background: #1e1e30;
+    transform: translateY(-1px);
+  }
+  .opt.correct {
+    border-color: var(--correct);
+    background: rgba(76,175,130,0.12);
+    color: var(--correct);
+  }
+  .opt.wrong {
+    border-color: var(--wrong);
+    background: rgba(224,92,92,0.1);
+    color: var(--wrong);
+  }
+  .opt:disabled { cursor: default; }
+  .opt-letter {
+    display: inline-block; width: 20px; height: 20px;
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 10px; line-height: 20px; text-align: center;
+    margin-right: 8px; color: var(--muted);
+    transition: all 0.18s;
+  }
+  .opt.correct .opt-letter { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong .opt-letter { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+  .feedback {
+    margin-top: 18px; padding: 12px 18px; border-radius: 10px;
+    font-size: 13px; font-weight: 600;
+    display: none; align-items: center; gap: 8px;
+  }
+  .feedback.show { display: flex; }
+  .feedback.ok { background: rgba(76,175,130,0.12); color: var(--correct); border: 1px solid rgba(76,175,130,0.25); }
+  .feedback.err { background: rgba(224,92,92,0.1); color: var(--wrong); border: 1px solid rgba(224,92,92,0.2); }
+  .btn-next {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; border-radius: 12px;
+    color: #0e0e12; font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; display: none;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next.show { display: block; }
+  .modes {
+    display: flex; gap: 8px; margin-bottom: 24px; justify-content: center;
+  }
+  .mode-btn {
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    font-size: 12px; cursor: pointer;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.18s;
+  }
+  .mode-btn.active {
+    border-color: var(--accent); color: var(--accent);
+    background: rgba(200,169,110,0.08);
+  }
+  .result-screen {
+    display: none; text-align: center; padding: 48px 24px;
+  }
+  .result-screen.show { display: block; }
+  .result-emoji { font-size: 56px; margin-bottom: 16px; }
+  .result-score {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 56px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .result-msg { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .btn-restart {
+    padding: 14px 36px; border-radius: 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    color: var(--text); font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--accent); color: var(--accent); }
+  @keyframes pop { 0%{transform:scale(0.96);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .card { animation: pop 0.3s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">TOPIK Vocabulary</div>
+    <h1>Trạng từ & Liên từ</h1>
+  </header>
+
+  <div class="modes">
+    <button class="mode-btn active" onclick="setMode('ko-vi')">한국어 → Tiếng Việt</button>
+    <button class="mode-btn" onclick="setMode('vi-ko')">Tiếng Việt → 한국어</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span id="st-total">0</span>Đã làm</div>
+    <div class="stat s-correct"><span id="st-correct">0</span>Đúng</div>
+    <div class="stat s-wrong"><span id="st-wrong">0</span>Sai</div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <div id="quiz-area">
+    <div class="card" id="card">
+      <span class="mode-badge" id="mode-badge">KO → VI</span>
+      <div class="question-num" id="q-num">Câu 1 / 100</div>
+      <div class="question-word" id="q-word">—</div>
+      <div class="question-prompt" id="q-prompt">Chọn nghĩa đúng bằng tiếng Việt</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Câu tiếp theo →</button>
+  </div>
+
+  <div class="result-screen" id="result">
+    <div class="result-emoji" id="res-emoji">🎉</div>
+    <div class="result-score" id="res-score">0/100</div>
+    <div class="result-msg" id="res-msg"></div>
+    <button class="btn-restart" onclick="restart()">Làm lại</button>
+  </div>
+</div>
+
+<script>
+const RAW = `가끔==sometimes/thỉnh thoảng
+가운데==middle/ở giữa
+가장==most/nhất, nhiều nhất
+각==each/mỗi, từng
+간단히==simply/một cách đơn giản
+갑자기==suddenly/đột ngột, bất ngờ
+같이==together/cùng nhau
+거기==there/ở đó
+거의==almost, nearly/gần như, hầu như
+계속==continue/tiếp tục
+곧==soon/sắp, ngay bây giờ
+그냥==just, as it is/cứ thế, vậy thôi
+그래서==so, thus/vì vậy, do đó
+그러나==but, however/nhưng, tuy nhiên
+그러니까==so, because/vì thế, bởi vậy
+그러면==then, if so/thì, trong trường hợp đó
+그런==then, such/như vậy, như thế
+그런데==by the way, however/nhưng mà, thế mà
+그럼==then/thì, vậy thì
+그렇게==like that, so/như vậy, như thế
+그렇지만==nevertheless, but/nhưng mà, dù vậy
+그리고==and/và, và rồi
+그만==stop, finish/thôi, dừng lại
+그중==among them/trong số đó
+기타==other/khác, ngoài ra
+깜짝==startled, surprised/giật mình, bất ngờ
+꼭==exactly, absolutely/nhất định, chắc chắn
+너무==too, very/quá, rất
+늘==always/luôn luôn, hằng ngày
+다==all, whole/tất cả, hết
+다시==again/lại, một lần nữa
+대부분==mostly, almost/hầu hết, phần lớn
+더==more/hơn, nhiều hơn
+덕분==thanks for, thanks to/nhờ, nhờ vào
+따로==separately/riêng, tách biệt
+때문==because, for ~/vì, bởi vì
+또==in addition, again/lại, cũng, thêm nữa
+또는==or/hoặc, hay là
+똑바로==upright, straight/thẳng, ngay thẳng
+만일==if, should/nếu như, giả sử
+많이==a lot of, many/rất nhiều
+매우==extremely, very/rất, vô cùng
+먼저==first, first of all, before/trước tiên, đầu tiên
+모두==all, everyone/tất cả mọi người, hết
+무척==very/rất, vô cùng
+물론==sure, of course/tất nhiên, dĩ nhiên
+미리==in advance, beforehand/trước, chuẩn bị trước
+바로==immediately, soon, just/ngay, ngay lập tức
+벌써==already/rồi, đã rồi
+별로==not really/không mấy, không lắm
+보통==usually, normally/thường, bình thường
+빨리==quickly/nhanh, nhanh lên
+뿐==only/chỉ, chỉ thôi
+새로==newly/mới, vừa mới
+서로==each other, both/nhau, lẫn nhau
+씩==each, every, per/mỗi, từng ... một
+아마==maybe, perhaps/có lẽ, có thể
+아주==very, completely/rất, hoàn toàn
+아직==yet, still/vẫn còn, chưa
+약간==slightly, a little/một chút, một ít
+어서==hurry, quickly/mau lên, nhanh lên
+언제나==always, anytime/luôn luôn, bất kỳ lúc nào
+없이==without/không có, thiếu
+여기==here/ở đây, đây
+여기저기==here and there/khắp nơi, chỗ này chỗ kia
+여러==various, many/nhiều, nhiều loại
+여러가지==several, various/nhiều thứ, đủ loại
+열심히==hard, enthusiastic/chăm chỉ, hăng hái
+오래==long, much/lâu, lâu dài
+왜냐하면==because/bởi vì, vì
+우선==first/trước tiên
+이렇게==like this, so, in this way/như thế này
+일찍==early/sớm, dậy sớm
+자주==often/thường xuyên, hay
+잘==well/tốt, giỏi, khéo
+저기==there, over there/ở đó (xa); Này (gọi)
+저렇게==like that, in that way/như thế kia
+전==all, before/tất cả; trước đây
+전혀==not at all/hoàn toàn không
+절대==never, absolutely/tuyệt đối, nhất định không
+정말==really, truly/thật sự, thật ra
+제일==most/nhất, số một
+조금==a little/một chút, một ít
+조용히==quietly/yên lặng, nhẹ nhàng
+좀==a little/một chút, làm ơn
+좀더==a little more/thêm một chút
+주로==mainly/chủ yếu, chủ yếu là
+중==medium, during/giữa, trong lúc
+직접==directly, direct/trực tiếp
+쯤==about, around ~/khoảng, vào khoảng
+참==really, very/thực sự, rất
+천천히==slowly/từ từ, chậm thôi
+특별히==especially/đặc biệt, đặc biệt là
+특히==especially, in particular/đặc biệt là, nhất là
+푹==deeply/sâu, ngủ say
+하지만==but, however/nhưng, tuy nhiên
+함께==together/cùng nhau
+항상==always/luôn luôn
+혼자==alone/một mình, cô đơn`;
+
+const vocab = RAW.trim().split('\n').map(line => {
+  const [ko, rest] = line.split('==');
+  const [en, vi] = rest.split('/');
+  return { ko: ko.trim(), en: en.trim(), vi: vi.trim() };
+});
+
+let TOTAL = vocab.length;
+let mode = 'ko-vi';
+let queue = [];
+let current = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && m === 'ko-vi') || (i === 1 && m === 'vi-ko'));
+  });
+  document.getElementById('mode-badge').textContent = m === 'ko-vi' ? 'KO → VI' : 'VI → KO';
+  restart();
+}
+
+function restart() {
+  TOTAL = vocab.length;
+  queue = shuffle(vocab);
+  current = 0; correctCount = 0; wrongCount = 0;
+  updateStats();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQuestion();
+}
+
+function updateStats() {
+  document.getElementById('st-total').textContent = current;
+  document.getElementById('st-correct').textContent = correctCount;
+  document.getElementById('st-wrong').textContent = wrongCount;
+  document.getElementById('prog').style.width = (current / TOTAL * 100) + '%';
+}
+
+function renderQuestion() {
+  answered = false;
+  const item = queue[current];
+  document.getElementById('q-num').textContent = `Câu ${current + 1} / ${TOTAL}`;
+
+  const isKoVi = mode === 'ko-vi';
+  document.getElementById('q-word').textContent = isKoVi ? item.ko : item.vi;
+  document.getElementById('q-prompt').textContent = isKoVi ? 'Chọn nghĩa đúng bằng tiếng Việt' : 'Chọn từ tiếng Hàn đúng';
+
+  const pool = vocab.filter(v => v.ko !== item.ko);
+  const wrongs = shuffle(pool).slice(0, 3);
+  const opts = shuffle([item, ...wrongs]);
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const label = isKoVi ? opt.vi : opt.ko;
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${label}`;
+    btn.onclick = () => handleAnswer(btn, opt.ko === item.ko);
+    optEl.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('btn-next').className = 'btn-next';
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (answered) return;
+  answered = true;
+
+  const allBtns = document.querySelectorAll('.opt');
+  allBtns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correctCount++;
+    fb.className = 'feedback show ok';
+    fb.innerHTML = '✓ Chính xác!';
+  } else {
+    btn.classList.add('wrong');
+    wrongCount++;
+    const item = queue[current];
+    allBtns.forEach(b => {
+      const label = b.textContent.slice(1).trim();
+      const isKoVi = mode === 'ko-vi';
+      if ((isKoVi && label === item.vi) || (!isKoVi && label === item.ko)) {
+        b.classList.add('correct');
+      }
+    });
+    fb.className = 'feedback show err';
+    const answer = mode === 'ko-vi' ? queue[current].vi : queue[current].ko;
+    fb.innerHTML = `✗ Đáp án đúng: <strong>${answer}</strong>`;
+  }
+
+  current++;
+  updateStats();
+  document.getElementById('btn-next').className = 'btn-next show';
+
+  if (current >= TOTAL) {
+    document.getElementById('btn-next').textContent = 'Xem kết quả →';
+  }
+}
+
+function nextQuestion() {
+  if (current >= TOTAL) {
+    showResult();
+    return;
+  }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+  const pct = Math.round(correctCount / TOTAL * 100);
+  document.getElementById('res-score').textContent = `${correctCount}/${TOTAL}`;
+  const emojis = ['😅','😐','🙂','😊','🎉'];
+  document.getElementById('res-emoji').textContent = emojis[Math.floor(pct/25)];
+  const msgs = [
+    'Cần ôn thêm nhiều nhé!',
+    'Không tệ, cố lên!',
+    'Khá ổn đó! Luyện thêm chút nữa.',
+    'Tốt lắm! Gần thuộc rồi!',
+    '완벽해요! Giỏi lắm!'
+  ];
+  document.getElementById('res-msg').textContent = msgs[Math.floor(pct/25)] + ` (${pct}%)`;
+}
+
+restart();
+</script>
+</body>
+</html>
