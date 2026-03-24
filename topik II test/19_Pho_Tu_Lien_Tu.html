@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 퀴즈 — Trạng từ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #17171e;
+    --card: #1e1e28;
+    --border: #2e2e3e;
+    --accent: #c8a96e;
+    --accent2: #7c9ef5;
+    --correct: #4caf82;
+    --wrong: #e05c5c;
+    --text: #e8e4dc;
+    --muted: #7a7890;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+  }
+
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+
+  .wrap { width: 100%; max-width: 640px; position: relative; z-index: 1; }
+
+  header { text-align: center; margin-bottom: 40px; }
+  header .label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700; line-height: 1.1;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  /* Stats bar */
+  .stats {
+    display: flex; gap: 8px; margin-bottom: 28px; justify-content: center;
+  }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    flex: 1; text-align: center;
+  }
+  .stat span { display: block; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .stat.s-correct span { color: var(--correct); }
+  .stat.s-wrong span { color: var(--wrong); }
+
+  /* Progress */
+  .progress-track {
+    height: 3px; background: var(--border); border-radius: 99px;
+    margin-bottom: 36px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px 32px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+  }
+  .card::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+  .mode-badge {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .question-num {
+    font-size: 11px; color: var(--muted); margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .question-word {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 10vw, 56px);
+    font-weight: 700; line-height: 1;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+  .question-prompt {
+    font-size: 13px; color: var(--muted); margin-bottom: 28px;
+  }
+
+  /* Options */
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opt {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) {
+    border-color: var(--accent2);
+    background: #1e1e30;
+    transform: translateY(-1px);
+  }
+  .opt.correct {
+    border-color: var(--correct);
+    background: rgba(76,175,130,0.12);
+    color: var(--correct);
+  }
+  .opt.wrong {
+    border-color: var(--wrong);
+    background: rgba(224,92,92,0.1);
+    color: var(--wrong);
+  }
+  .opt:disabled { cursor: default; }
+  .opt-letter {
+    display: inline-block; width: 20px; height: 20px;
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 10px; line-height: 20px; text-align: center;
+    margin-right: 8px; color: var(--muted);
+    transition: all 0.18s;
+  }
+  .opt.correct .opt-letter { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong .opt-letter { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+
+  /* Feedback */
+  .feedback {
+    margin-top: 18px; padding: 12px 18px; border-radius: 10px;
+    font-size: 13px; font-weight: 600;
+    display: none; align-items: center; gap: 8px;
+  }
+  .feedback.show { display: flex; }
+  .feedback.ok { background: rgba(76,175,130,0.12); color: var(--correct); border: 1px solid rgba(76,175,130,0.25); }
+  .feedback.err { background: rgba(224,92,92,0.1); color: var(--wrong); border: 1px solid rgba(224,92,92,0.2); }
+
+  /* Next button */
+  .btn-next {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; border-radius: 12px;
+    color: #0e0e12; font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; display: none;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 8px;
+  }
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next.show { display: block; }
+
+  /* Mode selector */
+  .modes {
+    display: flex; gap: 8px; margin-bottom: 24px; justify-content: center;
+  }
+  .mode-btn {
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    font-size: 12px; cursor: pointer;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.18s;
+  }
+  .mode-btn.active {
+    border-color: var(--accent); color: var(--accent);
+    background: rgba(200,169,110,0.08);
+  }
+
+  /* Result screen */
+  .result-screen {
+    display: none; text-align: center; padding: 48px 24px;
+  }
+  .result-screen.show { display: block; }
+  .result-emoji { font-size: 56px; margin-bottom: 16px; }
+  .result-score {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 56px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .result-msg { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .btn-restart {
+    padding: 14px 36px; border-radius: 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    color: var(--text); font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--accent); color: var(--accent); }
+
+  @keyframes pop { 0%{transform:scale(0.96);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .card { animation: pop 0.3s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">TOPIK Vocabulary</div>
+    <h1>Trạng từ & Phó từ</h1>
+  </header>
+
+  <div class="modes">
+    <button class="mode-btn active" onclick="setMode('ko-vi')">한국어 → Tiếng Việt</button>
+    <button class="mode-btn" onclick="setMode('vi-ko')">Tiếng Việt → 한국어</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span id="st-total">0</span>Đã làm</div>
+    <div class="stat s-correct"><span id="st-correct">0</span>Đúng</div>
+    <div class="stat s-wrong"><span id="st-wrong">0</span>Sai</div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <div id="quiz-area">
+    <div class="card" id="card">
+      <span class="mode-badge" id="mode-badge">KO → VI</span>
+      <div class="question-num" id="q-num">Câu 1 / 20</div>
+      <div class="question-word" id="q-word">—</div>
+      <div class="question-prompt" id="q-prompt">Chọn nghĩa đúng bằng tiếng Việt</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Câu tiếp theo →</button>
+  </div>
+
+  <div class="result-screen" id="result">
+    <div class="result-emoji" id="res-emoji">🎉</div>
+    <div class="result-score" id="res-score">0/20</div>
+    <div class="result-msg" id="res-msg"></div>
+    <button class="btn-restart" onclick="restart()">Làm lại</button>
+  </div>
+</div>
+
+<script>
+const RAW = `가까이==near/gần, gần đây
+가득==full/đầy, đầy ắp
+가만히==motionlessly/yên lặng, không cử động
+각각==separately, each/mỗi cái, từng cái
+각종==various/các loại, đủ loại
+간절히==eagerly/tha thiết, khẩn cầu
+갈수록==more and more/ngày càng, càng ngày càng
+건너==across/bên kia, ngang qua
+겉==side, outside/bề ngoài, vỏ ngoài
+게다가==besides, in addition/hơn nữa, ngoài ra
+겨우==barely, finally/vừa đủ, chỉ vừa
+결국==after all/cuối cùng, rốt cuộc
+결코==never/không bao giờ, tuyệt nhiên
+경우==case, circumstance/trường hợp, hoàn cảnh
+골고루==evenly/đều đặn, đồng đều
+곳곳==here and there, everywhere/khắp nơi
+공통==common/chung, chung nhau
+과연==as expected/quả thật, đúng như dự đoán
+괜히==for no reason/vô cớ, không có lý do
+굉장히==extremely, to a great extent/cực kỳ, vô cùng
+그대로==as it is/như vậy, nguyên trạng
+그래도==(but) still/nhưng vẫn, dù vậy
+그래야==so that/như thế thì mới, phải vậy
+그러니==therefore/vì thế, do đó
+그러다가==and then/và rồi, rồi thì
+그러므로==hence/vì vậy, do đó
+그러자==and then/và rồi, khi đó
+그리==so, very, that/như vậy, như thế
+그리하여==then/và vì vậy, và rồi
+그만큼==that much/đến mức đó, bấy nhiêu
+그저==just/chỉ vậy thôi, đơn giản
+근데==by the way/à mà, nhưng mà
+글쎄==oh well/ừm, chẳng biết
+급히==suddenly/vội vàng, gấp
+기본==basic/cơ bản
+깜빡==forgetfully, with a blink/quên mất lúc nào, nháy mắt
+깨끗이==clearly/sạch sẽ (phó từ)
+꼬박꼬박==properly (without failure), faithfully/đầy đủ, đúng hạn
+꼼꼼히==thoroughly, meticulously/tỉ mỉ, chi tiết
+꽤==quite/khá, khá là
+꾸준히==steadily/kiên trì, đều đặn
+끝내==finally, eventually/cuối cùng, rốt cuộc
+나날이==day by day/ngày qua ngày, từng ngày
+나름==depends on/tùy, tùy thuộc vào
+날로==day by day/ngày càng, mỗi ngày
+내내==always/suốt, liên tục
+너무나==too~, very/quá (nhấn mạnh)
+다행히==fortunately/may mắn thay, may là
+단순히==simply/đơn thuần, đơn giản là
+달리==besides, differently/khác đi, khác biệt
+당연히==of course/dĩ nhiên, đương nhiên
+당장==immediately, for now/ngay lập tức, ngay bây giờ
+대개==mostly, usually/phần lớn, thường thường
+대단히==greatly/rất, vô cùng (nhấn mạnh)
+대신==in substitute/thay cho, thay thế
+대체로==usually, in general/nhìn chung, thường thì
+더구나==furthermore, moreover/hơn nữa, thậm chí
+더욱==even more/càng, càng hơn
+덜==less, not yet/ít hơn, chưa đủ
+도대체==how on earth/rốt cuộc, đến cùng
+되도록==as much as possible/càng nhiều càng tốt
+드디어==finally/cuối cùng, rốt cuộc
+따라서==therefore, hence/do đó, vì vậy
+따로따로==separately/riêng rẽ, từng cái
+딱==perfectly, just/đúng, vừa khít
+때때로==sometimes/thỉnh thoảng, đôi khi
+때로==now and then/đôi khi, lúc thì
+또박또박==word by word, letter by letter/từng từ một, rõ ràng
+또한==also/cũng, ngoài ra
+똑같이==similarly, in the same manner/giống nhau, y như nhau
+뜻밖에==unexpectedly/bất ngờ, không ngờ
+마음껏==as much as one wants/thoải mái, tùy thích
+마음대로==as one wishes/tùy ý, theo ý mình
+마찬가지==being the same, in the same manner/cũng vậy, tương tự
+마치==as if, just like/như thể, tựa như
+마침==just happened to be/vừa đúng lúc
+마침내==finally/cuối cùng, sau cùng
+막==insanely, do something without any order/bừa bãi, liều
+만약==by any chance/nếu, nếu như
+멀리==far away/xa, ở xa
+몰래==secretly/lén, bí mật
+몹시==very, terribly/cực kỳ, kinh khủng
+무사히==safely/bình an, an toàn
+무조건==absolutely/vô điều kiện, nhất định
+및==and/và, cùng với
+반드시==without fail, certainly/nhất định, chắc chắn
+반짝반짝==shiny, sparkly/lấp lánh, sáng lóng lánh
+부지런히==eagerly, diligently/siêng năng, chăm chỉ
+분명히==clearly, explicitly/rõ ràng, chắc chắn
+비록==even if/mặc dù, dù cho
+빠짐없이==all without exception/không thiếu sót, đầy đủ
+사실==fact/sự thật, thực tế
+살짝==slightly, quietly/nhẹ nhàng, lén lén
+상관없이==regardless/bất kể, dù sao
+상당히==fairly, pretty/khá, tương đối
+서서히==gradually/từ từ, dần dần
+설마==no way/lẽ nào, chắc không phải
+소중히==valuably, carefully/trân trọng, cẩn thận
+솔직히==honestly, frankly/thành thật mà nói
+스스로==by oneself/tự mình, tự lực
+실은==in fact, actually/thực ra, thực tế
+실제==in fact, actually/thực tế, thực sự
+실제로==in fact, actually/trên thực tế
+실컷==as much as one wants/thỏa thích, thỏa lòng
+쓸데없이==uselessly, unreasonably/một cách vô ích
+아무래도==anyhow, whatever/dù sao, dù thế nào
+아무리==no matter how/dù có thế nào
+아무튼==anyway/dù sao, thôi thì
+어느새==already, so soon/khi nào không hay, bất giác
+어쨌든==anyway/dù sao đi nữa
+어쩌다가==coincidentally/tình cờ, vô tình
+어쩌면==maybe, possibly/có lẽ, biết đâu
+어쩐지==somehow/không biết sao, cảm giác gì đó
+어차피==after all, any way/dù sao thì cũng
+억지로==forcibly/ép buộc, miễn cưỡng
+얼른==to be fast, to be quick/nhanh lên, mau lên
+여전히==just as it was before/vẫn như cũ, vẫn còn
+역시==as expected, after all/đúng như vậy, quả nhiên
+영원히==eternally, everlastingly, forever/mãi mãi, vĩnh cửu
+오히려==rather/thay vào đó, ngược lại
+온==all~, entire/toàn, toàn bộ (trước danh từ)
+온갖==various kinds of/mọi loại, đủ thứ
+온통==all, entire/tất cả, hoàn toàn
+완전히==completely/hoàn toàn, triệt để
+왠지==for some reason/không biết tại sao
+우연히==coincidentally/tình cờ, ngẫu nhiên
+워낙==very, basically/vốn dĩ, vốn là
+원래==originally/ban đầu, vốn dĩ
+유난히==outstandingly, especially/đặc biệt hơn, nổi bật
+의외로==unexpectedly/bất ngờ thay, không ngờ
+이내==soon/trong vòng, ngay sau đó
+이리==this way/hướng này, đây
+이리저리==here and there/chỗ này chỗ kia
+이만==this much of, at here/thôi, bấy nhiêu
+이만큼==this much/bấy nhiêu đây
+이미==already/đã, rồi
+이외==except, besides/ngoài ra, ngoài cái đó
+이제야==finally now/bây giờ mới, rốt cuộc
+일단==first of all, firstly/trước tiên, trước hết
+일부러==on purpose/cố ý, cố tình
+자꾸==frequently/cứ, liên tục
+자세히==in detail/chi tiết, tỉ mỉ
+잔뜩==full, much/đầy, rất nhiều
+저절로==being natural, being automatic/tự nhiên, tự động
+적당히==appropriately/vừa phải, đúng mức
+적어도==at least/ít nhất
+전부==all, entire/tất cả, toàn bộ
+전체==entire/toàn bộ, toàn thể
+절대로==definitely, absolutely/tuyệt đối, nhất định
+점점==gradually, slowly/dần dần, từ từ
+점차==gradually/từ từ, dần dần
+정말로==really/thật sự, thực sự
+정성껏==with one's whole heart, elaborately/tận tâm, thành ý
+정신없이==hectically, frantically/hỗn loạn, điên cuồng
+정확히==accurately/một cách chính xác
+제대로==properly/đúng cách, đúng nghĩa
+제발==please/xin, làm ơn
+조만간==sooner or later/sớm muộn, rồi thì
+좀처럼==easily, anytime soon/dễ dàng; hiếm khi
+종종==from time to time, sometimes/thỉnh thoảng
+즉==that is, which means/tức là, nghĩa là
+진짜==really, truly/thật sự, thực sự
+쭉==all the time/liên tục, suốt
+차라리==rather/thà rằng, thà
+충분히==enough, sufficiently, fully/đầy đủ, thỏa đáng
+틀림없이==definitely/chắc chắn, nhất định
+편히==easily/thoải mái, nhẹ nhàng
+하도==too, excessively/quá mức
+하루빨리==as soon as possible/càng sớm càng tốt
+하마터면==almost, nearly/suýt, gần như
+한꺼번에==at once, together/cùng một lúc
+한편==on the other hand/mặt khác, trong khi đó
+함부로==thoughtlessly, mindlessly/bừa bãi, vô tội vạ
+혹시==maybe/biết đâu, có thể
+혹은==or/hoặc, hay là
+활짝==in full bloom/nở rộ, rộng mở
+훨씬==much, far, a lot/hơn nhiều, xa hơn
+흔히==commonly, often/thường xuyên, phổ biến
+힘껏==with all one's strength/hết sức lực, dùng hết sức`
+
+const vocab = RAW.trim().split('\n').map(line => {
+  const [ko, rest] = line.split('==');
+  const [en, vi] = rest.split('/');
+  return { ko: ko.trim(), en: en.trim(), vi: vi.trim() };
+});
+
+let TOTAL = vocab.length;
+let mode = 'ko-vi';
+let queue = [];
+let current = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && m === 'ko-vi') || (i === 1 && m === 'vi-ko'));
+  });
+  document.getElementById('mode-badge').textContent = m === 'ko-vi' ? 'KO → VI' : 'VI → KO';
+  restart();
+}
+
+function restart() {
+  TOTAL = vocab.length;
+  queue = shuffle(vocab);
+  current = 0; correctCount = 0; wrongCount = 0;
+  updateStats();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQuestion();
+}
+
+function updateStats() {
+  document.getElementById('st-total').textContent = current;
+  document.getElementById('st-correct').textContent = correctCount;
+  document.getElementById('st-wrong').textContent = wrongCount;
+  document.getElementById('prog').style.width = (current / TOTAL * 100) + '%';
+}
+
+function renderQuestion() {
+  answered = false;
+  const item = queue[current];
+  document.getElementById('q-num').textContent = `Câu ${current + 1} / ${TOTAL}`;
+
+  const isKoVi = mode === 'ko-vi';
+  document.getElementById('q-word').textContent = isKoVi ? item.ko : item.vi;
+  document.getElementById('q-prompt').textContent = isKoVi ? 'Chọn nghĩa đúng bằng tiếng Việt' : 'Chọn từ tiếng Hàn đúng';
+
+  // Pick 3 wrong answers
+  const pool = vocab.filter(v => v.ko !== item.ko);
+  const wrongs = shuffle(pool).slice(0, 3);
+  const opts = shuffle([item, ...wrongs]);
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const label = isKoVi ? opt.vi : opt.ko;
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${label}`;
+    btn.onclick = () => handleAnswer(btn, opt.ko === item.ko);
+    optEl.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('btn-next').className = 'btn-next';
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (answered) return;
+  answered = true;
+
+  const allBtns = document.querySelectorAll('.opt');
+  allBtns.forEach(b => b.disabled = true);
+
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correctCount++;
+    fb.className = 'feedback show ok';
+    fb.innerHTML = '✓ Chính xác!';
+  } else {
+    btn.classList.add('wrong');
+    wrongCount++;
+    // Highlight correct
+    const item = queue[current];
+    allBtns.forEach(b => {
+      const label = b.textContent.slice(1).trim();
+      const isKoVi = mode === 'ko-vi';
+      if ((isKoVi && label === item.vi) || (!isKoVi && label === item.ko)) {
+        b.classList.add('correct');
+      }
+    });
+    fb.className = 'feedback show err';
+    const answer = mode === 'ko-vi' ? queue[current].vi : queue[current].ko;
+    fb.innerHTML = `✗ Đáp án đúng: <strong>${answer}</strong>`;
+  }
+
+  current++;
+  updateStats();
+  document.getElementById('btn-next').className = 'btn-next show';
+
+  if (current >= TOTAL) {
+    document.getElementById('btn-next').textContent = 'Xem kết quả →';
+  }
+}
+
+function nextQuestion() {
+  if (current >= TOTAL) {
+    showResult();
+    return;
+  }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+  const pct = Math.round(correctCount / TOTAL * 100);
+  document.getElementById('res-score').textContent = `${correctCount}/${TOTAL}`;
+  const emojis = ['😅','😐','🙂','😊','🎉'];
+  document.getElementById('res-emoji').textContent = emojis[Math.floor(pct/25)];
+  const msgs = [
+    'Cần ôn thêm nhiều nhé!',
+    'Không tệ, cố lên!',
+    'Khá ổn đó! Luyện thêm chút nữa.',
+    'Tốt lắm! Gần thuộc rồi!',
+    '완벽해요! Giỏi lắm!'
+  ];
+  document.getElementById('res-msg').textContent = msgs[Math.floor(pct/25)] + ` (${pct}%)`;
+}
+
+restart();
+</script>
+</body>
+</html>
