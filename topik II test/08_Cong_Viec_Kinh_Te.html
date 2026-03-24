@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국어 퀴즈 — Công việc & Kinh tế</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=Be+Vietnam+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12;
+    --surface: #17171e;
+    --card: #1e1e28;
+    --border: #2e2e3e;
+    --accent: #c8a96e;
+    --accent2: #7c9ef5;
+    --correct: #4caf82;
+    --wrong: #e05c5c;
+    --text: #e8e4dc;
+    --muted: #7a7890;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px 48px;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  .wrap { width: 100%; max-width: 640px; position: relative; z-index: 1; }
+  header { text-align: center; margin-bottom: 40px; }
+  header .label {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700; line-height: 1.1;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stats { display: flex; gap: 8px; margin-bottom: 28px; justify-content: center; }
+  .stat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 13px; color: var(--muted);
+    flex: 1; text-align: center;
+  }
+  .stat span { display: block; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+  .stat.s-correct span { color: var(--correct); }
+  .stat.s-wrong span { color: var(--wrong); }
+  .progress-track { height: 3px; background: var(--border); border-radius: 99px; margin-bottom: 36px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 40px 32px 32px;
+    margin-bottom: 20px; position: relative; overflow: hidden;
+  }
+  .card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+  }
+  .mode-badge {
+    position: absolute; top: 16px; right: 20px;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted);
+  }
+  .question-num { font-size: 11px; color: var(--muted); margin-bottom: 16px; letter-spacing: 1px; }
+  .question-word {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(36px, 10vw, 56px);
+    font-weight: 700; line-height: 1; margin-bottom: 10px; color: var(--text);
+  }
+  .question-prompt { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .opt {
+    background: var(--surface); border: 1.5px solid var(--border);
+    border-radius: 12px; padding: 14px 18px;
+    font-size: 14px; font-family: 'Be Vietnam Pro', sans-serif;
+    color: var(--text); cursor: pointer; transition: all 0.18s;
+    text-align: left; line-height: 1.4;
+  }
+  .opt:hover:not(:disabled) { border-color: var(--accent2); background: #1e1e30; transform: translateY(-1px); }
+  .opt.correct { border-color: var(--correct); background: rgba(76,175,130,0.12); color: var(--correct); }
+  .opt.wrong { border-color: var(--wrong); background: rgba(224,92,92,0.1); color: var(--wrong); }
+  .opt:disabled { cursor: default; }
+  .opt-letter {
+    display: inline-block; width: 20px; height: 20px;
+    border: 1px solid var(--border); border-radius: 4px;
+    font-size: 10px; line-height: 20px; text-align: center;
+    margin-right: 8px; color: var(--muted); transition: all 0.18s;
+  }
+  .opt.correct .opt-letter { background: var(--correct); border-color: var(--correct); color: #fff; }
+  .opt.wrong .opt-letter { background: var(--wrong); border-color: var(--wrong); color: #fff; }
+  .feedback {
+    margin-top: 18px; padding: 12px 18px; border-radius: 10px;
+    font-size: 13px; font-weight: 600; display: none; align-items: center; gap: 8px;
+  }
+  .feedback.show { display: flex; }
+  .feedback.ok { background: rgba(76,175,130,0.12); color: var(--correct); border: 1px solid rgba(76,175,130,0.25); }
+  .feedback.err { background: rgba(224,92,92,0.1); color: var(--wrong); border: 1px solid rgba(224,92,92,0.2); }
+  .btn-next {
+    width: 100%; padding: 16px;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; border-radius: 12px;
+    color: #0e0e12; font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; display: none; transition: opacity 0.2s, transform 0.2s; margin-top: 8px;
+  }
+  .btn-next:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-next.show { display: block; }
+  .modes { display: flex; gap: 8px; margin-bottom: 24px; justify-content: center; }
+  .mode-btn {
+    padding: 7px 16px; border-radius: 99px;
+    border: 1.5px solid var(--border);
+    background: var(--surface); color: var(--muted);
+    font-size: 12px; cursor: pointer;
+    font-family: 'Be Vietnam Pro', sans-serif; transition: all 0.18s;
+  }
+  .mode-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,169,110,0.08); }
+  .result-screen { display: none; text-align: center; padding: 48px 24px; }
+  .result-screen.show { display: block; }
+  .result-emoji { font-size: 56px; margin-bottom: 16px; }
+  .result-score {
+    font-family: 'Noto Serif KR', serif; font-size: 56px; font-weight: 700;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px;
+  }
+  .result-msg { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+  .btn-restart {
+    padding: 14px 36px; border-radius: 12px;
+    background: var(--card); border: 1.5px solid var(--border);
+    color: var(--text); font-size: 14px; font-weight: 600;
+    cursor: pointer; font-family: 'Be Vietnam Pro', sans-serif; transition: all 0.2s;
+  }
+  .btn-restart:hover { border-color: var(--accent); color: var(--accent); }
+  @keyframes pop { 0%{transform:scale(0.96);opacity:0} 100%{transform:scale(1);opacity:1} }
+  .card { animation: pop 0.3s ease; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="label">TOPIK Vocabulary</div>
+    <h1>Công việc & Kinh tế</h1>
+  </header>
+
+  <div class="modes">
+    <button class="mode-btn active" onclick="setMode('ko-vi')">한국어 → Tiếng Việt</button>
+    <button class="mode-btn" onclick="setMode('vi-ko')">Tiếng Việt → 한국어</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><span id="st-total">0</span>Đã làm</div>
+    <div class="stat s-correct"><span id="st-correct">0</span>Đúng</div>
+    <div class="stat s-wrong"><span id="st-wrong">0</span>Sai</div>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+
+  <div id="quiz-area">
+    <div class="card" id="card">
+      <span class="mode-badge" id="mode-badge">KO → VI</span>
+      <div class="question-num" id="q-num">Câu 1 / 250</div>
+      <div class="question-word" id="q-word">—</div>
+      <div class="question-prompt" id="q-prompt">Chọn nghĩa đúng bằng tiếng Việt</div>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+    </div>
+    <button class="btn-next" id="btn-next" onclick="nextQuestion()">Câu tiếp theo →</button>
+  </div>
+
+  <div class="result-screen" id="result">
+    <div class="result-emoji" id="res-emoji">🎉</div>
+    <div class="result-score" id="res-score">0/250</div>
+    <div class="result-msg" id="res-msg"></div>
+    <button class="btn-restart" onclick="restart()">Làm lại</button>
+  </div>
+</div>
+
+<script>
+const RAW = `가계부==household account book/sổ chi tiêu gia đình
+가능==possibility, potentiality/khả năng, tính khả thi
+가능성==possibility/khả năng xảy ra
+가입==entry/gia nhập, đăng ký
+가치==value/giá trị
+감소==reduction/sự giảm, sự sụt giảm
+개발==development/phát triển, khai thác
+개선==improvement/cải thiện, cải tiến
+거래==transaction/giao dịch
+거스름돈==change/tiền thừa
+건설==construction/xây dựng
+건축==architecture/kiến trúc, xây dựng
+건축가==architect/kiến trúc sư
+검사==inspection/kiểm tra, kiểm sát viên
+경력==career/kinh nghiệm làm việc, lý lịch
+경비==security/an ninh, chi phí
+경비원==security guard/bảo vệ
+경영==management/quản lý, kinh doanh
+경영자==executive, CEO/giám đốc điều hành
+경쟁==competition/cạnh tranh
+경쟁력==competitiveness/năng lực cạnh tranh
+경제==economy/kinh tế
+경제력==economic power/sức mạnh kinh tế
+계산==calculation, accounting/tính toán, thanh toán
+계산서==check, bill/hóa đơn, bill
+계약==contract/hợp đồng
+계약금==down payment/tiền đặt cọc
+계약서==written contract/văn bản hợp đồng
+계좌==bank account/tài khoản ngân hàng
+계획성==planning/tính kế hoạch
+고객==client, customer/khách hàng
+고지서==notice/giấy thông báo hóa đơn
+공공요금==utility charges/tiền điện nước công cộng
+공사==construction/công trình xây dựng
+공장==factory/nhà máy, xưởng
+과소비==waste of use/tiêu xài hoang phí
+과장==manager/trưởng phòng; thổi phồng
+과학자==scientists/nhà khoa học
+관계자==the person concerned/người liên quan
+관련==relation/liên quan
+관련성==relevance/tính liên quan
+관리==management/quản lý
+교사==teacher/giáo viên, thầy cô
+교육자==educator/nhà giáo dục
+교환==exchange/trao đổi, đổi
+구매==purchase/mua hàng, sự mua
+구인==a job offer/tuyển dụng
+구입==purchase/mua, việc mua
+구조==structure/cấu trúc; giải cứu
+근로자==worker, laborer/người lao động
+근무==work/làm việc, công tác
+금액==amount of money/số tiền
+기술==skill, technique/kỹ thuật, kỹ năng
+기술자==technician/kỹ thuật viên
+기업==company, corporation/doanh nghiệp, công ty
+기업인==entrepreneur/doanh nhân
+기준==standard, criteria/tiêu chuẩn, chuẩn mực
+기회==opportunity/cơ hội
+낭비==waste/lãng phí
+노동==labor/lao động
+노동자==laborer/công nhân, người lao động
+단골==regular customer/khách quen, thường xuyên
+담당==being in charge/phụ trách
+담당자==person in charge/người phụ trách
+대기업==large company/công ty lớn, tập đoàn
+대리==substitute/đại diện; cấp phó phòng
+대여==rental/cho thuê
+대여료==rental charge/phí cho thuê
+대출==loan/cho vay, vay
+대표==representative/đại diện
+도구==tool/dụng cụ, công cụ
+도장==seal, stamp/con dấu, ấn
+동료==colleague/đồng nghiệp
+등록증==registration card/thẻ đăng ký
+디자이너==designer/nhà thiết kế
+마감일==deadline/ngày hết hạn, hạn chót
+마무리==conclusion/hoàn thiện, kết thúc
+마케팅==marketing/tiếp thị, marketing
+매진==sold out/hết hàng, cháy hàng
+면접==interview/phỏng vấn
+면접관==interviewer/người phỏng vấn
+면접시험==interview test/kỳ thi phỏng vấn
+면허증==license/bằng lái, giấy phép
+모집==recruitment/tuyển dụng, thu tập
+목표==target, goal/mục tiêu
+무통장 입금==electronic transfer/chuyển khoản ngân hàng
+문서==documents/tài liệu, văn bản
+문의==inquiry/hỏi thăm, liên hệ
+문제점==problem/vấn đề, điểm hạn chế
+물가==price/giá cả, mức giá
+물품==product, goods/hàng hóa, vật phẩm
+미용사==barber/thợ cắt tóc, thợ làm tóc
+바탕==background, foundation/nền tảng, cơ sở
+반납==return/trả lại, hoàn trả
+반납일==return date/ngày trả hàng
+반응==reaction/phản ứng
+반품==refund/trả hàng, hoàn trả
+발급==issuance/cấp phát
+발달==development/sự phát triển
+발생==occurrence/sự xảy ra, xuất hiện
+방식==method, style/phương thức, phong cách
+번호표==number ticket/số thứ tự, phiếu số
+변경==change, alter/thay đổi, biến đổi
+변화==change/sự thay đổi
+보고==report/báo cáo
+보고서==written report/bản báo cáo
+보고회==briefing session/buổi báo cáo
+보관==storage/lưu trữ, bảo quản
+보너스==bonus/tiền thưởng, bonus
+보증금==deposit/tiền đặt cọc, tiền bảo lãnh
+보충==replenishment/bổ sung, bù đắp
+보험==insurance/bảo hiểm
+보험금==insurance money/tiền bảo hiểm
+보험료==insurance fee/phí bảo hiểm
+볼일==errand/việc cần làm, công chuyện
+부서==department/phòng ban, bộ phận
+부자==rich person/người giàu
+부족==lacking/thiếu hụt
+분실==loss/mất (đồ), thất lạc
+분실물==lost and found/đồ vật bị mất
+불경기==economic depression/suy thoái kinh tế
+불량==defective product/hàng lỗi
+브랜드==brand/thương hiệu
+비용==cost/chi phí, chi tiêu
+빚==debt/nợ nần
+사무소==office/văn phòng, trụ sở
+사업==business/kinh doanh, sự nghiệp
+사용료==usage fee/phí sử dụng
+사용법==how to use/hướng dẫn sử dụng
+사은품==appreciation gift/quà tặng kèm
+사표==resignation/đơn xin thôi việc
+산업==industry/công nghiệp
+상담==consultation, counseling/tư vấn, tham khảo
+상담원==counselor/nhân viên tư vấn
+상담자==consultant/người tư vấn
+상승==rise, increase/sự tăng lên, leo thang
+상업==commerce/thương mại
+상인==merchant/thương nhân, người buôn
+상태==status/trạng thái, tình trạng
+상표==label/nhãn hiệu, thương hiệu
+상품권==gift certificate/phiếu quà tặng
+상황==situation/tình huống, tình trạng
+생산==production/sản xuất
+생필품==daily necessities/nhu yếu phẩm
+생활비==cost of living/chi phí sinh hoạt
+서명==signature/chữ ký
+서빙==serving/phục vụ bàn ăn
+선착순==order of arrival/theo thứ tự đến trước
+설명서==manual/hướng dẫn sử dụng
+설문조사==questionnaire/khảo sát, điều tra
+설문지==questionnaire form/phiếu khảo sát
+성공==success/thành công
+세금==tax/thuế
+소규모==small scale/quy mô nhỏ
+소득==income/thu nhập
+소방관==firefighter/lính cứu hỏa
+소비==consumption/tiêu thụ, tiêu dùng
+소비자==consumer/người tiêu dùng
+소용==way of use/tác dụng, công dụng
+손질==trimming, repair/sửa sang, cắt tỉa
+솜씨==skill/tay nghề, kỹ xảo
+송금==money transfer/chuyển tiền
+수거==pickup, collection/thu gom
+수단==means, method/phương tiện, cách thức
+수리==repair/sửa chữa
+수리비==repair cost/chi phí sửa chữa
+수수료==commission, fee/phí hoa hồng, lệ phí
+수입==import, income/nhập khẩu; thu nhập
+수정==revision/chỉnh sửa
+수준==level/mức độ, trình độ
+수출==export/xuất khẩu
+수표==money check/séc ngân hàng
+승진==promotion/thăng chức, thăng tiến
+시도==attempt, trial/thử nghiệm, nỗ lực
+식비==food expenses/tiền ăn, chi phí ăn uống
+신분증==identification document/chứng minh nhân dân
+신상품==new item/sản phẩm mới
+신용==credit, trust/tín dụng, uy tín
+신제품==new product/sản phẩm mới
+신청자==applicant/người đăng ký, người nộp đơn
+실력==ability/năng lực, thực lực
+실시==implementation/thực hiện, triển khai
+실천==practice, action/thực hành, thực hiện
+심리학자==psychologist/nhà tâm lý học
+심부름==errand/việc vặt, đi cho ai
+싸구려==cheap thing/đồ rẻ tiền
+아르바이트==part-time job/việc làm thêm, part-time
+아이디어==idea/ý tưởng, idea
+애프터서비스==after-sales service/dịch vụ hậu mãi
+야근==overwork/làm thêm giờ, tăng ca
+언론인==journalist/nhà báo, phóng viên
+업무==work, job/công việc, nhiệm vụ
+역할==role/vai trò
+연락==communication/liên lạc
+연장==extension/kéo dài; cái dụng cụ
+연회비==annual fee/phí hội viên hàng năm
+영수증==receipt/hóa đơn, biên nhận
+영업==sales/kinh doanh, bán hàng
+영업부==sales department/phòng kinh doanh
+영역==area/lĩnh vực, vùng
+영향==impact/ảnh hưởng, tác động
+예금==bank deposit/tiền gửi ngân hàng
+예상==expectation/dự đoán, ước tính
+예정==plans/kế hoạch, dự kiến
+예측==forecast/dự đoán, tiên đoán
+완성==completion/hoàn thành
+요구==request/yêu cầu, đòi hỏi
+요리사==chef/đầu bếp
+요청==request/yêu cầu, đề nghị
+용돈==pocket money/tiền tiêu vặt
+우수성==excellence/sự xuất sắc, ưu điểm
+운전기사==driver/lái xe, tài xế
+원서==application/hồ sơ ứng tuyển
+원인==cause/nguyên nhân
+유료==being charged/có phí, trả tiền
+응답==response, answer/phản hồi, trả lời
+응답자==respondents/người trả lời khảo sát
+의견==opinion/ý kiến, quan điểm
+의논==consultation/thảo luận, bàn bạc
+의사소통==communication/giao tiếp
+이름표==name tag/thẻ tên
+이용료==usage fee/phí sử dụng
+이용자==user/người sử dụng
+이익==profit/lợi nhuận, lợi ích
+이자==interest/lãi suất, tiền lãi
+인출기==ATM/máy ATM
+인턴사원==intern/nhân viên thực tập
+일상==daily life/cuộc sống hàng ngày
+일시불==lump-sum payment/thanh toán một lần
+일자리==workplace/việc làm, chỗ làm
+일정==schedule/lịch trình, lịch làm việc
+일회용품==disposable product/đồ dùng một lần
+입금==deposit/nộp tiền, gửi tiền
+입장==admission/lối vào; lập trường
+자격==qualification/tư cách, tiêu chuẩn
+자격증==license, certificate/bằng chứng chỉ, chứng nhận
+작업==work, operation/công việc, hoạt động
+잔돈==small change/tiền lẻ, tiền thối
+잔액==balance/số dư, số tiền còn lại
+장단점==advantages and disadvantages/ưu nhược điểm
+장사==business/buôn bán, kinh doanh
+재발급==reissue/cấp lại (giấy tờ)
+재산==wealth, property/tài sản
+재테크==investment techniques/kỹ thuật đầu tư, quản lý tài chính
+저금==savings/tiết kiệm tiền
+저축==savings/tiết kiệm (tích lũy)
+적금==installment savings/tiết kiệm định kỳ
+전달==delivery, conveyance/truyền đạt, chuyển giao
+전망==outlook/triển vọng, tầm nhìn
+전문가==expert/chuyên gia
+전세==security deposit housing/thuê nhà đặt cọc (chế độ Jeonse)
+절약==saving, frugality/tiết kiệm
+접수==reception/tiếp nhận, đăng ký
+정지==stop/dừng lại, tạm dừng
+정체==identity/danh tính; tắc đường
+제공==offer/cung cấp, đề xuất
+제안==suggestion/đề xuất, gợi ý
+제작==production/sản xuất, chế tác
+제출==submission/nộp, trình
+제품==product/sản phẩm
+제한==limit, restriction/giới hạn, hạn chế
+조건==conditions/điều kiện
+조절==adjustment/điều chỉnh
+종합==total, comprehensive/tổng hợp
+주문서==purchase order/đơn đặt hàng
+주식회사==corporation/công ty cổ phần
+주장==assertion/khẳng định; đội trưởng
+준비물==belongings/đồ dùng cần chuẩn bị
+중개소==agency/trung gian, văn phòng môi giới
+중고==second hand/đồ cũ, hàng cũ
+중고품==second-hand goods/hàng cũ
+중단==suspension/tạm dừng, đình chỉ
+중소기업==small and medium enterprises/doanh nghiệp vừa và nhỏ
+중요성==importance/tầm quan trọng
+증가==growth, rise/sự tăng trưởng
+증명서==certificate/giấy chứng nhận
+지원==support/hỗ trợ; ứng tuyển
+지원자==applicant/người ủng hộ; ứng viên
+지점==branch/điểm; chi nhánh
+지출==expense, spending/chi tiêu, chi phí
+직장인==worker/người đi làm, nhân viên
+진행==progress/tiến hành, tiến triển
+집값==house price/giá nhà
+집세==rent/tiền thuê nhà
+집주인==landlord/chủ nhà, chủ trọ
+참석==attendance/có mặt, tham dự
+채용==recruitment/tuyển dụng nhân sự
+처리==processing/xử lý
+청구서==invoice/hóa đơn, giấy đòi tiền
+총무과==general affairs division/phòng tổng vụ
+추가==adding/thêm vào, bổ sung
+추천==recommendation/sự giới thiệu, khuyên dùng
+추천서==letter of recommendation/thư giới thiệu
+추측==guess/phỏng đoán, đoán
+출입==access, enter/ra vào, lưu thông
+출퇴근==commuting/đi làm và về (hàng ngày)
+취업==employment/xin việc làm, có việc
+취업난==unemployment crisis/khó khăn tìm việc
+큰돈==big money/số tiền lớn
+택배==delivery/giao hàng nhanh
+택배비==delivery fee/phí giao hàng
+통지서==notice/giấy thông báo
+퇴직==retirement/nghỉ hưu, thôi việc
+특기==specialty/sở trường, đặc kỹ
+팀장==team leader/trưởng nhóm
+판매==sale/bán hàng, doanh số
+판매자==seller/người bán hàng
+편리==convenience/sự tiện lợi
+평가==evaluation/đánh giá
+품질==quality/chất lượng
+프로그래머==programmer/lập trình viên
+필수품==necessities/vật dụng thiết yếu
+필요성==necessity/sự cần thiết
+학자==scholar/học giả, nhà khoa học
+한의사==doctor of traditional Korean medicine/bác sĩ đông y Hàn
+할부==installment plan/trả góp theo tháng
+해결==solution/giải quyết
+해결책==solution/giải pháp
+해고==layoff/sa thải, cho nghỉ việc
+해소==solution/giải tỏa, giải quyết
+해소법==way to resolve/cách giải quyết
+현장==on-site/hiện trường, tại chỗ
+혜택==grace, blessing/ưu đãi, lợi ích
+홍보==public relations/quảng bá, PR
+홍보물==promotion materials/tài liệu quảng cáo
+환불==refund/hoàn tiền
+환율==exchange rate/tỷ giá hối đoái
+환전==currency exchange/đổi tiền tệ
+활동==activities/hoạt động
+활용==utilization/ứng dụng, tận dụng
+회비==membership fee/phí hội viên
+회원==member/hội viên, thành viên
+회장==president/chủ tịch hội, công ty
+효과==effect/hiệu quả, tác dụng
+훈련==training/đào tạo, huấn luyện
+희망자==applicant/người có hy vọng, người đăng ký`;
+
+const vocab = RAW.trim().split('\n').map(line => {
+  const [ko, rest] = line.split('==');
+  const [en, vi] = rest.split('/');
+  return { ko: ko.trim(), en: en.trim(), vi: vi.trim() };
+});
+
+let TOTAL = vocab.length;
+let mode = 'ko-vi';
+let queue = [];
+let current = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let answered = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function setMode(m) {
+  mode = m;
+  document.querySelectorAll('.mode-btn').forEach((b, i) => {
+    b.classList.toggle('active', (i === 0 && m === 'ko-vi') || (i === 1 && m === 'vi-ko'));
+  });
+  document.getElementById('mode-badge').textContent = m === 'ko-vi' ? 'KO → VI' : 'VI → KO';
+  restart();
+}
+
+function restart() {
+  TOTAL = vocab.length;
+  queue = shuffle(vocab);
+  current = 0; correctCount = 0; wrongCount = 0;
+  updateStats();
+  document.getElementById('result').classList.remove('show');
+  document.getElementById('quiz-area').style.display = '';
+  renderQuestion();
+}
+
+function updateStats() {
+  document.getElementById('st-total').textContent = current;
+  document.getElementById('st-correct').textContent = correctCount;
+  document.getElementById('st-wrong').textContent = wrongCount;
+  document.getElementById('prog').style.width = (current / TOTAL * 100) + '%';
+}
+
+function renderQuestion() {
+  answered = false;
+  const item = queue[current];
+  document.getElementById('q-num').textContent = `Câu ${current + 1} / ${TOTAL}`;
+  const isKoVi = mode === 'ko-vi';
+  document.getElementById('q-word').textContent = isKoVi ? item.ko : item.vi;
+  document.getElementById('q-prompt').textContent = isKoVi ? 'Chọn nghĩa đúng bằng tiếng Việt' : 'Chọn từ tiếng Hàn đúng';
+
+  const pool = vocab.filter(v => v.ko !== item.ko);
+  const wrongs = shuffle(pool).slice(0, 3);
+  const opts = shuffle([item, ...wrongs]);
+
+  const letters = ['A', 'B', 'C', 'D'];
+  const optEl = document.getElementById('options');
+  optEl.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const label = isKoVi ? opt.vi : opt.ko;
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${label}`;
+    btn.onclick = () => handleAnswer(btn, opt.ko === item.ko);
+    optEl.appendChild(btn);
+  });
+
+  document.getElementById('feedback').className = 'feedback';
+  document.getElementById('feedback').innerHTML = '';
+  document.getElementById('btn-next').className = 'btn-next';
+}
+
+function handleAnswer(btn, isCorrect) {
+  if (answered) return;
+  answered = true;
+  const allBtns = document.querySelectorAll('.opt');
+  allBtns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('feedback');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correctCount++;
+    fb.className = 'feedback show ok';
+    fb.innerHTML = '✓ Chính xác!';
+  } else {
+    btn.classList.add('wrong');
+    wrongCount++;
+    const item = queue[current];
+    allBtns.forEach(b => {
+      const label = b.textContent.slice(1).trim();
+      const isKoVi = mode === 'ko-vi';
+      if ((isKoVi && label === item.vi) || (!isKoVi && label === item.ko)) {
+        b.classList.add('correct');
+      }
+    });
+    fb.className = 'feedback show err';
+    const answer = mode === 'ko-vi' ? queue[current].vi : queue[current].ko;
+    fb.innerHTML = `✗ Đáp án đúng: <strong>${answer}</strong>`;
+  }
+  current++;
+  updateStats();
+  document.getElementById('btn-next').className = 'btn-next show';
+  if (current >= TOTAL) {
+    document.getElementById('btn-next').textContent = 'Xem kết quả →';
+  }
+}
+
+function nextQuestion() {
+  if (current >= TOTAL) { showResult(); return; }
+  renderQuestion();
+}
+
+function showResult() {
+  document.getElementById('quiz-area').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+  const pct = Math.round(correctCount / TOTAL * 100);
+  document.getElementById('res-score').textContent = `${correctCount}/${TOTAL}`;
+  const emojis = ['😅','😐','🙂','😊','🎉'];
+  document.getElementById('res-emoji').textContent = emojis[Math.floor(pct/25)];
+  const msgs = ['Cần ôn thêm nhiều nhé!','Không tệ, cố lên!','Khá ổn đó! Luyện thêm chút nữa.','Tốt lắm! Gần thuộc rồi!','완벽해요! Giỏi lắm!'];
+  document.getElementById('res-msg').textContent = msgs[Math.floor(pct/25)] + ` (${pct}%)`;
+}
+
+restart();
+</script>
+</body>
+</html>
