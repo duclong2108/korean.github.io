@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOPIK II LV5-6 — Ngữ Pháp Nâng Cao</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e12;
+    --bg2: #111620;
+    --bg3: #181e2c;
+    --border: #1e2638;
+    --gold: #d4a843;
+    --gold2: #f0c96e;
+    --gold-dim: #5a4015;
+    --red: #e05c5c;
+    --teal: #3ecfb8;
+    --blue: #4a90d9;
+    --purple: #a07ee8;
+    --orange: #e89450;
+    --green: #52c47a;
+    --text: #eef0f5;
+    --text2: #9aa0b8;
+    --text3: #4a5070;
+    --shadow: 0 4px 32px rgba(0,0,0,0.7);
+    --radius: 12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;font-size:14px;line-height:1.65;min-height:100vh;}
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,#0a0e12 0%,#111620 50%,#0d1220 100%);
+    border-bottom:1px solid var(--border);
+    padding:16px 24px 13px;
+    position:sticky;top:0;z-index:100;
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  }
+  .logo{display:flex;flex-direction:column;line-height:1.1;}
+  .logo-kr{font-family:'Noto Serif KR',serif;font-size:21px;font-weight:700;
+    background:linear-gradient(90deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .logo-sub{font-size:10px;color:var(--text3);letter-spacing:3px;text-transform:uppercase;margin-top:2px;}
+  .badge-row{display:flex;gap:6px;align-self:center;margin-left:10px;}
+  .badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:4px;padding:3px 8px;}
+  .badge-lv5{background:rgba(232,148,80,0.15);color:var(--orange);border:1px solid rgba(232,148,80,0.3);}
+  .badge-lv6{background:rgba(224,92,92,0.15);color:var(--red);border:1px solid rgba(224,92,92,0.3);}
+
+  .header-right{margin-left:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+  .stats{font-size:11px;color:var(--text3);display:flex;gap:16px;}
+  .stats span{display:flex;align-items:center;gap:4px;}
+  .stats strong{color:var(--gold);}
+
+  .level-tabs{display:flex;gap:4px;}
+  .lvtab{font-size:11px;padding:5px 11px;border-radius:6px;border:1px solid var(--border);
+    background:var(--bg3);color:var(--text3);cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s;}
+  .lvtab:hover{border-color:var(--gold-dim);color:var(--text2);}
+  .lvtab.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold2);}
+
+  .search-wrap{position:relative;}
+  .search-wrap input{
+    background:var(--bg3);border:1px solid var(--border);border-radius:8px;
+    color:var(--text);font-family:inherit;font-size:13px;padding:8px 14px 8px 34px;
+    width:220px;outline:none;transition:border-color .2s;
+  }
+  .search-wrap input:focus{border-color:var(--gold-dim);}
+  .search-wrap input::placeholder{color:var(--text3);}
+  .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:13px;}
+
+  /* LAYOUT */
+  .layout{display:flex;min-height:calc(100vh - 65px);}
+  aside{
+    width:215px;min-width:215px;background:var(--bg2);
+    border-right:1px solid var(--border);padding:14px 0;
+    position:sticky;top:65px;height:calc(100vh - 65px);overflow-y:auto;
+  }
+  aside::-webkit-scrollbar{width:3px;}
+  aside::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+  .sidebar-section{padding:8px 14px 3px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:6px;}
+  .cat-btn{
+    display:flex;align-items:center;gap:8px;width:100%;padding:7px 16px;
+    background:none;border:none;color:var(--text2);font-family:inherit;font-size:12px;
+    text-align:left;cursor:pointer;transition:all .15s;border-left:2px solid transparent;
+  }
+  .cat-btn:hover{background:var(--bg3);color:var(--text);}
+  .cat-btn.active{background:var(--bg3);color:var(--gold);border-left-color:var(--gold);font-weight:600;}
+  .cat-btn .cnt{margin-left:auto;font-size:10px;background:var(--bg);padding:1px 6px;border-radius:10px;color:var(--text3);}
+  .cat-btn.active .cnt{color:var(--gold-dim);}
+
+  main{flex:1;padding:22px 26px;max-width:920px;overflow-y:auto;}
+  main::-webkit-scrollbar{width:4px;}
+  main::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+  .cat-header{display:flex;align-items:baseline;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+  .cat-title{font-family:'Noto Serif KR',serif;font-size:20px;font-weight:700;color:var(--gold);}
+  .cat-count{font-size:11px;color:var(--text3);background:var(--bg2);padding:2px 8px;border-radius:10px;border:1px solid var(--border);}
+
+  /* CARD */
+  .grammar-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:13px;overflow:hidden;box-shadow:var(--shadow);transition:border-color .2s;}
+  .grammar-card:hover{border-color:#252e44;}
+  .card-head{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;user-select:none;}
+  .card-head:hover{background:var(--bg3);}
+
+  .pattern-tag{
+    font-family:'Noto Serif KR',serif;font-size:15px;font-weight:700;
+    color:var(--gold2);background:rgba(212,168,67,0.1);
+    border:1px solid rgba(212,168,67,0.22);padding:4px 12px;border-radius:6px;white-space:nowrap;
+    max-width:220px;overflow:hidden;text-overflow:ellipsis;
+  }
+  .card-meta{flex:1;min-width:0;}
+  .card-meaning{font-weight:600;font-size:13px;color:var(--text);}
+  .card-level{font-size:10.5px;color:var(--text3);margin-top:2px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+
+  .level-badge{font-size:9.5px;padding:2px 7px;border-radius:4px;font-weight:700;letter-spacing:0.5px;}
+  .lv5{background:rgba(232,148,80,0.15);color:var(--orange);border:1px solid rgba(232,148,80,0.3);}
+  .lv6{background:rgba(224,92,92,0.15);color:var(--red);border:1px solid rgba(224,92,92,0.3);}
+  .lv-both{background:rgba(160,126,232,0.15);color:var(--purple);border:1px solid rgba(160,126,232,0.3);}
+
+  .chevron{color:var(--text3);font-size:11px;transition:transform .25s;flex-shrink:0;}
+  .grammar-card.open .chevron{transform:rotate(180deg);}
+  .card-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border);}
+  .grammar-card.open .card-body{display:block;}
+
+  /* SECTIONS */
+  .section{margin-top:13px;}
+  .section-label{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+  .structure-box{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:6px;padding:10px 14px;font-family:'Noto Serif KR',serif;font-size:14px;color:var(--gold2);}
+  .structure-note{font-size:11.5px;color:var(--text2);margin-top:5px;line-height:1.5;}
+
+  .conj-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px;}
+  .conj-table th{background:var(--bg3);color:var(--text3);font-weight:500;padding:6px 10px;text-align:left;border-bottom:1px solid var(--border);font-size:11px;letter-spacing:0.5px;}
+  .conj-table td{padding:7px 10px;border-bottom:1px solid rgba(30,38,56,0.6);color:var(--text2);vertical-align:top;}
+  .conj-table tr:last-child td{border-bottom:none;}
+  .conj-table td:first-child{color:var(--text);font-weight:500;}
+  .kr-g{font-family:'Noto Serif KR',serif;color:var(--gold2);}
+
+  .usage-list{list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .usage-list li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--text2);}
+  .usage-list li::before{content:'▸';color:var(--teal);flex-shrink:0;margin-top:2px;}
+
+  .example-list{display:flex;flex-direction:column;gap:9px;}
+  .example-item{background:var(--bg3);border-radius:8px;padding:10px 14px;border-left:2px solid var(--gold-dim);}
+  .example-kr{font-family:'Noto Serif KR',serif;font-size:14.5px;color:var(--text);margin-bottom:2px;}
+  .highlight{color:var(--gold2);font-weight:700;}
+  .example-rom{font-size:11px;color:var(--text3);font-style:italic;margin-bottom:3px;}
+  .example-vi{font-size:12.5px;color:var(--teal);}
+
+  .note-box{background:rgba(212,168,67,0.05);border:1px solid rgba(212,168,67,0.18);border-radius:8px;padding:10px 14px;display:flex;gap:10px;}
+  .note-icon{font-size:14px;flex-shrink:0;margin-top:1px;}
+  .note-content{font-size:12.5px;color:var(--text2);line-height:1.6;}
+
+  .compare-box{background:rgba(224,92,92,0.05);border:1px solid rgba(224,92,92,0.18);border-radius:8px;padding:10px 14px;font-size:12.5px;color:var(--text2);line-height:1.6;}
+  .compare-box strong{color:var(--red);}
+
+  .topik-tip{background:rgba(82,196,122,0.05);border:1px solid rgba(82,196,122,0.2);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text2);display:flex;gap:8px;}
+  .tip-icon{color:var(--green);flex-shrink:0;}
+
+  .freq-badge{font-size:10px;padding:1px 7px;border-radius:10px;font-weight:600;}
+  .freq-hi{background:rgba(224,92,92,0.15);color:var(--red);border:1px solid rgba(224,92,92,0.25);}
+  .freq-mid{background:rgba(232,148,80,0.15);color:var(--orange);border:1px solid rgba(232,148,80,0.25);}
+  .freq-lo{background:rgba(74,144,217,0.15);color:var(--blue);border:1px solid rgba(74,144,217,0.25);}
+
+  .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;}
+  .tag{font-size:10px;padding:2px 7px;border-radius:4px;background:#181e2c;color:var(--text3);border:1px solid var(--border);}
+
+  .empty{text-align:center;padding:60px 20px;color:var(--text3);}
+  .search-match{background:rgba(212,168,67,0.22);border-radius:2px;color:var(--gold2);}
+
+  @media(max-width:700px){aside{display:none;}main{padding:14px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:center">
+    <div class="logo">
+      <span class="logo-kr">한국어 문법 고급</span>
+      <span class="logo-sub">TOPIK II LV5–6 — Ngữ Pháp Nâng Cao</span>
+    </div>
+    <div class="badge-row">
+      <span class="badge badge-lv5">LV5</span>
+      <span class="badge badge-lv6">LV6</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="level-tabs">
+      <button class="lvtab active" data-lv="all">Tất cả</button>
+      <button class="lvtab" data-lv="5"><span style="color:var(--orange)">●</span> LV5</button>
+      <button class="lvtab" data-lv="6"><span style="color:var(--red)">●</span> LV6</button>
+    </div>
+    <div class="stats">
+      <span>📚 <strong id="tg">0</strong> ngữ pháp</span>
+      <span>📁 <strong id="tc">0</strong> chủ đề</span>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="Tìm ngữ pháp…" autocomplete="off">
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside id="sidebar"></aside>
+  <main id="main"></main>
+</div>
+
+<script>
+const G = [
+
+// ═══════════════════════════════════════════════════════
+// 1. NỐI CÂU CAO CẤP
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"geonman", pattern:"-건만 / -건마는", level:5,
+  freq:"mid",
+  meaning:"Tuy nhiên / Dù vậy nhưng (đối lập, văn viết cổ)",
+  structure:"V/A 어간 + -건만",
+  structureNote:"-건만 là dạng rút gọn của -건마는. Tương đương -지만 nhưng văn vẻ, cổ hơn, hay gặp trong thơ văn.",
+  usage:[
+    "Đối lập hai vế, mang sắc thái tiếc nuối, thất vọng mạnh hơn -지만",
+    "Hay gặp trong văn học, thơ, nhạc Hàn Quốc",
+    "Thường kết hợp với cảm xúc buồn, tiếc: 기다리건만, 보고 싶건만",
+  ],
+  examples:[
+    {kr:"기다리<span class='highlight'>건만</span> 그는 오지 않았다.", rom:"Gidarigeonman geuneun oji anassda.", vi:"Tuy chờ mãi nhưng anh ấy vẫn không đến."},
+    {kr:"열심히 노력했<span class='highlight'>건만</span> 결과는 좋지 않았다.", rom:"Yeolsimhi noryeokhaessgeomman gyeolgwaneun jochi anassda.", vi:"Dù đã cố gắng hết sức nhưng kết quả vẫn không tốt."},
+  ],
+  compare:"-지만 (phổ biến, khẩu ngữ và văn viết) vs -건만 (văn học, cổ, cảm xúc nặng hơn)",
+  tags:["LV5","문어","문학","대조"],
+},
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"noramyeon", pattern:"-노라면", level:5,
+  freq:"mid",
+  meaning:"Cứ làm mãi thì rồi sẽ... (kết quả tự nhiên theo thời gian)",
+  structure:"V 어간 + -노라면",
+  structureNote:"Dùng với động từ hành động. Diễn tả khi làm A liên tục thì kết quả B tự nhiên xuất hiện.",
+  usage:[
+    "Kết quả tự nhiên từ hành động lặp đi lặp lại",
+    "Thường mang hàm ý lạc quan, tích cực: cứ làm rồi sẽ được",
+    "Tương tự -다 보면 nhưng văn vẻ hơn, nhấn mạnh hành động kéo dài",
+  ],
+  examples:[
+    {kr:"열심히 공부하<span class='highlight'>노라면</span> 실력이 늘 거예요.", rom:"Yeolsimhi gongbuha-noramyeon sillyeogi neul geoyeyo.", vi:"Cứ chăm chỉ học thì trình độ sẽ tăng thôi."},
+    {kr:"살다<span class='highlight'>노라면</span> 좋은 날도 오겠지.", rom:"Salda-noramyeon joeun naldo ogessji.", vi:"Cứ sống mãi rồi sẽ có ngày tốt lành thôi."},
+  ],
+  compare:"-다 보면 (phổ biến, khẩu ngữ) vs -노라면 (văn viết, nhấn mạnh thời gian dài)",
+  tags:["LV5","문어","결과","지속"],
+},
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"dasontchi", pattern:"-다손 치더라도 / -다손 쳐도", level:6,
+  freq:"lo",
+  meaning:"Dù cho rằng / Giả sử có đi nữa thì (nhượng bộ cực đoan)",
+  structure:"V/A 어간 + -다손 치더라도",
+  structureNote:"Nhượng bộ giả định cực đoan — chấp nhận A là thật để lập luận B vẫn đúng. Văn phong tranh luận.",
+  usage:[
+    "Giả định chấp nhận điều cực đoan nhất để nhấn mạnh kết luận",
+    "Thường trong văn nghị luận, tranh luận học thuật",
+    "Mạnh hơn -아/어도, -더라도",
+  ],
+  examples:[
+    {kr:"그 말이 사실이<span class='highlight'>다손 치더라도</span> 용서할 수 없어요.", rom:"Geu mari sasiri-da-son chideoraryodo yongseohalsul eopseoyo.", vi:"Dù cho điều đó là sự thật đi nữa cũng không thể tha thứ."},
+    {kr:"힘들<span class='highlight'>다손 치더라도</span> 포기하면 안 됩니다.", rom:"Himdeu-da-son chideoraryodo pogihамyeon an doemnida.", vi:"Dù cho có khó khăn đến đâu cũng không được bỏ cuộc."},
+  ],
+  compare:"-더라도 (dù A thì B, phổ biến) vs -다손 치더라도 (giả sử cực đoan hơn, tranh luận)",
+  tags:["LV6","문어","양보","논증"],
+},
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"lrachimyeon", pattern:"-(으)ㄹ라치면", level:6,
+  freq:"lo",
+  meaning:"Mỗi khi / Hễ cứ... thì lại (lặp đi lặp lại không như ý)",
+  structure:"V 어간 + -(으)ㄹ라치면",
+  structureNote:"Diễn tả hành động thường xuyên bị gián đoạn hoặc dẫn đến kết quả không mong muốn. Văn học.",
+  usage:[
+    "Hễ cứ định làm A thì B (không tốt) lại xảy ra",
+    "Luôn hàm ý tiêu cực hoặc bực bội",
+    "Hay gặp trong văn học và thơ ca, ít dùng trong giao tiếp thường ngày",
+  ],
+  examples:[
+    {kr:"외출할<span class='highlight'>라치면</span> 비가 왔다.", rom:"Oechulhallachimyeon biga watda.", vi:"Hễ cứ muốn ra ngoài thì trời lại mưa."},
+    {kr:"잠을 자<span class='highlight'>려라치면</span> 전화가 왔다.", rom:"Jameul ja-ryeorachimyeon jeonhwaga watda.", vi:"Hễ cứ định ngủ thì lại có điện thoại."},
+  ],
+  tags:["LV6","문어","반복","부정적"],
+},
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"goseo", pattern:"-고서야", level:5,
+  freq:"mid",
+  meaning:"Chỉ sau khi (hoàn toàn xong A) mới B — nhấn mạnh điều kiện tiên quyết",
+  structure:"V 어간 + -고서야",
+  structureNote:"Nhấn mạnh hành động A phải hoàn thành hoàn toàn thì B mới có thể xảy ra. Mạnh hơn -고 나서.",
+  usage:[
+    "Điều kiện bắt buộc phải xong trước: phải A đến nơi đến chốn mới B được",
+    "Thường hàm ý trách móc, tiếc nuối: 'mãi đến khi A mới biết B'",
+    "-고서야 알았다 / 깨달았다: mãi sau khi... mới nhận ra",
+  ],
+  examples:[
+    {kr:"잃어버리<span class='highlight'>고서야</span> 소중함을 알았어요.", rom:"Ireobeori-goseoYA sojungHameul arasseoyo.", vi:"Mãi đến khi mất đi mới biết quý trọng."},
+    {kr:"직접 해보<span class='highlight'>고서야</span> 어려움을 알았어요.", rom:"Jikjeop haepo-goseoYA eoryeoUmeul arasseoyo.", vi:"Mãi sau khi tự mình làm thử mới biết là khó."},
+    {kr:"설명을 듣<span class='highlight'>고서야</span> 이해했어요.", rom:"Seolmyeongeul deut-goseoYA ihaehasseoyo.", vi:"Mãi sau khi nghe giải thích mới hiểu được."},
+  ],
+  compare:"-고 나서 (sau khi, trung tính) vs -고서야 (mãi đến khi mới, nhấn mạnh điều kiện/tiếc nuối)",
+  tags:["LV5","조건","강조","후회"],
+},
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"ayaman", pattern:"-아/어야만", level:5,
+  freq:"hi",
+  meaning:"Chỉ khi / Nhất định phải (điều kiện duy nhất)",
+  structure:"V/A 어간 + -아/어야만",
+  structureNote:"-아/어야 + 만 (trợ từ nhấn mạnh) → nhấn mạnh điều kiện là DUY NHẤT, không thể thiếu.",
+  usage:[
+    "Nhấn mạnh điều kiện tuyệt đối: chỉ khi A thì B mới có thể",
+    "Mạnh hơn -아/어야 hàng",
+    "Thường kết hợp với mới/비로소: 해야만 비로소 알 수 있다",
+  ],
+  examples:[
+    {kr:"직접 경험해봐<span class='highlight'>야만</span> 알 수 있어요.", rom:"Jikjeop gyeongheomhaebwa-Yaman al su isseoyo.", vi:"Chỉ khi tự mình trải nghiệm mới có thể biết được."},
+    {kr:"건강해<span class='highlight'>야만</span> 무엇이든 할 수 있어요.", rom:"Geonganghae-Yaman mueosiDen hal su isseoyo.", vi:"Chỉ khi khỏe mạnh mới có thể làm được bất cứ điều gì."},
+    {kr:"포기하지 않아<span class='highlight'>야만</span> 성공할 수 있어요.", rom:"Pogihaji anha-Yaman seonggonghal su isseoyo.", vi:"Chỉ khi không bỏ cuộc mới có thể thành công."},
+  ],
+  topikTip:"📝 TOPIK II 쓰기 LV5: dùng -아/어야만 để nhấn mạnh điều kiện tuyệt đối trong bài luận.",
+  tags:["LV5","조건","강조","필수"],
+},
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"deon-ji", pattern:"-(으)ㄴ/는지", level:5,
+  freq:"hi",
+  meaning:"Liệu / Không biết có... không (nghi vấn gián tiếp nhúng)",
+  structure:"V/A 어간 + -(으)ㄴ/는지 + V",
+  structureNote:"Nhúng câu hỏi vào trong câu chính. Tương đương '어떤지, 무엇인지, 얼마나 ~ 는지'",
+  usage:[
+    "Câu hỏi gián tiếp nhúng vào câu chính: 모르다, 알다, 궁금하다...",
+    "-(으)ㄴ/는지 모르다: không biết... hay không",
+    "얼마나 ~ 는지 모르다: không biết là bao nhiêu (= rất, lắm)",
+    "-는지 알다: biết là...",
+  ],
+  examples:[
+    {kr:"그가 올지 안 올지 모르겠어요.", rom:"Geuga olji an olji moreugesseoyo.", vi:"Không biết anh ấy có đến không."},
+    {kr:"얼마나 보고 싶<span class='highlight'>은지</span> 몰라요.", rom:"Eolmana bogo sipeuNji mollayo.", vi:"Không biết là nhớ đến mức nào (= nhớ lắm)."},
+    {kr:"어디에 있<span class='highlight'>는지</span> 알아요?", rom:"Eodie itneunJi arayo?", vi:"Bạn biết là đang ở đâu không?"},
+  ],
+  notes:"💡 '얼마나 ~(으)ㄴ/는지 모르다' = cách diễn đạt 'rất/lắm' rất hay gặp trong TOPIK đọc hiểu.",
+  tags:["LV5","간접의문","내포문"],
+},
+{
+  cat:"Nối câu cao cấp", icon:"🔗",
+  id:"ginyeong", pattern:"-기는커녕", level:5,
+  freq:"mid",
+  meaning:"Đừng nói đến việc (làm A), ngay cả... cũng không",
+  structure:"V 어간 + -기는커녕",
+  structureNote:"Mạnh hơn -는커녕, nhấn mạnh ngay cả điều tối thiểu liên quan đến hành động cũng không có.",
+  usage:[
+    "Phủ nhận hoàn toàn và mạnh mẽ hơn -는커녕",
+    "Luôn đi với câu phủ định",
+    "-기는커녕 vs -는커녕: nghĩa tương tự, -기는커녕 nhấn mạnh vào HÀNH ĐỘNG",
+  ],
+  examples:[
+    {kr:"도와주기는커녕 방해까지 했어요.", rom:"Dowajugigineunkeonyeong banghaekkajihaesseoyo.", vi:"Đừng nói là giúp đỡ, còn cản trở nữa."},
+    {kr:"먹기는커녕 물도 못 마셨어요.", rom:"Meokgineunkeonyeong muldo mot masyeosseoyo.", vi:"Đừng nói là ăn, ngay cả nước cũng không uống được."},
+  ],
+  tags:["LV5","부정강조","연결"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 2. ĐIỀU KIỆN & NHƯỢNG BỘ CAO CẤP
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Điều kiện & Nhượng bộ cao cấp", icon:"🔀",
+  id:"deorayo", pattern:"-더라도", level:5,
+  freq:"hi",
+  meaning:"Dù / Cho dù (nhượng bộ giả định — mạnh hơn -아/어도)",
+  structure:"V/A 어간 + -더라도",
+  structureNote:"Giả định điều kiện A dù thế nào, kết quả B vẫn không thay đổi. Mạnh hơn và trang trọng hơn -아/어도.",
+  usage:[
+    "Nhượng bộ mạnh: dù A có xảy ra thì B vẫn vậy",
+    "Thường dùng với điều giả định chưa xảy ra",
+    "-더라도 vs -아/어도: -더라도 nhấn mạnh hơn, thường văn viết",
+    "설령 / 비록 + -더라도: dù cho / dẫu / mặc dù",
+  ],
+  examples:[
+    {kr:"설령 실패하<span class='highlight'>더라도</span> 포기하지 않겠어요.", rom:"Seollyeong silpaehadeoraryodo pogihaji angeseoyo.", vi:"Dù cho có thất bại cũng sẽ không bỏ cuộc."},
+    {kr:"비록 힘들<span class='highlight'>더라도</span> 끝까지 하겠습니다.", rom:"Birok himdeuldeoraryodo kkeutkkaji hagetseumnida.", vi:"Dẫu khó khăn đến đâu cũng sẽ làm đến cùng."},
+    {kr:"돈이 많<span class='highlight'>더라도</span> 건강이 없으면 소용없어요.", rom:"Doni mandeoraryodo geongangi eopseumyeon soyongeopseoyo.", vi:"Dù có nhiều tiền mà không có sức khỏe thì vô ích."},
+  ],
+  topikTip:"📝 TOPIK II 쓰기 LV5-6: 비록/설령 + -더라도 là cặp hay dùng trong bài luận nghị luận.",
+  tags:["LV5","양보","조건","문어"],
+},
+{
+  cat:"Điều kiện & Nhượng bộ cao cấp", icon:"🔀",
+  id:"eulmangjeong", pattern:"-(으)ㄹ망정", level:6,
+  freq:"lo",
+  meaning:"Dù có / Tuy rằng... nhưng nhất định không... (nhượng bộ + cương quyết)",
+  structure:"V/A 어간 + -(으)ㄹ망정",
+  structureNote:"Nhượng bộ về A nhưng cương quyết không chấp nhận B. Văn học, trang trọng cao.",
+  usage:[
+    "Chấp nhận A nhưng kết quả B thì tuyệt đối không",
+    "Thường kết hợp với từ quyết tâm mạnh: 절대, 결코",
+    "Gặp trong văn học và thành ngữ cổ",
+  ],
+  examples:[
+    {kr:"굶<span class='highlight'>을망정</span> 남의 것은 탐내지 않겠다.", rom:"Gulmeulmangjeong nameui geosseun tamnaeji angesda.", vi:"Dù có đói đi nữa cũng tuyệt đối không thèm muốn của người khác."},
+    {kr:"죽<span class='highlight'>을망정</span> 거짓말은 하지 않겠다.", rom:"Jugeulmangjeong geojitmareun haji angesda.", vi:"Dù có chết cũng không nói dối."},
+  ],
+  tags:["LV6","양보","문학","고어"],
+},
+{
+  cat:"Điều kiện & Nhượng bộ cao cấp", icon:"🔀",
+  id:"eun-jeuk", pattern:"-(으)ㄴ즉 / -(으)니만큼", level:6,
+  freq:"lo",
+  meaning:"Bởi vậy / Vì lẽ đó (lý do trang trọng → kết luận)",
+  structure:"V/A 어간 + -(으)ㄴ즉 / -(으)니만큼",
+  structureNote:"Văn bản hành chính, thông báo trang trọng. Nêu lý do → đưa ra yêu cầu/kết luận.",
+  usage:[
+    "-(으)ㄴ즉: bởi vậy, nên (lý do → kết luận trang trọng)",
+    "-(으)니만큼: vì (lý do), tương xứng với (kết quả phù hợp)",
+    "Gặp trong văn bản hành chính, thông báo công khai",
+  ],
+  examples:[
+    {kr:"시간이 촉박한<span class='highlight'>즉</span> 빨리 결정하시기 바랍니다.", rom:"Sigani chokbakhaNeunjeuk ppalli gyeoljeonghashigi baramnida.", vi:"Thời gian gấp, kính mong quý vị quyết định sớm."},
+    {kr:"중요한 자리인<span class='highlight'>만큼</span> 준비를 철저히 하세요.", rom:"JungYohan jariinmankeum junbireul cheoljeohi haseyo.", vi:"Vì đây là vị trí quan trọng, hãy chuẩn bị chu đáo."},
+  ],
+  tags:["LV6","격식","문어","공문서"],
+},
+{
+  cat:"Điều kiện & Nhượng bộ cao cấp", icon:"🔀",
+  id:"eomyeon", pattern:"-았/었으면", level:5,
+  freq:"hi",
+  meaning:"Giá mà / Nếu như (ước muốn/điều kiện ngược hiện thực)",
+  structure:"V/A 어간 + -았/었으면 (좋겠다/하다)",
+  usage:[
+    "Ước nguyện về điều chưa hoặc không xảy ra",
+    "-았/었으면 좋겠다: giá mà/ước gì",
+    "-았/었으면 하다: ước muốn nhẹ hơn",
+    "Phân biệt: -(으)면 좋겠다 (tương lai có thể) vs -았/었으면 좋겠다 (ước điều khó/không thể)",
+  ],
+  examples:[
+    {kr:"지금 한국에 있었으면 <span class='highlight'>좋겠어요</span>.", rom:"Jigeum hanguge isseosseumyeon jokesseoyo.", vi:"Giá mà bây giờ đang ở Hàn Quốc."},
+    {kr:"그 일을 하지 않았으면 <span class='highlight'>좋았을 텐데</span>.", rom:"Geu ireul haji anhasseumyeon joasseul tende.", vi:"Giá mà không làm việc đó thì tốt hơn."},
+    {kr:"시험이 쉬웠으면 <span class='highlight'>했는데</span>.", rom:"Siheomi swiwosseumyeon haessneunde.", vi:"Giá mà bài thi dễ thì hay biết mấy."},
+  ],
+  tags:["LV5","반사실","바람","소망"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 3. BIỂU ĐẠT THÁI ĐỘ & LẬP TRƯỜNG
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Biểu đạt thái độ & Lập trường", icon:"💬",
+  id:"aedo", pattern:"-아/어 봤자", level:5,
+  freq:"mid",
+  meaning:"Dù có làm cũng vô ích / Dù thế cũng không ra gì",
+  structure:"V 어간 + -아/어 봤자",
+  structureNote:"Hành động A được thực hiện nhưng kết quả B vẫn không khả quan/vô ích. Hàm ý bi quan.",
+  usage:[
+    "Dù có làm A thì cũng không đạt được B (vô ích)",
+    "Thường hàm ý tiêu cực, chán nản, hoặc thực tế",
+    "Câu vế sau thường là phủ định hoặc tiêu cực",
+  ],
+  examples:[
+    {kr:"지금 가<span class='highlight'>봤자</span> 이미 끝났을 거예요.", rom:"Jigeum ga-bwatja imi kkeutnasseul geoyeyo.", vi:"Dù có đi bây giờ cũng chắc đã kết thúc rồi."},
+    {kr:"말해<span class='highlight'>봤자</span> 소용없어요.", rom:"Malhae-bwatja soyongeopseoyo.", vi:"Dù có nói cũng vô ích thôi."},
+    {kr:"아무리 노력해<span class='highlight'>봤자</span> 안 돼요.", rom:"Amuri noryeokhae-bwatja an dwaeyo.", vi:"Dù có cố gắng đến đâu cũng không được."},
+  ],
+  compare:"-아/어도 (dù A vẫn B, trung tính) vs -아/어 봤자 (dù A nhưng vô ích, tiêu cực/thực dụng)",
+  tags:["LV5","양보","비관적","강조"],
+},
+{
+  cat:"Biểu đạt thái độ & Lập trường", icon:"💬",
+  id:"gihamyeo", pattern:"-기에/길래", level:5,
+  freq:"mid",
+  meaning:"Vì thấy / Vì (nguyên nhân dựa trên quan sát trực tiếp)",
+  structure:"V/A 어간 + -기에 / -길래",
+  structureNote:"-기에: văn viết, trang trọng hơn. -길래: khẩu ngữ, thường ngày. Cả hai đều dựa trên điều người nói trực tiếp quan sát.",
+  usage:[
+    "Nguyên nhân dựa trên điều người nói nhìn thấy/nghe thấy",
+    "-길래: tôi thấy A nên tôi đã làm B (thường là phản ứng)",
+    "-기에: vì lẽ A (lý do trang trọng hơn)",
+  ],
+  examples:[
+    {kr:"맛있어 보이<span class='highlight'>길래</span> 사 왔어요.", rom:"Masiteo boi-gillae sa wasseoyo.", vi:"Thấy trông ngon nên mua về."},
+    {kr:"비가 오<span class='highlight'>길래</span> 우산을 가져왔어요.", rom:"Biga o-gillae usaneul gajyeowasseoyo.", vi:"Thấy trời mưa nên mang ô theo."},
+    {kr:"무엇이 궁금하시<span class='highlight'>기에</span> 여기까지 오셨나요?", rom:"Mueos-i gunggeumhasi-gie yeogiKKaji osyeonnayo?", vi:"Vì điều gì mà quý vị đến tận đây vậy?"},
+  ],
+  compare:"-아/어서 (nguyên nhân chung) vs -길래 (phản ứng dựa trên quan sát) vs -기에 (lý do quan sát, trang trọng)",
+  tags:["LV5","이유","관찰","반응"],
+},
+{
+  cat:"Biểu đạt thái độ & Lập trường", icon:"💬",
+  id:"dodeunmaldo", pattern:"-도 그렇고 ~도 그렇고", level:5,
+  freq:"mid",
+  meaning:"Cái này cũng vậy, cái kia cũng vậy (liệt kê nhiều lý do)",
+  structure:"A도 그렇고 B도 그렇고",
+  usage:[
+    "Liệt kê nhiều lý do/yếu tố cùng chiều",
+    "Thường dùng khi muốn nêu nhiều vấn đề cùng lúc",
+    "Thường kết thúc bằng câu kết luận",
+  ],
+  examples:[
+    {kr:"날씨<span class='highlight'>도 그렇고</span> 기분<span class='highlight'>도 그렇고</span> 오늘은 정말 최악이에요.", rom:"Nalssido geureokgo gibundo geureokgo oneureun jeongmal choeagi-eyo.", vi:"Thời tiết cũng vậy, tâm trạng cũng vậy, hôm nay thật tệ hết mức."},
+    {kr:"가격<span class='highlight'>도 그렇고</span> 품질<span class='highlight'>도 그렇고</span> 마음에 안 들어요.", rom:"Gagyeokdo geureokgo pumjildo geureokgo maeum-e an deureoyo.", vi:"Giá cả thế này, chất lượng thế này, không vừa ý chút nào."},
+  ],
+  tags:["LV5","열거","이유"],
+},
+{
+  cat:"Biểu đạt thái độ & Lập trường", icon:"💬",
+  id:"eulppun", pattern:"-(으)ㄹ 뿐더러", level:5,
+  freq:"mid",
+  meaning:"Không chỉ vậy mà còn / Hơn thế nữa",
+  structure:"V/A 어간 + -(으)ㄹ 뿐더러",
+  structureNote:"Mạnh hơn -뿐만 아니라, thường văn viết và nhấn mạnh hơn.",
+  usage:[
+    "Cộng thêm thông tin, nhấn mạnh hơn -뿐만 아니라",
+    "Thường dùng trong văn viết, bài luận",
+  ],
+  examples:[
+    {kr:"그는 공부를 잘할<span class='highlight'>뿐더러</span> 운동도 잘한다.", rom:"Geuneun gongbureul jalHal ppundeoleo undongdo jalhanda.", vi:"Anh ấy không chỉ học giỏi mà thể thao cũng xuất sắc."},
+    {kr:"이 제품은 저렴할<span class='highlight'>뿐더러</span> 품질도 우수합니다.", rom:"I jepumeun jeoryeoMhal ppundeoleo pumjildo usuHamnida.", vi:"Sản phẩm này không chỉ rẻ mà chất lượng còn vượt trội."},
+  ],
+  tags:["LV5","첨가","문어"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 4. SUY ĐOÁN & NHẬN ĐỊNH CAO CẤP
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Suy đoán & Nhận định cao cấp", icon:"🌀",
+  id:"eulkeo", pattern:"-(으)ㄹ 것이다 (추측)", level:5,
+  freq:"hi",
+  meaning:"Chắc sẽ / Có thể sẽ (suy đoán trang trọng)",
+  structure:"V/A 어간 + -(으)ㄹ 것이다",
+  usage:[
+    "Suy đoán trang trọng trong văn viết — tương đương -(으)ㄹ 거예요 nhưng văn vẻ hơn",
+    "Kết luận mang tính suy luận logic",
+    "Văn bản học thuật, báo cáo, luận văn",
+  ],
+  examples:[
+    {kr:"이 추세가 계속된다면 인구는 감소할 <span class='highlight'>것이다</span>.", rom:"I chusega gyesoktoeNdamyeon inguneun gamsohall geosida.", vi:"Nếu xu hướng này tiếp tục, dân số sẽ giảm."},
+    {kr:"꾸준히 노력하면 성공할 <span class='highlight'>것이다</span>.", rom:"Kkujunhi noryeokhamyeon seonggonghal geosida.", vi:"Nếu kiên trì nỗ lực thì sẽ thành công."},
+  ],
+  topikTip:"📝 TOPIK II 쓰기 LV5-6: văn phong học thuật BẮT BUỘC dùng -(으)ㄹ 것이다 thay vì -(으)ㄹ 거예요.",
+  tags:["LV5","추측","문어","학술"],
+},
+{
+  cat:"Suy đoán & Nhận định cao cấp", icon:"🌀",
+  id:"euroboita", pattern:"-(으)로 보이다 / -(으)로 보인다", level:5,
+  freq:"hi",
+  meaning:"Trông có vẻ / Nhìn thì thấy như (nhận định khách quan)",
+  structure:"N/(으)ㄴ/는 것 + 으로 보이다",
+  usage:[
+    "Nhận định dựa trên quan sát bề ngoài",
+    "Trang trọng hơn -(으)ㄴ/는 것 같다, hay dùng trong báo cáo",
+    "-(으)로 판단되다: được đánh giá là (còn trang trọng hơn nữa)",
+  ],
+  examples:[
+    {kr:"경제 상황이 점차 개선되고 있는 것<span class='highlight'>으로 보인다</span>.", rom:"Gyeongje sanghwangi jeomcha gaeseon-doego itneun geot-euro boin-da.", vi:"Tình hình kinh tế trông có vẻ đang dần được cải thiện."},
+    {kr:"그의 표정으로 볼 때 화가 난 것<span class='highlight'>으로 보였다</span>.", rom:"Geuui pyojeong-euro bol ttae hwaga nan geos-euro boyeossda.", vi:"Nhìn nét mặt của anh ta, trông có vẻ đang tức giận."},
+  ],
+  tags:["LV5","추측","객관적","학술"],
+},
+{
+  cat:"Suy đoán & Nhận định cao cấp", icon:"🌀",
+  id:"geosida", pattern:"-(으)ㄹ 것으로 예상되다/전망되다", level:6,
+  freq:"hi",
+  meaning:"Được dự báo / Được dự kiến (học thuật, báo cáo)",
+  structure:"V/A 어간 + -(으)ㄹ 것으로 예상/전망/추정되다",
+  usage:[
+    "Văn phong học thuật và báo cáo cho dự báo/ước tính",
+    "예상되다 (được dự đoán), 전망되다 (được triển vọng), 추정되다 (được ước tính)",
+    "Tương đương tiếng Việt: 'được dự báo rằng', 'ước tính rằng'",
+  ],
+  examples:[
+    {kr:"내년에는 물가가 더 오를 것으로 <span class='highlight'>전망됩니다</span>.", rom:"Naenyeoneneun mulgaga deo oreul geosseuro jeongmangdoemnida.", vi:"Năm tới giá cả được dự báo sẽ tiếp tục tăng."},
+    {kr:"피해 규모는 약 100억 원으로 <span class='highlight'>추정됩니다</span>.", rom:"Pihae gyumoneun yak baek-eoK woneuro chujeoNgdoemnida.", vi:"Quy mô thiệt hại được ước tính khoảng 10 tỷ won."},
+  ],
+  topikTip:"📝 TOPIK II 54번(쓰기): các cụm này CỰC KỲ cần thiết cho phần viết luận về xã hội/thống kê.",
+  tags:["LV6","학술","문어","예측"],
+},
+{
+  cat:"Suy đoán & Nhận định cao cấp", icon:"🌀",
+  id:"lji-eo", pattern:"-(으)ㄹ지(도) 모르다", level:5,
+  freq:"hi",
+  meaning:"Có thể / Biết đâu / Không chừng (suy đoán không chắc)",
+  structure:"V/A 어간 + -(으)ㄹ지(도) 모르다",
+  usage:[
+    "Suy đoán không chắc chắn: có thể A, không chắc",
+    "-지도 모르다: có thể (còn nghi ngờ hơn)",
+    "Thường đi với 어쩌면, 혹시, 아마",
+  ],
+  examples:[
+    {kr:"어쩌면 내가 틀렸을<span class='highlight'>지도 몰라</span>.", rom:"Eojjeo-myeon naega teullreotsseulji-do molla.", vi:"Biết đâu tôi đã sai."},
+    {kr:"그가 올<span class='highlight'>지 모르니</span> 기다려 봐요.", rom:"Geuga olji moreuNi gidaryeo bwayo.", vi:"Không biết anh ấy có đến không, cứ chờ xem."},
+    {kr:"비가 올<span class='highlight'>지도 모르니</span> 우산 가져가.", rom:"Biga olji-do moreuNi usan gajyeoga.", vi:"Không chừng trời mưa đấy, mang ô đi."},
+  ],
+  tags:["LV5","추측","불확실"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 5. VĂN PHONG HỌC THUẬT (학술문체)
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Văn phong học thuật", icon:"📄",
+  id:"e-ttareumyeon", pattern:"-에 따르면 / -에 따라(서)", level:5,
+  freq:"hi",
+  meaning:"Theo / Tùy theo (trích dẫn nguồn / điều chỉnh theo)",
+  structure:"N + 에 따르면 (theo nguồn) / N + 에 따라(서) (tùy theo)",
+  usage:[
+    "-에 따르면 + 인용: Theo [nguồn], [nội dung]",
+    "-에 따라(서): tùy theo, phụ thuộc vào (điều chỉnh)",
+    "Là cụm bắt buộc trong văn phong học thuật và báo cáo",
+  ],
+  examples:[
+    {kr:"최근 연구<span class='highlight'>에 따르면</span> 수면 부족이 건강에 해롭다.", rom:"Choegeun yeongu-e ttareuMyeon sumyeon bujogi geongang-e haeropda.", vi:"Theo nghiên cứu gần đây, thiếu ngủ có hại cho sức khỏe."},
+    {kr:"상황<span class='highlight'>에 따라서</span> 계획을 바꿀 수 있어요.", rom:"Sanghwang-e ttaraseo gyehoigeul bakkul su isseoyo.", vi:"Có thể thay đổi kế hoạch tùy theo tình huống."},
+    {kr:"통계청 자료<span class='highlight'>에 따르면</span> 출생률이 계속 감소하고 있다.", rom:"Tonggyecheong jaryo-e ttareuMyeon chulsaengryuri gyesok gamso-hago itda.", vi:"Theo số liệu của Tổng cục Thống kê, tỷ lệ sinh tiếp tục giảm."},
+  ],
+  topikTip:"📝 TOPIK II 쓰기 54번: -에 따르면 là cụm MỞ ĐẦU đoạn trích dẫn thông tin/số liệu cực hay dùng.",
+  tags:["LV5","학술","인용","문어"],
+},
+{
+  cat:"Văn phong học thuật", icon:"📄",
+  id:"eulsu-itda-hack", pattern:"-(으)ㄹ 수 있다 (가능성 학술)", level:5,
+  freq:"hi",
+  meaning:"Có thể nói rằng / Có thể khẳng định (kết luận học thuật)",
+  structure:"V + -(으)ㄹ 수 있다 (học thuật) / -다고 할 수 있다",
+  usage:[
+    "-다고 할 수 있다: có thể nói rằng (kết luận dè dặt, học thuật)",
+    "-다고 볼 수 있다: có thể xem là (nhận định)",
+    "Đây là cách kết luận thường gặp trong văn học thuật Hàn",
+  ],
+  examples:[
+    {kr:"이러한 결과를 통해 환경 보호의 중요성을 알 수 있<span class='highlight'>다고 할 수 있다</span>.", rom:"Ireuhan gyeolgwareul tonghae hwangyeong boho-ui jungYoseongeul al su itdago hal su itda.", vi:"Qua kết quả này, có thể nói rằng tầm quan trọng của bảo vệ môi trường được thể hiện rõ."},
+    {kr:"이 현상은 현대 사회의 특징으로 볼 수 있<span class='highlight'>다</span>.", rom:"I hyeonsangeun hyeondae sahoe-ui teukjjeongeuro bol su itda.", vi:"Hiện tượng này có thể được xem là đặc điểm của xã hội hiện đại."},
+  ],
+  tags:["LV5","학술","결론","문어"],
+},
+{
+  cat:"Văn phong học thuật", icon:"📄",
+  id:"raneun-jeom", pattern:"-(이)라는 점에서 / -(으)ㄴ/는 점에서", level:5,
+  freq:"hi",
+  meaning:"Ở điểm / Xét ở khía cạnh",
+  structure:"N + 이라는 점에서 / V/A + -(으)ㄴ/는 점에서",
+  usage:[
+    "Nêu khía cạnh/góc độ đánh giá",
+    "-(으)ㄴ/는 점에서 의의가 있다: có ý nghĩa ở chỗ",
+    "Rất phổ biến trong văn phong học thuật Hàn",
+  ],
+  examples:[
+    {kr:"환경을 보호한다는 <span class='highlight'>점에서</span> 이 정책은 중요합니다.", rom:"Hwangyeongeul boho-Handaneun jeom-eseo i jeongchaeg-eun jungYohamnida.", vi:"Xét ở khía cạnh bảo vệ môi trường, chính sách này quan trọng."},
+    {kr:"새로운 시도라는 <span class='highlight'>점에서</span> 의의가 있다.", rom:"Saeroun sido-raneun jeom-eseo uiiga itda.", vi:"Có ý nghĩa ở chỗ đây là một thử nghiệm mới."},
+  ],
+  tags:["LV5","학술","논점","문어"],
+},
+{
+  cat:"Văn phong học thuật", icon:"📄",
+  id:"raneun-geosi", pattern:"-다는 것이다 / -다는 점이다", level:5,
+  freq:"hi",
+  meaning:"Điều quan trọng là / Vấn đề là (kết luận nhấn mạnh)",
+  structure:"[mệnh đề] + -다는 것이다/점이다",
+  usage:[
+    "Nhấn mạnh điểm cốt lõi, trọng tâm của lập luận",
+    "Thường kết thúc đoạn văn học thuật",
+    "중요한 것은 ~ 다는 것이다: điều quan trọng là...",
+  ],
+  examples:[
+    {kr:"중요한 것은 포기하지 않는<span class='highlight'>다는 것이다</span>.", rom:"Jungyo-han geoSseun pogihaji anneun-daneun geoSida.", vi:"Điều quan trọng là không bỏ cuộc."},
+    {kr:"문제는 우리가 이 상황을 인식하지 못하고 있<span class='highlight'>다는 점이다</span>.", rom:"Munjeeneun urFRi i sanghwangeul insikHaji mot-hago it-daneun jeomida.", vi:"Vấn đề là chúng ta đang không nhận thức được tình huống này."},
+  ],
+  tags:["LV5","학술","결론","강조"],
+},
+{
+  cat:"Văn phong học thuật", icon:"📄",
+  id:"eul-ppyo-ha", pattern:"-을/를 통해(서)", level:5,
+  freq:"hi",
+  meaning:"Thông qua / Qua (phương tiện, quá trình)",
+  structure:"N + 을/를 통해(서) / V + -기를 통해",
+  usage:[
+    "Diễn tả phương tiện hoặc quá trình để đạt kết quả",
+    "Rất phổ biến trong văn viết học thuật",
+    "이를 통해: thông qua điều này (liên kết câu)",
+  ],
+  examples:[
+    {kr:"교육<span class='highlight'>을 통해</span> 사회가 발전할 수 있다.", rom:"Gyoyuk-eul tonghae sahoe-ga baljeon-hal su itda.", vi:"Xã hội có thể phát triển thông qua giáo dục."},
+    {kr:"이 연구<span class='highlight'>를 통해서</span> 새로운 사실을 발견했다.", rom:"I yeongu-reul tonghae-seo saeroun sasireul balgyeonhaessda.", vi:"Thông qua nghiên cứu này, đã phát hiện ra sự thật mới."},
+    {kr:"이<span class='highlight'>를 통해</span> 알 수 있듯이…", rom:"I-reul tonghae al su itdeu-shi…", vi:"Như có thể thấy qua điều này…"},
+  ],
+  tags:["LV5","학술","수단","문어"],
+},
+{
+  cat:"Văn phong học thuật", icon:"📄",
+  id:"myeon-seo-do", pattern:"-면서도", level:5,
+  freq:"mid",
+  meaning:"Vừa A vừa B mà vẫn / Mặc dù đồng thời A nhưng lại B",
+  structure:"V/A 어간 + -면서도",
+  usage:[
+    "Đồng thời xảy ra A và B nhưng B mâu thuẫn với A",
+    "Nhấn mạnh sự mâu thuẫn/nghịch lý đang xảy ra cùng lúc",
+    "Mạnh hơn -지만 vì nhấn mạnh tính đồng thời",
+  ],
+  examples:[
+    {kr:"알<span class='highlight'>면서도</span> 모른 척해요.", rom:"Al-myeon-seo-do moreun cheokhaeyo.", vi:"Biết đấy mà vẫn giả vờ không biết."},
+    {kr:"힘들<span class='highlight'>면서도</span> 웃고 있어요.", rom:"Himdeul-myeon-seo-do utgo isseoyo.", vi:"Dù mệt mà vẫn cười."},
+    {kr:"원하<span class='highlight'>면서도</span> 포기했어요.", rom:"Wonha-myeon-seo-do pogihasseoyo.", vi:"Dù muốn mà vẫn từ bỏ."},
+  ],
+  tags:["LV5","대조","동시","역설"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 6. CỔ NGỮ & VĂN HỌC (고어/문학체)
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Cổ ngữ & Văn học", icon:"📜",
+  id:"nora", pattern:"-노라 / -노니", level:6,
+  freq:"lo",
+  meaning:"Ta... / Tôi... (ngôi thứ nhất cổ điển, thơ văn)",
+  structure:"V 어간 + -노라 / -노니",
+  structureNote:"Thể hiện hành động của người nói trong văn học cổ điển. -노라: hành động, -노니: lý do/bối cảnh.",
+  usage:[
+    "Ngôi thứ nhất cổ điển trong thơ, văn học",
+    "-노라: ta đang..., ta sẽ... (nhấn mạnh hành động)",
+    "-노니: ta... bởi vì / ta thấy rằng",
+    "TOPIK 읽기 phần văn học cổ điển hay gặp",
+  ],
+  examples:[
+    {kr:"나는 가<span class='highlight'>노라</span>, 다시 돌아오리.", rom:"Naneun ga-nora, dasi doraoUri.", vi:"Ta ra đi, ta sẽ trở về."},
+    {kr:"청산리 벽계수야 수이 감을 자랑마라. 일도 창해하면 돌아오기 어려워라. 명월이 만공산하니 쉬어 간들 어떠리.", rom:"(Thơ cổ điển)", vi:"(Ví dụ thơ cổ điển Hàn)"},
+  ],
+  notes:"💡 Hay gặp trong đề đọc hiểu TOPIK II phần 시조 (시조 = thể thơ cổ Hàn).",
+  tags:["LV6","고어","문학","시"],
+},
+{
+  cat:"Cổ ngữ & Văn học", icon:"📜",
+  id:"anya", pattern:"-잖아(요) / -잖니", level:5,
+  freq:"hi",
+  meaning:"Vì / Mà / Chả phải là... đó sao (nhắc lại điều hiển nhiên)",
+  structure:"V/A 어간 + -잖아요",
+  structureNote:"-잖아요 = -지 않아요? được rút gọn. Dùng để nhắc điều người nghe đã biết hoặc nên biết.",
+  usage:[
+    "Nhắc lại thông tin mà cả hai đều biết",
+    "Hàm ý 'chả phải bạn biết điều đó rồi sao?'",
+    "Giải thích lý do bằng điều hiển nhiên",
+  ],
+  examples:[
+    {kr:"그 사람 친절하<span class='highlight'>잖아요</span>. 왜 나쁘다고 해요?", rom:"Geu saram chinjeolha-janhayo. Wae nappeudago haeyo?", vi:"Người đó tốt bụng mà. Sao lại nói là xấu?"},
+    {kr:"늦었<span class='highlight'>잖아</span>. 빨리 가자.", rom:"Neuteo-ssa-janha. Ppalli gaja.", vi:"Muộn rồi mà. Đi nhanh thôi."},
+    {kr:"그거 비싸<span class='highlight'>잖아요</span>.", rom:"Geugeo bissa-janhayo.", vi:"Cái đó đắt mà (bạn biết rồi đó)."},
+  ],
+  notes:"💡 -잖아요 rất tự nhiên trong hội thoại. TOPIK 듣기 hay gặp.",
+  tags:["LV5","구어","당연","설명"],
+},
+{
+  cat:"Cổ ngữ & Văn học", icon:"📜",
+  id:"sijyo", pattern:"시조 / 시 읽기 핵심", level:6,
+  freq:"mid",
+  meaning:"Từ vựng và ngữ pháp cổ điển cần biết để đọc hiểu thơ cổ",
+  structure:"Danh sách từ/cấu trúc cổ điển",
+  conj:[
+    ["이다 cổ","이로다 / 이라","(là...) 이것이 무엇이로다"],
+    ["-거니와","Vừa A vừa B (cổ)","예쁘거니와 착하기도 하다"],
+    ["-련마는","-겠지만 (cổ)","가련마는 못 가네"],
+    ["-도다","Nhấn mạnh cảm thán","아름답도다!"],
+    ["-고나","Cảm thán về điều nhận ra","왔고나! (À đến rồi)"],
+    ["아니 ~랴","Chẳng phải... hay sao?","아니 아름다우랴?"],
+    ["하여금","Khiến cho (cổ)","그로 하여금 하게 했다"],
+    ["마다","Mỗi / Mọi","날마다, 사람마다"],
+  ],
+  examples:[
+    {kr:"청산은 나를 보고 말없이 살라<span class='highlight'>하고</span> 창공은 나를 보고 티없이 살라<span class='highlight'>한다</span>.", rom:"", vi:"Núi xanh nhìn ta, bảo ta sống không lời / Trời xanh nhìn ta, bảo ta sống không bụi."},
+  ],
+  notes:"💡 TOPIK II LV5-6 phần đọc hiểu hay có thơ/시조. Không cần hiểu hết nghĩa từng chữ — cần nắm ý chính và cảm xúc của bài.",
+  tags:["LV6","문학","고어","독해"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 7. CẤU TRÚC NHẤN MẠNH & ĐẢNG CẤU TRÚC
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Nhấn mạnh & Đảo cấu trúc", icon:"🎯",
+  id:"geosida-emp", pattern:"-(으)ㄴ/는 것은 ~ (이)다", level:5,
+  freq:"hi",
+  meaning:"Điều mà... là... (câu nhấn mạnh phân liệt)",
+  structure:"-(으)ㄴ/는 것은 [nội dung nhấn mạnh] + 이다",
+  usage:[
+    "Cấu trúc phân liệt nhấn mạnh (cleft sentence)",
+    "Tương đương 'Điều A là B' hoặc 'Cái quan trọng là'",
+    "Thường dùng để nhấn mạnh thông tin cốt lõi",
+  ],
+  examples:[
+    {kr:"중요한 것은 결과가 아니라 과정<span class='highlight'>이다</span>.", rom:"JungYohan geoSeun gyeolgwa-ga aNira gwajeong-ida.", vi:"Điều quan trọng không phải là kết quả mà là quá trình."},
+    {kr:"내가 원하는 것은 단지 평화<span class='highlight'>이다</span>.", rom:"Naega wonhaneun geoSeun danji pyeonghwa-ida.", vi:"Điều tôi muốn chỉ đơn giản là hòa bình."},
+  ],
+  topikTip:"📝 TOPIK II 54번 쓰기: câu nhấn mạnh phân liệt giúp bài viết chuyên nghiệp và rõ ràng hơn.",
+  tags:["LV5","강조","분열문","학술"],
+},
+{
+  cat:"Nhấn mạnh & Đảo cấu trúc", icon:"🎯",
+  id:"garyeon", pattern:"-(으)ㄹ 뿐이다 / 그저 ~(으)ㄹ 뿐", level:5,
+  freq:"mid",
+  meaning:"Không gì hơn ngoài / Chỉ... thôi (giới hạn tuyệt đối)",
+  structure:"V/A 어간 + -(으)ㄹ 뿐이다",
+  usage:[
+    "Không có gì ngoài A, giới hạn tuyệt đối",
+    "Hàm ý khiêm tốn hoặc biện hộ: tôi chỉ làm thế thôi",
+    "그저 / 단지 / 오직 + -(으)ㄹ 뿐: chỉ... thôi",
+  ],
+  examples:[
+    {kr:"저는 그저 최선을 다했을 <span class='highlight'>뿐이에요</span>.", rom:"Jeoneun geujeo choeSeoneul dahae-sseul ppunieyo.", vi:"Tôi chỉ đã cố gắng hết sức thôi."},
+    {kr:"오직 사랑할 <span class='highlight'>뿐</span> 다른 이유는 없어요.", rom:"Ojik saranghal ppun dareun iyuneun eopseoyo.", vi:"Chỉ yêu thôi, không có lý do nào khác."},
+  ],
+  tags:["LV5","한정","겸손","강조"],
+},
+{
+  cat:"Nhấn mạnh & Đảo cấu trúc", icon:"🎯",
+  id:"amuri", pattern:"아무리 ~(아/어)도 / 아무리 ~(으)ㄹ지라도", level:5,
+  freq:"hi",
+  meaning:"Dù có như thế nào đi nữa / Dù cực đoan đến đâu",
+  structure:"아무리 + V/A + -아/어도 / -(으)ㄹ지라도",
+  usage:[
+    "Nhấn mạnh dù điều kiện cực đoan đến đâu, kết quả vẫn không thay đổi",
+    "아무리 + A + -아/어도: dù có A đến mức nào",
+    "-(으)ㄹ지라도: văn viết, trang trọng hơn -아/어도",
+  ],
+  examples:[
+    {kr:"<span class='highlight'>아무리</span> 바빠<span class='highlight'>도</span> 밥은 먹어야 해요.", rom:"Amuri bappado babeun meogeoYA haeyo.", vi:"Dù có bận đến đâu cũng phải ăn cơm."},
+    {kr:"<span class='highlight'>아무리</span> 힘들<span class='highlight'>지라도</span> 포기하지 마세요.", rom:"Amuri himdeu-lljirado pogihaji maseyo.", vi:"Dù khó khăn đến đâu cũng đừng bỏ cuộc."},
+    {kr:"<span class='highlight'>아무리</span> 좋은 약<span class='highlight'>이라도</span> 과하면 독이다.", rom:"Amuri joeun yak-iraro gwahamyeon dogida.", vi:"Dù là thuốc tốt đến đâu, dùng quá mức cũng thành độc."},
+  ],
+  tags:["LV5","양보","강조","극단"],
+},
+{
+  cat:"Nhấn mạnh & Đảo cấu trúc", icon:"🎯",
+  id:"biroseo", pattern:"비로소", level:5,
+  freq:"mid",
+  meaning:"Mới thực sự / Lúc đó mới (lần đầu tiên thực sự xảy ra)",
+  structure:"[điều kiện] + 비로소 + [kết quả]",
+  usage:[
+    "Nhấn mạnh chỉ khi A xảy ra thì B MỚI thực sự xảy ra lần đầu",
+    "Thường đi với -아/어야, -고 나서야, -고서야",
+    "Sắc thái: 'chỉ đến lúc đó mới thực sự hiểu/cảm nhận'",
+  ],
+  examples:[
+    {kr:"잃고 나서야 <span class='highlight'>비로소</span> 소중함을 알았다.", rom:"Ilko naseoYA biroseo sojungHameul alatsda.", vi:"Mãi sau khi mất đi mới thực sự nhận ra sự quý giá."},
+    {kr:"부모가 되어서야 <span class='highlight'>비로소</span> 부모 마음을 알게 됩니다.", rom:"Bumoga doee-seoYA biroseo bumo maeumeul alge doemnida.", vi:"Mãi đến khi làm cha mẹ mới thực sự hiểu lòng cha mẹ."},
+  ],
+  tags:["LV5","강조","처음","깨달음"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 8. PHÂN BIỆT & BẪY HAY GAP TRONG TOPIK LV5-6
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Bẫy TOPIK LV5-6", icon:"⚠️",
+  id:"trap1", pattern:"-더라도 vs -(으)ㄹ지라도 vs -아/어도",
+  level:5, freq:"hi",
+  meaning:"Ba dạng nhượng bộ — phân biệt mức độ và văn phong",
+  structure:"Xem bảng",
+  conj:[
+    ["-아/어도","Phổ biến nhất, khẩu ngữ lẫn văn viết","바빠도 괜찮아요"],
+    ["-더라도","Nhấn mạnh hơn, giả định, văn viết","설령 실패하더라도"],
+    ["-(으)ㄹ지라도","Trang trọng nhất, văn học/hành chính","아무리 힘들지라도"],
+    ["-다손 치더라도","Cực đoan, tranh luận học thuật","사실이다손 치더라도"],
+    ["-(으)ㄹ망정","Văn học, cổ điển, cương quyết","굶을망정 도둑질은 안 해"],
+  ],
+  examples:[
+    {kr:"(구어) 바빠도 와요. → (문어) 바쁘더라도 오세요. → (격식) 아무리 바쁠지라도 참석해야 합니다.", rom:"", vi:"(Khẩu ngữ) Dù bận cũng đến → (Văn viết) Dù bận vẫn hãy đến → (Trang trọng) Dù bận đến đâu cũng phải tham dự."},
+  ],
+  topikTip:"📝 TOPIK II LV5-6 쓰기: cùng ý nghĩa nhưng chọn đúng văn phong = điểm số chênh lệch.",
+  tags:["LV5","혼동주의","양보","문체"],
+},
+{
+  cat:"Bẫy TOPIK LV5-6", icon:"⚠️",
+  id:"trap2", pattern:"-다 보면 vs -노라면 vs -고서야",
+  level:5, freq:"mid",
+  meaning:"Ba cách nói về kết quả theo thời gian — phân biệt",
+  structure:"Xem bảng",
+  conj:[
+    ["-다 보면","Phổ biến, khẩu ngữ. Cứ làm rồi sẽ...","공부하다 보면 늘어요"],
+    ["-노라면","Văn viết, nhấn mạnh thời gian dài","살다노라면 좋은 날도 오겠지"],
+    ["-고서야","Điều kiện tiên quyết. Mãi sau khi... mới...","잃고서야 알았다"],
+    ["-아/어야만","Điều kiện duy nhất, nhấn mạnh","해야만 알 수 있다"],
+  ],
+  examples:[
+    {kr:"공부하다 보면 늘어요. (자연스럽게)", rom:"", vi:"Cứ học thì sẽ giỏi thôi. (tự nhiên)"},
+    {kr:"직접 해봐야만 알 수 있어요. (유일한 조건)", rom:"", vi:"Chỉ khi tự làm thử mới biết được. (điều kiện duy nhất)"},
+    {kr:"실패하고서야 알았어요. (뒤늦은 깨달음)", rom:"", vi:"Mãi sau khi thất bại mới nhận ra. (nhận ra muộn màng)"},
+  ],
+  tags:["LV5","혼동주의","조건","결과"],
+},
+{
+  cat:"Bẫy TOPIK LV5-6", icon:"⚠️",
+  id:"trap3", pattern:"-(으)ㄹ 것이다 vs -(으)ㄹ 것으로 보이다 vs -(으)ㄹ 것으로 예상되다",
+  level:6, freq:"hi",
+  meaning:"Ba dạng dự đoán học thuật — phân biệt mức trang trọng",
+  structure:"Xem bảng",
+  conj:[
+    ["-(으)ㄹ 것이다","Kết luận/dự đoán trang trọng","가격이 오를 것이다"],
+    ["-(으)ㄹ 것으로 보인다","Nhận định từ quan sát","개선될 것으로 보인다"],
+    ["-(으)ㄹ 것으로 예상된다","Dự báo có cơ sở","감소할 것으로 예상된다"],
+    ["-(으)ㄹ 것으로 전망된다","Dự báo xu hướng","증가할 것으로 전망된다"],
+    ["-(으)ㄹ 것으로 추정된다","Ước tính (số liệu)","약 100억으로 추정된다"],
+  ],
+  examples:[
+    {kr:"이 추세는 앞으로도 계속될 것으로 전망된다.", rom:"I chuseneun apeuro-do gyesoktoel geoseuro jeongmangdoenda.", vi:"Xu hướng này được dự báo sẽ tiếp tục trong tương lai."},
+    {kr:"경제 성장률은 3%에 달할 것으로 예상된다.", rom:"Gyeongje seongjangyuryeun sam-peosente dalhal geoseuro yesangdoenda.", vi:"Tỷ lệ tăng trưởng kinh tế được dự đoán đạt 3%."},
+  ],
+  topikTip:"📝 TOPIK II 54번: sử dụng đúng các cụm dự báo này là điểm THEN CHỐT để đạt điểm cao.",
+  tags:["LV6","혼동주의","학술","예측","쓰기필수"],
+},
+{
+  cat:"Bẫy TOPIK LV5-6", icon:"⚠️",
+  id:"trap4", pattern:"피동 vs 사동 — 헷갈리기 쉬운 쌍",
+  level:5, freq:"hi",
+  meaning:"Cặp thụ động/sai khiến hay nhầm nhất",
+  structure:"Xem bảng",
+  conj:[
+    ["보이다","피동: được nhìn thấy / 사동: cho xem","잘 보여요 / 아이에게 보여줘요"],
+    ["들리다","피동: được nghe thấy / 들이다: đưa vào","잘 들려요 / 숨을 들이쉬다"],
+    ["먹이다","사동 của 먹다: cho ăn","아기에게 밥을 먹였어요"],
+    ["먹히다","피동 của 먹다: bị ăn","과자가 다 먹혔어요"],
+    ["입히다","사동: cho mặc / 입히다(피동은 없음)","아이에게 옷을 입혔어요"],
+    ["잡히다","피동: bị bắt","도둑이 경찰에게 잡혔어요"],
+    ["잡아주다","능동 보조: giúp bắt","물고기를 잡아줬어요"],
+  ],
+  examples:[
+    {kr:"아이에게 옷을 입혔어요. (사동 — 엄마가 입힘)", rom:"", vi:"Mẹ mặc quần áo cho đứa bé. (sai khiến)"},
+    {kr:"도둑이 경찰에게 잡혔어요. (피동 — 도둑이 당함)", rom:"", vi:"Tên trộm bị cảnh sát bắt. (thụ động)"},
+  ],
+  tags:["LV5","혼동주의","피동","사동"],
+},
+
+// ═══════════════════════════════════════════════════════
+// 9. KỸ NĂNG VIẾT LUẬN TOPIK II 54번
+// ═══════════════════════════════════════════════════════
+{
+  cat:"Kỹ năng viết luận TOPIK 54번", icon:"✍️",
+  id:"essay1", pattern:"문단 구성 — 서론/본론/결론", level:5,
+  freq:"hi",
+  meaning:"Cấu trúc bài luận TOPIK II 54번 chuẩn",
+  structure:"서론 → 본론 → 결론 (800-1000자)",
+  conj:[
+    ["서론 (mở bài)","현대 사회에서 ~은/는 중요한 문제이다.","Nêu chủ đề + tầm quan trọng"],
+    ["본론 1 (thân bài 1)","첫째, / 우선, ~ 다는 점에서","Lý do/ví dụ thứ 1"],
+    ["본론 2 (thân bài 2)","둘째, / 또한, ~ 뿐만 아니라","Lý do/ví dụ thứ 2"],
+    ["결론 (kết bài)","따라서 / 이러한 점을 고려할 때","Kết luận + đề xuất"],
+    ["연결어 중요","또한, 반면, 그러나, 이에 따라","Từ nối đoạn văn chuyên nghiệp"],
+  ],
+  examples:[
+    {kr:"현대 사회에서 환경 문제는 매우 중요한 과제이다. 이에 대해 다음과 같이 살펴보고자 한다.", rom:"", vi:"Trong xã hội hiện đại, vấn đề môi trường là một thách thức rất quan trọng. Sau đây tôi xin trình bày về vấn đề này."},
+    {kr:"이러한 점을 고려할 때, 우리는 환경 보호를 위해 적극적으로 노력해야 할 것이다.", rom:"", vi:"Xét những điểm này, chúng ta cần nỗ lực tích cực vì bảo vệ môi trường."},
+  ],
+  topikTip:"📝 54번 채점 기준: 내용(content) 12점 + 언어(language) 12점 + 구성(structure) 6점. Cấu trúc rõ ràng = 6 điểm cấu trúc gần như chắc chắn.",
+  tags:["LV5","쓰기","54번","필수"],
+},
+{
+  cat:"Kỹ năng viết luận TOPIK 54번", icon:"✍️",
+  id:"essay2", pattern:"고급 연결어 & 표현", level:5,
+  freq:"hi",
+  meaning:"Từ nối và biểu đạt nâng cao cần có trong bài 54번",
+  structure:"Các cụm từ học thuật cần thuộc",
+  conj:[
+    ["Mở đầu chủ đề","~은/는 현대 사회에서 중요한 문제로 대두되고 있다.","~ đang nổi lên là vấn đề quan trọng"],
+    ["Trích dẫn số liệu","~ 에 따르면 / ~ 통계에 의하면","Theo... / Theo số liệu thống kê..."],
+    ["Thêm lý do","뿐만 아니라 / 더불어 / 이와 함께","Không chỉ vậy / Hơn nữa"],
+    ["Đối lập","반면에 / 그러나 / 이에 반해","Ngược lại / Tuy nhiên"],
+    ["Kết quả","이로 인해 / 그 결과 / 이에 따라","Do đó / Kết quả là / Theo đó"],
+    ["Kết luận","따라서 / 이를 위해서는 / 이러한 점을 감안하면","Do vậy / Để làm được điều đó / Xét những điểm này"],
+    ["Đề xuất","~해야 할 것이다 / ~하는 것이 필요하다","Cần phải... / Cần thiết phải..."],
+    ["Nhấn mạnh","특히 / 무엇보다도 / 그 중에서도","Đặc biệt / Hơn tất cả / Trong đó"],
+  ],
+  examples:[
+    {kr:"이와 같이 살펴본 결과, 이 문제를 해결하기 위해서는 사회 전체의 노력이 필요하다.", rom:"", vi:"Qua những phân tích trên, để giải quyết vấn đề này cần có nỗ lực của toàn xã hội."},
+  ],
+  topikTip:"📝 Dùng ít nhất 3-4 từ nối học thuật trong bài 54번. Tránh dùng mãi 그리고 và 그래서 — quá đơn giản, bị trừ điểm.",
+  tags:["LV5","쓰기","54번","연결어","필수"],
+},
+{
+  cat:"Kỹ năng viết luận TOPIK 54번", icon:"✍️",
+  id:"essay3", pattern:"주제별 핵심 어휘 — 사회/환경/기술", level:5,
+  freq:"hi",
+  meaning:"Từ vựng chủ đề cần thiết cho bài viết 54번",
+  structure:"Theo chủ đề thường ra trong TOPIK II",
+  conj:[
+    ["사회 문제","저출산, 고령화, 양극화, 실업, 빈부 격차","sinh suất thấp, già hóa, phân cực, thất nghiệp"],
+    ["환경","온난화, 탄소 배출, 친환경, 재활용, 기후 변화","ấm lên, phát thải carbon, thân thiện môi trường"],
+    ["기술/정보","디지털화, 인공지능, 정보화 사회, 사이버 범죄","số hóa, AI, xã hội thông tin, tội phạm mạng"],
+    ["경제","경제 성장, 물가 상승, 소비, 생산성, 글로벌화","tăng trưởng KT, lạm phát, tiêu dùng, toàn cầu hóa"],
+    ["교육","입시 경쟁, 사교육, 창의력, 인성 교육","cạnh tranh thi cử, học thêm, sáng tạo, giáo dục nhân cách"],
+    ["건강","정신 건강, 스트레스, 생활 습관, 만성 질환","sức khỏe tâm thần, stress, thói quen sinh hoạt"],
+  ],
+  examples:[
+    {kr:"저출산·고령화 사회에서는 경제 활동 인구의 감소로 인해 여러 문제가 발생하고 있다.", rom:"", vi:"Trong xã hội sinh suất thấp và già hóa, nhiều vấn đề đang phát sinh do dân số lao động giảm."},
+  ],
+  topikTip:"📝 Mỗi chủ đề 54번 cần 10-15 từ chuyên ngành. Nhớ 3-4 chủ đề thường ra là đủ để không bị bí từ.",
+  tags:["LV5","쓰기","어휘","주제별"],
+},
+
+];
+
+// ─────────────────── APP ───────────────────
+const cats = [...new Set(G.map(g => g.cat))];
+const catIconMap = {};
+G.forEach(g => catIconMap[g.cat] = g.icon);
+
+let currentCat = cats[0];
+let searchQ = '';
+let lvFilter = 'all';
+
+document.getElementById('tg').textContent = G.length;
+document.getElementById('tc').textContent = cats.length;
+
+document.querySelectorAll('.lvtab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.lvtab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    lvFilter = t.dataset.lv;
+    buildSidebar(); buildMain();
+  });
+});
+
+function filterG(items) {
+  if (lvFilter === 'all') return items;
+  return items.filter(g => String(g.level) === lvFilter);
+}
+
+function buildSidebar() {
+  const aside = document.getElementById('sidebar');
+  let html = '<div class="sidebar-section">Chủ đề</div>';
+  cats.forEach(cat => {
+    const count = filterG(G.filter(g => g.cat === cat)).length;
+    if (!count && lvFilter !== 'all') return;
+    const active = cat === currentCat;
+    html += `<button class="cat-btn${active?' active':''}" data-cat="${cat}">
+      <span>${catIconMap[cat]||'📌'}</span>
+      <span style="flex:1">${cat.split('—')[0].trim()}</span>
+      <span class="cnt">${count}</span>
+    </button>`;
+  });
+  aside.innerHTML = html;
+  aside.querySelectorAll('.cat-btn').forEach(b => b.addEventListener('click', () => {
+    currentCat = b.dataset.cat; searchQ = '';
+    document.getElementById('search').value = '';
+    buildSidebar(); buildMain();
+  }));
+}
+
+function hl(t) {
+  if (!searchQ || !t) return t || '';
+  return t.replace(new RegExp(`(${searchQ.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'), '<span class="search-match">$1</span>');
+}
+
+function lvBadge(l) {
+  const cls = l===5?'lv5':l===6?'lv6':'lv-both';
+  return `<span class="level-badge ${cls}">LV${l}</span>`;
+}
+function freqBadge(f) {
+  if (!f) return '';
+  const map = {hi:['freq-hi','Hay ra ★★★'],mid:['freq-mid','Trung bình ★★'],lo:['freq-lo','Ít gặp ★']};
+  const [cls,txt] = map[f]||['freq-lo',''];
+  return `<span class="freq-badge ${cls}">${txt}</span>`;
+}
+
+function renderCard(g) {
+  const struct = g.structure ? `<div class="section">
+    <div class="section-label">Cấu trúc</div>
+    <div class="structure-box">${hl(g.structure)}</div>
+    ${g.structureNote?`<div class="structure-note">→ ${hl(g.structureNote)}</div>`:''}
+  </div>` : '';
+
+  const conj = g.conj?.length ? `<div class="section">
+    <div class="section-label">Bảng so sánh / Biến đổi</div>
+    <table class="conj-table"><thead><tr><th>Dạng</th><th>Kết quả / Ví dụ</th><th>Ghi chú</th></tr></thead><tbody>
+      ${g.conj.map(([a,b,c])=>`<tr><td>${hl(a)}</td><td class="kr-g">${hl(b)}</td><td style="font-size:11px;color:var(--text2)">${hl(c||'')}</td></tr>`).join('')}
+    </tbody></table>
+  </div>` : '';
+
+  const usage = g.usage?.length ? `<div class="section">
+    <div class="section-label">Cách dùng</div>
+    <ul class="usage-list">${g.usage.map(u=>`<li>${hl(u)}</li>`).join('')}</ul>
+  </div>` : '';
+
+  const ex = g.examples?.length ? `<div class="section">
+    <div class="section-label">Ví dụ</div>
+    <div class="example-list">
+      ${g.examples.map(e=>`<div class="example-item">
+        <div class="example-kr">${e.kr}</div>
+        ${e.rom?`<div class="example-rom">${hl(e.rom)}</div>`:''}
+        <div class="example-vi">→ ${hl(e.vi)}</div>
+      </div>`).join('')}
+    </div>
+  </div>` : '';
+
+  const cmp = g.compare ? `<div class="section">
+    <div class="section-label">So sánh / Phân biệt</div>
+    <div class="compare-box">${hl(g.compare)}</div>
+  </div>` : '';
+
+  const note = g.notes ? `<div class="section"><div class="note-box"><span class="note-icon">💡</span><div class="note-content">${hl(g.notes)}</div></div></div>` : '';
+
+  const tip = g.topikTip ? `<div class="section"><div class="topik-tip"><span class="tip-icon">📝</span><span>${hl(g.topikTip)}</span></div></div>` : '';
+
+  const tags = g.tags ? `<div class="tags">${g.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>` : '';
+
+  return `<div class="grammar-card" id="c-${g.id}">
+    <div class="card-head" onclick="tog('${g.id}')">
+      <div class="pattern-tag" title="${g.pattern}">${g.pattern}</div>
+      <div class="card-meta">
+        <div class="card-meaning">${hl(g.meaning)}</div>
+        <div class="card-level">${lvBadge(g.level)} ${freqBadge(g.freq)}</div>
+      </div>
+      <div class="chevron">▼</div>
+    </div>
+    <div class="card-body">${struct}${conj}${usage}${ex}${cmp}${note}${tip}${tags}</div>
+  </div>`;
+}
+
+function buildMain() {
+  const main = document.getElementById('main');
+  if (searchQ.length >= 2) {
+    const q = searchQ.toLowerCase();
+    let items = filterG(G.filter(g =>
+      g.pattern.toLowerCase().includes(q) ||
+      g.meaning.toLowerCase().includes(q) ||
+      (g.usage||[]).some(u=>u.toLowerCase().includes(q)) ||
+      (g.notes||'').toLowerCase().includes(q) ||
+      (g.compare||'').toLowerCase().includes(q) ||
+      (g.examples||[]).some(e=>e.vi.toLowerCase().includes(q)||e.kr.toLowerCase().includes(q)) ||
+      (g.topikTip||'').toLowerCase().includes(q)
+    ));
+    main.innerHTML = `<div class="cat-header"><div class="cat-title">🔍 Kết quả</div><span class="cat-count">${items.length} ngữ pháp</span></div>
+      ${items.length?items.map(renderCard).join(''):'<div class="empty"><div style="font-size:48px">🔍</div><h3 style="color:var(--text2);margin-top:12px">Không tìm thấy</h3></div>'}`;
+    return;
+  }
+  const items = filterG(G.filter(g=>g.cat===currentCat));
+  main.innerHTML = `<div class="cat-header">
+    <div class="cat-title">${catIconMap[currentCat]||'📌'} ${currentCat}</div>
+    <span class="cat-count">${items.length} ngữ pháp</span>
+  </div>
+  ${items.length?items.map(renderCard).join(''):'<div class="empty"><div style="font-size:48px">📭</div><h3 style="color:var(--text2);margin-top:12px">Không có ngữ pháp ở cấp này</h3></div>'}`;
+}
+
+function tog(id) {
+  document.getElementById('c-'+id)?.classList.toggle('open');
+}
+
+let st;
+document.getElementById('search').addEventListener('input', e => {
+  clearTimeout(st);
+  st = setTimeout(() => { searchQ = e.target.value.trim(); buildSidebar(); buildMain(); }, 250);
+});
+
+buildSidebar();
+buildMain();
+</script>
+</body>
+</html>
