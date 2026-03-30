@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOPIK I - Tổng hợp Ngữ pháp Tiếng Hàn</title>
+  <meta name="description" content="Tổng hợp toàn bộ ngữ pháp TOPIK I (Cấp 1-2) tiếng Hàn: lý thuyết, ví dụ, lưu ý, trường hợp đặc biệt.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    <div class="header-brand">
+      <span class="flag">🇰🇷</span>
+      <span>TOPIK I 문법</span>
+    </div>
+    <div class="search-container">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Tìm ngữ pháp... (ví dụ: 은/는, 고 싶다)">
+      <div class="search-results-dropdown" id="searchDropdown"></div>
+    </div>
+  </header>
+
+  <!-- Sidebar Overlay (mobile) -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="layout">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Tổng quan</div>
+        <a class="sidebar-item active" href="#" data-target="home">
+          <span class="item-icon">🏠</span> Trang chủ
+        </a>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-section-title">Ngữ pháp</div>
+        <a class="sidebar-item" href="#" data-target="cat-particles">
+          <span class="item-icon">🔤</span> Trợ từ (조사)
+          <span class="item-count" id="count-particles"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-endings">
+          <span class="item-icon">📝</span> Kết thúc câu (종결어미)
+          <span class="item-count" id="count-endings"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-tense">
+          <span class="item-icon">⏰</span> Thì (시제)
+          <span class="item-count" id="count-tense"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-connectors">
+          <span class="item-icon">🔗</span> Liên kết (연결어미)
+          <span class="item-count" id="count-connectors"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-expressions">
+          <span class="item-icon">💬</span> Biểu hiện (표현)
+          <span class="item-count" id="count-expressions"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-modifiers">
+          <span class="item-icon">✏️</span> Định ngữ (관형형)
+          <span class="item-count" id="count-modifiers"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-negation">
+          <span class="item-icon">🚫</span> Phủ định (부정)
+          <span class="item-count" id="count-negation"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-irregular">
+          <span class="item-icon">⚡</span> Bất quy tắc (불규칙)
+          <span class="item-count" id="count-irregular"></span>
+        </a>
+        <a class="sidebar-item" href="#" data-target="cat-honorific">
+          <span class="item-icon">👑</span> Kính ngữ & Khác
+          <span class="item-count" id="count-honorific"></span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+      <!-- Hero -->
+      <section class="hero" id="hero">
+        <h1>📚 Tổng hợp Ngữ pháp TOPIK I</h1>
+        <p>Toàn bộ kiến thức ngữ pháp cần thiết cho kỳ thi TOPIK I (Cấp 1-2), bao gồm lý thuyết, ví dụ minh họa, lưu ý quan trọng và các trường hợp đặc biệt.</p>
+        <div class="stats">
+          <div class="stat-item">
+            <div class="stat-number" id="totalGrammar">0</div>
+            <div class="stat-label">Ngữ pháp</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">9</div>
+            <div class="stat-label">Chủ đề</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Cấp độ</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Grammar content will be rendered here by JS -->
+      <div id="grammarContainer"></div>
+      <div class="no-results" id="noResults" style="display:none;">
+        <div class="nr-icon">🔍</div>
+        <p>Không tìm thấy ngữ pháp phù hợp.</p>
+      </div>
+
+      <footer class="footer">
+        TOPIK I 문법 총정리 · Tổng hợp ngữ pháp TOPIK I · 2026
+      </footer>
+    </main>
+  </div>
+
+  <!-- Back to top -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+  <script src="grammar-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
