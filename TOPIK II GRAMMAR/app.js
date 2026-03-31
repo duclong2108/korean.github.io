@@ -139,6 +139,14 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
     }
 
+    // Quiz Button
+    if (item.examples && item.examples.length > 0) {
+      bodyHtml += `<button class="quiz-btn" data-card-id="${cardId}" onclick="startQuiz(this, '${cardId}')">
+        <span class="qicon">✏️</span> Luyện tập
+      </button>
+      <div class="quiz-area" id="quiz-${cardId}"></div>`;
+    }
+
     return `<div class="grammar-card" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}">
       <div class="grammar-card-header">
         <div class="grammar-title-group">
@@ -335,3 +343,153 @@ document.addEventListener('DOMContentLoaded', () => {
     card.style.animationDelay = `${(i % 10) * 0.05}s`;
   });
 });
+
+// ===== QUIZ SYSTEM =====
+function getAllItems() {
+  const all = [];
+  GRAMMAR_DATA.forEach(cat => cat.items.forEach(item => all.push(item)));
+  return all;
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function findItemByCardId(cardId) {
+  const parts = cardId.replace('card-', '').split('-');
+  const ci = parseInt(parts[0]), ii = parseInt(parts[1]);
+  return GRAMMAR_DATA[ci]?.items[ii];
+}
+
+function generateQuestions(item) {
+  const questions = [];
+  const allItems = getAllItems();
+
+  item.examples.forEach(ex => {
+    const krText = stripHtml(ex.kr);
+    const boldMatch = ex.kr.match(/<b>(.*?)<\/b>/g);
+    if (!boldMatch) return;
+    const answer = boldMatch.map(b => b.replace(/<\/?b>/g, '')).join('');
+    const blankText = krText.replace(answer, '______');
+    if (blankText === krText) return;
+
+    const wrongPool = allItems
+      .filter(it => it.name !== item.name)
+      .map(it => {
+        const n = it.name.replace(/^-/, '').replace(/[()]/g, '');
+        return n.length > 0 ? n : null;
+      })
+      .filter(Boolean);
+
+    const wrongs = shuffle(wrongPool).slice(0, 3);
+    if (wrongs.length < 3) return;
+
+    const options = shuffle([answer, ...wrongs]);
+    const correctIdx = options.indexOf(answer);
+
+    questions.push({
+      sentence: blankText,
+      translation: ex.vi,
+      options,
+      correctIdx,
+      answer
+    });
+  });
+
+  return shuffle(questions).slice(0, 5);
+}
+
+function startQuiz(btn, cardId) {
+  const item = findItemByCardId(cardId);
+  if (!item) return;
+
+  const questions = generateQuestions(item);
+  if (questions.length === 0) {
+    const area = document.getElementById(`quiz-${cardId}`);
+    area.innerHTML = `<div class="quiz-container"><p style="color:var(--text-muted)">Không đủ dữ liệu để tạo bài tập.</p></div>`;
+    return;
+  }
+
+  btn.style.display = 'none';
+  renderQuestion(cardId, questions, 0, 0);
+}
+
+function renderQuestion(cardId, questions, idx, score) {
+  const area = document.getElementById(`quiz-${cardId}`);
+  if (idx >= questions.length) {
+    const pct = Math.round((score / questions.length) * 100);
+    const icon = pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '💪';
+    area.innerHTML = `<div class="quiz-container">
+      <div class="quiz-score">
+        <div class="score-icon">${icon}</div>
+        <div class="score-text">${score}/${questions.length}</div>
+        <div class="score-detail">Đúng ${pct}% — ${pct >= 80 ? 'Xuất sắc!' : pct >= 50 ? 'Khá tốt!' : 'Cần ôn thêm!'}</div>
+        <button class="quiz-restart-btn" onclick="restartQuiz('${cardId}')">🔄 Làm lại</button>
+      </div>
+    </div>`;
+    return;
+  }
+
+  const q = questions[idx];
+  const labels = ['A', 'B', 'C', 'D'];
+  area.innerHTML = `<div class="quiz-container">
+    <div class="quiz-header">
+      <div class="quiz-title">✏️ LUYỆN TẬP</div>
+      <div class="quiz-progress">Câu ${idx + 1}/${questions.length} · Đúng: ${score}</div>
+    </div>
+    <div class="quiz-question">Điền vào chỗ trống:<br>${q.sentence.replace('______', '<span class="blank">?</span>')}</div>
+    <div class="quiz-options">
+      ${q.options.map((opt, i) => `<div class="quiz-option" data-idx="${i}" onclick="checkAnswer('${cardId}', ${idx}, ${i}, ${q.correctIdx}, ${score}, ${questions.length})">
+        <span class="opt-label">${labels[i]}</span>
+        <span>${opt}</span>
+      </div>`).join('')}
+    </div>
+    <div id="feedback-${cardId}"></div>
+  </div>`;
+
+  area._questions = questions;
+}
+
+function checkAnswer(cardId, qIdx, selectedIdx, correctIdx, score, total) {
+  const area = document.getElementById(`quiz-${cardId}`);
+  const questions = area._questions;
+  const options = area.querySelectorAll('.quiz-option');
+  const isCorrect = selectedIdx === correctIdx;
+
+  options.forEach((opt, i) => {
+    opt.classList.add('disabled');
+    if (i === correctIdx) opt.classList.add('correct');
+    if (i === selectedIdx && !isCorrect) opt.classList.add('wrong');
+  });
+
+  const newScore = isCorrect ? score + 1 : score;
+  const fb = document.getElementById(`feedback-${cardId}`);
+  const q = questions[qIdx];
+  fb.innerHTML = `<div class="quiz-feedback ${isCorrect ? 'correct-fb' : 'wrong-fb'}">
+    ${isCorrect ? '✅ Chính xác!' : `❌ Sai rồi! Đáp án đúng: <b>${q.answer}</b>`}
+    <div class="fb-translation">${q.translation}</div>
+  </div>
+  <button class="quiz-next-btn" onclick="renderQuestion('${cardId}', document.getElementById('quiz-${cardId}')._questions, ${qIdx + 1}, ${newScore})">
+    ${qIdx + 1 < total ? '➡️ Câu tiếp' : '📊 Xem kết quả'}
+  </button>`;
+}
+
+function restartQuiz(cardId) {
+  const item = findItemByCardId(cardId);
+  if (!item) return;
+  const questions = generateQuestions(item);
+  const area = document.getElementById(`quiz-${cardId}`);
+  area._questions = questions;
+  renderQuestion(cardId, questions, 0, 0);
+}
