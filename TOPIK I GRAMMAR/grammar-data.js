@@ -155,6 +155,35 @@ const GRAMMAR_DATA = [
                     { kr: '주말<b>마다</b> 등산을 가요.', vi: 'Mỗi cuối tuần tôi đi leo núi.' }
                 ],
                 notes: ['날마다 = 매일, 해마다 = 매년. 마다 ≈ 매~.']
+            },
+            {
+                name: '밖에', meaning: 'Chỉ có / Ngoài ra không', level: 2,
+                theory: ['<b>밖에</b> = chỉ có, ngoài ra không. Luôn đi với phủ định.'],
+                examples: [
+                    { kr: '돈이 천 원<b>밖에</b> 없어요.', vi: 'Chỉ có 1000 won thôi.' },
+                    { kr: '한국어<b>밖에</b> 못 해요.', vi: 'Chỉ biết tiếng Hàn thôi.' }
+                ],
+                notes: ['Luôn đi với 없다, 못, 안: 밖에 + phủ định.', '만 ≈ 밖에 nhưng 만 không cần phủ định: 물만 주세요 = 물밖에 안 마셔요.']
+            },
+            {
+                name: '(이)나', meaning: 'Hoặc / Hay là / Tận', level: 1,
+                theory: ['<b>(이)나</b> có 3 nghĩa: (1) Hoặc: 커피나 차. (2) Khoảng/tận (số lượng lớn): 세 시간이나. (3) Đại loại: 영화나 봅시다.'],
+                examples: [
+                    { kr: '커피<b>나</b> 차 드세요.', vi: 'Uống cà phê hoặc trà nhé.' },
+                    { kr: '세 시간<b>이나</b> 기다렸어요.', vi: 'Đã chờ tận 3 tiếng.' },
+                    { kr: '영화<b>나</b> 봅시다.', vi: 'Xem phim hay gì đi.' }
+                ],
+                notes: ['Có patchim → 이나, không patchim → 나.', 'Nghĩa "tận" nhấn mạnh số lượng nhiều/lâu hơn kỳ vọng.']
+            },
+            {
+                name: '이다 / 아니다', meaning: 'Là / Không phải là', level: 1,
+                theory: ['<b>이다</b> = là. <b>아니다</b> = không phải là.', '이다: có patchim → 이에요, không patchim → 예요. Formal: 입니다.', '아니다: 아니에요 / 아닙니다.'],
+                examples: [
+                    { kr: '저는 학생<b>이에요</b>.', vi: 'Tôi là học sinh.' },
+                    { kr: '의사가 <b>아니에요</b>.', vi: 'Không phải là bác sĩ.' },
+                    { kr: '이것은 책<b>이 아닙니다</b>.', vi: 'Đây không phải là sách.' }
+                ],
+                notes: ['이다 là trợ từ đặc biệt, gắn trực tiếp vào danh từ.', 'Quá khứ: 이었어요/였어요. 아니었어요.', 'Câu hỏi: 학생이에요? (có phải học sinh không?)']
             }
         ]
     },
@@ -445,6 +474,36 @@ const GRAMMAR_DATA = [
                     { kr: '버스를 타<b>거나</b> 지하철을 타요.', vi: 'Tôi đi xe buýt hoặc tàu điện.' }
                 ],
                 notes: ['Có thể liệt kê 3+ vế: A-거나 B-거나 C해요.']
+            },
+            {
+                name: '-아/어도', meaning: 'Dù / Mặc dù / Cho dù', level: 2,
+                theory: ['<b>-아/어도</b> = dù, mặc dù, cho dù. Kết quả không bị ảnh hưởng bởi điều kiện.', '모음 ㅏ,ㅗ → -아도. Khác → -어도. 하다 → 해도.'],
+                examples: [
+                    { kr: '비가 와<b>도</b> 갈 거예요.', vi: 'Dù trời mưa tôi cũng sẽ đi.' },
+                    { kr: '바빠<b>도</b> 운동해요.', vi: 'Dù bận tôi vẫn tập thể dục.' },
+                    { kr: '많이 먹어<b>도</b> 안 살쪄요.', vi: 'Dù ăn nhiều cũng không béo.' }
+                ],
+                notes: ['아무리 + -아/어도: dù ... đến đâu: 아무리 바빠도 (dù bận đến đâu).', '≈ -지만 nhưng -아/어도 nhấn mạnh "dù thế vẫn..." hơn.']
+            },
+            {
+                name: '-(으)러', meaning: 'Đi để (mục đích)', level: 1,
+                theory: ['<b>-(으)러</b> = đi để, đến để. Dùng với 가다, 오다, 다니다.', 'Không patchim → -러, có patchim → -으러.'],
+                examples: [
+                    { kr: '밥 먹<b>으러</b> 가요.', vi: 'Đi ăn cơm.' },
+                    { kr: '친구를 만나<b>러</b> 가요.', vi: 'Đi gặp bạn.' },
+                    { kr: '한국어를 배우<b>러</b> 왔어요.', vi: 'Tôi đến để học tiếng Hàn.' }
+                ],
+                notes: ['Chỉ dùng với 가다/오다/다니다.', '≠ -(으)려고: -(으)러 + 이동, -(으)려고 + mọi động từ.']
+            },
+            {
+                name: '-아/어서 (nguyên nhân)', meaning: 'Vì / Nên (lý do)', level: 1,
+                theory: ['<b>-아/어서</b> nghĩa 2: vì, nên. Nguyên nhân dẫn đến kết quả.', 'Khác với -아/어서 (trình tự = và rồi).'],
+                examples: [
+                    { kr: '배가 아파<b>서</b> 병원에 갔어요.', vi: 'Vì đau bụng nên đi bệnh viện.' },
+                    { kr: '비가 와<b>서</b> 못 나갔어요.', vi: 'Vì trời mưa nên không ra ngoài được.' },
+                    { kr: '만나<b>서</b> 반갑습니다.', vi: 'Rất vui được gặp bạn.' }
+                ],
+                notes: ['KHÔNG chia thì ở vế trước: 아팠어서 (✗) → 아파서 (✓).', 'KHÔNG dùng mệnh lệnh/đề nghị ở vế sau. Dùng -(으)니까 thay.', '만나서 반갑습니다 là cụm cố định.']
             }
         ]
     },
@@ -538,6 +597,62 @@ const GRAMMAR_DATA = [
                     { kr: '한국어를 배우<b>기로 했어요</b>.', vi: 'Tôi đã quyết định học tiếng Hàn.' }
                 ],
                 notes: ['Thường dùng ở quá khứ: -기로 했다 (đã quyết định).']
+            },
+            {
+                name: '-게 되다', meaning: 'Trở nên / Đến lúc phải', level: 2,
+                theory: ['<b>-게 되다</b> = trở nên, đến lúc, đi đến chỗ. Sự thay đổi tự nhiên hoặc ngoài ý muốn.'],
+                examples: [
+                    { kr: '한국어를 잘하<b>게 됐어요</b>.', vi: 'Tôi đã trở nên giỏi tiếng Hàn.' },
+                    { kr: '한국에 가<b>게 됐어요</b>.', vi: 'Tôi sẽ đi Hàn Quốc (hoàn cảnh dẫn đến).' },
+                    { kr: '그 사람을 알<b>게 됐어요</b>.', vi: 'Tôi đã biết người đó (tình cờ).' }
+                ],
+                notes: ['Nhấn mạnh sự thay đổi không chủ đích.', 'Quá khứ: -게 됐다 (đã trở nên). Tương lai: -게 될 거예요.']
+            },
+            {
+                name: '-기 때문에', meaning: 'Vì / Bởi vì', level: 2,
+                theory: ['<b>-기 때문에</b> = vì, bởi vì. Nhấn mạnh nguyên nhân.', 'Formal hơn -아/어서, -(으)니까.'],
+                examples: [
+                    { kr: '바쁘<b>기 때문에</b> 못 갔어요.', vi: 'Vì bận nên không đi được.' },
+                    { kr: '비가 오<b>기 때문에</b> 우산을 가져가세요.', vi: 'Vì trời mưa nên hãy mang ô.' }
+                ],
+                notes: ['명사 + 때문에: 비 때문에, 너 때문에.', 'Có thể chia thì: 바빴기 때문에 (vì đã bận).']
+            },
+            {
+                name: '-(으)ㄹ까 하다', meaning: 'Đang nghĩ sẽ / Định sẽ', level: 2,
+                theory: ['<b>-(으)ㄹ까 하다</b> = đang nghĩ sẽ, định sẽ. Kế hoạch chưa chắc chắn.'],
+                examples: [
+                    { kr: '내일 쉴<b>까 해요</b>.', vi: 'Tôi đang nghĩ ngày mai sẽ nghỉ.' },
+                    { kr: '한국어를 공부할<b>까 해요</b>.', vi: 'Tôi đang nghĩ sẽ học tiếng Hàn.' }
+                ],
+                notes: ['Chỉ ngôi 1.', 'Ít chắc chắn hơn -(으)려고 하다.']
+            },
+            {
+                name: '-(으)ㄹ 줄 알다/모르다', meaning: 'Biết/Không biết cách', level: 2,
+                theory: ['<b>-(으)ㄹ 줄 알다</b> = biết cách, biết làm.', '<b>-(으)ㄹ 줄 모르다</b> = không biết cách.'],
+                examples: [
+                    { kr: '수영할 <b>줄 알아요</b>.', vi: 'Tôi biết bơi.' },
+                    { kr: '운전할 <b>줄 몰라요</b>.', vi: 'Tôi không biết lái xe.' },
+                    { kr: '한국어를 읽을 <b>줄 알아요</b>?', vi: 'Bạn biết đọc tiếng Hàn không?' }
+                ],
+                notes: ['Nghĩa 2: -(으)ㄴ/는 줄 알다 = tưởng rằng, biết rằng: 올 줄 알았어요 (tôi tưởng bạn đến).']
+            },
+            {
+                name: '-기 위해(서)', meaning: 'Để / Nhằm mục đích', level: 2,
+                theory: ['<b>-기 위해(서)</b> = để, nhằm mục đích. Formal hơn -(으)려고.'],
+                examples: [
+                    { kr: '건강하<b>기 위해서</b> 운동해요.', vi: 'Để khỏe mạnh nên tập thể dục.' },
+                    { kr: '시험에 합격하<b>기 위해</b> 열심히 공부해요.', vi: 'Để đỗ thi nên học chăm chỉ.' }
+                ],
+                notes: ['명사 + 을/를 위해서: 건강을 위해서.', 'Formal, dùng trong văn viết và nói.']
+            },
+            {
+                name: '-곤 하다', meaning: 'Thường / Hay (thói quen)', level: 2,
+                theory: ['<b>-곤 하다</b> = thường, hay. Thói quen lặp đi lặp lại.'],
+                examples: [
+                    { kr: '주말에 등산을 하<b>곤 해요</b>.', vi: 'Cuối tuần tôi thường đi leo núi.' },
+                    { kr: '어렸을 때 이 공원에서 놀<b>곤 했어요</b>.', vi: 'Hồi nhỏ tôi thường chơi ở công viên này.' }
+                ],
+                notes: ['= -곤 했다 (quá khứ): thói quen trong quá khứ.']
             }
         ]
     },
