@@ -142,6 +142,52 @@ const GRAMMAR_DATA = [
                     { kr: '뭐<b>든지</b> 다 먹을 수 있어요.', vi: 'Bất kể gì cũng ăn được.' }
                 ],
                 notes: ['뭐든지 (bất kể gì), 누구든지 (bất kể ai), 어디든지 (bất kể đâu), 언제든지 (bất kể khi nào).']
+            },
+            {
+                name: '-더라도', meaning: 'Cho dù / Dù cho', level: 4,
+                theory: ['<b>-더라도</b> = cho dù, dù cho. Nhượng bộ, kết quả không thay đổi.'],
+                examples: [
+                    { kr: '아무리 힘들<b>더라도</b> 포기하지 마세요.', vi: 'Cho dù khó đến đâu cũng đừng bỏ cuộc.' },
+                    { kr: '비가 오<b>더라도</b> 갈 거예요.', vi: 'Cho dù trời mưa tôi cũng sẽ đi.' }
+                ],
+                notes: ['Mạnh hơn -아/어도.', 'Thường đi với 아무리.']
+            },
+            {
+                name: '-다가는', meaning: 'Nếu cứ tiếp tục ... thì (hậu quả xấu)', level: 4,
+                theory: ['<b>-다가는</b> = nếu cứ tiếp tục thì (kết quả xấu). Cảnh báo.'],
+                examples: [
+                    { kr: '그렇게 먹<b>다가는</b> 살이 찔 거예요.', vi: 'Nếu cứ ăn thế thì sẽ béo đấy.' },
+                    { kr: '이렇게 하<b>다가는</b> 실패할 거예요.', vi: 'Nếu cứ làm thế này thì sẽ thất bại.' }
+                ],
+                notes: ['Vế sau luôn tiêu cực. Dùng để cảnh báo.', '≠ -다 보면 (kết quả tự nhiên/tích cực).']
+            },
+            {
+                name: '-았/었더라면', meaning: 'Nếu đã ... thì (giả định quá khứ)', level: 5,
+                theory: ['<b>-았/었더라면</b> = nếu đã (làm gì) thì. Giả định ngược quá khứ (contrary-to-fact).'],
+                examples: [
+                    { kr: '더 열심히 공부<b>했더라면</b> 합격했을 텐데.', vi: 'Nếu đã học chăm hơn thì đã đỗ rồi.' },
+                    { kr: '일찍 출발<b>했더라면</b> 늦지 않았을 거예요.', vi: 'Nếu đã xuất phát sớm thì đã không trễ.' }
+                ],
+                notes: ['Vế sau thường dùng -(으)ㄹ 텐데, -(으)ㄹ 거예요.', 'Diễn tả hối tiếc, tiếc nuối.']
+            },
+            {
+                name: '-(으)ㄴ 채(로)', meaning: 'Trong trạng thái / Nguyên vẹn', level: 4,
+                theory: ['<b>-(으)ㄴ 채(로)</b> = trong trạng thái, giữ nguyên. Duy trì trạng thái khi làm việc khác.'],
+                examples: [
+                    { kr: '신발을 신<b>은 채로</b> 들어갔어요.', vi: 'Đi giày nguyên vào nhà.' },
+                    { kr: '불을 켜 놓<b>은 채</b> 잠들었어요.', vi: 'Bật đèn nguyên rồi ngủ.' },
+                    { kr: '눈을 감<b>은 채</b> 음악을 들었어요.', vi: 'Nhắm mắt nghe nhạc.' }
+                ],
+                notes: ['Nhấn mạnh trạng thái giữ nguyên không thay đổi.', 'Chỉ dùng với động từ.']
+            },
+            {
+                name: '-는 한편', meaning: 'Trong khi đó / Một mặt', level: 5,
+                theory: ['<b>-는 한편</b> = trong khi đó, một mặt, đồng thời. Hai hành động song song.'],
+                examples: [
+                    { kr: '회사에 다니<b>는 한편</b> 대학원에서 공부하고 있어요.', vi: 'Vừa đi làm đồng thời học thạc sĩ.' },
+                    { kr: '경제가 성장하<b>는 한편</b> 환경 문제도 심각해지고 있어요.', vi: 'Kinh tế tăng trưởng, đồng thời vấn đề môi trường cũng nghiêm trọng.' }
+                ],
+                notes: ['Formal, thường dùng trong văn viết/tin tức.']
             }
         ]
     },
@@ -380,6 +426,99 @@ const GRAMMAR_DATA = [
                     { kr: '보시<b>다시피</b> 여기는 아주 아름다워요.', vi: 'Như bạn thấy, nơi đây rất đẹp.' }
                 ],
                 notes: ['Thường chỉ dùng với: 알다시피, 보다시피, 듣다시피.']
+            },
+            {
+                name: '-아/어 버리다', meaning: 'Làm xong hẳn / Mất rồi', level: 3,
+                theory: ['<b>-아/어 버리다</b> = làm xong hẳn, (đã) mất rồi. Nhấn mạnh hoàn thành + cảm xúc (tiếc nuối hoặc nhẹ nhõm).'],
+                examples: [
+                    { kr: '숙제를 다 해 <b>버렸어요</b>.', vi: 'Tôi đã làm xong hẳn bài tập rồi (nhẹ nhõm).' },
+                    { kr: '지갑을 잃어 <b>버렸어요</b>.', vi: 'Tôi đã bị mất ví rồi (tiếc nuối).' },
+                    { kr: '다 먹어 <b>버렸어요</b>.', vi: 'Tôi đã ăn hết sạch rồi.' }
+                ],
+                notes: ['Cảm xúc tích cực (nhẹ nhõm): 끝내 버렸다! Hoặc tiêu cực (tiếc nuối): 잊어 버렸다.']
+            },
+            {
+                name: '-고 말다', meaning: 'Rốt cuộc đã / Cuối cùng đã', level: 4,
+                theory: ['<b>-고 말다</b> = rốt cuộc đã, cuối cùng đã. Kết quả không mong muốn xảy ra.'],
+                examples: [
+                    { kr: '결국 울<b>고 말았어요</b>.', vi: 'Rốt cuộc đã khóc.' },
+                    { kr: '비밀을 말하<b>고 말았어요</b>.', vi: 'Rốt cuộc đã nói ra bí mật.' }
+                ],
+                notes: ['Thường dùng với kết quả tiêu cực/không mong muốn.', 'Quyết tâm: -고 말겠다 = nhất định sẽ: 합격하고 말겠다!']
+            },
+            {
+                name: '-기는커녕', meaning: 'Đừng nói đến / Huống chi', level: 4,
+                theory: ['<b>-기는커녕</b> = đừng nói đến, huống chi, chẳng những ... mà còn.'],
+                examples: [
+                    { kr: '여행<b>은커녕</b> 쉬지도 못했어요.', vi: 'Đừng nói đi du lịch, nghỉ ngơi cũng không được.' },
+                    { kr: '도와주<b>기는커녕</b> 방해만 했어요.', vi: 'Chẳng những không giúp đỡ mà còn cản trở.' }
+                ],
+                notes: ['Danh từ + 은/는커녕 cũng dùng được: 밥은커녕 물도 못 마셨어요.']
+            },
+            {
+                name: '-는 통에', meaning: 'Vì / Do mà (bất ngờ, tiêu cực)', level: 5,
+                theory: ['<b>-는 통에</b> = vì, do mà. Nguyên nhân bất ngờ, không kiểm soát, kết quả tiêu cực.'],
+                examples: [
+                    { kr: '아이가 우<b>는 통에</b> 잠을 못 잤어요.', vi: 'Vì trẻ khóc nên không ngủ được.' },
+                    { kr: '전화가 오<b>는 통에</b> 집중을 못 했어요.', vi: 'Vì điện thoại cứ đến nên không tập trung được.' }
+                ],
+                notes: ['Chỉ dùng với động từ.', 'Tiêu cực + bất ngờ (≠ -는 바람에 tương tự nhưng ít nhấn mạnh sự lặp lại).']
+            },
+            {
+                name: '-는 중이다', meaning: 'Đang trong quá trình', level: 3,
+                theory: ['<b>-는 중이다</b> = đang trong quá trình, đang giữa chừng.'],
+                examples: [
+                    { kr: '지금 회의하<b>는 중이에요</b>.', vi: 'Đang trong cuộc họp.' },
+                    { kr: '식사하<b>는 중이에요</b>.', vi: 'Đang ăn cơm.' },
+                    { kr: '준비하<b>는 중입니다</b>.', vi: 'Đang trong quá trình chuẩn bị.' }
+                ],
+                notes: ['= -고 있다 nhưng -는 중이다 formal hơn.', '명사 + 중이다: 회의 중이에요 (đang họp).']
+            },
+            {
+                name: '-(으)ㄹ 뿐이다', meaning: 'Chỉ có thể / Chỉ là', level: 5,
+                theory: ['<b>-(으)ㄹ 뿐이다</b> = chỉ, chỉ có thể. Giới hạn.'],
+                examples: [
+                    { kr: '기다릴 <b>뿐이에요</b>.', vi: 'Chỉ có thể chờ thôi.' },
+                    { kr: '바라볼 <b>뿐이에요</b>.', vi: 'Chỉ có thể nhìn thôi.' }
+                ],
+                notes: ['명사 + 뿐이다: 그것뿐이에요 (chỉ có thế thôi).', '≈ -ㄹ 따름이다 (formal hơn).']
+            },
+            {
+                name: '-기 나름이다', meaning: 'Tùy thuộc vào / Tùy cách', level: 5,
+                theory: ['<b>-기 나름이다</b> = tùy thuộc vào cách, kết quả phụ thuộc vào hành động.'],
+                examples: [
+                    { kr: '생각하<b>기 나름이에요</b>.', vi: 'Tùy cách nghĩ.' },
+                    { kr: '노력하<b>기 나름이에요</b>.', vi: 'Tùy vào mức độ cố gắng.' }
+                ],
+                notes: ['명사 + 나름이다: 사람 나름이에요 (tùy người).']
+            },
+            {
+                name: '-(으)ㄹ 따름이다', meaning: 'Chỉ có thể (formal)', level: 6,
+                theory: ['<b>-(으)ㄹ 따름이다</b> = chỉ có thể, chỉ biết. Formal, văn viết.'],
+                examples: [
+                    { kr: '감사할 <b>따름입니다</b>.', vi: 'Chỉ biết cảm ơn.' },
+                    { kr: '놀라울 <b>따름이에요</b>.', vi: 'Chỉ có thể kinh ngạc.' }
+                ],
+                notes: ['Rất formal. ≈ -(으)ㄹ 뿐이다.']
+            },
+            {
+                name: '-아/어 가다/오다', meaning: 'Dần dần (tiếp tục)', level: 3,
+                theory: ['<b>-아/어 가다</b> = dần dần (tiếp tục đi, rời xa).', '<b>-아/어 오다</b> = dần dần (tiếp tục đến, đến gần).'],
+                examples: [
+                    { kr: '날씨가 추워져 <b>가요</b>.', vi: 'Thời tiết dần dần lạnh đi.' },
+                    { kr: '한국어가 좋아져 <b>왔어요</b>.', vi: 'Tiếng Hàn dần dần tốt lên (đến nay).' },
+                    { kr: '살아 <b>가고</b> 있어요.', vi: 'Đang sống tiếp.' }
+                ],
+                notes: ['-아/어 가다: xa dần, tiếp tục đi (tương lai).', '-아/어 오다: đến gần, đã tiếp tục (quá khứ→hiện tại).']
+            },
+            {
+                name: '-아/어 대다', meaning: 'Cứ liên tục / Không ngừng', level: 5,
+                theory: ['<b>-아/어 대다</b> = cứ liên tục, không ngừng, liên tục (tiêu cực/khó chịu).'],
+                examples: [
+                    { kr: '아이가 울어 <b>대요</b>.', vi: 'Đứa trẻ cứ khóc không ngừng.' },
+                    { kr: '친구가 떠들어 <b>대요</b>.', vi: 'Bạn cứ nói liên tục.' }
+                ],
+                notes: ['Có sắc thái tiêu cực, phàn nàn.']
             }
         ]
     },
@@ -582,6 +721,51 @@ const GRAMMAR_DATA = [
                     { kr: '만나<b>고 보니</b> 좋은 사람이었어요.', vi: 'Gặp rồi mới biết là người tốt.' }
                 ],
                 notes: ['Nhấn mạnh phát hiện mới sau khi đã trải nghiệm.']
+            },
+            {
+                name: '-고자', meaning: 'Với mong muốn / Nhằm (formal)', level: 5,
+                theory: ['<b>-고자</b> = với mong muốn, nhằm. Mục đích, rất formal.'],
+                examples: [
+                    { kr: '한국어를 배우<b>고자</b> 한국에 왔습니다.', vi: 'Tôi đến Hàn Quốc với mong muốn học tiếng Hàn.' },
+                    { kr: '성공하<b>고자</b> 노력하고 있습니다.', vi: 'Đang cố gắng nhằm mục đích thành công.' }
+                ],
+                notes: ['Rất formal, dùng trong bài phát biểu, văn bản chính thức.', '≈ -(으)려고 (informal).']
+            },
+            {
+                name: '-(으)ㄹ지 모르다', meaning: 'Có thể / Biết đâu', level: 4,
+                theory: ['<b>-(으)ㄹ지 모르다</b> = có thể, biết đâu, không biết chừng.'],
+                examples: [
+                    { kr: '비가 올<b>지 몰라요</b>.', vi: 'Biết đâu trời mưa.' },
+                    { kr: '늦을<b>지 모르니까</b> 일찍 출발하세요.', vi: 'Vì có thể sẽ trễ nên hãy xuất phát sớm.' }
+                ],
+                notes: ['= -(으)ㄹ지도 모르다: 올지도 몰라요 (biết đâu sẽ đến).']
+            },
+            {
+                name: '-는가/나 싶다', meaning: 'Tự hỏi / Nghĩ rằng', level: 5,
+                theory: ['<b>-는가/나 싶다</b> = tự hỏi, nghĩ rằng, cảm thấy. Suy nghĩ nội tâm.'],
+                examples: [
+                    { kr: '이게 맞<b>나 싶어요</b>.', vi: 'Tôi tự hỏi cái này có đúng không.' },
+                    { kr: '뭘 하고 있<b>는가 싶었어요</b>.', vi: 'Tôi tự hỏi mình đang làm gì.' }
+                ],
+                notes: ['Diễn tả sự nghi ngờ, suy nghĩ bên trong.']
+            },
+            {
+                name: '-고도', meaning: 'Dù đã ... mà vẫn', level: 5,
+                theory: ['<b>-고도</b> = dù đã, mặc dù đã. Kết quả trái ngược sau hành động.'],
+                examples: [
+                    { kr: '알<b>고도</b> 모르는 척했어요.', vi: 'Dù đã biết mà vẫn giả vờ không biết.' },
+                    { kr: '많이 먹<b>고도</b> 배가 고파요.', vi: 'Dù đã ăn nhiều mà vẫn đói.' }
+                ],
+                notes: ['Nhấn mạnh kết quả bất ngờ/trái ngược.']
+            },
+            {
+                name: '-(으)ㄹ 게 뻔하다', meaning: 'Rõ ràng sẽ / Chắc chắn sẽ', level: 5,
+                theory: ['<b>-(으)ㄹ 게 뻔하다</b> = rõ ràng sẽ, chắc chắn sẽ (tiêu cực).'],
+                examples: [
+                    { kr: '지금 가면 늦을 게 <b>뻔해요</b>.', vi: 'Nếu đi bây giờ chắc chắn sẽ trễ.' },
+                    { kr: '물어봐도 안 알려줄 게 <b>뻔해요</b>.', vi: 'Dù hỏi cũng chắc chắn không nói cho.' }
+                ],
+                notes: ['Thường dùng với kết quả tiêu cực.', '≠ -(으)ㄹ 뻔하다 (suýt nữa thì).']
             }
         ]
     },
@@ -661,6 +845,42 @@ const GRAMMAR_DATA = [
                     { kr: '어려<b>움에도 불구하고</b> 끝까지 했어요.', vi: 'Mặc dù khó khăn nhưng đã làm đến cùng.' }
                 ],
                 notes: ['Rất formal, văn viết.', '명사 + 에도 불구하고: 비에도 불구하고 (bất chấp mưa).']
+            },
+            {
+                name: '-는 법이다', meaning: 'Thường / Là lẽ tự nhiên', level: 5,
+                theory: ['<b>-는 법이다</b> = là lẽ tự nhiên, thường là vậy. Quy luật chung.'],
+                examples: [
+                    { kr: '시간이 지나면 잊<b>는 법이에요</b>.', vi: 'Thời gian trôi qua thì thường sẽ quên.' },
+                    { kr: '노력하면 결과가 나오<b>는 법이에요</b>.', vi: 'Nếu cố gắng thì đương nhiên sẽ có kết quả.' }
+                ],
+                notes: ['≈ -기 마련이다 nhưng -는 법이다 hơi nhẹ hơn.']
+            },
+            {
+                name: '-(이)야말로', meaning: 'Chính là / Đích thực là', level: 5,
+                theory: ['<b>-(이)야말로</b> = chính là, đích thực là. Nhấn mạnh mạnh.'],
+                examples: [
+                    { kr: '이것<b>이야말로</b> 진짜 한국 음식이에요.', vi: 'Đây mới chính là đồ ăn Hàn Quốc thật sự.' },
+                    { kr: '당신<b>이야말로</b> 최고예요.', vi: 'Chính bạn mới là giỏi nhất.' }
+                ],
+                notes: ['Nhấn mạnh hơn 이/가.']
+            },
+            {
+                name: '-기만 하다', meaning: 'Chỉ có / Chỉ toàn', level: 4,
+                theory: ['<b>-기만 하다</b> = chỉ có, chỉ toàn. Nhấn mạnh chỉ có một hành động duy nhất.'],
+                examples: [
+                    { kr: '울<b>기만 해요</b>.', vi: 'Chỉ khóc thôi.' },
+                    { kr: '먹<b>기만 하고</b> 운동을 안 해요.', vi: 'Chỉ toàn ăn mà không tập thể dục.' }
+                ],
+                notes: ['Thường có sắc thái phàn nàn.']
+            },
+            {
+                name: '-기 십상이다', meaning: 'Dễ xảy ra / Rất có thể', level: 6,
+                theory: ['<b>-기 십상이다</b> = dễ xảy ra, rất có khả năng (thường tiêu cực).'],
+                examples: [
+                    { kr: '그렇게 하면 실패하<b>기 십상이에요</b>.', vi: 'Nếu làm thế thì rất dễ thất bại.' },
+                    { kr: '비가 오면 미끄러지<b>기 십상이에요</b>.', vi: 'Nếu trời mưa thì rất dễ trượt.' }
+                ],
+                notes: ['Thường dùng với kết quả tiêu cực.', '= -기 쉽다 nhưng -기 십상이다 mạnh hơn.']
             }
         ]
     }
