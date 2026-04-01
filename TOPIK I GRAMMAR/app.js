@@ -136,18 +136,26 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>`;
     }
 
-    // Quiz Button
+    // Action Buttons
+    bodyHtml += `<div class="action-buttons">
+      <button class="mark-learned-btn" data-card-id="${cardId}" onclick="toggleLearned('${cardId}', '${item.name}')">
+        <span class="qicon"></span> <span class="btn-text"></span>
+      </button>`;
+
     if (item.examples && item.examples.length > 0) {
       bodyHtml += `<button class="quiz-btn" data-card-id="${cardId}" onclick="startQuiz(this, '${cardId}')">
         <span class="qicon">✏️</span> Luyện tập
-      </button>
-      <div class="quiz-area" id="quiz-${cardId}"></div>`;
+      </button>`;
     }
 
-    return `<div class="grammar-card" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}">
+    bodyHtml += `<div class="quiz-area" id="quiz-${cardId}"></div></div>`;
+
+    const isLearned = hasLearned(item.name) ? ' learned' : '';
+
+    return `<div class="grammar-card${isLearned}" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}">
       <div class="grammar-card-header">
         <div class="grammar-title-group">
-          <span class="grammar-name">${item.name}</span>
+          <span class="grammar-name">${item.name} <span class="learned-check">✓</span></span>
           <span class="grammar-meaning">${item.meaning}</span>
         </div>
         <span class="grammar-level-badge ${levelClass}">${levelText}</span>
@@ -340,6 +348,36 @@ document.addEventListener('DOMContentLoaded', () => {
     card.style.animationDelay = `${(i % 10) * 0.05}s`;
   });
 });
+
+// ===== LEARNING PROGRESS SYSTEM =====
+const STORAGE_KEY = 'topik1_learned_items';
+
+function getLearnedItems() {
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch(e) { return []; }
+}
+
+function hasLearned(itemName) {
+  return getLearnedItems().includes(itemName);
+}
+
+function toggleLearned(cardId, itemName) {
+  const card = document.getElementById(cardId);
+  const items = getLearnedItems();
+  const idx = items.indexOf(itemName);
+  
+  if (idx > -1) {
+    items.splice(idx, 1);
+    card.classList.remove('learned');
+  } else {
+    items.push(itemName);
+    card.classList.add('learned');
+  }
+  
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+}
 
 // ===== QUIZ SYSTEM =====
 function getAllItems() {
