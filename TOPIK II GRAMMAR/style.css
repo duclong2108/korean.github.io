@@ -242,11 +242,30 @@ body {
   overflow: hidden;
   transition: var(--transition);
   animation: fadeInUp 0.5s ease both;
+  position: relative;
+}
+
+.grammar-card.learned {
+  border-color: rgba(67, 233, 123, 0.4);
+  box-shadow: 0 0 20px rgba(67, 233, 123, 0.05), inset 0 0 20px rgba(67, 233, 123, 0.02);
+}
+
+.grammar-card.learned::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 4px; height: 100%;
+  background: var(--korean-green);
+  box-shadow: 0 0 10px var(--korean-green);
 }
 
 .grammar-card:hover {
   border-color: var(--border-accent);
   box-shadow: 0 0 30px rgba(108,92,231,0.08);
+}
+
+.grammar-card.learned:hover {
+  border-color: rgba(67, 233, 123, 0.6);
+  box-shadow: 0 0 30px rgba(67, 233, 123, 0.1);
 }
 
 @keyframes fadeInUp {
@@ -268,6 +287,25 @@ body {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 1.2rem; font-weight: 700;
   color: var(--accent-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.learned-check {
+  font-size: 1rem;
+  color: var(--korean-green);
+  display: none;
+}
+
+.grammar-card.learned .learned-check {
+  display: inline-block;
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 .grammar-meaning {
@@ -636,3 +674,48 @@ body {
   font-family: inherit;
 }
 .quiz-restart-btn:hover { transform: translateY(-2px); }
+
+/* Learning Progress Action */
+.action-buttons {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.25rem;
+}
+
+.mark-learned-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 10px 20px;
+  background: rgba(67, 233, 123, 0.1);
+  border: 1px solid rgba(67, 233, 123, 0.3);
+  border-radius: var(--radius-md);
+  color: var(--korean-green); font-size: 0.88rem; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+  font-family: inherit;
+}
+
+.mark-learned-btn:hover {
+  background: rgba(67, 233, 123, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(67, 233, 123, 0.15);
+}
+
+.grammar-card.learned .mark-learned-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.grammar-card.learned .mark-learned-btn .btn-text::before {
+  content: 'Bỏ đánh dấu Đã học';
+}
+.grammar-card:not(.learned) .mark-learned-btn .btn-text::before {
+  content: 'Đánh dấu Đã học';
+}
+
+.grammar-card.learned .mark-learned-btn .qicon::before {
+  content: '🔄';
+}
+.grammar-card:not(.learned) .mark-learned-btn .qicon::before {
+  content: '✅';
+}
+
+/* Update quiz btn margin since it's now in action-buttons */
+.action-buttons .quiz-btn { margin-top: 0; }
