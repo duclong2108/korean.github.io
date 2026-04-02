@@ -427,7 +427,7 @@ const GRAMMAR_DATA = [
                 theory: ['<b>-(으)ㄴ 후에</b> = sau khi. 에 có thể lược bỏ.', 'Không patchim → <b>-ㄴ 후에</b>, có patchim → <b>-은 후에</b>.'],
                 examples: [
                     { kr: '밥을 먹<b>은 후에</b> 커피를 마셔요.', vi: 'Sau khi ăn cơm tôi uống cà phê.' },
-                    { kr: '졸업하<b>ㄴ 후에</b> 뭐 할 거예요?', vi: 'Sau khi tốt nghiệp bạn sẽ làm gì?' }
+                    { kr: '졸업<b>한 후에</b> 뭐 할 거예요?', vi: 'Sau khi tốt nghiệp bạn sẽ làm gì?' }
                 ],
                 notes: ['Tương đương: -고 나서 (sau khi ... xong): 먹고 나서 갔어요.']
             },
