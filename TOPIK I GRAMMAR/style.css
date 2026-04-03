@@ -396,8 +396,38 @@ body {
 
 .example-kr {
   font-family: 'Noto Sans KR', sans-serif;
-  font-size: 1rem; font-weight: 500;
-  color: var(--text-primary); margin-bottom: 4px;
+  font-size: 1.05rem; font-weight: 500;
+  color: var(--text-color);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.example-kr b { color: var(--korean-green); }
+
+.tts-btn {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tts-btn:hover {
+  background: rgba(108, 92, 231, 0.2);
+  color: var(--accent-primary);
+  transform: scale(1.1);
+}
+
+.tts-btn:active {
+  transform: scale(0.9);
 }
 
 .example-kr .highlight {
