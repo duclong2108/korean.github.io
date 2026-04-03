@@ -412,6 +412,20 @@ function findItemByCardId(cardId) {
 }
 
 function generateQuestions(item) {
+  // 1. Check if we have dedicated high-quality questions for this grammar point
+  if (typeof QUIZ_BANK !== 'undefined' && QUIZ_BANK[item.name] && QUIZ_BANK[item.name].length > 0) {
+    const bankQs = QUIZ_BANK[item.name].map(q => ({
+      sentence: q.q,
+      translation: q.explain, // use translation field for explanation
+      options: q.options,
+      correctIdx: q.ans,
+      answer: q.options[q.ans],
+      isBank: true
+    }));
+    return shuffle(bankQs).slice(0, 10); // Show up to 10 questions from bank
+  }
+
+  // 2. Fallback: Auto-generate from examples
   const questions = [];
   const allItems = getAllItems();
 
@@ -444,7 +458,8 @@ function generateQuestions(item) {
       translation: ex.vi,
       options,
       correctIdx,
-      answer
+      answer,
+      isBank: false
     });
   });
 
@@ -484,12 +499,14 @@ function renderQuestion(cardId, questions, idx, score) {
 
   const q = questions[idx];
   const labels = ['A', 'B', 'C', 'D'];
+  const qTitle = q.isBank ? q.sentence : `Điền vào chỗ trống:<br>${q.sentence.replace('______', '<span class="blank">?</span>')}`;
+
   area.innerHTML = `<div class="quiz-container">
     <div class="quiz-header">
       <div class="quiz-title">✏️ LUYỆN TẬP</div>
       <div class="quiz-progress">Câu ${idx + 1}/${questions.length} · Đúng: ${score}</div>
     </div>
-    <div class="quiz-question">Điền vào chỗ trống:<br>${q.sentence.replace('______', '<span class="blank">?</span>')}</div>
+    <div class="quiz-question">${qTitle}</div>
     <div class="quiz-options">
       ${q.options.map((opt, i) => `<div class="quiz-option" data-idx="${i}" onclick="checkAnswer('${cardId}', ${idx}, ${i}, ${q.correctIdx}, ${score}, ${questions.length})">
         <span class="opt-label">${labels[i]}</span>
@@ -518,9 +535,13 @@ function checkAnswer(cardId, qIdx, selectedIdx, correctIdx, score, total) {
   const newScore = isCorrect ? score + 1 : score;
   const fb = document.getElementById(`feedback-${cardId}`);
   const q = questions[qIdx];
+
+  const fbLabel = isCorrect ? '✅ Chính xác!' : `❌ Sai rồi! Đáp án đúng: <b>${q.answer}</b>`;
+  const fbContext = q.isBank ? `<b>Giải thích:</b> ${q.translation}` : `<b>Dịch nghĩa:</b> ${q.translation}`;
+
   fb.innerHTML = `<div class="quiz-feedback ${isCorrect ? 'correct-fb' : 'wrong-fb'}">
-    ${isCorrect ? '✅ Chính xác!' : `❌ Sai rồi! Đáp án đúng: <b>${q.answer}</b>`}
-    <div class="fb-translation">${q.translation}</div>
+    ${fbLabel}
+    <div class="fb-translation" style="margin-top:8px">${fbContext}</div>
   </div>
   <button class="quiz-next-btn" onclick="renderQuestion('${cardId}', document.getElementById('quiz-${cardId}')._questions, ${qIdx + 1}, ${newScore})">
     ${qIdx + 1 < total ? '➡️ Câu tiếp' : '📊 Xem kết quả'}
