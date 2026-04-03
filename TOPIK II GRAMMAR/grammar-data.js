@@ -414,7 +414,7 @@ const GRAMMAR_DATA = [
                 theory: ['<b>-(으)ㄴ/는 모양이다</b> = có vẻ, hình như. Phỏng đoán dựa trên quan sát bên ngoài.'],
                 examples: [
                     { kr: '비가 오<b>는 모양이에요</b>.', vi: 'Có vẻ trời đang mưa.' },
-                    { kr: '많이 아프<b>ㄴ 모양이에요</b>.', vi: 'Có vẻ ốm nặng.' }
+                    { kr: '많이 아<b>픈 모양이에요</b>.', vi: 'Có vẻ ốm nặng.' }
                 ],
                 notes: ['≈ -나 보다, nhưng -는 모양이다 formal/văn viết hơn.']
             },
