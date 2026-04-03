@@ -91,8 +91,12 @@ document.addEventListener('DOMContentLoaded', () => {
       bodyHtml += `<div class="gc-section">
         <div class="gc-section-title"><span class="icon">💡</span> Ví dụ</div>`;
       item.examples.forEach(ex => {
+        const cleanKr = stripHtml(ex.kr).replace(/'/g, "\\'");
         bodyHtml += `<div class="example-box">
-          <div class="example-kr">${ex.kr}</div>
+          <div class="example-kr">
+            <span>${ex.kr}</span>
+            <button class="tts-btn" onclick="speakKorean('${cleanKr}')" title="Nghe phát âm">🔊</button>
+          </div>
           <div class="example-vi">${ex.vi}</div>
         </div>`;
       });
@@ -356,7 +360,7 @@ function getLearnedItems() {
   try {
     const data = localStorage.getItem(STORAGE_KEY);
     return data ? JSON.parse(data) : [];
-  } catch(e) { return []; }
+  } catch (e) { return []; }
 }
 
 function hasLearned(itemName) {
@@ -367,7 +371,7 @@ function toggleLearned(cardId, itemName) {
   const card = document.getElementById(cardId);
   const items = getLearnedItems();
   const idx = items.indexOf(itemName);
-  
+
   if (idx > -1) {
     items.splice(idx, 1);
     card.classList.remove('learned');
@@ -375,7 +379,7 @@ function toggleLearned(cardId, itemName) {
     items.push(itemName);
     card.classList.add('learned');
   }
-  
+
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 }
 
@@ -531,3 +535,17 @@ function restartQuiz(cardId) {
   area._questions = questions;
   renderQuestion(cardId, questions, 0, 0);
 }
+
+// ===== TTS SYSTEM =====
+function speakKorean(text) {
+  if (!('speechSynthesis' in window)) {
+    alert('Trình duyệt của bạn không hỗ trợ Text-to-Speech.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'ko-KR';
+  utterance.rate = 0.85; // Slightly slower for language learners
+  window.speechSynthesis.speak(utterance);
+}
+
