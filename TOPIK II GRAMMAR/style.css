@@ -273,6 +273,10 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+.quiz-done-badge {
+  display: none;
+}
+
 .grammar-card.quizzed .quiz-done-badge {
   display: inline-flex;
   align-items: center;
