@@ -404,7 +404,7 @@ const QUIZ_BANK = {
             explain: "SAI LỖI CHẢY NÃO: 먹었기는. ĐÚNG: 먹기는 먹었지만 / 먹기는 했지만 (Ăn thì SỰ THẬT Tao Có Trút Tĩ Tã Vào Bụng Tao RỒI ĐÓ (Tương Cái Cảm Xúc Quá khứ ở Chữ Xong Sau)... Nhưng tao vẫn đói)."
         },
         {
-            q: "Dùng với ĐỘNG TỪ '작다' (Nhỏ). Nhà Tôi Bé THÌ CÓ BÉ ĐẤY nhưng Rất Thoải Mái Cực Kì:",
+            q: "Dùng với TÍNH TỪ '작다' (Nhỏ). Nhà Tôi Bé THÌ CÓ BÉ ĐẤY nhưng Rất Thoải Mái Cực Kì:",
             options: ["작기는 작지만 편해요.", "작기면 하지만 편해요.", "작고 작지만 편해요.", "작더니 작지만 편해요."],
             ans: 0,
             explain: "Nhân đôi nhân từ: 작기는 작지만 (Bé thì Nhà Tao Có Bé Đấy... Nhưng nó Ấm)."
