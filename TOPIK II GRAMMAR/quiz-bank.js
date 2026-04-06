@@ -937,20 +937,6 @@ const QUIZ_BANK = {
             explain: "Đáp án đúng là -았/었던 것 같다, nghĩa là Hình như đã / Chắc đã."
         }
     ],
-    "-았/었으면 하다": [
-        {
-            q: "Ngữ pháp <b>-았/었으면 하다</b> có nghĩa là gì?",
-            options: ["Lẽ ra nên / Phỏng đoán nhẹ", "Ước gì / Mong rằng", "Bất kể A hay B", "Nói rằng ... hay là"],
-            ans: 1,
-            explain: "-았/었으면 하다 = Ước gì / Mong rằng"
-        },
-        {
-            q: "Ngữ pháp nào mang nghĩa: <b>ước gì, mong rằng</b>?",
-            options: ["-ㄴ/는다고 치다", "-았/었으면 하다", "-자고 하다", "-아/어야지"],
-            ans: 1,
-            explain: "Đáp án đúng là -았/었으면 하다, nghĩa là Ước gì / Mong rằng."
-        }
-    ],
     "-ㄴ/는다고 하다": [
         {
             q: "Ngữ pháp <b>-ㄴ/는다고 하다</b> có nghĩa là gì?",
@@ -2041,6 +2027,34 @@ const QUIZ_BANK = {
             options: ["조차", "-기 십상이다", "마저", "-냐고 하다 / -(으)냐고 하다"],
             ans: 0,
             explain: "Đáp án đúng là 조차, nghĩa là Ngay cả / Đến cả."
+        }
+    ],
+    "-다(가) 보니(까)": [
+        {
+            q: "Ngữ pháp <b>-다(가) 보니(까)</b> có nghĩa là gì?",
+            options: ["Cứ làm mãi sẽ ...", "Làm mãi rồi nhận ra", "Đang làm ... thì / Giữa chừng", "Sau khi ... xong thì (nhận ra)"],
+            ans: 1,
+            explain: "-다(가) 보니(까) = Làm mãi rồi nhận ra"
+        },
+        {
+            q: "Ngữ pháp nào mang nghĩa: <b>trong khi cứ làm, bất ngờ nhận ra</b>?",
+            options: ["-다(가) 보면", "-다가", "-다(가) 보니(까)", "-고 나니(까)"],
+            ans: 2,
+            explain: "Đáp án đúng là -다(가) 보니(까), nghĩa là Làm mãi rồi nhận ra."
+        }
+    ],
+    "-다(가) 보면": [
+        {
+            q: "Ngữ pháp <b>-다(가) 보면</b> có nghĩa là gì?",
+            options: ["Làm mãi rồi nhận ra", "Cứ làm mãi sẽ ...", "Vì mải / Do bận", "Ngay khi / Vừa ... liền"],
+            ans: 1,
+            explain: "-다(가) 보면 = Cứ làm mãi sẽ ..."
+        },
+        {
+            q: "Ngữ pháp nào mang nghĩa: <b>nếu cứ làm, tự nhiên sẽ xảy ra</b>?",
+            options: ["-다(가) 보니(까)", "-다(가) 보면", "-고 보면", "-는 법이다"],
+            ans: 1,
+            explain: "Đáp án đúng là -다(가) 보면, nghĩa là Cứ làm mãi sẽ ..."
         }
     ]
 };
