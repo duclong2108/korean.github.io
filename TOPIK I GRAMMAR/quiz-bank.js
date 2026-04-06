@@ -1776,7 +1776,12 @@ const QUIZ_BANK = {
         },
         {
             q: "Một RÀO CẢN của '-기 때문에': Vế đằng sau có được xài (-(으)세요, -(으)ㅂ시다...) không?",
-            options: ["Có, rất bình thường", "TUYỆT ĐỐI CẤM (Giống hệt -아/어서)"],
+            options: [
+            "Có, dùng bình thường với mọi vế",
+            "TUYỆT ĐỐI CẤM — Giống hệt -아/어서",
+            "Chỉ cấm khi dùng với 합니다체",
+            "Không cấm, nhưng rất hiếm gặp"
+        ],
             ans: 1,
             explain: "Cũng cấm xài rủ rê, sai bảo. 바쁘기 때문에 도와주세요 (Vì bận NÊN ĐỪNG GIÚP NỮA ✗ SAI RỒI). Phải dùng 니까 (바쁘니까 도와주세요 ✓)."
         },
