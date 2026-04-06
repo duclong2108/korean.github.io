@@ -105,10 +105,10 @@ const GRAMMAR_DATA = [
                 theory: ['<b>부터</b> = từ (điểm bắt đầu), <b>까지</b> = đến (điểm kết thúc).', 'Dùng cho cả thời gian và địa điểm.'],
                 examples: [
                     { kr: '9시<b>부터</b> 6시<b>까지</b> 일해요.', vi: 'Tôi làm việc từ 9 giờ đến 6 giờ.' },
-                    { kr: '서울<b>에서</b> 부산<b>까지</b> 얼마나 걸려요?', vi: 'Từ Seoul đến Busan mất bao lâu?' },
+                    { kr: '서울<b>부터</b> 부산<b>까지</b> 얼마나 걸려요?', vi: 'Từ Seoul đến Busan mất bao lâu?' },
                     { kr: '월요일<b>부터</b> 금요일<b>까지</b> 수업이 있어요.', vi: 'Tôi có lớp từ thứ Hai đến thứ Sáu.' }
                 ],
-                notes: ['까지 có thể dùng một mình: 5시<b>까지</b> 오세요 (Hãy đến trước 5 giờ).', '부터 thường đi với 에서 khi chỉ nơi chốn: 여기<b>에서부터</b>.']
+                notes: ['까지 có thể dùng một mình: 5시<b>까지</b> 오세요 (Hãy đến trước 5 giờ).', '부터 thường đi với 에서 khi chỉ nơi chốn: 여기<b>에서부터</b>. Khi chỉ địa điểm, 서울에서 부산까지 và 서울부터 부산까지 đều đúng nhưng 에서까지 nhấn mạnh điểm xuất phát cụ thể hơn.']
             },
             {
                 name: '의', meaning: 'Của (sở hữu)', level: 1,
@@ -146,7 +146,7 @@ const GRAMMAR_DATA = [
                     { kr: '친구<b>처럼</b> 편해요.', vi: 'Thoải mái như bạn bè.' },
                     { kr: '눈<b>처럼</b> 하얘요.', vi: 'Trắng như tuyết.' }
                 ],
-                notes: ['처럼 = (이)랑 같이 (dùng với danh từ). Dùng với động/tính từ: -는 것처럼, -(으)ㄴ 것처럼.', '≈ 같이 khi diễn đạt sự tương đồng: 친구처럼 = 친구같이.']
+                notes: ['처럼 ≈ 같이 khi diễn đạt sự tương đồng: 친구처럼 = 친구같이 (như người bạn). Lưu ý: (이)랑 같이 = "cùng với ai đó" (together with), hoàn toàn khác nghĩa với 처럼.', 'Dùng với động/tính từ: -는 것처럼, -(으)ㄴ 것처럼.']
             },
             {
                 name: '만', meaning: 'Chỉ / Chỉ có', level: 1,
@@ -193,7 +193,7 @@ const GRAMMAR_DATA = [
                     { kr: '의사가 <b>아니에요</b>.', vi: 'Không phải là bác sĩ.' },
                     { kr: '이것은 책<b>이 아닙니다</b>.', vi: 'Đây không phải là sách.' }
                 ],
-                notes: ['이다 là trợ từ đặc biệt, gắn trực tiếp vào danh từ.', 'Quá khứ: 이었어요/였어요. 아니었어요.', 'Câu hỏi: 학생이에요? (có phải học sinh không?)']
+                notes: ['이다 là copula (서술격조사), gắn trực tiếp vào danh từ để tạo vị ngữ — khác với trợ từ thông thường.', 'Quá khứ: 이었어요/였어요. 아니었어요.', 'Câu hỏi: 학생이에요? (có phải học sinh không?)']
             },
             {
                 name: '께 / 께서', meaning: 'Cho (ai) / Chủ ngữ (kính ngữ)', level: 1,
