@@ -699,7 +699,7 @@ const GRAMMAR_DATA = [
                 name: '-는가 하면', meaning: 'Vừa ... vừa / Có khi ... có khi', level: 5,
                 theory: ['<b>-는가 하면</b> = có khi ... có khi, vừa ... vừa. Nêu hai mặt đối lập.'],
                 examples: [
-                    { kr: '울<b>는가 하면</b> 웃기도 해요.', vi: 'Có khi khóc, có khi lại cười.' },
+                    { kr: '우<b>는가 하면</b> 웃기도 해요.', vi: 'Có khi khóc, có khi lại cười.' },
                     { kr: '바쁜 날이 있<b>는가 하면</b> 한가한 날도 있어요.', vi: 'Có ngày bận, có ngày rảnh.' }
                 ],
                 notes: ['Diễn tả sự đa dạng, tương phản trong cùng một chủ thể.']
@@ -930,19 +930,6 @@ const GRAMMAR_DATA = [
                     { kr: '이런 끔찍한 음식을 먹느니 차라리 굶겠어.', vi: 'Thà nhịn đói còn hơn là ăn món ăn kinh khủng này.' }
                 ],
                 notes: ['Trọng tâm đặt ở vế sau (sự lựa chọn B).'],
-                important: true
-            },
-            {
-                name: '-기 나름이다',
-                meaning: 'Tùy thuộc vào việc...',
-                level: 4,
-                theory: [
-                    '<b>-기 나름이다</b> tương đương "tùy thuộc vào việc gì". Diễn tả kết quả thay đổi dựa trên hành động.'
-                ],
-                examples: [
-                    { kr: '성공은 노력하기 나름이에요.', vi: 'Thành công tùy thuộc vào sự nỗ lực.' }
-                ],
-                notes: ['Tương đương với: -에 달려 있다.'],
                 important: true
             },
             {
