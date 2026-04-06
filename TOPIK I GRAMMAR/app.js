@@ -599,4 +599,3 @@ function speakKorean(text) {
   utterance.rate = 0.85; // Slightly slower for language learners
   window.speechSynthesis.speak(utterance);
 }
-
