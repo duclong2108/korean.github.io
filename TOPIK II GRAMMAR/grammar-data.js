@@ -205,6 +205,26 @@ const GRAMMAR_DATA = [
                 notes: ['Chủ ngữ hai vế phải GIỐNG NHAU.', 'Khác -고: -다가 nhấn mạnh gián đoạn/chuyển đổi, -고 đơn thuần liệt kê.', 'Cũng dùng chỉ sự lặp lại: 웃다가 울다가 해요 (lúc cười lúc khóc).']
             },
             {
+                name: '-다(가) 보니(까)', meaning: 'Làm mãi rồi nhận ra', level: 4,
+                theory: ['<b>-다(가) 보니(까)</b> = trong khi cứ làm A, (bất ngờ) nhận ra/phát hiện B.', 'Nhấn mạnh: quá trình liên tục → kết quả là nhận thức mới hoặc tình trạng đã xảy ra.', 'Gắn vào thân động từ. Kết quả ở vế sau là sự kiện đã xảy ra (quá khứ/hiện tại).'],
+                examples: [
+                    { kr: '작업하<b>다 보니까</b> 새벽이 됐어요.', vi: 'Cứ mải làm việc, đến lúc nhận ra đã sang sáng sớm.' },
+                    { kr: '이야기하<b>다 보니까</b> 공통점이 많더라고요.', vi: 'Cứ nói chuyện mãi thì nhận ra có nhiều điểm chung.' },
+                    { kr: '매일 연습하<b>다 보니</b> 실력이 늘었어요.', vi: 'Cứ luyện tập mỗi ngày thì thấy tiến bộ rồi.' }
+                ],
+                notes: ['Nhấn mạnh: TIẾP DIỄN → Nhận ra (kết quả đã xảy ra).', 'So sánh: -다(가) 보면 = tiếp diễn → kết quả dự đoán tương lai.', 'Kết quả thường là nhận thức/phát hiện BẤT NGỜ.']
+            },
+            {
+                name: '-다(가) 보면', meaning: 'Cứ làm mãi sẽ ...', level: 4,
+                theory: ['<b>-다(가) 보면</b> = nếu cứ làm A thì (tự nhiên) B sẽ xảy ra.', 'Nhấn mạnh: quá trình lặp lại liên tục → kết quả tất yếu trong tương lai.', 'Vế sau thường là lời khuyên, dự đoán tích cực.'],
+                examples: [
+                    { kr: '심호흡하<b>다 보면</b> 마음이 차분해집니다.', vi: 'Nếu cứ thở sâu thì tâm trạng sẽ bình tĩnh lại.' },
+                    { kr: '열심히 하<b>다 보면</b> 언젠가 성공할 거예요.', vi: 'Nếu cứ cố gắng thì sẽ có ngày thành công.' },
+                    { kr: '살<b>다 보면</b> 좋은 일도 있을 거예요.', vi: 'Sống mãi rồi cũng sẽ có chuyện vui thôi.' }
+                ],
+                notes: ['Nhấn mạnh: TIẾP DIỄN → Kết quả (tương lai/dự đoán).', 'So sánh: -다(가) 보니(까) = đã nhận ra (quá khứ); -다(가) 보면 = sẽ thấy (tương lai).', 'Thường mang nghĩa khuyến khích, lạc quan.']
+            },
+            {
                 name: '-더니', meaning: 'Trước đó ... nay / Rồi thì', level: 4,
                 theory: ['<b>-더니</b> diễn tả sự thay đổi hoặc kết quả sau khi quan sát.', 'Ngôi 3: A-더니 B (anh ấy trước ... nay ...). Ngôi 1: chỉ quá khứ -았/었더니.'],
                 examples: [
