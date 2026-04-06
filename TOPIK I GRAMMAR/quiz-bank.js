@@ -1777,11 +1777,11 @@ const QUIZ_BANK = {
         {
             q: "Một RÀO CẢN của '-기 때문에': Vế đằng sau có được xài (-(으)세요, -(으)ㅂ시다...) không?",
             options: [
-            "Có, dùng bình thường với mọi vế",
-            "TUYỆT ĐỐI CẤM — Giống hệt -아/어서",
-            "Chỉ cấm khi dùng với 합니다체",
-            "Không cấm, nhưng rất hiếm gặp"
-        ],
+                "Có, dùng bình thường với mọi vế",
+                "TUYỆT ĐỐI CẤM — Giống hệt -아/어서",
+                "Chỉ cấm khi dùng với 합니다체",
+                "Không cấm, nhưng rất hiếm gặp"
+            ],
             ans: 1,
             explain: "Cũng cấm xài rủ rê, sai bảo. 바쁘기 때문에 도와주세요 (Vì bận NÊN ĐỪNG GIÚP NỮA ✗ SAI RỒI). Phải dùng 니까 (바쁘니까 도와주세요 ✓)."
         },
@@ -1959,8 +1959,13 @@ const QUIZ_BANK = {
         },
         {
             q: "Bất quy tắc ㄹ KHÉT LẸT: Động từ '만들다' (Làm, chế tạo). Chia thành 'Món ăn MÀ MẸ ĐÃ LÀM':",
-            options: ["엄마가 만들은 음식", "엄마가 만들은 음식", "엄마가 만든 음식", "엄마가 만든 음식"],
-            ans: 3,
+            options: [
+                "엄마가 만들은 음식",
+                "엄마가 만든 음식",
+                "엄마가 만드는 음식",
+                "엄마가 만들 음식"
+            ],
+            ans: 1,
             explain: "만들다 + 은. Chữ ㄹ gặp chữ 은 => Bà chằn ㄹ lập tức xoá sổ chữ 은, NHƯNG chữ ㄹ cũng phải bay màu NHƯỜNG CHỖ cho chữ ㄴ chọc xuống đáy. (만들다 -> 탈락 ㄹ -> 만 + ㄴ = 만든). Lần đầu tiên bạn thấy cảnh này phải không?"
         }
     ],
