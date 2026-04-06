@@ -156,11 +156,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isLearned = hasLearned(item.name) ? ' learned' : '';
     const isQuizzed = hasQuizzed(item.name) ? ' quizzed' : '';
+    const impBadge = item.important ? `<span class="important-badge">⭐ Trọng tâm TOPIK</span>` : '';
 
     return `<div class="grammar-card${isLearned}${isQuizzed}" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}">
       <div class="grammar-card-header">
         <div class="grammar-title-group">
           <span class="grammar-name">${item.name} <span class="learned-check">✓</span></span>
+          ${impBadge}
           <span class="quiz-done-badge">✏️ Đã luyện</span>
           <span class="grammar-meaning">${item.meaning}</span>
         </div>
