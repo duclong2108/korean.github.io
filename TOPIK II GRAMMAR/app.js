@@ -23,8 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     'nominalization': 'count-nominalization',
     'particles': 'count-particles', 'tense': 'count-tense',
     'modifiers': 'count-modifiers', 'negation': 'count-negation',
-    'irregular': 'count-irregular', 'honorific': 'count-honorific'
+    'irregular': 'count-irregular', 'honorific': 'count-honorific',
+    'advanced_master': 'count-advanced_master'
   };
+
   GRAMMAR_DATA.forEach(cat => {
     const el = document.getElementById(catIdMap[cat.id]);
     if (el) el.textContent = cat.items.length;
@@ -35,7 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = '';
     noResults.style.display = 'none';
     GRAMMAR_DATA.forEach((cat, ci) => {
-      container.innerHTML += renderCategory(cat, ci);
+      try {
+        container.innerHTML += renderCategory(cat, ci);
+      } catch (e) {
+        console.error('Error rendering category: ' + cat.title, e);
+      }
     });
     attachCardListeners();
   }
@@ -48,31 +54,31 @@ document.addEventListener('DOMContentLoaded', () => {
         <h2>${cat.title}</h2>
         <div class="cat-desc">${cat.description}</div>
       </div>
-    </div>`;
+    </div> `;
     cat.items.forEach((item, i) => {
-      html += renderCard(item, `card-${ci}-${i}`);
+      html += renderCard(item, `card - ${ci} -${i} `);
     });
-    html += `</div>`;
+    html += `</div> `;
     return html;
   }
 
   function renderCard(item, cardId) {
     const levelClass = item.level === 1 ? 'level-1' : 'level-2';
-    const levelText = `Cấp ${item.level}`;
+    const levelText = `Cấp ${item.level} `;
 
     let bodyHtml = '';
 
     // Theory
     if (item.theory) {
-      bodyHtml += `<div class="gc-section">
+      bodyHtml += `<div class="gc-section" >
         <div class="gc-section-title"><span class="icon">📖</span> Lý thuyết</div>
         <div class="gc-theory">${item.theory.map(p => `<p>${p}</p>`).join('')}</div>
-      </div>`;
+      </div> `;
     }
 
     // Conjugation
     if (item.conjugation && item.conjugation.length > 0) {
-      bodyHtml += `<div class="gc-section">
+      bodyHtml += `<div class="gc-section" >
         <div class="gc-section-title"><span class="icon">🔧</span> Cách chia</div>
         <table class="conj-table"><thead><tr>`;
       const cols = item.conjugationCols || ['Điều kiện', 'Cách dùng', 'Ví dụ'];
@@ -86,79 +92,87 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         bodyHtml += `</tr>`;
       });
-      bodyHtml += `</tbody></table></div>`;
+      bodyHtml += `</tbody></table ></div> `;
     }
 
     // Examples
     if (item.examples && item.examples.length > 0) {
-      bodyHtml += `<div class="gc-section">
-        <div class="gc-section-title"><span class="icon">💡</span> Ví dụ</div>`;
+      bodyHtml += `<div class="gc-section" >
+    <div class="gc-section-title"><span class="icon">💡</span> Ví dụ</div>`;
       item.examples.forEach(ex => {
-        bodyHtml += `<div class="example-box">
-          <div class="example-kr">${ex.kr}</div>
+        const cleanKr = stripHtml(ex.kr).replace(/'/g, "\\'");
+        bodyHtml += `<div class="example-box" >
+          <div class="example-kr">
+            <span>${ex.kr}</span>
+            <button class="tts-btn" onclick="speakKorean('${cleanKr}')" title="Nghe phát âm">🔊</button>
+          </div>
           <div class="example-vi">${ex.vi}</div>
-        </div>`;
+        </div> `;
       });
-      bodyHtml += `</div>`;
+      bodyHtml += `</div> `;
     }
 
     // Notes
     if (item.notes && item.notes.length > 0) {
-      bodyHtml += `<div class="gc-section">
-        <div class="gc-section-title"><span class="icon">📌</span> Lưu ý</div>`;
+      bodyHtml += `<div class="gc-section" >
+    <div class="gc-section-title"><span class="icon">📌</span> Lưu ý</div>`;
       item.notes.forEach(n => {
-        bodyHtml += `<div class="note-box">
+        bodyHtml += `<div class="note-box" >
           <div class="note-title">⚠️ Lưu ý</div>
           <p>${n}</p>
-        </div>`;
+        </div> `;
       });
-      bodyHtml += `</div>`;
+      bodyHtml += `</div> `;
     }
 
     // Special cases
     if (item.special && item.special.length > 0) {
-      bodyHtml += `<div class="gc-section">
-        <div class="gc-section-title"><span class="icon">🔥</span> Trường hợp đặc biệt</div>`;
+      bodyHtml += `<div class="gc-section" >
+    <div class="gc-section-title"><span class="icon">🔥</span> Trường hợp đặc biệt</div>`;
       item.special.forEach(s => {
-        bodyHtml += `<div class="special-box">
+        bodyHtml += `<div class="special-box" >
           <div class="special-title">⭐ Đặc biệt</div>
           <p>${s}</p>
-        </div>`;
+        </div> `;
       });
-      bodyHtml += `</div>`;
+      bodyHtml += `</div> `;
     }
 
     // Comparison
     if (item.comparison) {
-      bodyHtml += `<div class="gc-section">
+      bodyHtml += `<div class="gc-section" >
         <div class="gc-section-title"><span class="icon">⚖️</span> So sánh</div>
         <div class="compare-box">
           <div class="compare-title">📊 So sánh</div>
           <p>${item.comparison}</p>
         </div>
-      </div>`;
+      </div> `;
     }
 
     // Action Buttons
     bodyHtml += `<div class="action-buttons">
-      <button class="mark-learned-btn" data-card-id="${cardId}" onclick="toggleLearned('${cardId}', '${item.name}')">
-        <span class="qicon"></span> <span class="btn-text"></span>
-      </button>`;
+    <button class="mark-learned-btn" data-card-id="${cardId}" onclick="toggleLearned('${cardId}', '${item.name}')">
+      <span class="qicon"></span> <span class="btn-text"></span>
+    </button>`;
 
     if (item.examples && item.examples.length > 0) {
       bodyHtml += `<button class="quiz-btn" data-card-id="${cardId}" onclick="startQuiz(this, '${cardId}')">
-        <span class="qicon">✏️</span> Luyện tập
+    <span class="qicon">✏️</span> Luyện tập
       </button>`;
     }
 
     bodyHtml += `<div class="quiz-area" id="quiz-${cardId}"></div></div>`;
 
     const isLearned = hasLearned(item.name) ? ' learned' : '';
+    const isQuizzed = hasQuizzed(item.name) ? ' quizzed' : '';
+    const impBadge = item.important ? `<span class="important-badge">⭐ Trọng tâm</span>` : '';
 
-    return `<div class="grammar-card${isLearned}" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}">
+    return `<div class="grammar-card${isLearned}${isQuizzed}" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}">
       <div class="grammar-card-header">
         <div class="grammar-title-group">
           <span class="grammar-name">${item.name} <span class="learned-check">✓</span></span>
+          ${impBadge}
+          <span class="quiz-done-badge">✏️ Đã luyện</span>
           <span class="grammar-meaning">${item.meaning}</span>
         </div>
         <span class="grammar-level-badge ${levelClass}">${levelText}</span>
@@ -167,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="grammar-card-body">
         <div class="grammar-card-content">${bodyHtml}</div>
       </div>
-    </div>`;
+    </div> `;
   }
 
   // ===== CARD TOGGLE =====
@@ -193,9 +207,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const results = [];
     GRAMMAR_DATA.forEach((cat, ci) => {
       cat.items.forEach((item, i) => {
-        const searchStr = `${item.name} ${item.meaning} ${(item.theory || []).join(' ')}`.toLowerCase();
+        const searchStr = `${item.name} ${item.meaning} ${(item.theory || []).join(' ')} `.toLowerCase();
         if (searchStr.includes(q)) {
-          results.push({ item, catTitle: cat.title, cardId: `card-${ci}-${i}` });
+          results.push({ item, catTitle: cat.title, cardId: `card - ${ci} -${i} ` });
         }
       });
     });
@@ -203,10 +217,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Show dropdown
     if (results.length > 0) {
       searchDropdown.innerHTML = results.slice(0, 10).map(r =>
-        `<div class="search-result-item" data-card="${r.cardId}">
+        `<div class="search-result-item" data-card="${r.cardId}" >
           <div class="sr-title">${r.item.name}</div>
           <div class="sr-desc">${r.item.meaning} · ${r.catTitle}</div>
-        </div>`
+        </div> `
       ).join('');
       searchDropdown.classList.add('active');
       noResults.style.display = 'none';
@@ -226,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     } else {
-      searchDropdown.innerHTML = `<div class="search-result-item"><div class="sr-desc">Không tìm thấy kết quả</div></div>`;
+      searchDropdown.innerHTML = `<div class="search-result-item" > <div class="sr-desc">Không tìm thấy kết quả</div></div> `;
       searchDropdown.classList.add('active');
     }
 
@@ -348,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add animation delay to cards
   document.querySelectorAll('.grammar-card').forEach((card, i) => {
-    card.style.animationDelay = `${(i % 10) * 0.05}s`;
+    card.style.animationDelay = `${(i % 10) * 0.05} s`;
   });
 });
 
@@ -382,7 +396,37 @@ function toggleLearned(cardId, itemName) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
 }
 
-// ===== QUIZ SYSTEM =====
+const QUIZ_STORAGE_KEY = 'topik2_quizzed_items';
+
+function getQuizzedItems() {
+  try {
+    const data = localStorage.getItem(QUIZ_STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (e) { return []; }
+}
+
+function hasQuizzed(itemName) {
+  return getQuizzedItems().includes(itemName);
+}
+
+function markQuizzed(cardId) {
+  const item = findItemByCardId(cardId);
+  if (!item) return;
+  const items = getQuizzedItems();
+  if (!items.includes(item.name)) {
+    items.push(item.name);
+    localStorage.setItem(QUIZ_STORAGE_KEY, JSON.stringify(items));
+    const card = document.getElementById(cardId);
+    if (card) {
+      card.classList.add('quizzed');
+      const badge = card.querySelector('.quiz-done-badge');
+      if (badge) badge.style.display = 'inline-flex';
+    }
+  }
+}
+
+
+
 function getAllItems() {
   const all = [];
   GRAMMAR_DATA.forEach(cat => cat.items.forEach(item => all.push(item)));
@@ -410,7 +454,7 @@ function findItemByCardId(cardId) {
   return GRAMMAR_DATA[ci]?.items[ii];
 }
 
-function generateQuestions(item) {
+function generateFallbackQuestions(item) {
   const questions = [];
   const allItems = getAllItems();
 
@@ -441,40 +485,66 @@ function generateQuestions(item) {
       translation: ex.vi,
       options,
       correctIdx,
-      answer
+      answer,
+      explain: 'Hệ thống tự động trích xuất từ câu ví dụ.'
     });
   });
 
   return shuffle(questions).slice(0, 5);
 }
 
+function generateQuestions(item) {
+  if (typeof QUIZ_BANK !== 'undefined' && QUIZ_BANK[item.name] && QUIZ_BANK[item.name].length > 0) {
+    const bankQs = QUIZ_BANK[item.name];
+    const qs = bankQs.map(bq => {
+      const formattedQ = (bq.q && !bq.sentence) ? bq.q : bq.sentence;
+      return {
+        sentence: formattedQ,
+        translation: '',
+        options: bq.options,
+        correctIdx: bq.ans !== undefined ? bq.ans : bq.correctIdx,
+        answer: bq.options[bq.ans !== undefined ? bq.ans : bq.correctIdx],
+        explain: bq.explain || 'Chưa có giải thích chi tiết.'
+      };
+    });
+    return shuffle(qs).slice(0, 5);
+  }
+  return generateFallbackQuestions(item);
+}
+
 function startQuiz(btn, cardId) {
   const item = findItemByCardId(cardId);
   if (!item) return;
 
+  const area = document.getElementById(`quiz-${cardId}`);
+  if (area) area.style.display = 'block';
+
   const questions = generateQuestions(item);
   if (questions.length === 0) {
-    const area = document.getElementById(`quiz-${cardId}`);
-    area.innerHTML = `<div class="quiz-container"><p style="color:var(--text-muted)">Không đủ dữ liệu để tạo bài tập.</p></div>`;
+    if (area) area.innerHTML = `<div class="quiz-container"> <p style="color:var(--text-muted)">Không đủ dữ liệu để tạo bài tập.</p></div>`;
+    if (btn) btn.style.display = 'none';
     return;
   }
 
-  btn.style.display = 'none';
+  if (btn) btn.style.display = 'none';
   renderQuestion(cardId, questions, 0, 0);
 }
 
 function renderQuestion(cardId, questions, idx, score) {
-  const area = document.getElementById(`quiz-${cardId}`);
+  const area = document.getElementById(`quiz - ${cardId} `);
   if (idx >= questions.length) {
     const pct = Math.round((score / questions.length) * 100);
-    const icon = pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '💪';
     area.innerHTML = `<div class="quiz-container">
-      <div class="quiz-score">
-        <div class="score-icon">${icon}</div>
-        <div class="score-text">${score}/${questions.length}</div>
-        <div class="score-detail">Đúng ${pct}% — ${pct >= 80 ? 'Xuất sắc!' : pct >= 50 ? 'Khá tốt!' : 'Cần ôn thêm!'}</div>
-        <button class="quiz-restart-btn" onclick="restartQuiz('${cardId}')">🔄 Làm lại</button>
-      </div>
+    <div class="quiz-header">
+      <div class="quiz-title">🏁 HOÀN THÀNH</div>
+      <div class="quiz-progress">100%</div>
+    </div>
+    <div class="quiz-result">
+      <div class="score-circle">${score}</div>
+      <div class="score-text">${score}/${questions.length}</div>
+      <div class="score-detail">Đúng ${pct}% — ${pct >= 80 ? 'Xuất sắc!' : pct >= 50 ? 'Khá tốt!' : 'Cần ôn thêm!'}</div>
+      <button class="quiz-restart-btn" onclick="restartQuiz('${cardId}')">🔄 Làm lại</button>
+    </div>
     </div>`;
     return;
   }
@@ -512,22 +582,37 @@ function checkAnswer(cardId, qIdx, selectedIdx, correctIdx, score, total) {
   });
 
   const newScore = isCorrect ? score + 1 : score;
+  if (qIdx + 1 === total && newScore > 0) markQuizzed(cardId);
   const fb = document.getElementById(`feedback-${cardId}`);
   const q = questions[qIdx];
   fb.innerHTML = `<div class="quiz-feedback ${isCorrect ? 'correct-fb' : 'wrong-fb'}">
     ${isCorrect ? '✅ Chính xác!' : `❌ Sai rồi! Đáp án đúng: <b>${q.answer}</b>`}
-    <div class="fb-translation">${q.translation}</div>
+    ${q.translation ? `<div class="fb-translation">${q.translation}</div>` : ''}
+    ${q.explain ? `<div class="fb-explain" style="margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.05); border-left: 3px solid var(--primary-color); border-radius: 4px; font-size: 0.9em; line-height: 1.5;">💡 <b>Giải thích:</b> ${q.explain}</div>` : ''}
   </div>
-  <button class="quiz-next-btn" onclick="renderQuestion('${cardId}', document.getElementById('quiz-${cardId}')._questions, ${qIdx + 1}, ${newScore})">
-    ${qIdx + 1 < total ? '➡️ Câu tiếp' : '📊 Xem kết quả'}
-  </button>`;
+    <button class="quiz-next-btn" onclick="renderQuestion('${cardId}', document.getElementById('quiz-${cardId}')._questions, ${qIdx + 1}, ${newScore})">
+      ${qIdx + 1 < total ? '➡️ Câu tiếp' : '📊 Xem kết quả'}
+    </button>`;
 }
 
 function restartQuiz(cardId) {
   const item = findItemByCardId(cardId);
   if (!item) return;
   const questions = generateQuestions(item);
-  const area = document.getElementById(`quiz-${cardId}`);
+  const area = document.getElementById(`quiz - ${cardId} `);
   area._questions = questions;
   renderQuestion(cardId, questions, 0, 0);
+}
+
+// ===== TTS SYSTEM =====
+function speakKorean(text) {
+  if (!('speechSynthesis' in window)) {
+    alert('Trình duyệt của bạn không hỗ trợ Text-to-Speech.');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'ko-KR';
+  utterance.rate = 0.85; // Slightly slower for language learners
+  window.speechSynthesis.speak(utterance);
 }
