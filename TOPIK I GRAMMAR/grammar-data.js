@@ -194,6 +194,24 @@ const GRAMMAR_DATA = [
                     { kr: '이것은 책<b>이 아닙니다</b>.', vi: 'Đây không phải là sách.' }
                 ],
                 notes: ['이다 là trợ từ đặc biệt, gắn trực tiếp vào danh từ.', 'Quá khứ: 이었어요/였어요. 아니었어요.', 'Câu hỏi: 학생이에요? (có phải học sinh không?)']
+            },
+            {
+                name: '께 / 께서', meaning: 'Cho (ai) / Chủ ngữ (kính ngữ)', level: 1,
+                theory: ['<b>께</b> là dạng kính ngữ của 에게/한테 (cho ai/đối với ai).', '<b>께서</b> là dạng kính ngữ của 이/가 (trợ từ chủ ngữ).'],
+                examples: [
+                    { kr: '선생님<b>께</b> 전화를 드렸어요.', vi: 'Tôi đã gọi điện cho thầy giáo.' },
+                    { kr: '할머니<b>께서</b> 주무십니다.', vi: 'Bà đang ngủ.' }
+                ],
+                notes: ['Dùng với người lớn tuổi, chức vụ cao.', 'Thường kết hợp với động từ kính ngữ (주무시다, 드시다, 주시다).']
+            },
+            {
+                name: '에게서 / 한테서', meaning: 'Từ (ai đó)', level: 1,
+                theory: ['<b>에게서 / 한테서</b> có nghĩa "từ ai đó", chỉ hành động xuất phát từ người/động vật.', '에게서 dùng trong văn viết/trang trọng, 한테서 dùng trong văn nói/thân mật.'],
+                examples: [
+                    { kr: '친구<b>한테서</b> 선물을 받았어요.', vi: 'Tôi nhận được quà từ bạn.' },
+                    { kr: '선생님<b>에게서</b> 한국어를 배웠어요.', vi: 'Tôi đã học tiếng Hàn từ giáo viên.' }
+                ],
+                notes: ['Chỉ dùng cho người/động vật. Nơi chốn phải dùng 에서: 도서관에서 (✓) 도서관한테서 (✗).']
             }
         ]
     },
@@ -298,7 +316,7 @@ const GRAMMAR_DATA = [
                 name: '-군요 / -구나', meaning: 'À ra vậy / Ồ thế à (nhận ra)', level: 2,
                 theory: ['<b>-군요</b> diễn tả sự nhận ra, ngạc nhiên về điều vừa biết.', '-군요 (lịch sự), -구나 (thân mật). Gắn vào thân từ (동사/형용사).'],
                 examples: [
-                    { kr: '병원에 가면 여기 쭉 가면 되는<b>군요</b>.', vi: 'À ra là đi thẳng đường này đến bệnh viện.' },
+                    { kr: '병원에 가려면 이 길로 쭉 가면 되는<b>군요</b>.', vi: 'À ra là cứ đi thẳng đường này để đến bệnh viện.' },
                     { kr: '한국 사람이<b>군요</b>.', vi: 'Ồ, hóa ra là người Hàn Quốc.' },
                     { kr: '오늘 쉬는<b>군요</b>.', vi: 'À hôm nay nghỉ à.' }
                 ],
@@ -546,16 +564,6 @@ const GRAMMAR_DATA = [
                     { kr: '한국어를 배우<b>러</b> 왔어요.', vi: 'Tôi đến để học tiếng Hàn.' }
                 ],
                 notes: ['Chỉ dùng với 가다/오다/다니다.', '≠ -(으)려고: -(으)러 + 이동, -(으)려고 + mọi động từ.']
-            },
-            {
-                name: '-아/어서 (nguyên nhân)', meaning: 'Vì / Nên (lý do)', level: 1,
-                theory: ['<b>-아/어서</b> nghĩa 2: vì, nên. Nguyên nhân dẫn đến kết quả.', 'Khác với -아/어서 (trình tự = và rồi).'],
-                examples: [
-                    { kr: '배가 아파<b>서</b> 병원에 갔어요.', vi: 'Vì đau bụng nên đi bệnh viện.' },
-                    { kr: '비가 와<b>서</b> 못 나갔어요.', vi: 'Vì trời mưa nên không ra ngoài được.' },
-                    { kr: '만나<b>서</b> 반갑습니다.', vi: 'Rất vui được gặp bạn.' }
-                ],
-                notes: ['KHÔNG chia thì ở vế trước: 아팠어서 (✗) → 아파서 (✓).', 'KHÔNG dùng mệnh lệnh/đề nghị ở vế sau. Dùng -(으)니까 thay.', '만나서 반갑습니다 là cụm cố định.']
             }
         ]
     },
