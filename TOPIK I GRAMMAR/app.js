@@ -29,11 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===== RENDER ALL GRAMMAR =====
   function renderAll() {
-    container.innerHTML = '';
     noResults.style.display = 'none';
-    GRAMMAR_DATA.forEach((cat, ci) => {
-      container.innerHTML += renderCategory(cat, ci);
-    });
+    const parts = [];
+    GRAMMAR_DATA.forEach((cat, ci) => parts.push(renderCategory(cat, ci)));
+    container.innerHTML = parts.join('');
     attachCardListeners();
   }
 
@@ -91,11 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
       bodyHtml += `<div class="gc-section">
         <div class="gc-section-title"><span class="icon">💡</span> Ví dụ</div>`;
       item.examples.forEach(ex => {
-        const cleanKr = stripHtml(ex.kr).replace(/'/g, "\\'");
+        const cleanKr = stripHtml(ex.kr)
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;');
         bodyHtml += `<div class="example-box">
           <div class="example-kr">
             <span>${ex.kr}</span>
-            <button class="tts-btn" onclick="speakKorean('${cleanKr}')" title="Nghe phát âm">🔊</button>
+            <button class="tts-btn" data-text="${cleanKr}" onclick="speakKorean(this.dataset.text)" title="Nghe phát âm">🔊</button>
           </div>
           <div class="example-vi">${ex.vi}</div>
         </div>`;
@@ -152,13 +153,16 @@ document.addEventListener('DOMContentLoaded', () => {
       </button>`;
     }
 
-    bodyHtml += `<div class="quiz-area" id="quiz-${cardId}"></div></div>`;
+    bodyHtml += `</div>`;
+    bodyHtml += `<div class="quiz-area" id="quiz-${cardId}"></div>`;
 
     const isLearned = hasLearned(item.name) ? ' learned' : '';
     const isQuizzed = hasQuizzed(item.name) ? ' quizzed' : '';
     const impBadge = item.important ? `<span class="important-badge">⭐ Trọng tâm TOPIK</span>` : '';
 
-    return `<div class="grammar-card${isLearned}${isQuizzed}" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}">
+    const theoryText = stripHtml((item.theory || []).join(' ')).replace(/"/g, '&quot;');
+
+    return `<div class="grammar-card${isLearned}${isQuizzed}" id="${cardId}" data-name="${item.name}" data-meaning="${item.meaning}" data-theory="${theoryText}">
       <div class="grammar-card-header">
         <div class="grammar-title-group">
           <span class="grammar-name">${item.name} <span class="learned-check">✓</span></span>
@@ -242,9 +246,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function filterCards(q) {
     let hasVisible = false;
     document.querySelectorAll('.grammar-card').forEach(card => {
-      const name = (card.dataset.name || '').toLowerCase();
+      const name    = (card.dataset.name    || '').toLowerCase();
       const meaning = (card.dataset.meaning || '').toLowerCase();
-      if (name.includes(q) || meaning.includes(q)) {
+      const theory  = (card.dataset.theory  || '').toLowerCase();
+      if (name.includes(q) || meaning.includes(q) || theory.includes(q)) {
         card.style.display = '';
         hasVisible = true;
       } else {
@@ -253,13 +258,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('.category-section').forEach(sec => {
-      const visibleCards = sec.querySelectorAll('.grammar-card[style=""],.grammar-card:not([style])');
-      const hiddenCards = sec.querySelectorAll('.grammar-card[style*="display: none"]');
-      if (hiddenCards.length === sec.querySelectorAll('.grammar-card').length) {
-        sec.style.display = 'none';
-      } else {
-        sec.style.display = '';
-      }
+      const total  = sec.querySelectorAll('.grammar-card').length;
+      const hidden = sec.querySelectorAll('.grammar-card[style*="display: none"]').length;
+      sec.style.display = (hidden === total) ? 'none' : '';
     });
 
     noResults.style.display = hasVisible ? 'none' : 'block';
@@ -516,14 +517,16 @@ function renderQuestion(cardId, questions, idx, score) {
   if (idx >= questions.length) {
     const pct = Math.round((score / questions.length) * 100);
     const icon = pct >= 80 ? '🎉' : pct >= 50 ? '👍' : '💪';
-    // Mark this grammar point as quizzed
     markQuizzed(cardId);
     area.innerHTML = `<div class="quiz-container">
       <div class="quiz-score">
         <div class="score-icon">${icon}</div>
         <div class="score-text">${score}/${questions.length}</div>
         <div class="score-detail">Đúng ${pct}% — ${pct >= 80 ? 'Xuất sắc!' : pct >= 50 ? 'Khá tốt!' : 'Cần ôn thêm!'}</div>
-        <button class="quiz-restart-btn" onclick="restartQuiz('${cardId}')">🔄 Làm lại</button>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px">
+          <button class="quiz-restart-btn" onclick="restartQuiz('${cardId}')">🔄 Làm lại</button>
+          <button class="quiz-restart-btn" onclick="closeQuiz('${cardId}')" style="background:rgba(255,255,255,0.08)">✕ Đóng</button>
+        </div>
       </div>
     </div>`;
     return;
@@ -536,7 +539,10 @@ function renderQuestion(cardId, questions, idx, score) {
   area.innerHTML = `<div class="quiz-container">
     <div class="quiz-header">
       <div class="quiz-title">✏️ LUYỆN TẬP</div>
-      <div class="quiz-progress">Câu ${idx + 1}/${questions.length} · Đúng: ${score}</div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="quiz-progress">Câu ${idx + 1}/${questions.length} · Đúng: ${score}</div>
+        <button onclick="closeQuiz('${cardId}')" title="Đóng quiz" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.1rem;padding:2px 6px">✕</button>
+      </div>
     </div>
     <div class="quiz-question">${qTitle}</div>
     <div class="quiz-options">
@@ -548,7 +554,6 @@ function renderQuestion(cardId, questions, idx, score) {
     <div id="feedback-${cardId}"></div>
   </div>`;
 
-  // Store questions data on the element
   area._questions = questions;
 }
 
@@ -587,6 +592,20 @@ function restartQuiz(cardId) {
   const area = document.getElementById(`quiz-${cardId}`);
   area._questions = questions;
   renderQuestion(cardId, questions, 0, 0);
+}
+
+function closeQuiz(cardId) {
+  const area = document.getElementById(`quiz-${cardId}`);
+  if (area) {
+    area.innerHTML = '';
+    area._questions = null;
+  }
+  // Restore the quiz button
+  const card = document.getElementById(cardId);
+  if (card) {
+    const btn = card.querySelector('.quiz-btn');
+    if (btn) btn.style.display = '';
+  }
 }
 
 // ===== TTS SYSTEM =====
