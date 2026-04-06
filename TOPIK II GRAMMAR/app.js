@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     </div> `;
     cat.items.forEach((item, i) => {
-      html += renderCard(item, `card - ${ci} -${i} `);
+      html += renderCard(item, `card-${ci}-${i}`);
     });
     html += `</div> `;
     return html;
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
       cat.items.forEach((item, i) => {
         const searchStr = `${item.name} ${item.meaning} ${(item.theory || []).join(' ')} `.toLowerCase();
         if (searchStr.includes(q)) {
-          results.push({ item, catTitle: cat.title, cardId: `card - ${ci} -${i} ` });
+          results.push({ item, catTitle: cat.title, cardId: `card-${ci}-${i}` });
         }
       });
     });
@@ -362,7 +362,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Add animation delay to cards
   document.querySelectorAll('.grammar-card').forEach((card, i) => {
-    card.style.animationDelay = `${(i % 10) * 0.05} s`;
+    card.style.animationDelay = `${(i % 10) * 0.05}s`;
   });
 });
 
@@ -531,7 +531,7 @@ function startQuiz(btn, cardId) {
 }
 
 function renderQuestion(cardId, questions, idx, score) {
-  const area = document.getElementById(`quiz - ${cardId} `);
+  const area = document.getElementById(`quiz-${cardId}`);
   if (idx >= questions.length) {
     const pct = Math.round((score / questions.length) * 100);
     area.innerHTML = `<div class="quiz-container">
@@ -599,7 +599,7 @@ function restartQuiz(cardId) {
   const item = findItemByCardId(cardId);
   if (!item) return;
   const questions = generateQuestions(item);
-  const area = document.getElementById(`quiz - ${cardId} `);
+  const area = document.getElementById(`quiz-${cardId}`);
   area._questions = questions;
   renderQuestion(cardId, questions, 0, 0);
 }
