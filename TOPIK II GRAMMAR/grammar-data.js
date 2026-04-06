@@ -401,7 +401,7 @@ const GRAMMAR_DATA = [
                 notes: ['명사 + 정도: 죽을 정도로 피곤해요 (mệt muốn chết).']
             },
             {
-                name: '-기 마련이다', meaning: 'Đương nhiên / Tất yếu', level: 5,
+                name: '-기 마련이다', important: true, meaning: 'Đương nhiên / Tất yếu', level: 5,
                 theory: ['<b>-기 마련이다</b> = đương nhiên, tất yếu, chắc chắn sẽ. Quy luật tự nhiên.'],
                 examples: [
                     { kr: '열심히 하<b>면 성공하기 마련이에요</b>.', vi: 'Nếu cố gắng thì đương nhiên sẽ thành công.' },
@@ -723,7 +723,7 @@ const GRAMMAR_DATA = [
                 notes: ['Nhấn mạnh phát hiện mới sau khi đã trải nghiệm.']
             },
             {
-                name: '-고자', meaning: 'Với mong muốn / Nhằm (formal)', level: 5,
+                name: '-고자', important: true, meaning: 'Với mong muốn / Nhằm (formal)', level: 5,
                 theory: ['<b>-고자</b> = với mong muốn, nhằm. Mục đích, rất formal.'],
                 examples: [
                     { kr: '한국어를 배우<b>고자</b> 한국에 왔습니다.', vi: 'Tôi đến Hàn Quốc với mong muốn học tiếng Hàn.' },
@@ -881,6 +881,82 @@ const GRAMMAR_DATA = [
                     { kr: '비가 오면 미끄러지<b>기 십상이에요</b>.', vi: 'Nếu trời mưa thì rất dễ trượt.' }
                 ],
                 notes: ['Thường dùng với kết quả tiêu cực.', '= -기 쉽다 nhưng -기 십상이다 mạnh hơn.']
+            }
+        ]
+        },
+    {
+        id: 'advanced_master',
+        icon: '👑',
+        title: '고급 완성 (Cao cấp 5-6)',
+        description: 'Các cấu trúc ngữ pháp nâng cao, thường gặp trong bài Đọc/Viết câu 53-54',
+        items: [
+            {
+                name: '-(으)ㄹ 지경이다',
+                meaning: 'Đến mức (sắp) / Tới mức',
+                level: 5,
+                theory: [
+                    '<b>-(으)ㄹ 지경이다</b> có nghĩa là TỚI MỨC, ĐẾN MỨC (thường mang ý tiêu cực hoặc cực đoan).',
+                    'Biểu hiện mức độ của một trạng thái hoặc sự việc quá giới hạn.'
+                ],
+                examples: [
+                    { kr: '너무 피곤해서 쓰러질 지경이에요.', vi: 'Vì quá mệt nên mệt đến mức muốn ngất xỉu.' },
+                    { kr: '스트레스 때문에 폭발할 지경이다.', vi: 'Vì stress nên đến mức như sắp bùng nổ.' }
+                ],
+                notes: ['Thường đi cùng các động từ chỉ sự suy kiệt (쓰러지다, 미치다, 죽다...)'],
+                important: true
+            },
+            {
+                name: '-(으)ㄹ 나위가 없다',
+                meaning: 'Không còn chỗ nào để chê / Hoàn hảo',
+                level: 5,
+                theory: [
+                    '<b>-(으)ㄹ 나위 (가) 없다</b> có nghĩa KHÔNG CÒN GÌ ĐỂ CHÊ, MIỄN CHÊ, vô cùng hoàn hảo.'
+                ],
+                examples: [
+                    { kr: '이 식당의 음식은 더할 나위 없이 맛있다.', vi: 'Thức ăn ở nhà hàng này ngon không chê vào đâu được.' },
+                    { kr: '그의 준비성은 나무랄 나위가 없었다.', vi: 'Sự chuẩn bị của cậu ấy hoàn hảo không có chỗ nào để trách cả.' }
+                ],
+                notes: ['Cụm cố định hay gặp: 더할 나위 없이 (không gì bằng).'],
+                important: true
+            },
+            {
+                name: '-느니 차라리',
+                meaning: 'Thà... còn hơn',
+                level: 5,
+                theory: [
+                    '<b>-느니 차라리</b> diễn tả ý: Hành động A tồi tệ đến mức "thà làm việc B còn hơn làm việc A".'
+                ],
+                examples: [
+                    { kr: '이런 끔찍한 음식을 먹느니 차라리 굶겠어.', vi: 'Thà nhịn đói còn hơn là ăn món ăn kinh khủng này.' }
+                ],
+                notes: ['Trọng tâm đặt ở vế sau (sự lựa chọn B).'],
+                important: true
+            },
+            {
+                name: '-기 나름이다',
+                meaning: 'Tùy thuộc vào việc...',
+                level: 4,
+                theory: [
+                    '<b>-기 나름이다</b> tương đương "tùy thuộc vào việc gì". Diễn tả kết quả thay đổi dựa trên hành động.'
+                ],
+                examples: [
+                    { kr: '성공은 노력하기 나름이에요.', vi: 'Thành công tùy thuộc vào sự nỗ lực.' }
+                ],
+                notes: ['Tương đương với: -에 달려 있다.'],
+                important: true
+            },
+            {
+                name: '-(으)ㄹ 성싶다',
+                meaning: 'Có vẻ như là...',
+                level: 6,
+                theory: [
+                    '<b>-(으)ㄹ 성싶다</b> diễn tả sự phỏng đoán cẩn thận (hơi trang trọng/văn viết).'
+                ],
+                examples: [
+                    { kr: '오늘 밤에는 눈이 올 성싶다.', vi: 'Có vẻ đêm nay trời sẽ có tuyết.' }
+                ],
+                notes: ['Tương đương: -(으)ㄹ 것 같다 ở dạng trang trọng.'],
+                important: true
             }
         ]
     }
