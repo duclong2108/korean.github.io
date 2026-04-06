@@ -84,7 +84,7 @@ const GRAMMAR_DATA = [
                 name: '와/과, 하고, (이)랑', meaning: 'Và / Với', level: 1,
                 theory: ['Cả ba đều có nghĩa "và" hoặc "với", nối hai danh từ.', '<b>와/과</b>: văn viết. Không patchim → 와, có patchim → 과.', '<b>하고</b>: dùng mọi trường hợp, phổ biến nhất.', '<b>(이)랑</b>: khẩu ngữ. Có patchim → 이랑, không patchim → 랑.'],
                 examples: [
-                    { kr: '커피<b>와</b> 빵을 먹었어요.', vi: 'Tôi đã ăn cà phê và bánh mì.' },
+                    { kr: '커피<b>와</b> 빵을 먹었어요.', vi: 'Tôi đã uống cà phê và ăn bánh mì.' },
                     { kr: '친구<b>하고</b> 같이 갔어요.', vi: 'Tôi đã đi cùng bạn.' },
                     { kr: '사과<b>랑</b> 바나나 주세요.', vi: 'Cho tôi táo và chuối.' }
                 ],
@@ -723,7 +723,7 @@ const GRAMMAR_DATA = [
                 theory: ['<b>-기 때문에</b> = vì, bởi vì. Nhấn mạnh nguyên nhân.', 'Formal hơn -아/어서, -(으)니까.'],
                 examples: [
                     { kr: '바쁘<b>기 때문에</b> 못 갔어요.', vi: 'Vì bận nên không đi được.' },
-                    { kr: '비가 오<b>기 때문에</b> 우산을 가져가세요.', vi: 'Vì trời mưa nên hãy mang ô.' }
+                    { kr: '비가 오<b>기 때문에</b> 길이 막혀요.', vi: 'Vì trời mưa nên đường bị tắc.' }
                 ],
                 notes: ['명사 + 때문에: 비 때문에, 너 때문에.', 'Có thể chia thì: 바빴기 때문에 (vì đã bận).']
             },
