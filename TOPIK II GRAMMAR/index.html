@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TOPIK II - Tổng hợp Ngữ pháp Tiếng Hàn</title>
+  <title>Ngữ pháp TOPIK II Hậu Duệ</title>
+  <script>
+    window.onerror = function(msg, url, line) {
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("grammarContainer").innerHTML += '<div style="color:red; background:white; padding: 20px; font-size: 24px; position:absolute; z-index:9999;">ERROR: ' + msg + ' LINE: ' + line + '</div>';
+      });
+      return false;
+    };
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <meta name="description" content="Tổng hợp toàn bộ ngữ pháp TOPIK II (Cấp 3-6) tiếng Hàn: lý thuyết, ví dụ, lưu ý, trường hợp đặc biệt.">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -59,6 +68,10 @@
           <span class="item-icon">📎</span> Danh từ hóa & Khác
           <span class="item-count" id="count-nominalization"></span>
         </a>
+        <a class="sidebar-item" href="#" data-target="cat-advanced_master">
+          <span class="item-icon">👑</span> Cao cấp 5-6
+          <span class="item-count" id="count-advanced_master"></span>
+        </a>
       </div>
     </nav>
     <main class="main-content" id="mainContent">
@@ -71,7 +84,7 @@
             <div class="stat-label">Ngữ pháp</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number">7</div>
+            <div class="stat-number">8</div>
             <div class="stat-label">Chủ đề</div>
           </div>
           <div class="stat-item">
@@ -91,7 +104,8 @@
     </main>
   </div>
   <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
-  <script src="grammar-data.js"></script>
-  <script src="app.js"></script>
+  <script src="grammar-data.js?v=9"></script>
+  <script src="quiz-bank.js?v=9"></script>
+  <script src="app.js?v=9"></script>
 </body>
 </html>
