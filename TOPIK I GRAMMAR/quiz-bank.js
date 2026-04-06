@@ -25,10 +25,10 @@ const QUIZ_BANK = {
             explain: "Câu giới thiệu bản thân thông thường dùng 저는 (저 + 는). 저는 김민수입니다 = Tôi là Kim Min Su. Mặc dù 제가 (저 + 가) đúng ngữ pháp, nhưng 이/가 mang sắc thái nhấn mạnh chủ ngữ, không phù hợp cho câu tự giới thiệu bình thường. Người Hàn 99% dùng 저는 trong trường hợp này."
         },
         {
-            q: "_____ 이름입니까?",
-            options: ["누가", "무엇가", "누구이", "무엇이"],
+            q: "Điền vào chỗ trống:<br>이름이 _____입니까?",
+            options: ["누가", "무엇가", "무엇이", "무엇"],
             ans: 3,
-            explain: "무엇 có patchim (ㅅ) nên đi với 이 thành 무엇이 (Cái gì là tên của bạn?). Nếu là 'Ai' thì dùng 누가."
+            explain: "Cấu trúc đúng là 이름이 무엇입니까? (Tên là gì?). 무엇 (cái gì) đứng làm vị ngữ sau 이다 → 무엇입니까. Không cần thêm 이/가 vào 무엇 ở đây vì 무엇 đã là phần vị ngữ (무엇 + 입니까). Lưu ý: 무엇이 (무엇 + 이/가) dùng khi 무엇 là chủ ngữ, ví dụ: 무엇이 필요해요? (Cần cái gì?)"
         },
         {
             q: "Chọn cặp từ đúng để điền vào:<br>형___ 크고 동생___ 작아요.",
