@@ -1194,6 +1194,36 @@ body {
   animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+.important-badge {
+  font-size: 0.72rem;
+  background: rgba(249, 212, 35, 0.2);
+  color: var(--korean-yellow);
+  padding: 3px 9px;
+  border-radius: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 0 10px rgba(249, 212, 35, 0.3);
+  border: 1px solid rgba(249, 212, 35, 0.5);
+  animation: pulseCore 2s infinite;
+}
+
+@keyframes pulseCore {
+  0% {
+    box-shadow: 0 0 0 0 rgba(249, 212, 35, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 6px rgba(249, 212, 35, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(249, 212, 35, 0);
+  }
+}
+
 .grammar-card.quizzed .grammar-card-header {
   border-left: 3px solid var(--korean-blue);
 }
