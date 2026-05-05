@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOPIK II — Bảng Ngữ Pháp Full 148 Cấu Trúc</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d27;
+    --card2: #1f2235;
+    --border: #2a2d3e;
+    --text: #e8eaf0;
+    --sub: #8b92a8;
+    --g1: #ff6b6b; /* Nguyên nhân */
+    --g2: #ffa94d; /* Đối lập */
+    --g3: #69db7c; /* Mục đích */
+    --g4: #74c0fc; /* Điều kiện */
+    --g5: #da77f2; /* Thứ tự */
+    --g6: #ff8787; /* Đang làm thì */
+    --g7: #63e6be; /* Phỏng đoán */
+    --g8: #f9c74f; /* Quá khứ */
+    --g9: #a9e34b; /* Hối tiếc */
+    --g10: #f783ac; /* Gián tiếp */
+    --g11: #4dabf7; /* Mức độ */
+    --g12: #ff922b; /* Khả năng */
+    --g13: #cc5de8; /* Nhận thức */
+    --g14: #20c997; /* Trạng thái */
+    --g15: #94d82d; /* Đặc biệt */
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #1a1d27 0%, #0f1117 100%);
+    padding: 48px 32px 32px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(116,192,252,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: linear-gradient(90deg, #74c0fc, #da77f2, #ff6b6b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .header p {
+    color: var(--sub);
+    margin-top: 8px;
+    font-size: 0.95rem;
+  }
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 24px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #74c0fc;
+  }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    color: var(--sub);
+    cursor: pointer;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* SECTION */
+  .section {
+    padding: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+  }
+  .section-count {
+    color: var(--sub);
+    font-size: 0.85rem;
+  }
+
+  /* CARD GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    transition: transform 0.15s, border-color 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    border-radius: 12px 0 0 12px;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+  }
+  .card-grammar {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+    margin-right: 8px;
+  }
+  .card-num {
+    font-size: 0.7rem;
+    color: var(--sub);
+    padding: 2px 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .card-meaning {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .card-tip {
+    font-size: 0.8rem;
+    color: var(--sub);
+    background: rgba(255,255,255,0.04);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .card-example {
+    font-size: 0.78rem;
+    color: #6b7280;
+    font-style: italic;
+    border-left: 2px solid rgba(255,255,255,0.08);
+    padding-left: 8px;
+    margin-top: 4px;
+  }
+  .card-example span {
+    display: block;
+    color: #9ca3af;
+  }
+
+  /* GROUP COLORS */
+  .g1 .card::before, .g1 .card-meaning { color: var(--g1); }
+  .g1 .card::before { background: var(--g1); }
+  .g1 .section-badge { background: rgba(255,107,107,0.12); color: var(--g1); border: 1px solid rgba(255,107,107,0.25); }
+
+  .g2 .card::before { background: var(--g2); }
+  .g2 .card-meaning { color: var(--g2); }
+  .g2 .section-badge { background: rgba(255,169,77,0.12); color: var(--g2); border: 1px solid rgba(255,169,77,0.25); }
+
+  .g3 .card::before { background: var(--g3); }
+  .g3 .card-meaning { color: var(--g3); }
+  .g3 .section-badge { background: rgba(105,219,124,0.12); color: var(--g3); border: 1px solid rgba(105,219,124,0.25); }
+
+  .g4 .card::before { background: var(--g4); }
+  .g4 .card-meaning { color: var(--g4); }
+  .g4 .section-badge { background: rgba(116,192,252,0.12); color: var(--g4); border: 1px solid rgba(116,192,252,0.25); }
+
+  .g5 .card::before { background: var(--g5); }
+  .g5 .card-meaning { color: var(--g5); }
+  .g5 .section-badge { background: rgba(218,119,242,0.12); color: var(--g5); border: 1px solid rgba(218,119,242,0.25); }
+
+  .g6 .card::before { background: var(--g6); }
+  .g6 .card-meaning { color: var(--g6); }
+  .g6 .section-badge { background: rgba(255,135,135,0.12); color: var(--g6); border: 1px solid rgba(255,135,135,0.25); }
+
+  .g7 .card::before { background: var(--g7); }
+  .g7 .card-meaning { color: var(--g7); }
+  .g7 .section-badge { background: rgba(99,230,190,0.12); color: var(--g7); border: 1px solid rgba(99,230,190,0.25); }
+
+  .g8 .card::before { background: var(--g8); }
+  .g8 .card-meaning { color: var(--g8); }
+  .g8 .section-badge { background: rgba(249,199,79,0.12); color: var(--g8); border: 1px solid rgba(249,199,79,0.25); }
+
+  .g9 .card::before { background: var(--g9); }
+  .g9 .card-meaning { color: var(--g9); }
+  .g9 .section-badge { background: rgba(169,227,75,0.12); color: var(--g9); border: 1px solid rgba(169,227,75,0.25); }
+
+  .g10 .card::before { background: var(--g10); }
+  .g10 .card-meaning { color: var(--g10); }
+  .g10 .section-badge { background: rgba(247,131,172,0.12); color: var(--g10); border: 1px solid rgba(247,131,172,0.25); }
+
+  .g11 .card::before { background: var(--g11); }
+  .g11 .card-meaning { color: var(--g11); }
+  .g11 .section-badge { background: rgba(77,171,247,0.12); color: var(--g11); border: 1px solid rgba(77,171,247,0.25); }
+
+  .g12 .card::before { background: var(--g12); }
+  .g12 .card-meaning { color: var(--g12); }
+  .g12 .section-badge { background: rgba(255,146,43,0.12); color: var(--g12); border: 1px solid rgba(255,146,43,0.25); }
+
+  .g13 .card::before { background: var(--g13); }
+  .g13 .card-meaning { color: var(--g13); }
+  .g13 .section-badge { background: rgba(204,93,232,0.12); color: var(--g13); border: 1px solid rgba(204,93,232,0.25); }
+
+  .g14 .card::before { background: var(--g14); }
+  .g14 .card-meaning { color: var(--g14); }
+  .g14 .section-badge { background: rgba(32,201,151,0.12); color: var(--g14); border: 1px solid rgba(32,201,151,0.25); }
+
+  .g15 .card::before { background: var(--g15); }
+  .g15 .card-meaning { color: var(--g15); }
+  .g15 .section-badge { background: rgba(148,216,45,0.12); color: var(--g15); border: 1px solid rgba(148,216,45,0.25); }
+
+  .footer {
+    text-align: center;
+    padding: 32px;
+    color: var(--sub);
+    font-size: 0.85rem;
+  }
+
+  @media print {
+    body { background: white; color: black; }
+    .card { border: 1px solid #ddd; background: #fafafa; page-break-inside: avoid; }
+    .header { background: white; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>TOPIK II — Bảng Ngữ Pháp Full</h1>
+  <p>148 cấu trúc trung cấp · Phân nhóm theo chức năng · Kèm mẹo nhớ</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">148</div><div class="stat-label">Cấu trúc</div></div>
+    <div class="stat"><div class="stat-num">15</div><div class="stat-label">Nhóm</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Điểm TOPIK</div></div>
+  </div>
+</div>
+
+<div class="legend">
+  <span style="color:var(--sub);font-size:0.75rem;margin-right:8px;align-self:center">Nhóm:</span>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g1)"></div>Nguyên nhân</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g2)"></div>Đối lập</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g3)"></div>Mục đích</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g4)"></div>Điều kiện</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g5)"></div>Thứ tự</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g6)"></div>Đang làm thì</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g7)"></div>Phỏng đoán</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g8)"></div>Quá khứ</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g9)"></div>Hối tiếc</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g10)"></div>Gián tiếp</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g11)"></div>Mức độ</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g12)"></div>Khả năng</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g13)"></div>Nhận thức</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g14)"></div>Trạng thái</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--g15)"></div>Đặc biệt</div>
+</div>
+
+<!-- G1: NGUYÊN NHÂN -->
+<div class="section g1">
+  <div class="section-header">
+    <span class="section-badge">💨 Nhóm 1 — Nguyên Nhân & Kết Quả</span>
+    <span class="section-count">10 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 바람에</div><div class="card-num">89</div></div><div class="card-meaning">vì... nên (xấu, bất ngờ)</div><div class="card-tip">💨 Gió thổi bất ngờ → kết quả XẤU + ĐỘT NGỘT, ngoài ý muốn. Câu sau luôn tiêu cực.</div><div class="card-example"><span>갑자기 비가 오는 바람에 소풍이 취소됐어요.</span>Vì trời đột ngột mưa nên chuyến picnic bị hủy.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 덕분에</div><div class="card-num">88</div></div><div class="card-meaning">nhờ... nên (tốt, biết ơn)</div><div class="card-tip">🙏 덕 = đức/ơn → nhờ ơn ai đó → kết quả TỐT. Ngược hoàn toàn với 바람에.</div><div class="card-example"><span>선생님 덕분에 합격했어요.</span>Nhờ thầy/cô nên tôi đỗ.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는 탓에</div><div class="card-num">7</div></div><div class="card-meaning">vì... nên (xấu, có lỗi)</div><div class="card-tip">😤 탓 = lỗi → CÓ NGƯỜI BỊ QUY TRÁCH NHIỆM. Thường là tự mình có lỗi.</div><div class="card-example"><span>운동 안 한 탓에 살이 쪘어요.</span>Vì không tập nên tăng cân.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-느라고</div><div class="card-num">83</div></div><div class="card-meaning">vì bận làm A nên không làm B được</div><div class="card-tip">📚 "Mải làm A → không có thời gian/sức B". Câu sau thường là kết quả không tốt.</div><div class="card-example"><span>숙제하느라고 전화를 못 받았어요.</span>Vì bận làm bài nên không nghe điện thoại.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 통에</div><div class="card-num">95</div></div><div class="card-meaning">vì cảnh hỗn loạn/ồn ào nên</div><div class="card-tip">🌀 통 = hỗn độn, ồn ào → Nguyên nhân là SỰ HỖNLOẠN, kết quả xấu. Mạnh hơn 바람에.</div><div class="card-example"><span>아이들이 떠드는 통에 집중 못 했어요.</span>Vì bọn trẻ ồn nên không tập trung được.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)로 인해(서)</div><div class="card-num">41</div></div><div class="card-meaning">do / vì (nguyên nhân trang trọng)</div><div class="card-tip">📰 Văn viết chính thức, báo chí. 인해 = do ảnh hưởng của. Thay cho 때문에 trong văn học thuật.</div><div class="card-example"><span>인터넷으로 인해 확산되었다.</span>Đã lan truyền do internet.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-아/어서 그런지</div><div class="card-num">121</div></div><div class="card-meaning">có lẽ vì... nên (không chắc chắn)</div><div class="card-tip">🤔 "그런지 = không biết có phải vì thế không" → PHỎNG ĐOÁN nguyên nhân, không khẳng định.</div><div class="card-example"><span>나이가 들어서 그런지 몸이 예전같지 않아요.</span>Có lẽ vì già nên người không như trước.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-길래</div><div class="card-num">65</div></div><div class="card-meaning">thấy rằng / vì thấy... nên</div><div class="card-tip">👀 Người nói QUAN SÁT thấy A → mới làm B. Nguyên nhân là điều mình tận mắt thấy.</div><div class="card-example"><span>남편이 안 오길래 바람맞은 줄 알았어요.</span>Thấy chồng không đến nên tưởng bị thả bom.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)니까(요)</div><div class="card-num">19</div></div><div class="card-meaning">vì... nên (trung lập, đa năng)</div><div class="card-tip">🔑 Giống TOPIK I nhưng thêm (요) → lịch sự hơn. Dùng giải thích lý do trong mọi ngữ cảnh.</div><div class="card-example"><span>열심히 하니까 성적이 우수해요.</span>Vì cố gắng nên điểm tốt.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)므로</div><div class="card-num">45</div></div><div class="card-meaning">vì / bởi vì (văn viết trang trọng)</div><div class="card-tip">📄 Văn bản chính thức, báo cáo. Thay cho 기 때문에 khi viết luận văn, công văn.</div><div class="card-example"><span>아침에 일어나야 하므로 이제 잡니다.</span>Vì phải dậy sớm nên đi ngủ đây.</div></div>
+  </div>
+</div>
+
+<!-- G2: ĐỐI LẬP -->
+<div class="section g2">
+  <div class="section-header">
+    <span class="section-badge">↔️ Nhóm 2 — Đối Lập & Tương Phản</span>
+    <span class="section-count">8 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는 반면(에)</div><div class="card-num">5</div></div><div class="card-meaning">trong khi A thì ngược lại B</div><div class="card-tip">↔️ Hai mặt đối lập của CÙNG sự vật. Văn học thuật, trang trọng hơn 지만.</div><div class="card-example"><span>택시는 편리한 반면에 비싸다.</span>Taxi tiện lợi trong khi đó lại đắt.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 대신(에)</div><div class="card-num">87</div></div><div class="card-meaning">thay vì / thay cho</div><div class="card-tip">🔄 대신 = thay thế → Không làm A mà làm B thay thế, hoặc đổi lại điều gì đó.</div><div class="card-example"><span>술 대신에 녹차를 마시자.</span>Uống trà thay vì rượu nhé.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 한편</div><div class="card-num">98</div></div><div class="card-meaning">trong khi đó cũng / vừa... vừa</div><div class="card-tip">⚖️한편 = một mặt khác → Làm 2 việc song song. Không đối lập mà BỔ SUNG thêm.</div><div class="card-example"><span>회사에 다니는 한편 부업도 해요.</span>Vừa đi làm vừa có công việc phụ.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는/은커녕</div><div class="card-num">99</div></div><div class="card-meaning">đừng nói đến A, ngay cả B cũng</div><div class="card-tip">📉 커녕 = không những không A, mà ngay cả B nhỏ hơn cũng không. Nhấn mạnh thiếu hụt cực độ.</div><div class="card-example"><span>술은커녕 차도 못 마셨어요.</span>Đừng nói đến rượu, ngay cả trà cũng không uống được.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-기는 하지만</div><div class="card-num">61</div></div><div class="card-meaning">tuy... nhưng (thừa nhận rồi phản bác)</div><div class="card-tip">✋ "Tôi thừa nhận A... NHƯNG B". Nhấn mạnh sự thừa nhận trước khi nêu mặt ngược lại.</div><div class="card-example"><span>어렵기는 하지만 재미있어요.</span>Tuy khó nhưng thú vị.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는들</div><div class="card-num">15</div></div><div class="card-meaning">dù cho / kể cả nếu (cũng vô ích)</div><div class="card-tip">🤷 들 = dù cho → Dù A thì B cũng không thay đổi. Sắc thái bi quan / bất lực.</div><div class="card-example"><span>내가 간들 소용없어요.</span>Dù tôi có đến cũng vô ích.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-더라도</div><div class="card-num">111</div></div><div class="card-meaning">dù / cho dù (mạnh hơn 아/어도)</div><div class="card-tip">💪 Mạnh hơn 아/어도. Nhấn mạnh "BẤT KỂ điều kiện khó khăn thế nào, B vẫn xảy ra".</div><div class="card-example"><span>힘겨운 일이 있더라도 참아요.</span>Dù có việc khó khăn cũng chịu đựng.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-만 못하다</div><div class="card-num">119</div></div><div class="card-meaning">không bằng / thua kém</div><div class="card-tip">📊 A만 못하다 = A không tốt bằng (cái khác). So sánh với chuẩn tham chiếu là điều tốt hơn.</div><div class="card-example"><span>중고는 신제품만 못해요.</span>Hàng cũ không bằng hàng mới.</div></div>
+  </div>
+</div>
+
+<!-- G3: MỤC ĐÍCH -->
+<div class="section g3">
+  <div class="section-header">
+    <span class="section-badge">🎯 Nhóm 3 — Mục Đích & Cơ Sở</span>
+    <span class="section-count">7 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-기 위해(서)</div><div class="card-num">59</div></div><div class="card-meaning">để / vì mục đích</div><div class="card-tip">🏹 Mục đích rõ ràng, chủ động. Chủ ngữ 2 vế thường giống nhau. Văn viết nhiều hơn.</div><div class="card-example"><span>문제 해결하기 위해 모였어요.</span>Tập hợp để giải quyết vấn đề.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-도록</div><div class="card-num">115</div></div><div class="card-meaning">để / đến mức / cho đến khi</div><div class="card-tip">🎯 3 TRONG 1: Mục đích (để) + Mức độ (đến nỗi) + Giới hạn (cho đến khi). Chủ ngữ có thể khác.</div><div class="card-example"><span>이해하도록 설명해 주세요.</span>Hãy giải thích để hiểu được.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)려면</div><div class="card-num">40</div></div><div class="card-meaning">nếu muốn / để có thể</div><div class="card-tip">📋 "Muốn đạt A thì phải làm B". Điều kiện tiên quyết để đạt mục tiêu.</div><div class="card-example"><span>기념사진 찍으려면 배경이 좋아야 해요.</span>Muốn chụp ảnh kỷ niệm thì cần nền đẹp.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 겸 (해서)</div><div class="card-num">21</div></div><div class="card-meaning">vừa để A vừa để B (hai mục đích)</div><div class="card-tip">🎭 겸 = kiêm → Một hành động phục vụ HAI mục đích cùng lúc. "Tiện thể... cũng..."</div><div class="card-example"><span>사과할 겸 편지를 썼어요.</span>Tôi viết thư vừa để xin lỗi vừa để...</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는 김에</div><div class="card-num">3</div></div><div class="card-meaning">nhân tiện / tranh thủ khi</div><div class="card-tip">🚶 김 = nhân tiện, tranh thủ → Đang làm A rồi, nhân tiện làm luôn B. "Tiện đường / Tiện thể".</div><div class="card-example"><span>마트에 가는 김에 친정도 갔다.</span>Nhân tiện đi siêu thị ghé thăm nhà mẹ đẻ.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-기/게 마련이다</div><div class="card-num">60</div></div><div class="card-meaning">chắc chắn sẽ / đương nhiên là</div><div class="card-tip">📜 마련 = định sẵn, tất yếu → QUY LUẬT TỰ NHIÊN, điều tất yếu xảy ra. "Đời là vậy".</div><div class="card-example"><span>준비 안 하면 후회하기 마련이다.</span>Không chuẩn bị thì tất yếu sẽ hối tiếc.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는 법이다</div><div class="card-num">6</div></div><div class="card-meaning">sẽ / đương nhiên (quy luật)</div><div class="card-tip">⚖️ 법 = quy tắc, lẽ → "Đó là lẽ đương nhiên". Gần giống 마련이다 nhưng nhấn mạnh quy tắc xã hội.</div><div class="card-example"><span>노력하면 개선되는 법이다.</span>Cứ cố gắng thì sẽ tiến bộ thôi.</div></div>
+  </div>
+</div>
+
+<!-- G4: ĐIỀU KIỆN -->
+<div class="section g4">
+  <div class="section-header">
+    <span class="section-badge">🔀 Nhóm 4 — Điều Kiện & Giả Định</span>
+    <span class="section-count">10 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ수록</div><div class="card-num">34</div></div><div class="card-meaning">càng A thì càng B</div><div class="card-tip">📈 Đồ thị tăng dần → A tăng thì B cũng tăng theo. Cấu trúc mạnh: A면 A할수록.</div><div class="card-example"><span>볼수록 더 좋아요.</span>Càng nhìn càng thích.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ지라도</div><div class="card-num">36</div></div><div class="card-meaning">dù có / cho dù thế nào</div><div class="card-tip">🏔️ Nhấn mạnh hơn 더라도. "Dù tình huống cực đoan thế nào, B vẫn đúng". Văn viết.</div><div class="card-example"><span>아무리 어려울지라도 해냅니다.</span>Dù khó đến đâu tôi vẫn làm được.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-든지</div><div class="card-num">116</div></div><div class="card-meaning">dù... đi nữa / bất kể</div><div class="card-tip">🎲 든지 = bất kể lựa chọn nào → "Dù chọn A hay B, kết quả vẫn vậy". Liệt kê 2 khả năng.</div><div class="card-example"><span>좋든지 싫든지 수능 봐야 해요.</span>Dù thích hay không cũng phải thi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ가(요)?</div><div class="card-num">17</div></div><div class="card-meaning">... không? (câu hỏi nhẹ, tự hỏi)</div><div class="card-tip">🤔 Câu hỏi nhẹ hơn 어요?, thường tự hỏi hoặc hỏi gián tiếp. Tính từ + ㄴ가요?</div><div class="card-example"><span>여자 친구는 예쁜가요?</span>Bạn gái có xinh không nhỉ?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ까 말까</div><div class="card-num">33</div></div><div class="card-meaning">có nên làm hay không</div><div class="card-tip">🪙 Lật đồng xu → Đang DO DỰ giữa 2 lựa chọn, chưa quyết định. "Làm hay thôi?"</div><div class="card-example"><span>길을 건널까 말까 고민했어요.</span>Băn khoăn có nên qua đường không.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)면 되다</div><div class="card-num">44</div></div><div class="card-meaning">chỉ cần... là được / ổn thôi</div><div class="card-tip">✅ "Điều kiện tối thiểu đủ để ổn". Đơn giản hóa yêu cầu → Chỉ cần A là đủ rồi.</div><div class="card-example"><span>웹사이트에서 접수하시면 됩니다.</span>Chỉ cần đăng ký trên website là được.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-기만 하면 (되다)</div><div class="card-num">63</div></div><div class="card-meaning">chỉ cần làm A là đủ</div><div class="card-tip">🔑 만 = chỉ → Nhấn mạnh "CHỈ CẦN một điều kiện DUY NHẤT này thôi là xong".</div><div class="card-example"><span>단어 외우기만 하면 100점이에요.</span>Chỉ cần thuộc từ vựng là 100 điểm.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)나 마나</div><div class="card-num">18</div></div><div class="card-meaning">làm hay không làm cũng vô ích</div><div class="card-tip">🚫 "Dù làm A hay không làm A, kết quả vẫn vậy" → Hành động vô nghĩa. Bi quan.</div><div class="card-example"><span>길을 물어보나 마나예요.</span>Hỏi đường cũng vô ích thôi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다고 치다</div><div class="card-num">69</div></div><div class="card-meaning">giả sử / cứ cho là</div><div class="card-tip">🎭 치다 = coi như → Giả định tình huống để suy luận. "Cứ cho là A, thì sẽ..."</div><div class="card-example"><span>일본에 간다고 치면 어디 갈까요?</span>Giả sử đi Nhật thì sẽ đến đâu?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)니만큼</div><div class="card-num">20</div></div><div class="card-meaning">vì / bởi vì (nhấn mạnh tương xứng)</div><div class="card-tip">⚖️ Mạnh hơn (으)니까. Nhấn mạnh "KẾT QUẢ TƯƠNG XỨNG với nỗ lực/hoàn cảnh".</div><div class="card-example"><span>노력하니만큼 결과가 기대돼요.</span>Vì nỗ lực nên kỳ vọng vào kết quả.</div></div>
+  </div>
+</div>
+
+<!-- G5: THỨ TỰ -->
+<div class="section g5">
+  <div class="section-header">
+    <span class="section-badge">⏱️ Nhóm 5 — Thứ Tự Hành Động</span>
+    <span class="section-count">7 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-자마자</div><div class="card-num">140</div></div><div class="card-meaning">vừa... liền ngay (0 giây)</div><div class="card-tip">⚡ Tức thì, không delay. Không chia thì vế trước. Chủ ngữ có thể khác nhau.</div><div class="card-example"><span>집에 오자마자 소파에 누웠어요.</span>Vừa về nhà liền nằm xuống sofa.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-고 나서</div><div class="card-num">51</div></div><div class="card-meaning">sau khi hoàn thành xong rồi mới</div><div class="card-tip">✅ A phải HOÀN THÀNH 100% → mới làm B. Nhấn mạnh thứ tự bắt buộc. Mạnh hơn 고.</div><div class="card-example"><span>이메일 확인하고 나서 연락할게요.</span>Sau khi check mail xong sẽ liên lạc.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-고 나니(까)</div><div class="card-num">49</div></div><div class="card-meaning">sau khi xong thì phát hiện ra</div><div class="card-tip">💡 À HA! → Làm xong mới NHẬN RA điều bất ngờ. Câu sau là trạng thái/cảm nhận mới.</div><div class="card-example"><span>쉬고 나니까 열이 내렸어요.</span>Nghỉ xong thì nhận ra sốt đã giảm.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-고 나면</div><div class="card-num">50</div></div><div class="card-meaning">sau khi xong thì sẽ (quy luật)</div><div class="card-tip">🔄 Lần nào cũng vậy → Quy luật, thói quen, dự đoán tương lai. Câu sau thường là tương lai.</div><div class="card-example"><span>청소하고 나면 기분이 상쾌해져요.</span>Dọn dẹp xong thì lúc nào cũng thấy sảng khoái.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)려던 참이다</div><div class="card-num">39</div></div><div class="card-meaning">vừa đúng lúc đang định làm</div><div class="card-tip">⏰ 참 = đúng lúc, vừa vặn → "Tôi vừa ĐANG ĐỊNH làm A thì đúng lúc B xảy ra/bạn hỏi".</div><div class="card-example"><span>학교에 가려던 참이에요.</span>Tôi vừa đang định đến trường đây.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 길에</div><div class="card-num">85</div></div><div class="card-meaning">trên đường đi / đang trên đường</div><div class="card-tip">🛣️ 길 = đường → Đang trên đường đến nơi nào đó → tiện thể làm B. Khác 김에 ở chỗ nhấn mạnh "đường đi".</div><div class="card-example"><span>집에 가는 길에 빵 사 왔어요.</span>Trên đường về nhà mua bánh mì luôn.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 사이에</div><div class="card-num">90</div></div><div class="card-meaning">trong khi / trong lúc (khoảng thời gian)</div><div class="card-tip">⌛ 사이 = khoảng cách/khoảng thời gian → Trong khoảng thời gian A đang xảy ra thì B.</div><div class="card-example"><span>제가 없는 사이에 택배 받아주세요.</span>Trong lúc tôi không có nhà hãy nhận hộ bưu kiện.</div></div>
+  </div>
+</div>
+
+<!-- G6: ĐANG LÀM THÌ -->
+<div class="section g6">
+  <div class="section-header">
+    <span class="section-badge">🔀 Nhóm 6 — Đang Làm Thì / Trong Quá Trình</span>
+    <span class="section-count">8 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-다가</div><div class="card-num">104</div></div><div class="card-meaning">đang làm A thì bị gián đoạn</div><div class="card-tip">🔀 Đang làm THẬT SỰ → bị cắt ngang. Không chia thì vế trước. Chủ ngữ 2 vế giống nhau.</div><div class="card-example"><span>공부하다가 잠이 들었어요.</span>Đang học thì ngủ thiếp đi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-다(가) 보니까</div><div class="card-num">102</div></div><div class="card-meaning">mải làm A thì nhận ra B (đã xảy ra)</div><div class="card-tip">⏳ Thời gian DÀI + À HA! (quá khứ) → Mải làm mà không biết, bỗng nhận ra kết quả đã xảy ra.</div><div class="card-example"><span>작업하다 보니까 새벽이 됐어요.</span>Mải làm việc thì đã thành sáng sớm.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-다(가) 보면</div><div class="card-num">103</div></div><div class="card-meaning">nếu cứ làm A thì sẽ B (tương lai)</div><div class="card-tip">🌈 Lời khuyên tương lai → Cứ kiên trì làm A thì sẽ có kết quả B. Thường dùng động viên.</div><div class="card-example"><span>연습하다 보면 잘 하게 될 거예요.</span>Cứ luyện tập thì sẽ giỏi thôi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)려다가</div><div class="card-num">38</div></div><div class="card-meaning">đang định làm A thì / thôi không làm</div><div class="card-tip">💭❌ Mới CHỈ có ý định (chưa làm) → bị gián đoạn hoặc tự đổi ý. Khác 다가 ở chỗ chưa bắt đầu.</div><div class="card-example"><span>외출하려다가 비가 와서 못 갔어요.</span>Định ra ngoài thì trời mưa nên không đi được.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 (도)중에</div><div class="card-num">84</div></div><div class="card-meaning">trong lúc / đang trong quá trình</div><div class="card-tip">🎬 중 = giữa chừng → Hành động đang ở GIỮA CHỪNG thì B xảy ra. Nhấn mạnh hơn 다가.</div><div class="card-example"><span>연기하는 중에 기침해버렸어요.</span>Đang diễn thì bị ho.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 중이다</div><div class="card-num">94</div></div><div class="card-meaning">đang... / hiện đang trong quá trình</div><div class="card-tip">📍 Diễn đạt trạng thái đang tiến hành. Nhấn mạnh hơn 고 있다. Hay dùng trong văn phòng.</div><div class="card-example"><span>지금 직장에 가는 중이에요.</span>Hiện tôi đang trên đường đến nơi làm.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-더니</div><div class="card-num">108</div></div><div class="card-meaning">hồi nãy/trước đó A... rồi sau đó B</div><div class="card-tip">🔄 Quan sát TRỰC TIẾP trong quá khứ → chuyển sang B bất ngờ. Chủ ngữ vế sau thường khác.</div><div class="card-example"><span>강의에 늦었더니 선생님이 야단치셨다.</span>Đến muộn thì bị thầy mắng.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-다시피</div><div class="card-num">105</div></div><div class="card-meaning">như bạn biết / như có thể thấy</div><div class="card-tip">👁️ 다시피 = như đã biết/thấy → Viện dẫn điều người nghe ĐỒNG BIẾT. Hay dùng: 보다시피, 알다시피.</div><div class="card-example"><span>보다시피 요즘 직장인들이 바빠요.</span>Như bạn thấy, dân văn phòng dạo này bận.</div></div>
+  </div>
+</div>
+
+<!-- G7: PHỎNG ĐOÁN -->
+<div class="section g7">
+  <div class="section-header">
+    <span class="section-badge">🔍 Nhóm 7 — Phỏng Đoán & Suy Luận</span>
+    <span class="section-count">10 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ가 보다</div><div class="card-num">16</div></div><div class="card-meaning">chắc là / suy luận từ bằng chứng</div><div class="card-tip">🔍 Thám tử suy luận → Đang THẤY bằng chứng cụ thể → suy ra. Ngạc nhiên nhẹ. Không dùng cho chính mình.</div><div class="card-example"><span>돈을 많이 쓰니 부자인가 봐요.</span>Tiêu nhiều tiền thế chắc là người giàu.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-나 보다</div><div class="card-num">80</div></div><div class="card-meaning">chắc là / có vẻ (với động từ)</div><div class="card-tip">🔍 Giống (으)ㄴ가 보다 nhưng dùng với ĐỘNG TỪ. 자다→자나 봐요, 오다→오나 봐요.</div><div class="card-example"><span>둘이 사귀나 봐요.</span>Hai người chắc đang hẹn hò.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 텐데</div><div class="card-num">31</div></div><div class="card-meaning">chắc sẽ... nhưng (lo lắng/quan tâm)</div><div class="card-tip">💭 Nghĩ cho người khác → Dự đoán + QUAN TÂM/LO LẮNG. Câu sau thường là hỏi thăm hoặc đề nghị.</div><div class="card-example"><span>많이 피곤할 텐데 좀 쉬세요.</span>Chắc mệt lắm, nghỉ ngơi đi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 테니(까)</div><div class="card-num">30</div></div><div class="card-meaning">tôi sẽ làm A, nên bạn hãy làm B</div><div class="card-tip">🤝 Cam kết của mình → yêu cầu người kia. "Tôi lo A, bạn lo B". Vế sau thường là đề nghị/mệnh lệnh.</div><div class="card-example"><span>제가 할 테니까 걱정 마세요.</span>Tôi sẽ làm nên đừng lo.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는/(으)ㄹ 모양이다</div><div class="card-num">8</div></div><div class="card-meaning">có vẻ / trông như thể</div><div class="card-tip">👁️ 모양 = hình dạng/vẻ → Nhìn bề ngoài → suy đoán. Tương tự (으)ㄴ 것 같다nhưng dựa vào ngoại hình nhiều hơn.</div><div class="card-example"><span>비가 오는 모양이에요.</span>Có vẻ trời mưa rồi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는/(으)ㄹ 셈이다</div><div class="card-num">9</div></div><div class="card-meaning">tính ra là / coi như là</div><div class="card-tip">🧮 셈 = tính toán → "Nếu tính ra thì cũng xem như là A". Đánh giá tương đương.</div><div class="card-example"><span>어떻게 할 셈이에요?</span>Bạn định tính thế nào?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ지(도) 모르다</div><div class="card-num">35</div></div><div class="card-meaning">có thể / không biết có... không</div><div class="card-tip">❓ Không chắc chắn → Khả năng xảy ra nhưng không khẳng định. Mạnh hơn (으)ㄹ 것 같다.</div><div class="card-example"><span>어떻게 해야 할지 모르겠어요.</span>Không biết phải làm thế nào.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-아/어 보이다</div><div class="card-num">120</div></div><div class="card-meaning">trông có vẻ / nhìn có vẻ</div><div class="card-tip">👀 보이다 = trông thấy → Dựa vào ngoại hình để nhận xét. Hay dùng khen/nhận xét về người.</div><div class="card-example"><span>얼굴이 어제보다 밝아 보여요.</span>Trông mặt tươi hơn hôm qua.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-던데</div><div class="card-num">114</div></div><div class="card-meaning">tôi thấy rằng / tôi nhận thấy</div><div class="card-tip">🧐 Kinh nghiệm cá nhân trong quá khứ → chia sẻ điều đã quan sát. Mang hàm ý muốn hỏi thêm.</div><div class="card-example"><span>길이 막히던데 사고가 났나요?</span>Thấy đường tắc, có tai nạn không?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 걸 보니(까)</div><div class="card-num">2</div></div><div class="card-meaning">nhìn thấy A → suy ra B</div><div class="card-tip">🔎 걸 보니 = nhìn vào cái đó mà → Bằng chứng trực tiếp dẫn đến suy luận. Cấu trúc: [bằng chứng] 걸 보니 [kết luận].</div><div class="card-example"><span>돈 많이 쓰는 걸 보니 부자인가 봐요.</span>Nhìn cách tiêu tiền thì chắc là giàu.</div></div>
+  </div>
+</div>
+
+<!-- G8: QUÁ KHỨ -->
+<div class="section g8">
+  <div class="section-header">
+    <span class="section-badge">📷 Nhóm 8 — Quá Khứ & Thói Quen</span>
+    <span class="section-count">8 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-던</div><div class="card-num">112</div></div><div class="card-meaning">từng / hồi đó hay làm (chưa dứt khoát)</div><div class="card-tip">📷 Ảnh cũ mờ → Ký ức quá khứ, hành động/trạng thái CHƯA HOÀN THÀNH dứt khoát. Đứng trước danh từ.</div><div class="card-example"><span>내가 다니던 학교가 없어졌어요.</span>Trường tôi từng học đã không còn nữa.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-았/었던</div><div class="card-num">112b</div></div><div class="card-meaning">đã từng làm (đã hoàn thành rồi)</div><div class="card-tip">📁 File đã lưu xong → Hành động ĐÃ HOÀN THÀNH hoàn toàn trong quá khứ, nhìn lại với tư cách hồi tưởng.</div><div class="card-example"><span>예전에 갔었던 식당에 가고 싶어요.</span>Muốn đến nhà hàng đã từng đến ngày trước.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-곤 하다</div><div class="card-num">55</div></div><div class="card-meaning">thường hay làm (thói quen lặp lại)</div><div class="card-tip">🔁 Lặp đi lặp lại → Thói quen, hành động xảy ra NHIỀU LẦN. Kết thúc câu (khác với 던 đứng trước danh từ).</div><div class="card-example"><span>우리는 분식점에서 만나곤 했어요.</span>Chúng tôi thường hay gặp nhau ở quán ăn vặt.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-더라</div><div class="card-num">109</div></div><div class="card-meaning">tôi thấy / tôi nghe (kinh nghiệm cá nhân)</div><div class="card-tip">📖 Kể lại điều đã TRỰC TIẾP trải nghiệm/nghe/thấy trong quá khứ. Ngôi kể thường là ngôi 1.</div><div class="card-example"><span>그 남자는 경찰에 잡혔더라.</span>Tôi nghe nói tên đó bị cảnh sát bắt.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-더라고(요)</div><div class="card-num">110</div></div><div class="card-meaning">tôi đã thấy rằng / hóa ra là</div><div class="card-tip">😮 Chia sẻ điều KHÁM PHÁ/NHẬN RA từ kinh nghiệm cá nhân. Sắc thái ngạc nhiên, chia sẻ.</div><div class="card-example"><span>서울은 도쿄보다 춥더라고요.</span>Hóa ra Seoul lạnh hơn Tokyo đấy.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-던가(요)?</div><div class="card-num">113</div></div><div class="card-meaning">hồi đó có... không nhỉ? (tự hỏi)</div><div class="card-tip">🤔 Tự hỏi về điều mình không chắc trong quá khứ. Thường hỏi người khác để xác nhận ký ức.</div><div class="card-example"><span>오늘 결혼기념일이던가요?</span>Hôm nay có phải ngày kỷ niệm không nhỉ?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-았/었던 것 같다</div><div class="card-num">128</div></div><div class="card-meaning">tôi nghĩ rằng (đã) / có vẻ đã</div><div class="card-tip">🧠 Kết hợp 았/었던 (hoàn thành QK) + 것 같다 (phỏng đoán) → Phỏng đoán về sự kiện trong quá khứ.</div><div class="card-example"><span>걔는 취업했던 것 같아요.</span>Tôi nghĩ bạn ấy đã xin được việc rồi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다면서(요)?</div><div class="card-num">79</div></div><div class="card-meaning">nghe nói / tôi nghe bảo rằng...?</div><div class="card-tip">📢❓ Thuật lại tin đã nghe → hỏi để xác nhận. "Tôi nghe nói X, có đúng không?"</div><div class="card-example"><span>너 영어 잘한다면서?</span>Nghe nói mày giỏi tiếng Anh à?</div></div>
+  </div>
+</div>
+
+<!-- G9: HỐI TIẾC -->
+<div class="section g9">
+  <div class="section-header">
+    <span class="section-badge">😔 Nhóm 9 — Hối Tiếc & Giả Định Quá Khứ</span>
+    <span class="section-count">5 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-고 말다</div><div class="card-num">53</div></div><div class="card-meaning">rốt cuộc lỡ làm mất rồi</div><div class="card-tip">😩 Buông tay → Cố tránh nhưng rốt cuộc vẫn xảy ra. Kết quả KHÔNG MONG MUỐN + cảm giác bất lực.</div><div class="card-example"><span>참으려 했는데 결국 울고 말았어요.</span>Cố nhịn nhưng cuối cùng vẫn khóc mất.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ걸 그랬다</div><div class="card-num">32</div></div><div class="card-meaning">đáng lẽ nên làm thì tốt hơn</div><div class="card-tip">😔 Thở dài nhìn lại → Tiếc vì đã KHÔNG LÀM điều đó. Phủ định: -지 말걸 그랬다.</div><div class="card-example"><span>우산 가져올걸 그랬어요.</span>Đáng lẽ nên mang ô mới phải.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-았/었더라면</div><div class="card-num">127</div></div><div class="card-meaning">nếu hồi đó đã... thì...</div><div class="card-tip">🕰️ Máy thời gian → Giả định NGƯỢC VỚI THỰC TẾ. Vế sau thường có 았/었을 텐데/거예요.</div><div class="card-example"><span>열심히 했더라면 합격했을 텐데.</span>Nếu cố gắng thì đã đỗ rồi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-고 보면</div><div class="card-num">54</div></div><div class="card-meaning">thực ra / một khi đã làm thì thấy</div><div class="card-tip">🔄 보면 = nhìn lại → "Một khi bắt đầu làm rồi nhìn lại thì thấy...". Thay đổi nhận thức.</div><div class="card-example"><span>배우고 보면 한국어는 쉬워요.</span>Một khi học rồi thì thấy tiếng Hàn dễ.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-았/었으면 하다</div><div class="card-num">129</div></div><div class="card-meaning">ước / mong muốn (nhẹ hơn 좋겠다)</div><div class="card-tip">🌠 Nhẹ hơn 았/었으면 좋겠다. Ước muốn của bản thân, thường chỉ diễn đạt điều muốn đơn giản.</div><div class="card-example"><span>점심은 라면이었으면 해요.</span>Mong bữa trưa là mì ramen.</div></div>
+  </div>
+</div>
+
+<!-- G10: GIÁN TIẾP -->
+<div class="section g10">
+  <div class="section-header">
+    <span class="section-badge">📢 Nhóm 10 — Câu Gián Tiếp & Tường Thuật</span>
+    <span class="section-count">12 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다고 하다</div><div class="card-num">70</div></div><div class="card-meaning">nói rằng (tường thuật)</div><div class="card-tip">📢 Thuật lại lời TRẦN THUẬT. ĐT현재→는다고, TT→다고, 명사→(이)라고.</div><div class="card-example"><span>친구는 병원에 안 간다고 했어요.</span>Bạn nói rằng không đi bệnh viện.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)라고 하다</div><div class="card-num">37</div></div><div class="card-meaning">bảo làm gì (mệnh lệnh)</div><div class="card-tip">👆 Thuật lại LỆNH. Phủ định: 지 말라고 (không phải 지 마라고). ĐT+으라고/라고.</div><div class="card-example"><span>아버지가 손 씻으라고 했어요.</span>Bố bảo rửa tay.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-자고 하다</div><div class="card-num">139</div></div><div class="card-meaning">rủ cùng làm (đề nghị)</div><div class="card-tip">🤗 Thuật lại LỜI MỜI cùng làm. Phủ định: 지 말자고. ĐT+자고.</div><div class="card-example"><span>동료가 포기하지 말자고 했어요.</span>Đồng nghiệp rủ đừng bỏ cuộc.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-냐고 하다</div><div class="card-num">82</div></div><div class="card-meaning">hỏi rằng (câu hỏi)</div><div class="card-tip">❓ Thuật lại CÂU HỎI. ĐT+냐고, TT+(으)냐고, 명사+(이)냐고. Động từ: 묻다/물어보다.</div><div class="card-example"><span>엄마가 시험 언제냐고 물었어요.</span>Mẹ hỏi bao giờ thi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다고(요)</div><div class="card-num">72</div></div><div class="card-meaning">nghe nói / người ta bảo rằng</div><div class="card-tip">📡 Thông tin từ nguồn bên ngoài. "Họ nói thế, tôi chỉ truyền đạt lại". Kết thúc câu.</div><div class="card-example"><span>내일 비가 온다고 해요.</span>Nghe nói ngày mai trời mưa.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다더니</div><div class="card-num">75</div></div><div class="card-meaning">nghe nói... nhưng (tương phản)</div><div class="card-tip">🔄 Nghe A... nhưng thực tế B (khác A). Nhấn mạnh sự tương phản giữa lời nói và thực tế.</div><div class="card-example"><span>일찍 온다더니 아직 안 왔어요.</span>Nói sẽ đến sớm nhưng vẫn chưa đến.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다더라</div><div class="card-num">76</div></div><div class="card-meaning">nghe nói (thông tin từ người khác)</div><div class="card-tip">📻 Thông tin GIÁN TIẾP từ người thứ ba. "Tôi nghe ai đó nói rằng..." Ít chắc chắn hơn 다고 해요.</div><div class="card-example"><span>내일은 눈이 온다더라.</span>Nghe nói ngày mai có tuyết.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다던데</div><div class="card-num">77</div></div><div class="card-meaning">nghe nói... (muốn xác nhận)</div><div class="card-tip">❓📢 Nghe thông tin → muốn HỎI THÊM/XÁC NHẬN. Hàm ý "tôi nghe thế, có đúng không?"</div><div class="card-example"><span>잘 생겼다던데 정말이야?</span>Nghe nói đẹp trai lắm, thật không?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다니</div><div class="card-num">73</div></div><div class="card-meaning">thật ra / ngạc nhiên khi nghe rằng</div><div class="card-tip">😲 Nghe điều đáng kinh ngạc → thán phục/ngạc nhiên. Câu sau thường là cảm xúc/nhận xét.</div><div class="card-example"><span>5개국어를 한다니 대단해요.</span>Nói được 5 thứ tiếng, tuyệt vời quá!</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다니까</div><div class="card-num">74</div></div><div class="card-meaning">tôi bảo mà / tôi đã nói rồi đấy</div><div class="card-tip">😤 Nhắc lại điều đã nói, bực bội vì không được tin/nghe. "Tôi đã nói rồi mà không chịu nghe!"</div><div class="card-example"><span>아무리 설명해도 화낸다니까.</span>Tôi bảo mà, giải thích bao nhiêu vẫn tức.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다면</div><div class="card-num">78</div></div><div class="card-meaning">nếu... (giả sử người đó nói/làm)</div><div class="card-tip">💬 Giả định điều ai đó NÓI HOẶC LÀM. Giống (으)면 nhưng nhấn mạnh vế điều kiện là lời nói/hành động.</div><div class="card-example"><span>운동선수가 되고 싶다면 학원에 등록해야 해요.</span>Nếu muốn thành vận động viên thì phải đăng ký học.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는다거나</div><div class="card-num">68</div></div><div class="card-meaning">hoặc là A hoặc là B (liệt kê)</div><div class="card-tip">📋 Liệt kê các lựa chọn/khả năng. "Hay là A, hay là B" → không xác định cụ thể.</div><div class="card-example"><span>독서한다거나 영화 보러 가요.</span>Hoặc đọc sách hoặc đi xem phim.</div></div>
+  </div>
+</div>
+
+<!-- G11: MỨC ĐỘ -->
+<div class="section g11">
+  <div class="section-header">
+    <span class="section-badge">📊 Nhóm 11 — Mức Độ & Tỉ Lệ</span>
+    <span class="section-count">9 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는 만큼</div><div class="card-num">4</div></div><div class="card-meaning">tương xứng với / nhiều như</div><div class="card-tip">⚖️ Cân bằng → Bỏ vào bao nhiêu thì nhận bấy nhiêu. A = B về mức độ. Cũng có nghĩa "vì".</div><div class="card-example"><span>노력한 만큼 결과가 나와요.</span>Kết quả tương xứng với nỗ lực.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">만큼</div><div class="card-num">143</div></div><div class="card-meaning">bằng / ngang bằng (với danh từ)</div><div class="card-tip">⚖️ Danh từ+만큼 = "ngang bằng cái đó". Không có (으)ㄴ/는 trước. 가족만큼 = "bằng gia đình".</div><div class="card-example"><span>가족만큼 중요한 것은 없어요.</span>Không có gì quan trọng bằng gia đình.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 정도(로)</div><div class="card-num">28</div></div><div class="card-meaning">đến mức / đến nỗi</div><div class="card-tip">📏 정도 = mức độ → "Đến mức/nỗi A". Diễn đạt mức độ cực đoan của hành động/trạng thái.</div><div class="card-example"><span>놀라울 정도로 크게 외쳤다.</span>Hét to đến mức ngạc nhiên.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-얼마나 -(으)ㄴ/는지</div><div class="card-num">146</div></div><div class="card-meaning">mức nào / đến đâu (cảm thán)</div><div class="card-tip">😲 얼마나 = bao nhiêu → Nhấn mạnh mức độ CỰC CAO. "Bạn không thể tưởng tượng được mức nào..."</div><div class="card-example"><span>얼마나 가난했는지 몰라요.</span>Bạn không thể tưởng tượng nghèo đến mức nào.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-듯이</div><div class="card-num">117</div></div><div class="card-meaning">như / giống như (so sánh cách thức)</div><div class="card-tip">🪞 듯이 = như vậy → So sánh CÁCH THỨC hành động. Thường dùng: 미친 듯이, 나는 듯이...</div><div class="card-example"><span>미친 듯이 춤췄어요.</span>Nhảy như điên.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 편이다</div><div class="card-num">96</div></div><div class="card-meaning">thiên về / có xu hướng</div><div class="card-tip">📊 편 = phía → Không khẳng định tuyệt đối mà nói "xu hướng". "Tôi thiên về phía A".</div><div class="card-example"><span>저는 돈을 아끼는 편이에요.</span>Tôi thiên về xu hướng tiết kiệm.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">치고(는)</div><div class="card-num">148</div></div><div class="card-meaning">so với / xét là... thì (đánh giá)</div><div class="card-tip">🏷️ "Xét theo tiêu chuẩn của X thì..." Thường ý nghĩa: đánh giá vượt/kém hơn kỳ vọng.</div><div class="card-example"><span>아이돌치고는 나이가 많아요.</span>Già so với tiêu chuẩn idol.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 만하다</div><div class="card-num">23</div></div><div class="card-meaning">đáng để / xứng đáng</div><div class="card-tip">👍 만하다 = đáng giá → "Đủ đáng để làm A". Khuyến khích thử/làm điều gì.</div><div class="card-example"><span>타개책을 시도할 만해요.</span>Đáng thử giải pháp đó.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-기에(는)</div><div class="card-num">64</div></div><div class="card-meaning">để làm A thì không phù hợp</div><div class="card-tip">🚫 Đánh giá sự phù hợp → "Để làm A thì [hoàn cảnh/điều kiện] không phù hợp/không đủ".</div><div class="card-example"><span>축구하기에는 날씨가 안 좋아요.</span>Thời tiết không tốt để chơi bóng đá.</div></div>
+  </div>
+</div>
+
+<!-- G12: KHẢ NĂNG -->
+<div class="section g12">
+  <div class="section-header">
+    <span class="section-badge">🔒 Nhóm 12 — Khả Năng & Giới Hạn</span>
+    <span class="section-count">8 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 뻔하다</div><div class="card-num">24</div></div><div class="card-meaning">suýt xảy ra (may không xảy ra)</div><div class="card-tip">😅 Gần gần → Gần xảy ra nhưng MAY MÀ không. Thường dùng quá khứ: 뻔했어요. Kết quả tiêu cực.</div><div class="card-example"><span>차에 치일 뻔했어요.</span>Suýt bị xe đâm.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 수밖에 없다</div><div class="card-num">27</div></div><div class="card-meaning">không còn lựa chọn nào khác</div><div class="card-tip">🔒 Tất cả cửa đóng → Đành phải làm thôi. Miễn cưỡng chấp nhận, không có lựa chọn khác.</div><div class="card-example"><span>시간이 없으니 뛰어갈 수밖에 없다.</span>Không có thời gian đành phải chạy.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 뿐만 아니라</div><div class="card-num">25</div></div><div class="card-meaning">không chỉ A mà còn B</div><div class="card-tip">➕ Vượt ra ngoài giới hạn → "Không dừng ở A, còn thêm B". Nhấn mạnh sự bổ sung.</div><div class="card-example"><span>걸을 뿐만 아니라 달리기도 잘해요.</span>Không chỉ đi được mà còn chạy giỏi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 뿐이다</div><div class="card-num">26</div></div><div class="card-meaning">chỉ... thôi / đơn giản chỉ là</div><div class="card-tip">🎯 뿐 = chỉ → Giới hạn ở A mà thôi, không có gì thêm. Giải thích đơn giản hóa.</div><div class="card-example"><span>국적이 다를 뿐이지 같은 인간이에요.</span>Chỉ khác quốc tịch thôi, đều là người như nhau.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 수(가) 있다</div><div class="card-num">92</div></div><div class="card-meaning">có thể xảy ra / khả năng</div><div class="card-tip">⚠️ 수 = khả năng → Nhấn mạnh khả năng xảy ra, thường cảnh báo. "Ngay cả X cũng có thể..."</div><div class="card-example"><span>전문가라도 실패하는 수가 있어요.</span>Ngay cả chuyên gia cũng có thể thất bại.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 수밖에 없다</div><div class="card-num">93</div></div><div class="card-meaning">không còn cách nào khác (động từ)</div><div class="card-tip">🔒 Giống (으)ㄹ 수밖에 없다. Dùng với 는 (động từ hiện tại). Nội dung giống nhau.</div><div class="card-example"><span>가족에게 빌리는 수밖에 없다.</span>Không còn cách nào khác là vay gia đình.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-게 하다</div><div class="card-num">48</div></div><div class="card-meaning">làm cho / khiến cho</div><div class="card-tip">🎮 Điều khiển → "Làm cho X trở thành trạng thái Y". Chủ thể tác động lên đối tượng.</div><div class="card-example"><span>동생은 나를 짜증나게 해요.</span>Em trai làm tôi bực mình.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 지경이다</div><div class="card-num">29</div></div><div class="card-meaning">gần đến mức / sắp đến mức</div><div class="card-tip">🌋 지경 = mức độ cực độ → Sắp đến giới hạn không thể chịu được. Nhấn mạnh tình huống nghiêm trọng.</div><div class="card-example"><span>그녀가 화낼 지경이에요.</span>Cô ấy sắp đến mức nổi giận rồi.</div></div>
+  </div>
+</div>
+
+<!-- G13: NHẬN THỨC -->
+<div class="section g13">
+  <div class="section-header">
+    <span class="section-badge">🧠 Nhóm 13 — Nhận Thức & Phán Đoán</span>
+    <span class="section-count">9 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는/(으)ㄹ 줄 몰랐다</div><div class="card-num">10</div></div><div class="card-meaning">không ngờ / không biết rằng</div><div class="card-tip">😲 Không ngờ! → Zero thông tin trước → BẤT NGỜ hoàn toàn khi biết ra. Ngạc nhiên mạnh.</div><div class="card-example"><span>합격할 줄 몰랐어요.</span>Không ngờ lại đỗ.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는/(으)ㄹ 줄 알았다</div><div class="card-num">11</div></div><div class="card-meaning">tưởng là / cứ nghĩ rằng</div><div class="card-tip">🤦 Tưởng vậy! → Có thông tin nhưng THÔNG TIN SAI → ngỡ ngàng. Câu sau thường có 는데.</div><div class="card-example"><span>어려울 줄 알았는데 쉬웠어요.</span>Tưởng khó nhưng dễ.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄹ 리가 없다</div><div class="card-num">22</div></div><div class="card-meaning">không thể nào / không đời nào</div><div class="card-tip">🚫 리 = lý/lẽ → Không có lý nào mà A lại xảy ra. Phủ định 100%, tin chắc là không.</div><div class="card-example"><span>그 사람이 거짓말할 리가 없어요.</span>Không đời nào người đó nói dối.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-ㄴ/는 척하다</div><div class="card-num">66</div></div><div class="card-meaning">giả vờ / làm bộ</div><div class="card-tip">🎭 척 = vẻ → Thực tế không A nhưng GIẢ VỜ như A. Hành động không chân thật.</div><div class="card-example"><span>그 후배는 착한 척해요.</span>Đàn em đó giả vờ tốt bụng.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 셈 치다</div><div class="card-num">91</div></div><div class="card-meaning">coi như / xem như là</div><div class="card-tip">🧮 셈 치다 = tính rằng là → Không thực sự A nhưng CỨ COI NHƯ là A. Thái độ tích cực.</div><div class="card-example"><span>연습하는 셈 치고 오디션에 가요.</span>Cứ coi như luyện tập mà đi audition.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는/(으)ㄹ지</div><div class="card-num">12</div></div><div class="card-meaning">không biết / không rõ... (câu hỏi gián tiếp)</div><div class="card-tip">❓ Câu hỏi gián tiếp → Diễn đạt điều chưa rõ/chưa biết, nhúng câu hỏi vào câu trần thuật.</div><div class="card-example"><span>지갑을 어디서 잃었는지 몰라요.</span>Không biết đánh rơi ví ở đâu.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-잖아(요)</div><div class="card-num">141</div></div><div class="card-meaning">... mà / đúng không (nhắc nhở)</div><div class="card-tip">💡 잖아 = đúng không, bạn biết rồi mà → Nhắc điều CẢ HAI ĐÃ BIẾT. Hơi có ý trách nhẹ.</div><div class="card-example"><span>내가 많이 사줬잖아요.</span>Tôi mua cho nhiều mà.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 한</div><div class="card-num">97</div></div><div class="card-meaning">chừng nào / miễn là / bao lâu còn</div><div class="card-tip">📏 한 = giới hạn → "Trong giới hạn/phạm vi A, thì B". Thường dùng: 내가 아는 한, 살아있는 한.</div><div class="card-example"><span>내가 아는 한 그건 사실이에요.</span>Trong phạm vi tôi biết thì đó là sự thật.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-고 말고(요)</div><div class="card-num">52</div></div><div class="card-meaning">tất nhiên là / dĩ nhiên</div><div class="card-tip">✅✅ Khẳng định mạnh mẽ. "Dĩ nhiên A rồi còn gì!" Trả lời câu hỏi với sự đồng ý tuyệt đối.</div><div class="card-example"><span>한국여행은 재미있고 말고요.</span>Du lịch Hàn Quốc vui chứ còn gì nữa!</div></div>
+  </div>
+</div>
+
+<!-- G14: TRẠNG THÁI -->
+<div class="section g14">
+  <div class="section-header">
+    <span class="section-badge">🌱 Nhóm 14 — Trạng Thái & Biến Đổi</span>
+    <span class="section-count">11 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ 채(로)</div><div class="card-num">1</div></div><div class="card-meaning">trong tình trạng / nguyên như vậy</div><div class="card-tip">🧊 채 = trạng thái giữ nguyên → Làm B mà VẪN GIỮ NGUYÊN tình trạng A. Không thay đổi.</div><div class="card-example"><span>앉은 채로 잠들었어요.</span>Ngủ quên trong tư thế ngồi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-아/어지다</div><div class="card-num">126</div></div><div class="card-meaning">trở nên / ngày càng (biến đổi)</div><div class="card-tip">🌱 Biến đổi dần dần → Tính từ + 아/어지다 = "trở nên [tính từ đó]". Quá trình thay đổi.</div><div class="card-example"><span>세계는 가까워지고 있어요.</span>Thế giới đang ngày càng gần lại.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 대로</div><div class="card-num">86</div></div><div class="card-meaning">đúng như / theo như / ngay khi</div><div class="card-tip">→ 대로 = theo đúng như → 2 nghĩa: "theo như A" (tuân theo) hoặc "ngay khi A" (thời gian).</div><div class="card-example"><span>바라는 대로 이루어져요.</span>Thực hiện đúng như mong muốn.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-대로</div><div class="card-num">106</div></div><div class="card-meaning">theo đúng như / y như</div><div class="card-tip">📋 Tuân thủ theo mệnh lệnh/khuôn mẫu. "Làm đúng y như A đã nói/quy định".</div><div class="card-example"><span>교수님 말씀대로 하자.</span>Làm theo đúng lời giáo sư.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)로서</div><div class="card-num">42</div></div><div class="card-meaning">với tư cách là / với vai trò là</div><div class="card-tip">👔 로서 = với tư cách → Nhấn mạnh VAI TRÒ/VỊ TRÍ. "Với tư cách là X, tôi..."</div><div class="card-example"><span>선배로서 충고할게요.</span>Với tư cách đàn anh/chị cho một lời khuyên.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(이)야말로</div><div class="card-num">130</div></div><div class="card-meaning">chính là / mới thật sự là</div><div class="card-tip">⭐ Nhấn mạnh tuyệt đối → "Đây CHÍNH LÀ / MỚI THẬT SỰ LÀ" điều muốn nói. Rất nhấn mạnh.</div><div class="card-example"><span>지금이야말로 역사적 순간이에요.</span>Đây chính là khoảnh khắc lịch sử.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-기 쉽다/어렵다</div><div class="card-num">56/58</div></div><div class="card-meaning">dễ/khó làm</div><div class="card-tip">📊 쉽다 = dễ / 어렵다 = khó + 기 = danh từ hóa. "Việc làm A là dễ/khó".</div><div class="card-example"><span>이해하기 쉬운 수업이에요.</span>Bài học dễ hiểu.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-기 십상이다</div><div class="card-num">57</div></div><div class="card-meaning">dễ bị / có xu hướng (tiêu cực)</div><div class="card-tip">⚠️ 십상 = thường xảy ra, dễ → Nhấn mạnh XU HƯỚNG TIÊU CỰC. Cảnh báo điều hay mắc phải.</div><div class="card-example"><span>젊은 운전자는 실수하기 십상이에요.</span>Tài xế trẻ hay mắc lỗi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-더군(요)</div><div class="card-num">107</div></div><div class="card-meaning">tôi thấy / tôi phát hiện ra</div><div class="card-tip">😮 Kinh nghiệm trực tiếp → chia sẻ điều đã thấy/nghe. Hơi trang trọng hơn 더라고요.</div><div class="card-example"><span>귀여운 이름을 지었더군요.</span>Tôi thấy đặt tên rất dễ thương đấy nhỉ.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)며</div><div class="card-num">43</div></div><div class="card-meaning">và / vừa... vừa (văn viết)</div><div class="card-tip">✍️ Văn viết, liệt kê trang trọng. Thay cho 고 trong văn học thuật/báo cáo.</div><div class="card-example"><span>피아노도 잘 치며 노래도 잘해요.</span>Vừa đánh đàn hay vừa hát giỏi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(이)나 -(이)나 할 것 없이</div><div class="card-num">46</div></div><div class="card-meaning">bất kể / không phân biệt</div><div class="card-tip">🤝 할 것 없이 = không có gì cần phân biệt → "Dù là X hay Y đi nữa, cũng vậy". Bình đẳng.</div><div class="card-example"><span>아이나 어른이나 건강이 중요해요.</span>Dù trẻ em hay người lớn, sức khỏe đều quan trọng.</div></div>
+  </div>
+</div>
+
+<!-- G15: ĐẶC BIỆT -->
+<div class="section g15">
+  <div class="section-header">
+    <span class="section-badge">✨ Nhóm 15 — Cấu Trúc Đặc Biệt & Trợ Từ Nâng Cao</span>
+    <span class="section-count">19 cấu trúc</span>
+  </div>
+  <div class="grid">
+    <div class="card"><div class="card-top"><div class="card-grammar">조차</div><div class="card-num">147</div></div><div class="card-meaning">ngay cả / thậm chí (cực đoan)</div><div class="card-tip">😱 Ngay cả điều tối thiểu CŨNG... Nhấn mạnh điều bất ngờ/cực đoan. Thường kết hợp phủ định.</div><div class="card-example"><span>기다림조차 설레요.</span>Ngay cả việc chờ đợi cũng thấy hồi hộp.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">마저</div><div class="card-num">142</div></div><div class="card-meaning">ngay cả / thêm vào đó (tiêu cực)</div><div class="card-tip">😞 Giống 조차 nhưng có sắc thái TIÊU CỰC hơn. "Thêm vào những khó khăn đó, ngay cả X cũng..."</div><div class="card-example"><span>숙제도 많은데 시간마저 부족해요.</span>Bài tập nhiều mà ngay cả thời gian cũng thiếu.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">아무 -(이)나</div><div class="card-num">144</div></div><div class="card-meaning">bất kỳ / bất cứ cái nào</div><div class="card-tip">🎲 아무 = bất kỳ + (이)나 = hoặc → "Bất kỳ cái nào cũng được". Không phân biệt, tùy ý.</div><div class="card-example"><span>아무 옷이나 가져오세요.</span>Mang bất kỳ quần áo nào cũng được.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">아무 -도</div><div class="card-num">145</div></div><div class="card-meaning">không một ai / không có gì cả</div><div class="card-tip">🚫 아무 + 도 + phủ định = phủ định hoàn toàn. "Không có bất kỳ điều gì/ai cả".</div><div class="card-example"><span>아무 걱정도 없어요.</span>Không có bất kỳ lo lắng nào cả.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">(이)라도</div><div class="card-num">118</div></div><div class="card-meaning">ít nhất là / dù chỉ là</div><div class="card-tip">🌱 라도 = dù chỉ → Không có thứ tốt hơn, ít nhất có thứ này. Chấp nhận phương án thứ hai.</div><div class="card-example"><span>이 문제지라도 풀어볼래요?</span>Ít nhất thì giải cái đề này không?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는 덕분에 / -에 의해(서)</div><div class="card-num">134</div></div><div class="card-meaning">bởi / bằng / qua (tác nhân)</div><div class="card-tip">🔧 에 의해 = bị động + tác nhân. Văn viết, học thuật. Giống "by" trong tiếng Anh bị động.</div><div class="card-example"><span>역경은 희망에 의해 극복할 수 있다.</span>Gian khổ có thể vượt qua bằng hy vọng.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-에 따라(서)</div><div class="card-num">133</div></div><div class="card-meaning">tùy theo / phụ thuộc vào</div><div class="card-tip">🔄 따라 = theo → "Kết quả B THAY ĐỔI theo A". Thường nói về sự thay đổi tùy hoàn cảnh.</div><div class="card-example"><span>예산에 따라 여행이 달라져요.</span>Lịch trình du lịch thay đổi tùy ngân sách.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-에 관해(서) / -에 대해(서)</div><div class="card-num">131/132</div></div><div class="card-meaning">về / liên quan đến</div><div class="card-tip">📖 관해 = liên quan, 대해 = đối với. Về mặt thực tế tương đương nhau, nhưng 에 대해 phổ biến hơn.</div><div class="card-example"><span>인기 가수에 관해 뉴스가 나왔어요.</span>Tin tức về ca sĩ nổi tiếng được đưa ra.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-을/를 통해(서)</div><div class="card-num">137</div></div><div class="card-meaning">thông qua / qua</div><div class="card-tip">🔗 통 = thông → "Qua kênh/phương tiện A mà biết/làm B". Diễn đạt phương tiện/cách thức.</div><div class="card-example"><span>드라마를 통해 그 배우를 알았어요.</span>Biết diễn viên đó qua phim truyền hình.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-을/를 비롯한</div><div class="card-num">136</div></div><div class="card-meaning">bao gồm / kể cả</div><div class="card-tip">📋 비롯 = bắt đầu từ → "Kể từ X trở đi, bao gồm cả". X là đại diện tiêu biểu.</div><div class="card-example"><span>나를 비롯한 모두가 찬성해요.</span>Tất cả kể cả tôi đều đồng ý.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-에다(가)</div><div class="card-num">135</div></div><div class="card-meaning">vào trong / tại (thêm vào)</div><div class="card-tip">➕ 에다가 = vào đó thêm → Chỉ nơi đặt thêm, hoặc thêm vào điều đã nói. Nhấn mạnh hơn 에.</div><div class="card-example"><span>우유는 냉장고에다가 넣었어요.</span>Tôi để sữa vào tủ lạnh.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-거든(요)</div><div class="card-num">47</div></div><div class="card-meaning">vì / bởi vì (giải thích bổ sung)</div><div class="card-tip">💬 거든 = nghe này → Giải thích thông tin mà người nghe chưa biết. Thêm lý do sau câu chính.</div><div class="card-example"><span>어려보여도 제가 상사거든요.</span>Dù trông trẻ nhưng tôi là sếp đấy.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-기는(요)</div><div class="card-num">62</div></div><div class="card-meaning">không cần đến mức đó / có gì đâu</div><div class="card-tip">🙈 Khiêm tốn phủ nhận lời khen/nhận xét của người khác. "Có gì đâu mà / Không đến mức đó".</div><div class="card-example"><span>고맙기는요. 별말씀을요.</span>Cảm ơn gì đâu. Không có gì.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-(으)ㄴ/는걸(요)</div><div class="card-num">13</div></div><div class="card-meaning">... mà / ... đó (nhẹ nhàng phản bác)</div><div class="card-tip">😅 걸요 = thực ra là → Nhẹ nhàng phản bác hoặc thêm thông tin ngược lại. "Thực ra là... mà".</div><div class="card-example"><span>아직 졸린걸요.</span>Vẫn còn buồn ngủ mà.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-자</div><div class="card-num">138</div></div><div class="card-meaning">hãy / cùng làm (thân mật)</div><div class="card-tip">🤝 Rút gọn của (으)ㅂ시다 → Thân mật, bạn bè. "문 닫자 = Đóng cửa lại đi".</div><div class="card-example"><span>이제 문 닫자.</span>Thôi đóng cửa đi.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-나(요)?</div><div class="card-num">81</div></div><div class="card-meaning">... không? (câu hỏi thân mật nhẹ)</div><div class="card-tip">❓ Câu hỏi thân mật, nhẹ nhàng. Đặc biệt dùng để hỏi bản thân hoặc người thân.</div><div class="card-example"><span>여기서 타면 되나?</span>Lên xe ở đây được không?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-니/냐?</div><div class="card-num">101</div></div><div class="card-meaning">... không? (câu hỏi thân mật/hỏi trẻ em)</div><div class="card-tip">👶 Rất thân mật, dùng với bạn bè thân hoặc nói chuyện với trẻ em/người nhỏ hơn.</div><div class="card-example"><span>기분 나쁘니?</span>Bạn thấy khó chịu không?</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-는구나</div><div class="card-num">100</div></div><div class="card-meaning">à / ồ ra vậy (nhận ra điều mới)</div><div class="card-tip">💡 Vừa nhận ra điều MỚI với bản thân. Không dùng để nói với người đang nói chuyện. Tự nhận ra.</div><div class="card-example"><span>이 애기는 벌써 걷는구나.</span>Ồ, em bé này đã đi được rồi đấy.</div></div>
+    <div class="card"><div class="card-top"><div class="card-grammar">-아/어야지</div><div class="card-num">125</div></div><div class="card-meaning">phải / cần (tự nhắc nhở)</div><div class="card-tip">✊ Tự nhắc mình hoặc nhắc người khác một cách thân mật. "Phải làm thế mới được chứ!"</div><div class="card-example"><span>일찍 결혼해야지.</span>Phải kết hôn sớm thôi.</div></div>
+  </div>
+</div>
+
+<div class="footer">
+  <p>📚 TOPIK II Grammar — 148 Cấu Trúc Đầy Đủ</p>
+  <p style="margin-top:8px">Học theo nhóm màu · Nhớ mẹo emoji · Ôn lại mỗi ngày</p>
+</div>
+
+</body>
+</html>
