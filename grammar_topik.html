@@ -1,0 +1,175 @@
+// lib/providers/trending_provider.dart
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/online_track.dart';
+import '../services/youtube_service.dart';
+
+class TrendingCategory {
+  final String label;
+  final String query;
+
+  const TrendingCategory(this.label, this.query);
+
+  // FIX #3: override == và hashCode để dùng làm Map key an toàn,
+  // không phụ thuộc vào reference equality của const.
+  @override
+  bool operator ==(Object other) =>
+      other is TrendingCategory && other.query == query;
+
+  @override
+  int get hashCode => query.hashCode;
+}
+
+const trendingCategories = [
+  // FIX: Thêm "official audio/video" vào các query tiếng Anh để ép YouTube
+  // trả về individual Video thay vì Playlist/Channel/Livestream
+  TrendingCategory('Global Hits', 'top songs 2025 official audio'),
+  TrendingCategory('Vietnam', 'nhạc trẻ hot nhất'),
+  TrendingCategory('US-UK', 'best pop songs 2025 official video'),
+  TrendingCategory('K-Pop', 'kpop trending 2025'),
+  TrendingCategory('Chill', 'chill mix 2025 official audio'),
+];
+
+class TrendingState {
+  final List<OnlineTrack> tracks;
+  final dynamic nextToken;
+  final bool isLoading;
+  final bool isFetchingMore;
+  final String? error;
+  final TrendingCategory currentCategory;
+
+  TrendingState({
+    this.tracks = const [],
+    this.nextToken,
+    this.isLoading = true,
+    this.isFetchingMore = false,
+    this.error,
+    TrendingCategory? currentCategory,
+  }) : currentCategory = currentCategory ?? trendingCategories[0];
+
+  TrendingState copyWith({
+    List<OnlineTrack>? tracks,
+    dynamic nextToken,
+    bool? isLoading,
+    bool? isFetchingMore,
+    String? error,
+    TrendingCategory? currentCategory,
+    bool clearError = false,
+    bool clearToken = false,
+  }) {
+    return TrendingState(
+      tracks: tracks ?? this.tracks,
+      nextToken: clearToken ? null : (nextToken ?? this.nextToken),
+      isLoading: isLoading ?? this.isLoading,
+      isFetchingMore: isFetchingMore ?? this.isFetchingMore,
+      error: clearError ? null : (error ?? this.error),
+      currentCategory: currentCategory ?? this.currentCategory,
+    );
+  }
+}
+
+class TrendingCategoryCache {
+  final List<OnlineTrack> tracks;
+  final dynamic nextToken;
+
+  // FIX #1: Không cache lỗi nữa. Chỉ cache kết quả thành công.
+  // Lỗi sẽ không được lưu → lần sau switch vào category đó sẽ thử lại network.
+  TrendingCategoryCache(this.tracks, this.nextToken);
+}
+
+class TrendingNotifier extends StateNotifier<TrendingState> {
+  // FIX #1: Map chỉ chứa cache của các lần fetch thành công.
+  final Map<TrendingCategory, TrendingCategoryCache> _cache = {};
+
+  TrendingNotifier() : super(TrendingState()) {
+    _fetchInitial();
+  }
+
+  Future<void> _fetchInitial({bool forceRefresh = false}) async {
+    final cat = state.currentCategory;
+
+    // Chỉ serve cache nếu fetch trước đó thành công (có tracks).
+    if (!forceRefresh && _cache.containsKey(cat)) {
+      final cached = _cache[cat]!;
+      state = state.copyWith(
+        isLoading: false,
+        tracks: cached.tracks,
+        nextToken: cached.nextToken,
+        clearError: true,
+        clearToken: cached.nextToken == null,
+      );
+      return;
+    }
+
+    state = state.copyWith(isLoading: true, clearError: true);
+    final result = await youtubeServiceInstance.fetchTrending(query: cat.query);
+
+    if (!mounted) return;
+    // Bỏ qua kết quả nếu user đã switch sang category khác trong lúc fetch.
+    if (state.currentCategory != cat) return;
+
+    if (result.tracks.isEmpty && result.nextToken == null) {
+      // FIX #1: Không cache lỗi → lần sau switch vào sẽ thử fetch lại.
+      state = state.copyWith(
+        isLoading: false,
+        error: 'Could not load trending music.',
+      );
+    } else {
+      // Chỉ cache kết quả thành công.
+      _cache[cat] = TrendingCategoryCache(result.tracks, result.nextToken);
+      state = state.copyWith(
+        isLoading: false,
+        tracks: result.tracks,
+        nextToken: result.nextToken,
+        clearError: true,
+        clearToken: result.nextToken == null,
+      );
+    }
+  }
+
+  Future<void> setCategory(TrendingCategory category) async {
+    if (state.currentCategory == category) return;
+    state = state.copyWith(currentCategory: category);
+    await _fetchInitial();
+  }
+
+  Future<void> retry() async {
+    await _fetchInitial(forceRefresh: true);
+  }
+
+  Future<void> loadMore() async {
+    if (state.isFetchingMore || state.nextToken == null || state.isLoading) {
+      return;
+    }
+
+    final cat = state.currentCategory;
+    state = state.copyWith(isFetchingMore: true);
+    final result = await youtubeServiceInstance.getNextPage(state.nextToken);
+
+    if (!mounted) return;
+
+    // FIX #2: Luôn check category trước khi update state — cả nhánh empty.
+    // Nếu user switch category trong lúc loadMore đang chạy, không được
+    // xóa nextToken hay thay đổi state của category mới.
+    if (state.currentCategory != cat) return;
+
+    if (result.tracks.isNotEmpty) {
+      final newTracks = [...state.tracks, ...result.tracks];
+      _cache[cat] = TrendingCategoryCache(newTracks, result.nextToken);
+      state = state.copyWith(
+        isFetchingMore: false,
+        tracks: newTracks,
+        nextToken: result.nextToken,
+        clearToken: result.nextToken == null,
+      );
+    } else {
+      state = state.copyWith(isFetchingMore: false, clearToken: true);
+    }
+  }
+}
+
+final trendingProvider =
+    StateNotifierProvider<TrendingNotifier, TrendingState>((ref) {
+  ref.keepAlive();
+  return TrendingNotifier();
+});
