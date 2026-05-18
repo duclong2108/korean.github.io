@@ -1,175 +1,194 @@
-// lib/providers/trending_provider.dart
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../models/online_track.dart';
-import '../services/youtube_service.dart';
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.root{padding:1rem 0;font-size:13px;color:var(--color-text-primary)}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
+.tab{padding:5px 12px;border:0.5px solid var(--color-border-secondary);border-radius:20px;cursor:pointer;font-size:12px;font-weight:500;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .15s}
+.tab.active{background:var(--color-text-primary);color:var(--color-background-primary);border-color:var(--color-text-primary)}
+.panel{display:none}.panel.active{display:block}
+table{width:100%;border-collapse:collapse}
+th{font-size:11px;font-weight:500;color:var(--color-text-secondary);text-align:left;padding:6px 10px;border-bottom:1px solid var(--color-border-secondary);background:var(--color-background-secondary)}
+td{padding:8px 10px;vertical-align:top;border-bottom:0.5px solid var(--color-border-tertiary);line-height:1.5}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--color-background-secondary)}
+.g{font-weight:500;font-size:13px;white-space:nowrap}
+.vn{color:var(--color-text-primary);font-size:13px}
+.note{color:var(--color-text-secondary);font-size:11px;margin-top:3px}
+.ex{color:var(--color-text-secondary);font-size:11px;font-style:italic;margin-top:2px}
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:1px 6px;border-radius:10px;margin-left:4px;vertical-align:middle}
+.bw{background:#FAEEDA;color:#633806}.bb{background:#E6F1FB;color:#0C447C}
+.bg{background:#EAF3DE;color:#27500A}.br{background:#FCEBEB;color:#791F1F}
+.bp{background:#FBEAF0;color:#72243E}.bgy{background:#F1EFE8;color:#444441}
+@media(prefers-color-scheme:dark){
+.bw{background:#633806;color:#FAC775}.bb{background:#0C447C;color:#B5D4F4}
+.bg{background:#27500A;color:#C0DD97}.br{background:#791F1F;color:#F7C1C1}
+.bp{background:#72243E;color:#F4C0D1}.bgy{background:#444441;color:#D3D1C7}}
+.sep{font-size:11px;font-weight:500;color:var(--color-text-secondary);padding:8px 10px 4px;background:var(--color-background-secondary);border-bottom:0.5px solid var(--color-border-tertiary);border-top:0.5px solid var(--color-border-tertiary)}
+</style>
+<div class="root">
+<div class="tabs">
+  <div class="tab active" onclick="show('t1',this)">🕐 Thời gian</div>
+  <div class="tab" onclick="show('t2',this)">⚡ Nguyên nhân</div>
+  <div class="tab" onclick="show('t3',this)">🎯 Mục đích</div>
+  <div class="tab" onclick="show('t4',this)">🔀 Điều kiện</div>
+  <div class="tab" onclick="show('t5',this)">🤝 Nhượng bộ</div>
+  <div class="tab" onclick="show('t6',this)">↔ Đối lập</div>
+  <div class="tab" onclick="show('t7',this)">🔭 Dự đoán</div>
+  <div class="tab" onclick="show('t8',this)">📌 Thêm / Chọn</div>
+  <div class="tab" onclick="show('t9',this)">📖 Kinh nghiệm</div>
+  <div class="tab" onclick="show('t10',this)">🔗 Từ nối câu</div>
+</div>
 
-class TrendingCategory {
-  final String label;
-  final String query;
+<div id="t1" class="panel active">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr><td class="g">~자마자</td><td class="vn">Vừa A xong ngay thì B</td><td><div class="note">⚠ Liền tiếp tức thì, không có khoảng cách</div><div class="ex">집에 오자마자 잠들었다 = Vừa về nhà liền ngủ</div></td></tr>
+<tr><td class="g">~고 나서</td><td class="vn">Sau khi A xong rồi B</td><td><div class="note">Có thể có khoảng cách thời gian giữa A và B</div><div class="ex">밥을 먹고 나서 산책했다 = Sau khi ăn xong đi dạo</div></td></tr>
+<tr><td class="g">~(으)ㄴ 후에<br>~(으)ㄴ 다음에</td><td class="vn">Sau khi A...</td><td><div class="note">≈ ~고 나서; dùng được với danh từ: 졸업 후에</div><div class="ex">수업이 끝난 후에 만나자 = Sau khi hết tiết gặp nhau nhé</div></td></tr>
+<tr><td class="g">~기 전에</td><td class="vn">Trước khi A...</td><td><div class="note">Ngược với ~(으)ㄴ 후에</div><div class="ex">자기 전에 이를 닦아라 = Trước khi ngủ đánh răng đi</div></td></tr>
+<tr><td class="g">~는 동안<br>~는 사이에</td><td class="vn">Trong khi / trong lúc A...</td><td><div class="note">Khoảng thời gian kéo dài; 사이에 = khoảnh khắc ngắn hơn</div><div class="ex">기다리는 동안 책을 읽었다 = Trong lúc chờ đọc sách</div></td></tr>
+<tr><td class="g">~다가</td><td class="vn">Đang A thì dừng/đổi sang B</td><td><div class="note">A bị gián đoạn hoặc đảo ngược; không phải kết thúc tự nhiên</div><div class="ex">공부하다가 잠들었다 = Đang học thì ngủ mất</div></td></tr>
+<tr><td class="g">~면서</td><td class="vn">Vừa A vừa B (đồng thời)</td><td><div class="note"><span class="badge bb">Phải cùng chủ ngữ</span> — nếu chủ ngữ khác → dùng ~는데</div><div class="ex">음악을 들으면서 공부한다 = Vừa nghe nhạc vừa học</div></td></tr>
+<tr><td class="g">~는데</td><td class="vn">Đang A thì B (bối cảnh nền)</td><td><div class="note"><span class="badge bg">Khác chủ ngữ OK</span> — B thường bất ngờ/đột ngột</div><div class="ex">축구하는데 선생님이 불렀다 = Đang chơi bóng thì thầy gọi</div></td></tr>
+<tr><td class="g">~(으)ㄴ지<br>N이/가 지나다</td><td class="vn">Đã... được bao lâu rồi</td><td><div class="note">Tính thời gian từ quá khứ đến nay</div><div class="ex">한국에 온 지 3년이 됐다 = Đã đến Hàn được 3 năm rồi</div></td></tr>
+</table>
+</div>
 
-  const TrendingCategory(this.label, this.query);
+<div id="t2" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr class="sep"><td colspan="3" class="sep">⚠ Phân biệt ~아/어서 vs ~(으)니까 — hay ra nhất trong TOPIK</td></tr>
+<tr><td class="g">~아/어서</td><td class="vn">Vì A nên B</td><td><div class="note"><span class="badge br">Không dùng với mệnh lệnh/đề nghị</span> — không: "바빠서 가세요"</div><div class="note">Nguyên nhân tự nhiên, không thể đảo thứ tự hai vế</div><div class="ex">피곤해서 쉬었다 = Vì mệt nên nghỉ</div></td></tr>
+<tr><td class="g">~(으)니까</td><td class="vn">Vì A thì B (nên...)</td><td><div class="note"><span class="badge bg">Được dùng với mệnh lệnh/đề nghị</span> — OK: "바우니까 빨리 가세요"</div><div class="note">Lý do mang tính lập luận; người nói nhấn mạnh lý do</div><div class="ex">비가 오니까 우산을 가져가 = Vì trời mưa thì mang ô đi</div></td></tr>
+<tr><td class="g">~기 때문에</td><td class="vn">Bởi vì A</td><td><div class="note">Trang trọng hơn ~아서/니까; hay dùng trong văn viết</div><div class="ex">바쁘기 때문에 못 갔다 = Vì bận nên không đi được</div></td></tr>
+<tr><td class="g">~느라고</td><td class="vn">Vì bận A mà (không làm được B)</td><td><div class="note"><span class="badge bw">Kết quả thường tiêu cực/không mong muốn</span>; cùng chủ ngữ</div><div class="ex">공부하느라고 못 잤다 = Vì bận học mà không ngủ được</div></td></tr>
+<tr><td class="g">~는 바람에</td><td class="vn">Vì A bất ngờ mà (B tiêu cực)</td><td><div class="note"><span class="badge br">Kết quả luôn tiêu cực</span> + nguyên nhân bất ngờ/ngoài ý muốn</div><div class="ex">비가 오는 바람에 행사가 취소됐다 = Vì mưa bất ngờ nên sự kiện bị hủy</div></td></tr>
+<tr><td class="g">~(으)므로</td><td class="vn">Vì / do (lý do)</td><td><div class="note">Văn viết trang trọng nhất; ≈ ~기 때문에</div><div class="ex">안전이 중요하므로 조심하십시오</div></td></tr>
+<tr><td class="g">왜냐하면 ~기 때문이다</td><td class="vn">Bởi vì... (giải thích)</td><td><div class="note">Cặp cố định — 왜냐하면 ở đầu, 때문이다 ở cuối</div><div class="ex">왜냐하면 바쁘기 때문이다 = Bởi vì bận</div></td></tr>
+</table>
+</div>
 
-  // FIX #3: override == và hashCode để dùng làm Map key an toàn,
-  // không phụ thuộc vào reference equality của const.
-  @override
-  bool operator ==(Object other) =>
-      other is TrendingCategory && other.query == query;
+<div id="t3" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr><td class="g">~(으)러</td><td class="vn">Đến/đi để làm A</td><td><div class="note"><span class="badge bb">Chỉ dùng với động từ di chuyển</span>: 가다, 오다, 다니다...</div><div class="ex">밥을 먹으러 갔다 = Đi để ăn cơm</div></td></tr>
+<tr><td class="g">~(으)려고</td><td class="vn">Định làm / có ý định làm</td><td><div class="note">Ý định chưa thực hiện; không dùng với câu mệnh lệnh</div><div class="ex">공부하려고 도서관에 갔다 = Đến thư viện định học</div></td></tr>
+<tr><td class="g">~기 위해(서)<br>~(으)ㄹ 위해(서)</td><td class="vn">Để / nhằm mục đích</td><td><div class="note">Mục đích trang trọng hơn ~(으)려고; dùng được với danh từ: 건강을 위해</div><div class="ex">건강을 위해 운동한다 = Tập thể dục vì sức khỏe</div></td></tr>
+<tr><td class="g">~(으)ㄹ 수 있도록</td><td class="vn">Để có thể làm được</td><td><div class="note">Mục đích hướng đến kết quả; ≈ ~기 위해</div><div class="ex">이해할 수 있도록 설명했다 = Giải thích để có thể hiểu được</div></td></tr>
+<tr><td class="g">~고자</td><td class="vn">Muốn / mong muốn làm</td><td><div class="note">Văn viết; diễn tả mong muốn/nguyện vọng</div><div class="ex">알리고자 이 글을 씁니다 = Viết bài này để thông báo</div></td></tr>
+</table>
+</div>
 
-  @override
-  int get hashCode => query.hashCode;
+<div id="t4" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr><td class="g">~(으)면</td><td class="vn">Nếu A thì B</td><td><div class="note">Điều kiện trung tính; có thể xảy ra hoặc không</div><div class="ex">시간이 있으면 갈게 = Nếu có thời gian sẽ đi</div></td></tr>
+<tr><td class="g">~(으)ㄴ다면<br>~(이)라면</td><td class="vn">Nếu (giả sử) A thì B</td><td><div class="note"><span class="badge bw">Giả định</span> — không đi kèm vế quá khứ thật (~었다)</div><div class="ex">돈이 있다면 살 텐데 = Nếu có tiền thì sẽ mua</div></td></tr>
+<tr><td class="g">~거든</td><td class="vn">Nếu A thì (hãy) B</td><td><div class="note">Vế sau thường là lời khuyên/đề nghị; sắc thái nhẹ nhàng</div><div class="ex">배고프거든 먹어 = Nếu đói thì ăn đi</div></td></tr>
+<tr><td class="g">~아/어야</td><td class="vn">Phải A thì mới B</td><td><div class="note">Điều kiện bắt buộc; không có A thì B không xảy ra</div><div class="ex">짝이 맞아야 신을 수 있다 = Phải thành đôi mới mang được</div></td></tr>
+<tr><td class="g">~아/어야만</td><td class="vn">Chỉ khi A thì mới B</td><td><div class="note">~아야 + 만 (nhấn mạnh thêm tính bắt buộc)</div><div class="ex">노력해야만 성공한다 = Chỉ khi cố gắng mới thành công</div></td></tr>
+<tr><td class="g">~(으)ㄹ 경우에</td><td class="vn">Trong trường hợp A</td><td><div class="note">Văn viết; = nếu xảy ra tình huống A</div><div class="ex">문제가 생길 경우에 연락하세요 = Nếu có vấn đề hãy liên hệ</div></td></tr>
+</table>
+</div>
+
+<div id="t5" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr class="sep"><td colspan="3" class="sep">Nhóm "dù A đi nữa thì B vẫn vậy" — sắp xếp từ yếu đến mạnh</td></tr>
+<tr><td class="g">~아/어도</td><td class="vn">Dù A thì B vẫn vậy</td><td><div class="note">Nhượng bộ cơ bản, thông dụng nhất</div><div class="ex">바빠도 운동해야 해 = Dù bận cũng phải tập</div></td></tr>
+<tr><td class="g">~더라도</td><td class="vn">Dù A đi nữa (nhấn mạnh)</td><td><div class="note">Mạnh hơn ~아도; thường văn viết; giả định mạnh hơn</div><div class="ex">비가 오더라도 갈 거야 = Dù có mưa cũng sẽ đi</div></td></tr>
+<tr><td class="g">~(으)ㄹ지라도</td><td class="vn">Dù cho có A đi nữa</td><td><div class="note">Trang trọng nhất; văn học/văn viết</div><div class="ex">실패할지라도 포기하지 않겠다 = Dù thất bại cũng không bỏ cuộc</div></td></tr>
+<tr><td class="g">~아/어 봐야<br>≈ ~다고 해도</td><td class="vn">Dù thử làm A cũng vô ích</td><td><div class="note"><span class="badge bw">Hàm ý vô ích</span> — kết quả sẽ không thay đổi dù có cố</div><div class="ex">가 봐야 값은 비슷할 거야 = Dù đi thử giá cũng vậy thôi</div></td></tr>
+<tr><td class="g">~(으)ㄹ지언정</td><td class="vn">Thà A còn hơn B</td><td><div class="note">Chấp nhận A (xấu) để tránh B (còn xấu hơn)</div><div class="ex">굶을지언정 훔치지 않겠다 = Thà nhịn đói còn hơn ăn cắp</div></td></tr>
+<tr><td class="g">~기는 하지만<br>~기는 ~지만</td><td class="vn">Có làm đấy nhưng...</td><td><div class="note">Thừa nhận A là thật, nhưng đưa ra đối lập B</div><div class="ex">가기는 하지만 싫어 = Có đi đấy nhưng không thích</div></td></tr>
+</table>
+</div>
+
+<div id="t6" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr><td class="g">~지만</td><td class="vn">Nhưng / tuy... nhưng</td><td><div class="note">Đối lập cơ bản; phổ biến nhất</div><div class="ex">비싸지만 맛있다 = Tuy đắt nhưng ngon</div></td></tr>
+<tr><td class="g">~(으)나</td><td class="vn">Nhưng / tuy nhiên</td><td><div class="note">Văn viết; ≈ ~지만</div><div class="ex">알고 있으나 말하지 않겠다 = Biết nhưng sẽ không nói</div></td></tr>
+<tr><td class="g">~는데</td><td class="vn">Trong khi đó / mặc dù</td><td><div class="note">Đa chức năng: bối cảnh nền / đối lập nhẹ / dẫn vào thông tin</div><div class="ex">나는 키가 큰데 동생은 작다 = Tôi cao trong khi em thấp</div></td></tr>
+<tr><td class="g">~는 반면에<br>~는 데 반해</td><td class="vn">Trong khi đó / ngược lại</td><td><div class="note">Đối lập mạnh; thường so sánh 2 đối tượng rõ ràng</div><div class="ex">형은 키가 큰 반면에 동생은 작다 = Anh cao trong khi em lại thấp</div></td></tr>
+<tr><td class="g">그러나<br>하지만</td><td class="vn">Nhưng / tuy nhiên</td><td><div class="note">Từ nối đầu câu; 그러나 trang trọng hơn 하지만</div><div class="ex">열심히 했다. 그러나 실패했다 = Đã cố gắng. Nhưng thất bại</div></td></tr>
+<tr><td class="g">그런데</td><td class="vn">Thế nhưng / nhưng mà</td><td><div class="note">Đối lập nhẹ hoặc chuyển sang thông tin bổ sung bất ngờ</div><div class="ex">먹었다. 그런데 배가 고프다 = Đã ăn. Thế mà vẫn đói</div></td></tr>
+</table>
+</div>
+
+<div id="t7" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr class="sep"><td colspan="3" class="sep">Sắp xếp từ chắc chắn → không chắc chắn</td></tr>
+<tr><td class="g">~(으)ㄹ 것이다</td><td class="vn">Sẽ... (tương lai chắc chắn)</td><td><div class="note">Dự đoán khá chắc; văn viết trang trọng</div><div class="ex">내일 비가 올 것이다 = Ngày mai sẽ mưa</div></td></tr>
+<tr><td class="g">~겠다</td><td class="vn">Tôi sẽ... / chắc là...</td><td><div class="note">Ý định của người nói (1) hoặc suy đoán từ tình huống (2)</div><div class="ex">(1) 제가 하겠습니다 = Tôi sẽ làm / (2) 춥겠다 = Chắc lạnh lắm</div></td></tr>
+<tr><td class="g">~ㄹ 모양이다</td><td class="vn">Có vẻ sẽ... (có bằng chứng)</td><td><div class="note">Dựa trên bằng chứng quan sát; ≈ ~ㄹ 것 같다</div><div class="ex">비가 올 모양이다 = Trông như trời sẽ mưa</div></td></tr>
+<tr><td class="g">~(으)ㄹ 것 같다</td><td class="vn">Có vẻ / hình như sẽ...</td><td><div class="note">Dự đoán chủ quan; ≈ ~ㄹ 모양이다 trong TOPIK</div><div class="ex">비가 올 것 같다 = Hình như sẽ mưa</div></td></tr>
+<tr><td class="g">~나 보다<br>~인가 보다</td><td class="vn">Chắc là... / hóa ra là...</td><td><div class="note">Suy luận từ kết quả quan sát thấy; người nói không trực tiếp biết</div><div class="ex">불이 켜져 있는 걸 보니 집에 있나 봐 = Thấy đèn bật chắc đang ở nhà</div></td></tr>
+<tr><td class="g">~(으)ㄹ 리가 없다</td><td class="vn">Không thể nào... (phủ định)</td><td><div class="note">Phủ định khả năng mạnh; đối lập với ~ㄹ 것 같다</div><div class="ex">그가 올 리가 없다 = Không thể nào anh ấy đến</div></td></tr>
+<tr><td class="g">~(으)ㄹ지도 모르다</td><td class="vn">Biết đâu / có thể...</td><td><div class="note">Khả năng không chắc, thấp; người nói không chắc</div><div class="ex">늦을지도 몰라 = Biết đâu có thể muộn</div></td></tr>
+<tr><td class="g">~(으)ㄹ 텐데</td><td class="vn">Chắc là... nhưng / đáng lẽ...</td><td><div class="note">Dự đoán kèm nuối tiếc hoặc lo ngại</div><div class="ex">피곤할 텐데 쉬어 = Chắc mệt lắm, nghỉ đi</div></td></tr>
+</table>
+</div>
+
+<div id="t8" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr class="sep"><td colspan="3" class="sep">Nhóm bổ sung thông tin</td></tr>
+<tr><td class="g">~고</td><td class="vn">Và / rồi (nối hành động)</td><td><div class="note">Nối 2 hành động/tính chất đơn giản</div><div class="ex">밥을 먹고 잔다 = Ăn cơm rồi ngủ</div></td></tr>
+<tr><td class="g">~(으)ㄹ 뿐만 아니라<br>~뿐 아니라</td><td class="vn">Không chỉ A mà còn B</td><td><div class="note">B thường quan trọng hơn hoặc bất ngờ hơn A</div><div class="ex">공부뿐 아니라 운동도 해 = Không chỉ học mà còn tập thể dục</div></td></tr>
+<tr><td class="g">~기도 하다</td><td class="vn">Cũng có lúc / đôi khi</td><td><div class="note">Bổ sung thêm đặc điểm; tần suất hoặc thêm vào</div><div class="ex">비가 오기도 한다 = Cũng có lúc mưa</div></td></tr>
+<tr><td class="g">또한 / 게다가</td><td class="vn">Ngoài ra / hơn nữa</td><td><div class="note">또한: văn viết; 게다가: thêm vào (thường ngạc nhiên)</div><div class="ex">또한 건강에도 좋다 = Ngoài ra còn tốt cho sức khỏe</div></td></tr>
+<tr class="sep"><td colspan="3" class="sep">Nhóm lựa chọn</td></tr>
+<tr><td class="g">~거나</td><td class="vn">A hoặc B</td><td><div class="note">Hai lựa chọn thay thế nhau; chỉ chọn 1</div><div class="ex">읽거나 쓰거나 해 = Đọc hoặc viết đi</div></td></tr>
+<tr><td class="g">~든지<br>~든가</td><td class="vn">Dù A hay B / bất kể là gì</td><td><div class="note">Không quan tâm lựa chọn nào; "cũng được"</div><div class="ex">뭘 먹든지 상관없어 = Ăn gì cũng được</div></td></tr>
+<tr><td class="g">또는 / 혹은</td><td class="vn">Hoặc là</td><td><div class="note">Từ nối đầu câu; 혹은 trang trọng hơn</div><div class="ex">전화 또는 이메일로 = Bằng điện thoại hoặc email</div></td></tr>
+</table>
+</div>
+
+<div id="t9" class="panel">
+<table>
+<tr><th style="width:27%">Cấu trúc</th><th style="width:32%">Nghĩa tiếng Việt</th><th>Ghi chú & ví dụ</th></tr>
+<tr><td class="g">~(으)ㄴ 적이 있다<br>~(으)ㄴ 적이 없다</td><td class="vn">Đã từng / Chưa từng</td><td><div class="note">Kinh nghiệm quá khứ; không dùng với tương lai</div><div class="ex">한국에 간 적이 있다 = Đã từng đến Hàn Quốc</div></td></tr>
+<tr><td class="g">~곤 하다</td><td class="vn">Thường hay / có thói quen</td><td><div class="note">Thói quen lặp đi lặp lại trong quá khứ hoặc hiện tại</div><div class="ex">어릴 때 여기 오곤 했다 = Hồi nhỏ hay đến đây</div></td></tr>
+<tr><td class="g">~아/어 보다</td><td class="vn">Thử làm A xem</td><td><div class="note">Thử nghiệm; kết quả chưa biết</div><div class="ex">한번 먹어 봐 = Thử ăn xem</div></td></tr>
+<tr><td class="g">~아/어 봐야</td><td class="vn">Dù thử làm cũng vô ích</td><td><div class="note">~아/어 보다 + ~아야 → kết quả sẽ không thay đổi</div><div class="ex">가 봐야 소용없어 = Dù thử đi cũng vô ích thôi</div></td></tr>
+<tr><td class="g">~(으)ㄹ 수 있다<br>~(으)ㄹ 수 없다</td><td class="vn">Có thể / Không thể</td><td><div class="note">Khả năng; ≠ ~ㄹ 리가 없다 (không thể nào — mạnh hơn)</div><div class="ex">혼자 할 수 있어요 = Có thể tự làm</div></td></tr>
+<tr><td class="g">~(으)ㄹ 수밖에 없다</td><td class="vn">Không còn cách nào khác ngoài việc</td><td><div class="note">Bắt buộc phải làm; không có lựa chọn khác</div><div class="ex">참을 수밖에 없다 = Chỉ có thể chịu đựng thôi</div></td></tr>
+<tr><td class="g">~게 되다</td><td class="vn">Trở nên / dần dần đến lúc</td><td><div class="note">Thay đổi trạng thái; kết quả tự nhiên theo thời gian</div><div class="ex">한국어를 잘하게 됐다 = Đã trở nên giỏi tiếng Hàn</div></td></tr>
+<tr><td class="g">~아/어지다</td><td class="vn">Trở nên (thay đổi dần)</td><td><div class="note">Biến đổi trạng thái; thường đi với tính từ</div><div class="ex">날씨가 더워졌다 = Thời tiết trở nên nóng hơn</div></td></tr>
+</table>
+</div>
+
+<div id="t10" class="panel">
+<table>
+<tr><th style="width:22%">Từ nối</th><th style="width:28%">Nghĩa</th><th>Chức năng & ghi chú</th></tr>
+<tr class="sep"><td colspan="3" class="sep">Nhóm kết quả / suy luận</td></tr>
+<tr><td class="g">그래서</td><td class="vn">Vì vậy / nên</td><td><div class="note">Kết quả tự nhiên; thông dụng nhất</div></td></tr>
+<tr><td class="g">그러므로<br>따라서</td><td class="vn">Do đó / vì vậy</td><td><div class="note">Trang trọng; kết luận logic — thường ở CUỐI đoạn</div></td></tr>
+<tr><td class="g">그러자</td><td class="vn">Và rồi ngay lúc đó</td><td><div class="note">Kết quả tức thì; hay dùng trong văn kể chuyện</div></td></tr>
+<tr class="sep"><td colspan="3" class="sep">Nhóm đối lập / bổ sung</td></tr>
+<tr><td class="g">그러나<br>하지만</td><td class="vn">Nhưng / tuy nhiên</td><td><div class="note">그러나: trang trọng; 하지만: thông thường</div></td></tr>
+<tr><td class="g">그런데</td><td class="vn">Thế nhưng / nhưng mà</td><td><div class="note">Đối lập nhẹ hoặc chuyển sang thông tin bổ sung/bất ngờ</div></td></tr>
+<tr><td class="g">그래도</td><td class="vn">Dù vậy / vẫn thế</td><td><div class="note">Nhượng bộ: dù A thì vẫn B</div></td></tr>
+<tr><td class="g">반면에</td><td class="vn">Ngược lại / trong khi đó</td><td><div class="note">So sánh 2 đối tượng đối lập</div></td></tr>
+<tr class="sep"><td colspan="3" class="sep">Nhóm diễn giải / bổ sung</td></tr>
+<tr><td class="g">즉 / 다시 말해</td><td class="vn">Tức là / nói cách khác</td><td><div class="note">Giải thích lại ý vừa nói rõ hơn</div></td></tr>
+<tr><td class="g">또한<br>게다가</td><td class="vn">Ngoài ra / hơn nữa</td><td><div class="note">Bổ sung thêm cùng chiều; 게다가 thường ngạc nhiên</div></td></tr>
+<tr><td class="g">예를 들면<br>예를 들어</td><td class="vn">Ví dụ như</td><td><div class="note">Đưa ra ví dụ cụ thể cho ý vừa nói</div></td></tr>
+<tr class="sep"><td colspan="3" class="sep">Nhóm điều kiện / trình tự</td></tr>
+<tr><td class="g">그러면<br>그렇다면</td><td class="vn">Vậy thì / nếu vậy</td><td><div class="note">Suy luận từ điều vừa nói → kết luận tiếp</div></td></tr>
+<tr><td class="g">이처럼<br>이와 같이</td><td class="vn">Như vậy / như thế này</td><td><div class="note">Tổng kết; dẫn đến kết luận — hay ở câu cuối đoạn</div></td></tr>
+<tr><td class="g">먼저 / 우선<br>다음으로 / 마지막으로</td><td class="vn">Trước tiên / Tiếp theo / Cuối cùng</td><td><div class="note">Liệt kê theo thứ tự; hay gặp trong văn giải thích</div></td></tr>
+</table>
+</div>
+</div>
+
+<script>
+function show(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
 }
-
-const trendingCategories = [
-  // FIX: Thêm "official audio/video" vào các query tiếng Anh để ép YouTube
-  // trả về individual Video thay vì Playlist/Channel/Livestream
-  TrendingCategory('Global Hits', 'top songs 2025 official audio'),
-  TrendingCategory('Vietnam', 'nhạc trẻ hot nhất'),
-  TrendingCategory('US-UK', 'best pop songs 2025 official video'),
-  TrendingCategory('K-Pop', 'kpop trending 2025'),
-  TrendingCategory('Chill', 'chill mix 2025 official audio'),
-];
-
-class TrendingState {
-  final List<OnlineTrack> tracks;
-  final dynamic nextToken;
-  final bool isLoading;
-  final bool isFetchingMore;
-  final String? error;
-  final TrendingCategory currentCategory;
-
-  TrendingState({
-    this.tracks = const [],
-    this.nextToken,
-    this.isLoading = true,
-    this.isFetchingMore = false,
-    this.error,
-    TrendingCategory? currentCategory,
-  }) : currentCategory = currentCategory ?? trendingCategories[0];
-
-  TrendingState copyWith({
-    List<OnlineTrack>? tracks,
-    dynamic nextToken,
-    bool? isLoading,
-    bool? isFetchingMore,
-    String? error,
-    TrendingCategory? currentCategory,
-    bool clearError = false,
-    bool clearToken = false,
-  }) {
-    return TrendingState(
-      tracks: tracks ?? this.tracks,
-      nextToken: clearToken ? null : (nextToken ?? this.nextToken),
-      isLoading: isLoading ?? this.isLoading,
-      isFetchingMore: isFetchingMore ?? this.isFetchingMore,
-      error: clearError ? null : (error ?? this.error),
-      currentCategory: currentCategory ?? this.currentCategory,
-    );
-  }
-}
-
-class TrendingCategoryCache {
-  final List<OnlineTrack> tracks;
-  final dynamic nextToken;
-
-  // FIX #1: Không cache lỗi nữa. Chỉ cache kết quả thành công.
-  // Lỗi sẽ không được lưu → lần sau switch vào category đó sẽ thử lại network.
-  TrendingCategoryCache(this.tracks, this.nextToken);
-}
-
-class TrendingNotifier extends StateNotifier<TrendingState> {
-  // FIX #1: Map chỉ chứa cache của các lần fetch thành công.
-  final Map<TrendingCategory, TrendingCategoryCache> _cache = {};
-
-  TrendingNotifier() : super(TrendingState()) {
-    _fetchInitial();
-  }
-
-  Future<void> _fetchInitial({bool forceRefresh = false}) async {
-    final cat = state.currentCategory;
-
-    // Chỉ serve cache nếu fetch trước đó thành công (có tracks).
-    if (!forceRefresh && _cache.containsKey(cat)) {
-      final cached = _cache[cat]!;
-      state = state.copyWith(
-        isLoading: false,
-        tracks: cached.tracks,
-        nextToken: cached.nextToken,
-        clearError: true,
-        clearToken: cached.nextToken == null,
-      );
-      return;
-    }
-
-    state = state.copyWith(isLoading: true, clearError: true);
-    final result = await youtubeServiceInstance.fetchTrending(query: cat.query);
-
-    if (!mounted) return;
-    // Bỏ qua kết quả nếu user đã switch sang category khác trong lúc fetch.
-    if (state.currentCategory != cat) return;
-
-    if (result.tracks.isEmpty && result.nextToken == null) {
-      // FIX #1: Không cache lỗi → lần sau switch vào sẽ thử fetch lại.
-      state = state.copyWith(
-        isLoading: false,
-        error: 'Could not load trending music.',
-      );
-    } else {
-      // Chỉ cache kết quả thành công.
-      _cache[cat] = TrendingCategoryCache(result.tracks, result.nextToken);
-      state = state.copyWith(
-        isLoading: false,
-        tracks: result.tracks,
-        nextToken: result.nextToken,
-        clearError: true,
-        clearToken: result.nextToken == null,
-      );
-    }
-  }
-
-  Future<void> setCategory(TrendingCategory category) async {
-    if (state.currentCategory == category) return;
-    state = state.copyWith(currentCategory: category);
-    await _fetchInitial();
-  }
-
-  Future<void> retry() async {
-    await _fetchInitial(forceRefresh: true);
-  }
-
-  Future<void> loadMore() async {
-    if (state.isFetchingMore || state.nextToken == null || state.isLoading) {
-      return;
-    }
-
-    final cat = state.currentCategory;
-    state = state.copyWith(isFetchingMore: true);
-    final result = await youtubeServiceInstance.getNextPage(state.nextToken);
-
-    if (!mounted) return;
-
-    // FIX #2: Luôn check category trước khi update state — cả nhánh empty.
-    // Nếu user switch category trong lúc loadMore đang chạy, không được
-    // xóa nextToken hay thay đổi state của category mới.
-    if (state.currentCategory != cat) return;
-
-    if (result.tracks.isNotEmpty) {
-      final newTracks = [...state.tracks, ...result.tracks];
-      _cache[cat] = TrendingCategoryCache(newTracks, result.nextToken);
-      state = state.copyWith(
-        isFetchingMore: false,
-        tracks: newTracks,
-        nextToken: result.nextToken,
-        clearToken: result.nextToken == null,
-      );
-    } else {
-      state = state.copyWith(isFetchingMore: false, clearToken: true);
-    }
-  }
-}
-
-final trendingProvider =
-    StateNotifierProvider<TrendingNotifier, TrendingState>((ref) {
-  ref.keepAlive();
-  return TrendingNotifier();
-});
+</script>
