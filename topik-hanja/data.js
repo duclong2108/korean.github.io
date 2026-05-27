@@ -393,5 +393,80 @@ const HANJA_DATA = [
 {char:"급",hanja:"急/給/級",vn:"Cấp/Cấp/Cấp",meaning:"hurry, give, level",tier:"common",theme:"orange",words:[
 {w:"고급",m:"cao cấp",p:"go-geup",en:"high-class/advanced"},{w:"중급",m:"trung cấp",p:"jung-geup",en:"intermediate"},{w:"초급",m:"sơ cấp",p:"cho-geup",en:"beginner"},{w:"급행",m:"cấp hành (tốc hành)",p:"geu-paeng",en:"express"},
 {w:"월급",m:"nguyệt cấp (lương)",p:"wol-geup",en:"monthly salary"},{w:"공급",m:"cung cấp",p:"gong-geup",en:"supply"},{w:"계급",m:"giai cấp",p:"gye-geup",en:"class/rank"},
-{w:"긴급",m:"khẩn cấp",p:"gin-geup",en:"emergency/urgent"},{w:"급격",m:"cấp kích (đột ngột)",p:"geup-gyeok",en:"rapid/drastic"},{w:"진급",m:"tiến cấp (thăng chức)",p:"jin-geup",en:"promotion"}]}
+{w:"긴급",m:"khẩn cấp",p:"gin-geup",en:"emergency/urgent"},{w:"급격",m:"cấp kích (đột ngột)",p:"geup-gyeok",en:"rapid/drastic"},{w:"진급",m:"tiến cấp (thăng chức)",p:"jin-geup",en:"promotion"}]},
+
+{char:"무",hanja:"無/務/武",vn:"Vô/Vụ/Vũ",meaning:"none, work, military",tier:"essential",theme:"red",words:[
+{w:"무료",m:"vô liệu (miễn phí)",p:"mu-ryo",en:"free of charge"},{w:"무시",m:"vô thị (bỏ qua)",p:"mu-si",en:"ignore/disregard"},{w:"의무",m:"nghĩa vụ",p:"ui-mu",en:"duty/obligation"},{w:"업무",m:"nghiệp vụ",p:"eom-mu",en:"business/work"},
+{w:"근무",m:"cần vụ (làm việc)",p:"geun-mu",en:"work/duty"},{w:"사무실",m:"tư vụ thất (văn phòng)",p:"sa-mu-sil",en:"office"},{w:"무기",m:"vũ khí",p:"mu-gi",en:"weapon"},
+{w:"무사",m:"vô sự / vũ sư",p:"mu-sa",en:"safety / warrior"},{w:"무조건",m:"vô điều kiện",p:"mu-jo-geon",en:"unconditional"},{w:"임무",m:"nhiệm vụ",p:"im-mu",en:"mission/task"}]},
+
+{char:"소",hanja:"少/小/所/消",vn:"Thiểu/Tiểu/Sở/Tiêu",meaning:"few, small, place, extinguish",tier:"essential",theme:"blue",words:[
+{w:"장소",m:"tràng sở (địa điểm)",p:"jang-so",en:"place/location"},{w:"소식",m:"tiêu tức (tin tức)",p:"so-sik",en:"news"},{w:"소비",m:"tiêu phí",p:"so-bi",en:"consumption"},{w:"감소",m:"giảm thiểu",p:"gam-so",en:"decrease/reduction"},
+{w:"청소",m:"thanh tảo (dọn dẹp)",p:"cheong-so",en:"cleaning"},{w:"최소",m:"tối thiểu",p:"choe-so",en:"minimum"},{w:"소녀",m:"thiếu nữ",p:"so-nyeo",en:"girl"},
+{w:"소개",m:"thiệu giới (giới thiệu)",p:"so-gae",en:"introduction"},{w:"소유",m:"sở hữu",p:"so-yu",en:"ownership"},{w:"해소",m:"giải tiêu (giải quyết)",p:"hae-so",en:"relief/solution"}]},
+
+{char:"고",hanja:"高/告/고",vn:"Cao/Cáo/Cố",meaning:"high, announce, old",tier:"essential",theme:"green",words:[
+{w:"최고",m:"tối cao",p:"choe-go",en:"best/highest"},{w:"광고",m:"quảng cáo",p:"gwang-go",en:"advertisement"},{w:"보고",m:"báo cáo",p:"bo-go",en:"report"},{w:"경고",m:"cảnh cáo",p:"gyeong-go",en:"warning"},
+{w:"고급",m:"cao cấp",p:"go-geup",en:"high-class"},{w:"고생",m:"khổ sinh (vất vả)",p:"go-saeng",en:"hardship"},{w:"고객",m:"cố khách (khách hàng)",p:"go-gaek",en:"customer"},
+{w:"고려",m:"khảo lự (cân nhắc)",p:"go-ryeo",en:"consideration"},{w:"원고",m:"nguyên cáo (bản thảo)",p:"won-go",en:"manuscript"},{w:"피고",m:"bị cáo",p:"pi-go",en:"defendant"}]},
+
+{char:"산",hanja:"産/山/산",vn:"Sản/Sơn/Toán",meaning:"produce, mountain, calculate",tier:"common",theme:"orange",words:[
+{w:"생산",m:"sinh sản (sản xuất)",p:"saeng-san",en:"production"},{w:"산업",m:"sản nghiệp (công nghiệp)",p:"sa-neop",en:"industry"},{w:"재산",m:"tài sản",p:"jae-san",en:"property/wealth"},{w:"부동산",m:"bất động sản",p:"bu-dong-san",en:"real estate"},
+{w:"등산",m:"đăng sơn (leo núi)",p:"deung-san",en:"mountain climbing"},{w:"계산",m:"kế toán (tính toán)",p:"gye-san",en:"calculation"},{w:"예산",m:"dự toán (ngân sách)",p:"ye-san",en:"budget"},
+{w:"파산",m:"phá sản",p:"pa-san",en:"bankruptcy"},{w:"국산",m:"quốc sản (hàng nội)",p:"guk-san",en:"domestic product"},{w:"산림",m:"sơn lâm (rừng núi)",p:"sal-lim",en:"forest"}]},
+
+{char:"금",hanja:"金/禁/今",vn:"Kim/Cấm/Kim",meaning:"gold/money, forbid, now",tier:"essential",theme:"purple",words:[
+{w:"금액",m:"kim ngạch (số tiền)",p:"geu-maek",en:"amount of money"},{w:"세금",m:"thuế kim",p:"se-geum",en:"tax"},{w:"현금",m:"hiện kim (tiền mặt)",p:"hyeon-geum",en:"cash"},{w:"금지",m:"cấm chỉ",p:"geum-ji",en:"prohibition"},
+{w:"방금",m:"phương kim (vừa mới)",p:"bang-geum",en:"just now"},{w:"지금",m:"chỉ kim (bây giờ)",p:"ji-geum",en:"now"},{w:"요금",m:"liệu kim (cước phí)",p:"yo-geum",en:"fare/fee"},
+{w:"벌금",m:"phạt kim (tiền phạt)",p:"beol-geum",en:"fine/penalty"},{w:"장학금",m:"tràng học kim (học bổng)",p:"jang-hak-geum",en:"scholarship"},{w:"금속",m:"kim thuộc (kim loại)",p:"geum-sok",en:"metal"}]},
+
+{char:"승",hanja:"乘/勝/昇",vn:"Thừa/Thắng/Thăng",meaning:"ride, win, rise",tier:"advanced",theme:"teal",words:[
+{w:"승진",m:"thăng tiến",p:"seung-jin",en:"promotion"},{w:"우승",m:"ưu thắng (vô địch)",p:"u-seung",en:"championship/victory"},{w:"환승",m:"hoán thừa (đổi xe)",p:"hwan-seung",en:"transfer (transit)"},{w:"상승",m:"thượng thăng (tăng lên)",p:"sang-seung",en:"rise/increase"},
+{w:"결승",m:"quyết thắng (chung kết)",p:"gyeol-seung",en:"finals"},{w:"승객",m:"thừa khách (hành khách)",p:"seung-gaek",en:"passenger"},{w:"승리",m:"thắng lợi",p:"seung-ni",en:"victory"},
+{w:"승부",m:"thắng phụ (thắng thua)",p:"seung-bu",en:"match/contest"},{w:"탑승",m:"tháp thừa (lên tàu/xe)",p:"tap-seung",en:"boarding"},{w:"승차",m:"thừa xa (lên xe)",p:"seung-cha",en:"getting on (a car)"}]},
+
+{char:"유",hanja:"有/유",vn:"Hữu/Lưu/Du",meaning:"have, flow, play",tier:"essential",theme:"indigo",words:[
+{w:"유명",m:"hữu danh (nổi tiếng)",p:"yu-myeong",en:"famous"},{w:"이유",m:"lý do",p:"i-yu",en:"reason"},{w:"유행",m:"lưu hành",p:"yu-haeng",en:"trend"},{w:"유학",m:"du học",p:"yu-hak",en:"study abroad"},
+{w:"소유",m:"sở hữu",p:"so-yu",en:"ownership"},{w:"고유",m:"cố hữu",p:"go-yu",en:"inherent/indigenous"},{w:"공유",m:"cộng hữu (chia sẻ)",p:"gong-yu",en:"sharing"},
+{w:"유일",m:"duy nhất",p:"yu-il",en:"only/sole"},{w:"유지",m:"duy trì",p:"yu-ji",en:"maintenance"},{w:"여유",m:"dư hữu (dư dả)",p:"yeo-yu",en:"composure/margin"}]},
+
+{char:"다",hanja:"多/다",vn:"Đa/Đa",meaning:"many",tier:"common",theme:"pink",words:[
+{w:"다양",m:"đa dạng",p:"da-yang",en:"various/diverse"},{w:"다수",m:"đa số",p:"da-su",en:"majority"},{w:"다행",m:"đa hạnh (may mắn)",p:"da-haeng",en:"fortunate/lucky"},{w:"다정",m:"đa tình (thân thiện)",p:"da-jeong",en:"affectionate"},
+{w:"대다수",m:"đại đa số",p:"dae-da-su",en:"the great majority"},{w:"다문화",m:"đa văn hóa",p:"da-mun-hwa",en:"multicultural"},{w:"다방면",m:"đa phương diện",p:"da-bang-myeon",en:"many directions/fields"},
+{w:"다발",m:"đa phát (xảy ra nhiều)",p:"da-bal",en:"frequent occurrence"},{w:"다수결",m:"đa số quyết",p:"da-su-gyeol",en:"majority rule"},{w:"다각",m:"đa giác (nhiều góc độ)",p:"da-gak",en:"various angles"}]},
+
+{char:"속",hanja:"速/續/속",vn:"Tốc/Tục/Thuộc",meaning:"fast, continue, belong",tier:"common",theme:"blue",words:[
+{w:"속도",m:"tốc độ",p:"sok-do",en:"speed/velocity"},{w:"계속",m:"kế tục (tiếp tục)",p:"gye-sok",en:"continuation"},{w:"연속",m:"liên tục",p:"yeon-sok",en:"consecutive/continuous"},{w:"소속",m:"sở thuộc",p:"so-sok",en:"belonging to"},
+{w:"접속",m:"tiếp tục (kết nối)",p:"jeop-sok",en:"connection/access"},{w:"구속",m:"câu thúc (giam giữ)",p:"gu-sok",en:"arrest/restriction"},{w:"신속",m:"thần tốc (nhanh chóng)",p:"sin-sok",en:"promptness/swiftness"},
+{w:"가속",m:"gia tốc",p:"ga-sok",en:"acceleration"},{w:"풍속",m:"phong tục / phong tốc",p:"pung-sok",en:"custom / wind speed"},{w:"고속",m:"cao tốc",p:"go-sok",en:"high speed"}]},
+
+{char:"독",hanja:"獨/讀/독",vn:"Độc",meaning:"alone, read, poison",tier:"advanced",theme:"red",words:[
+{w:"독립",m:"độc lập",p:"dong-nip",en:"independence"},{w:"고독",m:"cô độc",p:"go-dok",en:"solitude/loneliness"},{w:"단독",m:"đơn độc",p:"dan-dok",en:"exclusive/sole"},{w:"독서",m:"độc thư (đọc sách)",p:"dok-seo",en:"reading"},
+{w:"중독",m:"trúng độc (nghiện)",p:"jung-dok",en:"addiction/poisoning"},{w:"해독",m:"giải độc",p:"hae-dok",en:"detoxification"},{w:"독감",m:"độc cảm (cúm)",p:"dok-gam",en:"flu"},
+{w:"독특",m:"độc đặc (độc đáo)",p:"dok-teuk",en:"unique"},{w:"독신",m:"độc thân",p:"dok-sin",en:"unmarried/single"},{w:"독창",m:"độc sáng (sáng tạo độc đáo)",p:"dok-chang",en:"originality"}]},
+
+{char:"복",hanja:"福/復/複/服",vn:"Phúc/Phục",meaning:"blessing, return, complex, clothes",tier:"common",theme:"green",words:[
+{w:"행복",m:"hạnh phúc",p:"haeng-bok",en:"happiness"},{w:"축복",m:"chúc phúc",p:"chuk-bok",en:"blessing"},{w:"회복",m:"hồi phục",p:"hoe-bok",en:"recovery"},{w:"반복",m:"phản phúc (lặp lại)",p:"ban-bok",en:"repetition"},
+{w:"복잡",m:"phức tạp",p:"bok-jap",en:"complex/complicated"},{w:"교복",m:"giáo phục (đồng phục)",p:"gyo-bok",en:"school uniform"},{w:"극복",m:"khắc phục",p:"geuk-bok",en:"overcome"},
+{w:"복수",m:"phục thù / số nhiều",p:"bok-su",en:"revenge / plural"},{w:"복사",m:"phục tả (sao chép)",p:"bok-sa",en:"copy"},{w:"복구",m:"phục cựu (khôi phục)",p:"bok-gu",en:"restoration"}]},
+
+{char:"약",hanja:"藥/約/약",vn:"Dược/Ước/Nhược",meaning:"medicine, promise, weak",tier:"essential",theme:"orange",words:[
+{w:"약국",m:"dược cục (hiệu thuốc)",p:"yak-guk",en:"pharmacy"},{w:"약사",m:"dược sĩ",p:"yak-sa",en:"pharmacist"},{w:"예약",m:"dự ước (đặt trước)",p:"ye-yak",en:"reservation"},{w:"약속",m:"ước thúc (lời hứa)",p:"yak-sok",en:"promise/appointment"},
+{w:"계약",m:"khế ước (hợp đồng)",p:"gye-yak",en:"contract"},{w:"절약",m:"tiết ước (tiết kiệm)",p:"jeo-ryak",en:"saving"},{w:"요약",m:"yếu ước (tóm tắt)",p:"yo-yak",en:"summary"},
+{w:"취약",m:"thúy nhược (yếu ớt)",p:"chwi-yak",en:"vulnerable"},{w:"약점",m:"nhược điểm",p:"yak-jeom",en:"weakness"},{w:"약효",m:"dược hiệu",p:"ya-kyo",en:"efficacy (of medicine)"}]},
+
+{char:"강",hanja:"强/降/강",vn:"Cường/Giáng/Giảng",meaning:"strong, fall, explain",tier:"common",theme:"teal",words:[
+{w:"건강",m:"kiện khang (sức khỏe)",p:"geon-gang",en:"health"},{w:"강조",m:"cường điệu (nhấn mạnh)",p:"gang-jo",en:"emphasis"},{w:"강력",m:"cường lực (mạnh mẽ)",p:"gang-nyeok",en:"strong/powerful"},{w:"하강",m:"hạ giáng (rơi xuống)",p:"ha-gang",en:"descent/drop"},
+{w:"강의",m:"giảng nghĩa (bài giảng)",p:"gang-ui",en:"lecture"},{w:"강사",m:"giảng sư",p:"gang-sa",en:"instructor/lecturer"},{w:"강연",m:"giảng diễn (diễn thuyết)",p:"gang-yeon",en:"lecture/speech"},
+{w:"강제",m:"cưỡng chế",p:"gang-je",en:"compulsion/coercion"},{w:"보강",m:"bổ cường (tăng cường)",p:"bo-gang",en:"reinforcement"},{w:"강수량",m:"giáng thủy lượng (lượng mưa)",p:"gang-su-ryang",en:"precipitation"}]},
+
+{char:"차",hanja:"車/次/차",vn:"Xa/Thứ/Sai",meaning:"car, next, difference",tier:"essential",theme:"purple",words:[
+{w:"자동차",m:"tự động xa (ô tô)",p:"ja-dong-cha",en:"car"},{w:"기차",m:"khí xa (tàu hỏa)",p:"gi-cha",en:"train"},{w:"주차",m:"trú xa (đỗ xe)",p:"ju-cha",en:"parking"},{w:"목차",m:"mục thứ (mục lục)",p:"mok-cha",en:"table of contents"},
+{w:"차례",m:"thứ lệ (lượt/trình tự)",p:"cha-rye",en:"turn/order"},{w:"차이",m:"sai dị (khác biệt)",p:"cha-i",en:"difference"},{w:"교차",m:"giao thoa (cắt ngang)",p:"gyo-cha",en:"intersection/crossing"},
+{w:"점차",m:"tiệm thứ (dần dần)",p:"jeom-cha",en:"gradually"},{w:"차별",m:"sai biệt (phân biệt)",p:"cha-byeol",en:"discrimination"},{w:"열차",m:"liệt xa (xe lửa)",p:"yeol-cha",en:"train"}]},
+
+{char:"종",hanja:"終/種/종",vn:"Chung/Chủng/Tông",meaning:"end, kind, religion",tier:"advanced",theme:"blue",words:[
+{w:"최종",m:"tối chung (cuối cùng)",p:"choe-jong",en:"final"},{w:"종료",m:"chung liễu (kết thúc)",p:"jong-nyo",en:"end/termination"},{w:"종류",m:"chủng loại",p:"jong-nyu",en:"kind/type"},{w:"인종",m:"nhân chủng",p:"in-jong",en:"race/ethnicity"},
+{w:"종교",m:"tôn giáo",p:"jong-gyo",en:"religion"},{w:"종점",m:"chung điểm (điểm cuối)",p:"jong-jeom",en:"terminus/end point"},{w:"종합",m:"tổng hợp",p:"jong-hap",en:"comprehensive/synthesis"},
+{w:"업종",m:"nghiệp chủng (loại ngành nghề)",p:"eop-jong",en:"type of business"},{w:"종업원",m:"tòng nghiệp viên (nhân viên)",p:"jong-eo-bwon",en:"employee/staff"},{w:"실종",m:"thất tung (mất tích)",p:"sil-jong",en:"disappearance"}]}
 ];
