@@ -315,5 +315,83 @@ const HANJA_DATA = [
 {char:"비",hanja:"比/費/非/備/批",vn:"Tỷ/Phí/Phi/Bị/Phê",meaning:"compare, cost, not, prepare",tier:"advanced",theme:"red",words:[
 {w:"비교",m:"so sánh (tỷ giáo)",p:"bi-gyo",en:"comparison"},{w:"비용",m:"phí dụng",p:"bi-yong",en:"cost/expense"},{w:"비판",m:"phê phán",p:"bi-pan",en:"criticism"},{w:"준비",m:"chuẩn bị",p:"jun-bi",en:"preparation"},
 {w:"비율",m:"tỷ suất",p:"bi-yul",en:"ratio"},{w:"소비",m:"tiêu phí",p:"so-bi",en:"consumption"},{w:"비밀",m:"bí mật",p:"bi-mil",en:"secret"},
-{w:"비난",m:"phỉ báng",p:"bi-nan",en:"blame/criticism"},{w:"설비",m:"thiết bị",p:"seol-bi",en:"equipment/facilities"},{w:"대비",m:"đối bị (chuẩn bị / so sánh)",p:"dae-bi",en:"preparation/contrast"}]}
+{w:"비난",m:"phỉ báng",p:"bi-nan",en:"blame/criticism"},{w:"설비",m:"thiết bị",p:"seol-bi",en:"equipment/facilities"},{w:"대비",m:"đối bị (chuẩn bị / so sánh)",p:"dae-bi",en:"preparation/contrast"}]},
+
+{char:"과",hanja:"過/科/果/課",vn:"Quá/Khoa/Quả/Khóa",meaning:"pass, subject, result",tier:"essential",theme:"blue",words:[
+{w:"결과",m:"kết quả",p:"gyeol-gwa",en:"result"},{w:"과거",m:"quá khứ",p:"gwa-geo",en:"past"},{w:"효과",m:"hiệu quả",p:"hyo-gwa",en:"effect"},{w:"과정",m:"quá trình",p:"gwa-jeong",en:"process"},
+{w:"과일",m:"hoa quả",p:"gwa-il",en:"fruit"},{w:"통과",m:"thông qua",p:"tong-gwa",en:"passing"},{w:"학과",m:"học khoa (chuyên ngành)",p:"hak-gwa",en:"major"},{w:"과장",m:"khoa trưởng",p:"gwa-jang",en:"manager"},
+{w:"과제",m:"khóa đề (bài tập)",p:"gwa-je",en:"assignment/task"},{w:"과도",m:"quá độ",p:"gwa-do",en:"excessive"},{w:"결과적",m:"kết quả đích",p:"gyeol-gwa-jeok",en:"resulting/eventual"}]},
+
+{char:"반",hanja:"反/半/班",vn:"Phản/Bán/Ban",meaning:"opposite, half, class",tier:"common",theme:"orange",words:[
+{w:"반대",m:"phản đối",p:"ban-dae",en:"opposition/opposite"},{w:"일반",m:"nhất ban (chung chung)",p:"il-ban",en:"general/ordinary"},{w:"절반",m:"chiết bán (một nửa)",p:"jeol-ban",en:"half"},{w:"반응",m:"phản ứng",p:"ba-neung",en:"reaction"},
+{w:"위반",m:"vi phạm (vi phản)",p:"wi-ban",en:"violation"},{w:"반사",m:"phản xạ",p:"ban-sa",en:"reflection"},{w:"반복",m:"phản phúc (lặp lại)",p:"ban-bok",en:"repetition"},
+{w:"전반",m:"toàn ban (toàn diện)",p:"jeon-ban",en:"overall/whole"},{w:"반항",m:"phản kháng",p:"ban-hang",en:"rebellion/defiance"},{w:"반입",m:"bán nhập (mang vào)",p:"ba-nip",en:"bringing in"}]},
+
+{char:"결",hanja:"決/結/缺",vn:"Quyết/Kết/Khuyết",meaning:"decide, tie, lack",tier:"essential",theme:"pink",words:[
+{w:"결정",m:"quyết định",p:"gyeol-jeong",en:"decision"},{w:"결과",m:"kết quả",p:"gyeol-gwa",en:"result"},{w:"결론",m:"kết luận",p:"gyeol-lon",en:"conclusion"},{w:"해결",m:"giải quyết",p:"hae-gyeol",en:"solution"},
+{w:"연결",m:"liên kết",p:"yeon-gyeol",en:"connection"},{w:"결혼",m:"kết hôn",p:"gyeol-hon",en:"marriage"},{w:"결석",m:"khuyết tịch (vắng mặt)",p:"gyeol-seok",en:"absence"},
+{w:"결제",m:"quyết tế (thanh toán)",p:"gyeol-je",en:"payment/settlement"},{w:"결점",m:"khuyết điểm",p:"gyeol-jeom",en:"flaw/weakness"},{w:"체결",m:"thể kết (ký kết)",p:"che-gyeol",en:"conclusion (of a contract)"}]},
+
+{char:"당",hanja:"當/堂/黨",vn:"Đương/Đường/Đảng",meaning:"proper, hall, party",tier:"common",theme:"teal",words:[
+{w:"당연",m:"đương nhiên",p:"dang-yeon",en:"natural/of course"},{w:"담당",m:"đảm đương",p:"dam-dang",en:"charge/responsibility"},{w:"식당",m:"thực đường (nhà hàng)",p:"sik-dang",en:"restaurant"},
+{w:"해당",m:"cai đương (tương ứng)",p:"hae-dang",en:"relevance/applicable"},{w:"정당",m:"chính đảng / chính đáng",p:"jeong-dang",en:"political party/justified"},{w:"당장",m:"đương trường (ngay lập tức)",p:"dang-jang",en:"right now/immediately"},
+{w:"당시",m:"đương thời (lúc đó)",p:"dang-si",en:"at that time"},{w:"배당",m:"bài đương (phân chia)",p:"bae-dang",en:"dividend/allocation"},{w:"당분간",m:"đương phân gian (tạm thời)",p:"dang-bun-gan",en:"for the time being"},
+{w:"부당",m:"bất đương (không thỏa đáng)",p:"bu-dang",en:"unjust/unfair"}]},
+
+{char:"표",hanja:"表/票",vn:"Biểu/Phiếu",meaning:"show, ticket",tier:"common",theme:"purple",words:[
+{w:"발표",m:"phát biểu",p:"bal-pyo",en:"presentation/announcement"},{w:"대표",m:"đại biểu",p:"dae-pyo",en:"representative"},{w:"표현",m:"biểu hiện",p:"pyo-hyeon",en:"expression"},{w:"표정",m:"biểu tình (nét mặt)",p:"pyo-jeong",en:"facial expression"},
+{w:"투표",m:"đầu phiếu (bỏ phiếu)",p:"tu-pyo",en:"voting"},{w:"목표",m:"mục tiêu",p:"mok-pyo",en:"goal/target"},{w:"표준",m:"tiêu chuẩn (biểu chuẩn)",p:"pyo-jun",en:"standard"},
+{w:"수표",m:"thủ phiếu (séc)",p:"su-pyo",en:"bank check"},{w:"지표",m:"chỉ tiêu",p:"ji-pyo",en:"index/indicator"},{w:"도표",m:"đồ biểu (biểu đồ)",p:"do-pyo",en:"chart/graph"}]},
+
+{char:"품",hanja:"品",vn:"Phẩm",meaning:"item, quality",tier:"common",theme:"red",words:[
+{w:"제품",m:"chế phẩm",p:"je-pum",en:"product"},{w:"상품",m:"thương phẩm",p:"sang-pum",en:"merchandise/prize"},{w:"작품",m:"tác phẩm",p:"jak-pum",en:"artwork/piece"},{w:"식품",m:"thực phẩm",p:"sik-pum",en:"food"},
+{w:"품질",m:"phẩm chất",p:"pum-jil",en:"quality"},{w:"물품",m:"vật phẩm",p:"mul-pum",en:"goods/articles"},{w:"부품",m:"bộ phận (linh kiện)",p:"bu-pum",en:"parts/components"},
+{w:"용품",m:"dụng phẩm (đồ dùng)",p:"yong-pum",en:"supplies/articles"},{w:"명품",m:"danh phẩm (hàng hiệu)",p:"myeong-pum",en:"luxury goods/masterpiece"},{w:"품목",m:"phẩm mục (hạng mục)",p:"pum-mok",en:"item/list of articles"}]},
+
+{char:"선",hanja:"善/線/先/選",vn:"Thiện/Tuyến/Tiên/Tuyển",meaning:"good, line, first, choose",tier:"advanced",theme:"green",words:[
+{w:"선택",m:"tuyển trạch (lựa chọn)",p:"seon-taek",en:"choice/selection"},{w:"우선",m:"ưu tiên",p:"u-seon",en:"first/priority"},{w:"개선",m:"cải thiện",p:"gae-seon",en:"improvement"},{w:"노선",m:"lộ tuyến",p:"no-seon",en:"route/line"},
+{w:"시선",m:"thị tuyến (ánh mắt)",p:"si-seon",en:"line of sight/gaze"},{w:"선생",m:"tiên sinh",p:"seon-saeng",en:"teacher"},{w:"선수",m:"tuyển thủ",p:"seon-su",en:"player/athlete"},
+{w:"선거",m:"tuyển cử (bầu cử)",p:"seon-geo",en:"election"},{w:"당선",m:"trúng tuyển",p:"dang-seon",en:"winning an election"},{w:"선진",m:"tiên tiến",p:"seon-jin",en:"advanced/developed"}]},
+
+{char:"가",hanja:"家/加/價/可",vn:"Gia/Gia/Giá/Khả",meaning:"family, add, price, able",tier:"essential",theme:"indigo",words:[
+{w:"가족",m:"gia tộc",p:"ga-jok",en:"family"},{w:"국가",m:"quốc gia",p:"guk-ga",en:"state/nation"},{w:"증가",m:"tăng gia",p:"jeung-ga",en:"increase"},{w:"참가",m:"tham gia",p:"cham-ga",en:"participation"},
+{w:"가격",m:"giá cách",p:"ga-gyeok",en:"price"},{w:"가능",m:"khả năng",p:"ga-neung",en:"possible"},{w:"가치",m:"giá trị",p:"ga-chi",en:"value/worth"},
+{w:"추가",m:"truy gia (thêm vào)",p:"chu-ga",en:"addition"},{w:"가정",m:"gia đình / giả định",p:"ga-jeong",en:"home/assumption"},{w:"작가",m:"tác giả",p:"jak-ga",en:"writer/author"},
+{w:"가공",m:"gia công",p:"ga-gong",en:"processing/manufacturing"},{w:"평가",m:"bình giá",p:"pyeong-ga",en:"evaluation"}]},
+
+{char:"명",hanja:"名/明/命",vn:"Danh/Minh/Mệnh",meaning:"name, bright, life",tier:"common",theme:"orange",words:[
+{w:"유명",m:"hữu danh (nổi tiếng)",p:"yu-myeong",en:"famous"},{w:"설명",m:"thuyết minh",p:"seol-myeong",en:"explanation"},{w:"생명",m:"sinh mệnh",p:"saeng-myeong",en:"life"},{w:"증명",m:"chứng minh",p:"jeung-myeong",en:"proof"},
+{w:"투명",m:"thấu minh (trong suốt)",p:"tu-myeong",en:"transparent"},{w:"명령",m:"mệnh lệnh",p:"myeong-nyeong",en:"command"},{w:"명확",m:"minh xác",p:"myeong-hwak",en:"clear/obvious"},
+{w:"명칭",m:"danh xưng",p:"myeong-ching",en:"name/title"},{w:"서명",m:"thự danh (chữ ký)",p:"seo-myeong",en:"signature"},{w:"운명",m:"vận mệnh",p:"un-myeong",en:"destiny/fate"}]},
+
+{char:"작",hanja:"作/昨",vn:"Tác/Tạc",meaning:"make, yesterday",tier:"essential",theme:"pink",words:[
+{w:"작품",m:"tác phẩm",p:"jak-pum",en:"artwork"},{w:"작업",m:"tác nghiệp",p:"ja-geop",en:"work/operation"},{w:"작가",m:"tác giả",p:"jak-ga",en:"writer/author"},{w:"시작",m:"bắt đầu (thủy tác)",p:"si-jak",en:"start"},
+{w:"조작",m:"thao tác / bịa đặt",p:"jo-jak",en:"operation/manipulation"},{w:"제작",m:"chế tác",p:"je-jak",en:"production"},{w:"작용",m:"tác dụng",p:"ja-gyong",en:"action/effect"},
+{w:"작문",m:"tác văn (viết văn)",p:"jang-mun",en:"composition/writing"},{w:"동작",m:"động tác",p:"dong-jak",en:"movement/motion"},{w:"작년",m:"tạc niên (năm ngoái)",p:"jang-nyeon",en:"last year"}]},
+
+{char:"구",hanja:"求/口/區/具",vn:"Cầu/Khẩu/Khu/Cụ",meaning:"seek, mouth, area, tool",tier:"advanced",theme:"teal",words:[
+{w:"요구",m:"yêu cầu",p:"yo-gu",en:"demand/request"},{w:"청구",m:"thỉnh cầu (đòi hỏi)",p:"cheong-gu",en:"claim/billing"},{w:"인구",m:"nhân khẩu",p:"in-gu",en:"population"},{w:"입구",m:"nhập khẩu (lối vào)",p:"ip-gu",en:"entrance"},
+{w:"구역",m:"khu vực",p:"gu-yeok",en:"zone/area"},{w:"도구",m:"đạo cụ",p:"do-gu",en:"tool/instrument"},{w:"가구",m:"gia cụ",p:"ga-gu",en:"furniture"},
+{w:"구분",m:"khu phân",p:"gu-bun",en:"division/classification"},{w:"연구",m:"nghiên cứu",p:"yeon-gu",en:"research"},{w:"구성",m:"cấu thành",p:"gu-seong",en:"composition"}]},
+
+{char:"부",hanja:"部/不/富/附",vn:"Bộ/Bất/Phú/Phụ",meaning:"part, not, rich, attach",tier:"common",theme:"blue",words:[
+{w:"부분",m:"bộ phận",p:"bu-bun",en:"part/portion"},{w:"전부",m:"toàn bộ",p:"jeon-bu",en:"all/everything"},{w:"부족",m:"bất túc (thiếu)",p:"bu-jok",en:"shortage/lack"},{w:"불안",m:"bất an",p:"bul-an",en:"anxiety/uneasiness"},
+{w:"부자",m:"phú gia (người giàu)",p:"bu-ja",en:"rich person"},{w:"부부",m:"phu phụ (vợ chồng)",p:"bu-bu",en:"married couple"},{w:"부작용",m:"phó tác dụng (tác dụng phụ)",p:"bu-ja-gyong",en:"side effect"},
+{w:"부담",m:"phụ đảm (gánh nặng)",p:"bu-dam",en:"burden"},{w:"부탁",m:"phó thác (nhờ vả)",p:"bu-tak",en:"request/favor"},{w:"첨부",m:"thiêm phụ (đính kèm)",p:"cheom-bu",en:"attachment"},
+{w:"내부",m:"nội bộ",p:"nae-bu",en:"inside/interior"}]},
+
+{char:"후",hanja:"後/候",vn:"Hậu/Hậu",meaning:"after, weather",tier:"common",theme:"red",words:[
+{w:"이후",m:"dĩ hậu (sau đó)",p:"i-hu",en:"after/since"},{w:"오후",m:"ngọ hậu (chiều)",p:"o-hu",en:"afternoon"},{w:"최후",m:"tối hậu (cuối cùng)",p:"choe-hu",en:"the last/final"},{w:"기후",m:"khí hậu",p:"gi-hu",en:"climate"},
+{w:"후보",m:"hậu bổ (ứng cử viên)",p:"hu-bo",en:"candidate"},{w:"후회",m:"hậu hối (hối hận)",p:"hu-hoe",en:"regret"},{w:"식후",m:"thực hậu (sau bữa ăn)",p:"si-ku",en:"after a meal"},
+{w:"후원",m:"hậu viện (tài trợ)",p:"hu-won",en:"support/sponsorship"},{w:"직후",m:"trực hậu (ngay sau khi)",p:"ji-ku",en:"immediately after"},{w:"전후",m:"tiền hậu (trước sau)",p:"jeon-hu",en:"front and back/before and after"}]},
+
+{char:"미",hanja:"美/未/微",vn:"Mỹ/Vị/Vi",meaning:"beauty, not yet, micro",tier:"advanced",theme:"purple",words:[
+{w:"미술",m:"mỹ thuật",p:"mi-sul",en:"art"},{w:"미인",m:"mỹ nhân",p:"mi-in",en:"beauty/beautiful woman"},{w:"미래",m:"vị lai (tương lai)",p:"mi-rae",en:"future"},{w:"미완성",m:"vị hoàn thành",p:"mi-wan-seong",en:"incomplete"},
+{w:"미안",m:"vị an (xin lỗi)",p:"mi-an",en:"sorry"},{w:"흥미",m:"hưng vị (hứng thú)",p:"heung-mi",en:"interest/curiosity"},{w:"의미",m:"ý nghĩa",p:"ui-mi",en:"meaning"},
+{w:"미묘",m:"vi diệu",p:"mi-myo",en:"subtle/delicate"},{w:"미국",m:"Mỹ quốc",p:"mi-guk",en:"USA"},{w:"미리",m:"vị lý (trước)",p:"mi-ri",en:"in advance"}]},
+
+{char:"급",hanja:"急/給/級",vn:"Cấp/Cấp/Cấp",meaning:"hurry, give, level",tier:"common",theme:"orange",words:[
+{w:"고급",m:"cao cấp",p:"go-geup",en:"high-class/advanced"},{w:"중급",m:"trung cấp",p:"jung-geup",en:"intermediate"},{w:"초급",m:"sơ cấp",p:"cho-geup",en:"beginner"},{w:"급행",m:"cấp hành (tốc hành)",p:"geu-paeng",en:"express"},
+{w:"월급",m:"nguyệt cấp (lương)",p:"wol-geup",en:"monthly salary"},{w:"공급",m:"cung cấp",p:"gong-geup",en:"supply"},{w:"계급",m:"giai cấp",p:"gye-geup",en:"class/rank"},
+{w:"긴급",m:"khẩn cấp",p:"gin-geup",en:"emergency/urgent"},{w:"급격",m:"cấp kích (đột ngột)",p:"geup-gyeok",en:"rapid/drastic"},{w:"진급",m:"tiến cấp (thăng chức)",p:"jin-geup",en:"promotion"}]}
 ];
