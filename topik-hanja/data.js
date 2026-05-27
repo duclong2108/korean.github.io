@@ -178,5 +178,142 @@ const HANJA_DATA = [
 {char:"심",hanja:"心/深/審/尋",vn:"Tâm/Thâm/Thẩm/Tầm",meaning:"heart, deep, examine",tier:"advanced",theme:"purple",words:[
 {w:"관심",m:"quan tâm"},{w:"중심",m:"trung tâm"},{w:"심각",m:"thâm khắc (nghiêm trọng)"},
 {w:"심리",m:"tâm lý"},{w:"안심",m:"an tâm"},{w:"열심",m:"nhiệt tâm"},
-{w:"양심",m:"lương tâm"},{w:"심사",m:"thẩm tra"},{w:"핵심",m:"hạch tâm (cốt lõi)"}]}
+{w:"양심",m:"lương tâm"},{w:"심사",m:"thẩm tra"},{w:"핵심",m:"hạch tâm (cốt lõi)"}]},
+
+{char:"민",hanja:"民",vn:"Dân",meaning:"people, citizen",tier:"essential",theme:"teal",words:[
+{w:"국민",m:"quốc dân"},{w:"시민",m:"thị dân"},{w:"주민",m:"cư dân"},{w:"민주",m:"dân chủ"},
+{w:"민족",m:"dân tộc"},{w:"민간",m:"dân gian"},{w:"민감",m:"mẫn cảm"},
+{w:"이민",m:"di dân"},{w:"난민",m:"nạn dân"},{w:"민원",m:"dân nguyện"}]},
+
+{char:"법",hanja:"法",vn:"Pháp",meaning:"law, method",tier:"essential",theme:"red",words:[
+{w:"법률",m:"pháp luật"},{w:"방법",m:"phương pháp"},{w:"문법",m:"văn pháp (ngữ pháp)"},{w:"법원",m:"pháp viện (tòa án)"},
+{w:"합법",m:"hợp pháp"},{w:"불법",m:"bất hợp pháp"},{w:"법칙",m:"pháp tắc"},
+{w:"헌법",m:"hiến pháp"},{w:"법학",m:"pháp học"},{w:"법적",m:"pháp đích (về mặt pháp lý)"}]},
+
+{char:"보",hanja:"保/報/步/補",vn:"Bảo/Báo/Bộ/Bổ",meaning:"protect, report, step, supplement",tier:"common",theme:"green",words:[
+{w:"보호",m:"bảo hộ"},{w:"보험",m:"bảo hiểm"},{w:"보고",m:"báo cáo"},{w:"보도",m:"báo đạo (đưa tin)"},
+{w:"보장",m:"bảo chưởng (bảo đảm)"},{w:"보통",m:"phổ thông"},{w:"정보",m:"thông tin"},
+{w:"보관",m:"bảo quản"},{w:"보충",m:"bổ sung"},{w:"보수",m:"bảo thủ / sửa chữa"},{w:"보존",m:"bảo tồn"}]},
+
+{char:"건",hanja:"建/健/件",vn:"Kiến/Kiện/Kiện",meaning:"build, health, matter",tier:"common",theme:"orange",words:[
+{w:"건설",m:"kiến thiết"},{w:"건강",m:"kiện khang (sức khỏe)"},{w:"건물",m:"kiến vật (tòa nhà)"},
+{w:"사건",m:"sự kiện"},{w:"조건",m:"điều kiện"},{w:"건축",m:"kiến trúc"},
+{w:"건의",m:"kiến nghị"},{w:"건전",m:"kiện toàn (lành mạnh)"},{w:"문건",m:"văn kiện"}]},
+
+{char:"연",hanja:"然/硏/連/演/延",vn:"Nhiên/Nghiên/Liên/Diễn/Diên",meaning:"nature, research, connect, perform",tier:"common",theme:"blue",words:[
+{w:"자연",m:"tự nhiên"},{w:"연구",m:"nghiên cứu"},{w:"연결",m:"liên kết"},{w:"연습",m:"luyện tập"},
+{w:"연설",m:"diễn thuyết"},{w:"연기",m:"diễn kỹ / hoãn"},{w:"연속",m:"liên tục"},
+{w:"연락",m:"liên lạc"},{w:"연장",m:"kéo dài"},{w:"관련",m:"quan liên (liên quan)"},
+{w:"연료",m:"nhiên liệu"},{w:"연합",m:"liên hợp"}]},
+
+{char:"감",hanja:"感/減/監",vn:"Cảm/Giảm/Giám",meaning:"feel, reduce, supervise",tier:"common",theme:"pink",words:[
+{w:"감정",m:"cảm tình"},{w:"감동",m:"cảm động"},{w:"감사",m:"cảm tạ"},{w:"감각",m:"cảm giác"},
+{w:"감소",m:"giảm thiểu"},{w:"감독",m:"giám đốc"},{w:"민감",m:"mẫn cảm"},
+{w:"감상",m:"cảm thưởng (thưởng thức)"},{w:"감염",m:"cảm nhiễm (lây nhiễm)"},{w:"직감",m:"trực cảm"}]},
+
+{char:"장",hanja:"場/長/章/裝/將/障",vn:"Trường/Trường/Chương/Trang/Tướng/Chướng",meaning:"place, long, chapter",tier:"common",theme:"indigo",words:[
+{w:"시장",m:"thị trường"},{w:"공장",m:"công trường"},{w:"성장",m:"thành trưởng"},{w:"회장",m:"hội trưởng"},
+{w:"사장",m:"giám đốc"},{w:"장소",m:"trường sở (nơi chốn)"},{w:"보장",m:"bảo chưởng"},
+{w:"장점",m:"ưu điểm"},{w:"장래",m:"tương lai"},{w:"장면",m:"trường diện (cảnh)"},
+{w:"장애",m:"chướng ngại"},{w:"장기",m:"trường kỳ (dài hạn)"}]},
+
+{char:"활",hanja:"活",vn:"Hoạt",meaning:"live, active",tier:"common",theme:"green",words:[
+{w:"생활",m:"sinh hoạt"},{w:"활동",m:"hoạt động"},{w:"활용",m:"hoạt dụng (ứng dụng)"},{w:"활발",m:"hoạt bát"},
+{w:"활력",m:"hoạt lực"},{w:"활성",m:"hoạt tính"},{w:"부활",m:"phục hoạt"},
+{w:"활약",m:"hoạt dược (hoạt động tích cực)"},{w:"활기",m:"hoạt khí (sức sống)"}]},
+
+{char:"물",hanja:"物",vn:"Vật",meaning:"thing, object",tier:"common",theme:"teal",words:[
+{w:"동물",m:"động vật"},{w:"식물",m:"thực vật"},{w:"인물",m:"nhân vật"},{w:"생물",m:"sinh vật"},
+{w:"물질",m:"vật chất"},{w:"건물",m:"kiến vật (tòa nhà)"},{w:"물건",m:"vật kiện (đồ vật)"},
+{w:"물가",m:"vật giá"},{w:"사물",m:"sự vật"},{w:"물리",m:"vật lý"},{w:"농산물",m:"nông sản vật"}]},
+
+{char:"용",hanja:"用/容",vn:"Dụng/Dung",meaning:"use, contain",tier:"common",theme:"orange",words:[
+{w:"사용",m:"sử dụng"},{w:"이용",m:"lợi dụng"},{w:"내용",m:"nội dung"},{w:"활용",m:"hoạt dụng"},
+{w:"비용",m:"phí dụng"},{w:"작용",m:"tác dụng"},{w:"적용",m:"áp dụng"},
+{w:"용어",m:"dụng ngữ (thuật ngữ)"},{w:"신용",m:"tín dụng"},{w:"고용",m:"cố dụng (thuê)"}]},
+
+{char:"신",hanja:"新/身/信/神/申",vn:"Tân/Thân/Tín/Thần/Thân",meaning:"new, body, believe, god",tier:"essential",theme:"purple",words:[
+{w:"신문",m:"tân văn (báo)"},{w:"신체",m:"thân thể"},{w:"자신",m:"tự thân"},{w:"신뢰",m:"tín lại"},
+{w:"신경",m:"thần kinh"},{w:"신청",m:"thân thỉnh (đăng ký)"},{w:"신용",m:"tín dụng"},
+{w:"정신",m:"tinh thần"},{w:"혁신",m:"cách tân"},{w:"통신",m:"thông tín"},{w:"신호",m:"tín hiệu"}]},
+
+{char:"리",hanja:"理/利",vn:"Lý/Lợi",meaning:"reason, profit",tier:"common",theme:"red",words:[
+{w:"관리",m:"quản lý"},{w:"처리",m:"xử lý"},{w:"원리",m:"nguyên lý"},{w:"심리",m:"tâm lý"},
+{w:"합리",m:"hợp lý"},{w:"이익",m:"lợi ích"},{w:"편리",m:"tiện lợi"},
+{w:"정리",m:"chỉnh lý"},{w:"물리",m:"vật lý"},{w:"유리",m:"hữu lợi / thủy tinh"},{w:"논리",m:"luận lý (logic)"}]},
+
+{char:"체",hanja:"體/替",vn:"Thể/Thế",meaning:"body, system, replace",tier:"common",theme:"blue",words:[
+{w:"신체",m:"thân thể"},{w:"전체",m:"toàn thể"},{w:"구체",m:"cụ thể"},{w:"단체",m:"đoàn thể"},
+{w:"체계",m:"thể hệ (hệ thống)"},{w:"체험",m:"thể nghiệm"},{w:"체제",m:"thể chế"},
+{w:"체력",m:"thể lực"},{w:"체육",m:"thể dục"},{w:"주체",m:"chủ thể"},{w:"물체",m:"vật thể"}]},
+
+{char:"안",hanja:"安/案/眼",vn:"An/Án/Nhãn",meaning:"peace, plan, eye",tier:"common",theme:"green",words:[
+{w:"안전",m:"an toàn"},{w:"안정",m:"an định"},{w:"안심",m:"an tâm"},{w:"제안",m:"đề án"},
+{w:"방안",m:"phương án"},{w:"안내",m:"an nội (hướng dẫn)"},{w:"불안",m:"bất an"},
+{w:"안경",m:"nhãn kính (kính mắt)"},{w:"치안",m:"trị an"},{w:"보안",m:"bảo an"}]},
+
+{char:"해",hanja:"海/解/害/該",vn:"Hải/Giải/Hại/Cai",meaning:"sea, solve, harm",tier:"common",theme:"pink",words:[
+{w:"해결",m:"giải quyết"},{w:"이해",m:"lý giải (hiểu)"},{w:"해석",m:"giải thích"},{w:"해외",m:"hải ngoại"},
+{w:"피해",m:"bị hại"},{w:"해양",m:"hải dương"},{w:"해방",m:"giải phóng"},
+{w:"오해",m:"ngộ giải (hiểu lầm)"},{w:"해당",m:"cai đương (tương ứng)"},{w:"해산",m:"giải tán"}]},
+
+{char:"행",hanja:"行/幸",vn:"Hành/Hạnh",meaning:"go, do, luck",tier:"essential",theme:"indigo",words:[
+{w:"행동",m:"hành động"},{w:"행복",m:"hạnh phúc"},{w:"행사",m:"hành sự (sự kiện)"},{w:"여행",m:"du lịch (lữ hành)"},
+{w:"은행",m:"ngân hàng"},{w:"시행",m:"thi hành"},{w:"실행",m:"thực hành"},{w:"행위",m:"hành vi"},
+{w:"행정",m:"hành chính"},{w:"유행",m:"lưu hành"},{w:"진행",m:"tiến hành"}]},
+
+{char:"조",hanja:"造/條/調/組/助/早",vn:"Tạo/Điều/Điều/Tổ/Trợ/Tảo",meaning:"make, condition, investigate, group",tier:"advanced",theme:"orange",words:[
+{w:"조건",m:"điều kiện"},{w:"조사",m:"điều tra"},{w:"구조",m:"cấu tạo / cứu trợ"},{w:"조직",m:"tổ chức"},
+{w:"제조",m:"chế tạo"},{w:"조절",m:"điều tiết"},{w:"강조",m:"cường điệu (nhấn mạnh)"},
+{w:"창조",m:"sáng tạo"},{w:"조정",m:"điều chỉnh"},{w:"협조",m:"hiệp trợ (hợp tác)"}]},
+
+{char:"단",hanja:"團/單/短/段/斷",vn:"Đoàn/Đơn/Đoản/Đoạn/Đoạn",meaning:"group, single, short, section",tier:"advanced",theme:"teal",words:[
+{w:"단체",m:"đoàn thể"},{w:"단순",m:"đơn thuần"},{w:"단계",m:"đoạn giai (giai đoạn)"},{w:"수단",m:"thủ đoạn"},
+{w:"판단",m:"phán đoán"},{w:"결단",m:"quyết đoán"},{w:"단점",m:"nhược điểm"},
+{w:"단기",m:"đoản kỳ"},{w:"단위",m:"đơn vị"},{w:"중단",m:"trung đoạn (gián đoạn)"}]},
+
+{char:"일",hanja:"一/日",vn:"Nhất/Nhật",meaning:"one, day, sun",tier:"essential",theme:"purple",words:[
+{w:"통일",m:"thống nhất"},{w:"일반",m:"nhất ban (nói chung)"},{w:"일정",m:"nhật trình (lịch trình)"},
+{w:"일부",m:"nhất bộ (một phần)"},{w:"생일",m:"sinh nhật"},{w:"일상",m:"nhật thường"},
+{w:"일시",m:"nhất thời"},{w:"동일",m:"đồng nhất"},{w:"일치",m:"nhất trí"},{w:"일자",m:"nhật tử (ngày)"}]},
+
+{char:"식",hanja:"食/式/識/植",vn:"Thực/Thức/Thức/Thực",meaning:"eat, form, know, plant",tier:"common",theme:"red",words:[
+{w:"음식",m:"ẩm thực"},{w:"식품",m:"thực phẩm"},{w:"의식",m:"ý thức"},{w:"지식",m:"tri thức"},
+{w:"공식",m:"công thức"},{w:"형식",m:"hình thức"},{w:"식물",m:"thực vật"},
+{w:"인식",m:"nhận thức"},{w:"방식",m:"phương thức"},{w:"식당",m:"thực đường (nhà hàng)"}]},
+
+{char:"방",hanja:"方/放/防/房/訪",vn:"Phương/Phóng/Phòng/Phòng/Phỏng",meaning:"direction, release, prevent, room",tier:"common",theme:"indigo",words:[
+{w:"방법",m:"phương pháp"},{w:"방향",m:"phương hướng"},{w:"방문",m:"phỏng vấn / thăm"},
+{w:"방송",m:"phóng tống (truyền hình)"},{w:"방지",m:"phòng chỉ (ngăn chặn)"},{w:"해방",m:"giải phóng"},
+{w:"방안",m:"phương án"},{w:"방식",m:"phương thức"},{w:"예방",m:"dự phòng"},{w:"개방",m:"khai phóng"}]},
+
+{char:"평",hanja:"平/評",vn:"Bình/Bình",meaning:"flat, peace, evaluate",tier:"advanced",theme:"green",words:[
+{w:"평가",m:"bình giá (đánh giá)"},{w:"평화",m:"hòa bình"},{w:"평균",m:"bình quân"},
+{w:"평소",m:"bình thường (thường ngày)"},{w:"공평",m:"công bằng"},{w:"비평",m:"phê bình"},
+{w:"평등",m:"bình đẳng"},{w:"수평",m:"thủy bình"},{w:"평범",m:"bình phàm (tầm thường)"}]},
+
+{char:"특",hanja:"特",vn:"Đặc",meaning:"special, particular",tier:"advanced",theme:"orange",words:[
+{w:"특별",m:"đặc biệt"},{w:"특히",m:"đặc biệt là"},{w:"특성",m:"đặc tính"},{w:"특징",m:"đặc trưng"},
+{w:"특정",m:"đặc định"},{w:"독특",m:"độc đặc"},{w:"특기",m:"đặc kỹ (sở trường)"},
+{w:"특색",m:"đặc sắc"},{w:"특수",m:"đặc thù"},{w:"특허",m:"đặc hứa (bằng sáng chế)"}]},
+
+{char:"능",hanja:"能",vn:"Năng",meaning:"ability, can",tier:"advanced",theme:"teal",words:[
+{w:"능력",m:"năng lực"},{w:"기능",m:"cơ năng / kỹ năng"},{w:"가능",m:"khả năng"},{w:"불가능",m:"bất khả năng"},
+{w:"재능",m:"tài năng"},{w:"가능성",m:"khả năng tính"},{w:"성능",m:"tính năng"},
+{w:"유능",m:"hữu năng"},{w:"만능",m:"vạn năng"},{w:"본능",m:"bản năng"}]},
+
+{char:"요",hanja:"要/料",vn:"Yếu/Liệu",meaning:"need, important, material",tier:"advanced",theme:"pink",words:[
+{w:"필요",m:"tất yếu (cần thiết)"},{w:"중요",m:"trọng yếu"},{w:"주요",m:"chủ yếu"},{w:"요인",m:"yếu nhân (yếu tố)"},
+{w:"요구",m:"yêu cầu"},{w:"요리",m:"liệu lý (nấu ăn)"},{w:"수요",m:"nhu cầu"},
+{w:"자료",m:"tư liệu"},{w:"연료",m:"nhiên liệu"},{w:"요약",m:"yếu ước (tóm tắt)"}]},
+
+{char:"지",hanja:"地/知/紙/支/志",vn:"Địa/Tri/Chỉ/Chi/Chí",meaning:"ground, know, paper, support",tier:"essential",theme:"blue",words:[
+{w:"지역",m:"địa vực (khu vực)"},{w:"토지",m:"thổ địa"},{w:"지식",m:"tri thức"},{w:"지원",m:"chi viên"},
+{w:"지방",m:"địa phương"},{w:"의지",m:"ý chí"},{w:"지도",m:"bản đồ / chỉ đạo"},
+{w:"지배",m:"chi phối"},{w:"지위",m:"địa vị"},{w:"잡지",m:"tạp chí"},{w:"지구",m:"địa cầu"}]},
+
+{char:"비",hanja:"比/費/非/備/批",vn:"Tỷ/Phí/Phi/Bị/Phê",meaning:"compare, cost, not, prepare",tier:"advanced",theme:"red",words:[
+{w:"비교",m:"so sánh (tỷ giáo)"},{w:"비용",m:"phí dụng"},{w:"비판",m:"phê phán"},{w:"준비",m:"chuẩn bị"},
+{w:"비율",m:"tỷ suất"},{w:"소비",m:"tiêu phí"},{w:"비밀",m:"bí mật"},
+{w:"비난",m:"phỉ báng"},{w:"설비",m:"thiết bị"},{w:"대비",m:"đối bị (chuẩn bị / so sánh)"}]}
 ];
