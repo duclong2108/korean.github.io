@@ -15,7 +15,7 @@ function renderCards(data, query = '') {
     data.forEach((item, idx) => {
         const matchCard = !q || item.char.includes(q) || item.hanja.includes(q) ||
             item.vn.toLowerCase().includes(q) || item.meaning.toLowerCase().includes(q) ||
-            item.words.some(w => w.w.includes(q) || w.m.toLowerCase().includes(q));
+            item.words.some(w => w.w.includes(q) || w.m.toLowerCase().includes(q) || (w.p && w.p.toLowerCase().includes(q)) || (w.en && w.en.toLowerCase().includes(q)));
 
         if (!matchCard) return;
         if (currentFilter !== 'all' && item.tier !== currentFilter) return;
@@ -36,9 +36,9 @@ function renderCards(data, query = '') {
             </div>
             <div class="word-list">
                 ${item.words.map(w => {
-                    const hl = q && (w.w.includes(q) || w.m.toLowerCase().includes(q)) ? ' highlight' : '';
+                    const hl = q && (w.w.includes(q) || w.m.toLowerCase().includes(q) || (w.p && w.p.toLowerCase().includes(q)) || (w.en && w.en.toLowerCase().includes(q))) ? ' highlight' : '';
                     return `<span class="word-chip${hl}" onclick="showWord(${idx},'${w.w}')">
-                        <span class="kor">${w.w}</span><span class="vi">${w.m}</span>
+                        <span class="kor">${w.w}</span>${w.p ? `<span class="pron">[${w.p}]</span>` : ''}<span class="vi">${w.m}</span>
                     </span>`;
                 }).join('')}
             </div>
@@ -97,12 +97,29 @@ function showWord(cardIdx, word) {
 
     modalBody.innerHTML = `
         <h3>${w.w}</h3>
+        ${w.p ? `<div class="modal-pron"><span onclick="speakText('${w.w}')" style="cursor:pointer; display:inline-block; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'" title="Nghe phát âm">🔊</span> [${w.p}]</div>` : ''}
         <div class="modal-hanja">Gốc: ${item.char} (${item.hanja}) ${breakdown ? `→ ${breakdown}` : ''}</div>
-        <div class="modal-meaning">🇻🇳 ${w.m}</div>
+        <div class="modal-meanings">
+            <div class="modal-meaning-row"><span class="flag">🇻🇳</span><span class="lang-label">VI</span> ${w.m}</div>
+            ${w.en ? `<div class="modal-meaning-row"><span class="flag">🇬🇧</span><span class="lang-label">EN</span> ${w.en}</div>` : ''}
+        </div>
         ${exHtml}
         ${rootsHtml}
     `;
     modalOverlay.classList.add('active');
+}
+
+// ===== TEXT TO SPEECH =====
+function speakText(text) {
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel(); // Stop any ongoing speech
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ko-KR';
+        utterance.rate = 0.9; // Slightly slower for better clarity
+        window.speechSynthesis.speak(utterance);
+    } else {
+        alert("Trình duyệt của bạn không hỗ trợ tính năng đọc văn bản.");
+    }
 }
 
 function scrollToCard(char) {
