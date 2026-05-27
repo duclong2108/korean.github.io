@@ -299,6 +299,7 @@ main {
 }
 
 .word-chip .kor { font-weight: 600; }
+.word-chip .pron { font-size: 0.68rem; color: var(--accent-2); margin-left: 1px; opacity: 0.8; }
 .word-chip .vi { font-size: 0.72rem; color: var(--text-dim); margin-left: 2px; }
 
 .word-chip.highlight {
@@ -376,12 +377,42 @@ main {
     margin-bottom: 12px;
 }
 
-.modal-body .modal-meaning {
+.modal-body .modal-pron {
     font-size: 0.95rem;
-    color: var(--text-dim);
+    color: var(--accent-2);
+    margin-bottom: 6px;
+    font-style: italic;
+}
+
+.modal-body .modal-meanings {
     margin-bottom: 16px;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.modal-body .modal-meaning-row {
+    font-size: 0.9rem;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-body .modal-meaning-row .flag {
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.modal-body .modal-meaning-row .lang-label {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    background: var(--surface-3);
+    padding: 1px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
 }
 
 .modal-body .modal-example {
