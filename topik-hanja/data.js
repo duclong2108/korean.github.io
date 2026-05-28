@@ -468,5 +468,80 @@ const HANJA_DATA = [
 {char:"종",hanja:"終/種/종",vn:"Chung/Chủng/Tông",meaning:"end, kind, religion",tier:"advanced",theme:"blue",words:[
 {w:"최종",m:"tối chung (cuối cùng)",p:"choe-jong",en:"final"},{w:"종료",m:"chung liễu (kết thúc)",p:"jong-nyo",en:"end/termination"},{w:"종류",m:"chủng loại",p:"jong-nyu",en:"kind/type"},{w:"인종",m:"nhân chủng",p:"in-jong",en:"race/ethnicity"},
 {w:"종교",m:"tôn giáo",p:"jong-gyo",en:"religion"},{w:"종점",m:"chung điểm (điểm cuối)",p:"jong-jeom",en:"terminus/end point"},{w:"종합",m:"tổng hợp",p:"jong-hap",en:"comprehensive/synthesis"},
-{w:"업종",m:"nghiệp chủng (loại ngành nghề)",p:"eop-jong",en:"type of business"},{w:"종업원",m:"tòng nghiệp viên (nhân viên)",p:"jong-eo-bwon",en:"employee/staff"},{w:"실종",m:"thất tung (mất tích)",p:"sil-jong",en:"disappearance"}]}
+{w:"업종",m:"nghiệp chủng (loại ngành nghề)",p:"eop-jong",en:"type of business"},{w:"종업원",m:"tòng nghiệp viên (nhân viên)",p:"jong-eo-bwon",en:"employee/staff"},{w:"실종",m:"thất tung (mất tích)",p:"sil-jong",en:"disappearance"}]},
+
+{char:"석",hanja:"席/石/夕/析",vn:"Tịch/Thạch/Tịch/Tích",meaning:"seat, stone, evening, analyze",tier:"common",theme:"orange",words:[
+{w:"출석",m:"xuất tịch (có mặt)",p:"chul-seok",en:"attendance"},{w:"결석",m:"khuyết tịch (vắng mặt)",p:"gyeol-seok",en:"absence"},{w:"참석",m:"tham tịch (tham dự)",p:"cham-seok",en:"attendance/participation"},
+{w:"좌석",m:"tọa tịch (chỗ ngồi)",p:"jwa-seok",en:"seat"},{w:"분석",m:"phân tích",p:"bun-seok",en:"analysis"},{w:"해석",m:"giải thích (phân tích)",p:"hae-seok",en:"interpretation"},
+{w:"보석",m:"bảo thạch (đá quý)",p:"bo-seok",en:"jewel/gem"},{w:"추석",m:"thu tịch (trung thu)",p:"chu-seok",en:"Chuseok (Korean Thanksgiving)"},{w:"석사",m:"thạc sĩ",p:"seok-sa",en:"Master's degree"},{w:"원석",m:"nguyên thạch",p:"won-seok",en:"rough stone"}]},
+
+{char:"역",hanja:"易/域/譯/役/疫",vn:"Dịch/Vực/Dịch/Dịch/Dịch",meaning:"trade, area, translate, role, disease",tier:"essential",theme:"green",words:[
+{w:"지역",m:"địa vực (khu vực)",p:"ji-yeok",en:"area/region"},{w:"역할",m:"dịch cát (vai trò)",p:"yeo-kal",en:"role/part"},{w:"무역",m:"mậu dịch (thương mại)",p:"mu-yeok",en:"trade/commerce"},
+{w:"번역",m:"phiên dịch",p:"beo-nyeok",en:"translation"},{w:"면역",m:"miễn dịch",p:"myeo-nyeok",en:"immunity"},{w:"구역",m:"khu vực",p:"gu-yeok",en:"zone/district"},
+{w:"역병",m:"dịch bệnh",p:"yeok-byeong",en:"epidemic/plague"},{w:"통역",m:"thông dịch",p:"tong-yeok",en:"interpretation"},{w:"전역",m:"toàn vực (toàn khu vực)",p:"jeo-nyeok",en:"whole area"},{w:"현역",m:"hiện dịch",p:"hyeo-nyeok",en:"active duty"}]},
+
+{char:"음",hanja:"音/飮/陰",vn:"Âm/Ẩm/Âm",meaning:"sound, drink, dark",tier:"common",theme:"teal",words:[
+{w:"음악",m:"âm nhạc",p:"eu-mak",en:"music"},{w:"발음",m:"phát âm",p:"ba-reum",en:"pronunciation"},{w:"소음",m:"tiêu âm (tiếng ồn)",p:"so-eum",en:"noise"},
+{w:"음료",m:"ẩm liệu (đồ uống)",p:"eum-nyo",en:"beverage/drink"},{w:"녹음",m:"lục âm (ghi âm)",p:"no-geum",en:"recording"},{w:"음성",m:"âm thanh",p:"eum-seong",en:"voice/sound"},
+{w:"식음료",m:"thực ẩm liệu (đồ ăn thức uống)",p:"si-geum-nyo",en:"food and beverage"},{w:"음식",m:"ẩm thực",p:"eum-sik",en:"food"},{w:"음력",m:"âm lịch",p:"eum-nyeok",en:"lunar calendar"},{w:"모음",m:"mẫu âm (nguyên âm)",p:"mo-eum",en:"vowel"}]},
+
+{char:"응",hanja:"應/凝",vn:"Ứng/Ngưng",meaning:"respond, react, coagulate",tier:"advanced",theme:"purple",words:[
+{w:"반응",m:"phản ứng",p:"ba-neung",en:"reaction"},{w:"응용",m:"ứng dụng",p:"eung-yong",en:"application"},{w:"적응",m:"thích ứng",p:"jeo-geung",en:"adaptation"},
+{w:"응답",m:"ứng đáp (trả lời)",p:"eung-dap",en:"response/answer"},{w:"응원",m:"ứng viện (cổ vũ)",p:"eung-won",en:"cheering/support"},{w:"상응",m:"tương ứng",p:"sang-eung",en:"correspondence"},
+{w:"대응",m:"đối ứng (đối phó)",p:"dae-eung",en:"response/coping"},{w:"응급",m:"ứng cấp (cấp cứu)",p:"eung-geup",en:"emergency"},{w:"반응기",m:"phản ứng khí",p:"ban-eung-gi",en:"reactor"},{w:"응시",m:"ứng thị (dự thi / nhìn chằm chằm)",p:"eung-si",en:"taking an exam / staring"}]},
+
+{char:"투",hanja:"投/透/鬪",vn:"Đầu/Thấu/Đấu",meaning:"throw, transparent, fight",tier:"advanced",theme:"blue",words:[
+{w:"투자",m:"đầu tư",p:"tu-ja",en:"investment"},{w:"투표",m:"đầu phiếu (bỏ phiếu)",p:"tu-pyo",en:"voting"},{w:"투명",m:"thấu minh (trong suốt)",p:"tu-myeong",en:"transparent"},
+{w:"투입",m:"đầu nhập (đưa vào)",p:"tu-ip",en:"input/insertion"},{w:"투신",m:"đầu thân (tự tử)",p:"tu-sin",en:"throwing oneself"},{w:"침투",m:"xâm thấu (thâm nhập)",p:"chim-tu",en:"infiltration/penetration"},
+{w:"투기",m:"đầu cơ",p:"tu-gi",en:"speculation"},{w:"투쟁",m:"đấu tranh",p:"tu-jaeng",en:"struggle/fight"},{w:"투고",m:"đầu cáo (gửi bài)",p:"tu-go",en:"contribution (to a publication)"},{w:"투약",m:"đầu dược (cấp thuốc)",p:"tu-yak",en:"medication/dosing"}]},
+
+{char:"판",hanja:"判/版/板/販",vn:"Phán/Bản/Bản/Phán",meaning:"judge, edition, board, sell",tier:"essential",theme:"pink",words:[
+{w:"판단",m:"phán đoán",p:"pan-dan",en:"judgment"},{w:"재판",m:"tài phán (xét xử)",p:"jae-pan",en:"trial/court"},{w:"비판",m:"phê phán",p:"bi-pan",en:"criticism"},
+{w:"출판",m:"xuất bản",p:"chul-pan",en:"publishing"},{w:"판사",m:"phán sự (thẩm phán)",p:"pan-sa",en:"judge"},{w:"간판",m:"khán bản (bảng hiệu)",p:"gan-pan",en:"signboard"},
+{w:"판결",m:"phán quyết",p:"pan-gyeol",en:"verdict/ruling"},{w:"판매",m:"phán mại (bán hàng)",p:"pan-mae",en:"sales"},{w:"판로",m:"phán lộ (đường tiêu thụ)",p:"pal-lo",en:"market/outlet"},{w:"판명",m:"phán minh (làm rõ)",p:"pan-myeong",en:"proving/becoming clear"}]},
+
+{char:"하",hanja:"下/夏/荷/賀",vn:"Hạ/Hạ/Hà/Hạ",meaning:"down, summer, load, congratulate",tier:"essential",theme:"red",words:[
+{w:"지하",m:"địa hạ (dưới đất)",p:"ji-ha",en:"underground"},{w:"하락",m:"hạ lạc (giảm xuống)",p:"ha-rak",en:"drop/fall"},{w:"이하",m:"dĩ hạ (trở xuống)",p:"i-ha",en:"below/less than"},
+{w:"하순",m:"hạ tuần (cuối tháng)",p:"ha-sun",en:"late in the month"},{w:"하천",m:"hà xuyên (sông suối)",p:"ha-cheon",en:"river/stream"},{w:"하중",m:"hà trọng (trọng tải)",p:"ha-jung",en:"load/weight"},
+{w:"하향",m:"hạ hướng (hướng xuống)",p:"ha-hyang",en:"downward"},{w:"축하",m:"chúc hạ (chúc mừng)",p:"chu-ka",en:"congratulation"},{w:"여름하",m:"mùa hè",p:"yeo-reum-ha",en:"summer"},{w:"하교",m:"hạ giáo (tan học)",p:"ha-gyo",en:"leaving school"}]},
+
+{char:"개",hanja:"開/改/個/槪",vn:"Khai/Cải/Cá/Khái",meaning:"open, change, individual, general",tier:"essential",theme:"indigo",words:[
+{w:"개발",m:"khai phát (phát triển)",p:"gae-bal",en:"development"},{w:"개방",m:"khai phóng (mở cửa)",p:"gae-bang",en:"opening"},{w:"개선",m:"cải thiện",p:"gae-seon",en:"improvement"},
+{w:"개인",m:"cá nhân",p:"gae-in",en:"individual"},{w:"공개",m:"công khai",p:"gong-gae",en:"making public"},{w:"개최",m:"khai thôi (tổ chức)",p:"gae-choe",en:"holding (an event)"},
+{w:"개혁",m:"cải cách",p:"gae-hyeok",en:"reform"},{w:"개별",m:"cá biệt",p:"gae-byeol",en:"individual/separate"},{w:"개념",m:"khái niệm",p:"gae-nyeom",en:"concept"},{w:"전개",m:"triển khai",p:"jeon-gae",en:"unfolding/development"}]},
+
+{char:"거",hanja:"去/居/巨/拒/擧",vn:"Khứ/Cư/Cự/Cự/Cử",meaning:"go, live, huge, reject, lift",tier:"common",theme:"orange",words:[
+{w:"과거",m:"quá khứ",p:"gwa-geo",en:"past"},{w:"제거",m:"trừ khứ (loại bỏ)",p:"je-geo",en:"removal/elimination"},{w:"주거",m:"trú cư (chỗ ở)",p:"ju-geo",en:"dwelling/residence"},
+{w:"거대",m:"cự đại (to lớn)",p:"geo-dae",en:"huge/gigantic"},{w:"거부",m:"cự phủ (từ chối)",p:"geo-bu",en:"refusal/rejection"},{w:"거래",m:"khứ lai (giao dịch)",p:"geo-rae",en:"transaction/trade"},
+{w:"철거",m:"triệt khứ (phá dỡ)",p:"cheol-geo",en:"demolition"},{w:"거절",m:"cự tuyệt (từ chối)",p:"geo-jeol",en:"refusal"},{w:"선거",m:"tuyển cử (bầu cử)",p:"seon-geo",en:"election"},{w:"거주",m:"cư trú",p:"geo-ju",en:"residence"}]},
+
+{char:"격",hanja:"格/擊/激/隔",vn:"Cách/Kích/Kích/Cách",meaning:"standard, hit, fierce, separate",tier:"advanced",theme:"teal",words:[
+{w:"가격",m:"giá cách (giá cả)",p:"ga-gyeok",en:"price"},{w:"성격",m:"tính cách",p:"seong-gyeok",en:"personality"},{w:"자격",m:"tư cách",p:"ja-gyeok",en:"qualification"},
+{w:"합격",m:"hợp cách (thi đỗ)",p:"hap-gyeok",en:"passing (an exam)"},{w:"인격",m:"nhân cách",p:"in-gyeok",en:"personality/character"},{w:"충격",m:"xung kích (sốc)",p:"chung-gyeok",en:"shock/impact"},
+{w:"공격",m:"công kích (tấn công)",p:"gong-gyeok",en:"attack"},{w:"격려",m:"kích lệ (động viên)",p:"gyeong-nyeo",en:"encouragement"},{w:"격차",m:"cách sai (khoảng cách)",p:"gyeok-cha",en:"gap/disparity"},{w:"엄격",m:"nghiêm cách (nghiêm khắc)",p:"eom-gyeok",en:"strict/severe"}]},
+
+{char:"락",hanja:"樂/落/諾/絡",vn:"Nhạc/Lạc/Nặc/Lạc",meaning:"music/joy, fall, promise, connect",tier:"common",theme:"green",words:[
+{w:"음악",m:"âm nhạc",p:"eu-mak",en:"music"},{w:"오락",m:"ngu lạc (giải trí)",p:"o-rak",en:"entertainment"},{w:"하락",m:"hạ lạc (giảm xuống)",p:"ha-rak",en:"drop/fall"},
+{w:"추락",m:"trụy lạc (rơi xuống)",p:"chu-rak",en:"fall/crash"},{w:"허락",m:"hứa nặc (cho phép)",p:"heo-rak",en:"permission"},{w:"수락",m:"thụ nặc (chấp nhận)",p:"su-rak",en:"acceptance"},
+{w:"탈락",m:"thoát lạc (bị loại)",p:"tal-lak",en:"elimination/dropout"},{w:"연락",m:"liên lạc",p:"yeol-lak",en:"contact"},{w:"단락",m:"đoạn lạc (đoạn văn)",p:"dal-lak",en:"paragraph"},{w:"부락",m:"bộ lạc",p:"bu-rak",en:"tribe/village"}]},
+
+{char:"양",hanja:"量/良/兩/養/洋",vn:"Lượng/Lương/Lưỡng/Dưỡng/Dương",meaning:"amount, good, two, raise, ocean",tier:"essential",theme:"blue",words:[
+{w:"수량",m:"số lượng",p:"su-ryang",en:"quantity/amount"},{w:"역량",m:"lực lượng (năng lực)",p:"yeong-nyang",en:"capability/capacity"},{w:"불량",m:"bất lương (tồi tệ)",p:"bul-lyang",en:"poor/defective"},
+{w:"양심",m:"lương tâm",p:"yang-sim",en:"conscience"},{w:"양국",m:"lưỡng quốc (hai nước)",p:"yang-guk",en:"two countries"},{w:"영양",m:"dinh dưỡng",p:"yeong-yang",en:"nutrition"},
+{w:"교양",m:"giáo dưỡng",p:"gyo-yang",en:"culture/refinement"},{w:"동양",m:"Đông phương",p:"dong-yang",en:"the East/Orient"},{w:"서양",m:"Tây phương",p:"seo-yang",en:"the West"},{w:"양보",m:"nhượng bộ",p:"yang-bo",en:"concession/yielding"}]},
+
+{char:"만",hanja:"滿/萬/晩/慢",vn:"Mãn/Vạn/Vãn/Mạn",meaning:"full, ten thousand, late, slow",tier:"common",theme:"purple",words:[
+{w:"만족",m:"mãn túc (thỏa mãn)",p:"man-jok",en:"satisfaction"},{w:"불만",m:"bất mãn",p:"bul-man",en:"dissatisfaction/complaint"},{w:"만약",m:"vạn nhược (nếu như)",p:"ma-nyak",en:"if/in case"},
+{w:"만일",m:"vạn nhất (giả sử)",p:"ma-nil",en:"by any chance"},{w:"만능",m:"vạn năng",p:"man-neung",en:"all-around/omnipotent"},{w:"만기",m:"mãn kỳ (hết hạn)",p:"man-gi",en:"expiration/maturity"},
+{w:"만찬",m:"vãn xan (bữa tối)",p:"man-chan",en:"dinner/banquet"},{w:"자만",m:"tự mãn",p:"ja-man",en:"conceit/pride"},{w:"원만",m:"viên mãn",p:"won-man",en:"smooth/harmonious"},{w:"태만",m:"đãi mạn (lười biếng)",p:"tae-man",en:"negligence"}]},
+
+{char:"병",hanja:"病/兵/倂/甁",vn:"Bệnh/Binh/Tính/Bình",meaning:"disease, soldier, combine, bottle",tier:"common",theme:"pink",words:[
+{w:"병원",m:"bệnh viện",p:"byeong-won",en:"hospital"},{w:"질병",m:"tật bệnh",p:"jil-byeong",en:"disease/illness"},{w:"전염병",m:"truyền nhiễm bệnh",p:"jeo-nyeom-byeong",en:"infectious disease"},
+{w:"병사",m:"binh sĩ",p:"byeong-sa",en:"soldier"},{w:"병력",m:"binh lực",p:"byeong-nyeok",en:"military strength"},{w:"합병",m:"hợp tính (sáp nhập)",p:"hap-byeong",en:"merger"},
+{w:"병행",m:"tính hành (song song)",p:"byeong-haeng",en:"parallel/concurrent"},{w:"문병",m:"vấn bệnh (thăm bệnh)",p:"mun-byeong",en:"visiting the sick"},{w:"병실",m:"bệnh thất (phòng bệnh)",p:"byeong-sil",en:"hospital room"},{w:"유리병",m:"lưu ly bình (chai thủy tinh)",p:"yu-ri-byeong",en:"glass bottle"}]},
+
+{char:"설",hanja:"說/設/雪/舌",vn:"Thuyết/Thiết/Tuyết/Thiệt",meaning:"speak, set up, snow, tongue",tier:"essential",theme:"red",words:[
+{w:"설명",m:"thuyết minh",p:"seol-myeong",en:"explanation"},{w:"소설",m:"tiểu thuyết",p:"so-seol",en:"novel"},{w:"연설",m:"diễn thuyết",p:"yeon-seol",en:"speech"},
+{w:"시설",m:"thiết kế (cơ sở vật chất)",p:"si-seol",en:"facility"},{w:"건설",m:"kiến thiết (xây dựng)",p:"geon-seol",en:"construction"},{w:"설계",m:"thiết kế",p:"seol-gye",en:"design"},
+{w:"폭설",m:"bạo tuyết (bão tuyết)",p:"pok-seol",en:"heavy snow"},{w:"전설",m:"truyền thuyết",p:"jeon-seol",en:"legend"},{w:"설득",m:"thuyết phục",p:"seol-deuk",en:"persuasion"},{w:"가설",m:"giả thuyết",p:"ga-seol",en:"hypothesis"}]}
 ];
